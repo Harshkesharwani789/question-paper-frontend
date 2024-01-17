@@ -1,23 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbarr from "./Components/Navbar/Navbar";
+import LoginPage3 from "./Components/LoginPage3/LoginPage3";
+import Profile from "./Components/Profile/Profile";
+import Login from "./Components/LoginPage/Login";
+import SignUp from "./Components/LoginPage/Signup";
+import ExamBoard from "./Components/ExamBoard/ExamBoard";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/loginpage3"
+            element={
+              <>
+                <Navbarr />
+                <LoginPage3 />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Navbarr />
+                <Profile />
+              </>
+            }
+          />
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                <Login />
+              </>
+            }
+          />
+          <Route
+            path="/signup"
+            exact
+            element={
+              <>
+                <SignUp />
+              </>
+            }
+          />
+          <Route
+            path="/examboard"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <ExamBoard />
+              </>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

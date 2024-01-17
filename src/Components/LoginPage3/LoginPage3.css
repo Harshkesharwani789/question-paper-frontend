@@ -1,0 +1,54 @@
+.box {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 1000px;
+  max-width: 100%;
+  min-height: 479px;
+}
+.line-1 {
+  position: absolute;
+  top: 34%;
+  /* width: 100%; */
+  font-size: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);
+  text-align: center;
+  left: 11%;
+  right: 3%;
+}
+
+/* Animation */
+.anim-typewriter {
+  animation: typewriter 4s steps(44) 1s 1 normal both;
+  /* blinkTextCursor 500ms steps(44) infinite normal; */
+}
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
+}
+@keyframes blinkTextCursor {
+  from {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+.yoihjij button {
+  background-color: #000;
+  padding: 5px 7px;
+  color: #fff;
+  border: none;
+}
+.yoihjij button:hover {
+  background-color: yellowgreen;
+  color: #000;
+}
