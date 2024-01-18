@@ -26,6 +26,7 @@ import AdminExam from "./Components/Admin/AdminExam";
 import ExamLevel from "./Components/Admin/ExamLevel";
 import AdminBlueprintdetailsview from "./Components/Admin/AdminBluprintdetailsview";
 import AdminQuestionDetailsview from "./Components/Admin/AdminQuestiondetailsview";
+import AdminSignin from "./Components/Admin/Adminlogin";
 
 function App() {
   return (
@@ -114,7 +115,7 @@ function App() {
             path="/admin"
             element={
               <>
-                <Main />
+                <AdminSignin />
               </>
             }
           />

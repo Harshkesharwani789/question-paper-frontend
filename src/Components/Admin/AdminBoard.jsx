@@ -4,6 +4,7 @@ import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
+import axios from "axios";
 
 const AdminBoard = () => {
   const [show, setShow] = useState();
@@ -47,6 +48,29 @@ const AdminBoard = () => {
   //   const data = editor.getData();
   // setAbDescription(data);
   // };
+  // Post method Integration
+  const [boardName, setboardName] = useState("");
+  const AddBoradname = async () => {
+    try {
+      const config = {
+        url: "/Admin/addClass",
+        method: "post",
+        baseURL: "http://localhost:8000/api",
+        header: { "content-type": "application/json" },
+        data: {
+          boardName: boardName,
+        },
+      };
+      await axios(config).then((res) => {
+        if (res.status === 200) {
+          alert(res.data.success);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      alert();
+    }
+  };
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
