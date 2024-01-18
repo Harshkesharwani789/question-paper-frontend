@@ -78,6 +78,19 @@ const AdminBlueprintdetails = () => {
 
   return (
     <>
+      <div className="col-lg-4 d-flex justify-content-center">
+        <div class="input-group ">
+          <span class="input-group-text" id="basic-addon1">
+            <BsSearch />
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            aria-describedby="basic-addon1"
+          />
+        </div>
+      </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Blue Print Details</h2>
@@ -183,216 +196,15 @@ const AdminBlueprintdetails = () => {
                 <td></td>
                 <td>Mathematics</td>
                 <td>
-                  <FaEye color="blue" onClick={handleShow} />
-                </td>
-                <td>
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <Table
-            responsive
-            bordered
-            style={{ width: "-webkit-fill-available", textAlign: "center" }}
-          >
-            <thead>
-              <tr>
-                <th>
-                  {" "}
-                  <div>S No.</div>
-                </th>
-                <th>
-                  {" "}
-                  <div>Total Marks</div>
-                </th>
-                <th>
-                  {" "}
-                  <div>Total Number of Questions</div>
-                </th>
-                <th>
-                  {" "}
-                  <div>Duration of Exam</div>
-                </th>
-                <th>
-                  <div>Action</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td>80</td>
-                <td>13</td>
-                <td>3 hrs</td>
-                <td>
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-
-          <Table
-            responsive
-            bordered
-            style={{
-              width: "-webkit-fill-available",
-              textAlign: "center",
-            }}
-          >
-            <thead>
-              <tr>
-                <th>
-                  {" "}
-                  <div>S No.</div>
-                </th>
-                <th>Prose(Lesson)</th>
-                <th>Poetry</th>
-                <th>Non-Detailed</th>
-                <th>Grammer</th>
-                <th>Vocabulary</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-
-          <Table
-            responsive
-            bordered
-            style={{
-              width: "-webkit-fill-available",
-              textAlign: "center",
-            }}
-          >
-            <thead>
-              <tr>
-                <th>
-                  {" "}
-                  <div>S No.</div>
-                </th>
-                <th>Section</th>
-                <th>Header</th>
-                <th>Types of Questions</th>
-                <th>No. of Questions</th>
-                <th>Marks</th>
-                <th>Specify the Difficulty level</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <Table
-                    responsive
-                    bordered
-                    style={{
-                      width: "-webkit-fill-available",
-                      textAlign: "center",
+                  <FaEye
+                    color="blue"
+                    onClick={() => {
+                      navigate("/adminblueprintdetailsview");
                     }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>Level</th>
-                        <th>No. of Questions</th>
-                        <th>Marks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                  />
                 </td>
                 <td>
                   <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
                     <div>
                       <AiFillDelete
                         className="text-danger"
@@ -407,15 +219,6 @@ const AdminBlueprintdetails = () => {
               </tr>
             </tbody>
           </Table>
-          {/* <tr>
-                <th rowSpan={2}>
-                  {" "}
-                  <div>Starting Prices</div>
-                </th>
-                <th>
-                  <div>Ending price</div>
-                </th>
-              </tr> */}
         </div>
 
         <Pagination style={{ float: "right" }}>
@@ -440,30 +243,77 @@ const AdminBlueprintdetails = () => {
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose}>
+        {/* <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>
               View Blue Print Details{" "}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row"></div>
-            <div className="do-sear mt-2">
-              <label> Image</label>
-              <input type="file" name="" id="" className="vi_0" />
+            <div className="row">
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Blueprint Id:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 ">GRM15454</p>
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Board:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 mt-1">CBSE</p>
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Medium:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 mt-1 ">English</p>
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Class:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 mt-1 ">V</p>
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Sub-Class:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 ">Primary</p>
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2 d-flex" style={{ gap: "10px" }}>
+                  <label htmlFor="" className="fw-bold">
+                    Subject:
+                  </label>{" "}
+                  <span>
+                    <p className="fs-6 ">Mathematics</p>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="do-sear mt-2">
-              <label>Description</label>
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                // data={lodingdetails}
-                // onChange={(event, editor) => {
-                //   const data = editor.getData();
-                //   setlodingdetails(data);
-                // }}
-              />
-            </div>
+
+            <div className="do-sear mt-2"></div>
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -472,7 +322,7 @@ const AdminBlueprintdetails = () => {
               </Button>
             </div>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
 
         {/* Edit Package modal */}
         <Modal show={show1} onHide={handleClose1}>

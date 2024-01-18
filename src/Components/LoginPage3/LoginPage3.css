@@ -49,6 +49,6 @@
   border: none;
 }
 .yoihjij button:hover {
-  background-color: yellowgreen;
-  color: #000;
+  background-color: rgb(8, 52, 148);
+  color: #fff;
 }

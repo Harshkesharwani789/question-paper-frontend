@@ -33,7 +33,7 @@ const Profile = () => {
           <div className="col-md-12">
             <button
               className=" btn"
-              style={{ backgroundColor: "yellowgreen", color: "#000" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
               onClick={() => {
                 setprofile(true);
                 setQuestionPaper(false);
@@ -45,7 +45,7 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "yellowgreen", color: "#000" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(true);
@@ -57,7 +57,7 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "yellowgreen", color: "#000" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(false);
@@ -83,14 +83,14 @@ const Profile = () => {
                 <div className="container">
                   <div className="row">
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <IoPersonSharp /> &nbsp; Name
                       </label>
                       <p>Mr. Amandeep Singh</p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <MdEmail /> &nbsp; Email
                       </label>
                       <p>email@gmail.com</p>
@@ -99,14 +99,14 @@ const Profile = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaPhoneAlt /> &nbsp; Phone
                       </label>
                       <p>+91-0000000000</p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaCity /> &nbsp; Country
                       </label>
                       <p>India</p>
@@ -116,14 +116,14 @@ const Profile = () => {
                   <div className="row"></div>
                   <div className="row">
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaHome /> &nbsp; State
                       </label>
                       <p>Karnataka</p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaHome /> &nbsp; City
                       </label>
                       <p>Bengalore</p>
@@ -132,7 +132,7 @@ const Profile = () => {
                   </div>
                   <div className="row">
                     <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "yellowgreen" }}>
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <CiCalendarDate /> &nbsp; Registration Date
                       </label>
                       <p> 16/12/2023 </p>
@@ -151,7 +151,7 @@ const Profile = () => {
                         bordered
                         style={{ width: "-webkit-fill-available" }}
                       >
-                        <thead style={{ backgroundColor: "yellowgreen" }}>
+                        <thead style={{ backgroundColor: "rgb(8, 52, 148)" }}>
                           <tr>
                             <th>S.No</th>
                             <th>
@@ -163,6 +163,9 @@ const Profile = () => {
                             <th>
                               <div>Subject</div>
                             </th>
+                            <th>
+                              <div>Status</div>
+                            </th>
 
                             <th>Action</th>
                           </tr>
@@ -171,9 +174,10 @@ const Profile = () => {
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>BI44854</td>
+                            <td>30/02/2023</td>
                             <td>Amandeep Singh</td>
                             <td>Maths</td>
+                            <td>Save as a draft / Generated</td>
 
                             <td>
                               {" "}
@@ -232,7 +236,7 @@ const Profile = () => {
                                 <th>
                                   <div>Amount</div>
                                 </th>
-                                <th>Action</th>
+                                {/* <th>Action</th> */}
                               </tr>
                             </thead>
 
@@ -241,11 +245,11 @@ const Profile = () => {
                                 <td>1</td>
                                 <td>31/02/2024</td>
                                 <td>Amandeep Singh</td>
-                                <td>Ganesh Pooja</td>
-                                <td>Car</td>
+                                <td>Mathematics</td>
+                                <td></td>
                                 <td>₹ 40</td>
 
-                                <td>
+                                {/* <td>
                                   {" "}
                                   <div>
                                     <div>
@@ -261,7 +265,7 @@ const Profile = () => {
                                       />{" "}
                                     </div>
                                   </div>
-                                </td>
+                                </td> */}
                               </tr>
                             </tbody>
                           </Table>

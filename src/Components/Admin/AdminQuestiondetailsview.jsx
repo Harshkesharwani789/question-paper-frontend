@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "../Admin/Admin.css";
 
-const AdminQuestionDetails = () => {
+const AdminQuestionDetailsview = () => {
   return (
     <div>
       <div className="container">
@@ -285,7 +285,7 @@ const AdminQuestionDetails = () => {
             </div>
           </div>
           <div className="yoihjij my-4">
-            <button style={{ float: "right" }}>Add</button>
+            <button style={{ float: "right" }}>Edit</button>
           </div>
         </div>
       </div>
@@ -293,4 +293,4 @@ const AdminQuestionDetails = () => {
   );
 };
 
-export default AdminQuestionDetails;
+export default AdminQuestionDetailsview;

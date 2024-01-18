@@ -78,12 +78,25 @@ const AdminQuestions = () => {
 
   return (
     <>
+      <div className="col-lg-4 d-flex justify-content-center">
+        <div class="input-group ">
+          <span class="input-group-text" id="basic-addon1">
+            <BsSearch />
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            aria-describedby="basic-addon1"
+          />
+        </div>
+      </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Add Questions</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#FAFA33", color: "#000" }}
+            style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
             onClick={() => {
               navigate("/adminquestiondetails");
             }}
@@ -150,36 +163,27 @@ const AdminQuestions = () => {
             />
           </div>
         </div> */}
-        <div className="row m-3">
-          <div className=" col-lg-12 hgjhgyu">
-            <div style={{ float: "right" }}>
-              <InputGroup>
-                <Form.Control type="search" />
-                <InputGroup.Text>
-                  <IoSearch />
-                </InputGroup.Text>
-              </InputGroup>
-            </div>
-          </div>
-        </div>
 
-        <br />
-        <br />
         <div className="">
           <Table
             responsive
             bordered
-            style={{ width: "-webkit-fill-available" }}
+            style={{ width: "-webkit-fill-available", textAlign: "center" }}
           >
             <thead style={{ backgroundColor: "orange" }}>
               <tr>
                 <th>S.No</th>
+                <th>Date</th>
+                <th>Board</th>
+                <th>Medium</th>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Sub-Class</th>
+
                 <th>
-                  <div>Description</div>
+                  <div>View</div>
                 </th>
-                <th>
-                  <div>Image</div>
-                </th>
+
                 <th>Action</th>
               </tr>
               {/* <tr>
@@ -197,9 +201,19 @@ const AdminQuestions = () => {
               <tr>
                 <td>1</td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 
                 <td>
-                  <img src="" alt="" />
+                  <FaEye
+                    color="blue"
+                    onClick={() => {
+                      navigate("/adminquestiondetailsview");
+                    }}
+                  />
                 </td>
 
                 <td>

@@ -139,7 +139,7 @@ const LoginPage3 = () => {
                       justifyContent: "center",
                     }}
                   >
-                    Generate Question Paper
+                    View Blue Print
                   </button>
                 </Form>
               </div>

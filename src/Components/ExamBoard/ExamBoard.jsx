@@ -40,7 +40,14 @@ const ExamBoard = () => {
                   <h4>Tell Us</h4>
                   <hr></hr>
                   <Row>
-                    <div className="col-10 mb-4">
+                    <div className="col-10">
+                      <label
+                        htmlFor=""
+                        className="fw-bold fs-6"
+                        style={{ letterSpacing: "0.5px" }}
+                      >
+                        Exam Board
+                      </label>
                       <Form.Select aria-label="Default select example">
                         <option>Select Exams Board</option>
                         <option value="cbse">State</option>
@@ -48,7 +55,14 @@ const ExamBoard = () => {
                     </div>
                   </Row>
                   <Row>
-                    <div className="col-10 mb-4">
+                    <div className="col-10 mt-2">
+                      <label
+                        htmlFor=""
+                        className="fw-bold fs-6"
+                        style={{ letterSpacing: "0.5px" }}
+                      >
+                        Medium
+                      </label>
                       <Form.Select aria-label="Default select example">
                         <option>Medium</option>
                         <option value="1">English</option>
@@ -58,7 +72,14 @@ const ExamBoard = () => {
                     </div>
                   </Row>
                   <Row>
-                    <div className="col-10 mb-4">
+                    <div className="col-10 mt-2">
+                      <label
+                        htmlFor=""
+                        className="fw-bold fs-6"
+                        style={{ letterSpacing: "0.5px" }}
+                      >
+                        Exam Name
+                      </label>
                       <Form.Select aria-label="Default select example">
                         <option>Exam Name</option>
                         <option value="1">Test-1</option>
@@ -68,6 +89,19 @@ const ExamBoard = () => {
                     </div>
                   </Row>
                   <Row>
+                    <div className="col-md-10 mt-2">
+                      <label htmlFor="" className="fw-bold fs-6">
+                        Exam Level
+                      </label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Exam Level</option>
+                        <option value="1">Test-1</option>
+                        <option value="2">Test-2</option>
+                        <option value="3">Test-3</option>
+                      </Form.Select>
+                    </div>
+                  </Row>
+                  <Row className="mt-2">
                     <div style={{ textAlign: "left", padding: "0px 12px" }}>
                       <div className="col-8 mb-4">
                         <input type="radio" name="fav_language" /> &nbsp;

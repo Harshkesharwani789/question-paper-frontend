@@ -158,7 +158,7 @@ const Side = () => {
               <span>
                 <IoPeopleOutline style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Name Of Exam</span>
+              <span className="ms-2">Name Of Examination</span>
             </li>
           </Link>
           <Link to="/adminsubject">
@@ -184,7 +184,7 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
-          <Link to="/adminweightage">
+          {/* <Link to="/adminweightage">
             <li
               className="a-ele "
               onClick={() => {
@@ -204,9 +204,12 @@ const Side = () => {
               <span>
                 <FaWeightHanging style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Weightage</span>
+              <span className="ms-2">
+                Weightage of <br />{" "}
+                <span className="ms-4"> Difficulty level</span>
+              </span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/adminblueprintdetails">
             <li
               className="a-ele "
@@ -231,7 +234,7 @@ const Side = () => {
             </li>
           </Link>
 
-          {/* <Link to="/adminquestions">
+          <Link to="/adminquestions">
             <li
               className="a-ele "
               onClick={() => {
@@ -251,9 +254,9 @@ const Side = () => {
               <span>
                 <FaShop style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Type Of Questions</span>
+              <span className="ms-2">Questions</span>
             </li>
-          </Link> */}
+          </Link>
           {/* <Link to="/adminquestionlevel">
             <li
               className="a-ele "
@@ -277,7 +280,7 @@ const Side = () => {
               <span className="ms-2">Type Of QuestionLevel </span>
             </li>
           </Link> */}
-          <Link to="/adminexamlevel">
+          {/* <Link to="/adminexamlevel">
             <li
               className="a-ele "
               onClick={() => {
@@ -299,7 +302,7 @@ const Side = () => {
               </span>
               <span className="ms-2">Exam Level</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/adminuserlist">
             <li
               className="a-ele "

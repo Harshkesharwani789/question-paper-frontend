@@ -26,19 +26,6 @@ const AdminHeader = () => {
               <AiOutlineLogout />
             </div>
           </div>
-          <div className="col-lg-4 d-flex justify-content-center">
-            <div class="input-group ">
-              <span class="input-group-text" id="basic-addon1">
-                <BsSearch />
-              </span>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search..."
-                aria-describedby="basic-addon1"
-              />
-            </div>
-          </div>
 
           {/* <div className="col-lg-7"></div> */}
           {/* <div

@@ -18,7 +18,7 @@ const steps = [
   " Weightage of the type of Question",
 ];
 
-function AdminBlueprint() {
+function AdminBlueprintdetailsview() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -116,7 +116,7 @@ function AdminBlueprint() {
                         <div className="row ">
                           <div className="col-md-6">
                             <div className="do-sear mt-2">
-                              <label htmlFor="">Blueprint Name</label>
+                              <label htmlFor="">BluePrint Name </label>
                               <input
                                 type="text"
                                 className="vi_0"
@@ -420,6 +420,20 @@ function AdminBlueprint() {
                                     placeholder="Enter Duration of the Examination"
                                     className="vi_0"
                                   />
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <div className="do-sear mt-2">
+                                  <label>
+                                    Dificulty Level
+                                    <span style={{ color: "red" }}>*</span>
+                                  </label>
+                                  <Form.Select aria-label="Default select example">
+                                    <option>Select the Difficulty Level</option>
+                                    <option value="1">Easy</option>
+                                    <option value="2">Average</option>
+                                    <option value="3">Difficult</option>
+                                  </Form.Select>
                                 </div>
                               </div>
                               {/* <div className="col-md-6">
@@ -740,7 +754,7 @@ function AdminBlueprint() {
                                       </label>
                                       <input
                                         type="text"
-                                        placeholder="Enter Header"
+                                        placeholder="Enter Section"
                                         className="vi_0"
                                       />
                                     </div>
@@ -1038,6 +1052,7 @@ function AdminBlueprint() {
                                   </div>
                                   <div className="row">
                                     <div className="col-md-9"></div>
+
                                     <div className="col-md-3">
                                       <Table
                                         responsive
@@ -1135,7 +1150,7 @@ function AdminBlueprint() {
                       <Button onClick={handleComplete}>
                         {completedSteps() === totalSteps() - 1
                           ? "Submit"
-                          : "Complete Step"}
+                          : "Edit and Complete Step"}
                       </Button>
                     ))}
                 </Box>
@@ -1148,4 +1163,4 @@ function AdminBlueprint() {
   );
 }
 
-export default AdminBlueprint;
+export default AdminBlueprintdetailsview;

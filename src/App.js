@@ -24,6 +24,8 @@ import AdminBoard from "./Components/Admin/AdminBoard";
 import AdminClass from "./Components/Admin/AdminClass";
 import AdminExam from "./Components/Admin/AdminExam";
 import ExamLevel from "./Components/Admin/ExamLevel";
+import AdminBlueprintdetailsview from "./Components/Admin/AdminBluprintdetailsview";
+import AdminQuestionDetailsview from "./Components/Admin/AdminQuestiondetailsview";
 
 function App() {
   return (
@@ -90,13 +92,22 @@ function App() {
             element={<Main children={<AdminBlueprintdetails />} />}
           />
           <Route
+            path="/adminblueprintdetailsview"
+            element={<Main children={<AdminBlueprintdetailsview />} />}
+          />
+          <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
+          />
+          <Route
+            path="/adminquestiondetailsview"
+            element={<Main children={<AdminQuestionDetailsview />} />}
           />
           <Route
             path="/Admin_accounthistory"
             element={<Main children={<AccountHistory />} />}
           />
+
           {/* Admin Panel Starts here */}
 
           <Route
