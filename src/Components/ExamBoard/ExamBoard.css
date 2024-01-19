@@ -6,3 +6,22 @@
 .page2-content-display {
   padding: 12px 0px;
 }
+
+.box {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 1000px;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 799px) {
+  .page2-content-display,
+  .col-6 {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
+

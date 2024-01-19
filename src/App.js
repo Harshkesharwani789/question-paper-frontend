@@ -27,6 +27,8 @@ import ExamLevel from "./Components/Admin/ExamLevel";
 import AdminBlueprintdetailsview from "./Components/Admin/AdminBluprintdetailsview";
 import AdminQuestionDetailsview from "./Components/Admin/AdminQuestiondetailsview";
 import AdminSignin from "./Components/Admin/Adminlogin";
+import BluePrint from "./Components/BluePrint/BluePrint";
+import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 
 function App() {
   return (
@@ -76,6 +78,26 @@ function App() {
               <>
                 <Navbarr />
                 <ExamBoard />
+              </>
+            }
+          />
+              <Route
+            path="/blueprint"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <BluePrint />
+              </>
+            }
+          />
+              <Route
+            path="/questionpaper"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <QuestionPaper />
               </>
             }
           />
