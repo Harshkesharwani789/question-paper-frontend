@@ -121,7 +121,7 @@ const AdminSignin = () => {
                       Email Id
                     </Form.Label>
                     <Form.Control
-                      type="password"
+                      type="email"
                       placeholder="Enter Email Id"
                       onChange={(e) => {
                         setemail(e.target.value);
