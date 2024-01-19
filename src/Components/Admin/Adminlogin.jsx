@@ -6,9 +6,12 @@ import Form from "react-bootstrap/Form";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import "../Admin/Admin.css";
+import swal from "sweetalert";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 const AdminSignin = () => {
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(FaEyeSlash);
   const [PasswordShow, setPasswordShow] = useState(false);
@@ -23,7 +26,56 @@ const AdminSignin = () => {
       setType("password");
     }
   };
+  const [email, setemail] = useState("");
+  const [passward, setpassward] = useState("");
 
+  const login = async () => {
+    try {
+      if (!email)
+        return swal({
+          title: "Opps!",
+          text: "Please enter email id!",
+          icon: "warning",
+          button: "OK!",
+        });
+      if (!passward)
+        return swal({
+          title: "Opps!",
+          text: "Please enter Your Password!",
+          icon: "warning",
+          button: "OK!",
+        });
+      const config = {
+        url: "/admin/login",
+        method: "Post",
+        baseURL: "http://localhost:8000/api",
+        header: { "Content-Type": "application/json" },
+        data: { email: email, password: passward },
+      };
+      let res = await axios(config);
+      if (res.status == 200);
+      {
+        swal({
+          title: "Success!",
+          text: "Successfully Login",
+          icon: "success",
+          button: "OK!",
+        });
+        sessionStorage.setItem("admin", JSON.stringify(res.data.success));
+        sessionStorage.setItem("token", res.data.token);
+        setTimeout(() => {
+          return navigate("/dashboard");
+        }, 1000);
+      }
+    } catch (error) {
+      swal({
+        title: "Opps!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Try Again!",
+      });
+    }
+  };
   //ForgotPassword
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -71,6 +123,9 @@ const AdminSignin = () => {
                     <Form.Control
                       type="password"
                       placeholder="Enter Email Id"
+                      onChange={(e) => {
+                        setemail(e.target.value);
+                      }}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -85,6 +140,9 @@ const AdminSignin = () => {
                         className="login-input"
                         placeholder="Password"
                         aria-describedby="basic-addon1"
+                        onChange={(e) => {
+                          setpassward(e.target.value);
+                        }}
                       />
                       {PasswordShow ? (
                         <button
@@ -125,6 +183,7 @@ const AdminSignin = () => {
                       border: "1px solid rgb(236 48 84)",
                       color: "white",
                     }}
+                    onClick={() => login()}
                   >
                     Sign-In
                   </button>
