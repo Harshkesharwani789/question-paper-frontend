@@ -402,9 +402,10 @@ table {
 
 /* Style table header (thead) */
 th {
-  background-color: #f2f2f2;
-  text-align: left;
-  padding: 10px;
+     /* background-color: #86b7fe !important; */
+     text-align: center;
+     padding: 10px;
+     color: black !important;
 }
 
 /* Style table rows (tbody) */
@@ -481,7 +482,7 @@ element.style {
 }
 
 table thead tr th {
-  background: orange !important;
+  background: navy !important ;
   color: #fff !important;
 }
 /* Scrollbar */

@@ -49,11 +49,11 @@ const LoginPage3 = () => {
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
                     >
-                      School Name
+                      School / Institute Name
                     </Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Enter Your School Name"
+                      placeholder="Enter Your School / Institute Name"
                     />
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
@@ -106,10 +106,19 @@ const LoginPage3 = () => {
                     >
                       Test Paper Name
                     </FormLabel>
-                    <Form.Control
+                    {/* <Form.Control
                       type="text"
                       placeholder="Enter the Test Paper Name"
-                    />
+                    /> */}
+                    <Form.Select aria-label="Default select example">
+                      <option>Select Test Paper Name</option>
+                      <option value="1">FA-1</option>
+                      <option value="2">FA-2</option>
+                      <option value="3">FA-3</option>
+                      <option value="3">FA-4</option>
+                      <option value="3">FA-5</option>
+                      <option value="3">FA-6</option>
+                    </Form.Select>
                     <FormLabel
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
@@ -127,20 +136,24 @@ const LoginPage3 = () => {
                       Size of the Question Paper
                     </FormLabel>
                     <Form.Control
+                    value="A4"
                       type="text"
                       placeholder="Enter the 
-                      Size of the Question Paper"
+                      Size of the Question Paper (Recommended-A4)"
+                      disabled
                     />
                   </Form.Group>
-                  <button
+
+                  <Button
                     style={{
                       margin: "auto",
                       display: "flex",
                       justifyContent: "center",
+                      background:"navy",
                     }}
                   >
-                    View Blue Print
-                  </button>
+                    <a href="/blueprint" style={{ color:"white", textDecoration:"none"}}>View Blue Print</a>
+                  </Button>
                 </Form>
               </div>
             </div>

@@ -1,0 +1,24 @@
+ /* Front page  */
+ .subject{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asd{
+    justify-content: space-around;
+}
+.square{
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border: 1px solid black;
+}
+.question-paper-display_1{
+    border: 1px solid lightgray;
+    width: 800px;
+    height: 100%;
+    justify-content: center;
+    margin: 20px auto;
+}

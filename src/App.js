@@ -29,12 +29,26 @@ import AdminQuestionDetailsview from "./Components/Admin/AdminQuestiondetailsvie
 import AdminSignin from "./Components/Admin/Adminlogin";
 import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
+import BluePrint2 from "./Components/BluePrint/BluePrint2";
+import Home from "./Components/Home/Home";
 
 function App() {
   return (
     <div className="App">
+
+    
       <BrowserRouter>
         <Routes>
+        <Route
+        path="/"
+        exact
+        element={
+          <>
+            {/* <Navbarr /> */}
+            <Home />
+          </>
+        }
+      />
           <Route
             path="/loginpage3"
             element={
@@ -54,7 +68,7 @@ function App() {
             }
           />
           <Route
-            path="/"
+            path="/login"
             exact
             element={
               <>
@@ -81,7 +95,7 @@ function App() {
               </>
             }
           />
-              <Route
+          <Route
             path="/blueprint"
             exact
             element={
@@ -91,7 +105,17 @@ function App() {
               </>
             }
           />
-              <Route
+          <Route
+            path="/blueprint2"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <BluePrint2 />
+              </>
+            }
+          />
+          <Route
             path="/questionpaper"
             exact
             element={

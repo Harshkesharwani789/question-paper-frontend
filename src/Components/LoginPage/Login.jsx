@@ -27,17 +27,18 @@ const Login = () => {
                 >
                   <div style={{ padding: "150px 0px", textAlign: "center" }}>
                     <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Guru Resource Management
+                      Welcome To <br></br>
+                      Question Paper Generator
                     </h3>
                     <p style={{ color: "white" }}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      New User Please Sign Up Here
                     </p>
                     <a href="/signup">
                       <button
                         style={{
                           padding: "7px 30px",
-                          backgroundColor: "rgb(236 48 84)",
-                          border: "1px solid rgb(255 53 92)",
+                          backgroundColor: "navy",
+                          border: "1px solid navy",
                           color: "white",
                         }}
                       >
@@ -97,15 +98,19 @@ const Login = () => {
                 <div>
                   <button
                     style={{
-                      padding: "6px 30px",
-                      backgroundColor: "rgb(236 48 84)",
-                      border: "1px solid rgb(236 48 84)",
-                      color: "white",
+                      padding: "7px 30px",
+                        backgroundColor: "navy",
+                        border: "1px solid navy",
+                        color: "white",
                     }}
                   >
                     <a
                       href="/examboard"
-                      style={{ color: "white", textDecoration: "none" }}
+                      style={{
+                        
+                        textDecoration:"none",
+                        color:"white"
+                      }}
                     >
                       Login
                     </a>

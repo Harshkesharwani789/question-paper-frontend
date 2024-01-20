@@ -14,8 +14,10 @@ import { CiCalendarDate } from "react-icons/ci";
 import { Table } from "react-bootstrap";
 import { BiSolidEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate= useNavigate();
   const [profile, setprofile] = useState(true);
   const [QuestionPaper, setQuestionPaper] = useState(false);
   const [Reject, setReject] = useState(false);
@@ -199,6 +201,7 @@ const Profile = () => {
                                       cursor: "pointer",
                                       fontSize: "20px",
                                     }}
+                                    onClick={()=>{navigate('/questionpaper')}}
                                   />
                                 </div>
                               </div>

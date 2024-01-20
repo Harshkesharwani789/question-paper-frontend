@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import Icon from 'react-icons-kit';
-import {
-    Button, Container, InputGroup,
-    Row, Modal,
-} from "react-bootstrap";
-import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom'
+import Icon from "react-icons-kit";
+import { Button, Container, InputGroup, Row, Modal } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
 
 const ExamBoard = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -19,119 +16,200 @@ const ExamBoard = () => {
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
 
+  const [before, setBefore] = useState(false);
+  const [after, setAfter] = useState("");
+
   return (
     <div>
-    <div className="container p-5">
-        <div >
-            <div className="box">
-                <div className="row">
-                    <div className="col-md-6">
-                        <div
-                            style={{
-                                backgroundImage: "url('../images/page2bg.png')",
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                backgroundRepeat: "no-repeat",
-                                height: "500px",
-                            }}
-                        >
-                            <h3 style={{ padding: "20px" }}>
-                                Guru Resource Management
-                            </h3>
-                        </div>
-                    </div>
-                    <div className='col-6'>
-                        <div className='page2-content-display'>
-                            <h4>Tell Us</h4>
-                            <hr></hr>
-                            <Row>
-                                <div className='col-10 mb-4'>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Select Exams Board</option>
-                                        <option value="cbse">State</option>
-                                    </Form.Select>
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className='col-10 mb-4'>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Select Exams Level</option>
-                                        <option value="cbse">1</option>
-                                        <option value="cbse">2</option>
-                                        <option value="cbse">3</option>
-
-                                    </Form.Select>
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className='col-10 mb-4'>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Medium</option>
-                                        <option value="1">English</option>
-                                        <option value="2">Hindi</option>
-                                        <option value="3">Kannada</option>
-                                    </Form.Select>
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className='col-10 mb-4'>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Exam Name</option>
-                                        <option value="1">Test-1</option>
-                                        <option value="2">Test-2</option>
-                                        <option value="3">Test-3</option>
-                                    </Form.Select>
-                                </div>
-                            </Row>
-                            <Row>
-                                <div style={{ textAlign: "left", padding: "0px 12px" }}>
-                                    <div className='col-8 mb-4' >
-                                        <input type="radio" name="fav_language" /> &nbsp;
-                                        <Button onClick={handleShow}>Syllabus question paper with blue print</Button>
-                                    </div>
-                                    <div className='col-8 mb-4'>
-                                        <input type="radio" name="fav_language" /> &nbsp;
-                                        <Button variant='success' onClick={handleShow}>Result Sheet and Marks Card</Button>
-                                    </div>
-                                </div>
-                            </Row>
-                            <br />
-                            <div style={{ display: "flex", justifyContent: "flex-end", padding: "0px 20px" }}>
-                                <Button onClick={handleShow}>Start</Button>
-                            </div>
-                        </div>
-                    </div>
-
+      <div className="container p-5">
+        <div>
+          <div className="box">
+            <div className="row">
+              <div className="col-md-6">
+                <div
+                  style={{
+                    backgroundImage: "url('../images/page2bg.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "500px",
+                    position:"relative"
+                  }}
+                >
+                   <div className="line-1">
+                    <h2>
+                      {" "}
+                      <p className="anim-typewriter text-dark">
+                        Welcome Amandeep Singh !{" "}
+                      </p>{" "}
+                      <span className="fs-4" style={{ textAlign: "center" }}>
+                        Please Enter Your Details
+                      </span>
+                    </h2>
+                  </div>
                 </div>
+              </div>
+              <div className="col-6">
+                <div className="page2-content-display">
+                  <h4>Tell Us</h4>
+                  <hr></hr>
+                  {before ? (
+                    <>
+                      <Row>
+                        <div style={{ textAlign: "left", padding: "0px 12px" }}>
+                          <div className="col-8 mb-4">
+                            <input type="radio" name="fav_language" /> &nbsp;
+                            <Button onClick={handleShow}>
+                              Syllabus question paper with blue print
+                            </Button>
+                          </div>
+                          <div className="col-8 mb-4">
+                            <input type="radio" name="fav_language" /> &nbsp;
+                            <Button variant="success" onClick={handleShow}>
+                              Result Sheet and Marks Card
+                            </Button>
+                          </div>
+                        </div>
+                      </Row>
+                    </>
+                  ) : (
+                    <>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select aria-label="Default select example">
+                            <option>Select Education Board</option>
+                            <option value="cbse">CBSE</option>
+                            <option value="cbse">ICSE</option>
+                            <option value="cbse">STATE</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select aria-label="Default select example">
+                            <option>Select Exams Name</option>
+                            <option value="1">FA-1</option>
+                            <option value="2">FA-2</option>
+                            <option value="3">FA-3</option>
+                            <option value="3">FA-4</option>
+                            <option value="3">FA-5</option>
+                            <option value="3">FA-6</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
 
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select aria-label="Default select example">
+                            <option>Select Medium</option>
+                            <option value="1">English</option>
+                            <option value="2">Hindi</option>
+                            <option value="3">Kannada</option>
+                            <option value="2">Sanskrit</option>
+                            <option value="3">Marathi</option>
+                            <option value="3">Urdu</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select aria-label="Default select example">
+                            <option>Select Exam Level</option>
+                            <option value="cbse">District Level</option>
+                            <option value="cbse">State Level</option>
+                            <option value="cbse">School Level</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div
+                          style={{
+                            float: "right",
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            padding: "0px 100px",
+                          }}
+                        >
+                          <Button
+                            variant=""
+                            style={{ backgroundColor: "navy", color: "white" }}
+                            onClick={() => {
+                              setBefore(true);
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </Row>
+                    </>
+                  )}
+
+                  {/* <Row>
+                    <div style={{ textAlign: "left", padding: "0px 12px" }}>
+                      <div className="col-8 mb-4">
+                        <input type="radio" name="fav_language" /> &nbsp;
+                        <Button onClick={handleShow}>
+                          Syllabus question paper with blue print
+                        </Button>
+                      </div>
+                      <div className="col-8 mb-4">
+                        <input type="radio" name="fav_language" /> &nbsp;
+                        <Button variant="success" onClick={handleShow}>
+                          Result Sheet and Marks Card
+                        </Button>
+                      </div>
+                    </div>
+                  </Row> */}
+                  <br />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      padding: "0px 20px",
+                    }}
+                  >
+                    <Button onClick={handleShow}>Start</Button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    {/* Payment Modal */}
+      {/* Payment Modal */}
 
-    <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-            <Modal.Title>Make Payment</Modal.Title>
+          <Modal.Title>Make Payment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <div>
-                <img src='../images/razorpay.png' style={{ width: "150px" }} alt='' />
-            </div>
+          <div>
+            <img
+              src="../images/razorpay.png"
+              style={{ width: "150px" }}
+              alt=""
+            />
+          </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-                Cancel
-            </Button>
-            <Button variant="primary" onClick={handleShow1}>
-                Pay
-            </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              navigate("/loginpage3");
+            }}
+          >
+            Pay
+          </Button>
         </Modal.Footer>
-    </Modal>
+      </Modal>
 
-    {/* after Payment  */}
+      {/* after Payment  */}
 
-    <Modal show={show1} onHide={handleClose1}>
+      {/* <Modal show={show1} onHide={handleClose1}>
         <Modal.Header closeButton>
             <Modal.Title></Modal.Title>
         </Modal.Header>
@@ -207,8 +285,8 @@ const ExamBoard = () => {
                 Generate
             </Button>
         </Modal.Footer>
-    </Modal>
-</div>
+    </Modal> */}
+    </div>
   );
 };
 

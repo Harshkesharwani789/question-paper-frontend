@@ -29,7 +29,7 @@ const AdminSignin = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <div style={{ backgroundColor: "#EC3054", height: "100vh" }}>
+    <div >
       <div
         className="container d-flex justify-content-center"
         style={{ paddingTop: "5rem" }}
@@ -49,7 +49,7 @@ const AdminSignin = () => {
                 >
                   <div style={{ padding: "150px 0px", textAlign: "center" }}>
                     <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Guru Resource Management
+                      Welcome To <br></br>Admin Pannel
                     </h3>
                     <p style={{ color: "white" }}>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -121,9 +121,10 @@ const AdminSignin = () => {
                   <button
                     style={{
                       padding: "6px 30px",
-                      backgroundColor: "rgb(236 48 84)",
-                      border: "1px solid rgb(236 48 84)",
+                      backgroundColor: "navy",
+                      border: "1px solid navy",
                       color: "white",
+                    
                     }}
                   >
                     Sign-In

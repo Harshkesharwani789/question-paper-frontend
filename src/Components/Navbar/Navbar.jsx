@@ -10,13 +10,13 @@ const Navbarr = () => {
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/"><img src="../Images/logo.png" alt="" style={{width:"100px"}}  /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <div class="dropdown">
                 <span class="dropbtn">
-                  <CgProfile /> <span className="fs-6">Amandeep Singh</span>
+                  <CgProfile color="#fff" /> <span className="fs-6 text-light">Amandeep Singh</span>
                 </span>
                 <div class="dropdown-content">
                   <a href="/profile">Profile</a>

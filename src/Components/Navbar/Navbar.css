@@ -38,3 +38,7 @@
 /* .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 } */
+.bg-body-tertiary{
+  background-color: navy !important;
+  color: #fff !important;
+}

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, InputGroup, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   return (
     <div>
       <div className="container d-flex justify-content-center p-5">
@@ -75,7 +77,7 @@ const SignUp = () => {
                         />
                       </Form.Group>
                     </div>
-                    <div className="col-md-4">
+                    {/* <div className="col-md-4">
                       <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label
                           style={{ display: "flex", padding: "0 4px" }}
@@ -89,8 +91,8 @@ const SignUp = () => {
                           <option value="3">Three</option>
                         </Form.Select>
                       </Form.Group>
-                    </div>
-                    <div className="col-md-4">
+                    </div> */}
+                    {/* <div className="col-md-4">
                       <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label
                           style={{ display: "flex", padding: "0 4px" }}
@@ -104,8 +106,8 @@ const SignUp = () => {
                           <option value="3">Three</option>
                         </Form.Select>
                       </Form.Group>
-                    </div>
-                    <div className="col-md-4">
+                    </div> */}
+                    {/* <div className="col-md-4">
                       <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label
                           style={{ display: "flex", padding: "0 4px" }}
@@ -119,7 +121,7 @@ const SignUp = () => {
                           <option value="3">Three</option>
                         </Form.Select>{" "}
                       </Form.Group>
-                    </div>
+                    </div> */}
 
                     <div className="col-md-6">
                       <Form.Group
@@ -278,11 +280,13 @@ const SignUp = () => {
                   <button
                     style={{
                       padding: "6px 30px",
-                      backgroundColor: "rgb(236 48 84)",
-                      border: "1px solid rgb(236 48 84)",
+                      background: "navy",
+                      border: "1px solid navy",
                       color: "white",
                     }}
+                    onClick={()=>{navigate("/login")}}
                   >
+
                     Sign-Up
                   </button>
                 </div>
@@ -300,17 +304,17 @@ const SignUp = () => {
                 >
                   <div style={{ padding: "220px 0px", textAlign: "center" }}>
                     <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Guru Resource Management
+                      Welcome To <br></br>Question Paper Generator
                     </h3>
                     <p style={{ color: "white" }}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Already have an Account Please
                     </p>
                     <a href="/">
                       <button
                         style={{
                           padding: "7px 30px",
-                          backgroundColor: "rgb(236 48 84)",
-                          border: "1px solid rgb(255 53 92)",
+                          background: "navy",
+                          border: "1px solid navy",
                           color: "white",
                         }}
                       >
