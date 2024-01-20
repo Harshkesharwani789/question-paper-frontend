@@ -300,7 +300,7 @@ const SignUp = () => {
                     <p style={{ color: "white" }}>
                       Already have an Account Please
                     </p>
-                    <a href="/">
+                    <a href="/login">
                       <button
                         style={{
                           padding: "7px 30px",
