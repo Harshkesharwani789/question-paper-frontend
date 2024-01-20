@@ -20,7 +20,7 @@ const Navbarr = () => {
                 </span>
                 <div class="dropdown-content">
                   <a href="/profile">Profile</a>
-                  <a href="/">Logout</a>
+                  <a href="/login">Logout</a>
                 </div>
               </div>
             </Nav>
