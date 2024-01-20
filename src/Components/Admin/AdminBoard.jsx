@@ -5,6 +5,7 @@ import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
+import swal from "sweetalert";
 
 const AdminBoard = () => {
   const [show, setShow] = useState();
@@ -44,6 +45,8 @@ const AdminBoard = () => {
   const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(data.length / productPerPage);
 
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
   // const handleChange = (e, editor) => {
   //   const data = editor.getData();
   // setAbDescription(data);
@@ -52,23 +55,44 @@ const AdminBoard = () => {
   const [boardName, setboardName] = useState("");
   const AddBoradname = async () => {
     try {
+      if (!boardName)
+        return swal({
+          title: "Opps!",
+          text: "Please Enter boardName ",
+          icon: "error",
+          button: "Try Again!",
+        });
       const config = {
-        url: "/Admin/addClass",
+        url: "/admin/addBoard",
         method: "post",
         baseURL: "http://localhost:8000/api",
-        header: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         data: {
           boardName: boardName,
+          authId: admin?._id,
         },
       };
-      await axios(config).then((res) => {
-        if (res.status === 200) {
-          alert(res.data.success);
-        }
-      });
+      const response = await axios(config);
+
+      if (response.status === 200) {
+        swal({
+          title: "Success!",
+          text: response.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
     } catch (error) {
-      console.log(error);
-      alert();
+      console.error(error);
+      swal({
+        title: "Opps!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Try Again!",
+      });
     }
   };
   return (
@@ -119,7 +143,7 @@ const AdminBoard = () => {
                 <td>1</td>
 
                 <td>
-                  <img src="" alt="" style={{ width: "75px" }} />
+                  <p></p>
                 </td>
 
                 <td>
@@ -180,7 +204,14 @@ const AdminBoard = () => {
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Name of the Board</label>
-                <input type="text" placeholder="Enter Board" className="vi_0" />
+                <input
+                  type="text"
+                  placeholder="Enter Board"
+                  className="vi_0"
+                  onChange={(e) => {
+                    setboardName(e.target.value);
+                  }}
+                />
               </div>
             </div>
 
@@ -204,7 +235,13 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button className="mx-2" variant="primary">
+              <Button
+                className="mx-2"
+                variant="primary"
+                onClick={() => {
+                  AddBoradname();
+                }}
+              >
                 Add
               </Button>
             </div>
