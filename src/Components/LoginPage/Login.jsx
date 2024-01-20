@@ -129,7 +129,7 @@ const Login = () => {
         keyboard={false}
         style={{ zIndex: "9999999" }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header sty>
           <Modal.Title>Forgot Password </Modal.Title>
         </Modal.Header>
         <Modal.Body>
