@@ -65,7 +65,7 @@ const ExamBoard = () => {
                           </div>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
-                            <Button variant="success" onClick={handleShow}>
+                            <Button variant="success" style={{backgroundColor:'green'}} onClick={handleShow}>
                               Result Sheet and Marks Card
                             </Button>
                           </div>
@@ -180,7 +180,7 @@ const ExamBoard = () => {
       {/* Payment Modal */}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Make Payment</Modal.Title>
         </Modal.Header>
         <Modal.Body>

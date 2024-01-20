@@ -4,7 +4,10 @@ import Form from "react-bootstrap/Form";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [show,setShow]= useState(false);
+  const handleShow = ()=> setShow(true);
+  const handleClose = ()=> setShow(false)
   return (
     <div>
       <div className="container d-flex justify-content-center p-5">
@@ -18,13 +21,13 @@ const SignUp = () => {
                 <h2>Sign-Up</h2>
                 <div className="container d-flex justify-content-center mt-4">
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <Form className="pe-2">
                         <Form.Group className="mb-3" controlId="formGroupEmail">
                           <Form.Label
                             style={{ display: "flex", padding: "0 4px" }}
                           >
-                            First Name
+                             Name
                           </Form.Label>
                           <Form.Control
                             type="text"
@@ -34,19 +37,7 @@ const SignUp = () => {
                       </Form>
                     </div>
 
-                    <div className="col-md-6">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Last Name
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Last Name"
-                        />
-                      </Form.Group>
-                    </div>
+                   
                     <div className="col-md-12">
                       <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label
@@ -284,7 +275,7 @@ const SignUp = () => {
                       border: "1px solid navy",
                       color: "white",
                     }}
-                    onClick={()=>{navigate("/login")}}
+                    onClick={()=>handleShow()}
                   >
 
                     Sign-Up
@@ -328,6 +319,40 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        style={{ zIndex: "9999999", borderRadius:"none" }}
+      >
+        <Modal.Header style={{backgroundColor:"navy",borderRadius:"unset"}}>
+          <Modal.Title style={{ color:"white"}}> Enter OTP</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              {/* <Form.Label style={{ display: "flex", padding: "0 4px" }}>
+                OTP
+              </Form.Label> */}
+              <Form.Control type="password" placeholder="Enter OTP" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant=""
+            style={{
+              backgroundColor: "navy",
+              border: "1px solid navy",
+              color: "white",
+            }}
+            onClick={()=> navigate("/login")}
+          >
+            Submit 
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
