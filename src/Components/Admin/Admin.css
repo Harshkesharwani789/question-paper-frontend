@@ -511,4 +511,16 @@ table thead tr th {
   -ms-flex-align: center;
   align-items: center;
 }
+.box_1 {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  height: auto;
+  border-radius: 24px;
+  /* border: 1px solid black; */
+  width: 100%;
+}
+.box_1 label {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #083494;
+}
 /* Admin Panel ends */

@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 } */
+.swal-footer {
+  text-align: center !important;
+}
+.swal-button {
+  background-color: #dc3545 !important;
+  border: none !important;
+}
+.swal-text {
+  font-size: 17px !important;
+  color: black !important;
+  font-family: initial !important;
+}
+.swal-title {
+  color: black !important;
+}

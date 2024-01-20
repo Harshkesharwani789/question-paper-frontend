@@ -51,7 +51,7 @@ const Side = () => {
       <div className="si09">
         <div className="lo-ad">
           <img
-            src="2.png"
+            src="../Images/logo.png"
             alt="adminlogo"
             style={{ width: "245px", height: "102px" }}
           />

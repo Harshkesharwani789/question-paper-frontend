@@ -220,13 +220,13 @@ const AdminQuestions = () => {
                   {" "}
                   <div style={{ display: "flex", gap: "20px" }}>
                     <div>
-                      <BiSolidEdit
+                      {/* <BiSolidEdit
                         className="text-success"
                         style={{ cursor: "pointer", fontSize: "20px" }}
                         onClick={() => {
                           handleShow1();
                         }}
-                      />{" "}
+                      /> */}
                     </div>
                     <div>
                       <AiFillDelete
