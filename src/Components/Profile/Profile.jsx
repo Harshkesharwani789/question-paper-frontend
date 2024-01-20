@@ -109,14 +109,21 @@ const Profile = () => {
                     </div>
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
+                        <CiCalendarDate /> &nbsp; Registration Date
+                      </label>
+                      <p> 16/12/2023 </p>
+                      <hr />
+                    </div>
+                    {/* <div className="col-md-6 ps-5">
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaCity /> &nbsp; Country
                       </label>
                       <p>India</p>
                       <hr />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="row"></div>
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaHome /> &nbsp; State
@@ -131,15 +138,9 @@ const Profile = () => {
                       <p>Bengalore</p>
                       <hr />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="row">
-                    <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
-                        <CiCalendarDate /> &nbsp; Registration Date
-                      </label>
-                      <p> 16/12/2023 </p>
-                      <hr />
-                    </div>
+                   
                   </div>
                 </div>
               </>

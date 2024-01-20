@@ -33,10 +33,10 @@ const ExamBoard = () => {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     height: "500px",
-                    position:"relative"
+                    position: "relative",
                   }}
                 >
-                   <div className="line-1">
+                  <div className="line-1">
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
@@ -59,15 +59,27 @@ const ExamBoard = () => {
                         <div style={{ textAlign: "left", padding: "0px 12px" }}>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
-                            <Button onClick={handleShow}>
+                            <Button>
                               Syllabus question paper with blue print
                             </Button>
                           </div>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
-                            <Button variant="success" style={{backgroundColor:'green'}} onClick={handleShow}>
+                            <Button
+                              variant="success"
+                              style={{ backgroundColor: "green" }}
+                            >
                               Result Sheet and Marks Card
                             </Button>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              padding: "0px 20px",
+                            }}
+                          >
+                            <Button onClick={handleShow}>Start</Button>
                           </div>
                         </div>
                       </Row>
@@ -161,15 +173,6 @@ const ExamBoard = () => {
                     </div>
                   </Row> */}
                   <br />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      padding: "0px 20px",
-                    }}
-                  >
-                    <Button onClick={handleShow}>Start</Button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -180,7 +183,7 @@ const ExamBoard = () => {
       {/* Payment Modal */}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header >
+        <Modal.Header>
           <Modal.Title>Make Payment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
