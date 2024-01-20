@@ -44,7 +44,7 @@ const Frontpage = () => {
                 <div className="d-flex gap-2">
                   <h5>Name of the Student:</h5>
                   <div
-                    style={{ borderBottom: "1px solid black", width: "73%" }}
+                    style={{ borderBottom: "1px solid black", width: "71%" }}
                   >
                     {/* <Form.Control  className="name" type="text" placeholder="" /> */}
                   </div>
