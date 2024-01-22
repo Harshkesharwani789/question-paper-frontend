@@ -4,8 +4,13 @@ import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
+import axios from "axios";
+import swal from "sweetalert";
 
 const AdminMedium = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -17,31 +22,177 @@ const AdminMedium = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
+  //Post method
+  const [mediumName, setmediumName] = useState("");
+
+  const Addmedium = async () => {
+    try {
+      const config = {
+        url: "/admin/addMedium",
+        baseURL: "http://localhost:8000/api",
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          mediumName: mediumName,
+          authId: admin?._id,
+        },
+      };
+
+      let res = await axios(config);
+      if (res.status == 200) {
+        swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          dangerMode: true,
+        });
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "oops",
+        text: error.response.data.error,
+        icon: "error",
+        dangerMode: true,
+      });
+    }
+  };
+
+  //get
+  const [Medium, setMedium] = useState([]);
+  const [nochangedata, setnochangedata] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //edit
+  const [updatemediumname, setupdatemediumname] = useState("");
+
+  const EditAddMedium = async () => {
+    try {
+      const config = {
+        url: "/admin/updateMedium",
+        method: "put",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          mediumName: mediumName,
+          authId: admin?._id,
+          id: updatemediumname,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        getAddMedium();
+        handleClose1();
+        return swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+  //delete
+  const [deleteA, setDeleteA] = useState("");
+  const DeletAddMedium = async () => {
+    try {
+      const config = {
+        url: "/admin/deleteMedium/" + deleteA + "/" + admin?._id,
+        baseURL: "http://localhost:8000/api",
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      let res = await axios(config);
+      if (res.status === 200) {
+        handleClose2();
+        getAddMedium();
+        return swal({
+          title: "Delete!",
+          text: res.data.success,
+          icon: "warning",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
-  //   DateRange Filter
-  const [data, setData] = useState([]);
-  const [startDate, setstartDate] = useState("");
-  const [endDate, setendDate] = useState("");
-  const filterData = () => {
-    if (!startDate) return alert("Please select from date");
-    if (!endDate) return alert("Please select to date");
-    const filteredData = data.filter((item) => {
-      const itemDate = new Date(item?.createdAt);
-      const startDateObj = new Date(startDate);
-      const endDateObj = new Date(endDate);
-
-      return itemDate >= startDateObj && itemDate <= endDateObj;
-    });
-    setData([...filteredData]);
+  //search filter for about us
+  const [searchH, setSearchH] = useState("");
+  const handleFilterH = (e) => {
+    if (e.target.value != "") {
+      setSearchH(e.target.value);
+      const filterTableH = nochangedata.filter((o) =>
+        Object.keys(o).some((k) =>
+          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
+        )
+      );
+      setMedium([...filterTableH]);
+    } else {
+      setSearchH(e.target.value);
+      setMedium([...nochangedata]);
+    }
   };
+  const [searchTermH, setSearchTermH] = useState("");
+  const searchedProductH = Medium.filter((item) => {
+    if (searchTermH.value === "") {
+      return item;
+    }
+    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
+      return item;
+    } else {
+      return console.log("not found");
+    }
+  });
   // Pagination
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(data.length / productPerPage);
+  const displayPage = Medium.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(Medium.length / productPerPage);
+  useEffect(() => {
+    getAddMedium();
+  }, []);
+  console.log(Medium);
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -54,6 +205,7 @@ const AdminMedium = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
+            onChange={handleFilterH}
           />
         </div>
       </div>
@@ -86,37 +238,42 @@ const AdminMedium = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
+              {displayPage?.map((item, i) => {
+                return (
+                  <tr>
+                    <td>{i + 1 + visitedPage}</td>
 
-                <td>
-                  <img src="" alt="" style={{ width: "75px" }} />
-                </td>
+                    <td>{item?.mediumName}</td>
 
-                <td>
-                  {" "}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              handleShow1(item);
+                              setupdatemediumname(item?._id);
+                              setmediumName(item?.mediumName);
+                            }}
+                          />{" "}
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setDeleteA(item?._id);
+                              handleShow2(item?._id);
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>
@@ -144,7 +301,7 @@ const AdminMedium = () => {
         </Pagination>
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
+          <Modal.Header style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Medium</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -155,6 +312,7 @@ const AdminMedium = () => {
                   type="text"
                   placeholder="Enter Medium"
                   className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
                 />
               </div>
             </div>
@@ -179,10 +337,13 @@ const AdminMedium = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="success" onClick={handleClose}>
-              Close
-            </Button>
-              <Button className="mx-2" variant="primary">
+              <Button
+                className="mx-2"
+                variant="primary"
+                onClick={() => {
+                  Addmedium();
+                }}
+              >
                 Add
               </Button>
             </div>
@@ -207,6 +368,8 @@ const AdminMedium = () => {
                   type="text"
                   placeholder="Enter Medium"
                   className="vi_0"
+                  value={mediumName}
+                  onChange={(e) => setmediumName(e.target.value)}
                 />
               </div>
             </div>
@@ -233,7 +396,13 @@ const AdminMedium = () => {
             <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
-            <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
+            <Button
+              variant="primary"
+              style={{ backgroundColor: "#FAFA33" }}
+              onClick={() => {
+                EditAddMedium();
+              }}
+            >
               Edit
             </Button>
           </Modal.Footer>
@@ -260,7 +429,14 @@ const AdminMedium = () => {
             <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary">Delete</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                DeletAddMedium();
+              }}
+            >
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
