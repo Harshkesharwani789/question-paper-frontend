@@ -11,14 +11,17 @@ const AdminMedium = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
+  const [show, setShow] = useState();
+  const [show1, setShow1] = useState();
+  const [show2, setShow2] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   //Post method
   const [mediumName, setmediumName] = useState("");
@@ -33,64 +36,33 @@ const AdminMedium = () => {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data:{
-          mediumName:mediumName,
-          authId:admin?._id
-        }
+        data: {
+          mediumName: mediumName,
+          authId: admin?._id,
+        },
       };
-      
-      let res = await axios (config);
-      if(res.status == 200){
-        return alert(res.data.success);
+
+      let res = await axios(config);
+      if (res.status == 200) {
+        swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          dangerMode: true,
+        });
+        handleClose();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      swal({
+        title: "oops",
+        text: error.response.data.error,
+        icon: "error",
+        dangerMode: true,
+      });
     }
   };
 
-  // const AddMedium = async () => {
-  //   try {
-  //     if(!mediumName) return  swal({
-  //       title: "oops!!",
-  //       text: "Please Enter the medium",
-  //       icon: "error",
-  //       dangerMode: true,
-  //     });
-  //     const config = {
-  //       url: "/admin/addMedium",
-  //       method: "post",
-  //       baseURL: "http://localhost:8000/api",
-  //       headers: {
-  //         "content-type": "application/json" ,
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       data: {
-  //         mediumName: mediumName,
-  //         authId: admin?._id,
-  //       },
-  //     };
-  //     let res = await axios (config)
-  //       if (res.status == 200) {
-  //         swal({
-  //           title: "Success!",
-  //           text: res.data.success,
-  //           icon: "success",
-  //           dangerMode: true,
-  //         });
-  //         getAddMedium();
-  //         handleClose();
-  //       }
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     swal({
-  //       title: "oops",
-  //       text: error.response.data.error,
-  //       icon: "error",
-  //       dangerMode: true,
-  //     });
-  //   }
-  // };
   //get
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
@@ -106,73 +78,76 @@ const AdminMedium = () => {
     }
   };
   //edit
-  const EditAddMedium = async (e) => {
-    e.preventDefault();
+  const [updatemediumname, setupdatemediumname] = useState("");
+
+  const EditAddMedium = async () => {
     try {
       const config = {
         url: "/admin/updateMedium",
         method: "put",
         baseURL: "http://localhost:8000/api",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          mediumName: mediumName,
+          authId: admin?._id,
+          id: updatemediumname,
+        },
       };
-      await axios(config).then((res) => {
-        if (res.status == 200) {
-          swal({
-            title: "Yeahh!!",
-            text: "Successfully Deleted",
-            icon: "success",
-            dangerMode: true,
-          });
-        }
-      });
+      let res = await axios(config);
+      if (res.status == 200) {
+        getAddMedium();
+        handleClose1();
+        return swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
     } catch (error) {
       console.log(error);
       swal({
-        title: "oops",
+        title: "Error!",
         text: error.response.data.error,
         icon: "error",
-        dangerMode: true,
+        button: "OK!",
       });
     }
   };
   //delete
-  const [Data, setData] = useState("");
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = (item) => {
-    setShow2(true);
-    setData(item);
-  };
-  const DeleteMedium = async () => {
+  const [deleteA, setDeleteA] = useState("");
+  const DeletAddMedium = async () => {
     try {
       const config = {
-        url: "/admin/deleteMedium" + Data + "/" + admin?._id,
-        method: "delete",
+        url: "/admin/deleteMedium/" + deleteA + "/" + admin?._id,
         baseURL: "http://localhost:8000/api",
+        method: "delete",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios(config).then((res) => {
-        if (res.status == 200) {
-          swal({
-            title: "Yeahh!!",
-            text: "Successfully Deleted",
-            icon: "success",
-            dangerMode: true,
-          });
-          getAddMedium();
-          handleClose2();
-        }
-      });
+      let res = await axios(config);
+      if (res.status === 200) {
+        handleClose2();
+        getAddMedium();
+        return swal({
+          title: "Delete!",
+          text: res.data.success,
+          icon: "warning",
+          button: "OK!",
+        });
+      }
     } catch (error) {
       console.log(error);
       swal({
-        title: "oops",
-        text: error.response.data.msg,
+        title: "Error!",
+        text: error.response.data.error,
         icon: "error",
-        dangerMode: true,
+        button: "OK!",
       });
     }
   };
@@ -213,6 +188,11 @@ const AdminMedium = () => {
   const visitedPage = pageNumber * productPerPage;
   const displayPage = Medium.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(Medium.length / productPerPage);
+  useEffect(() => {
+    getAddMedium();
+  }, []);
+  console.log(Medium);
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -258,10 +238,10 @@ const AdminMedium = () => {
             </thead>
 
             <tbody>
-              {Medium?.map((item, i) => {
+              {displayPage?.map((item, i) => {
                 return (
                   <tr>
-                    <td>{i + 1}</td>
+                    <td>{i + 1 + visitedPage}</td>
 
                     <td>{item?.mediumName}</td>
 
@@ -274,6 +254,8 @@ const AdminMedium = () => {
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                               handleShow1(item);
+                              setupdatemediumname(item?._id);
+                              setmediumName(item?.mediumName);
                             }}
                           />{" "}
                         </div>
@@ -282,6 +264,7 @@ const AdminMedium = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
+                              setDeleteA(item?._id);
                               handleShow2(item?._id);
                             }}
                           />{" "}
@@ -416,7 +399,7 @@ const AdminMedium = () => {
             <Button
               variant="primary"
               style={{ backgroundColor: "#FAFA33" }}
-              onClick={(e) => {
+              onClick={() => {
                 EditAddMedium();
               }}
             >
@@ -449,7 +432,7 @@ const AdminMedium = () => {
             <Button
               variant="primary"
               onClick={() => {
-                DeleteMedium();
+                DeletAddMedium();
               }}
             >
               Delete
