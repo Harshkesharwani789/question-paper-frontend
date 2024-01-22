@@ -6,6 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
+import moment from "moment";
 
 const AdminBoard = () => {
   const [show, setShow] = useState();
@@ -84,6 +85,8 @@ const AdminBoard = () => {
           icon: "success",
           button: "OK!",
         });
+        handleClose();
+        getallboardname();
       }
     } catch (error) {
       console.error(error);
@@ -95,6 +98,89 @@ const AdminBoard = () => {
       });
     }
   };
+  // get method
+  const [getboardname, setboardname] = useState([]);
+  const getallboardname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      if (res.status == 200) {
+        setboardname(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // edit method
+  const [updateboardname, setupdateboardname] = useState("");
+
+  const updateallboardname = async () => {
+    try {
+      const config = {
+        url: "/admin/updateBoard",
+        method: "put",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          boardName: boardName,
+          authId: admin?._id,
+          id: updateboardname,
+        },
+      };
+      const res = await axios(config);
+      if (res.status == 200) {
+        handleClose1();
+        getallboardname();
+        return swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+  // delete method
+  const [deleteA, setDeleteA] = useState("");
+  const deleteboard = async () => {
+    try {
+      const config = {
+        url: "/admin/deleteBoard/" + deleteA + "/" + admin?._id,
+        baseURL: "http://localhost:8000/api",
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      let res = await axios(config);
+      if (res.status === 200) {
+        handleClose2();
+        getallboardname();
+        return swal({
+          title: "Delete!",
+          text: res.data.success,
+          icon: "warning",
+          button: "OK!",
+        });
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getallboardname();
+  }, []);
+  console.log(getboardname);
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -139,37 +225,43 @@ const AdminBoard = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
+              {getboardname?.map((val, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>
+                      <p>{val?.boardName}</p>
+                    </td>
 
-                <td>
-                  <p></p>
-                </td>
-
-                <td>
-                  {" "}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              handleShow1();
+                              setupdateboardname(val?._id);
+                              setboardName(val?.boardName);
+                            }}
+                          />{" "}
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setDeleteA(val?._id);
+                              handleShow2(val?._id);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>
@@ -262,7 +354,15 @@ const AdminBoard = () => {
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Name of the Board</label>
-                <input type="text" placeholder="Enter Board" className="vi_0" />
+                <input
+                  type="text"
+                  placeholder="Enter Board"
+                  className="vi_0"
+                  value={boardName}
+                  onChange={(e) => {
+                    setboardName(e.target.value);
+                  }}
+                />
               </div>
             </div>
 
@@ -288,7 +388,13 @@ const AdminBoard = () => {
             <Button variant="danger" onClick={handleClose1}>
               Close
             </Button>
-            <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
+            <Button
+              variant="primary"
+              style={{ backgroundColor: "#FAFA33" }}
+              onClick={() => {
+                updateallboardname();
+              }}
+            >
               Edit
             </Button>
           </Modal.Footer>
@@ -315,7 +421,9 @@ const AdminBoard = () => {
             <Button variant="btn btn-secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary">Delete</Button>
+            <Button variant="primary" onClick={deleteboard}>
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

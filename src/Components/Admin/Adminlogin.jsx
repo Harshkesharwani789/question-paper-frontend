@@ -63,9 +63,7 @@ const AdminSignin = () => {
         });
         sessionStorage.setItem("admin", JSON.stringify(res.data.success));
         sessionStorage.setItem("token", res.data.token);
-        setTimeout(() => {
-          return navigate("/dashboard");
-        }, 1000);
+        navigate("/dashboard");
       }
     } catch (error) {
       swal({
@@ -81,7 +79,7 @@ const AdminSignin = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <div >
+    <div>
       <div
         className="container d-flex justify-content-center"
         style={{ paddingTop: "5rem" }}
@@ -182,7 +180,6 @@ const AdminSignin = () => {
                       backgroundColor: "navy",
                       border: "1px solid navy",
                       color: "white",
-                    
                     }}
                     onClick={() => login()}
                   >
