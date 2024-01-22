@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -12,6 +12,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
 import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
+import axios from "axios";
 
 const steps = [
   "Blueprint Details",
@@ -69,6 +70,52 @@ function AdminBlueprint() {
     setActiveStep(0);
     setCompleted({});
   };
+  // get method for board
+  const [getboardname, setboardname] = useState([]);
+  const getallboardname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      if (res.status == 200) {
+        setboardname(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method add class
+  const [getclassname, setgetclassName] = useState([]);
+  const getallclassname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      if (res.status == 200) {
+        setgetclassName(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getallboardname();
+    getallclassname();
+    getaddsubclasss();
+  }, []);
+  console.log(getboardname);
+  console.log(getclassname);
+  console.log(getaddsubclass);
 
   return (
     <>
@@ -138,49 +185,13 @@ function AdminBlueprint() {
                                   className="vi_0"
                                 >
                                   <option>Select the Board</option>
-                                  <option value="CBSE">CBSE</option>
-                                  <option value="ICSE">ICSE</option>
-                                  <option value="AN">
-                                    Andaman and Nicobar Islands
-                                  </option>
-                                  <option value="AP">Andhra Pradesh</option>
-                                  <option value="AR">Arunachal Pradesh</option>
-                                  <option value="AS">Assam</option>
-                                  <option value="BR">Bihar</option>
-                                  <option value="CH">Chandigarh</option>
-                                  <option value="CT">Chhattisgarh</option>
-                                  <option value="DN">
-                                    Dadra and Nagar Haveli
-                                  </option>
-                                  <option value="DD">Daman and Diu</option>
-                                  <option value="DL">Delhi</option>
-                                  <option value="GA">Goa</option>
-                                  <option value="GJ">Gujarat</option>
-                                  <option value="HR">Haryana</option>
-                                  <option value="HP">Himachal Pradesh</option>
-                                  <option value="JK">Jammu and Kashmir</option>
-                                  <option value="JH">Jharkhand</option>
-                                  <option value="KA">Karnataka</option>
-                                  <option value="KL">Kerala</option>
-                                  <option value="LA">Ladakh</option>
-                                  <option value="LD">Lakshadweep</option>
-                                  <option value="MP">Madhya Pradesh</option>
-                                  <option value="MH">Maharashtra</option>
-                                  <option value="MN">Manipur</option>
-                                  <option value="ML">Meghalaya</option>
-                                  <option value="MZ">Mizoram</option>
-                                  <option value="NL">Nagaland</option>
-                                  <option value="OR">Odisha</option>
-                                  <option value="PY">Puducherry</option>
-                                  <option value="PB">Punjab</option>
-                                  <option value="RJ">Rajasthan</option>
-                                  <option value="SK">Sikkim</option>
-                                  <option value="TN">Tamil Nadu</option>
-                                  <option value="TG">Telangana</option>
-                                  <option value="TR">Tripura</option>
-                                  <option value="UP">Uttar Pradesh</option>
-                                  <option value="UT">Uttarakhand</option>
-                                  <option value="WB">West Bengal</option>
+                                  {getboardname?.map((val, i) => {
+                                    return (
+                                      <option value={val?.boardName} key={i}>
+                                        {val?.boardName}
+                                      </option>
+                                    );
+                                  })}
                                 </Form.Select>
                               </div>
                             </div>
@@ -223,12 +234,13 @@ function AdminBlueprint() {
                                 </label>
                                 <Form.Select aria-label="Default select example">
                                   <option>Select the Class</option>
-                                  <option value="English">English</option>
-                                  <option value="Hindi">Hindi</option>
-                                  <option value="Kanada">Kanada</option>
-                                  <option value="Kanada">Maths</option>
-                                  <option value="Kanada">Science</option>
-                                  <option value="Kanada">Social Science</option>
+                                  {getclassname?.map((val, i) => {
+                                    return (
+                                      <option value={val?.className}>
+                                        {val?.className}
+                                      </option>
+                                    );
+                                  })}
                                 </Form.Select>
                               </div>
                             </div>
@@ -240,12 +252,13 @@ function AdminBlueprint() {
                                 </label>
                                 <Form.Select aria-label="Default select example">
                                   <option>Select the Sub-Class</option>
-                                  <option value="English">English</option>
-                                  <option value="Hindi">Hindi</option>
-                                  <option value="Kanada">Kanada</option>
-                                  <option value="Kanada">Maths</option>
-                                  <option value="Kanada">Science</option>
-                                  <option value="Kanada">Social Science</option>
+                                  {getaddsubclass?.map((val, i) => {
+                                    return (
+                                      <option value={val?.subclassName}>
+                                        {val?.subclassName}
+                                      </option>
+                                    );
+                                  })}
                                 </Form.Select>
                               </div>
                             </div>

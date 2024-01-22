@@ -33,18 +33,18 @@ const AdminMedium = () => {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data:{
-          mediumName:mediumName,
-          authId:admin?._id
-        }
+        data: {
+          mediumName: mediumName,
+          authId: admin?._id,
+        },
       };
-      
-      let res = await axios (config);
-      if(res.status == 200){
+
+      let res = await axios(config);
+      if (res.status == 200) {
         return alert(res.data.success);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
