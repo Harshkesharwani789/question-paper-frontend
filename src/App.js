@@ -31,6 +31,9 @@ import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
+import BluePrint3 from "./Components/BluePrint/BluePrint3";
+import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
+import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
 
 function App() {
   return (
@@ -115,6 +118,16 @@ function App() {
               </>
             }
           />
+            <Route
+            path="/blueprint3"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <BluePrint3 />
+              </>
+            }
+          />
           <Route
             path="/questionpaper"
             exact
@@ -134,6 +147,10 @@ function App() {
             path="/adminblueprint"
             element={<Main children={<AdminBlueprint />} />}
           />
+            <Route
+            path="/admineditblueprint"
+            element={<Main children={<AdminEditBluePrint />} />}
+          />
           <Route
             path="/adminblueprintdetails"
             element={<Main children={<AdminBlueprintdetails />} />}
@@ -145,6 +162,10 @@ function App() {
           <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
+          />
+           <Route
+            path="/admineditquestiondetails"
+            element={<Main children={<AdminEditQuestionDetails />} />}
           />
           <Route
             path="/adminquestiondetailsview"

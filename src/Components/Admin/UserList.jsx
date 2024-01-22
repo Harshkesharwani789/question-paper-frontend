@@ -287,7 +287,7 @@ const UserList = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="" className= 'btn btn-secondary' onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>

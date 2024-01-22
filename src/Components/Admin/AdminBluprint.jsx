@@ -106,7 +106,7 @@ function AdminBlueprint() {
                         pt: 2,
                       }}
                     >
-                      <Button onClick={handleReset}>Back</Button>
+                      <Button  variant= '' style = {{backgroundColor:"navy", color:"white"}} onClick={handleReset}>Back</Button>
                     </Box>
                   </Typography>
                 </React.Fragment>
@@ -1147,10 +1147,12 @@ function AdminBlueprint() {
 
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                     <Button
+                    variant=""
                       color="inherit"
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
+                      style = {{backgroundColor:"navy", color:"white"}}
                     >
                       Back
                     </Button>
@@ -1167,7 +1169,7 @@ function AdminBlueprint() {
                           Step {activeStep + 1} already completed
                         </Typography>
                       ) : (
-                        <Button onClick={handleComplete}>
+                        <Button varient= 'success' onClick={handleComplete}>
                           {completedSteps() === totalSteps() - 1
                             ? "Submit"
                             : "Complete Step"}

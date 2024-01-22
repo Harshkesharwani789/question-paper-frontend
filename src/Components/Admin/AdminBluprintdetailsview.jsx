@@ -74,7 +74,7 @@ function AdminBlueprintdetailsview() {
     <>
       <div className="box_1">
         <div className="Stepper-info " style={{ padding: "20px" }}>
-          <Box sx={{ width: "100%" }}>
+          {/* <Box sx={{ width: "100%" }}>
             <Stepper nonLinear activeStep={activeStep}>
               {steps.map((label, index) => (
                 <Step key={label} completed={completed[index]}>
@@ -351,11 +351,7 @@ function AdminBlueprintdetailsview() {
                                 <CKEditor
                                   editor={ClassicEditor}
                                   className="vi_0"
-                                  // data={lodingdetails}
-                                  // onChange={(event, editor) => {
-                                  //   const data = editor.getData();
-                                  //   setlodingdetails(data);
-                                  // }}
+                                 
                                 />
                               </div>
                             </div>
@@ -424,48 +420,7 @@ function AdminBlueprintdetailsview() {
                                   />
                                 </div>
                               </div>
-                              {/* <div className="row ">
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Total Marks{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="number"
-                                      placeholder="Enter Total Marks"
-                                      className="vi_0"
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Total Number of Questions{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Total Number of Questions"
-                                      className="vi_0"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Duration of the Examination{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Duration of the Examination"
-                                      className="vi_0"
-                                    />
-                                  </div>
-                                </div>
-                              </div> */}
+                             
                             </div>
                           </Typography>
                         </>
@@ -557,33 +512,7 @@ function AdminBlueprintdetailsview() {
                                       </div>
                                     </div>
 
-                                    {/* <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Branch Name{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Branch Name "
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Commission Amount{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Eg:500"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div> */}
+                                    
                                   </div>
                                 </div>
                               </Typography>
@@ -595,460 +524,7 @@ function AdminBlueprintdetailsview() {
                                   className="container"
                                   style={{ padding: "5px" }}
                                 >
-                                  {/* <div className="row ">
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Name{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Name"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Phone Number{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Phone Number"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Email Id{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Email Id"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Bank Name{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Bank Name"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Account Number{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your A/C Number"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        IFSC Code{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your IFSC Code"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Branch Name{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Your Branch Name "
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Commission Amount{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Eg:500"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                </div> */}
-                                  {/* <div className="row">
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label>
-                                          Section{" "}
-                                          <span style={{ color: "red" }}>
-                                            *
-                                          </span>
-                                        </label>
-                                        <input
-                                          type="text"
-                                          placeholder="Enter Header"
-                                          className="vi_0"
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6"></div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label>
-                                          Header 1{" "}
-                                          <span style={{ color: "red" }}>
-                                            *
-                                          </span>
-                                        </label>
-                                        <input
-                                          type="text"
-                                          placeholder="Enter Header"
-                                          className="vi_0"
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label>
-                                          Type of Questions{" "}
-                                          <span style={{ color: "red" }}>
-                                            *
-                                          </span>
-                                        </label>
-                                        <Form.Select aria-label="Default select example">
-                                          <option>
-                                            Select Type of Questions
-                                          </option>
-                                          <option value="English">
-                                            English
-                                          </option>
-                                          <option value="Hindi">Hindi</option>
-                                          <option value="Kanada">Kanada</option>
-                                          <option value="Kanada">Maths</option>
-                                          <option value="Kanada">
-                                            Science
-                                          </option>
-                                          <option value="Kanada">
-                                            Social Science
-                                          </option>
-                                        </Form.Select>
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label htmlFor="">
-                                          {" "}
-                                          No. of Questions
-                                          <span style={{ color: "red" }}>
-                                            *
-                                          </span>
-                                        </label>
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Enter the No. of Questions"
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label htmlFor="">
-                                          {" "}
-                                          Marks
-                                          <span style={{ color: "red" }}>
-                                            *
-                                          </span>
-                                        </label>
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Enter the Marks"
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <label htmlFor="">
-                                          {" "}
-                                          Specify the Difficulty Level
-                                        </label>
-                                        <div className="row">
-                                          <div className="col-md-3">
-                                            <label htmlFor="">Easy</label>
-                                          </div>
-                                          <div className="col-md-5">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Enter No. of Questions"
-                                            />
-                                          </div>
-                                          <div className="col-md-4">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Marks"
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="row ">
-                                        <div className="col-md-3">
-                                          <label htmlFor="">V S A</label>
-                                          <input
-                                            type="text"
-                                            className="vi_0 mt-2"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <label htmlFor="">S A</label>
-                                          <input
-                                            type="text"
-                                            className="vi_0 mt-2"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3 ">
-                                          <label htmlFor="">L A</label>
-                                          <input
-                                            type="text"
-                                            className="vi_0 mt-2"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <label htmlFor="">V L A</label>
-                                          <input
-                                            type="text"
-                                            className="vi_0 mt-2"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                      </div>
-                                      
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <div className="row">
-                                          <div className="col-md-3">
-                                            <label htmlFor="">Average</label>
-                                          </div>
-                                          <div className="col-md-5">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Enter No. of Questions"
-                                            />
-                                          </div>
-                                          <div className="col-md-4">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Marks"
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6 mt-2">
-                                      <div className="row ">
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                      </div>
-                                      
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="do-sear mt-2">
-                                        <div className="row">
-                                          <div className="col-md-3">
-                                            <label htmlFor="">Difficult</label>
-                                          </div>
-                                          <div className="col-md-5">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Enter No. of Questions"
-                                            />
-                                          </div>
-                                          <div className="col-md-4">
-                                            <input
-                                              type="text"
-                                              className="vi_0"
-                                              placeholder="Marks"
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6 mt-2">
-                                      <div className="row">
-                                        <div className="col-md-3 ">
-                                          <input
-                                            type="text"
-                                            className="vi_0 "
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                        <div className="col-md-3">
-                                          <input
-                                            type="text"
-                                            className="vi_0"
-                                            placeholder="No of Questions"
-                                          />
-                                        </div>
-                                      </div>
-                                      
-                                    </div>
-
-                                    <div className="text-end mb-3">
-                                      <Button
-                                        type="submit"
-                                        style={{
-                                          backgroundColor: "red",
-                                          color: "white",
-                                          marginTop: "10px",
-                                        }}
-                                      >
-                                        Add
-                                      </Button>
-                                    </div>
-                                    <div className="row">
-                                      <div className="col-md-9"></div>
-                                      <div className="col-md-3">
-                                        <Table
-                                          responsive
-                                          bordered
-                                          style={{
-                                            width: "-webkit-fill-available",
-                                            textAlign: "center",
-                                          }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th>Total No. of Questions</th>
-                                              <th>Total Marks</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>20</td>
-                                              <td>100 marks</td>
-                                            </tr>
-                                          </tbody>
-                                        </Table>
-                                      </div>
-                                    </div>
-                                    <div className="row">
-                                      <div className="col-md-9"></div>
-                                      <div className="col-md-3">
-                                        <Table
-                                          responsive
-                                          bordered
-                                          style={{
-                                            width: "-webkit-fill-available",
-                                            textAlign: "center",
-                                          }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th>Content</th>
-                                              <th>Full Form</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <th>V S A</th>
-                                              <td>Very Short Answer</td>
-                                            </tr>
-                                            <tr>
-                                              <th>S A</th>
-                                              <td>Short Answer</td>
-                                            </tr>
-                                            <tr>
-                                              <th>V L A</th>
-                                              <td>Very Long Answer</td>
-                                            </tr>
-                                            <tr>
-                                              <th>L A</th>
-                                              <td>Long Answer</td>
-                                            </tr>
-                                          </tbody>
-                                        </Table>
-                                      </div>
-                                    </div>
-                                  </div> */}
+                                 
                                   <div className="row mt-3">
                                     <div className="col-md-4">
                                       <label htmlFor="">Dificulty Level</label>
@@ -1177,7 +653,591 @@ function AdminBlueprintdetailsview() {
                 </React.Fragment>
               )}
             </div>
-          </Box>
+          </Box> */}
+         
+         {/* blue print 1  */}
+          <div className="blueprint-content-display">
+            <div className="blueprint-titles">
+              <h3>First Language English 2014</h3>
+              <h4>DESIGN & BLUE PRINT</h4>
+            </div>
+            {/* table 1 */}
+            <div className="weightage-objectives">
+              <div className="main-title">
+                <b>1.</b>
+                <b>Weightage to Objectives - Marks</b>
+              </div>
+              <div className="objectives-table">
+                <Table bordered hover style={{ border: "1px solid" }}>
+                  <thead>
+                    <tr>
+                      <th>Objectives</th>
+                      <th>Percentage</th>
+                      <th>Marks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Remembering</td>
+                      <td>30%</td>
+                      <td>30</td>
+                    </tr>
+                    <tr>
+                      <td>Understanding</td>
+                      <td>32%</td>
+                      <td>32</td>
+                    </tr>
+
+                    <tr>
+                      <td>Expression</td>
+                      <td>30%</td>
+                      <td>30</td>
+                    </tr>
+                    <tr>
+                      <td>Appreciation</td>
+                      <td>8%</td>
+                      <td>8</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+
+            {/* table 2 */}
+            <div className="weightage-objectives">
+              <div className="main-title">
+                <b>2.</b>
+                <b>Weightage to Content</b>
+              </div>
+              <div className="text-center">
+                <div className="objectives-table">
+                  <Table
+                    bordered
+                    hover
+                    size="sm"
+                    style={{ border: "1px solid" }}
+                  >
+                    <tbody>
+                      <tr>
+                        <td>Prose</td>
+                        <td>30</td>
+                      </tr>
+                      <tr>
+                        <td>Poetry</td>
+                        <td>30</td>
+                      </tr>
+                      <tr>
+                        <td>Non-details</td>
+                        <td>07</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Grammer 20 + <br></br> Vocabulary
+                        </td>
+                        <td>
+                          <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
+                          <br></br>100
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+            </div>
+
+            {/* table 3  */}
+            <div className="weightage-objectives">
+              <div className="main-title">
+                <b>3.</b>
+                <b>Weightage to type of Questions</b>
+              </div>
+              <div className="objectives-table">
+                <Table
+                  bordered
+                  hover
+                  size="md"
+                  style={{  border: "1px solid" }}
+                >
+                  <tbody>
+                    <tr>
+                      <td>Multiple types questions</td>
+                      <td>14x1</td>
+                      <td>14</td>
+                    </tr>
+                    <tr>
+                      <td>One sentence answers</td>
+                      <td>11x1</td>
+                      <td>11</td>
+                    </tr>
+                    <tr>
+                      <td>2-3 sentence answers</td>
+                      <td>9x2</td>
+                      <td>18</td>
+                    </tr>
+                    <tr>
+                      <td>Short Answer of 3-4 sentences</td>
+                      <td>9x3</td>
+                      <td>27</td>
+                    </tr>
+                    <tr>
+                      <td>Answer in 5-6 sentences</td>
+                      <td>5x4</td>
+                      <td>20</td>
+                    </tr>
+                    <tr>
+                      <td>Compositions</td>
+                      <td>2x5</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Total</b>
+                      </td>
+                      <td></td>
+                      <td>
+                        <b>100</b>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+
+            {/* table 4  */}
+            <div className="weightage-objectives">
+              <div className="main-title">
+                <b>4.</b>
+                <b>Weightage to Difficult Level</b>
+              </div>
+              <div className="objectives-table">
+                <Table bordered hover size="md" style={{ border: "1px solid" }}>
+                  <tbody>
+                    <tr>
+                      <td>Easy</td>
+                      <td>Average</td>
+                      <td>Difficult</td>
+                      <td>Total</td>
+                    </tr>
+                    <tr>
+                      <td>30</td>
+                      <td>50</td>
+                      <td>20</td>
+                      <td>100</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          </div>
+
+{/* blue print 2  */}
+<div style={{ fontFamily:"sans-serif"}}>
+                <div className='blueprint2-container' style={{ padding: "20px 0px" }}>
+                    <div style={{display:"flex", justifyContent:"space-between"}}>
+                        <div><b>Time : 3 hrs.</b></div>
+                        <div><b>BLUE PRINT</b></div>
+                        <div><b>Marks : 100</b></div>
+                    </div>
+
+                    <div>
+                    <Table responsive bordered style={{border:"1px solid"}} size='sm'>
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <th key={index}>Table heading</th>
+                                ))} */}
+                                <th>content</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>comprehension</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>expression</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>appreciation</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>total question</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>total marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <td key={index}>Table cell {index}</td>
+                                ))} */}
+                                <td></td>
+                                <td>M.C</td>
+                                <td>V.S.A</td>
+                                <td>S.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                                <td>M.C</td>
+                                <td>V.S.A</td>
+                                <td>S.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                                <td>M.C</td>
+                                <td>V.S.A</td>
+                                <td>S.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                                <td>L.A</td>
+                               <td></td>
+                               <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <td key={index}>Table cell {index}</td>
+                                ))} */}
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>                            
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <td key={index}>Table cell {index}</td>
+                                ))} */}
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <td key={index}>Table cell {index}</td>
+                                ))} */}
+                                 <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                {/* {Array.from({ length: 23 }).map((_, index) => (
+                                    <td key={index}>Table cell {index}</td>
+                                ))} */}
+                                 <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                            <td>7</td>
+                            <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>lesson name</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </>

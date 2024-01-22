@@ -205,6 +205,13 @@ const AdminBlueprintdetails = () => {
                 </td>
                 <td>
                   <div style={{ display: "flex", gap: "20px" }}>
+                  <div>
+                      <BiSolidEdit
+                        className="text-success"
+                        style={{ cursor: "pointer", fontSize: "20px" }}
+                        onClick={() => {navigate('/admineditblueprint')}}
+                      />
+                    </div>
                     <div>
                       <AiFillDelete
                         className="text-danger"

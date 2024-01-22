@@ -58,16 +58,47 @@
   }
   
   .second-page-body{
-    padding: 4px 10px;
     margin: 14px 50px;
   }
-  
-  .question-body {
+
+  .question-body-main {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0px;
   }
   
+  .question-body {
+    /* display: flex;
+    justify-content: space-between; */
+    padding-bottom: 0px;
+  }
+  
+  .ans-section{
+    display: flex;
+    gap: 10px;
+  }
+  .ans{
+    display: flex;
+    align-items: center;
+  }
+  .ans-box{
+    border: 1px solid;
+    /* padding: 12px; */
+    /* margin: 0; */
+    /* width: 6%; */
+    padding: 15px;
+    /* height: 2rem; */
+  }
+
+  .ans-line{
+    border-bottom: 1px solid;
+    width: 100%;
+  }
+  
+  .mcq-img{
+    width: 50%;
+    height: 158px;
+  }
   .qp-end-buttons{
   display: flex;
   gap: 20px;
@@ -83,7 +114,11 @@
     justify-content: space-between;
     padding: 0px 10px;
   }
-  
+  .ans-section-lg{
+    display: flex;
+    gap: 10px;
+    padding: 18px 0;
+  }
   .selct-cls {
     border: 1px solid lightgray;
     border-radius: 6px;

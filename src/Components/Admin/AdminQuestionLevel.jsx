@@ -59,13 +59,13 @@ const AdminQuestionLevel = () => {
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Question Level</h2>
+          <h2 className="header-c ">Question </h2>
           <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}
             onClick={handleShow}
           >
-            Add Question Level
+            Add Types of Question 
           </button>
         </div>
 
@@ -146,16 +146,16 @@ const AdminQuestionLevel = () => {
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>
-              Add Question Level
+            Add Types of Question 
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Question Level</label>
+                <label>Question Type</label>
                 <input
                   type="text"
-                  placeholder="Enter Question Level"
+                  placeholder="Enter Question Type"
                   className="vi_0"
                 />
               </div>
@@ -197,16 +197,16 @@ const AdminQuestionLevel = () => {
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>
-              Edit Question Level
+            Edit Types of Question 
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Question Level</label>
+                <label>Question Type</label>
                 <input
                   type="text"
-                  placeholder="Enter Question Level"
+                  placeholder="Enter Question Type"
                   className="vi_0"
                 />
               </div>
@@ -231,7 +231,7 @@ const AdminQuestionLevel = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>

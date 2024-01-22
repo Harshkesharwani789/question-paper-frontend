@@ -257,7 +257,7 @@ const Side = () => {
               <span className="ms-2">Questions</span>
             </li>
           </Link>
-          {/* <Link to="/adminquestionlevel">
+          <Link to="/adminquestionlevel">
             <li
               className="a-ele "
               onClick={() => {
@@ -277,10 +277,10 @@ const Side = () => {
               <span>
                 <IoNewspaperOutline style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Type Of QuestionLevel </span>
+              <span className="ms-2">Type Of Question </span>
             </li>
-          </Link> */}
-          {/* <Link to="/adminexamlevel">
+          </Link>
+          <Link to="/adminexamlevel">
             <li
               className="a-ele "
               onClick={() => {
@@ -302,7 +302,7 @@ const Side = () => {
               </span>
               <span className="ms-2">Exam Level</span>
             </li>
-          </Link> */}
+          </Link>
           <Link to="/adminuserlist">
             <li
               className="a-ele "

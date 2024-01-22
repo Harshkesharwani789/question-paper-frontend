@@ -1,16 +1,36 @@
 import React, { useState } from "react";
-import { Button, InputGroup, Modal } from "react-bootstrap";
+import {  InputGroup, Modal ,  Button,  Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
+import "../LoginPage3/LoginPage3.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [show,setShow]= useState(false);
   const handleShow = ()=> setShow(true);
   const handleClose = ()=> setShow(false)
+
+  const [PasswordShow, setPasswordShow] = useState(false);
+  const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(eyeOff);
+  const handleToggle = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
+
   return (
     <div>
-      <div className="container d-flex justify-content-center p-5">
+      {/* <div className="container d-flex justify-content-center p-5">
         <div className="">
           <div className="box ">
             <div className="row">
@@ -68,52 +88,7 @@ const SignUp = () => {
                         />
                       </Form.Group>
                     </div>
-                    {/* <div className="col-md-4">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Country
-                        </Form.Label>
-                        <Form.Select aria-label="Default select example">
-                          <option>Open this select menu</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </div> */}
-                    {/* <div className="col-md-4">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          State
-                        </Form.Label>
-                        <Form.Select aria-label="Default select example">
-                          <option>Open this select menu</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </div> */}
-                    {/* <div className="col-md-4">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          City
-                        </Form.Label>
-                        <Form.Select aria-label="Default select example">
-                          <option>Open this select menu</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </Form.Select>{" "}
-                      </Form.Group>
-                    </div> */}
-
+                 
                     <div className="col-md-6">
                       <Form.Group
                         className="mb-3"
@@ -164,104 +139,8 @@ const SignUp = () => {
                       </Form>
                     </div>
 
-                    {/* <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Mobile Number
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter Mobile Number"
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="formGroupPassword"
-                        >
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Email Id
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter Email Id"
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="formGroupPassword"
-                        >
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Password
-                          </Form.Label>
-                          <Form.Control
-                            type="password"
-                            placeholder="Enter Password"
-                          />
-                        </Form.Group>
-                         */}
-
-                    {/* <div className="col-md-6">
-                      <Form>
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Last Name
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter Last Name"
-                          />
-                        </Form.Group>
-                        
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            City
-                          </Form.Label>
-                          <Form.Control type="text" placeholder="Enter City" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            State
-                          </Form.Label>
-                          <Form.Control type="text" placeholder="Enter State" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Country
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter Country"
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="formGroupPassword"
-                        >
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                            Confirm Password
-                          </Form.Label>
-                          <Form.Control
-                            type="password"
-                            placeholder="Enter Password"
-                          />
-                        </Form.Group>
-                      </Form>
-                    </div> */}
+                   
+                   
                   </div>
                 </div>
 
@@ -318,7 +197,192 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      {/* new Register form  */}
+      <div className="container p-3">
+        {/* <div> */}
+          <div className="box">
+            <div className="row">
+            
+              <div className="col-6">
+                <div className="page2-content-display p-4">
+                  <h4 style={{ textAlign: "center" }}>Register Here</h4>
+                  <hr></hr>
+
+                  <Row>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter Your Name"
+                        />
+                      </Form.Group>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>Mobile Number</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter Your Number"
+                        />
+                      </Form.Group>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="col-12">
+                      <Form.Label>Email ID</Form.Label>
+                      <InputGroup className="mb-2">
+                        <Form.Control
+                          className="login-input"
+                          type="email"
+                          placeholder="Enter Email id"
+                          aria-label="email"
+                          aria-describedby="basic-addon1"
+                        />
+                      </InputGroup>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="col-12">
+                      <Form.Group
+                        className="mb-2"
+                        controlId="formGroupPassword"
+                      >
+                        <Form.Label>Password</Form.Label>
+                        <InputGroup className="col-lg-3 mb-2">
+                          <Form.Control
+                            type={PasswordShow ? "text" : "password"}
+                            className="login-input"
+                            placeholder="Password"
+                            aria-describedby="basic-addon1"
+                          />
+                          {PasswordShow ? (
+                            <button
+                              onClick={() => setPasswordShow(!PasswordShow)}
+                              className="passbtn"
+                            >
+                              <FaEye style={{color:"white"}}/>
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => setPasswordShow(!PasswordShow)}
+                              className="passbtn"
+                            >
+                              <FaEyeSlash style={{color:"white"}} />
+                            </button>
+                          )}
+                        </InputGroup>
+                      </Form.Group>
+                    </div>
+                  </Row>
+
+                  <Row>
+                    <div className="col-12 ">
+                      <Form.Group
+                        className="mb-2"
+                        controlId="formGroupPassword"
+                      >
+                        <Form.Label>Confirm Password</Form.Label>
+                        <InputGroup className="col-lg-3 mb-2">
+                          <Form.Control
+                            type={PasswordShow ? "text" : "password"}
+                            className="login-input"
+                            placeholder="Password"
+                            aria-describedby="basic-addon1"
+                          />
+                          {PasswordShow ? (
+                            <button
+                              onClick={() => setPasswordShow(!PasswordShow)}
+                              className="passbtn"
+                            >
+                              <FaEye style={{color:"white"}}/>
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => setPasswordShow(!PasswordShow)}
+                              className="passbtn"
+                            >
+                              <FaEyeSlash style={{color:"white"}} />
+                            </button>
+                          )}
+                        </InputGroup>
+                      </Form.Group>
+                    </div>
+                  </Row>
+                  <div>
+                  <Form style={{ display: "flex", padding: "0 4px" }}>
+                        {["checkbox"].map((type) => (
+                          <div key={`inline-${type}`} className="mb-3">
+                            <Form.Check
+                              inline
+                              label="I agree the terms and conditions"
+                              name="group1"
+                              type={type}
+                              id={`inline-${type}-1`}
+                            />
+                          </div>
+                        ))}
+                      </Form>
+                  </div>
+                  <Row>
+                    <div
+                      style={{
+                        float: "right",
+                        display: "flex",
+                        justifyContent: "center",
+                        padding: "0px 100px",
+                      }}
+                    >
+                      <Button
+                        variant=""
+                        style={{ backgroundColor: "navy", color: "white" }} onClick={handleShow}
+                      >
+                        Register
+                      </Button>
+                    </div>
+                  </Row>
+                </div>
+                {/* <br /> */}
+              </div>
+              <div className="col-md-6">
+                <div className="signup-bg-img">
+                  <div className="line-1">
+                    <h3>
+                      Welcome To <br></br>
+                      Question Paper Generator
+                    </h3>
+                    <span className="fs-6" style={{ textAlign: "center" }}>
+                      If you have already an account Login Here
+                    </span>
+                    <div>
+                      <a href="/login">
+                        <Button
+                          style={{
+                            padding: "7px 30px",
+                            backgroundColor: "navy",
+                            border: "1px solid navy",
+                            color: "white",
+                          }}
+                        >
+                          Log in
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/* </div> */}
+
+        </div>
+
+
+      {/* Registration OTP  */}
       <Modal
         show={show}
         onHide={handleClose}

@@ -26,16 +26,7 @@ const ExamBoard = () => {
           <div className="box">
             <div className="row">
               <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../images/page2bg.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "500px",
-                    position: "relative",
-                  }}
-                >
+                <div className="bg-img">
                   <div className="line-1">
                     <h2>
                       {" "}
@@ -59,18 +50,21 @@ const ExamBoard = () => {
                         <div style={{ textAlign: "left", padding: "0px 12px" }}>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
-                            <Button>
+                            {/* <Button>
                               Syllabus question paper with blue print
-                            </Button>
+                            </Button> */}
+                            <Button>Individual</Button>
                           </div>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
-                            <Button
+                            {/* <Button
                               variant="success"
                               style={{ backgroundColor: "green" }}
                             >
                               Result Sheet and Marks Card
-                            </Button>
+                            </Button> */}
+                            <Button variant="success"
+                              style={{ backgroundColor: "green" }}>Student</Button>
                           </div>
                           <div
                             style={{
@@ -134,6 +128,27 @@ const ExamBoard = () => {
                         </div>
                       </Row>
                       <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select aria-label="Default select example">
+                            <option>Select Class</option>
+                            <option value="1">LKg</option>
+                            <option value="2">Ukg</option>
+                            <option value="3">Class I</option>
+                            <option value="3">Class II</option>
+                            <option value="3">Class III</option>
+                            <option value="3">Class VI</option>
+                            <option value="3">Class V</option>
+                            <option value="3">Class VI</option>
+                            <option value="3">Class VII</option>
+                            <option value="3">Class VIII</option>
+                            <option value="3">Class IX</option>
+                            <option value="3">Class X</option>
+                            <option value="3">Class XI</option>
+                            <option value="3">Class XII</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
                         <div
                           style={{
                             float: "right",
@@ -156,22 +171,6 @@ const ExamBoard = () => {
                     </>
                   )}
 
-                  {/* <Row>
-                    <div style={{ textAlign: "left", padding: "0px 12px" }}>
-                      <div className="col-8 mb-4">
-                        <input type="radio" name="fav_language" /> &nbsp;
-                        <Button onClick={handleShow}>
-                          Syllabus question paper with blue print
-                        </Button>
-                      </div>
-                      <div className="col-8 mb-4">
-                        <input type="radio" name="fav_language" /> &nbsp;
-                        <Button variant="success" onClick={handleShow}>
-                          Result Sheet and Marks Card
-                        </Button>
-                      </div>
-                    </div>
-                  </Row> */}
                   <br />
                 </div>
               </div>

@@ -17,11 +17,23 @@
   max-width: 100%;
 }
 
+.bg-img{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 500px;
+  position: relative;
+  background-image: url(../../../public/page2bg.png);
+}
+
 @media screen and (max-width: 799px) {
   .page2-content-display,
   .col-6 {
     width: 100%;
     padding: 10px 20px;
+  }
+  .bg-img{
+    height: 200px;
   }
 }
 

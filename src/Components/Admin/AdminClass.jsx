@@ -310,6 +310,9 @@ const AdminClass = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
+          <Button variant="success" onClick={handleClose}>
+              Close
+            </Button>
             <Button className="mx-2" variant="primary">
               Add
             </Button>
@@ -334,6 +337,9 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="success"  onClick={handleClose1}>
+            Close
+          </Button>
           <Button variant="primary" style={{ backgroundColor: "#26AAE0" }}>
             Edit
           </Button>
@@ -346,7 +352,7 @@ const AdminClass = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
+          <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
@@ -358,7 +364,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="btn btn-secondary" onClick={handleClose2}>
+          <Button variant="success" onClick={handleClose2}>
             Close
           </Button>
           <Button variant="primary">Delete</Button>
@@ -387,6 +393,9 @@ const AdminClass = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
+          <Button variant="success" onClick={handleClose3}>
+              Close
+            </Button>
             <Button className="mx-2" variant="primary">
               Add
             </Button>
@@ -420,6 +429,9 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="success" onClick={handleClose4}>
+              Close
+            </Button>
           <Button variant="primary" style={{ backgroundColor: "#26AAE0" }}>
             Edit
           </Button>
