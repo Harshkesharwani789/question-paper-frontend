@@ -6,8 +6,9 @@ import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
-const ExamLevel = () => {
-  const admin = JSON.parse(sessionStorage.getItem("admin"));
+
+const AdminTypeOfQuestions = () => {
+    const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
   
     const [show, setShow] = useState();
@@ -23,18 +24,18 @@ const ExamLevel = () => {
     const handleShow2 = () => setShow2(true);
   
     //Post
-    const [examlevel, setexamlevel] = useState("");
-    const AddExamLevel = async () => {
-      if (!examlevel)
+    const [subjectName, setsubjectName] = useState("");
+    const AddSubject = async () => {
+      if (!subjectName)
         return swal({
           title: "Oops!",
-          text: "Please Enter the Exam Level",
+          text: "Please Enter the Subject",
           icon: "error",
           button: "Ok!",
         });
       try {
         const config = {
-          url: "/admin/addExamLevel",
+          url: "/admin/addSubjects",
           method: "post",
           baseURL: "http://localhost:8000/api",
           headers: {
@@ -42,14 +43,14 @@ const ExamLevel = () => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            examlevel: examlevel,
+            subjectName: subjectName,
             authId: admin?._id,
           },
         };
         let res = await axios(config);
         if (res.status == 200) {
           handleClose();
-          getExamLevel();
+          getSubject();
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -68,15 +69,15 @@ const ExamLevel = () => {
       }
     };
     //get
-    const [examlevell, setexamlevell] = useState([]);
+    const [subject, setsubject] = useState([]);
     const [nochangedata, setnochangedata] = useState([]);
-    const getExamLevel = async () => {
+    const getSubject = async () => {
       try {
         let res = await axios.get(
           "http://localhost:8000/api/admin/getAllSujects"
         );
         if (res.status == 200) {
-          setexamlevell(res.data.success);
+          setsubject(res.data.success);
           setnochangedata(res.data.success);
         }
       } catch (error) {
@@ -85,8 +86,8 @@ const ExamLevel = () => {
     };
   
     //update
-    const [updateexamlevel, setpdatesetexamlevel] = useState("");
-    const UpdateExamLevel = async () => {
+    const [updateSubject, setpdateSubject] = useState("");
+    const UpdateSubject = async () => {
       try {
         const config = {
           url: "/admin/updateSubjects",
@@ -97,16 +98,16 @@ const ExamLevel = () => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            setexamlevel: setexamlevel,
+            subjectName: subjectName,
             authId: admin?._id,
-            id: updateexamlevel,
+            id: updateSubject,
           },
         };
         let res = await axios(config);
         if (res.status == 200)
           if (res.status == 200) {
             handleClose1();
-            getExamLevel();
+            getSubject();
             return swal({
               title: "Yeah!",
               text: res.data.success,
@@ -125,11 +126,11 @@ const ExamLevel = () => {
       }
     };
     //delete
-    const [exam, setexam] = useState("");
-    const Deleteexamlevel = async () => {
+    const [sub, setsub] = useState("");
+    const DeleteSubject = async () => {
       try {
         const config = {
-          url: "/admin/deleteSubjects/" + exam + "/" + admin?._id,
+          url: "/admin/deleteSubjects/" + sub + "/" + admin?._id,
           method: "delete",
           baseURL: "http://localhost:8000/api",
           headers: {
@@ -140,7 +141,7 @@ const ExamLevel = () => {
         let res = await axios(config);
         if (res.status == 200) {
           handleClose2();
-          getExamLevel();
+          getSubject();
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -172,14 +173,14 @@ const ExamLevel = () => {
             String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
           )
         );
-        setexamlevell([...filterTableH]);
+        setsubject([...filterTableH]);
       } else {
         setSearchH(e.target.value);
-        setexamlevell([...nochangedata]);
+        setsubject([...nochangedata]);
       }
     };
     const [searchTermH, setSearchTermH] = useState("");
-    const searchedProductH = examlevell.filter((item) => {
+    const searchedProductH = subject.filter((item) => {
       if (searchTermH.value === "") {
         return item;
       }
@@ -193,10 +194,10 @@ const ExamLevel = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const productPerPage = 5;
     const visitedPage = pageNumber * productPerPage;
-    const displayPage = examlevell.slice(visitedPage, visitedPage + productPerPage);
-    const pageCount = Math.ceil(examlevell.length / productPerPage);
+    const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
+    const pageCount = Math.ceil(subject.length / productPerPage);
     useEffect(() => {
-      getExamLevel();
+      getSubject();
     }, []);
   
     return (
@@ -217,13 +218,13 @@ const ExamLevel = () => {
         </div>
         <div className="customerhead p-2">
           <div className="d-flex justify-content-between align-items-center">
-            <h2 className="header-c ">Exam Level</h2>
+            <h2 className="header-c ">Type Of Questions</h2>
             <button
               className=" btn"
               style={{ backgroundColor: "#083494", color: "white" }}
               onClick={handleShow}
             >
-              Add Exam Level
+              Add Type Of Question
             </button>
           </div>
   
@@ -237,7 +238,7 @@ const ExamLevel = () => {
                 <tr>
                   <th>S.No</th>
                   <th>
-                    <div>Exam Level</div>
+                    <div>Type Of Questions</div>
                   </th>
                   <th>Action</th>
                 </tr>
@@ -249,7 +250,7 @@ const ExamLevel = () => {
                     <tr>
                       <td>{i + 1 + visitedPage}</td>
   
-                      <td>{item?.examlevel}</td>
+                      <td>{item?.subjectName}</td>
   
                       <td>
                         {" "}
@@ -260,8 +261,8 @@ const ExamLevel = () => {
                               style={{ cursor: "pointer", fontSize: "20px" }}
                               onClick={() => {
                                 handleShow1();
-                                setpdatesetexamlevel(item);
-                                setexamlevel(item?.examlevel);
+                                setpdateSubject(item);
+                                setsubjectName(item?.subjectName);
                                 
                               }}
                             />{" "}
@@ -271,7 +272,7 @@ const ExamLevel = () => {
                               className="text-danger"
                               style={{ cursor: "pointer", fontSize: "20px" }}
                               onClick={() => {
-                                setexam(item?._id);
+                                setsub(item?._id);
                                 handleShow2();
                               }}
                             />{" "}
@@ -308,18 +309,18 @@ const ExamLevel = () => {
           </Pagination>
           {/* Add Package modal */}
           <Modal show={show} onHide={handleClose}>
-            <Modal.Header  style={{ backgroundColor: "#26AAE0" }}>
-              <Modal.Title style={{ color: "white" }}>Add Exam Level</Modal.Title>
+            <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
+              <Modal.Title style={{ color: "white" }}>Add Type Of Question</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="row">
                 <div className="do-sear mt-2">
-                  <label>Exam Level</label>
+                  <label>Type Of Question</label>
                   <input
                     type="text"
-                    placeholder="Enter Exam Level"
+                    placeholder="Enter Subject"
                     className="vi_0"
-                    onChange={(e) => setexamlevel(e.target.value)}
+                    onChange={(e) => setsubjectName(e.target.value)}
                   />
                 </div>
               </div>
@@ -348,7 +349,7 @@ const ExamLevel = () => {
                   className="mx-2"
                   variant="primary"
                   onClick={() => {
-                    AddExamLevel();
+                    AddSubject();
                   }}
                 >
                   Add
@@ -365,18 +366,18 @@ const ExamLevel = () => {
             keyboard={false}
           >
             <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
-              <Modal.Title style={{ color: "white" }}>Edit Exam Level</Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Edit Type Of Question</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="row">
                 <div className="do-sear mt-2">
-                  <label>Exam Level</label>
+                  <label>Type Of Question</label>
                   <input
                     type="text"
-                    placeholder="Enter Exam Level "
+                    placeholder="Enter Subject"
                     className="vi_0"
-                    value={examlevel}
-                    onChange={(e) => setexamlevel(e.target.value)}
+                    value={subjectName}
+                    onChange={(e) => setsubjectName(e.target.value)}
                   />
                 </div>
               </div>
@@ -407,7 +408,7 @@ const ExamLevel = () => {
                 variant="primary"
                 style={{ backgroundColor: "#FAFA33" }}
                 onClick={() => {
-                  UpdateExamLevel();
+                  UpdateSubject();
                 }}
               >
                 Edit
@@ -436,7 +437,7 @@ const ExamLevel = () => {
               <Button variant="btn btn-secondary" onClick={handleClose2}>
                 Close
               </Button>
-              <Button variant="primary" onClick={Deleteexamlevel}>
+              <Button variant="primary" onClick={DeleteSubject}>
                 Delete
               </Button>
             </Modal.Footer>
@@ -446,4 +447,4 @@ const ExamLevel = () => {
     );
   };
 
-export default ExamLevel;
+export default AdminTypeOfQuestions

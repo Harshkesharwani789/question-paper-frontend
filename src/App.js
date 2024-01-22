@@ -31,6 +31,7 @@ import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
+import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
 
 function App() {
   return (
@@ -220,6 +221,18 @@ function App() {
                 children={
                   <>
                     <ExamLevel />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/admintypesofquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminTypeOfQuestions />
                   </>
                 }
               />
