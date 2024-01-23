@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Form } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -163,9 +163,7 @@ const AdminEditQuestionDetails = () => {
                   rows="5"
                   className="vi_0"
                 ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
             <div className="col-md-6">
@@ -246,9 +244,7 @@ const AdminEditQuestionDetails = () => {
                     rows="5"
                     className="vi_0"
                   ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                  <CKEditor editor={ClassicEditor} className="vi_0" />
                 </div>
               </div>
             </div>
@@ -262,7 +258,7 @@ const AdminEditQuestionDetails = () => {
         <button style={{}}>Update</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminEditQuestionDetails
+export default AdminEditQuestionDetails;

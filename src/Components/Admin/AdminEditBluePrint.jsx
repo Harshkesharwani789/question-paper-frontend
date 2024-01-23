@@ -21,370 +21,245 @@ const steps = [
 ];
 
 const AdminEditBluePrint = () => {
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [completed, setCompleted] = React.useState({});
-  
-    const totalSteps = () => {
-      return steps.length;
-    };
-  
-    const completedSteps = () => {
-      return Object.keys(completed).length;
-    };
-  
-    const isLastStep = () => {
-      return activeStep === totalSteps() - 1;
-    };
-  
-    const allStepsCompleted = () => {
-      return completedSteps() === totalSteps();
-    };
-  
-    const handleNext = () => {
-      const newActiveStep =
-        isLastStep() && !allStepsCompleted()
-          ? // It's the last step, but not all steps have been completed,
-            // find the first step that has been completed
-            steps.findIndex((step, i) => !(i in completed))
-          : activeStep + 1;
-      setActiveStep(newActiveStep);
-    };
-  
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-  
-    const handleStep = (step) => () => {
-      setActiveStep(step);
-    };
-  
-    const handleComplete = () => {
-      const newCompleted = completed;
-      newCompleted[activeStep] = true;
-      setCompleted(newCompleted);
-      handleNext();
-    };
-  
-    const handleReset = () => {
-      setActiveStep(0);
-      setCompleted({});
-    };
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [completed, setCompleted] = React.useState({});
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ? // It's the last step, but not all steps have been completed,
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStep = (step) => () => {
+    setActiveStep(step);
+  };
+
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    handleNext();
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setCompleted({});
+  };
   return (
     <div className="box_1">
-    <div className="Stepper-info " style={{ padding: "20px" }}>
-      <Box sx={{ width: "100%" }}>
-        <Stepper nonLinear activeStep={activeStep}>
-          {steps.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)}>
-                {label}
-              </StepButton>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {allStepsCompleted() ? (
-            <React.Fragment>
-              <Typography
-                sx={{ mt: 2, mb: 1 }}
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  fontSize: "20px",
-                  fontWeight: "500",
-                }}
-              >
-                All steps completed successfully
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignSelf: "center",
-                    pt: 2,
+      <div className="Stepper-info " style={{ padding: "20px" }}>
+        <Box sx={{ width: "100%" }}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label} completed={completed[index]}>
+                <StepButton color="inherit" onClick={handleStep(index)}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+          <div>
+            {allStepsCompleted() ? (
+              <React.Fragment>
+                <Typography
+                  sx={{ mt: 2, mb: 1 }}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    fontSize: "20px",
+                    fontWeight: "500",
                   }}
                 >
-                  <Button onClick={handleReset}>Back</Button>
-                </Box>
-              </Typography>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              {activeStep == 0 ? (
-                <>
-                  <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                    <div className="container" style={{ padding: "5px" }}>
-                      <div className="row ">
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label htmlFor="">Blueprint Name</label>
-                            <input
-                              type="text"
-                              className="vi_0"
-                              placeholder="Enter BluePrint Name"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label>
-                              Select Board
-                              <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <Form.Select
-                              aria-label="Default select example"
-                              className="vi_0"
-                            >
-                              <option>Select the Board</option>
-                              <option value="CBSE">CBSE</option>
-                              <option value="ICSE">ICSE</option>
-                              <option value="AN">
-                                Andaman and Nicobar Islands
-                              </option>
-                              <option value="AP">Andhra Pradesh</option>
-                              <option value="AR">Arunachal Pradesh</option>
-                              <option value="AS">Assam</option>
-                              <option value="BR">Bihar</option>
-                              <option value="CH">Chandigarh</option>
-                              <option value="CT">Chhattisgarh</option>
-                              <option value="DN">
-                                Dadra and Nagar Haveli
-                              </option>
-                              <option value="DD">Daman and Diu</option>
-                              <option value="DL">Delhi</option>
-                              <option value="GA">Goa</option>
-                              <option value="GJ">Gujarat</option>
-                              <option value="HR">Haryana</option>
-                              <option value="HP">Himachal Pradesh</option>
-                              <option value="JK">Jammu and Kashmir</option>
-                              <option value="JH">Jharkhand</option>
-                              <option value="KA">Karnataka</option>
-                              <option value="KL">Kerala</option>
-                              <option value="LA">Ladakh</option>
-                              <option value="LD">Lakshadweep</option>
-                              <option value="MP">Madhya Pradesh</option>
-                              <option value="MH">Maharashtra</option>
-                              <option value="MN">Manipur</option>
-                              <option value="ML">Meghalaya</option>
-                              <option value="MZ">Mizoram</option>
-                              <option value="NL">Nagaland</option>
-                              <option value="OR">Odisha</option>
-                              <option value="PY">Puducherry</option>
-                              <option value="PB">Punjab</option>
-                              <option value="RJ">Rajasthan</option>
-                              <option value="SK">Sikkim</option>
-                              <option value="TN">Tamil Nadu</option>
-                              <option value="TG">Telangana</option>
-                              <option value="TR">Tripura</option>
-                              <option value="UP">Uttar Pradesh</option>
-                              <option value="UT">Uttarakhand</option>
-                              <option value="WB">West Bengal</option>
-                            </Form.Select>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label>
-                              Select Subjects{" "}
-                              <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <Form.Select aria-label="Default select example">
-                              <option>Select the Subjects</option>
-                              <option value="English">English</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="Kanada">Kanada</option>
-                              <option value="Kanada">Maths</option>
-                              <option value="Kanada">Science</option>
-                              <option value="Kanada">Social Science</option>
-                            </Form.Select>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label>
-                              Select Medium{" "}
-                              <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <Form.Select aria-label="Default select example">
-                              <option>Select the Medium</option>
-                              <option value="English">English</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="Kanada">Kanada</option>
-                            </Form.Select>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label>
-                              Select Class{" "}
-                              <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <Form.Select aria-label="Default select example">
-                              <option>Select the Class</option>
-                              <option value="English">English</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="Kanada">Kanada</option>
-                              <option value="Kanada">Maths</option>
-                              <option value="Kanada">Science</option>
-                              <option value="Kanada">Social Science</option>
-                            </Form.Select>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="do-sear mt-2">
-                            <label>
-                              Select Sub-Class{" "}
-                              <span style={{ color: "red" }}>*</span>
-                            </label>
-                            <Form.Select aria-label="Default select example">
-                              <option>Select the Sub-Class</option>
-                              <option value="English">English</option>
-                              <option value="Hindi">Hindi</option>
-                              <option value="Kanada">Kanada</option>
-                              <option value="Kanada">Maths</option>
-                              <option value="Kanada">Science</option>
-                              <option value="Kanada">Social Science</option>
-                            </Form.Select>
-                          </div>
-                        </div>
-                        <div className="row mt-3">
-                          <div className="col-md-4">
-                            <label htmlFor="">Objectives</label>
-                            <p className="fs-5 mt-2">
-                              <MdPlayArrow
-                                style={{ marginRight: "15px" }}
+                  All steps completed successfully
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignSelf: "center",
+                      pt: 2,
+                    }}
+                  >
+                    <Button onClick={handleReset}>Back</Button>
+                  </Box>
+                </Typography>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                {activeStep == 0 ? (
+                  <>
+                    <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                      <div className="container" style={{ padding: "5px" }}>
+                        <div className="row ">
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label htmlFor="">Blueprint Name</label>
+                              <input
+                                type="text"
+                                className="vi_0"
+                                placeholder="Enter BluePrint Name"
                               />
-                              Remembering
-                            </p>
+                            </div>
                           </div>
-                          <div className="col-md-4">
-                            <label htmlFor="">No. of Questions</label>
-                            <input
-                              type="text"
-                              className="vi_0 mt-2"
-                              placeholder="Enter No. of Questions"
-                            />
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label>
+                                Select Board
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <Form.Select
+                                aria-label="Default select example"
+                                className="vi_0"
+                              >
+                                <option>Select the Board</option>
+                                <option value="CBSE">CBSE</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="AN">
+                                  Andaman and Nicobar Islands
+                                </option>
+                                <option value="AP">Andhra Pradesh</option>
+                                <option value="AR">Arunachal Pradesh</option>
+                                <option value="AS">Assam</option>
+                                <option value="BR">Bihar</option>
+                                <option value="CH">Chandigarh</option>
+                                <option value="CT">Chhattisgarh</option>
+                                <option value="DN">
+                                  Dadra and Nagar Haveli
+                                </option>
+                                <option value="DD">Daman and Diu</option>
+                                <option value="DL">Delhi</option>
+                                <option value="GA">Goa</option>
+                                <option value="GJ">Gujarat</option>
+                                <option value="HR">Haryana</option>
+                                <option value="HP">Himachal Pradesh</option>
+                                <option value="JK">Jammu and Kashmir</option>
+                                <option value="JH">Jharkhand</option>
+                                <option value="KA">Karnataka</option>
+                                <option value="KL">Kerala</option>
+                                <option value="LA">Ladakh</option>
+                                <option value="LD">Lakshadweep</option>
+                                <option value="MP">Madhya Pradesh</option>
+                                <option value="MH">Maharashtra</option>
+                                <option value="MN">Manipur</option>
+                                <option value="ML">Meghalaya</option>
+                                <option value="MZ">Mizoram</option>
+                                <option value="NL">Nagaland</option>
+                                <option value="OR">Odisha</option>
+                                <option value="PY">Puducherry</option>
+                                <option value="PB">Punjab</option>
+                                <option value="RJ">Rajasthan</option>
+                                <option value="SK">Sikkim</option>
+                                <option value="TN">Tamil Nadu</option>
+                                <option value="TG">Telangana</option>
+                                <option value="TR">Tripura</option>
+                                <option value="UP">Uttar Pradesh</option>
+                                <option value="UT">Uttarakhand</option>
+                                <option value="WB">West Bengal</option>
+                              </Form.Select>
+                            </div>
                           </div>
-                          <div className="col-md-4">
-                            <label htmlFor="">Marks</label>
-                            <input
-                              type="number"
-                              className="vi_0 mt-2"
-                              placeholder="Enter the Marks"
-                            />
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label>
+                                Select Subjects{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <Form.Select aria-label="Default select example">
+                                <option>Select the Subjects</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kanada">Kanada</option>
+                                <option value="Kanada">Maths</option>
+                                <option value="Kanada">Science</option>
+                                <option value="Kanada">Social Science</option>
+                              </Form.Select>
+                            </div>
                           </div>
-                          <div className="col-md-4 mt-2">
-                            <p className="fs-5">
-                              <MdPlayArrow
-                                style={{ marginRight: "15px" }}
-                              />
-                              Understanding
-                            </p>
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label>
+                                Select Medium{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <Form.Select aria-label="Default select example">
+                                <option>Select the Medium</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kanada">Kanada</option>
+                              </Form.Select>
+                            </div>
                           </div>
-                          <div className="col-md-4">
-                            <input
-                              type="text"
-                              className="vi_0"
-                              placeholder="Enter No. of Questions"
-                            />
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label>
+                                Select Class{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <Form.Select aria-label="Default select example">
+                                <option>Select the Class</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kanada">Kanada</option>
+                                <option value="Kanada">Maths</option>
+                                <option value="Kanada">Science</option>
+                                <option value="Kanada">Social Science</option>
+                              </Form.Select>
+                            </div>
                           </div>
-                          <div className="col-md-4">
-                            <input
-                              type="number"
-                              className="vi_0"
-                              placeholder="Enter the Marks"
-                            />
+                          <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                              <label>
+                                Select Sub-Class{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <Form.Select aria-label="Default select example">
+                                <option>Select the Sub-Class</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Kanada">Kanada</option>
+                                <option value="Kanada">Maths</option>
+                                <option value="Kanada">Science</option>
+                                <option value="Kanada">Social Science</option>
+                              </Form.Select>
+                            </div>
                           </div>
-                          <div className="col-md-4 mt-2">
-                            <p className="fs-5">
-                              <MdPlayArrow
-                                style={{ marginRight: "15px" }}
-                              />
-                              Expression
-                            </p>
-                          </div>
-                          <div className="col-md-4">
-                            <input
-                              type="text"
-                              className="vi_0"
-                              placeholder="Enter No. of Questions"
-                            />
-                          </div>
-                          <div className="col-md-4">
-                            <input
-                              type="number"
-                              className="vi_0"
-                              placeholder="Enter the Marks"
-                            />
-                          </div>
-                          <div className="col-md-4 mt-2">
-                            <p className="fs-5">
-                              <MdPlayArrow
-                                style={{ marginRight: "15px" }}
-                              />
-                              Appreciation
-                            </p>
-                          </div>
-                          <div className="col-md-4">
-                            <input
-                              type="text"
-                              className="vi_0"
-                              placeholder="Enter No. of Questions"
-                            />
-                          </div>
-                          <div className="col-md-4">
-                            <input
-                              type="number"
-                              className="vi_0"
-                              placeholder="Enter the Marks"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-md-12">
-                          <div className="do-sear mt-2">
-                            <label htmlFor="" className="mb-2">
-                              General Instructions
-                            </label>
-                            <CKEditor
-                              editor={ClassicEditor}
-                              className="vi_0"
-                              // data={lodingdetails}
-                              // onChange={(event, editor) => {
-                              //   const data = editor.getData();
-                              //   setlodingdetails(data);
-                              // }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Typography>
-                </>
-              ) : (
-                <>
-                  {activeStep == 1 ? (
-                    <>
-                      <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                        <div
-                          className="container"
-                          style={{ padding: "5px" }}
-                        >
-                          <div className="row">
-                            <div className="col-md-4 mt-2">
-                              <label htmlFor="">Types of Questions</label>
-                              <p className="fs-5">
-                                <MdPlayArrow
-                                  style={{ marginRight: "15px" }}
-                                />
-                                Multiple Chose Questions
+                          <div className="row mt-3">
+                            <div className="col-md-4">
+                              <label htmlFor="">Objectives</label>
+                              <p className="fs-5 mt-2">
+                                <MdPlayArrow style={{ marginRight: "15px" }} />
+                                Remembering
                               </p>
                             </div>
                             <div className="col-md-4">
                               <label htmlFor="">No. of Questions</label>
                               <input
                                 type="text"
-                                className="vi_0"
+                                className="vi_0 mt-2"
                                 placeholder="Enter No. of Questions"
                               />
                             </div>
@@ -392,37 +267,151 @@ const AdminEditBluePrint = () => {
                               <label htmlFor="">Marks</label>
                               <input
                                 type="number"
+                                className="vi_0 mt-2"
+                                placeholder="Enter the Marks"
+                              />
+                            </div>
+                            <div className="col-md-4 mt-2">
+                              <p className="fs-5">
+                                <MdPlayArrow style={{ marginRight: "15px" }} />
+                                Understanding
+                              </p>
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="text"
+                                className="vi_0"
+                                placeholder="Enter No. of Questions"
+                              />
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="number"
+                                className="vi_0"
+                                placeholder="Enter the Marks"
+                              />
+                            </div>
+                            <div className="col-md-4 mt-2">
+                              <p className="fs-5">
+                                <MdPlayArrow style={{ marginRight: "15px" }} />
+                                Expression
+                              </p>
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="text"
+                                className="vi_0"
+                                placeholder="Enter No. of Questions"
+                              />
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="number"
+                                className="vi_0"
+                                placeholder="Enter the Marks"
+                              />
+                            </div>
+                            <div className="col-md-4 mt-2">
+                              <p className="fs-5">
+                                <MdPlayArrow style={{ marginRight: "15px" }} />
+                                Appreciation
+                              </p>
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="text"
+                                className="vi_0"
+                                placeholder="Enter No. of Questions"
+                              />
+                            </div>
+                            <div className="col-md-4">
+                              <input
+                                type="number"
                                 className="vi_0"
                                 placeholder="Enter the Marks"
                               />
                             </div>
                           </div>
-                          <div className="row">
-                            <div className="col-md-4"></div>
-                            <div className="col-md-4 mt-2">
-                              <span style={{ float: "right" }}>
-                                <label htmlFor="">Total Marks</label>
-                              </span>
-                            </div>
-                            <div className="col-md-4">
-                              <input
-                                type="text"
-                                placeholder="Total Marks"
+
+                          <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                              <label htmlFor="" className="mb-2">
+                                General Instructions
+                              </label>
+                              <CKEditor
+                                editor={ClassicEditor}
                                 className="vi_0"
+                                // data={lodingdetails}
+                                // onChange={(event, editor) => {
+                                //   const data = editor.getData();
+                                //   setlodingdetails(data);
+                                // }}
                               />
                             </div>
                           </div>
-                          <div className="row">
-                            <div className="col-md-6">
-                              <label htmlFor="">Duration of Exam</label>
-                              <input
-                                type="text"
-                                className="vi_0"
-                                placeholder="Enter Duration of Exam"
-                              />
+                        </div>
+                      </div>
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    {activeStep == 1 ? (
+                      <>
+                        <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                          <div className="container" style={{ padding: "5px" }}>
+                            <div className="row">
+                              <div className="col-md-4 mt-2">
+                                <label htmlFor="">Types of Questions</label>
+                                <p className="fs-5">
+                                  <MdPlayArrow
+                                    style={{ marginRight: "15px" }}
+                                  />
+                                  Multiple Chose Questions
+                                </p>
+                              </div>
+                              <div className="col-md-4">
+                                <label htmlFor="">No. of Questions</label>
+                                <input
+                                  type="text"
+                                  className="vi_0"
+                                  placeholder="Enter No. of Questions"
+                                />
+                              </div>
+                              <div className="col-md-4">
+                                <label htmlFor="">Marks</label>
+                                <input
+                                  type="number"
+                                  className="vi_0"
+                                  placeholder="Enter the Marks"
+                                />
+                              </div>
                             </div>
-                          </div>
-                          {/* <div className="row ">
+                            <div className="row">
+                              <div className="col-md-4"></div>
+                              <div className="col-md-4 mt-2">
+                                <span style={{ float: "right" }}>
+                                  <label htmlFor="">Total Marks</label>
+                                </span>
+                              </div>
+                              <div className="col-md-4">
+                                <input
+                                  type="text"
+                                  placeholder="Total Marks"
+                                  className="vi_0"
+                                />
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-md-6">
+                                <label htmlFor="">Duration of Exam</label>
+                                <input
+                                  type="text"
+                                  className="vi_0"
+                                  placeholder="Enter Duration of Exam"
+                                />
+                              </div>
+                            </div>
+                            {/* <div className="row ">
                             <div className="col-md-6">
                               <div className="do-sear mt-2">
                                 <label>
@@ -464,98 +453,88 @@ const AdminEditBluePrint = () => {
                               </div>
                             </div>
                           </div> */}
-                        </div>
-                      </Typography>
-                    </>
-                  ) : (
-                    <>
-                      {activeStep == 2 ? (
-                        <>
-                          <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                            <div
-                              className="container"
-                              style={{ padding: "5px" }}
-                            >
-                              <div className="row ">
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Prose (Lesson) Weightage{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Prose (Lesson) Marks"
-                                      className="vi_0"
-                                    />
+                          </div>
+                        </Typography>
+                      </>
+                    ) : (
+                      <>
+                        {activeStep == 2 ? (
+                          <>
+                            <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                              <div
+                                className="container"
+                                style={{ padding: "5px" }}
+                              >
+                                <div className="row ">
+                                  <div className="col-md-6">
+                                    <div className="do-sear mt-2">
+                                      <label>
+                                        Prose (Lesson) Weightage{" "}
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Prose (Lesson) Marks"
+                                        className="vi_0"
+                                      />
+                                    </div>
                                   </div>
-                                </div>
 
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Poetry Weightage{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Poetry Marks"
-                                      className="vi_0"
-                                    />
+                                  <div className="col-md-6">
+                                    <div className="do-sear mt-2">
+                                      <label>
+                                        Poetry Weightage{" "}
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Poetry Marks"
+                                        className="vi_0"
+                                      />
+                                    </div>
                                   </div>
-                                </div>
 
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Non-Detailed Weightage{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Non-Detailed Marks"
-                                      className="vi_0"
-                                    />
+                                  <div className="col-md-6">
+                                    <div className="do-sear mt-2">
+                                      <label>
+                                        Non-Detailed Weightage{" "}
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Non-Detailed Marks"
+                                        className="vi_0"
+                                      />
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Grammer Weightage{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Grammer Marks"
-                                      className="vi_0"
-                                    />
+                                  <div className="col-md-6">
+                                    <div className="do-sear mt-2">
+                                      <label>
+                                        Grammer Weightage{" "}
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Grammer Marks"
+                                        className="vi_0"
+                                      />
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Vocabulary Weightage{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Vocabulary Marks"
-                                      className="vi_0"
-                                    />
+                                  <div className="col-md-6">
+                                    <div className="do-sear mt-2">
+                                      <label>
+                                        Vocabulary Weightage{" "}
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        placeholder="Enter Vocabulary Marks"
+                                        className="vi_0"
+                                      />
+                                    </div>
                                   </div>
-                                </div>
 
-                                {/* <div className="col-md-6">
+                                  {/* <div className="col-md-6">
                                 <div className="do-sear mt-2">
                                   <label>
                                     Branch Name{" "}
@@ -582,18 +561,18 @@ const AdminEditBluePrint = () => {
                                   />
                                 </div>
                               </div> */}
+                                </div>
                               </div>
-                            </div>
-                          </Typography>
-                        </>
-                      ) : (
-                        <>
-                          <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                            <div
-                              className="container"
-                              style={{ padding: "5px" }}
-                            >
-                              {/* <div className="row ">
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                              <div
+                                className="container"
+                                style={{ padding: "5px" }}
+                              >
+                                {/* <div className="row ">
                               <div className="col-md-6">
                                 <div className="do-sear mt-2">
                                   <label>
@@ -702,7 +681,7 @@ const AdminEditBluePrint = () => {
                                 </div>
                               </div>
                             </div> */}
-                              {/* <div className="row">
+                                {/* <div className="row">
                                 <div className="col-md-6">
                                   <div className="do-sear mt-2">
                                     <label>
@@ -1047,138 +1026,138 @@ const AdminEditBluePrint = () => {
                                   </div>
                                 </div>
                               </div> */}
-                              <div className="row mt-3">
-                                <div className="col-md-4">
-                                  <label htmlFor="">Dificulty Level</label>
-                                  <p className="fs-5 mt-2">
-                                    <MdPlayArrow
-                                      style={{ marginRight: "15px" }}
+                                <div className="row mt-3">
+                                  <div className="col-md-4">
+                                    <label htmlFor="">Dificulty Level</label>
+                                    <p className="fs-5 mt-2">
+                                      <MdPlayArrow
+                                        style={{ marginRight: "15px" }}
+                                      />
+                                      Easy
+                                    </p>
+                                  </div>
+                                  <div className="col-md-4">
+                                    <label htmlFor="">No. of Questions</label>
+                                    <input
+                                      type="text"
+                                      className="vi_0 mt-2"
+                                      placeholder="Enter No. of Questions"
                                     />
-                                    Easy
-                                  </p>
-                                </div>
-                                <div className="col-md-4">
-                                  <label htmlFor="">No. of Questions</label>
-                                  <input
-                                    type="text"
-                                    className="vi_0 mt-2"
-                                    placeholder="Enter No. of Questions"
-                                  />
-                                </div>
-                                <div className="col-md-4">
-                                  <label htmlFor="">Marks</label>
-                                  <input
-                                    type="number"
-                                    className="vi_0 mt-2"
-                                    placeholder="Enter the Marks"
-                                  />
-                                </div>
-                                <div className="col-md-4 mt-2">
-                                  <p className="fs-5">
-                                    <MdPlayArrow
-                                      style={{ marginRight: "15px" }}
+                                  </div>
+                                  <div className="col-md-4">
+                                    <label htmlFor="">Marks</label>
+                                    <input
+                                      type="number"
+                                      className="vi_0 mt-2"
+                                      placeholder="Enter the Marks"
                                     />
-                                    Average
-                                  </p>
-                                </div>
-                                <div className="col-md-4">
-                                  <input
-                                    type="text"
-                                    className="vi_0"
-                                    placeholder="Enter No. of Questions"
-                                  />
-                                </div>
-                                <div className="col-md-4">
-                                  <input
-                                    type="number"
-                                    className="vi_0"
-                                    placeholder="Enter the Marks"
-                                  />
-                                </div>
-                                <div className="col-md-4 mt-2">
-                                  <p className="fs-5">
-                                    <MdPlayArrow
-                                      style={{ marginRight: "15px" }}
+                                  </div>
+                                  <div className="col-md-4 mt-2">
+                                    <p className="fs-5">
+                                      <MdPlayArrow
+                                        style={{ marginRight: "15px" }}
+                                      />
+                                      Average
+                                    </p>
+                                  </div>
+                                  <div className="col-md-4">
+                                    <input
+                                      type="text"
+                                      className="vi_0"
+                                      placeholder="Enter No. of Questions"
                                     />
-                                    Difficult
-                                  </p>
-                                </div>
-                                <div className="col-md-4">
-                                  <input
-                                    type="text"
-                                    className="vi_0"
-                                    placeholder="Enter No. of Questions"
-                                  />
-                                </div>
-                                <div className="col-md-4">
-                                  <input
-                                    type="number"
-                                    className="vi_0"
-                                    placeholder="Enter the Marks"
-                                  />
-                                </div>
-                                <div className="col-md-4"></div>
-                                <div className="col-md-4 mt-2">
-                                  <label
-                                    htmlFor=""
-                                    style={{ float: "right" }}
-                                  >
-                                    Total Marks
-                                  </label>
-                                </div>
-                                <div className="col-md-4">
-                                  <input
-                                    type="text"
-                                    className="vi_0"
-                                    placeholder="Total Marks"
-                                  />
+                                  </div>
+                                  <div className="col-md-4">
+                                    <input
+                                      type="number"
+                                      className="vi_0"
+                                      placeholder="Enter the Marks"
+                                    />
+                                  </div>
+                                  <div className="col-md-4 mt-2">
+                                    <p className="fs-5">
+                                      <MdPlayArrow
+                                        style={{ marginRight: "15px" }}
+                                      />
+                                      Difficult
+                                    </p>
+                                  </div>
+                                  <div className="col-md-4">
+                                    <input
+                                      type="text"
+                                      className="vi_0"
+                                      placeholder="Enter No. of Questions"
+                                    />
+                                  </div>
+                                  <div className="col-md-4">
+                                    <input
+                                      type="number"
+                                      className="vi_0"
+                                      placeholder="Enter the Marks"
+                                    />
+                                  </div>
+                                  <div className="col-md-4"></div>
+                                  <div className="col-md-4 mt-2">
+                                    <label
+                                      htmlFor=""
+                                      style={{ float: "right" }}
+                                    >
+                                      Total Marks
+                                    </label>
+                                  </div>
+                                  <div className="col-md-4">
+                                    <input
+                                      type="text"
+                                      className="vi_0"
+                                      placeholder="Total Marks"
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </Typography>
-                        </>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
+                            </Typography>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleNext} sx={{ mr: 1 }}>
-                  Next
-                </Button>
-                {activeStep !== steps.length &&
-                  (completed[activeStep] ? (
-                    <Typography
-                      variant="caption"
-                      sx={{ display: "inline-block" }}
-                    >
-                      Step {activeStep + 1} already completed
-                    </Typography>
-                  ) : (
-                    <Button onClick={handleComplete}>
-                      {completedSteps() === totalSteps() - 1
-                        ? "Submit"
-                        : "Complete Step"}
-                    </Button>
-                  ))}
-              </Box>
-            </React.Fragment>
-          )}
-        </div>
-      </Box>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  <Button onClick={handleNext} sx={{ mr: 1 }}>
+                    Next
+                  </Button>
+                  {activeStep !== steps.length &&
+                    (completed[activeStep] ? (
+                      <Typography
+                        variant="caption"
+                        sx={{ display: "inline-block" }}
+                      >
+                        Step {activeStep + 1} already completed
+                      </Typography>
+                    ) : (
+                      <Button onClick={handleComplete}>
+                        {completedSteps() === totalSteps() - 1
+                          ? "Submit"
+                          : "Complete Step"}
+                      </Button>
+                    ))}
+                </Box>
+              </React.Fragment>
+            )}
+          </div>
+        </Box>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default AdminEditBluePrint
+export default AdminEditBluePrint;

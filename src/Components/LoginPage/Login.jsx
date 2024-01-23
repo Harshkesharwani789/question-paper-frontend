@@ -6,12 +6,84 @@ import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import axios from "axios";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate("");
   //ForgotPassword
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //post
+  const [Mobile,setMobile] = useState("");
+  const [Email,setEmail] = useState("");
+  const [Password,setPassword] = useState("");
+
+  const TeacherLogin = async()=>{
+    try {
+      if(!Mobile) return swal({
+        title:"oops!",
+        text:"Please Enter the Mobile Number",
+        icon:"error",
+        button:"Ok!"
+      })
+      if(!Email) return swal({
+        title:"oops!",
+        text:"Please Enter the Email ID",
+        icon:"error",
+        button:"Ok!"
+      })
+      if(!Password) return swal({
+        title:"oops!",
+        text:"Please Enter Password",
+        icon:"error",
+        button:"Ok!"
+      })
+      const config={
+        url:"/admin/loginTeacher",
+        method:"post",
+        baseURL:"http://localhost:8000/api",
+        headers:{
+          "Content-type":"application/json",
+          // Authorization:`Bearer ${token}`,
+        },
+        data:{
+          Mobile:Mobile,
+          Email:Email,
+          Password:Password,
+        }
+      }
+      let res = await axios(config);
+      if(res.status==200)
+      {
+         swal({
+          title:"Yeah!!",
+          text:"Successfully Logged In",
+          icon:"success",
+          button:"OK!"
+        });
+        sessionStorage.setItem("user", JSON.stringify(res.data.success));
+        sessionStorage.setItem("token", res.data.token);
+        setTimeout(() => {
+          return navigate("/examboard");
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title:"oops",
+        text:error.response.data.error,
+        icon:"error",
+        button:"Try Again"
+      })
+    }
+  }
 
   const [PasswordShow, setPasswordShow] = useState(false);
   const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
@@ -183,8 +255,9 @@ const Login = () => {
                       <Form.Group className="mb-2" controlId="formGroupEmail">
                         <Form.Label>Mobile Number</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="number"
                           placeholder="Enter Mobile Number"
+                          onChange={(e)=>setMobile(e.target.value)}
                         />
                       </Form.Group>
                     </div>
@@ -199,6 +272,7 @@ const Login = () => {
                           placeholder="Enter Email id"
                           aria-label="email"
                           aria-describedby="basic-addon1"
+                          onChange={(e)=>setEmail(e.target.value)}
                         />
                       </InputGroup>
                     </div>
@@ -216,6 +290,7 @@ const Login = () => {
                             className="login-input"
                             placeholder="Password"
                             aria-describedby="basic-addon1"
+                            onChange={(e)=>setPassword(e.target.value)}
                           />
                           {PasswordShow ? (
                             <button
@@ -257,21 +332,22 @@ const Login = () => {
                         padding: "0px 100px",
                       }}
                     >
-                      <a
+                      {/* <a
                       href="/examboard"
                       style={{
                         
                         textDecoration:"none",
                         color:"white"
                       }}
-                    >
+                    > */}
                       <Button
                         variant=""
                         style={{ backgroundColor: "navy", color: "white" }}
+                        onClick={()=>{TeacherLogin()}}
                       >
                         Log in 
                       </Button>
-                      </a>
+                      {/* </a> */}
                     </div>
                   </Row>
                 </div>
