@@ -11,7 +11,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const SignUp = () => {
-  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
 
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const SignUp = () => {
           Mobile: Mobile,
           Email: Email,
           Password: Password,
-          authId: admin?.id,
+          authId: user?.id,
         },
       };
       let res = await axios(config);
@@ -56,7 +56,8 @@ const SignUp = () => {
         });
         
       }
-      window.location.assign("/login");
+      navigate("/login")
+      // window.location.assign("/login");
     } catch (error) {
       console.log(error);
       return swal({

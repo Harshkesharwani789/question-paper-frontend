@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "react-icons-kit";
 import { Button, Container, InputGroup, Row, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
+import axios from "axios";
 
 const ExamBoard = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -19,6 +20,79 @@ const ExamBoard = () => {
 
   const [before, setBefore] = useState(false);
   const [after, setAfter] = useState("");
+
+   // get method of Board
+   const [getboardname, setboardname] = useState([]);
+   const getallboardname = async () => {
+     try {
+       let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+       if (res.status == 200) {
+         setboardname(res.data.success);
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
+    //get method of Name of Examination
+  const [NameExam, setNameExam] = useState([]);
+  const getNameExamination = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllNameExamination"
+      );
+      if (res.status == 200) {
+        setNameExam(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get mthod of medium
+  const [Medium, setMedium] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get
+  const [Examlevell, setExamlevell] = useState([]);
+  const getExamLevel = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getExamLevel"
+      );
+      if (res.status == 200) {
+        setExamlevell(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+    // get method of add class
+    const [getclassname, setgetclassName] = useState([]);
+    const getallclassname = async () => {
+      try {
+        let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+        if (res.status == 200) {
+          setgetclassName(res.data.success);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+   useEffect(()=>{
+    getallboardname();
+    getNameExamination();
+    getAddMedium();
+    getExamLevel();
+    getallclassname();
+   },[])
 
   return (
     <div>
@@ -91,10 +165,13 @@ const ExamBoard = () => {
                       <Row>
                         <div className="col-10 mb-4">
                           <Form.Select aria-label="Default select example">
+                          
                             <option>Select Education Board</option>
-                            <option value="cbse">CBSE</option>
-                            <option value="cbse">ICSE</option>
-                            <option value="cbse">STATE</option>
+                           {getboardname?.map((item,i)=>{
+                            return(
+                              <option value={item?.boardName}>{item?.boardName}</option>
+                            )
+                           })}
                           </Form.Select>
                         </div>
                       </Row>
@@ -102,12 +179,11 @@ const ExamBoard = () => {
                         <div className="col-10 mb-4">
                           <Form.Select aria-label="Default select example">
                             <option>Select Exams Name</option>
-                            <option value="1">FA-1</option>
-                            <option value="2">FA-2</option>
-                            <option value="3">FA-3</option>
-                            <option value="3">FA-4</option>
-                            <option value="3">FA-5</option>
-                            <option value="3">FA-6</option>
+                            {NameExam?.map((item,i)=>{
+                              return(
+                                <option value={item?.NameExamination}>{item?.NameExamination}</option>
+                              )
+                            })}
                           </Form.Select>
                         </div>
                       </Row>
@@ -116,12 +192,11 @@ const ExamBoard = () => {
                         <div className="col-10 mb-4">
                           <Form.Select aria-label="Default select example">
                             <option>Select Medium</option>
-                            <option value="1">English</option>
-                            <option value="2">Hindi</option>
-                            <option value="3">Kannada</option>
-                            <option value="2">Sanskrit</option>
-                            <option value="3">Marathi</option>
-                            <option value="3">Urdu</option>
+                            {Medium?.map((item,i)=>{
+                              return(
+                                <option value={item?.mediumName}>{item?.mediumName}</option>
+                              )
+                            })}
                           </Form.Select>
                         </div>
                       </Row>
@@ -129,9 +204,11 @@ const ExamBoard = () => {
                         <div className="col-10 mb-4">
                           <Form.Select aria-label="Default select example">
                             <option>Select Exam Level</option>
-                            <option value="cbse">District Level</option>
-                            <option value="cbse">State Level</option>
-                            <option value="cbse">School Level</option>
+                            {Examlevell?.map((item,i)=>{
+                              return(
+                                <option value={item?.Examlevel}>{item?.Examlevel}</option>
+                              )
+                            })}
                           </Form.Select>
                         </div>
                       </Row>
@@ -139,20 +216,12 @@ const ExamBoard = () => {
                         <div className="col-10 mb-4">
                           <Form.Select aria-label="Default select example">
                             <option>Select Class</option>
-                            <option value="1">LKg</option>
-                            <option value="2">Ukg</option>
-                            <option value="3">Class I</option>
-                            <option value="3">Class II</option>
-                            <option value="3">Class III</option>
-                            <option value="3">Class VI</option>
-                            <option value="3">Class V</option>
-                            <option value="3">Class VI</option>
-                            <option value="3">Class VII</option>
-                            <option value="3">Class VIII</option>
-                            <option value="3">Class IX</option>
-                            <option value="3">Class X</option>
-                            <option value="3">Class XI</option>
-                            <option value="3">Class XII</option>
+                            {getclassname?.map((item,i)=>{
+                              return(
+                                <option value={item?.className}>{item?.className}</option>
+                              )
+                            })}
+                           
                           </Form.Select>
                         </div>
                       </Row>

@@ -68,7 +68,7 @@ const Login = () => {
           icon:"success",
           button:"OK!"
         });
-        sessionStorage.setItem("admin", JSON.stringify(res.data.success));
+        sessionStorage.setItem("user", JSON.stringify(res.data.success));
         sessionStorage.setItem("token", res.data.token);
         setTimeout(() => {
           return navigate("/examboard");
