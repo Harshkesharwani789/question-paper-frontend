@@ -622,6 +622,16 @@ const AdminClass = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
+            {/* <Button
+              className="mx-2"
+              variant="primary"
+              onClick={() => {
+                classNamee();
+              }}
+            > */}
+            <Button variant="success" onClick={handleClose}>
+              Close
+            </Button>
             <Button
               className="mx-2"
               variant="primary"
@@ -660,6 +670,14 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+          {/* <Button
+            variant="primary"
+            style={{ backgroundColor: "#26AAE0" }}
+            
+          > */}
+          <Button variant="success" onClick={handleClose1}>
+            Close
+          </Button>
           <Button
             variant="primary"
             style={{ backgroundColor: "#26AAE0" }}
@@ -678,7 +696,7 @@ const AdminClass = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
+          <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
@@ -690,7 +708,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="btn btn-secondary" onClick={handleClose2}>
+          <Button variant="success" onClick={handleClose2}>
             Close
           </Button>
           <Button
@@ -841,121 +859,6 @@ const AdminClass = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* Accomodations images modal */}
-      {/* <Modal show={show100} onHide={handleClose100}>
-      <Modal.Header closeButton>
-        <Modal.Title>Images</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose100}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal> */}
-      {/* Transport images modal */}
-      {/* <Modal show={show101} onHide={handleClose101}>
-      <Modal.Header closeButton>
-        <Modal.Title>Images</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose101}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal> */}
     </div>
   );
 };

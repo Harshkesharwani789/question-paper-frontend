@@ -5,7 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { BiSolidEdit } from "react-icons/bi";
 
-const AdminQuestionDetails = () => {
+const AdminEditQuestionDetails = () => {
   return (
     <div>
       <div className="box_1">
@@ -163,9 +163,7 @@ const AdminQuestionDetails = () => {
                   rows="5"
                   className="vi_0"
                 ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
             <div className="col-md-6">
@@ -246,23 +244,21 @@ const AdminQuestionDetails = () => {
                     rows="5"
                     className="vi_0"
                   ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                  <CKEditor editor={ClassicEditor} className="vi_0" />
                 </div>
               </div>
             </div>
             {/* <div className="yoihjij my-4">
-              <button style={{ float: "right" }}>Add</button>
+              <button style={{ float: "right" }}>Update</button>
             </div> */}
           </div>
         </div>
       </div>
       <div className="yoihjij text-center my-2">
-        <button style={{}}>Add</button>
+        <button style={{}}>Update</button>
       </div>
     </div>
   );
 };
 
-export default AdminQuestionDetails;
+export default AdminEditQuestionDetails;

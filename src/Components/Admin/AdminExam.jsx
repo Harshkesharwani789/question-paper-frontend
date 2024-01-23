@@ -378,7 +378,7 @@ const AdminExam = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}
@@ -396,7 +396,7 @@ const AdminExam = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -408,7 +408,7 @@ const AdminExam = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="btn btn-secondary" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary"

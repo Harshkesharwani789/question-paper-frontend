@@ -11,16 +11,7 @@ const LoginPage3 = () => {
           <div className="box">
             <div className="row">
               <div className="col-md-6 gfffg">
-                <div
-                  style={{
-                    backgroundImage: "url('../loginpage3.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "717px",
-                    position: "relative",
-                  }}
-                >
+                <div className="login-bg">
                   <div className="line-1">
                     <h2>
                       {" "}

@@ -7,7 +7,7 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 
-const AdminSubject = () => {
+const AdminTypeOfQuestions = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -24,60 +24,59 @@ const AdminSubject = () => {
   const handleShow2 = () => setShow2(true);
 
   //Post
-  const [subjectName, setsubjectName] = useState("");
-  const AddSubject = async () => {
-    if (!subjectName)
-      return swal({
-        title: "Oops!",
-        text: "Please Enter the Subject",
-        icon: "error",
-        button: "Ok!",
-      });
+  const [Typesofquestion, setTypesofquestion] = useState("");
+  const Typesoffquestion = async () => {
     try {
+      if (!Typesofquestion)
+        return swal({
+          title: "OOps!",
+          text: "Please Enter Types of Question",
+          icon: "error",
+          button: "Try Again!",
+        });
       const config = {
-        url: "/admin/addSubjects",
+        url: "/admin/addtypesofquestion",
         method: "post",
         baseURL: "http://localhost:8000/api",
         headers: {
-          "Content-type": "application/json",
+          "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          subjectName: subjectName,
+          Typesofquestion: Typesofquestion,
           authId: admin?._id,
         },
       };
       let res = await axios(config);
-      if (res.status == 200) {
-        handleClose();
-        getSubject();
-        return swal({
+      if (res.status == 200)
+        swal({
           title: "Yeah!",
           text: res.data.success,
           icon: "success",
           button: "Ok!",
         });
-      }
+      handleClose();
+      getalltypesofquess();
     } catch (error) {
       console.log(error);
-      return swal({
-        title: "Oops!",
+      swal({
+        title: "OOps!",
         text: error.response.data.error,
         icon: "error",
-        button: "Ok!",
+        button: "Try Again!",
       });
     }
   };
   //get
-  const [subject, setsubject] = useState([]);
+  const [getalltypesofques, setgetalltypesofques] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
-  const getSubject = async () => {
+  const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "http://localhost:8000/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
-        setsubject(res.data.success);
+        setgetalltypesofques(res.data.success);
         setnochangedata(res.data.success);
       }
     } catch (error) {
@@ -86,51 +85,53 @@ const AdminSubject = () => {
   };
 
   //update
-  const [updateSubject, setpdateSubject] = useState("");
-  const UpdateSubject = async () => {
+  const [edittypesofquestion, setedittypesofquestion] = useState("");
+  const updatetypesofquestion = async () => {
     try {
       const config = {
-        url: "/admin/updateSubjects",
-        method: "put",
+        url: "/admin/updateTypesofquestions",
         baseURL: "http://localhost:8000/api",
+        method: "put",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          subjectName: subjectName,
+          Typesofquestion: Typesofquestion,
+          id: edittypesofquestion,
           authId: admin?._id,
-          id: updateSubject,
         },
       };
       let res = await axios(config);
-      if (res.status == 200)
-        if (res.status == 200) {
-          handleClose1();
-          getSubject();
-          return swal({
-            title: "Yeah!",
-            text: res.data.success,
-            icon: "success",
-            button: "Ok!",
-          });
-        }
+      if (res.status == 200);
+      swal({
+        title: "Yeah!",
+        text: res.data.success,
+        icon: "success",
+        button: "Ok!",
+      });
+      handleClose1();
+      getalltypesofquess();
     } catch (error) {
       console.log(error);
       return swal({
-        title: "Oops!",
+        title: "OOps!",
         text: error.response.data.error,
         icon: "error",
-        button: "Ok!",
+        button: "Try Again!",
       });
     }
   };
   //delete
-  const [sub, setsub] = useState("");
-  const DeleteSubject = async () => {
+  const [deletetypsofques, setdeletetypsofques] = useState("");
+  const Deletedeletetypsofques = async () => {
     try {
       const config = {
-        url: "/admin/deleteSubjects/" + sub + "/" + admin?._id,
+        url:
+          "/admin/deleteAllTypesofquestions/" +
+          deletetypsofques +
+          "/" +
+          admin?._id,
         method: "delete",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -141,8 +142,8 @@ const AdminSubject = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose2();
-        getSubject();
-        return swal({
+        getalltypesofquess();
+        swal({
           title: "Yeah!",
           text: res.data.success,
           icon: "success",
@@ -151,7 +152,7 @@ const AdminSubject = () => {
       }
     } catch (error) {
       console.log(error);
-      return swal({
+       swal({
         title: "Oops!",
         text: error.response.data.error,
         icon: "error",
@@ -160,46 +161,16 @@ const AdminSubject = () => {
     }
   };
 
-  //   Row Filter
-  const [itempage, setItempage] = useState(5);
-
-  //   DateRange Filter
-  const [searchH, setSearchH] = useState("");
-  const handleFilterH = (e) => {
-    if (e.target.value != "") {
-      setSearchH(e.target.value);
-      const filterTableH = nochangedata.filter((o) =>
-        Object.keys(o).some((k) =>
-          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
-        )
-      );
-      setsubject([...filterTableH]);
-    } else {
-      setSearchH(e.target.value);
-      setsubject([...nochangedata]);
-    }
-  };
-  const [searchTermH, setSearchTermH] = useState("");
-  const searchedProductH = subject.filter((item) => {
-    if (searchTermH.value === "") {
-      return item;
-    }
-    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
-      return item;
-    } else {
-      return console.log("not found");
-    }
-  });
-  // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(subject.length / productPerPage);
+  // // Pagination
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
+  // const pageCount = Math.ceil(subject.length / productPerPage);
   useEffect(() => {
-    getSubject();
+    getalltypesofquess();
   }, []);
-
+  console.log(getalltypesofques);
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -212,19 +183,19 @@ const AdminSubject = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
-            onChange={handleFilterH}
+            // onChange={handleFilterH}
           />
         </div>
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Subject</h2>
+          <h2 className="header-c ">Type Of Questions</h2>
           <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}
             onClick={handleShow}
           >
-            Add Subject
+            Add Type Of Question
           </button>
         </div>
 
@@ -238,19 +209,19 @@ const AdminSubject = () => {
               <tr>
                 <th>S.No</th>
                 <th>
-                  <div>Subject</div>
+                  <div>Type Of Questions</div>
                 </th>
                 <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
-              {displayPage?.map((item, i) => {
+              {getalltypesofques?.map((item, i) => {
                 return (
-                  <tr>
-                    <td>{i + 1 + visitedPage}</td>
+                  <tr key={i}>
+                    <td>{i + 1}</td>
 
-                    <td>{item?.subjectName}</td>
+                    <td>{item?.Typesofquestion}</td>
 
                     <td>
                       {" "}
@@ -261,9 +232,8 @@ const AdminSubject = () => {
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                               handleShow1();
-                              setpdateSubject(item);
-                              setsubjectName(item?.subjectName);
-                              
+                              setedittypesofquestion(item);
+                              setTypesofquestion(item?.Typesofquestion);
                             }}
                           />{" "}
                         </div>
@@ -272,8 +242,8 @@ const AdminSubject = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setsub(item?._id);
-                              handleShow2();
+                              setdeletetypsofques(item?._id);
+                              handleShow2(item?._id);
                             }}
                           />{" "}
                         </div>
@@ -286,7 +256,7 @@ const AdminSubject = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -306,42 +276,44 @@ const AdminSubject = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Subject</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Add Type Of Question
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Subject</label>
+                <label>Type Of Question</label>
                 <input
                   type="text"
                   placeholder="Enter Subject"
                   className="vi_0"
-                  onChange={(e) => setsubjectName(e.target.value)}
+                  onChange={(e) => setTypesofquestion(e.target.value)}
                 />
               </div>
             </div>
 
             {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
+          <label>Title 2</label>
+          <input type="text" placeholder="Enter Title 2" className="vi_0" />
+        </div> */}
 
             {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
+            <label>Description</label>
+            <CKEditor
+              editor={ClassicEditor}
+              // data={AbDescription}
+              onChange={handleChange}
+            />
+          </div> */}
             {/* <div className="do-sear mt-2">
-        <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
+          <label>URL</label>
+          <input type="text" placeholder="Enter URL" className="vi_0" />
+        </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -349,7 +321,7 @@ const AdminSubject = () => {
                 className="mx-2"
                 variant="primary"
                 onClick={() => {
-                  AddSubject();
+                  Typesoffquestion();
                 }}
               >
                 Add
@@ -366,49 +338,33 @@ const AdminSubject = () => {
           keyboard={false}
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
-            <Modal.Title style={{ color: "white" }}>Edit Subject</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Edit Type Of Question
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Subject</label>
+                <label>Type Of Question</label>
                 <input
                   type="text"
                   placeholder="Enter Subject"
                   className="vi_0"
-                  value={subjectName}
-                  onChange={(e) => setsubjectName(e.target.value)}
+                  value={Typesofquestion}
+                  onChange={(e) => setTypesofquestion(e.target.value)}
                 />
               </div>
             </div>
-
-            {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
-
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2"> */}
-            {/* <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="danger" onClick={handleClose1}>
               Close
             </Button>
             <Button
               variant="primary"
               style={{ backgroundColor: "#FAFA33" }}
               onClick={() => {
-                UpdateSubject();
+                updatetypesofquestion();
               }}
             >
               Edit
@@ -422,7 +378,7 @@ const AdminSubject = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
+            <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -434,10 +390,10 @@ const AdminSubject = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="btn btn-secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={DeleteSubject}>
+            <Button variant="primary" onClick={Deletedeletetypsofques}>
               Delete
             </Button>
           </Modal.Footer>
@@ -447,4 +403,4 @@ const AdminSubject = () => {
   );
 };
 
-export default AdminSubject;
+export default AdminTypeOfQuestions;

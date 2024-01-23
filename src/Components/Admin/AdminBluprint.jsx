@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -14,6 +14,7 @@ import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AiFillDelete } from "react-icons/ai";
 
 const steps = [
   "Blueprint Details",
@@ -71,10 +72,22 @@ function AdminBlueprint() {
     setActiveStep(0);
     setCompleted({});
   };
-  const Dificultylevetotal = () => {
-    // const num1 = prease;
-  };
+
   const navigate = useNavigate();
+  //getmethod for types of questions
+  const [getalltypesofques, setgetalltypesofques] = useState([]);
+  const getalltypesofquess = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllTypesofquestion"
+      );
+      if (res.status == 200) {
+        setgetalltypesofques(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // get method for board
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
@@ -126,6 +139,7 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
+
   const [blName, setblName] = useState("");
   const [board, setboard] = useState("");
   const [medium, setmedium] = useState("");
@@ -162,12 +176,107 @@ function AdminBlueprint() {
   const [Difficult, setDifficult] = useState("");
   const [DifficultMask, setDifficultMask] = useState("");
   const [TotalDifficultMask, setTotalDifficultMask] = useState("");
+  const [TypesofQuestions, setTypesofQuestions] = useState(false);
+  const [Arr, setArr] = useState([]);
+
+  const qatypeRef = useRef(null);
+  const nqaRef = useRef(null);
+  const maskRef = useRef(null);
+
+  const AddTypesofquestion = () => {
+    try {
+      if (!QAType) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Question Type",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+
+      if (!NQA) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter No. of Questions",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if NQA is not provided
+      }
+
+      if (!Mask) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter Marks",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if Mask is not provided
+      }
+
+      let Question = 1;
+      Arr.forEach((ele) => {
+        if (ele?.QAType === QAType && ele?.NQA === NQA && ele?.Mask === Mask) {
+          Question = 0;
+          swal({
+            title: "Oops!",
+            text: "Already Exists...",
+            icon: "error",
+            button: "Try Again!",
+          });
+        }
+      });
+
+      if (Question) {
+        const obj = {
+          QAType: QAType,
+          NQA: NQA,
+          Mask: Mask,
+        };
+
+        Arr.push(obj);
+        setArr([...Arr]); // Ensure you create a new array reference to trigger a re-render
+        console.log("Arr", Arr);
+
+        swal({
+          title: "Yeah!",
+          text: "Added Successfully...",
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteQuestionType = (index) => {
+    try {
+      const deletedQuestion = Arr[index];
+
+      // Create a new array excluding the element at the specified index
+      const updatedArr = Arr.filter((_, i) => i !== index);
+
+      setArr(updatedArr);
+      console.log("Arr after deletion", updatedArr);
+
+      swal({
+        title: "Deleted!",
+        text: " Deleted Successfully.",
+        icon: "warning",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const Blueprint = async () => {
     try {
       const config = {
         url: "/admin/registerBLUEPRINT",
-        baseURL: "http:localhost:8000/api",
+        baseURL: "http://localhost:8000/api",
         method: "post",
         headers: { "content-type": "application/json" },
         data: {
@@ -207,6 +316,7 @@ function AdminBlueprint() {
           Difficult: Difficult,
           DifficultMask: DifficultMask,
           TotalDifficultMask: TotalDifficultMask,
+          TypesofQuestions: Arr,
         },
       };
       let res = await axios(config);
@@ -229,16 +339,19 @@ function AdminBlueprint() {
       });
     }
   };
+
   useEffect(() => {
     getallboardname();
     getallclassname();
     getaddsubclasss();
     getAddMedium();
+    getalltypesofquess();
   }, []);
   console.log(getboardname);
   console.log(getclassname);
   console.log(getaddsubclass);
   console.log(Medium);
+  console.log(getalltypesofques);
 
   return (
     <>
@@ -276,7 +389,13 @@ function AdminBlueprint() {
                         pt: 2,
                       }}
                     >
-                      <Button onClick={Blueprint}>Submit</Button>
+                      <Button
+                        variant=""
+                        style={{ backgroundColor: "navy", color: "white" }}
+                        onClick={Blueprint}
+                      >
+                        Submit
+                      </Button>
                     </Box>
                   </Typography>
                 </React.Fragment>
@@ -294,6 +413,7 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter BluePrint Name"
+                                  value={blName}
                                   onChange={(e) => {
                                     setblName(e.target.value);
                                   }}
@@ -308,6 +428,7 @@ function AdminBlueprint() {
                                 </label>
                                 <Form.Select
                                   aria-label="Default select example"
+                                  value={board}
                                   className="vi_0"
                                   onChange={(e) => setboard(e.target.value)}
                                 >
@@ -380,7 +501,7 @@ function AdminBlueprint() {
                                   <option>Select the Class</option>
                                   {getclassname?.map((val, i) => {
                                     return (
-                                      <option value={val?.className}>
+                                      <option value={val?.className} key={i}>
                                         {val?.className}
                                       </option>
                                     );
@@ -403,7 +524,7 @@ function AdminBlueprint() {
                                   <option>Select the Sub-Class</option>
                                   {getaddsubclass?.map((val, i) => {
                                     return (
-                                      <option value={val?.subclassName}>
+                                      <option value={val?.subclassName} key={i}>
                                         {val?.subclassName}
                                       </option>
                                     );
@@ -427,6 +548,7 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0 mt-2"
                                   placeholder="Enter No. of Questions"
+                                  value={NQRemembering}
                                   onChange={(e) => {
                                     setNQRemembering(e.target.value);
                                   }}
@@ -438,6 +560,7 @@ function AdminBlueprint() {
                                   type="number"
                                   className="vi_0 mt-2"
                                   placeholder="Enter the Marks"
+                                  value={MaskRemembering}
                                   onChange={(e) => {
                                     setMaskRemembering(e.target.value);
                                   }}
@@ -456,6 +579,7 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+                                  value={NQUnderstanding}
                                   onChange={(e) => {
                                     setNQUnderstanding(e.target.value);
                                   }}
@@ -466,6 +590,7 @@ function AdminBlueprint() {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+                                  value={MaskUnderstanding}
                                   onChange={(e) => {
                                     setMaskUnderstanding(e.target.value);
                                   }}
@@ -484,6 +609,7 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+                                  value={NQExpression}
                                   onChange={(e) => {
                                     setNQExpression(e.target.value);
                                   }}
@@ -494,6 +620,7 @@ function AdminBlueprint() {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+                                  value={MaskExpression}
                                   onChange={(e) => {
                                     setMaskExpression(e.target.value);
                                   }}
@@ -512,6 +639,7 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+                                  value={NQAppreciation}
                                   onChange={(e) => {
                                     setNQAppreciation(e.target.value);
                                   }}
@@ -522,6 +650,7 @@ function AdminBlueprint() {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+                                  value={MaskAppreciation}
                                   onChange={(e) => {
                                     setMaskAppreciation(e.target.value);
                                   }}
@@ -569,6 +698,7 @@ function AdminBlueprint() {
                                       type="text"
                                       placeholder="Enter Prose (Lesson) Marks"
                                       className="vi_0"
+                                      value={ProseWeightage}
                                       onChange={(e) => {
                                         setProseWeightage(e.target.value);
                                       }}
@@ -586,6 +716,7 @@ function AdminBlueprint() {
                                       type="text"
                                       placeholder="Enter Poetry Marks"
                                       className="vi_0"
+                                      value={PoetryWeightage}
                                       onChange={(e) => {
                                         setPoetryWeightage(e.target.value);
                                       }}
@@ -603,6 +734,7 @@ function AdminBlueprint() {
                                       type="text"
                                       placeholder="Enter Non-Detailed Marks"
                                       className="vi_0"
+                                      value={NonDetailedWeightage}
                                       onChange={(e) => {
                                         setNonDetailedWeightage(e.target.value);
                                       }}
@@ -619,6 +751,7 @@ function AdminBlueprint() {
                                       type="text"
                                       placeholder="Enter Grammer Marks"
                                       className="vi_0"
+                                      value={GrammerWeightage}
                                       onChange={(e) => {
                                         setGrammerWeightage(e.target.value);
                                       }}
@@ -635,6 +768,7 @@ function AdminBlueprint() {
                                       type="text"
                                       placeholder="Enter Vocabulary Marks"
                                       className="vi_0"
+                                      value={VocabularyWeightage}
                                       onChange={(e) => {
                                         setVocabularyWeightage(e.target.value);
                                       }}
@@ -655,19 +789,42 @@ function AdminBlueprint() {
                                   style={{ padding: "5px" }}
                                 >
                                   <div className="row">
-                                    <div className="col-md-4 mt-2">
+                                    <div className="col-md-3">
                                       <label htmlFor="">
                                         Types of Questions
                                       </label>
-                                      <p className="fs-5">
-                                        <MdPlayArrow
-                                          style={{ marginRight: "15px" }}
-                                        />
-                                        Multiple Chose Questions
-                                      </p>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-md-3">
                                       <label htmlFor="">No. of Questions</label>
+                                    </div>
+                                    <div className="col-md-3">
+                                      <label htmlFor="">Marks</label>
+                                    </div>
+                                  </div>
+
+                                  <div className="row">
+                                    <div className="col-md-3 mt-2">
+                                      <Form.Select
+                                        aria-label="Default select example"
+                                        onChange={(e) => {
+                                          setQAType(e.target.value);
+                                        }}
+                                      >
+                                        <option value="">
+                                          Selete the Type of Question
+                                        </option>
+                                        {getalltypesofques?.map((val, i) => {
+                                          return (
+                                            <option
+                                              value={val?.Typesofquestion}
+                                            >
+                                              {val?.Typesofquestion}
+                                            </option>
+                                          );
+                                        })}
+                                      </Form.Select>
+                                    </div>
+                                    <div className="col-md-3">
                                       <input
                                         type="text"
                                         className="vi_0"
@@ -677,8 +834,7 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
-                                    <div className="col-md-4">
-                                      <label htmlFor="">Marks</label>
+                                    <div className="col-md-3">
                                       <input
                                         type="number"
                                         className="vi_0"
@@ -688,8 +844,63 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
+                                    <div className="col-md-3">
+                                      <Button
+                                        style={{
+                                          backgroundColor: "red",
+                                          color: "white",
+                                        }}
+                                        onClick={AddTypesofquestion}
+                                      >
+                                        Add
+                                      </Button>
+                                    </div>
                                   </div>
-                                  <div className="row">
+                                  <div className="row mt-4">
+                                    <div className="col-md-12">
+                                      <Table
+                                        responsive
+                                        bordered
+                                        style={{
+                                          width: "-webkit-fill-available",
+                                        }}
+                                      >
+                                        <thead>
+                                          <tr>
+                                            <th>S No.</th>
+                                            <th>Content</th>
+                                            <th>No. of Question</th>
+                                            <th>Marks</th>
+                                            <th>Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {Arr.map((val, i) => {
+                                            return (
+                                              <tr key={i}>
+                                                <td>{i + 1}</td>
+                                                <td>{val?.QAType}</td>
+                                                <td>{val?.NQA}</td>
+                                                <td>{val?.Mask}</td>
+                                                <td>
+                                                  {" "}
+                                                  <AiFillDelete
+                                                    color="red"
+                                                    cursor="pointer"
+                                                    onClick={() =>
+                                                      deleteQuestionType(i)
+                                                    }
+                                                  />
+                                                </td>
+                                              </tr>
+                                            );
+                                          })}
+                                        </tbody>
+                                      </Table>
+                                    </div>
+                                  </div>
+
+                                  {/* <div className="row">
                                     <div className="col-md-4"></div>
                                     <div className="col-md-4 mt-2">
                                       <span style={{ float: "right" }}>
@@ -706,17 +917,26 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
-                                  </div>
+                                  </div> */}
                                   <div className="row">
                                     <div className="col-md-6">
                                       <label htmlFor="">Duration of Exam</label>
                                       <input
                                         type="text"
                                         className="vi_0"
+                                        value={DurationOfExam}
                                         placeholder="Enter Duration of Exam"
                                         onChange={(e) => {
                                           setDurationOfExam(e.target.value);
                                         }}
+                                      />
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="">Total Marks</label>
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        placeholder="Total Marks"
                                       />
                                     </div>
                                   </div>
@@ -745,6 +965,7 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0 mt-2"
+                                        value={Easy}
                                         placeholder="Enter No. of Questions"
                                         onChange={(e) => {
                                           setEasy(e.target.value);
@@ -757,6 +978,7 @@ function AdminBlueprint() {
                                         type="number"
                                         className="vi_0 mt-2"
                                         placeholder="Enter the Marks"
+                                        value={EasyMask}
                                         onChange={(e) => {
                                           setEasyMask(e.target.value);
                                         }}
@@ -774,6 +996,7 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0"
+                                        value={Average}
                                         placeholder="Enter No. of Questions"
                                         onChange={(e) => {
                                           setAverage(e.target.value);
@@ -784,6 +1007,7 @@ function AdminBlueprint() {
                                       <input
                                         type="number"
                                         className="vi_0"
+                                        value={AverageMask}
                                         placeholder="Enter the Marks"
                                         onChange={(e) => {
                                           setAverageMask(e.target.value);
@@ -802,6 +1026,7 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0"
+                                        value={Difficult}
                                         placeholder="Enter No. of Questions"
                                         onChange={(e) => {
                                           setDifficult(e.target.value);
@@ -812,6 +1037,7 @@ function AdminBlueprint() {
                                       <input
                                         type="number"
                                         className="vi_0"
+                                        value={DifficultMask}
                                         placeholder="Enter the Marks"
                                         onChange={(e) => {
                                           setDifficultMask(e.target.value);
@@ -829,9 +1055,10 @@ function AdminBlueprint() {
                                     </div>
                                     <div className="col-md-4">
                                       <input
-                                        type="text"
+                                        type="number"
                                         className="vi_0"
                                         placeholder="Total Marks"
+                                        // value={TotalDifficultMask}
                                         onClick={(e) => {
                                           setTotalDifficultMask(e.target.value);
                                         }}
@@ -849,10 +1076,12 @@ function AdminBlueprint() {
 
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                     <Button
+                      variant=""
                       color="inherit"
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
+                      style={{ backgroundColor: "navy", color: "white" }}
                     >
                       Back
                     </Button>
@@ -869,11 +1098,7 @@ function AdminBlueprint() {
                           Step {activeStep + 1} already completed
                         </Typography>
                       ) : (
-                        <Button
-                          onClick={() => {
-                            handleComplete();
-                          }}
-                        >
+                        <Button varient="success" onClick={handleComplete}>
                           {completedSteps() === totalSteps() - 1
                             ? "Submit"
                             : "Complete Step"}

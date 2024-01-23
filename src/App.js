@@ -31,24 +31,26 @@ import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
+import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
+import BluePrint3 from "./Components/BluePrint/BluePrint3";
+import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
+import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
 
 function App() {
   return (
     <div className="App">
-
-    
       <BrowserRouter>
         <Routes>
-        <Route
-        path="/"
-        exact
-        element={
-          <>
-            {/* <Navbarr /> */}
-            <Home />
-          </>
-        }
-      />
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                {/* <Navbarr /> */}
+                <Home />
+              </>
+            }
+          />
           <Route
             path="/loginpage3"
             element={
@@ -116,6 +118,16 @@ function App() {
             }
           />
           <Route
+            path="/blueprint3"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <BluePrint3 />
+              </>
+            }
+          />
+          <Route
             path="/questionpaper"
             exact
             element={
@@ -135,16 +147,24 @@ function App() {
             element={<Main children={<AdminBlueprint />} />}
           />
           <Route
+            path="/admineditblueprint"
+            element={<Main children={<AdminEditBluePrint />} />}
+          />
+          <Route
             path="/adminblueprintdetails"
             element={<Main children={<AdminBlueprintdetails />} />}
           />
           <Route
-            path="/adminblueprintdetailsview"
+            path="/adminblueprintdetailsview/:blueprint_ID"
             element={<Main children={<AdminBlueprintdetailsview />} />}
           />
           <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
+          />
+          <Route
+            path="/admineditquestiondetails"
+            element={<Main children={<AdminEditQuestionDetails />} />}
           />
           <Route
             path="/adminquestiondetailsview"
@@ -220,6 +240,18 @@ function App() {
                 children={
                   <>
                     <ExamLevel />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/admintypesofquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminTypeOfQuestions />
                   </>
                 }
               />

@@ -389,102 +389,31 @@ const QuestionPaper = ({ text }) => {
                 </div>
             </div> */}
             <Frontpage />
-            <div className='question-paper-display' id="pdf" >
-
-                {/* logo header  */}
-                <div className="question-paper-display-header" >
-                    <div>
-                        <img src='../images/logo.png' style={{ width: "100px", height: "4rem" }} />
-                    </div>
-                    <div>
-                        <h2 style={{ fontSize: "24px" }}>Karnataka School Examinaion</h2>
-                        {/* <h5>
-                                    Examination Link
-                                </h5> */}
-                        <h5 style={{ textAlign: "center" }}>
-                            FA-1
-                        </h5>
-                    </div>
-
-                    <div >
-                        <p style={{ width: "100px", height: "4rem", textAlign: "right", color: "white" }}>1</p>
-                    </div>
-
-
-                </div>
-
-                {/* Suject and more section  */}
-                <div className='subject-details-section'>
-                    <div className="details-container" >
-                        <div>
-                            <div><b>Subject : English</b></div>
-                        </div>
-                        <div>
-                            <div style={{ textAlign: "right" }}><b>Grade : V</b></div>
-                        </div>
-                    </div>
-                    <div className="details-container">
-                        <div>
-                            <div>
-                                <b>Date : ----------------------------</b>
-                            </div>
-                        </div>
-                        <div>
-                            <div style={{ textAlign: "right" }}><b>Marks : 40</b></div>
-                        </div>
-                    </div>
-                    <div className="details-container">
-                        <div>
-                            <div>
-                                {/* <b>Date : ----------------------------</b> */}
-                            </div>
-                        </div>
-                        <div>
-                            <div style={{ textAlign: "right" }}> <b>Time : 2 Hours</b></div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Instruction */}
-                <div className='instruction-container'>
-                    <div className='instruction-display'>
-                        <div>
-                            <p style={{ textAlign: "left" }}><b>Instruction:</b></p>
-                            <ul>
-                                <li>Read the question paper carefully</li>
-                                <li>Read the question paper carefully</li>
-                                <li>Read the question paper carefully</li>
-                                <li>Read the question paper carefully</li>
-                            </ul>
-                        </div></div>
-                </div>
+            <div className='question-paper-display-container' id="pdf" >
 
 
                 {/* questions start here  */}
-                <div className='question-starts'>
-                    <div className='first-page-question-body'>
 
-                        {/* <div className="watermark-container">
-                                <h1 className="watermark-text">{"Water mark"}</h1>
-                            </div> */}
-
+                {/* first qp starts here  */}
+                <div className='question-paper-display'>
+                    <div className="second-page-body" >
                         <h3 style={{ textAlign: "center" }}>Section -A</h3>
-                        <div className="question-body" >
+                        <div className="question-body-main" >
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
                                     <b>I</b>
-                                    <b style={{ textAlign: "left" }}>Four alternatives are given for each of the following question/ incomplete <br></br>statements choose the correct alternative  and write the complete answer <br></br> along with the correctoption for question numbers 1 to 16</b>
+                                    <b style={{ textAlign: "left" }}>Four alternatives are given for each of the following question/ incomplete <br></br>statements choose the correct alternative  and write the complete answer <br></br> along with the correctoption for question numbers 1 to 20</b>
                                 </div>
                             </div>
                             <div style={{ display: "flex", marginTop: "45px" }}>
-                                <b>1x14 =14</b>
+                                <b>20x1=20</b>
                             </div>
                         </div>
                         <br />
-                        <div className="question-body" >
+                        <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>1)</p>
+                                    <b>1)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -504,12 +433,21 @@ const QuestionPaper = ({ text }) => {
                                         d) yellow
                                     </div>
                                 </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
                         </div>
-                        <div className="question-body" >
+                        <br />
+                        <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>2)</p>
+                                    <b>2)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -529,12 +467,21 @@ const QuestionPaper = ({ text }) => {
                                         d) yellow
                                     </div>
                                 </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
                         </div>
-                        <div className="question-body" >
+                        <br />
+                        <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>3)</p>
+                                    <b>3)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -554,13 +501,22 @@ const QuestionPaper = ({ text }) => {
                                         d) yellow
                                     </div>
                                 </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
                         </div>
-                        <div className="question-body" >
+                        <br />
+                        <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>4)</p>
-                                    <b>What is the color of apple?</b>
+                                    <b>4)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
                                     <div className='col-6 mb-3 d-flex'>
@@ -579,36 +535,57 @@ const QuestionPaper = ({ text }) => {
                                         d) yellow
                                     </div>
                                 </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
                         </div>
-                        <div className="question-body" >
+                        <br />
+                        <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>5)</p>
-                                    <b>What is the color of apple?</b>
+                                    <b>5)</b>
+                                    <b>Find the picture and choose the correct answer </b>
+                                </div>
+                                <div>
+                                    <img src="../Images/mcq.jpg" className='mcq-img' alt='' />
                                 </div>
                                 <Row>
                                     <div className='col-6 mb-3 d-flex'>
-                                        a) Red
+                                        a) School
                                     </div>
                                     <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
+                                        b) Hospital
                                     </div>
                                 </Row>
 
                                 <Row>
                                     <div className='col-6 mb-3 d-flex'>
-                                        c) blue
+                                        c) Gound
                                     </div>
                                     <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
+                                        d) Home
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
                                     </div>
                                 </Row>
                             </div>
+
                         </div>
+                        <br />
                     </div>
-                    <div className="page-footer" >
-                        <div>8th FL English QP</div>
+                    <div className='page-footer'>
+                        <div>8th Std. English QP</div>
                         <div>1</div>
                     </div>
                 </div>
@@ -617,11 +594,10 @@ const QuestionPaper = ({ text }) => {
 
                 <div className='question-paper-display'>
                     <div className="second-page-body" >
-
                         <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>6)</p>
+                                    <b>6)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -642,143 +618,20 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                 </Row>
 
-                            </div>
-
-                        </div>
-                        <div className="question-body">
-                            <div>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>7)</p>
-                                    <b>What is the color of apple?</b>
-                                </div>
                                 <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        a) Red
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
-                                    </div>
-                                </Row>
-
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        c) blue
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
                                     </div>
                                 </Row>
                             </div>
-
                         </div>
+                        <br />
                         <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>8)</p>
-                                    <b>What is the color of apple? What is the color of apple?</b>
-                                </div>
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        a) Red
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
-                                    </div>
-                                </Row>
-
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        c) blue
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
-                                    </div>
-                                </Row>
-                            </div>
-
-                        </div>
-                        <div className="question-body">
-                            <div>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>9)</p>
-                                    <b>What is the color of apple? What is the color of apple?</b>
-                                </div>
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        a) Red
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
-                                    </div>
-                                </Row>
-
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        c) blue
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
-                                    </div>
-                                </Row>
-                            </div>
-
-                        </div>
-                        <div className="question-body">
-                            <div>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>10)</p>
-                                    <b>What is the color of apple?</b>
-                                </div>
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        a) Red
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
-                                    </div>
-                                </Row>
-
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        c) blue
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
-                                    </div>
-                                </Row>
-                            </div>
-
-                        </div>
-                        <div className="question-body">
-                            <div>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>11)</p>
-                                    <b>What is the color of apple?</b>
-                                </div>
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        a) Red
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        b) Purple
-                                    </div>
-                                </Row>
-
-                                <Row>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        c) blue
-                                    </div>
-                                    <div className='col-6 mb-3 d-flex'>
-                                        d) yellow
-                                    </div>
-                                </Row>
-                            </div>
-
-                        </div>
-                        <div className="question-body">
-                            <div>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>12)</p>
+                                    <b>7)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -799,13 +652,20 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                 </Row>
 
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
-
                         </div>
+                        <br />
                         <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>13)</p>
+                                    <b>8)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -826,13 +686,20 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                 </Row>
 
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
-
                         </div>
+                        <br />
                         <div className="question-body">
                             <div>
                                 <div style={{ display: "flex", gap: "12px" }}>
-                                    <p>14)</p>
+                                    <b>9)</b>
                                     <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
                                 <Row>
@@ -853,13 +720,120 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                 </Row>
 
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
                             </div>
-
                         </div>
-                        {/* <br /><br /><br /> */}
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>10)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>11)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>12)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
                     </div>
                     <div className='page-footer'>
-                        <div>8th FL English QP</div>
+                        <div>8th Std. English QP</div>
                         <div>2</div>
                     </div>
                 </div>
@@ -867,465 +841,720 @@ const QuestionPaper = ({ text }) => {
                 {/* third page start here  */}
 
                 <div className='question-paper-display'>
-                    <div className='question-starts'>
-                        <div className='first-page-question-body'>
-                            <h3 style={{ textAlign: "center", paddingTop: "20px" }}>Section -B</h3>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <b>II</b>
-                                        <b style={{ textAlign: "left" }}>Answer the Following questions in One Sentence</b>
-                                    </div>
+                    <div className="second-page-body" >
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>13)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
                                 </div>
-                                <div style={{ display: "flex", }}>
-                                    <b>1x11 =11</b>
-                                </div>
-                            </div>
-                            <br />
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>1)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
                                     </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>2)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
                                     </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>3)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>4)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>5)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>6)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>7)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>8)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>9)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>10)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>11)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div >
-                                <h3 style={{ textAlign: "center" }}>Section -C</h3>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <b>III</b>
-                                            <b style={{ textAlign: "left" }}>Answer the Following questions in Two-Three Sentence</b>
-                                        </div>
-                                    </div>
-                                    <div style={{ display: "flex", }}>
-                                        <b>2x9 =18</b>
-                                    </div>
-                                </div>
-                                <br />
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>1)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>2)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>3)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>4)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>5)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>6)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>7)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>8)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>9)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>10)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>11)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>12)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </Row>
 
-                        <div className="page-footer" >
-                            <div>8th FL English QP</div>
-                            <div>1</div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
                         </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>14)</b>
+                                    <b>Find the picture and choose the correct answer </b>
+                                </div>
+                                <div>
+                                    <img src="../Images/mcq.jpg" className='mcq-img' alt='' />
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) School
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Hospital
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) Gound
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) Home
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>15)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>16)</b>
+                                    <b>Find the picture and choose the correct answer </b>
+                                </div>
+                                <div>
+                                    <img src="../Images/mcq.jpg" className='mcq-img' alt='' />
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) School
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Hospital
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) Gound
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) Home
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>17)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='page-footer'>
+                        <div>8th Std. English QP</div>
+                        <div>3</div>
                     </div>
                 </div>
                 {/* fourth page starts here  */}
 
                 <div className='question-paper-display'>
-                    <div className='question-starts'>
-                        <div className='first-page-question-body'>
-                            <h3 style={{ textAlign: "center", paddingTop: "20px" }}>Section -D</h3>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <b>IV</b>
-                                        <b style={{ textAlign: "left" }}>Answer the Following questions in three to four Sentence</b>
+                    <div className="second-page-body" >
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>18)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
                                     </div>
-                                </div>
-                                <div style={{ display: "flex", }}>
-                                    <b>3x9 =11</b>
-                                </div>
-                            </div>
-                            <br />
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>1)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
                                     </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>2)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>3)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>4)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>5)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>6)</p>
-                                        <b>What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>7)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>8)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="question-body" >
-                                <div>
-                                    <div style={{ display: "flex", gap: "12px" }}>
-                                        <p>9)</p>
-                                        <b>What is the color of apple? What is the color of apple?</b>
-                                    </div>
-                                </div>
-                            </div>
+                                </Row>
 
-                            <div >
-                                <h3 style={{ textAlign: "center" }}>Section -E</h3>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <b>V</b>
-                                            <b style={{ textAlign: "left" }}>Answer the Following questions in Five to Six Sentence</b>
-                                        </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
                                     </div>
-                                    <div style={{ display: "flex", }}>
-                                        <b>4x5 =20</b>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
                                     </div>
-                                </div>
-                                <br />
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>1)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>2)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>3)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>4)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>5)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
+                                </Row>
 
-
-
-
-
-                            </div>
-
-                            <div >
-                                <h3 style={{ textAlign: "center" }}>Section -F</h3>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <b>VI</b>
-                                            <b style={{ textAlign: "left" }}>Choose any Four of the Following questions and write a paragraph</b>
-                                        </div>
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
                                     </div>
-                                    <div style={{ display: "flex", }}>
-                                        <b>4x6 =20</b>
-                                    </div>
-                                </div>
-                                <br />
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>1)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>2)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>3)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>4)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>5)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="question-body" >
-                                    <div>
-                                        <div style={{ display: "flex", gap: "12px" }}>
-                                            <p>6)</p>
-                                            <b>What is the color of apple? What is the color of apple?</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
+                                </Row>
                             </div>
                         </div>
-                        <div className="page-footer" >
-                            <div>8th FL English QP</div>
-                            <div>1</div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>19)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) Red
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Purple
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) blue
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) yellow
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
                         </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>20)</b>
+                                    <b>Find the picture and choose the correct answer </b>
+                                </div>
+                                <div>
+                                    <img src="../Images/mcq.jpg" className='mcq-img' alt='' />
+                                </div>
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        a) School
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        b) Hospital
+                                    </div>
+                                </Row>
+
+                                <Row>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        c) Gound
+                                    </div>
+                                    <div className='col-6 mb-3 d-flex'>
+                                        d) Home
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section'>
+                                        <div className='ans'>Answer: </div>
+                                        <div className='ans-box'></div>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+
+                        </div>
+                        <br />
+                        <h3 style={{ textAlign: "center" }}>Section -B</h3>
+                        <div className="question-body-main" >
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>II</b>
+                                    <b style={{ textAlign: "left" }}> Write the folloring answer in 2-3 sentence from 21 to 25</b>
+                                </div>
+                            </div>
+                            <div style={{ display: "flex", marginTop: "0px" }}>
+                                <b>5x2=10</b>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>21)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>22)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='page-footer'>
+                        <div>8th Std. English QP</div>
+                        <div>4</div>
                     </div>
                 </div>
 
-                <div className='qp-end-buttons'>
-                    <div>
-                        <a href='/blueprint'><Button className='edit-button'>Back</Button></a>
-                    </div>
+                {/* fifth page starts here  */}
 
-                    <div>
-                        <Button className='Add-button'>Save as Draft</Button>
+                <div className='question-paper-display'>
+                    <div className="second-page-body" >
+                    <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>23)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>24)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>25)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <br />
+                        <h3 style={{ textAlign: "center" }}>Section -C</h3>
+                        <div className="question-body-main" >
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>III</b>
+                                    <b style={{ textAlign: "left" }}> Write the folloring answer in 4-5 sentence from 26 to 27</b>
+                                </div>
+                            </div>
+                            <div style={{ display: "flex", marginTop: "0px" }}>
+                                <b>3x2=6</b>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>26)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>27)</b>
+                                    <b>What is the color of apple? What is the color of apple?</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
                     </div>
-
-                    <div>
-                        <Button onClick={createPDF} className='edit-button'>Generate</Button>
+                    <div className='page-footer'>
+                        <div>8th Std. English QP</div>
+                        <div>5</div>
                     </div>
                 </div>
+
+                 {/* sixth page starts here  */}
+
+                 <div className='question-paper-display'>
+                    <div className="second-page-body" >
+                        <h3 style={{ textAlign: "center" }}>Section -D</h3>
+                        <div className="question-body-main" >
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>IV</b>
+                                    <b style={{ textAlign: "left" }}> Write the Letter in 8-10 sentence.</b>
+                                </div>
+                            </div>
+                            <div style={{ display: "flex", marginTop: "0px" }}>
+                                <b>4x1=4</b>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="question-body">
+                            <div>
+                                <div style={{ display: "flex", gap: "12px" }}>
+                                    <b>28)</b>
+                                    <b>Write the Permission Letter from your Parents to Go on a School Trip</b>
+                                </div>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                    <div className='ans-section-lg'>
+                                        <div className='ans-line'></div>
+                                    </div>
+                                </Row>
+                                <Row>
+                                        <div className='ans-line' style={{padding:"10px 0"}}></div>
+                                </Row>
+                               {/* <br /> */}
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div className='page-footer'>
+                        <div>8th Std. English QP</div>
+                        <div>6</div>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
 
