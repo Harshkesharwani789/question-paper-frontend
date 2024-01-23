@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
 
 const ExamBoard = () => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -31,9 +32,12 @@ const ExamBoard = () => {
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
-                        Welcome Amandeep Singh !{" "}
+                        Guru Resource Management{" "}
                       </p>{" "}
-                      <span className="fs-4" style={{ textAlign: "center" }}>
+                      <p className="fs-4 anim-typewriter text-dark" style={{paddingLeft:"6rem"}}>
+                       Welcomes You!{" "}
+                      </p>
+                      <span className="fs-4">
                         Please Enter Your Details
                       </span>
                     </h2>
@@ -63,8 +67,12 @@ const ExamBoard = () => {
                             >
                               Result Sheet and Marks Card
                             </Button> */}
-                            <Button variant="success"
-                              style={{ backgroundColor: "green" }}>Student</Button>
+                            <Button
+                              variant="success"
+                              style={{ backgroundColor: "green" }}
+                            >
+                              Student
+                            </Button>
                           </div>
                           <div
                             style={{

@@ -31,13 +31,10 @@ import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
-<<<<<<< HEAD
+import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
+import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
 import BluePrint3 from "./Components/BluePrint/BluePrint3";
 import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
-import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
-=======
-import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
->>>>>>> 90c1609736c7423eb6f70fe92712c33a7f96c486
 
 function App() {
   return (
