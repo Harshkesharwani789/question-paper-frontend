@@ -31,13 +31,11 @@ import BluePrint from "./Components/BluePrint/BluePrint";
 import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
-<<<<<<< HEAD
-import BluePrint3 from "./Components/BluePrint/BluePrint3";
-import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
-import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
-=======
 import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
->>>>>>> 90c1609736c7423eb6f70fe92712c33a7f96c486
+import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
+import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
+import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
+import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 
 function App() {
   return (
@@ -122,16 +120,7 @@ function App() {
               </>
             }
           />
-            <Route
-            path="/blueprint3"
-            exact
-            element={
-              <>
-                <Navbarr />
-                <BluePrint3 />
-              </>
-            }
-          />
+           
           <Route
             path="/questionpaper"
             exact
@@ -139,6 +128,26 @@ function App() {
               <>
                 <Navbarr />
                 <QuestionPaper />
+              </>
+            }
+          />
+           <Route
+            path="/answersheet"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <AnswerSheet />
+              </>
+            }
+          />
+             <Route
+            path="/syllabuscopy"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <SyllabusCopy />
               </>
             }
           />
