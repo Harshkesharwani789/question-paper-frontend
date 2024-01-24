@@ -27,6 +27,7 @@ const Login = () => {
 
   const TeacherLogin = async()=>{
     try {
+      
       if(!Mobile) return swal({
         title:"oops!",
         text:"Please Enter the Mobile Number",

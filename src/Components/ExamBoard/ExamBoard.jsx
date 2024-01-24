@@ -105,11 +105,9 @@ const ExamBoard = () => {
                   <div className="line-1">
                     <h2>
                       {" "}
-                      <p className="anim-typewriter text-dark">
-                        Guru Resource Management{" "}
-                      </p>{" "}
-                      <p className="fs-4 anim-typewriter text-dark" style={{paddingLeft:"6rem"}}>
-                       Welcomes You!{" "}
+                     
+                      <p className="anim-typewriter text-dark" style={{paddingLeft:"3rem"}}>
+                       Welcome {user?.FirstName} {user?.LastName}!{" "}
                       </p>
                       <span className="fs-4">
                         Please Enter Your Details
