@@ -7,6 +7,16 @@
   padding: 12px 0px;
 }
 
+
+.bg-img{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 500px;
+  position: relative;
+  background-image: url(../../../public/page2bg.png);
+}
+
 .box {
   background-color: #fff;
   border-radius: 30px;
@@ -17,14 +27,6 @@
   max-width: 100%;
 }
 
-.bg-img{
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 500px;
-  position: relative;
-  background-image: url(../../../public/page2bg.png);
-}
 
 @media screen and (max-width: 799px) {
   .page2-content-display,

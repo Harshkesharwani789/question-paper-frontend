@@ -184,7 +184,7 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
-          {/* <Link to="/adminexamlevel">
+          <Link to="/adminchapter">
             <li
               className="a-ele "
               onClick={() => {
@@ -204,9 +204,11 @@ const Side = () => {
               <span>
                 <FaWeightHanging style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Exam level</span>
+              <span className="ms-2">
+               Chapters
+              </span>
             </li>
-          </Link> */}
+          </Link>
           <Link to="/adminblueprintdetails">
             <li
               className="a-ele "
@@ -298,6 +300,29 @@ const Side = () => {
                 <PiExamFill style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">Exam Level</span>
+            </li>
+          </Link>
+          <Link to="/weightageofthecontent">
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(true);
+                setUserList(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <PiExamFill style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Weightage of Content</span>
             </li>
           </Link>
           <Link to="/adminuserlist">

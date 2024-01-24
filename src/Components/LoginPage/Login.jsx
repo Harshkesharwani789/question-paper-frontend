@@ -21,11 +21,11 @@ const Login = () => {
   const handleShow = () => setShow(true);
 
   //post
-  const [Mobile,setMobile] = useState("");
-  const [Email,setEmail] = useState("");
-  const [Password,setPassword] = useState("");
+  const [Mobile, setMobile] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
-  const TeacherLogin = async()=>{
+  const TeacherLogin = async () => {
     try {
      
       if(!Email) return swal({
@@ -48,20 +48,19 @@ const Login = () => {
           "Content-type":"application/json",
           // Authorization:`Bearer ${token}`,
         },
-        data:{
-          Mobile:Mobile,
-          Email:Email,
-          Password:Password,
-        }
-      }
+        data: {
+          Mobile: Mobile,
+          Email: Email,
+          Password: Password,
+        },
+      };
       let res = await axios(config);
-      if(res.status==200)
-      {
-         swal({
-          title:"Yeah!!",
-          text:"Successfully Logged In",
-          icon:"success",
-          button:"OK!"
+      if (res.status == 200) {
+        swal({
+          title: "Yeah!!",
+          text: "Successfully Logged In",
+          icon: "success",
+          button: "OK!",
         });
         sessionStorage.setItem("user", JSON.stringify(res.data.success));
         sessionStorage.setItem("token", res.data.token);
@@ -72,13 +71,13 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       return swal({
-        title:"oops",
-        text:error.response.data.error,
-        icon:"error",
-        button:"Try Again"
-      })
+        title: "oops",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Try Again",
+      });
     }
-  }
+  };
 
   const [PasswordShow, setPasswordShow] = useState(false);
   const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
@@ -98,7 +97,7 @@ const Login = () => {
 
 
       {/* New Login  */}
-      <div className="container p-5">
+      <div className="container p-3">
         <div>
           <div className="box">
             <div className="row">
@@ -144,7 +143,7 @@ const Login = () => {
                           placeholder="Enter email or mobile number"
                           aria-label="email"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setEmail(e.target.value)}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </InputGroup>
                     </div>
@@ -162,21 +161,21 @@ const Login = () => {
                             className="login-input"
                             placeholder="Password"
                             aria-describedby="basic-addon1"
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           {PasswordShow ? (
                             <button
                               onClick={() => setPasswordShow(!PasswordShow)}
                               className="passbtn"
                             >
-                              <FaEye style={{color:"white"}}/>
+                              <FaEye style={{ color: "white" }} />
                             </button>
                           ) : (
                             <button
                               onClick={() => setPasswordShow(!PasswordShow)}
                               className="passbtn"
                             >
-                              <FaEyeSlash style={{color:"white"}} />
+                              <FaEyeSlash style={{ color: "white" }} />
                             </button>
                           )}
                         </InputGroup>
@@ -215,9 +214,11 @@ const Login = () => {
                       <Button
                         variant=""
                         style={{ backgroundColor: "navy", color: "white" }}
-                        onClick={()=>{TeacherLogin()}}
+                        onClick={() => {
+                          TeacherLogin();
+                        }}
                       >
-                        Log in 
+                        Log in
                       </Button>
                       {/* </a> */}
                     </div>

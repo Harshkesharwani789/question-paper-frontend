@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { Button, Modal, Form, Pagination, Table } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 
-const AdminTypeOfQuestions = () => {
+const AdminChapter = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+  const [getclassname, setgetclassName] = useState([]);
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -24,59 +25,71 @@ const AdminTypeOfQuestions = () => {
   const handleShow2 = () => setShow2(true);
 
   //Post
-  const [Typesofquestion, setTypesofquestion] = useState("");
-  const Typesoffquestion = async () => {
+  const [chapterName, setChapterName] = useState("");
+  const [subjectName, setSubjectName] = useState("");
+
+  const AddChapter = async () => {
+    if (!chapterName)
+      return swal({
+        title: "Oops!",
+        text: "Please Enter the chapter name",
+        icon: "error",
+        button: "Ok!",
+      });
+    if (!subjectName)
+      return swal({
+        title: "Oops!",
+        text: "Please Enter select subject name",
+        icon: "error",
+        button: "Ok!",
+      });
     try {
-      if (!Typesofquestion)
-        return swal({
-          title: "OOps!",
-          text: "Please Enter Types of Question",
-          icon: "error",
-          button: "Try Again!",
-        });
       const config = {
-        url: "/admin/addtypesofquestion",
+        url: "/admin/addChapter",
         method: "post",
         baseURL: "http://localhost:8000/api",
         headers: {
-          "content-type": "application/json",
+          "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Typesofquestion: Typesofquestion,
+          chapterName: chapterName,
+          subjectName: subjectName,
           authId: admin?._id,
         },
       };
       let res = await axios(config);
-      if (res.status == 200)
-        swal({
+      if (res.status == 200) {
+        handleClose();
+        getChapter();
+        return swal({
           title: "Yeah!",
           text: res.data.success,
           icon: "success",
           button: "Ok!",
         });
-      handleClose();
-      getalltypesofquess();
+      }
     } catch (error) {
       console.log(error);
-      swal({
-        title: "OOps!",
+      return swal({
+        title: "Oops!",
         text: error.response.data.error,
         icon: "error",
-        button: "Try Again!",
+        button: "Ok!",
       });
     }
   };
+
   //get
-  const [getalltypesofques, setgetalltypesofques] = useState([]);
+  const [chapters, setchapters] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
-  const getalltypesofquess = async () => {
+  const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
+        "http://localhost:8000/api/admin/getAllChapter"
       );
       if (res.status == 200) {
-        setgetalltypesofques(res.data.success);
+        setchapters(res.data.success);
         setnochangedata(res.data.success);
       }
     } catch (error) {
@@ -85,53 +98,52 @@ const AdminTypeOfQuestions = () => {
   };
 
   //update
-  const [edittypesofquestion, setedittypesofquestion] = useState("");
-  const updatetypesofquestion = async () => {
+  const [updatechapter, setpdatesetchapter] = useState("");
+  const UpdateChapter = async () => {
     try {
       const config = {
-        url: "/admin/updateTypesofquestions",
-        baseURL: "http://localhost:8000/api",
+        url: "/admin/updateChapter",
         method: "put",
+        baseURL: "http://localhost:8000/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Typesofquestion: Typesofquestion,
-          id: edittypesofquestion,
+          chapterName: chapterName,
+          subjectName: subjectName,
           authId: admin?._id,
+          id: updatechapter,
         },
       };
       let res = await axios(config);
-      if (res.status == 200);
-      swal({
-        title: "Yeah!",
-        text: res.data.success,
-        icon: "success",
-        button: "Ok!",
-      });
-      handleClose1();
-      getalltypesofquess();
+      if (res.status == 200)
+        if (res.status == 200) {
+          handleClose1();
+          getChapter();
+          return swal({
+            title: "Yeah!",
+            text: res.data.success,
+            icon: "success",
+            button: "Ok!",
+          });
+        }
     } catch (error) {
       console.log(error);
       return swal({
-        title: "OOps!",
+        title: "Oops!",
         text: error.response.data.error,
         icon: "error",
-        button: "Try Again!",
+        button: "Ok!",
       });
     }
   };
   //delete
-  const [deletetypsofques, setdeletetypsofques] = useState("");
-  const Deletedeletetypsofques = async () => {
+  const [chapter, setChapter] = useState("");
+  const DeleteChapter = async () => {
     try {
       const config = {
-        url:
-          "/admin/deleteAllTypesofquestions/" +
-          deletetypsofques +
-          "/" +
-          admin?._id,
+        url: "/admin/deleteChapter/" + chapter + "/" + admin?._id,
         method: "delete",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -142,8 +154,8 @@ const AdminTypeOfQuestions = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose2();
-        getalltypesofquess();
-        swal({
+        getChapter();
+        return swal({
           title: "Yeah!",
           text: res.data.success,
           icon: "success",
@@ -152,7 +164,7 @@ const AdminTypeOfQuestions = () => {
       }
     } catch (error) {
       console.log(error);
-      swal({
+      return swal({
         title: "Oops!",
         text: error.response.data.error,
         icon: "error",
@@ -161,18 +173,64 @@ const AdminTypeOfQuestions = () => {
     }
   };
 
-  // // Pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const productPerPage = 5;
-  // const visitedPage = pageNumber * productPerPage;
-  // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  // const pageCount = Math.ceil(subject.length / productPerPage);
+  //   get method of subject
+  const [subject, setsubject] = useState([]);
+  //   const [nochangedata, setnochangedata] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //   Row Filter
+  const [itempage, setItempage] = useState(5);
+
+  //   DateRange Filter
+  const [searchH, setSearchH] = useState("");
+  const handleFilterH = (e) => {
+    if (e.target.value != "") {
+      setSearchH(e.target.value);
+      const filterTableH = nochangedata.filter((o) =>
+        Object.keys(o).some((k) =>
+          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
+        )
+      );
+      setchapters([...filterTableH]);
+    } else {
+      setSearchH(e.target.value);
+      setchapters([...nochangedata]);
+    }
+  };
+  const [searchTermH, setSearchTermH] = useState("");
+  const searchedProductH = chapters.filter((item) => {
+    if (searchTermH.value === "") {
+      return item;
+    }
+    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
+      return item;
+    } else {
+      return console.log("not found");
+    }
+  });
+  // Pagination
+  const [pageNumber, setPageNumber] = useState(0);
+  const productPerPage = 5;
+  const visitedPage = pageNumber * productPerPage;
+  const displayPage = chapters.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(chapters.length / productPerPage);
   useEffect(() => {
-    getalltypesofquess();
+    getChapter();
+    getSubject();
   }, []);
-  console.log(getalltypesofques);
   return (
-    <>
+    <div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -183,19 +241,19 @@ const AdminTypeOfQuestions = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
-            // onChange={handleFilterH}
+            onChange={handleFilterH}
           />
         </div>
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Type Of Questions</h2>
+          <h2 className="header-c ">Chapters</h2>
           <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}
             onClick={handleShow}
           >
-            Add Type Of Question
+            Add Chapters
           </button>
         </div>
 
@@ -209,19 +267,24 @@ const AdminTypeOfQuestions = () => {
               <tr>
                 <th>S.No</th>
                 <th>
-                  <div>Type Of Questions</div>
+                  <div>Subject</div>
+                </th>
+                <th>
+                  <div>Chapter Name</div>
                 </th>
                 <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
-              {getalltypesofques?.map((item, i) => {
+              {chapters?.map((item, i) => {
                 return (
-                  <tr key={i}>
+                  <tr>
                     <td>{i + 1}</td>
 
-                    <td>{item?.Typesofquestion}</td>
+                    <td>{item?.subjectName}</td>
+
+                    <td>{item?.chapterName}</td>
 
                     <td>
                       {" "}
@@ -231,9 +294,10 @@ const AdminTypeOfQuestions = () => {
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              handleShow1();
-                              setedittypesofquestion(item);
-                              setTypesofquestion(item?.Typesofquestion);
+                              handleShow1(item);
+                              setpdatesetchapter(item?._id);
+                              setChapterName(item?.chapterName);
+                              setSubjectName(item?.subjectName);
                             }}
                           />{" "}
                         </div>
@@ -242,7 +306,7 @@ const AdminTypeOfQuestions = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setdeletetypsofques(item?._id);
+                              setChapter(item?._id);
                               handleShow2(item?._id);
                             }}
                           />{" "}
@@ -256,7 +320,7 @@ const AdminTypeOfQuestions = () => {
           </Table>
         </div>
 
-        {/* <Pagination style={{ float: "right" }}>
+        <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -276,23 +340,99 @@ const AdminTypeOfQuestions = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
+        </Pagination>
+
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>
-              Add Type Of Question
-            </Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Add Chapter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Type Of Question</label>
+                <label>Subject</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSubjectName(e.target.value)}
+                >
+                  <option>Select Subject</option>
+                  {subject?.map((val, i) => {
+                    return (
+                      <option value={val?.subjectName} key={i}>
+                        {val?.subjectName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter</label>
                 <input
                   type="text"
-                  placeholder="Enter Subject"
                   className="vi_0"
-                  onChange={(e) => setTypesofquestion(e.target.value)}
+                  placeholder="Enter Chapter Name"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="d-flex">
+              <Button
+                className="mx-2"
+                variant="primary"
+                onClick={() => {
+                  AddChapter();
+                }}
+              >
+                Add
+              </Button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Edit Package modal */}
+        <Modal
+          show={show1}
+          onHide={handleClose1}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+            <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Subject</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSubjectName(e.target.value)}
+                >
+                  <option>Select Subject</option>
+                  {subject?.map((val, i) => {
+                    return (
+                      <option value={val?.subjectName} key={i}>
+                        {val?.subjectName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Name"
+                  value={chapterName}
+                  onChange={(e) => setChapterName(e.target.value)}
                 />
               </div>
             </div>
@@ -316,55 +456,14 @@ const AdminTypeOfQuestions = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <div className="d-flex">
-              <Button
-                className="mx-2"
-                variant="primary"
-                onClick={() => {
-                  Typesoffquestion();
-                }}
-              >
-                Add
-              </Button>
-            </div>
-          </Modal.Footer>
-        </Modal>
-
-        {/* Edit Package modal */}
-        <Modal
-          show={show1}
-          onHide={handleClose1}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
-            <Modal.Title style={{ color: "white" }}>
-              Edit Type Of Question
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Type Of Question</label>
-                <input
-                  type="text"
-                  placeholder="Enter Subject"
-                  className="vi_0"
-                  value={Typesofquestion}
-                  onChange={(e) => setTypesofquestion(e.target.value)}
-                />
-              </div>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button
               variant="primary"
               style={{ backgroundColor: "#FAFA33" }}
               onClick={() => {
-                updatetypesofquestion();
+                UpdateChapter();
               }}
             >
               Edit
@@ -378,7 +477,7 @@ const AdminTypeOfQuestions = () => {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -390,17 +489,17 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="btn btn-secondary" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={Deletedeletetypsofques}>
+            <Button variant="primary" onClick={DeleteChapter}>
               Delete
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AdminTypeOfQuestions;
+export default AdminChapter;

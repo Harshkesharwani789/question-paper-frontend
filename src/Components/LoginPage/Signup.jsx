@@ -54,7 +54,6 @@ const SignUp = () => {
           icon: "success",
           button: "Ok!",
         });
-        
       }
       setTimeout(() => {
          return navigate("/login")
@@ -84,7 +83,6 @@ const SignUp = () => {
 
       {/* new Register form  */}
       <div className="container p-3">
-        {/* <div> */}
         <div className="box">
           <div className="row">
             <div className="col-6">
@@ -94,32 +92,32 @@ const SignUp = () => {
 
                 <Row>
                   <Col>
-                  <div className="col-12">
-                    <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Your First Name"
-                        onChange={(e) => {
-                          setFirstName(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                  </div>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your First Name"
+                          onChange={(e) => {
+                            setFirstName(e.target.value);
+                          }}
+                        />
+                      </Form.Group>
+                    </div>
                   </Col>
                   <Col>
-                  <div className="col-12">
-                    <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Your Last Name"
-                        onChange={(e) => {
-                          setLastName(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                  </div>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your Last Name"
+                          onChange={(e) => {
+                            setLastName(e.target.value);
+                          }}
+                        />
+                      </Form.Group>
+                    </div>
                   </Col>
                 </Row>
                 <Row>
@@ -129,7 +127,7 @@ const SignUp = () => {
                       <Form.Control
                         type="number"
                         placeholder="Enter Your Number"
-                        onChange={(e)=>setMobile(e.target.value)}
+                        onChange={(e) => setMobile(e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -144,7 +142,7 @@ const SignUp = () => {
                         placeholder="Enter Email id"
                         aria-label="email"
                         aria-describedby="basic-addon1"
-                        onChange={(e)=>setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </InputGroup>
                   </div>
@@ -159,7 +157,7 @@ const SignUp = () => {
                           className="login-input"
                           placeholder="Password"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         {PasswordShow ? (
                           <button
@@ -191,7 +189,7 @@ const SignUp = () => {
                           className="login-input"
                           placeholder="Password"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         {PasswordShow1 ? (
                           <button
@@ -239,14 +237,15 @@ const SignUp = () => {
                     <Button
                       variant=""
                       style={{ backgroundColor: "navy", color: "white" }}
-                      onClick={()=>{TeacherRegister()}}
+                      onClick={() => {
+                        TeacherRegister();
+                      }}
                     >
                       Register
                     </Button>
                   </div>
                 </Row>
               </div>
-              {/* <br /> */}
             </div>
             <div className="col-md-6">
               <div className="signup-bg-img">
@@ -277,7 +276,6 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
       </div>
 
       {/* Registration OTP  */}
@@ -296,9 +294,6 @@ const SignUp = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="formGroupPassword">
-              {/* <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                OTP
-              </Form.Label> */}
               <Form.Control type="password" placeholder="Enter OTP" />
             </Form.Group>
           </Form>
