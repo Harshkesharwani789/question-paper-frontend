@@ -272,6 +272,20 @@ function AdminBlueprint() {
     }
   };
 
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const Blueprint = async () => {
     try {
       const config = {
@@ -346,13 +360,14 @@ function AdminBlueprint() {
     getaddsubclasss();
     getAddMedium();
     getalltypesofquess();
+    getallweightagecontent();
   }, []);
   console.log(getboardname);
   console.log(getclassname);
   console.log(getaddsubclass);
   console.log(Medium);
   console.log(getalltypesofques);
-
+  console.log(weightage);
   return (
     <>
       <div className="box_1">
@@ -688,93 +703,114 @@ function AdminBlueprint() {
                               style={{ padding: "5px" }}
                             >
                               <div className="row ">
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Prose (Lesson) Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Prose (Lesson) Marks"
-                                      className="vi_0"
-                                      value={ProseWeightage}
-                                      onChange={(e) => {
-                                        setProseWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Poetry Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Poetry Marks"
-                                      className="vi_0"
-                                      value={PoetryWeightage}
-                                      onChange={(e) => {
-                                        setPoetryWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Non-Detailed Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Non-Detailed Marks"
-                                      className="vi_0"
-                                      value={NonDetailedWeightage}
-                                      onChange={(e) => {
-                                        setNonDetailedWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Grammer Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Grammer Marks"
-                                      className="vi_0"
-                                      value={GrammerWeightage}
-                                      onChange={(e) => {
-                                        setGrammerWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Vocabulary Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Vocabulary Marks"
-                                      className="vi_0"
-                                      value={VocabularyWeightage}
-                                      onChange={(e) => {
-                                        setVocabularyWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
+                                {weightage
+                                  ?.filter((ele) => subjects == ele?.Subject)
+                                  .map((val, i) => {
+                                    return (
+                                      <div className="col-md-6" key={i}>
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            {val?.Content} Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder={`Please Enter ${val?.Content} Marks`}
+                                            className="vi_0"
+                                            onChange={(e) => {
+                                              setProseWeightage(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                {/* <div className="col-md-6">
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            Poetry Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder="Enter Poetry Marks"
+                                            className="vi_0"
+                                            value={PoetryWeightage}
+                                            onChange={(e) => {
+                                              setPoetryWeightage(
+                                                e.target.value
+                                              );
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="col-md-6">
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            Non-Detailed Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder="Enter Non-Detailed Marks"
+                                            className="vi_0"
+                                            value={NonDetailedWeightage}
+                                            onChange={(e) => {
+                                              setNonDetailedWeightage(
+                                                e.target.value
+                                              );
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="col-md-6">
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            Grammer Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder="Enter Grammer Marks"
+                                            className="vi_0"
+                                            value={GrammerWeightage}
+                                            onChange={(e) => {
+                                              setGrammerWeightage(
+                                                e.target.value
+                                              );
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="col-md-6">
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            Vocabulary Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder="Enter Vocabulary Marks"
+                                            className="vi_0"
+                                            value={VocabularyWeightage}
+                                            onChange={(e) => {
+                                              setVocabularyWeightage(
+                                                e.target.value
+                                              );
+                                            }}
+                                          />
+                                        </div>
+                                      </div> */}
                               </div>
                             </div>
                           </Typography>

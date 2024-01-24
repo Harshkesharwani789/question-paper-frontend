@@ -228,7 +228,7 @@ const AdminBlueprintdetails = () => {
                     <td>{val?.subjects}</td>
                     <td>
                       <Link
-                        to={`/adminblueprintdetailsview/${val.id}`}
+                        to={`/adminblueprintdetailsview/${val?._id}`}
                         style={{ textDecoration: "none", color: "white" }}
                       >
                         <FaEye color="blue" />
