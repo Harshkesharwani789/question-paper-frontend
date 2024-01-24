@@ -5,7 +5,6 @@ const Dashboard = () => {
   return (
     <div>
       <h2 className="header-c ">Dashboard</h2>
-  
     </div>
   );
 };
