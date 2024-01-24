@@ -184,7 +184,7 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
-          <Link to="/adminexamlevel">
+          {/* <Link to="/adminexamlevel">
             <li
               className="a-ele "
               onClick={() => {
@@ -206,7 +206,7 @@ const Side = () => {
               </span>
               <span className="ms-2">Exam level</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/adminblueprintdetails">
             <li
               className="a-ele "

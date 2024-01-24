@@ -32,9 +32,10 @@ import QuestionPaper from "./Components/QuestionPaper/QuestionPaper";
 import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
 import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
-import BluePrint3 from "./Components/BluePrint/BluePrint3";
 import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
 import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
+import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
+import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 
 function App() {
   return (
@@ -117,16 +118,7 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/blueprint3"
-            exact
-            element={
-              <>
-                <Navbarr />
-                <BluePrint3 />
-              </>
-            }
-          />
+
           <Route
             path="/questionpaper"
             exact
@@ -134,6 +126,26 @@ function App() {
               <>
                 <Navbarr />
                 <QuestionPaper />
+              </>
+            }
+          />
+          <Route
+            path="/answersheet"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <AnswerSheet />
+              </>
+            }
+          />
+          <Route
+            path="/syllabuscopy"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <SyllabusCopy />
               </>
             }
           />

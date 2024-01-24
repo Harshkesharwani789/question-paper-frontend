@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { Button, Modal, Pagination, Table } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
@@ -23,9 +23,9 @@ const ExamLevel = () => {
     const handleShow2 = () => setShow2(true);
   
     //Post
-    const [examlevel, setexamlevel] = useState("");
+    const [Examlevel, setExamlevel] = useState("");
     const AddExamLevel = async () => {
-      if (!examlevel)
+      if (!Examlevel)
         return swal({
           title: "Oops!",
           text: "Please Enter the Exam Level",
@@ -42,7 +42,7 @@ const ExamLevel = () => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            examlevel: examlevel,
+            Examlevel: Examlevel,
             authId: admin?._id,
           },
         };
@@ -68,15 +68,15 @@ const ExamLevel = () => {
       }
     };
     //get
-    const [examlevell, setexamlevell] = useState([]);
+    const [Examlevell, setExamlevell] = useState([]);
     const [nochangedata, setnochangedata] = useState([]);
     const getExamLevel = async () => {
       try {
         let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllSujects"
+          "http://localhost:8000/api/admin/getExamLevel"
         );
         if (res.status == 200) {
-          setexamlevell(res.data.success);
+          setExamlevell(res.data.success);
           setnochangedata(res.data.success);
         }
       } catch (error) {
@@ -89,7 +89,7 @@ const ExamLevel = () => {
     const UpdateExamLevel = async () => {
       try {
         const config = {
-          url: "/admin/updateSubjects",
+          url: "/admin/updateExamLevel",
           method: "put",
           baseURL: "http://localhost:8000/api",
           headers: {
@@ -97,7 +97,7 @@ const ExamLevel = () => {
             Authorization: `Bearer ${token}`,
           },
           data: {
-            setexamlevel: setexamlevel,
+            Examlevel: Examlevel,
             authId: admin?._id,
             id: updateexamlevel,
           },
@@ -129,7 +129,7 @@ const ExamLevel = () => {
     const Deleteexamlevel = async () => {
       try {
         const config = {
-          url: "/admin/deleteSubjects/" + exam + "/" + admin?._id,
+          url: "/admin/deleteExamLevel/" + exam + "/" + admin?._id,
           method: "delete",
           baseURL: "http://localhost:8000/api",
           headers: {
@@ -172,14 +172,14 @@ const ExamLevel = () => {
             String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
           )
         );
-        setexamlevell([...filterTableH]);
+        setExamlevell([...filterTableH]);
       } else {
         setSearchH(e.target.value);
-        setexamlevell([...nochangedata]);
+        setExamlevell([...nochangedata]);
       }
     };
     const [searchTermH, setSearchTermH] = useState("");
-    const searchedProductH = examlevell.filter((item) => {
+    const searchedProductH = Examlevell.filter((item) => {
       if (searchTermH.value === "") {
         return item;
       }
@@ -193,8 +193,8 @@ const ExamLevel = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const productPerPage = 5;
     const visitedPage = pageNumber * productPerPage;
-    const displayPage = examlevell.slice(visitedPage, visitedPage + productPerPage);
-    const pageCount = Math.ceil(examlevell.length / productPerPage);
+    const displayPage = Examlevell.slice(visitedPage, visitedPage + productPerPage);
+    const pageCount = Math.ceil(Examlevell.length / productPerPage);
     useEffect(() => {
       getExamLevel();
     }, []);
@@ -247,9 +247,9 @@ const ExamLevel = () => {
                 {displayPage?.map((item, i) => {
                   return (
                     <tr>
-                      <td>{i + 1 + visitedPage}</td>
+                      <td>{i + 1}</td>
   
-                      <td>{item?.examlevel}</td>
+                      <td>{item?.Examlevel}</td>
   
                       <td>
                         {" "}
@@ -259,9 +259,9 @@ const ExamLevel = () => {
                               className="text-success"
                               style={{ cursor: "pointer", fontSize: "20px" }}
                               onClick={() => {
-                                handleShow1();
-                                setpdatesetexamlevel(item);
-                                setexamlevel(item?.examlevel);
+                                handleShow1(item);
+                                setpdatesetexamlevel(item?._id);
+                                setExamlevel(item?.Examlevel);
                                 
                               }}
                             />{" "}
@@ -272,7 +272,7 @@ const ExamLevel = () => {
                               style={{ cursor: "pointer", fontSize: "20px" }}
                               onClick={() => {
                                 setexam(item?._id);
-                                handleShow2();
+                                handleShow2(item?._id);
                               }}
                             />{" "}
                           </div>
@@ -319,7 +319,7 @@ const ExamLevel = () => {
                     type="text"
                     placeholder="Enter Exam Level"
                     className="vi_0"
-                    onChange={(e) => setexamlevel(e.target.value)}
+                    onChange={(e) => setExamlevel(e.target.value)}
                   />
                 </div>
               </div>
@@ -375,8 +375,8 @@ const ExamLevel = () => {
                     type="text"
                     placeholder="Enter Exam Level "
                     className="vi_0"
-                    value={examlevel}
-                    onChange={(e) => setexamlevel(e.target.value)}
+                    value={Examlevel}
+                    onChange={(e) => setExamlevel(e.target.value)}
                   />
                 </div>
               </div>
