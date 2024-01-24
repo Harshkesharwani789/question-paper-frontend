@@ -33,26 +33,25 @@ import BluePrint2 from "./Components/BluePrint/BluePrint2";
 import Home from "./Components/Home/Home";
 import AdminTypeOfQuestions from "./Components/Admin/AdminTypeOfQuestions";
 import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
-import BluePrint3 from "./Components/BluePrint/BluePrint3";
 import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
+import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
+import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 
 function App() {
   return (
     <div className="App">
-
-    
       <BrowserRouter>
         <Routes>
-        <Route
-        path="/"
-        exact
-        element={
-          <>
-            {/* <Navbarr /> */}
-            <Home />
-          </>
-        }
-      />
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                {/* <Navbarr /> */}
+                <Home />
+              </>
+            }
+          />
           <Route
             path="/loginpage3"
             element={
@@ -119,16 +118,7 @@ function App() {
               </>
             }
           />
-            <Route
-            path="/blueprint3"
-            exact
-            element={
-              <>
-                <Navbarr />
-                <BluePrint3 />
-              </>
-            }
-          />
+
           <Route
             path="/questionpaper"
             exact
@@ -136,6 +126,26 @@ function App() {
               <>
                 <Navbarr />
                 <QuestionPaper />
+              </>
+            }
+          />
+          <Route
+            path="/answersheet"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <AnswerSheet />
+              </>
+            }
+          />
+          <Route
+            path="/syllabuscopy"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <SyllabusCopy />
               </>
             }
           />
@@ -148,7 +158,7 @@ function App() {
             path="/adminblueprint"
             element={<Main children={<AdminBlueprint />} />}
           />
-            <Route
+          <Route
             path="/admineditblueprint"
             element={<Main children={<AdminEditBluePrint />} />}
           />
@@ -157,14 +167,14 @@ function App() {
             element={<Main children={<AdminBlueprintdetails />} />}
           />
           <Route
-            path="/adminblueprintdetailsview"
+            path="/adminblueprintdetailsview/:blueprint_ID"
             element={<Main children={<AdminBlueprintdetailsview />} />}
           />
           <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
           />
-           <Route
+          <Route
             path="/admineditquestiondetails"
             element={<Main children={<AdminEditQuestionDetails />} />}
           />
@@ -247,7 +257,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/admintypesofquestion"
             element={
               <Main

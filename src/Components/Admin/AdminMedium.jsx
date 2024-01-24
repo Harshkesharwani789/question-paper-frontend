@@ -51,11 +51,12 @@ const AdminMedium = () => {
           dangerMode: true,
         });
         handleClose();
+        getAddMedium();
       }
     } catch (error) {
       console.log(error);
       swal({
-        title: "oops",
+        title: "Oops",
         text: error.response.data.error,
         icon: "error",
         dangerMode: true,
@@ -63,7 +64,7 @@ const AdminMedium = () => {
     }
   };
 
-  //get
+  //get method for medium
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {

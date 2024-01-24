@@ -48,10 +48,7 @@ const AdminBoard = () => {
 
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  // const handleChange = (e, editor) => {
-  //   const data = editor.getData();
-  // setAbDescription(data);
-  // };
+
   // Post method Integration
   const [boardName, setboardName] = useState("");
   const AddBoradname = async () => {
