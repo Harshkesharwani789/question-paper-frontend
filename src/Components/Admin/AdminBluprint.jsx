@@ -15,6 +15,7 @@ import { MdPlayArrow } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
+import swal from "sweetalert";
 
 const steps = [
   "Blueprint Details",
@@ -128,6 +129,7 @@ function AdminBlueprint() {
   };
   //get method for medium
   const [Medium, setMedium] = useState([]);
+  const [nochangedata,setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
