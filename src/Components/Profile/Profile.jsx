@@ -35,7 +35,7 @@ const Profile = () => {
           <div className="col-md-12">
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" , padding:"3px 4px"}}
               onClick={() => {
                 setprofile(true);
                 setQuestionPaper(false);
@@ -47,7 +47,7 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff"  , padding:"3px 6px"}}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(true);
@@ -59,7 +59,7 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
+              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff"  , padding:"3px 4px"}}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(false);

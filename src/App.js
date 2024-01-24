@@ -37,6 +37,7 @@ import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetail
 import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
 import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 import Weightagecontent from "./Components/Admin/Weightagecontent";
+import AdminChapter from "./Components/Admin/AdminChapter";
 
 function App() {
   return (
@@ -317,6 +318,18 @@ function App() {
                 children={
                   <>
                     <AdminSubject />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminchapter"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminChapter />
                   </>
                 }
               />
