@@ -41,20 +41,18 @@ import AdminChapter from "./Components/Admin/AdminChapter";
 function App() {
   return (
     <div className="App">
-
-    
       <BrowserRouter>
         <Routes>
-        <Route
-        path="/"
-        exact
-        element={
-          <>
-            {/* <Navbarr /> */}
-            <Home />
-          </>
-        }
-      />
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                {/* <Navbarr /> */}
+                <Home />
+              </>
+            }
+          />
           <Route
             path="/loginpage3"
             element={
@@ -121,7 +119,7 @@ function App() {
               </>
             }
           />
-           
+
           <Route
             path="/questionpaper"
             exact
@@ -132,7 +130,7 @@ function App() {
               </>
             }
           />
-           <Route
+          <Route
             path="/answersheet"
             exact
             element={
@@ -142,7 +140,7 @@ function App() {
               </>
             }
           />
-             <Route
+          <Route
             path="/syllabuscopy"
             exact
             element={
@@ -161,7 +159,7 @@ function App() {
             path="/adminblueprint"
             element={<Main children={<AdminBlueprint />} />}
           />
-            <Route
+          <Route
             path="/admineditblueprint"
             element={<Main children={<AdminEditBluePrint />} />}
           />
@@ -170,14 +168,14 @@ function App() {
             element={<Main children={<AdminBlueprintdetails />} />}
           />
           <Route
-            path="/adminblueprintdetailsview"
+            path="/adminblueprintdetailsview/:blueprint_ID"
             element={<Main children={<AdminBlueprintdetailsview />} />}
           />
           <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
           />
-           <Route
+          <Route
             path="/admineditquestiondetails"
             element={<Main children={<AdminEditQuestionDetails />} />}
           />
@@ -260,7 +258,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/admintypesofquestion"
             element={
               <Main

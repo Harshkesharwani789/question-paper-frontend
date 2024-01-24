@@ -16,9 +16,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
 import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminBlueprintdetails = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -75,6 +78,32 @@ const AdminBlueprintdetails = () => {
       setData([...data]);
     }
   };
+  // get method   for blue print
+
+  const [blueprint, setblueprint] = useState([]);
+  const getallblueprint = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllBLUEPRINTs/" + admin?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (res.status == 200) {
+        setblueprint(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getallblueprint();
+  }, []);
+  console.log(blueprint);
+  console.log("first", admin);
 
   return (
     <>
@@ -185,45 +214,51 @@ const AdminBlueprintdetails = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-                <td>CBSE</td>
+              {blueprint?.map((val, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{val?.blueprintId}</td>
+                    <td></td>
+                    <td>{val?.board}</td>
 
-                <td>English</td>
-                <td></td>
-                <td></td>
-                <td>Mathematics</td>
-                <td>
-                  <FaEye
-                    color="blue"
-                    onClick={() => {
-                      navigate("/adminblueprintdetailsview");
-                    }}
-                  />
-                </td>
-                <td>
-                  <div style={{ display: "flex", gap: "20px" }}>
-                  <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {navigate('/admineditblueprint')}}
-                      />
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                    <td>{val?.medium}</td>
+                    <td>{val?.className}</td>
+                    <td>{val?.SubClassName}</td>
+                    <td>{val?.subjects}</td>
+                    <td>
+                      <Link
+                        to={`/adminblueprintdetailsview/${val.id}`}
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        <FaEye color="blue" />
+                      </Link>
+                    </td>
+                    <td>
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              navigate("/admineditblueprint");
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              handleShow2();
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>

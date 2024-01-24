@@ -203,6 +203,8 @@ const AdminClass = () => {
       };
       let res = await axios(config);
       if (res.status == 200) {
+        handleClose();
+        getaddsubclasss();
         return swal({
           title: "Success!",
           text: res.data.success,
@@ -220,6 +222,99 @@ const AdminClass = () => {
       });
     }
   };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // update method for subclass
+  const [editsubclass, seteditsubclass] = useState("");
+  const editsubbclass = async () => {
+    try {
+      const config = {
+        url: "/admin/updateSubClass",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          className: classsname,
+          subclassName: subclasssname,
+          authId: admin?._id,
+          id: editsubclass,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        handleClose4();
+        getaddsubclasss();
+        return swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Opps!",
+        text: error.response.data.error,
+        icon: "success",
+        button: "OK!",
+      });
+    }
+  };
+  // delete method
+  const [deletesubclass, setdeletesubclass] = useState("");
+  const deletesubclasss = async () => {
+    try {
+      const config = {
+        url: "/admin/deleteSubClass/" + deletesubclass + "/" + admin?._id,
+        method: "delete",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const res = await axios(config);
+      if (res.status == 200) {
+        handleClose5();
+        getaddsubclasss();
+        return swal({
+          title: "Deteded!",
+          text: res.data.success,
+          icon: "warning",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Opps!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+  useEffect(() => {
+    getaddsubclasss();
+  }, []);
+  console.log(getaddsubclass);
+
   const [View, setView] = useState({});
   const [show100, setShow100] = useState(false);
   const handleClose100 = () => setShow100(false);
@@ -428,35 +523,49 @@ const AdminClass = () => {
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
+                      {getaddsubclass?.map((val, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{val?.className}</td>
+                            <td>{val?.subclassName}</td>
 
-                        <td>
-                          {" "}
-                          <div style={{ display: "flex", gap: "20px" }}>
-                            <div>
-                              <BiSolidEdit
-                                className="text-success"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow4();
-                                }}
-                              />{" "}
-                            </div>
-                            <div>
-                              <AiFillDelete
-                                className="text-danger"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow2();
-                                }}
-                              />{" "}
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                            <td>
+                              {" "}
+                              <div style={{ display: "flex", gap: "20px" }}>
+                                <div>
+                                  <BiSolidEdit
+                                    className="text-success"
+                                    style={{
+                                      cursor: "pointer",
+                                      fontSize: "20px",
+                                    }}
+                                    onClick={() => {
+                                      handleShow4();
+                                      seteditsubclass(val?._id);
+                                      setclasssname(val?.className);
+                                      setsubclasssname(val?.subclassName);
+                                    }}
+                                  />{" "}
+                                </div>
+                                <div>
+                                  <AiFillDelete
+                                    className="text-danger"
+                                    style={{
+                                      cursor: "pointer",
+                                      fontSize: "20px",
+                                    }}
+                                    onClick={() => {
+                                      handleShow5(val?._id);
+                                      setdeletesubclass(val?._id);
+                                    }}
+                                  />{" "}
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </Table>
                 </div>
@@ -520,12 +629,16 @@ const AdminClass = () => {
                 classNamee();
               }}
             > */}
-          <Button variant="success" onClick={handleClose}>
+            <Button variant="success" onClick={handleClose}>
               Close
             </Button>
-            <Button className="mx-2" variant="primary" onClick={() => {
+            <Button
+              className="mx-2"
+              variant="primary"
+              onClick={() => {
                 classNamee();
-              }}>
+              }}
+            >
               Add
             </Button>
           </div>
@@ -562,12 +675,16 @@ const AdminClass = () => {
             style={{ backgroundColor: "#26AAE0" }}
             
           > */}
-        <Button variant="success"  onClick={handleClose1}>
+          <Button variant="success" onClick={handleClose1}>
             Close
           </Button>
-          <Button variant="primary" style={{ backgroundColor: "#26AAE0" }} onClick={() => {
+          <Button
+            variant="primary"
+            style={{ backgroundColor: "#26AAE0" }}
+            onClick={() => {
               updateclassname();
-            }}>
+            }}
+          >
             Edit
           </Button>
         </Modal.Footer>
@@ -669,23 +786,43 @@ const AdminClass = () => {
         <Modal.Body>
           <div className="do-sear mt-2">
             <label>Class</label>
-            <Form.Select aria-label="Default select example">
-              <option>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
+                setclasssname(e.target.value);
+              }}
+            >
+              <option value={classsname}>Select Class</option>
+              {getclassname?.map((val, i) => {
+                return (
+                  <option value={val?.className} key={i}>
+                    {val?.className}
+                  </option>
+                );
+              })}
             </Form.Select>
           </div>
           <div className="do-sear mt-2">
             <label>Subclass</label>
-            <input type="text" className="vi_0" placeholder="Enter Subclass" />
+            <input
+              type="text"
+              className="vi_0"
+              placeholder="Enter Subclass"
+              value={subclasssname}
+              onChange={(e) => {
+                setsubclasssname(e.target.value);
+              }}
+            />
           </div>
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="success" onClick={handleClose4}>
-              Close
-            </Button>
-          <Button variant="primary" style={{ backgroundColor: "#26AAE0" }}>
+          <Button
+            variant="primary"
+            style={{ backgroundColor: "#26AAE0" }}
+            onClick={() => {
+              editsubbclass();
+            }}
+          >
             Edit
           </Button>
         </Modal.Footer>
@@ -712,124 +849,16 @@ const AdminClass = () => {
           <Button variant="danger" onClick={handleClose5}>
             Close
           </Button>
-          <Button variant="primary">Delete</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              deletesubclasss();
+            }}
+          >
+            Delete
+          </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* Accomodations images modal */}
-      {/* <Modal show={show100} onHide={handleClose100}>
-      <Modal.Header closeButton>
-        <Modal.Title>Images</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose100}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal> */}
-      {/* Transport images modal */}
-      {/* <Modal show={show101} onHide={handleClose101}>
-      <Modal.Header closeButton>
-        <Modal.Title>Images</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-6 p-3">
-              <Image
-                src=""
-                alt="pic"
-                style={{ width: "180px", height: "150px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose101}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal> */}
     </div>
   );
 };
