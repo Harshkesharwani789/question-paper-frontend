@@ -6,12 +6,12 @@ import { Button, FormLabel } from "react-bootstrap";
 const LoginPage3 = () => {
   return (
     <div>
-      <div className="container p-5">
+      <div className="container p-3">
         <div>
           <div className="box">
             <div className="row">
               <div className="col-md-6 gfffg">
-                <div className="login-bg">
+                <div className="login3-bg">
                   <div className="line-1">
                     <h2>
                       {" "}

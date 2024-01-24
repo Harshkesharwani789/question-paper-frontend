@@ -96,7 +96,7 @@ const ExamBoard = () => {
 
   return (
     <div>
-      <div className="container p-5">
+      <div className="container p-3">
         <div>
           <div className="box">
             <div className="row">

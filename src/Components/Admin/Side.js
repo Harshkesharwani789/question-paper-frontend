@@ -184,7 +184,7 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
-          {/* <Link to="/adminexamlevel">
+          <Link to="/adminchapter">
             <li
               className="a-ele "
               onClick={() => {
@@ -205,10 +205,10 @@ const Side = () => {
                 <FaWeightHanging style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">
-                Exam level
+               Chapters
               </span>
             </li>
-          </Link> */}
+          </Link>
           <Link to="/adminblueprintdetails">
             <li
               className="a-ele "

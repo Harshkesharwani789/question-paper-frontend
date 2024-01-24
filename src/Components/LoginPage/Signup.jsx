@@ -54,9 +54,8 @@ const SignUp = () => {
           icon: "success",
           button: "Ok!",
         });
-        
       }
-      navigate("/login")
+      navigate("/login");
       // window.location.assign("/login");
     } catch (error) {
       console.log(error);
@@ -99,178 +98,8 @@ const SignUp = () => {
 
   return (
     <div>
-      {/* <div className="container d-flex justify-content-center p-5">
-        <div className="">
-          <div className="box ">
-            <div className="row">
-              <div
-                className="col-md-6 "
-                style={{ padding: "30px", textAlign: "center" }}
-              >
-                <h2>Sign-Up</h2>
-                <div className="container d-flex justify-content-center mt-4">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <Form className="pe-2">
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                             Name
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter First Name"
-                          />
-                        </Form.Group>
-                      </Form>
-                    </div>
-
-                   
-                    <div className="col-md-12">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Mobile Number
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Mobile Number"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-12">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Email Id
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Email Id"
-                        />
-                      </Form.Group>
-                    </div>
-                 
-                    <div className="col-md-6">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Password
-                        </Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Enter Password"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-6">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Confirm Password
-                        </Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Enter Password"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-12">
-                      <Form style={{ display: "flex", padding: "0 4px" }}>
-                        {["checkbox"].map((type) => (
-                          <div key={`inline-${type}`} className="mb-3">
-                            <Form.Check
-                              inline
-                              label="I agree to terms and conditions"
-                              name="group1"
-                              type={type}
-                              id={`inline-${type}-1`}
-                            />
-                          </div>
-                        ))}
-                      </Form>
-                    </div>
-
-                   
-                   
-                  </div>
-                </div>
-
-                <br />
-
-                <div>
-                  <button
-                    style={{
-                      padding: "6px 30px",
-                      background: "navy",
-                      border: "1px solid navy",
-                      color: "white",
-                    }}
-                    onClick={()=>handleShow()}
-                  >
-
-                    Sign-Up
-                  </button>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../exam.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "655px",
-                  }}
-                >
-                  <div style={{ padding: "220px 0px", textAlign: "center" }}>
-                    <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Question Paper Generator
-                    </h3>
-                    <p style={{ color: "white" }}>
-                      Already have an Account Please
-                    </p>
-                    <a href="/login">
-                      <button
-                        style={{
-                          padding: "7px 30px",
-                          background: "navy",
-                          border: "1px solid navy",
-                          color: "white",
-                        }}
-                      >
-                        Sign-In
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       {/* new Register form  */}
       <div className="container p-3">
-        {/* <div> */}
         <div className="box">
           <div className="row">
             <div className="col-6">
@@ -280,32 +109,32 @@ const SignUp = () => {
 
                 <Row>
                   <Col>
-                  <div className="col-12">
-                    <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Your First Name"
-                        onChange={(e) => {
-                          setFirstName(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                  </div>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your First Name"
+                          onChange={(e) => {
+                            setFirstName(e.target.value);
+                          }}
+                        />
+                      </Form.Group>
+                    </div>
                   </Col>
                   <Col>
-                  <div className="col-12">
-                    <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Your Last Name"
-                        onChange={(e) => {
-                          setLastName(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                  </div>
+                    <div className="col-12">
+                      <Form.Group className="mb-2" controlId="formGroupEmail">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your Last Name"
+                          onChange={(e) => {
+                            setLastName(e.target.value);
+                          }}
+                        />
+                      </Form.Group>
+                    </div>
                   </Col>
                 </Row>
                 <Row>
@@ -315,7 +144,7 @@ const SignUp = () => {
                       <Form.Control
                         type="number"
                         placeholder="Enter Your Number"
-                        onChange={(e)=>setMobile(e.target.value)}
+                        onChange={(e) => setMobile(e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -330,7 +159,7 @@ const SignUp = () => {
                         placeholder="Enter Email id"
                         aria-label="email"
                         aria-describedby="basic-addon1"
-                        onChange={(e)=>setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </InputGroup>
                   </div>
@@ -345,7 +174,7 @@ const SignUp = () => {
                           className="login-input"
                           placeholder="Password"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         {PasswordShow ? (
                           <button
@@ -377,7 +206,7 @@ const SignUp = () => {
                           className="login-input"
                           placeholder="Password"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         {PasswordShow1 ? (
                           <button
@@ -425,14 +254,15 @@ const SignUp = () => {
                     <Button
                       variant=""
                       style={{ backgroundColor: "navy", color: "white" }}
-                      onClick={()=>{TeacherRegister()}}
+                      onClick={() => {
+                        TeacherRegister();
+                      }}
                     >
                       Register
                     </Button>
                   </div>
                 </Row>
               </div>
-              {/* <br /> */}
             </div>
             <div className="col-md-6">
               <div className="signup-bg-img">
@@ -463,7 +293,6 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
       </div>
 
       {/* Registration OTP  */}
@@ -482,9 +311,6 @@ const SignUp = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="formGroupPassword">
-              {/* <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                OTP
-              </Form.Label> */}
               <Form.Control type="password" placeholder="Enter OTP" />
             </Form.Group>
           </Form>
