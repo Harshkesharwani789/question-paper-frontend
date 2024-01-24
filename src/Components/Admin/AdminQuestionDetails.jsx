@@ -1,11 +1,169 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { BiSolidEdit } from "react-icons/bi";
+import axios from "axios";
+import swal from "sweetalert";
 
 const AdminQuestionDetails = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
+  //post
+  const formdata = new FormData();
+  const [Board, setBoard] = useState("");
+  const [Medium, setMedium] = useState("");
+  const [Class, setClass] = useState("");
+  const [Sub_Class, setSub_Class] = useState("");
+  const [Subject, setSubject] = useState("");
+  const [Chapter_Name, setChapter_Name] = useState("");
+  const [Types_Question, setTypes_Question] = useState("");
+  const [Question_From, setQuestion_From] = useState("");
+  const [Question, setQuestion] = useState("");
+  const [Option_1, setOption_1] = useState("");
+  const [Option_2, setOption_2] = useState("");
+  const [Option_3, setOption_3] = useState("");
+  const [Option_4, setOption_4] = useState("");
+  const [Image, setImage] = useState("");
+  const [Marks, setMarks] = useState("");
+  const [Answer, setAnswer] = useState("");
+
+  const AddQuestion = async () => {
+    formdata.set("Board", Board);
+    formdata.set("Medium", Medium);
+    formdata.set("Class", Class);
+    formdata.set("Sub_Class", Sub_Class);
+    formdata.set("Subject", Subject);
+    formdata.set("Chapter_Name", Chapter_Name);
+    formdata.set("Types_Question", Types_Question);
+    formdata.set("Question_From", Question_From);
+    formdata.set("Question", Question);
+    formdata.set("Option_1", Option_1);
+    formdata.set("Option_2", Option_2);
+    formdata.set("Option_3", Option_3);
+    formdata.set("Option_4", Option_4);
+    formdata.set("Image", Image);
+    formdata.set("Marks", Marks);
+    formdata.set("Answer", Answer);
+    formdata.set("id", admin?._id);
+    try {
+      const config = {
+        url: "/admin/AddQuestionPaper",
+        method: "post",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data: formdata,
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        return swal({
+          title: "yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+  // get method
+  const [getboardname, setboardname] = useState([]);
+  const getallboardname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      if (res.status == 200) {
+        setboardname(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get method for medium
+  const [Mediumm, setMediumm] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMediumm(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method add class
+  const [getclassname, setgetclassName] = useState([]);
+  const getallclassname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      if (res.status == 200) {
+        setgetclassName(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get for subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get for type of questions
+  const [getalltypesofques, setgetalltypesofques] = useState([]);
+  const getalltypesofquess = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllTypesofquestion"
+      );
+      if (res.status == 200) {
+        setgetalltypesofques(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getallboardname();
+    getAddMedium();
+    getallclassname();
+    getaddsubclasss();
+    getSubject();
+    getalltypesofquess();
+  }, []);
   return (
     <div>
       <div className="box_1">
@@ -19,45 +177,11 @@ const AdminQuestionDetails = () => {
                   className="vi_0"
                 >
                   <option>Select the Board</option>
-                  <option value="CBSE">CBSE</option>
-                  <option value="ICSE">ICSE</option>
-                  <option value="AN">Andaman and Nicobar Islands</option>
-                  <option value="AP">Andhra Pradesh</option>
-                  <option value="AR">Arunachal Pradesh</option>
-                  <option value="AS">Assam</option>
-                  <option value="BR">Bihar</option>
-                  <option value="CH">Chandigarh</option>
-                  <option value="CT">Chhattisgarh</option>
-                  <option value="DN">Dadra and Nagar Haveli</option>
-                  <option value="DD">Daman and Diu</option>
-                  <option value="DL">Delhi</option>
-                  <option value="GA">Goa</option>
-                  <option value="GJ">Gujarat</option>
-                  <option value="HR">Haryana</option>
-                  <option value="HP">Himachal Pradesh</option>
-                  <option value="JK">Jammu and Kashmir</option>
-                  <option value="JH">Jharkhand</option>
-                  <option value="KA">Karnataka</option>
-                  <option value="KL">Kerala</option>
-                  <option value="LA">Ladakh</option>
-                  <option value="LD">Lakshadweep</option>
-                  <option value="MP">Madhya Pradesh</option>
-                  <option value="MH">Maharashtra</option>
-                  <option value="MN">Manipur</option>
-                  <option value="ML">Meghalaya</option>
-                  <option value="MZ">Mizoram</option>
-                  <option value="NL">Nagaland</option>
-                  <option value="OR">Odisha</option>
-                  <option value="PY">Puducherry</option>
-                  <option value="PB">Punjab</option>
-                  <option value="RJ">Rajasthan</option>
-                  <option value="SK">Sikkim</option>
-                  <option value="TN">Tamil Nadu</option>
-                  <option value="TG">Telangana</option>
-                  <option value="TR">Tripura</option>
-                  <option value="UP">Uttar Pradesh</option>
-                  <option value="UT">Uttarakhand</option>
-                  <option value="WB">West Bengal</option>
+                  {getboardname?.map((item, i) => {
+                    return (
+                      <option value={item?.boardName}>{item?.boardName}</option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -66,9 +190,13 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Medium</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Medium</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kannada</option>
+                  {Mediumm?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -77,9 +205,11 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Class</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Class</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kannada</option>
+                  {getclassname?.map((item) => {
+                    return (
+                      <option value={item?.className}>{item?.className}</option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -88,9 +218,13 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Sub-Class</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Sub-Class</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kannada</option>
+                  {getaddsubclass?.map((item) => {
+                    return (
+                      <option value={item?.subclassName}>
+                        {item?.subclassName}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -99,9 +233,13 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Subject</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Subject</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kanada</option>
+                  {subject?.map((item) => {
+                    return (
+                      <option value={item?.subjectName}>
+                        {item?.subjectName}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -134,23 +272,24 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select the Types of the Question</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Types of the Question</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kanada</option>
+                  {getalltypesofques?.map((item) => {
+                    return (
+                      <option value={item?.Typesofquestion}>
+                        {item?.Typesofquestion}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Select the Question From</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Question From</option>
-                  <option value="English">Prose(Lesson)</option>
-                  <option value="Hindi">Poetry</option>
-                  <option value="Kanada">Non-Detailed</option>
-                  <option value="Kanada">Grammar</option>
-                  <option value="Kanada">Vocabulary</option>
-                </Form.Select>
+                <label htmlFor="">Question From</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Question From "
+                />
               </div>
             </div>
             <div className="col-md-12">
@@ -163,9 +302,7 @@ const AdminQuestionDetails = () => {
                   rows="5"
                   className="vi_0"
                 ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
             <div className="col-md-6">
@@ -246,9 +383,7 @@ const AdminQuestionDetails = () => {
                     rows="5"
                     className="vi_0"
                   ></textarea> */}
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"/>
+                  <CKEditor editor={ClassicEditor} className="vi_0" />
                 </div>
               </div>
             </div>

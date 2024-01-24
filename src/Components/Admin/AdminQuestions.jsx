@@ -17,8 +17,13 @@ import { FaEye } from "react-icons/fa";
 import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 
 const AdminQuestions = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -34,6 +39,100 @@ const AdminQuestions = () => {
   const handleShow2 = () => setShow2(true);
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
+
+  
+  //get
+  const [Questions, setQuestions] = useState([]);
+
+  const getAllQuestions = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllQuestionUser"
+      );
+      if (res.status == 200) {
+        setQuestions(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+  //update
+  const [updateQuestion, setupdateQuestion] = useState("");
+
+  const UpdateQuestion = async () => {
+    try {
+      const config = {
+        url: "/admin/UpdateQuestionPaper" + updateQuestion + "/" + admin?._id,
+        method: "put",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        // data: formdata,
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        handleClose1();
+        getAllQuestions();
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+  //delete
+  const [deleteA, setDeleteA] = useState("");
+  const DeleteQuestion = async () => {
+    try {
+      const config = {
+        url: "/admin/deleteQuestionPaper" + deleteA + "/" + admin?._id,
+        method: "delete",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        handleClose2();
+        getAllQuestions();
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -76,6 +175,9 @@ const AdminQuestions = () => {
     }
   };
 
+  useEffect(() => {
+    getAllQuestions();
+  }, []);
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -198,14 +300,15 @@ const AdminQuestions = () => {
             </thead>
 
             <tbody>
+             
               <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>xcvxcv</td>
+                <td>xcvxc</td>
+                <td>xcv</td>
+                <td>xc</td>
+                <td>xcv</td>
+                <td>xcv</td>
+                <td>xcvcv</td>
 
                 <td>
                   <FaEye
@@ -223,7 +326,26 @@ const AdminQuestions = () => {
                       <BiSolidEdit
                         className="text-success"
                         style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {navigate('/admineditquestiondetails')}}
+                        onClick={() => {
+                          setupdateQuestion();
+                          navigate("/admineditquestiondetails");
+                          // setBoard(item?.Board);
+                          // setMedium(item?.Medium);
+                          // setClass(item?.Class);
+                          // setSub_Class(item?.Sub_Class);
+                          // setSubject(item?.Subject);
+                          // setChapter_Name(item?.Chapter_Name);
+                          // setTypes_Question(item?.Types_Question);
+                          // setQuestion_From(item?.Question_From);
+                          // setQuestion(item?.Question);
+                          // setOption_1(item?.Option_1);
+                          // setOption_2(item?.Option_2);
+                          // setOption_3(item?.Option_3);
+                          // setOption_4(item?.Option_4);
+                          // setImage(item?.Image);
+                          // setMarks(item?.Marks);
+                          // setAnswer(item?.Answer);
+                        }}
                       />
                     </div>
                     <div>
@@ -231,6 +353,7 @@ const AdminQuestions = () => {
                         className="text-danger"
                         style={{ cursor: "pointer", fontSize: "20px" }}
                         onClick={() => {
+                          setDeleteA();
                           handleShow2();
                         }}
                       />{" "}
@@ -238,6 +361,7 @@ const AdminQuestions = () => {
                   </div>
                 </td>
               </tr>
+             
             </tbody>
           </Table>
         </div>
