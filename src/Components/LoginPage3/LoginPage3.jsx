@@ -27,7 +27,7 @@ const LoginPage3 = () => {
               </div>
               <div className="col-md-6 yoihjij ">
                 <Form className="pe-2 pt-3">
-                  <Form.Group controlId="formFile" className="mb-3">
+                  <Form.Group controlId="formFile" className="mb-2">
                     <Form.Label
                       className="fs-6 fw-bold"
                       style={{ letterSpacing: "0.5px" }}
