@@ -48,7 +48,7 @@ const SignUp = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-        return swal({
+         swal({
           title: "yeah!",
           text: res.data.success,
           icon: "success",
@@ -56,7 +56,10 @@ const SignUp = () => {
         });
         
       }
-      navigate("/login")
+      setTimeout(() => {
+         return navigate("/login")
+      }, 1000);
+     
       // window.location.assign("/login");
     } catch (error) {
       console.log(error);
@@ -70,203 +73,14 @@ const SignUp = () => {
   };
 
   const [PasswordShow, setPasswordShow] = useState(false);
-  const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
-  const [type, setType] = useState("password");
-  const [icon, setIcon] = useState(eyeOff);
-  const handleToggle = () => {
-    if (type === "password") {
-      setIcon(eye);
-      setType("text");
-    } else {
-      setIcon(eyeOff);
-      setType("password");
-    }
-  };
 
   const [PasswordShow1, setPasswordShow1] = useState(false);
-  const [confirmpasswordshow1, setconfirmpasswordshow1] = useState(false);
-  const [type1, setType1] = useState("password");
-  const [icon1, setIcon1] = useState(eyeOff);
-  const handleToggle1 = () => {
-    if (type1 === "password") {
-      setIcon1(eye);
-      setType1("text");
-    } else {
-      setIcon1(eyeOff);
-      setType1("password");
-    }
-  };
+ 
+
 
   return (
     <div>
-      {/* <div className="container d-flex justify-content-center p-5">
-        <div className="">
-          <div className="box ">
-            <div className="row">
-              <div
-                className="col-md-6 "
-                style={{ padding: "30px", textAlign: "center" }}
-              >
-                <h2>Sign-Up</h2>
-                <div className="container d-flex justify-content-center mt-4">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <Form className="pe-2">
-                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                          <Form.Label
-                            style={{ display: "flex", padding: "0 4px" }}
-                          >
-                             Name
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter First Name"
-                          />
-                        </Form.Group>
-                      </Form>
-                    </div>
-
-                   
-                    <div className="col-md-12">
-                      <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Mobile Number
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Mobile Number"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-12">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Email Id
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Enter Email Id"
-                        />
-                      </Form.Group>
-                    </div>
-                 
-                    <div className="col-md-6">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Password
-                        </Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Enter Password"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-6">
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formGroupPassword"
-                      >
-                        <Form.Label
-                          style={{ display: "flex", padding: "0 4px" }}
-                        >
-                          Confirm Password
-                        </Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Enter Password"
-                        />
-                      </Form.Group>
-                    </div>
-
-                    <div className="col-md-12">
-                      <Form style={{ display: "flex", padding: "0 4px" }}>
-                        {["checkbox"].map((type) => (
-                          <div key={`inline-${type}`} className="mb-3">
-                            <Form.Check
-                              inline
-                              label="I agree to terms and conditions"
-                              name="group1"
-                              type={type}
-                              id={`inline-${type}-1`}
-                            />
-                          </div>
-                        ))}
-                      </Form>
-                    </div>
-
-                   
-                   
-                  </div>
-                </div>
-
-                <br />
-
-                <div>
-                  <button
-                    style={{
-                      padding: "6px 30px",
-                      background: "navy",
-                      border: "1px solid navy",
-                      color: "white",
-                    }}
-                    onClick={()=>handleShow()}
-                  >
-
-                    Sign-Up
-                  </button>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../exam.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "655px",
-                  }}
-                >
-                  <div style={{ padding: "220px 0px", textAlign: "center" }}>
-                    <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Question Paper Generator
-                    </h3>
-                    <p style={{ color: "white" }}>
-                      Already have an Account Please
-                    </p>
-                    <a href="/login">
-                      <button
-                        style={{
-                          padding: "7px 30px",
-                          background: "navy",
-                          border: "1px solid navy",
-                          color: "white",
-                        }}
-                      >
-                        Sign-In
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
 
       {/* new Register form  */}
       <div className="container p-3">

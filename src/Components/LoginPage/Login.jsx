@@ -27,12 +27,7 @@ const Login = () => {
 
   const TeacherLogin = async()=>{
     try {
-      if(!Mobile) return swal({
-        title:"oops!",
-        text:"Please Enter the Mobile Number",
-        icon:"error",
-        button:"Ok!"
-      })
+     
       if(!Email) return swal({
         title:"oops!",
         text:"Please Enter the Email ID",
@@ -100,118 +95,7 @@ const Login = () => {
   };
   return (
     <div>
-      {/* <div className="container d-flex justify-content-center p-5">
-        <div className="">
-          <div className="box ">
-            <div className="row">
-              <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../exam.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "480px",
-                  }}
-                >
-                  <div style={{ padding: "150px 0px", textAlign: "center" }}>
-                    <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>
-                      Question Paper Generator
-                    </h3>
-                    <p style={{ color: "white" }}>
-                     If you are a New User Please Register Here
-                    </p>
-                    <a href="/signup">
-                      <button
-                        style={{
-                          padding: "7px 30px",
-                          backgroundColor: "navy",
-                          border: "1px solid navy",
-                          color: "white",
-                        }}
-                      >
-                       Register
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
 
-              <div className="col-md-6 mt-4 text-center">
-                <h2>Sign-In</h2>
-                <Form className="pe-2">
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Mobile Number
-                    </Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter Mobile Number"
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Email Id
-                    </Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter Email Id"
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Password
-                    </Form.Label>
-                    <InputGroup>
-                      <Form.Control type="password" />
-                      <InputGroup.Text>
-                        <FaEye />
-                      </InputGroup.Text>
-                    </InputGroup>
-                  </Form.Group>
-
-                </Form>
-
-                <h6
-                  style={{
-                    display: "flex",
-                    padding: "0 4px",
-                    cursor: "pointer",
-                  }}
-                  onClick={handleShow}
-                >
-                  Forgot Password?
-                </h6>
-                <br />
-
-                <div>
-                  <button
-                    style={{
-                      padding: "7px 30px",
-                        backgroundColor: "navy",
-                        border: "1px solid navy",
-                        color: "white",
-                    }}
-                  >
-                    <a
-                      href="/examboard"
-                      style={{
-                        
-                        textDecoration:"none",
-                        color:"white"
-                      }}
-                    >
-                      Login
-                    </a>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       {/* New Login  */}
       <div className="container p-5">
@@ -252,24 +136,12 @@ const Login = () => {
 
                   <Row>
                     <div className="col-10 mb-2">
-                      <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>Mobile Number</Form.Label>
-                        <Form.Control
-                          type="number"
-                          placeholder="Enter Mobile Number"
-                          onChange={(e)=>setMobile(e.target.value)}
-                        />
-                      </Form.Group>
-                    </div>
-                  </Row>
-                  <Row>
-                    <div className="col-10 mb-2">
                       <Form.Label>Email ID</Form.Label>
                       <InputGroup className="mb-2">
                         <Form.Control
                           className="login-input"
                           type="email"
-                          placeholder="Enter Email id"
+                          placeholder="Enter email or mobile number"
                           aria-label="email"
                           aria-describedby="basic-addon1"
                           onChange={(e)=>setEmail(e.target.value)}
