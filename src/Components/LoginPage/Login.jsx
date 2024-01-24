@@ -21,53 +21,54 @@ const Login = () => {
   const handleShow = () => setShow(true);
 
   //post
-  const [Mobile,setMobile] = useState("");
-  const [Email,setEmail] = useState("");
-  const [Password,setPassword] = useState("");
+  const [Mobile, setMobile] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
-  const TeacherLogin = async()=>{
+  const TeacherLogin = async () => {
     try {
-      
-      if(!Mobile) return swal({
-        title:"oops!",
-        text:"Please Enter the Mobile Number",
-        icon:"error",
-        button:"Ok!"
-      })
-      if(!Email) return swal({
-        title:"oops!",
-        text:"Please Enter the Email ID",
-        icon:"error",
-        button:"Ok!"
-      })
-      if(!Password) return swal({
-        title:"oops!",
-        text:"Please Enter Password",
-        icon:"error",
-        button:"Ok!"
-      })
-      const config={
-        url:"/admin/loginTeacher",
-        method:"post",
-        baseURL:"http://localhost:8000/api",
-        headers:{
-          "Content-type":"application/json",
+      if (!Mobile)
+        return swal({
+          title: "oops!",
+          text: "Please Enter the Mobile Number",
+          icon: "error",
+          button: "Ok!",
+        });
+      if (!Email)
+        return swal({
+          title: "oops!",
+          text: "Please Enter the Email ID",
+          icon: "error",
+          button: "Ok!",
+        });
+      if (!Password)
+        return swal({
+          title: "oops!",
+          text: "Please Enter Password",
+          icon: "error",
+          button: "Ok!",
+        });
+      const config = {
+        url: "/admin/loginTeacher",
+        method: "post",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "application/json",
           // Authorization:`Bearer ${token}`,
         },
-        data:{
-          Mobile:Mobile,
-          Email:Email,
-          Password:Password,
-        }
-      }
+        data: {
+          Mobile: Mobile,
+          Email: Email,
+          Password: Password,
+        },
+      };
       let res = await axios(config);
-      if(res.status==200)
-      {
-         swal({
-          title:"Yeah!!",
-          text:"Successfully Logged In",
-          icon:"success",
-          button:"OK!"
+      if (res.status == 200) {
+        swal({
+          title: "Yeah!!",
+          text: "Successfully Logged In",
+          icon: "success",
+          button: "OK!",
         });
         sessionStorage.setItem("user", JSON.stringify(res.data.success));
         sessionStorage.setItem("token", res.data.token);
@@ -78,13 +79,13 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       return swal({
-        title:"oops",
-        text:error.response.data.error,
-        icon:"error",
-        button:"Try Again"
-      })
+        title: "oops",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Try Again",
+      });
     }
-  }
+  };
 
   const [PasswordShow, setPasswordShow] = useState(false);
   const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
@@ -101,121 +102,8 @@ const Login = () => {
   };
   return (
     <div>
-      {/* <div className="container d-flex justify-content-center p-5">
-        <div className="">
-          <div className="box ">
-            <div className="row">
-              <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../exam.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "480px",
-                  }}
-                >
-                  <div style={{ padding: "150px 0px", textAlign: "center" }}>
-                    <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>
-                      Question Paper Generator
-                    </h3>
-                    <p style={{ color: "white" }}>
-                     If you are a New User Please Register Here
-                    </p>
-                    <a href="/signup">
-                      <button
-                        style={{
-                          padding: "7px 30px",
-                          backgroundColor: "navy",
-                          border: "1px solid navy",
-                          color: "white",
-                        }}
-                      >
-                       Register
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6 mt-4 text-center">
-                <h2>Sign-In</h2>
-                <Form className="pe-2">
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Mobile Number
-                    </Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter Mobile Number"
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Email Id
-                    </Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter Email Id"
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label style={{ display: "flex", padding: "0 4px" }}>
-                      Password
-                    </Form.Label>
-                    <InputGroup>
-                      <Form.Control type="password" />
-                      <InputGroup.Text>
-                        <FaEye />
-                      </InputGroup.Text>
-                    </InputGroup>
-                  </Form.Group>
-
-                </Form>
-
-                <h6
-                  style={{
-                    display: "flex",
-                    padding: "0 4px",
-                    cursor: "pointer",
-                  }}
-                  onClick={handleShow}
-                >
-                  Forgot Password?
-                </h6>
-                <br />
-
-                <div>
-                  <button
-                    style={{
-                      padding: "7px 30px",
-                        backgroundColor: "navy",
-                        border: "1px solid navy",
-                        color: "white",
-                    }}
-                  >
-                    <a
-                      href="/examboard"
-                      style={{
-                        
-                        textDecoration:"none",
-                        color:"white"
-                      }}
-                    >
-                      Login
-                    </a>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       {/* New Login  */}
-      <div className="container p-5">
+      <div className="container p-3">
         <div>
           <div className="box">
             <div className="row">
@@ -258,7 +146,7 @@ const Login = () => {
                         <Form.Control
                           type="number"
                           placeholder="Enter Mobile Number"
-                          onChange={(e)=>setMobile(e.target.value)}
+                          onChange={(e) => setMobile(e.target.value)}
                         />
                       </Form.Group>
                     </div>
@@ -273,7 +161,7 @@ const Login = () => {
                           placeholder="Enter Email id"
                           aria-label="email"
                           aria-describedby="basic-addon1"
-                          onChange={(e)=>setEmail(e.target.value)}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </InputGroup>
                     </div>
@@ -291,21 +179,21 @@ const Login = () => {
                             className="login-input"
                             placeholder="Password"
                             aria-describedby="basic-addon1"
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           {PasswordShow ? (
                             <button
                               onClick={() => setPasswordShow(!PasswordShow)}
                               className="passbtn"
                             >
-                              <FaEye style={{color:"white"}}/>
+                              <FaEye style={{ color: "white" }} />
                             </button>
                           ) : (
                             <button
                               onClick={() => setPasswordShow(!PasswordShow)}
                               className="passbtn"
                             >
-                              <FaEyeSlash style={{color:"white"}} />
+                              <FaEyeSlash style={{ color: "white" }} />
                             </button>
                           )}
                         </InputGroup>
@@ -344,9 +232,11 @@ const Login = () => {
                       <Button
                         variant=""
                         style={{ backgroundColor: "navy", color: "white" }}
-                        onClick={()=>{TeacherLogin()}}
+                        onClick={() => {
+                          TeacherLogin();
+                        }}
                       >
-                        Log in 
+                        Log in
                       </Button>
                       {/* </a> */}
                     </div>

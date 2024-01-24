@@ -36,6 +36,7 @@ import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
 import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
 import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
 import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
+import AdminChapter from "./Components/Admin/AdminChapter";
 
 function App() {
   return (
@@ -312,6 +313,18 @@ function App() {
                 children={
                   <>
                     <AdminSubject />
+                  </>
+                }
+              />
+            }
+          />
+              <Route
+            path="/adminchapter"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminChapter />
                   </>
                 }
               />

@@ -31,13 +31,14 @@
   /* blinkTextCursor 500ms steps(44) infinite normal; */
 }
 
-.login-bg{
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 683px;
-  position: relative;
-  background-image: url(../../../public/loginpage3.jpg);
+
+.login3-bg{
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+height: 690px;
+position: relative;
+background-image: url(../../../public/loginpage3.jpg);
 }
 
 .signup-bg-img {
@@ -56,6 +57,7 @@
   to {
     width: 50%;
   }
+  
 }
 @keyframes blinkTextCursor {
   from {
@@ -86,7 +88,7 @@
 .line-1 {
   position: absolute;
   top: 45%;
-  left: 5%;
+  left: 9%;
 }
 .line-1 h3{
   font-size: 25px;
