@@ -25,7 +25,6 @@ const Dashboard = () => {
             </Card.Subtitle>
           </Card.Body>
         </Card>
-
       </div>
     </div>
   );
