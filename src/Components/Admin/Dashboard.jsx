@@ -7,7 +7,6 @@ const Dashboard = () => {
     <div>
       <h2 className="header-c ">Dashboard</h2>
       <div className="d-flex gap-5 text-center">
-
         <Card style={{ width: "15rem" }}>
           <Card.Body>
             <Card.Title>Number of Registered Users</Card.Title>

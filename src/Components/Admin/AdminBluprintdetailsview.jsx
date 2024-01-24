@@ -24,6 +24,7 @@ const steps = [
 
 function AdminBlueprintdetailsview() {
   const { blueprint_ID } = useParams();
+  console.log("first", blueprint_ID);
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const [activeStep, setActiveStep] = React.useState(0);
@@ -70,21 +71,11 @@ function AdminBlueprintdetailsview() {
     handleNext();
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllBLUEPRINTs/${blueprint_ID}/` +
-          admin?._id,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        `http://localhost:8000/api/admin/getblueprintsbyid/${blueprint_ID}`
       );
 
       if (res.status == 200) {
@@ -94,10 +85,26 @@ function AdminBlueprintdetailsview() {
       console.log(error);
     }
   };
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallblueprint();
+    getallweightagecontent();
   }, []);
-  console.log(blueprint);
+  console.log("blueprint", blueprint);
+  console.log("weightage", weightage);
   return (
     <>
       <div className="box_1">
@@ -105,8 +112,8 @@ function AdminBlueprintdetailsview() {
           {/* blue print 1  */}
           <div className="blueprint-content-display">
             <div className="blueprint-titles">
-              <h3>{blueprint?.blueprint}</h3>
-              <h4>DESIGN & BLUE PRINT</h4>
+              <h3>{blueprint?.blName}</h3>
+              <h4> BLUE PRINT</h4>
             </div>
             {/* table 1 */}
             <div className="weightage-objectives">
@@ -126,24 +133,24 @@ function AdminBlueprintdetailsview() {
                   <tbody>
                     <tr>
                       <td>Remembering</td>
-                      <td>30%</td>
-                      <td>30</td>
+                      <td>{blueprint?.NQRemembering}</td>
+                      <td>{blueprint?.MaskRemembering}</td>
                     </tr>
                     <tr>
                       <td>Understanding</td>
-                      <td>32%</td>
-                      <td>32</td>
+                      <td>{blueprint?.NQUnderstanding}</td>
+                      <td>{blueprint?.MaskUnderstanding}</td>
                     </tr>
 
                     <tr>
                       <td>Expression</td>
-                      <td>30%</td>
-                      <td>30</td>
+                      <td>{blueprint?.NQExpression}</td>
+                      <td>{blueprint?.MaskExpression}</td>
                     </tr>
                     <tr>
                       <td>Appreciation</td>
-                      <td>8%</td>
-                      <td>8</td>
+                      <td>{blueprint?.NQAppreciation}</td>
+                      <td>{blueprint?.MaskAppreciation}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -165,17 +172,22 @@ function AdminBlueprintdetailsview() {
                     style={{ border: "1px solid" }}
                   >
                     <tbody>
-                      <tr>
-                        <td>Prose</td>
-                        <td>30</td>
-                      </tr>
-                      <tr>
+                      {weightage?.map((val, i) => {
+                        return (
+                          <tr>
+                            <td>{val?.blueprint?.Content}</td>
+                            <td>{blueprint?.ProseWeightage}</td>
+                          </tr>
+                        );
+                      })}
+
+                      {/* <tr>
                         <td>Poetry</td>
-                        <td>30</td>
+                        <td>{blueprint?.PoetryWeightage}</td>
                       </tr>
                       <tr>
                         <td>Non-details</td>
-                        <td>07</td>
+                        <td>{blueprint?.NonDetailedWeightage}</td>
                       </tr>
                       <tr>
                         <td>
@@ -185,7 +197,7 @@ function AdminBlueprintdetailsview() {
                           <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
                           <br></br>100
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </Table>
                 </div>

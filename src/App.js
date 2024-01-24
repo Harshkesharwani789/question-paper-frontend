@@ -36,6 +36,7 @@ import AdminEditBluePrint from "./Components/Admin/AdminEditBluePrint";
 import AdminEditQuestionDetails from "./Components/Admin/AdminEditQuestionDetails";
 import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
 import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
+import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 
 function App() {
@@ -174,6 +175,10 @@ function App() {
           <Route
             path="/adminquestiondetails"
             element={<Main children={<AdminQuestionDetails />} />}
+          />
+          <Route
+            path="/weightageofthecontent"
+            element={<Main children={<Weightagecontent />} />}
           />
           <Route
             path="/admineditquestiondetails"
@@ -318,7 +323,7 @@ function App() {
               />
             }
           />
-              <Route
+          <Route
             path="/adminchapter"
             element={
               <Main
