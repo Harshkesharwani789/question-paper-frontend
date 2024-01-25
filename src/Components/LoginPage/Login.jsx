@@ -27,33 +27,25 @@ const Login = () => {
 
   const TeacherLogin = async () => {
     try {
-      if (!Mobile)
-        return swal({
-          title: "oops!",
-          text: "Please Enter the Mobile Number",
-          icon: "error",
-          button: "Ok!",
-        });
-      if (!Email)
-        return swal({
-          title: "oops!",
-          text: "Please Enter the Email ID",
-          icon: "error",
-          button: "Ok!",
-        });
-      if (!Password)
-        return swal({
-          title: "oops!",
-          text: "Please Enter Password",
-          icon: "error",
-          button: "Ok!",
-        });
-      const config = {
-        url: "/admin/loginTeacher",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "application/json",
+     
+      if(!Email) return swal({
+        title:"oops!",
+        text:"Please Enter the Email ID",
+        icon:"error",
+        button:"Ok!"
+      })
+      if(!Password) return swal({
+        title:"oops!",
+        text:"Please Enter Password",
+        icon:"error",
+        button:"Ok!"
+      })
+      const config={
+        url:"/admin/loginTeacher",
+        method:"post",
+        baseURL:"http://localhost:8000/api",
+        headers:{
+          "Content-type":"application/json",
           // Authorization:`Bearer ${token}`,
         },
         data: {
@@ -102,6 +94,8 @@ const Login = () => {
   };
   return (
     <div>
+
+
       {/* New Login  */}
       <div className="container p-3">
         <div>
@@ -141,24 +135,12 @@ const Login = () => {
 
                   <Row>
                     <div className="col-10 mb-2">
-                      <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>Mobile Number</Form.Label>
-                        <Form.Control
-                          type="number"
-                          placeholder="Enter Mobile Number"
-                          onChange={(e) => setMobile(e.target.value)}
-                        />
-                      </Form.Group>
-                    </div>
-                  </Row>
-                  <Row>
-                    <div className="col-10 mb-2">
                       <Form.Label>Email ID</Form.Label>
                       <InputGroup className="mb-2">
                         <Form.Control
                           className="login-input"
                           type="email"
-                          placeholder="Enter Email id"
+                          placeholder="Enter email or mobile number"
                           aria-label="email"
                           aria-describedby="basic-addon1"
                           onChange={(e) => setEmail(e.target.value)}

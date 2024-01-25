@@ -302,6 +302,29 @@ const Side = () => {
               <span className="ms-2">Exam Level</span>
             </li>
           </Link>
+          <Link to="/weightageofthecontent">
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(true);
+                setUserList(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <PiExamFill style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Weightage of Content</span>
+            </li>
+          </Link>
           <Link to="/adminuserlist">
             <li
               className="a-ele "

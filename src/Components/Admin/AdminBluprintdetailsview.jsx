@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
 import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
-import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
-import { MdPlayArrow } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -24,6 +16,7 @@ const steps = [
 
 function AdminBlueprintdetailsview() {
   const { blueprint_ID } = useParams();
+  console.log("first", blueprint_ID);
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const [activeStep, setActiveStep] = React.useState(0);
@@ -70,21 +63,11 @@ function AdminBlueprintdetailsview() {
     handleNext();
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllBLUEPRINTs/${blueprint_ID}/` +
-          admin?._id,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        `http://localhost:8000/api/admin/getblueprintsbyid/${blueprint_ID}`
       );
 
       if (res.status == 200) {
@@ -94,10 +77,26 @@ function AdminBlueprintdetailsview() {
       console.log(error);
     }
   };
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallblueprint();
+    getallweightagecontent();
   }, []);
-  console.log(blueprint);
+  console.log("blueprint", blueprint);
+  console.log("weightage", weightage);
   return (
     <>
       <div className="box_1">
@@ -105,8 +104,8 @@ function AdminBlueprintdetailsview() {
           {/* blue print 1  */}
           <div className="blueprint-content-display">
             <div className="blueprint-titles">
-              <h3>{blueprint?.blueprint}</h3>
-              <h4>DESIGN & BLUE PRINT</h4>
+              <h3>{blueprint?.blName}</h3>
+              <h4> BLUE PRINT</h4>
             </div>
             {/* table 1 */}
             <div className="weightage-objectives">
@@ -126,24 +125,24 @@ function AdminBlueprintdetailsview() {
                   <tbody>
                     <tr>
                       <td>Remembering</td>
-                      <td>30%</td>
-                      <td>30</td>
+                      <td>{blueprint?.NQRemembering}</td>
+                      <td>{blueprint?.MaskRemembering}</td>
                     </tr>
                     <tr>
                       <td>Understanding</td>
-                      <td>32%</td>
-                      <td>32</td>
+                      <td>{blueprint?.NQUnderstanding}</td>
+                      <td>{blueprint?.MaskUnderstanding}</td>
                     </tr>
 
                     <tr>
                       <td>Expression</td>
-                      <td>30%</td>
-                      <td>30</td>
+                      <td>{blueprint?.NQExpression}</td>
+                      <td>{blueprint?.MaskExpression}</td>
                     </tr>
                     <tr>
                       <td>Appreciation</td>
-                      <td>8%</td>
-                      <td>8</td>
+                      <td>{blueprint?.NQAppreciation}</td>
+                      <td>{blueprint?.MaskAppreciation}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -165,17 +164,22 @@ function AdminBlueprintdetailsview() {
                     style={{ border: "1px solid" }}
                   >
                     <tbody>
-                      <tr>
-                        <td>Prose</td>
-                        <td>30</td>
-                      </tr>
-                      <tr>
+                      {blueprint?.Weightageofthecontent?.map((val, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{val?.label}</td>
+                            <td>{val?.Marks}</td>
+                          </tr>
+                        );
+                      })}
+
+                      {/* <tr>
                         <td>Poetry</td>
-                        <td>30</td>
+                        <td>{blueprint?.PoetryWeightage}</td>
                       </tr>
                       <tr>
                         <td>Non-details</td>
-                        <td>07</td>
+                        <td>{blueprint?.NonDetailedWeightage}</td>
                       </tr>
                       <tr>
                         <td>
@@ -185,7 +189,7 @@ function AdminBlueprintdetailsview() {
                           <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
                           <br></br>100
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </Table>
                 </div>
@@ -200,37 +204,19 @@ function AdminBlueprintdetailsview() {
               </div>
               <div className="objectives-table">
                 <Table bordered hover size="md" style={{ border: "1px solid" }}>
-                  <tbody>
-                    <tr>
-                      <td>Multiple types questions</td>
-                      <td>14x1</td>
-                      <td>14</td>
-                    </tr>
-                    <tr>
-                      <td>One sentence answers</td>
-                      <td>11x1</td>
-                      <td>11</td>
-                    </tr>
-                    <tr>
-                      <td>2-3 sentence answers</td>
-                      <td>9x2</td>
-                      <td>18</td>
-                    </tr>
-                    <tr>
-                      <td>Short Answer of 3-4 sentences</td>
-                      <td>9x3</td>
-                      <td>27</td>
-                    </tr>
-                    <tr>
-                      <td>Answer in 5-6 sentences</td>
-                      <td>5x4</td>
-                      <td>20</td>
-                    </tr>
-                    <tr>
-                      <td>Compositions</td>
-                      <td>2x5</td>
-                      <td>10</td>
-                    </tr>
+                  <tbody key={i}>
+                    {blueprint?.TypesofQuestions?.map((val, i) => {
+                      return (
+                        <tr>
+                          <td>{val?.QAType}</td>
+                          <td>
+                            {val?.NQA}x{val?.Mask}
+                          </td>
+                          <td></td>
+                        </tr>
+                      );
+                    })}
+
                     <tr>
                       <td>
                         <b>Total</b>
@@ -261,10 +247,10 @@ function AdminBlueprintdetailsview() {
                       <td>Total</td>
                     </tr>
                     <tr>
-                      <td>30</td>
-                      <td>50</td>
-                      <td>20</td>
-                      <td>100</td>
+                      <td>{blueprint?.EasyMask}</td>
+                      <td>{blueprint?.AverageMask}</td>
+                      <td>{blueprint?.DifficultMask}</td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </Table>

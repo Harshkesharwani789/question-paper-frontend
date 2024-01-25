@@ -10,7 +10,6 @@ import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
-import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -129,7 +128,7 @@ function AdminBlueprint() {
   };
   //get method for medium
   const [Medium, setMedium] = useState([]);
-  const [nochangedata,setnochangedata] = useState([]);
+  const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
@@ -161,11 +160,6 @@ function AdminBlueprint() {
   const [Appreciation, setAppreciation] = useState("");
   const [MaskAppreciation, setMaskAppreciation] = useState("");
   const [NQAppreciation, setNQAppreciation] = useState("");
-  const [ProseWeightage, setProseWeightage] = useState("");
-  const [PoetryWeightage, setPoetryWeightage] = useState("");
-  const [NonDetailedWeightage, setNonDetailedWeightage] = useState("");
-  const [GrammerWeightage, setGrammerWeightage] = useState("");
-  const [VocabularyWeightage, setVocabularyWeightage] = useState("");
   const [QAType, setQAType] = useState("");
   const [NQA, setNQA] = useState("");
   const [Mask, setMask] = useState("");
@@ -178,12 +172,106 @@ function AdminBlueprint() {
   const [Difficult, setDifficult] = useState("");
   const [DifficultMask, setDifficultMask] = useState("");
   const [TotalDifficultMask, setTotalDifficultMask] = useState("");
+  const [label, setlabel] = useState("");
+  const [Marks, setMarks] = useState("");
   const [TypesofQuestions, setTypesofQuestions] = useState(false);
-  const [Arr, setArr] = useState([]);
 
-  const qatypeRef = useRef(null);
-  const nqaRef = useRef(null);
-  const maskRef = useRef(null);
+  // Add for dificulty level
+
+  const handleChangeeasy = (e) => {
+    const value = e.target.value;
+    setEasyMask(value);
+  };
+  const handleChangeaverage = (e) => {
+    const value = e.target.value;
+    setAverageMask(value);
+  };
+
+  const handleChangedifficult = (e) => {
+    const value = e.target.value;
+    setDifficultMask(value);
+  };
+  const updatedadd = (value1, value2, value3) => {
+    const parsevalue1 = parseFloat(value1);
+    const parsevalue2 = parseFloat(value2);
+    const pasrsevalue3 = parseFloat(value3);
+    const calculatedresult =
+      isNaN(parsevalue1) || isNaN(parsevalue2) || isNaN(pasrsevalue3)
+        ? "Invalid Input"
+        : parsevalue1 + parsevalue2 + pasrsevalue3;
+    setTotalDifficultMask(calculatedresult);
+  };
+
+  // Array of object 2
+  const [Arr1, setArr1] = useState([]);
+  const AddWeightageofthecontent = () => {
+    try {
+      if (!label) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Label",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return;
+      }
+      if (!Marks) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Label",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return;
+      }
+      let content = 1;
+      Arr1.forEach((ele) => {
+        if (ele?.label === label && ele?.Marks === Marks) {
+          content = 0;
+          swal({
+            title: "Oops!",
+            text: "Already Exists...",
+            icon: "error",
+            button: "Try Again!",
+          });
+        }
+      });
+      if (content) {
+        const obj = {
+          label: label,
+          Marks: Marks,
+        };
+        Arr1.push(obj);
+        setArr1([...Arr1]);
+        console.log("Arr1", Arr1);
+        swal({
+          title: "Yeah!",
+          text: "Added Successfully...",
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {}
+  };
+
+  const deletedWeightageofthecontent = (index) => {
+    try {
+      const deletedcontent = Arr1[index];
+      const updatedArr1 = Arr1.filter((_, i) => i !== index);
+      setArr1(updatedArr1);
+      console.log("Arr after deletion", updatedArr1);
+      swal({
+        title: "Deleted!",
+        text: " Deleted Successfully.",
+        icon: "warning",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // Array of object 1
+  const [Arr, setArr] = useState([]);
 
   const AddTypesofquestion = () => {
     try {
@@ -274,6 +362,20 @@ function AdminBlueprint() {
     }
   };
 
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const Blueprint = async () => {
     try {
       const config = {
@@ -301,11 +403,6 @@ function AdminBlueprint() {
           Appreciation: Appreciation,
           MaskAppreciation: MaskAppreciation,
           NQAppreciation: NQAppreciation,
-          ProseWeightage: ProseWeightage,
-          PoetryWeightage: PoetryWeightage,
-          NonDetailedWeightage: NonDetailedWeightage,
-          GrammerWeightage: GrammerWeightage,
-          VocabularyWeightage: VocabularyWeightage,
           QAType: QAType,
           NQA: NQA,
           Mask: Mask,
@@ -319,6 +416,7 @@ function AdminBlueprint() {
           DifficultMask: DifficultMask,
           TotalDifficultMask: TotalDifficultMask,
           TypesofQuestions: Arr,
+          Weightageofthecontent: Arr1,
         },
       };
       let res = await axios(config);
@@ -341,20 +439,37 @@ function AdminBlueprint() {
       });
     }
   };
-
+  //get method for subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getallclassname();
     getaddsubclasss();
     getAddMedium();
     getalltypesofquess();
+    getallweightagecontent();
+    getSubject();
   }, []);
   console.log(getboardname);
   console.log(getclassname);
   console.log(getaddsubclass);
   console.log(Medium);
   console.log(getalltypesofques);
-
+  console.log(weightage);
+  console.log(subject);
   return (
     <>
       <div className="box_1">
@@ -456,12 +571,13 @@ function AdminBlueprint() {
                                   onChange={(e) => setsubjects(e.target.value)}
                                 >
                                   <option>Select the Subjects</option>
-                                  <option value="English">English</option>
-                                  <option value="Hindi">Hindi</option>
-                                  <option value="Kanada">Kanada</option>
-                                  <option value="Kanada">Maths</option>
-                                  <option value="Kanada">Science</option>
-                                  <option value="Kanada">Social Science</option>
+                                  {subject?.map((val, i) => {
+                                    return (
+                                      <option value={val?.subjectName}>
+                                        {val?.subjectName}
+                                      </option>
+                                    );
+                                  })}
                                 </Form.Select>
                               </div>
                             </div>
@@ -532,6 +648,11 @@ function AdminBlueprint() {
                                     );
                                   })}
                                 </Form.Select>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="do-sear">
+                                <label htmlFor="">Add Chapter Name</label>
                               </div>
                             </div>
                             <div className="row mt-3">
@@ -689,95 +810,142 @@ function AdminBlueprint() {
                               className="container"
                               style={{ padding: "5px" }}
                             >
-                              <div className="row ">
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Prose (Lesson) Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Prose (Lesson) Marks"
-                                      className="vi_0"
-                                      value={ProseWeightage}
-                                      onChange={(e) => {
-                                        setProseWeightage(e.target.value);
-                                      }}
-                                    />
+                              <div className="row">
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <label htmlFor="">Select Content</label>
                                   </div>
                                 </div>
-
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Poetry Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Poetry Marks"
-                                      className="vi_0"
-                                      value={PoetryWeightage}
-                                      onChange={(e) => {
-                                        setPoetryWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Non-Detailed Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Non-Detailed Marks"
-                                      className="vi_0"
-                                      value={NonDetailedWeightage}
-                                      onChange={(e) => {
-                                        setNonDetailedWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Grammer Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Grammer Marks"
-                                      className="vi_0"
-                                      value={GrammerWeightage}
-                                      onChange={(e) => {
-                                        setGrammerWeightage(e.target.value);
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Vocabulary Weightage{" "}
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Vocabulary Marks"
-                                      className="vi_0"
-                                      value={VocabularyWeightage}
-                                      onChange={(e) => {
-                                        setVocabularyWeightage(e.target.value);
-                                      }}
-                                    />
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <label htmlFor="">No. of Marks</label>
                                   </div>
                                 </div>
                               </div>
+                              <div className="row">
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Form.Select
+                                      aria-label="Default select example"
+                                      onChange={(e) => {
+                                        setlabel(e.target.value);
+                                      }}
+                                    >
+                                      <option value="">
+                                        Selete the Type of Question
+                                      </option>
+                                      {weightage
+                                        ?.filter(
+                                          (ele) => subjects == ele?.Subject
+                                        )
+                                        .map((val, i) => {
+                                          return (
+                                            <option value={val?.Content}>
+                                              {val?.Content}
+                                            </option>
+                                          );
+                                        })}
+                                    </Form.Select>
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
+                                      placeholder="Enter the Weightage"
+                                      className="vi_0"
+                                      onChange={(e) => {
+                                        setMarks(e.target.value);
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Button
+                                      style={{
+                                        backgroundColor: "red",
+                                        color: "white",
+                                      }}
+                                      onClick={() => {
+                                        AddWeightageofthecontent();
+                                      }}
+                                    >
+                                      Add
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row mt-4">
+                                <div className="col-md-12">
+                                  <Table
+                                    responsive
+                                    bordered
+                                    style={{
+                                      width: "-webkit-fill-available",
+                                    }}
+                                  >
+                                    <thead>
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Content</th>
+                                        <th>Marks</th>
+                                        <th>Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {Arr1?.map((item, i) => {
+                                        return (
+                                          <tr key={i}>
+                                            <td>{i + 1}</td>
+                                            <td>{item?.label}</td>
+                                            <td>{item?.Marks}</td>
+                                            <td>
+                                              <AiFillDelete
+                                                color="red"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  deletedWeightageofthecontent(
+                                                    i
+                                                  );
+                                                }}
+                                              />
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
+                                    </tbody>
+                                  </Table>
+                                </div>
+                              </div>
+                              {/* <div className="row ">
+                                {weightage
+                                  ?.filter((ele) => subjects == ele?.Subject)
+                                  .map((val, i) => {
+                                    return (
+                                      <div className="col-md-4" key={i}>
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            {val?.Content} Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder={`Please Enter ${val?.Content} Marks`}
+                                            className="vi_0"
+                                            onChange={(e) => {
+                                              setProseWeightage(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                              </div> */}
                             </div>
                           </Typography>
                         </>
@@ -981,9 +1149,7 @@ function AdminBlueprint() {
                                         className="vi_0 mt-2"
                                         placeholder="Enter the Marks"
                                         value={EasyMask}
-                                        onChange={(e) => {
-                                          setEasyMask(e.target.value);
-                                        }}
+                                        onChange={handleChangeeasy}
                                       />
                                     </div>
                                     <div className="col-md-4 mt-2">
@@ -1011,9 +1177,7 @@ function AdminBlueprint() {
                                         className="vi_0"
                                         value={AverageMask}
                                         placeholder="Enter the Marks"
-                                        onChange={(e) => {
-                                          setAverageMask(e.target.value);
-                                        }}
+                                        onChange={handleChangeaverage}
                                       />
                                     </div>
                                     <div className="col-md-4 mt-2">
@@ -1030,9 +1194,7 @@ function AdminBlueprint() {
                                         className="vi_0"
                                         value={Difficult}
                                         placeholder="Enter No. of Questions"
-                                        onChange={(e) => {
-                                          setDifficult(e.target.value);
-                                        }}
+                                        onChange={handleChangedifficult}
                                       />
                                     </div>
                                     <div className="col-md-4">

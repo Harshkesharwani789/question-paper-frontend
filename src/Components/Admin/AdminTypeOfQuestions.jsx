@@ -152,7 +152,7 @@ const AdminTypeOfQuestions = () => {
       }
     } catch (error) {
       console.log(error);
-       swal({
+      swal({
         title: "Oops!",
         text: error.response.data.error,
         icon: "error",

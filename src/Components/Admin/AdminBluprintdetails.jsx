@@ -79,6 +79,7 @@ const AdminBlueprintdetails = () => {
     }
   };
   // get method   for blue print
+  console.log(admin)
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
@@ -228,7 +229,7 @@ const AdminBlueprintdetails = () => {
                     <td>{val?.subjects}</td>
                     <td>
                       <Link
-                        to={`/adminblueprintdetailsview/${val.id}`}
+                        to={`/adminblueprintdetailsview/${val?._id}`}
                         style={{ textDecoration: "none", color: "white" }}
                       >
                         <FaEye color="blue" />
