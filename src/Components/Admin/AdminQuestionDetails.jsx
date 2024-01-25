@@ -17,7 +17,7 @@ const AdminQuestionDetails = () => {
   const [Medium, setMedium] = useState("");
   const [Class, setClass] = useState("");
   const [Sub_Class, setSub_Class] = useState("");
-  const [Subject, setSubject] = useState("");
+  const [Subjects, setSubjects] = useState("");
   const [Chapter_Name, setChapter_Name] = useState("");
   const [Types_Question, setTypes_Question] = useState("");
   const [Question_From, setQuestion_From] = useState("");
@@ -30,55 +30,21 @@ const AdminQuestionDetails = () => {
   const [Marks, setMarks] = useState("");
   const [Answer, setAnswer] = useState("");
 
-  const AddQuestion = async () => {
-    formdata.set("Board", Board);
-    formdata.set("Medium", Medium);
-    formdata.set("Class", Class);
-    formdata.set("Sub_Class", Sub_Class);
-    formdata.set("Subject", Subject);
-    formdata.set("Chapter_Name", Chapter_Name);
-    formdata.set("Types_Question", Types_Question);
-    formdata.set("Question_From", Question_From);
-    formdata.set("Question", Question);
-    formdata.set("Option_1", Option_1);
-    formdata.set("Option_2", Option_2);
-    formdata.set("Option_3", Option_3);
-    formdata.set("Option_4", Option_4);
-    formdata.set("Image", Image);
-    formdata.set("Marks", Marks);
-    formdata.set("Answer", Answer);
-    formdata.set("id", admin?._id);
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
     try {
-      const config = {
-        url: "/admin/AddQuestionPaper",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: formdata,
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        return swal({
-          title: "yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
       }
     } catch (error) {
       console.log(error);
-      return swal({
-        title: "oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Ok!",
-      });
     }
   };
-  // get method
+  // get method for board name
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
@@ -163,12 +129,24 @@ const AdminQuestionDetails = () => {
     getaddsubclasss();
     getSubject();
     getalltypesofquess();
+    getallweightagecontent();
   }, []);
+  console.log(weightage);
   return (
     <div>
       <div className="box_1">
         <div className="container">
           <div className="row">
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Section</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Section"
+                />
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -179,7 +157,9 @@ const AdminQuestionDetails = () => {
                   <option>Select the Board</option>
                   {getboardname?.map((item, i) => {
                     return (
-                      <option value={item?.boardName}>{item?.boardName}</option>
+                      <option value={item?.boardName} key={i}>
+                        {item?.boardName}
+                      </option>
                     );
                   })}
                 </Form.Select>
@@ -190,9 +170,9 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Medium</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Medium</option>
-                  {Mediumm?.map((item) => {
+                  {Mediumm?.map((item, i) => {
                     return (
-                      <option value={item?.mediumName}>
+                      <option value={item?.mediumName} key={i}>
                         {item?.mediumName}
                       </option>
                     );
@@ -205,9 +185,11 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Class</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Class</option>
-                  {getclassname?.map((item) => {
+                  {getclassname?.map((item, i) => {
                     return (
-                      <option value={item?.className}>{item?.className}</option>
+                      <option value={item?.className} key={i}>
+                        {item?.className}
+                      </option>
                     );
                   })}
                 </Form.Select>
@@ -218,9 +200,9 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Sub-Class</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((item) => {
+                  {getaddsubclass?.map((item, i) => {
                     return (
-                      <option value={item?.subclassName}>
+                      <option value={item?.subclassName} key={i}>
                         {item?.subclassName}
                       </option>
                     );
@@ -233,13 +215,35 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Subject</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Subject</option>
-                  {subject?.map((item) => {
+                  {subject?.map((item, i) => {
                     return (
-                      <option value={item?.subjectName}>
+                      <option value={item?.subjectName} key={i}>
                         {item?.subjectName}
                       </option>
                     );
                   })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Lesson</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setlabel(e.target.value);
+                  }}
+                >
+                  <option value="">Selete the Lesson</option>
+                  {weightage
+                    ?.filter((ele) => Subjects == ele?.Subject)
+                    ?.map((val, i) => {
+                      return (
+                        <option value={val?.Content} key={i}>
+                          {val?.Content}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -256,42 +260,33 @@ const AdminQuestionDetails = () => {
             </div>
           </div>
           <div className="row mt-2">
-            {/* <div className="col-md-6">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Difficulty level of Paper</label>
                 <Form.Select aria-label="Default select example">
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kanada</option>
+                  <option value="English">Easy</option>
+                  <option value="Hindi">Average</option>
+                  <option value="Kanada">Difficult</option>
                 </Form.Select>
               </div>
-            </div> */}
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Types of the Question</option>
-                  {getalltypesofques?.map((item) => {
-                    return (
-                      <option value={item?.Typesofquestion}>
-                        {item?.Typesofquestion}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+              </div>{" "}
+              <Form.Select aria-label="Default select example">
+                <option>Select the Types of the Question</option>
+                {getalltypesofques?.map((item, i) => {
+                  return (
+                    <option value={item?.Typesofquestion} key={i}>
+                      {item?.Typesofquestion}
+                    </option>
+                  );
+                })}
+              </Form.Select>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question From</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Question From "
-                />
-              </div>
-            </div>
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
