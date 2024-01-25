@@ -11,8 +11,16 @@ const AdminQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
+  const handleChange = (e, editor) => {
+    const data = editor.getData();
+    setQuestion(data);
+  };
+  const handleChange1 = (e, editor) => {
+    const data = editor.getData();
+    setAnswer(data);
+  };
   //post
-  const formdata = new FormData();
+
   const [Board, setBoard] = useState("");
   const [Medium, setMedium] = useState("");
   const [Class, setClass] = useState("");
@@ -31,33 +39,52 @@ const AdminQuestionDetails = () => {
   const [Answer, setAnswer] = useState("");
 
   const AddQuestion = async () => {
-    formdata.set("Board", Board);
-    formdata.set("Medium", Medium);
-    formdata.set("Class", Class);
-    formdata.set("Sub_Class", Sub_Class);
-    formdata.set("Subject", Subject);
-    formdata.set("Chapter_Name", Chapter_Name);
-    formdata.set("Types_Question", Types_Question);
-    formdata.set("Question_From", Question_From);
-    formdata.set("Question", Question);
-    formdata.set("Option_1", Option_1);
-    formdata.set("Option_2", Option_2);
-    formdata.set("Option_3", Option_3);
-    formdata.set("Option_4", Option_4);
-    formdata.set("Image", Image);
-    formdata.set("Marks", Marks);
-    formdata.set("Answer", Answer);
-    formdata.set("id", admin?._id);
+    const formdata = new FormData();
+    formdata.append("Medium", Medium);
+    formdata.append("Board", Board);
+    formdata.append("Class", Class);
+    formdata.append("Sub_Class", Sub_Class);
+    formdata.append("Subject", Subject);
+    formdata.append("Chapter_Name", Chapter_Name);
+    formdata.append("Types_Question", Types_Question);
+    formdata.append("Question_From", Question_From);
+    formdata.append("Question", Question);
+    formdata.append("Option_1", Option_1);
+    formdata.append("Option_2", Option_2);
+    formdata.append("Option_3", Option_3);
+    formdata.append("Option_4", Option_4);
+    formdata.append("Image", Image);
+    formdata.append("Marks", Marks);
+    formdata.append("Answer", Answer);
+    formdata.append("authId", admin?._id);
     try {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
         baseURL: "http://localhost:8000/api",
         headers: {
-          "Content-type": "multipart/form-data",
+          "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        data: formdata,
+        data: 
+          // Board:Board,
+          // Medium:Medium,
+          // Class:Class,
+          // Sub_Class:Sub_Class,
+          // Subject:Subject,
+          // Chapter_Name:Chapter_Name,
+          // Types_Question:Types_Question,
+          // Question_From:Question_From,
+          // Question:Question,
+          // Option_1:Option_1,
+          // Option_2:Option_2,
+          // Option_3:Option_3,
+          // Option_4:Option_4,
+          // Image:Image,
+          // Marks:Marks,
+          // Answer:Answer,
+          // authId: admin?._id,
+          formdata
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -78,6 +105,7 @@ const AdminQuestionDetails = () => {
       });
     }
   };
+  
   // get method
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
@@ -156,6 +184,20 @@ const AdminQuestionDetails = () => {
       console.log(error);
     }
   };
+  //get of chapters
+  const [chapters, setchapters] = useState([]);
+  const getChapter = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllChapter"
+      );
+      if (res.status == 200) {
+        setchapters(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -163,6 +205,7 @@ const AdminQuestionDetails = () => {
     getaddsubclasss();
     getSubject();
     getalltypesofquess();
+    getChapter();
   }, []);
   return (
     <div>
@@ -175,6 +218,7 @@ const AdminQuestionDetails = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
+                  onChange={(e) => setBoard(e.target.value)}
                 >
                   <option>Select the Board</option>
                   {getboardname?.map((item, i) => {
@@ -188,7 +232,10 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Medium</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setMedium(e.target.value)}
+                >
                   <option>Select the Medium</option>
                   {Mediumm?.map((item) => {
                     return (
@@ -203,7 +250,10 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Class</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setClass(e.target.value)}
+                >
                   <option>Select the Class</option>
                   {getclassname?.map((item) => {
                     return (
@@ -216,7 +266,10 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Sub-Class</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSub_Class(e.target.value)}
+                >
                   <option>Select the Sub-Class</option>
                   {getaddsubclass?.map((item) => {
                     return (
@@ -231,7 +284,10 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Subject</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSubject(e.target.value)}
+                >
                   <option>Select the Subject</option>
                   {subject?.map((item) => {
                     return (
@@ -246,11 +302,18 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Chapter Name</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setChapter_Name(e.target.value)}
+                >
                   <option>Select the Chapter Name</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kanada</option>
+                  {chapters?.map((item) => {
+                    return (
+                      <option value={item?.chapterName}>
+                        {item?.chapterName}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -270,7 +333,10 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setTypes_Question(e.target.value)}
+                >
                   <option>Select the Types of the Question</option>
                   {getalltypesofques?.map((item) => {
                     return (
@@ -289,6 +355,7 @@ const AdminQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Question From "
+                  onChange={(e) => setQuestion_From(e.target.value)}
                 />
               </div>
             </div>
@@ -302,7 +369,9 @@ const AdminQuestionDetails = () => {
                   rows="5"
                   className="vi_0"
                 ></textarea> */}
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <CKEditor editor={ClassicEditor} className="vi_0" 
+                data={Question}
+                onChange={handleChange}/>
               </div>
             </div>
             <div className="col-md-6">
@@ -312,6 +381,7 @@ const AdminQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Opion 1"
+                  onChange={(e)=>setOption_1(e.target.value)}
                 />
               </div>
             </div>
@@ -322,6 +392,7 @@ const AdminQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Option 2"
+                  onChange={(e)=>setOption_2(e.target.value)}
                 />
               </div>
             </div>
@@ -332,6 +403,7 @@ const AdminQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Option 3"
+                  onChange={(e)=>setOption_3(e.target.value)}
                 />
               </div>
             </div>
@@ -342,6 +414,7 @@ const AdminQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Option 4"
+                  onChange={(e)=>setOption_4(e.target.value)}
                 />
               </div>
             </div>
@@ -349,7 +422,8 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear">
                 <label htmlFor="">Image</label>
-                <input type="file" className="vi_0" />
+                <input type="file" className="vi_0" 
+                onChange={(e)=>setImage(e.target.files[0])}/>
               </div>
             </div>
             <div className="col-md-6">
@@ -359,6 +433,7 @@ const AdminQuestionDetails = () => {
                   type="number"
                   className="vi_0"
                   placeholder="Enter The Marks"
+                  onChange={(e)=>setMarks(e.target.value)}
                 />
               </div>
             </div>
@@ -383,7 +458,9 @@ const AdminQuestionDetails = () => {
                     rows="5"
                     className="vi_0"
                   ></textarea> */}
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
+                  <CKEditor editor={ClassicEditor} className="vi_0" 
+                  data={Answer}
+                  onChange={handleChange1}/>
                 </div>
               </div>
             </div>
@@ -394,7 +471,9 @@ const AdminQuestionDetails = () => {
         </div>
       </div>
       <div className="yoihjij text-center my-2">
-        <button style={{}}>Add</button>
+        <button onClick={()=>{
+          AddQuestion();
+        }}>Add</button>
       </div>
     </div>
   );

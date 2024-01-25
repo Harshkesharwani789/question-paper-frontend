@@ -40,7 +40,74 @@ const AdminQuestions = () => {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
-  
+  //post
+  const formdata = new FormData();
+  const [Board, setBoard] = useState("");
+  const [Medium, setMedium] = useState("");
+  const [Class, setClass] = useState("");
+  const [Sub_Class, setSub_Class] = useState("");
+  const [Subject, setSubject] = useState("");
+  const [Chapter_Name, setChapter_Name] = useState("");
+  const [Types_Question, setTypes_Question] = useState("");
+  const [Question_From, setQuestion_From] = useState("");
+  const [Question, setQuestion] = useState("");
+  const [Option_1, setOption_1] = useState("");
+  const [Option_2, setOption_2] = useState("");
+  const [Option_3, setOption_3] = useState("");
+  const [Option_4, setOption_4] = useState("");
+  const [Image, setImage] = useState("");
+  const [Marks, setMarks] = useState("");
+  const [Answer, setAnswer] = useState("");
+
+  const AddQuestion = async () => {
+    formdata.set("Board", Board);
+    formdata.set("Medium", Medium);
+    formdata.set("Class", Class);
+    formdata.set("Sub_Class", Sub_Class);
+    formdata.set("Subject", Subject);
+    formdata.set("Chapter_Name", Chapter_Name);
+    formdata.set("Types_Question", Types_Question);
+    formdata.set("Question_From", Question_From);
+    formdata.set("Question", Question);
+    formdata.set("Option_1", Option_1);
+    formdata.set("Option_2", Option_2);
+    formdata.set("Option_3", Option_3);
+    formdata.set("Option_4", Option_4);
+    formdata.set("Image", Image);
+    formdata.set("Marks", Marks);
+    formdata.set("Answer", Answer);
+    formdata.set("id", admin?._id);
+    try {
+      const config = {
+        url: "/admin/AddQuestionPaper",
+        method: "post",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data: formdata,
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        handleClose();
+        return swal({
+          title: "yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
   //get
   const [Questions, setQuestions] = useState([]);
 
@@ -75,7 +142,7 @@ const AdminQuestions = () => {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        // data: formdata,
+        data: formdata,
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -366,7 +433,7 @@ const AdminQuestions = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -386,7 +453,7 @@ const AdminQuestions = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header style={{ backgroundColor: "orange" }}>
