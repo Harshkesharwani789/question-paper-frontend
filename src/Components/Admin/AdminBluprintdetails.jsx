@@ -79,6 +79,7 @@ const AdminBlueprintdetails = () => {
     }
   };
   // get method   for blue print
+  console.log(admin)
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
