@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -12,15 +12,20 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
 import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
+import axios from "axios";
+import swal from "sweetalert";
 
 const steps = [
   "Blueprint Details",
+  "Weightage to the ContentMarks Details",
   "Marks Details",
-  "Weightage to the Content",
   " Weightage of the Difficulty Level",
 ];
 
 const AdminEditBluePrint = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -69,6 +74,181 @@ const AdminEditBluePrint = () => {
     setActiveStep(0);
     setCompleted({});
   };
+  // get method of Board
+  const [getboardname, setboardname] = useState([]);
+  const getallboardname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      if (res.status == 200) {
+        setboardname(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get for subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get method for medium
+  const [Mediumm, setMediumm] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMediumm(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method add class
+  const [getclassname, setgetclassName] = useState([]);
+  const getallclassname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      if (res.status == 200) {
+        setgetclassName(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //update Details
+  const [blName, setblName] = useState("");
+  const [board, setboard] = useState("");
+  const [medium, setmedium] = useState("");
+  const [className, setclassName] = useState("");
+  const [SubClassName, setSubClassName] = useState("");
+  const [subjects, setsubjects] = useState("");
+  const [Instructions, setInstructions] = useState("");
+  const [Remembering, setRemembering] = useState("");
+  const [NQRemembering, setNQRemembering] = useState("");
+  const [MaskRemembering, setMaskRemembering] = useState("");
+  const [Understanding, setUnderstanding] = useState("");
+  const [NQUnderstanding, setNQUnderstanding] = useState("");
+  const [MaskUnderstanding, setMaskUnderstanding] = useState("");
+  const [Expression, setExpression] = useState("");
+  const [NQExpression, setNQExpression] = useState("");
+  const [MaskExpression, setMaskExpression] = useState("");
+  const [Appreciation, setAppreciation] = useState("");
+  const [MaskAppreciation, setMaskAppreciation] = useState("");
+  const [NQAppreciation, setNQAppreciation] = useState("");
+  const [Weightageofthecontent, setWeightageofthecontent] = useState("");
+  const [QAType, setQAType] = useState("");
+  const [NQA, setNQA] = useState("");
+  const [Mask, setMask] = useState("");
+  const [DurationOfExam, setDurationOfExam] = useState("");
+  const [TotalMask, setTotalMask] = useState("");
+  const [Easy, setEasy] = useState("");
+  const [EasyMask, setEasyMask] = useState("");
+  const [Average, setAverage] = useState("");
+  const [AverageMask, setAverageMask] = useState("");
+  const [Difficult, setDifficult] = useState("");
+  const [DifficultMask, setDifficultMask] = useState("");
+  const [TotalDifficultMask, setTotalDifficultMask] = useState("");
+  const [label, setlabel] = useState("");
+  const [Marks, setMarks] = useState("");
+  const [TypesofQuestions, setTypesofQuestions] = useState(false);
+  const [updateblueprintdetails, setupdateblueprintdetails] = useState("");
+
+  const UpdateBluePrintDetails = async () => {
+    try {
+      const config = {
+        url: "/admin/",
+        method: "put",
+        baseURL: "http:localhost:8000/api",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          blName: blName,
+          board: board,
+          medium: medium,
+          className: className,
+          SubClassName: SubClassName,
+          subjects: subjects,
+          Instructions: Instructions,
+          Remembering: Remembering,
+          NQRemembering: NQRemembering,
+          MaskRemembering: MaskRemembering,
+          Understanding: Understanding,
+          NQUnderstanding: NQUnderstanding,
+          MaskUnderstanding: MaskUnderstanding,
+          Expression: Expression,
+          NQExpression: NQExpression,
+          MaskExpression: MaskExpression,
+          Appreciation: Appreciation,
+          MaskAppreciation: MaskAppreciation,
+          NQAppreciation: NQAppreciation,
+          Weightageofthecontent: Weightageofthecontent,
+          TypesofQuestions: TypesofQuestions,
+          DurationOfExam: DurationOfExam,
+          TotalMask: TotalMask,
+          Easy: Easy,
+          EasyMask: EasyMask,
+          Average: Average,
+          AverageMask: AverageMask,
+          Difficult: Difficult,
+          DifficultMask: DifficultMask,
+          TotalDifficultMask: TotalDifficultMask,
+
+          authId: admin?._id,
+          id: updateblueprintdetails,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+  useEffect(() => {
+    getallboardname();
+    getSubject();
+    getAddMedium();
+    getallclassname();
+    getaddsubclasss();
+  }, []);
+
   return (
     <div className="box_1">
       <div className="Stepper-info " style={{ padding: "20px" }}>
@@ -122,6 +302,8 @@ const AdminEditBluePrint = () => {
                                 type="text"
                                 className="vi_0"
                                 placeholder="Enter BluePrint Name"
+                                value={blName}
+                                onChange={(e) => setblName(e.target.value)}
                               />
                             </div>
                           </div>
@@ -134,51 +316,16 @@ const AdminEditBluePrint = () => {
                               <Form.Select
                                 aria-label="Default select example"
                                 className="vi_0"
+                                onChange={(e) => setboard(e.target.value)}
                               >
                                 <option>Select the Board</option>
-                                <option value="CBSE">CBSE</option>
-                                <option value="ICSE">ICSE</option>
-                                <option value="AN">
-                                  Andaman and Nicobar Islands
-                                </option>
-                                <option value="AP">Andhra Pradesh</option>
-                                <option value="AR">Arunachal Pradesh</option>
-                                <option value="AS">Assam</option>
-                                <option value="BR">Bihar</option>
-                                <option value="CH">Chandigarh</option>
-                                <option value="CT">Chhattisgarh</option>
-                                <option value="DN">
-                                  Dadra and Nagar Haveli
-                                </option>
-                                <option value="DD">Daman and Diu</option>
-                                <option value="DL">Delhi</option>
-                                <option value="GA">Goa</option>
-                                <option value="GJ">Gujarat</option>
-                                <option value="HR">Haryana</option>
-                                <option value="HP">Himachal Pradesh</option>
-                                <option value="JK">Jammu and Kashmir</option>
-                                <option value="JH">Jharkhand</option>
-                                <option value="KA">Karnataka</option>
-                                <option value="KL">Kerala</option>
-                                <option value="LA">Ladakh</option>
-                                <option value="LD">Lakshadweep</option>
-                                <option value="MP">Madhya Pradesh</option>
-                                <option value="MH">Maharashtra</option>
-                                <option value="MN">Manipur</option>
-                                <option value="ML">Meghalaya</option>
-                                <option value="MZ">Mizoram</option>
-                                <option value="NL">Nagaland</option>
-                                <option value="OR">Odisha</option>
-                                <option value="PY">Puducherry</option>
-                                <option value="PB">Punjab</option>
-                                <option value="RJ">Rajasthan</option>
-                                <option value="SK">Sikkim</option>
-                                <option value="TN">Tamil Nadu</option>
-                                <option value="TG">Telangana</option>
-                                <option value="TR">Tripura</option>
-                                <option value="UP">Uttar Pradesh</option>
-                                <option value="UT">Uttarakhand</option>
-                                <option value="WB">West Bengal</option>
+                                {getboardname?.map((item, i) => {
+                                  return (
+                                    <option value={item?.boardName}>
+                                      {item?.boardName}
+                                    </option>
+                                  );
+                                })}
                               </Form.Select>
                             </div>
                           </div>
@@ -188,14 +335,18 @@ const AdminEditBluePrint = () => {
                                 Select Subjects{" "}
                                 <span style={{ color: "red" }}>*</span>
                               </label>
-                              <Form.Select aria-label="Default select example">
+                              <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) => setsubjects(e.target.value)}
+                              >
                                 <option>Select the Subjects</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Kanada">Kanada</option>
-                                <option value="Kanada">Maths</option>
-                                <option value="Kanada">Science</option>
-                                <option value="Kanada">Social Science</option>
+                                {subject?.map((item) => {
+                                  return (
+                                    <option value={item?.subjectName}>
+                                      {item?.subjectName}
+                                    </option>
+                                  );
+                                })}
                               </Form.Select>
                             </div>
                           </div>
@@ -205,11 +356,18 @@ const AdminEditBluePrint = () => {
                                 Select Medium{" "}
                                 <span style={{ color: "red" }}>*</span>
                               </label>
-                              <Form.Select aria-label="Default select example">
+                              <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) => setmedium(e.target.value)}
+                              >
                                 <option>Select the Medium</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Kanada">Kanada</option>
+                                {Mediumm?.map((item) => {
+                                  return (
+                                    <option value={item?.mediumName}>
+                                      {item?.mediumName}
+                                    </option>
+                                  );
+                                })}
                               </Form.Select>
                             </div>
                           </div>
@@ -219,14 +377,18 @@ const AdminEditBluePrint = () => {
                                 Select Class{" "}
                                 <span style={{ color: "red" }}>*</span>
                               </label>
-                              <Form.Select aria-label="Default select example">
+                              <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) => setclassName(e.target.value)}
+                              >
                                 <option>Select the Class</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Kanada">Kanada</option>
-                                <option value="Kanada">Maths</option>
-                                <option value="Kanada">Science</option>
-                                <option value="Kanada">Social Science</option>
+                                {getclassname?.map((item) => {
+                                  return (
+                                    <option value={item?.className}>
+                                      {item?.className}
+                                    </option>
+                                  );
+                                })}
                               </Form.Select>
                             </div>
                           </div>
@@ -236,14 +398,20 @@ const AdminEditBluePrint = () => {
                                 Select Sub-Class{" "}
                                 <span style={{ color: "red" }}>*</span>
                               </label>
-                              <Form.Select aria-label="Default select example">
+                              <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) =>
+                                  setSubClassName(e.target.value)
+                                }
+                              >
                                 <option>Select the Sub-Class</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="Kanada">Kanada</option>
-                                <option value="Kanada">Maths</option>
-                                <option value="Kanada">Science</option>
-                                <option value="Kanada">Social Science</option>
+                                {getaddsubclass?.map((item) => {
+                                  return (
+                                    <option value={item?.subclassName}>
+                                      {item?.subclassName}
+                                    </option>
+                                  );
+                                })}
                               </Form.Select>
                             </div>
                           </div>
@@ -261,6 +429,9 @@ const AdminEditBluePrint = () => {
                                 type="text"
                                 className="vi_0 mt-2"
                                 placeholder="Enter No. of Questions"
+                                onChange={(e) =>
+                                  setNQRemembering(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4">
@@ -269,6 +440,9 @@ const AdminEditBluePrint = () => {
                                 type="number"
                                 className="vi_0 mt-2"
                                 placeholder="Enter the Marks"
+                                onChange={(e) =>
+                                  setMaskRemembering(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4 mt-2">
@@ -282,6 +456,9 @@ const AdminEditBluePrint = () => {
                                 type="text"
                                 className="vi_0"
                                 placeholder="Enter No. of Questions"
+                                onChange={(e) =>
+                                  setNQUnderstanding(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4">
@@ -289,6 +466,9 @@ const AdminEditBluePrint = () => {
                                 type="number"
                                 className="vi_0"
                                 placeholder="Enter the Marks"
+                                onChange={(e) =>
+                                  setMaskUnderstanding(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4 mt-2">
@@ -302,6 +482,9 @@ const AdminEditBluePrint = () => {
                                 type="text"
                                 className="vi_0"
                                 placeholder="Enter No. of Questions"
+                                onChange={(e) =>
+                                  setNQExpression(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4">
@@ -309,6 +492,9 @@ const AdminEditBluePrint = () => {
                                 type="number"
                                 className="vi_0"
                                 placeholder="Enter the Marks"
+                                onChange={(e) =>
+                                  setMaskExpression(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4 mt-2">
@@ -322,6 +508,9 @@ const AdminEditBluePrint = () => {
                                 type="text"
                                 className="vi_0"
                                 placeholder="Enter No. of Questions"
+                                onChange={(e) =>
+                                  setNQAppreciation(e.target.value)
+                                }
                               />
                             </div>
                             <div className="col-md-4">
@@ -329,6 +518,9 @@ const AdminEditBluePrint = () => {
                                 type="number"
                                 className="vi_0"
                                 placeholder="Enter the Marks"
+                                onChange={(e) =>
+                                  setMaskAppreciation(e.target.value)
+                                }
                               />
                             </div>
                           </div>
@@ -341,11 +533,11 @@ const AdminEditBluePrint = () => {
                               <CKEditor
                                 editor={ClassicEditor}
                                 className="vi_0"
-                                // data={lodingdetails}
-                                // onChange={(event, editor) => {
-                                //   const data = editor.getData();
-                                //   setlodingdetails(data);
-                                // }}
+                                data={Instructions}
+                                onChange={(event, editor) => {
+                                  const data = editor.getData();
+                                  setInstructions(data);
+                                }}
                               />
                             </div>
                           </div>
@@ -357,213 +549,313 @@ const AdminEditBluePrint = () => {
                   <>
                     {activeStep == 1 ? (
                       <>
-                        <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                          <div className="container" style={{ padding: "5px" }}>
-                            <div className="row">
-                              <div className="col-md-4 mt-2">
-                                <label htmlFor="">Types of Questions</label>
-                                <p className="fs-5">
-                                  <MdPlayArrow
-                                    style={{ marginRight: "15px" }}
-                                  />
-                                  Multiple Chose Questions
-                                </p>
+                       <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                            <div
+                              className="container"
+                              style={{ padding: "5px" }}
+                            >
+                              <div className="row">
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <label htmlFor="">Select Content</label>
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <label htmlFor="">No. of Marks</label>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="col-md-4">
-                                <label htmlFor="">No. of Questions</label>
-                                <input
-                                  type="text"
-                                  className="vi_0"
-                                  placeholder="Enter No. of Questions"
-                                />
+                              <div className="row">
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Form.Select
+                                      aria-label="Default select example"
+                                      onChange={(e) => {
+                                        setQAType(e.target.value);
+                                      }}
+                                    >
+                                      <option value="">
+                                        Selete the Type of Question
+                                      </option>
+                                      {/* {weightage
+                                        ?.filter(
+                                          (ele) => subjects == ele?.Subject
+                                        )
+                                        .map((val, i) => {
+                                          return (
+                                            <option value={val?.Content}>
+                                              {val?.Content}
+                                            </option>
+                                          );
+                                        })} */}
+                                    </Form.Select>
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
+                                      placeholder="Enter the Weightage"
+                                      className="vi_0"
+                                      onChange={(e) => {
+                                        setMarks(e.target.value);
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Button
+                                      style={{
+                                        backgroundColor: "red",
+                                        color: "white",
+                                      }}
+                                      // onClick={() => {
+                                      //   AddWeightageofthecontent();
+                                      // }}
+                                    >
+                                      Add
+                                    </Button>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="col-md-4">
-                                <label htmlFor="">Marks</label>
-                                <input
-                                  type="number"
-                                  className="vi_0"
-                                  placeholder="Enter the Marks"
-                                />
+                              <div className="row mt-4">
+                                <div className="col-md-12">
+                                  <Table
+                                    responsive
+                                    bordered
+                                    style={{
+                                      width: "-webkit-fill-available",
+                                    }}
+                                  >
+                                    <thead>
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Content</th>
+                                        <th>Marks</th>
+                                        <th>Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {/* {Arr1?.map((item, i) => {
+                                        return (
+                                          <tr key={i}>
+                                            <td>{i + 1}</td>
+                                            <td>{item?.label}</td>
+                                            <td>{item?.Marks}</td>
+                                            <td>
+                                              <AiFillDelete
+                                                color="red"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  deletedWeightageofthecontent(
+                                                    i
+                                                  );
+                                                }}
+                                              />
+                                            </td>
+                                          </tr>
+                                        );
+                                      })} */}
+                                    </tbody>
+                                  </Table>
+                                </div>
                               </div>
+                              {/* <div className="row ">
+                                {weightage
+                                  ?.filter((ele) => subjects == ele?.Subject)
+                                  .map((val, i) => {
+                                    return (
+                                      <div className="col-md-4" key={i}>
+                                        <div className="do-sear mt-2">
+                                          <label>
+                                            {val?.Content} Weightage{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <input
+                                            type="text"
+                                            placeholder={`Please Enter ${val?.Content} Marks`}
+                                            className="vi_0"
+                                            onChange={(e) => {
+                                              setProseWeightage(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                              </div> */}
                             </div>
-                            <div className="row">
-                              <div className="col-md-4"></div>
-                              <div className="col-md-4 mt-2">
-                                <span style={{ float: "right" }}>
-                                  <label htmlFor="">Total Marks</label>
-                                </span>
-                              </div>
-                              <div className="col-md-4">
-                                <input
-                                  type="text"
-                                  placeholder="Total Marks"
-                                  className="vi_0"
-                                />
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col-md-6">
-                                <label htmlFor="">Duration of Exam</label>
-                                <input
-                                  type="text"
-                                  className="vi_0"
-                                  placeholder="Enter Duration of Exam"
-                                />
-                              </div>
-                            </div>
-                            {/* <div className="row ">
-                            <div className="col-md-6">
-                              <div className="do-sear mt-2">
-                                <label>
-                                  Total Marks{" "}
-                                  <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <input
-                                  type="number"
-                                  placeholder="Enter Total Marks"
-                                  className="vi_0"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="col-md-6">
-                              <div className="do-sear mt-2">
-                                <label>
-                                  Total Number of Questions{" "}
-                                  <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <input
-                                  type="text"
-                                  placeholder="Enter Total Number of Questions"
-                                  className="vi_0"
-                                />
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <div className="do-sear mt-2">
-                                <label>
-                                  Duration of the Examination{" "}
-                                  <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <input
-                                  type="text"
-                                  placeholder="Enter Duration of the Examination"
-                                  className="vi_0"
-                                />
-                              </div>
-                            </div>
-                          </div> */}
-                          </div>
-                        </Typography>
+                          </Typography>
                       </>
                     ) : (
                       <>
                         {activeStep == 2 ? (
                           <>
                             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                              <div
-                                className="container"
-                                style={{ padding: "5px" }}
-                              >
-                                <div className="row ">
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Prose (Lesson) Weightage{" "}
-                                        <span style={{ color: "red" }}>*</span>
+                                <div
+                                  className="container"
+                                  style={{ padding: "5px" }}
+                                >
+                                  <div className="row">
+                                    <div className="col-md-3">
+                                      <label htmlFor="">
+                                        Types of Questions
                                       </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Prose (Lesson) Marks"
-                                        className="vi_0"
-                                      />
+                                    </div>
+                                    <div className="col-md-3">
+                                      <label htmlFor="">No. of Questions</label>
+                                    </div>
+                                    <div className="col-md-3">
+                                      <label htmlFor="">Marks</label>
                                     </div>
                                   </div>
 
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Poetry Weightage{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
+                                  <div className="row">
+                                    <div className="col-md-3 mt-2">
+                                      <Form.Select
+                                        aria-label="Default select example"
+                                        onChange={(e) => {
+                                          setQAType(e.target.value);
+                                        }}
+                                      >
+                                        <option value="">
+                                          Selete the Type of Question
+                                        </option>
+                                        {/* {getalltypesofques?.map((val, i) => {
+                                          return (
+                                            <option
+                                              value={val?.Typesofquestion}
+                                            >
+                                              {val?.Typesofquestion}
+                                            </option>
+                                          );
+                                        })} */}
+                                      </Form.Select>
+                                    </div>
+                                    <div className="col-md-3">
                                       <input
                                         type="text"
-                                        placeholder="Enter Poetry Marks"
                                         className="vi_0"
+                                        placeholder="Enter No. of Questions"
+                                        onChange={(e) => {
+                                          setNQA(e.target.value);
+                                        }}
                                       />
+                                    </div>
+                                    <div className="col-md-3">
+                                      <input
+                                        type="number"
+                                        className="vi_0"
+                                        placeholder="Enter the Marks"
+                                        onChange={(e) => {
+                                          setMask(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="col-md-3">
+                                      <Button
+                                        style={{
+                                          backgroundColor: "red",
+                                          color: "white",
+                                        }}
+                                        // onClick={AddTypesofquestion}
+                                      >
+                                        Add
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  <div className="row mt-4">
+                                    <div className="col-md-12">
+                                      <Table
+                                        responsive
+                                        bordered
+                                        style={{
+                                          width: "-webkit-fill-available",
+                                        }}
+                                      >
+                                        <thead>
+                                          <tr>
+                                            <th>S No.</th>
+                                            <th>Content</th>
+                                            <th>No. of Question</th>
+                                            <th>Marks</th>
+                                            <th>Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {/* {Arr.map((val, i) => {
+                                            return ( */}
+                                              <tr >
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                  {" "}
+                                                  {/* <AiFillDelete
+                                                    color="red"
+                                                    cursor="pointer"
+                                                    onClick={() =>
+                                                      deleteQuestionType(i)
+                                                    }
+                                                  /> */}
+                                                </td>
+                                              </tr>
+                                            {/* );
+                                          })} */}
+                                        </tbody>
+                                      </Table>
                                     </div>
                                   </div>
 
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Non-Detailed Weightage{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
+                                  {/* <div className="row">
+                                    <div className="col-md-4"></div>
+                                    <div className="col-md-4 mt-2">
+                                      <span style={{ float: "right" }}>
+                                        <label htmlFor="">Total Marks</label>
+                                      </span>
+                                    </div>
+                                    <div className="col-md-4">
                                       <input
                                         type="text"
-                                        placeholder="Enter Non-Detailed Marks"
+                                        placeholder="Total Marks"
                                         className="vi_0"
+                                        onChange={(e) => {
+                                          setTotalMask(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                  </div> */}
+                                  <div className="row">
+                                    <div className="col-md-6">
+                                      <label htmlFor="">Duration of Exam</label>
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        value={DurationOfExam}
+                                        placeholder="Enter Duration of Exam"
+                                        onChange={(e) => {
+                                          setDurationOfExam(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="">Total Marks</label>
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        placeholder="Total Marks"
                                       />
                                     </div>
                                   </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Grammer Weightage{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Grammer Marks"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-md-6">
-                                    <div className="do-sear mt-2">
-                                      <label>
-                                        Vocabulary Weightage{" "}
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        placeholder="Enter Vocabulary Marks"
-                                        className="vi_0"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  {/* <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Branch Name{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Branch Name "
-                                    className="vi_0"
-                                  />
                                 </div>
-                              </div>
-
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Commission Amount{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Eg:500"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div> */}
-                                </div>
-                              </div>
-                            </Typography>
+                              </Typography>
                           </>
                         ) : (
                           <>
@@ -572,460 +864,7 @@ const AdminEditBluePrint = () => {
                                 className="container"
                                 style={{ padding: "5px" }}
                               >
-                                {/* <div className="row ">
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Name{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Name"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Phone Number{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Phone Number"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Email Id{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Email Id"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Bank Name{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Bank Name"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Account Number{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your A/C Number"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    IFSC Code{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your IFSC Code"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Branch Name{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Enter Your Branch Name "
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="col-md-6">
-                                <div className="do-sear mt-2">
-                                  <label>
-                                    Commission Amount{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    placeholder="Eg:500"
-                                    className="vi_0"
-                                  />
-                                </div>
-                              </div>
-                            </div> */}
-                                {/* <div className="row">
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Section{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Header"
-                                      className="vi_0"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6"></div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Header 1{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="Enter Header"
-                                      className="vi_0"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label>
-                                      Type of Questions{" "}
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <Form.Select aria-label="Default select example">
-                                      <option>
-                                        Select Type of Questions
-                                      </option>
-                                      <option value="English">
-                                        English
-                                      </option>
-                                      <option value="Hindi">Hindi</option>
-                                      <option value="Kanada">Kanada</option>
-                                      <option value="Kanada">Maths</option>
-                                      <option value="Kanada">
-                                        Science
-                                      </option>
-                                      <option value="Kanada">
-                                        Social Science
-                                      </option>
-                                    </Form.Select>
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label htmlFor="">
-                                      {" "}
-                                      No. of Questions
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="vi_0"
-                                      placeholder="Enter the No. of Questions"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label htmlFor="">
-                                      {" "}
-                                      Marks
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="vi_0"
-                                      placeholder="Enter the Marks"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <label htmlFor="">
-                                      {" "}
-                                      Specify the Difficulty Level
-                                    </label>
-                                    <div className="row">
-                                      <div className="col-md-3">
-                                        <label htmlFor="">Easy</label>
-                                      </div>
-                                      <div className="col-md-5">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Enter No. of Questions"
-                                        />
-                                      </div>
-                                      <div className="col-md-4">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Marks"
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="row ">
-                                    <div className="col-md-3">
-                                      <label htmlFor="">V S A</label>
-                                      <input
-                                        type="text"
-                                        className="vi_0 mt-2"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <label htmlFor="">S A</label>
-                                      <input
-                                        type="text"
-                                        className="vi_0 mt-2"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3 ">
-                                      <label htmlFor="">L A</label>
-                                      <input
-                                        type="text"
-                                        className="vi_0 mt-2"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <label htmlFor="">V L A</label>
-                                      <input
-                                        type="text"
-                                        className="vi_0 mt-2"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <div className="row">
-                                      <div className="col-md-3">
-                                        <label htmlFor="">Average</label>
-                                      </div>
-                                      <div className="col-md-5">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Enter No. of Questions"
-                                        />
-                                      </div>
-                                      <div className="col-md-4">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Marks"
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="col-md-6 mt-2">
-                                  <div className="row ">
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-                                <div className="col-md-6">
-                                  <div className="do-sear mt-2">
-                                    <div className="row">
-                                      <div className="col-md-3">
-                                        <label htmlFor="">Difficult</label>
-                                      </div>
-                                      <div className="col-md-5">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Enter No. of Questions"
-                                        />
-                                      </div>
-                                      <div className="col-md-4">
-                                        <input
-                                          type="text"
-                                          className="vi_0"
-                                          placeholder="Marks"
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="col-md-6 mt-2">
-                                  <div className="row">
-                                    <div className="col-md-3 ">
-                                      <input
-                                        type="text"
-                                        className="vi_0 "
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                    <div className="col-md-3">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        placeholder="No of Questions"
-                                      />
-                                    </div>
-                                  </div>
-                                  
-                                </div>
-
-                                <div className="text-end mb-3">
-                                  <Button
-                                    type="submit"
-                                    style={{
-                                      backgroundColor: "red",
-                                      color: "white",
-                                      marginTop: "10px",
-                                    }}
-                                  >
-                                    Add
-                                  </Button>
-                                </div>
-                                <div className="row">
-                                  <div className="col-md-9"></div>
-                                  <div className="col-md-3">
-                                    <Table
-                                      responsive
-                                      bordered
-                                      style={{
-                                        width: "-webkit-fill-available",
-                                        textAlign: "center",
-                                      }}
-                                    >
-                                      <thead>
-                                        <tr>
-                                          <th>Total No. of Questions</th>
-                                          <th>Total Marks</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>20</td>
-                                          <td>100 marks</td>
-                                        </tr>
-                                      </tbody>
-                                    </Table>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-md-9"></div>
-                                  <div className="col-md-3">
-                                    <Table
-                                      responsive
-                                      bordered
-                                      style={{
-                                        width: "-webkit-fill-available",
-                                        textAlign: "center",
-                                      }}
-                                    >
-                                      <thead>
-                                        <tr>
-                                          <th>Content</th>
-                                          <th>Full Form</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th>V S A</th>
-                                          <td>Very Short Answer</td>
-                                        </tr>
-                                        <tr>
-                                          <th>S A</th>
-                                          <td>Short Answer</td>
-                                        </tr>
-                                        <tr>
-                                          <th>V L A</th>
-                                          <td>Very Long Answer</td>
-                                        </tr>
-                                        <tr>
-                                          <th>L A</th>
-                                          <td>Long Answer</td>
-                                        </tr>
-                                      </tbody>
-                                    </Table>
-                                  </div>
-                                </div>
-                              </div> */}
+                               
                                 <div className="row mt-3">
                                   <div className="col-md-4">
                                     <label htmlFor="">Dificulty Level</label>
