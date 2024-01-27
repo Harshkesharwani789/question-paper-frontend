@@ -40,14 +40,18 @@ const AdminQuestions = () => {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
-  
   //get
   const [Questions, setQuestions] = useState([]);
 
   const getAllQuestions = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllQuestionUser"
+        `http://localhost:8000/api/admin/getAllQuestionAdmin/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (res.status == 200) {
         setQuestions(res.data.success);
@@ -62,6 +66,8 @@ const AdminQuestions = () => {
       });
     }
   };
+  // get
+
   //update
   const [updateQuestion, setupdateQuestion] = useState("");
 
@@ -75,7 +81,7 @@ const AdminQuestions = () => {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        // data: formdata,
+        data: formdata,
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -178,6 +184,7 @@ const AdminQuestions = () => {
   useEffect(() => {
     getAllQuestions();
   }, []);
+  console.log(Questions);
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -206,65 +213,6 @@ const AdminQuestions = () => {
             Add Questions
           </button>
         </div>
-        {/* <div className="row p-2 align-items-end justify-content-around mb-3">
-          <div className="col-lg-2 " style={{ width: "fit-content" }}>
-            <label>Select :</label>
-            <Form.Select
-              aria-label="Default select example"
-              style={{ height: "35px" }}
-              value={itempage}
-              onChange={(e) => setItempage(e.target.value)}
-            >
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-              <option value={15}>15</option>
-              <option value={15}>20</option>
-              <option value={15}>25</option>
-            </Form.Select>
-          </div>
-
-          <div className="col-lg-2">
-            <label>From :</label>
-            <Form.Control
-              type="date"
-              aria-describedby="basic-addon1"
-              value={startDate}
-              onChange={(e) => setstartDate(e.target.value)}
-            />
-          </div>
-
-          <div className="col-lg-2">
-            <label>To :</label>
-            <Form.Control
-              type="date"
-              aria-describedby="basic-addon1"
-              value={endDate}
-              onChange={(e) => setendDate(e.target.value)}
-            />
-          </div>
-
-          <div className="col-lg-2">
-            <button className="btn btn-primary" onClick={filterData}>
-              Submit
-            </button>
-          </div>
-
-          <div
-            className="input-group col-lg-4 hgjhgyu"
-            style={{ width: "auto", height: "35px", marginTop: "20px" }}
-          >
-            <span class="input-group-text" id="basic-addon1">
-              <BsSearch />
-            </span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search..."
-              aria-describedby="basic-addon1"
-              onChange={handleFilter}
-            />
-          </div>
-        </div> */}
 
         <div className="">
           <Table
@@ -275,12 +223,13 @@ const AdminQuestions = () => {
             <thead style={{ backgroundColor: "orange" }}>
               <tr>
                 <th>S.No</th>
-                <th>Date</th>
+                <th>Section</th>
                 <th>Board</th>
                 <th>Medium</th>
                 <th>Class</th>
                 <th>Subject</th>
                 <th>Sub-Class</th>
+                <th>Types of Question</th>
 
                 <th>
                   <div>View</div>
@@ -288,85 +237,63 @@ const AdminQuestions = () => {
 
                 <th>Action</th>
               </tr>
-              {/* <tr>
-                <th rowSpan={2}>
-                  {" "}
-                  <div>Starting Prices</div>
-                </th>
-                <th>
-                  <div>Ending price</div>
-                </th>
-              </tr> */}
             </thead>
 
             <tbody>
-             
-              <tr>
-                <td>xcvxcv</td>
-                <td>xcvxc</td>
-                <td>xcv</td>
-                <td>xc</td>
-                <td>xcv</td>
-                <td>xcv</td>
-                <td>xcvcv</td>
+              {Questions?.map((val, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{val?.Section}</td>
+                    <td>{val?.Board}</td>
+                    <td>{val?.Medium}</td>
+                    <td>{val?.Class}</td>
+                    <td>{val?.Subject}</td>
+                    <td>{val?.Sub_Class}</td>
+                    <td>{val?.Types_Question}</td>
 
-                <td>
-                  <FaEye
-                    color="blue"
-                    onClick={() => {
-                      navigate("/adminquestiondetailsview");
-                    }}
-                  />
-                </td>
-
-                <td>
-                  {" "}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
+                    <td>
+                      <FaEye
+                        color="blue"
                         onClick={() => {
-                          setupdateQuestion();
-                          navigate("/admineditquestiondetails");
-                          // setBoard(item?.Board);
-                          // setMedium(item?.Medium);
-                          // setClass(item?.Class);
-                          // setSub_Class(item?.Sub_Class);
-                          // setSubject(item?.Subject);
-                          // setChapter_Name(item?.Chapter_Name);
-                          // setTypes_Question(item?.Types_Question);
-                          // setQuestion_From(item?.Question_From);
-                          // setQuestion(item?.Question);
-                          // setOption_1(item?.Option_1);
-                          // setOption_2(item?.Option_2);
-                          // setOption_3(item?.Option_3);
-                          // setOption_4(item?.Option_4);
-                          // setImage(item?.Image);
-                          // setMarks(item?.Marks);
-                          // setAnswer(item?.Answer);
+                          navigate(`/adminquestiondetailsview/${val?._id}`);
                         }}
                       />
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          setDeleteA();
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-             
+                    </td>
+
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setupdateQuestion();
+                              navigate("/admineditquestiondetails");
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setDeleteA();
+                              handleShow2();
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -386,7 +313,7 @@ const AdminQuestions = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header style={{ backgroundColor: "orange" }}>

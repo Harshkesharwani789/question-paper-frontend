@@ -38,6 +38,7 @@ import AnswerSheet from "./Components/AnswerSheet/AnswerSheet";
 import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
+import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 
 function App() {
   return (
@@ -185,16 +186,18 @@ function App() {
             element={<Main children={<AdminEditQuestionDetails />} />}
           />
           <Route
-            path="/adminquestiondetailsview"
+            path="/adminquestiondetailsview/:question_Id"
             element={<Main children={<AdminQuestionDetailsview />} />}
           />
           <Route
             path="/Admin_accounthistory"
             element={<Main children={<AccountHistory />} />}
           />
-
+          <Route
+            path="/Adminquestion_paper"
+            element={<Main children={<AdminQuestionPaper />} />}
+          />
           {/* Admin Panel Starts here */}
-
           <Route
             path="/admin"
             element={

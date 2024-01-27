@@ -48,14 +48,17 @@ const SignUp = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-        return swal({
+         swal({
           title: "yeah!",
           text: res.data.success,
           icon: "success",
           button: "Ok!",
         });
       }
-      navigate("/login");
+      setTimeout(() => {
+         return navigate("/login")
+      }, 1000);
+     
       // window.location.assign("/login");
     } catch (error) {
       console.log(error);
@@ -69,35 +72,15 @@ const SignUp = () => {
   };
 
   const [PasswordShow, setPasswordShow] = useState(false);
-  const [confirmpasswordshow, setconfirmpasswordshow] = useState(false);
-  const [type, setType] = useState("password");
-  const [icon, setIcon] = useState(eyeOff);
-  const handleToggle = () => {
-    if (type === "password") {
-      setIcon(eye);
-      setType("text");
-    } else {
-      setIcon(eyeOff);
-      setType("password");
-    }
-  };
 
   const [PasswordShow1, setPasswordShow1] = useState(false);
-  const [confirmpasswordshow1, setconfirmpasswordshow1] = useState(false);
-  const [type1, setType1] = useState("password");
-  const [icon1, setIcon1] = useState(eyeOff);
-  const handleToggle1 = () => {
-    if (type1 === "password") {
-      setIcon1(eye);
-      setType1("text");
-    } else {
-      setIcon1(eyeOff);
-      setType1("password");
-    }
-  };
+ 
+
 
   return (
     <div>
+      
+
       {/* new Register form  */}
       <div className="container p-3">
         <div className="box">

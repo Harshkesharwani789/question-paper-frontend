@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
 import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
-import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
-import { MdPlayArrow } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -172,11 +164,11 @@ function AdminBlueprintdetailsview() {
                     style={{ border: "1px solid" }}
                   >
                     <tbody>
-                      {weightage?.map((val, i) => {
+                      {blueprint?.Weightageofthecontent?.map((val, i) => {
                         return (
-                          <tr>
-                            <td>{val?.blueprint?.Content}</td>
-                            <td>{blueprint?.ProseWeightage}</td>
+                          <tr key={i}>
+                            <td>{val?.label}</td>
+                            <td>{val?.Marks}</td>
                           </tr>
                         );
                       })}
@@ -212,37 +204,19 @@ function AdminBlueprintdetailsview() {
               </div>
               <div className="objectives-table">
                 <Table bordered hover size="md" style={{ border: "1px solid" }}>
-                  <tbody>
-                    <tr>
-                      <td>Multiple types questions</td>
-                      <td>14x1</td>
-                      <td>14</td>
-                    </tr>
-                    <tr>
-                      <td>One sentence answers</td>
-                      <td>11x1</td>
-                      <td>11</td>
-                    </tr>
-                    <tr>
-                      <td>2-3 sentence answers</td>
-                      <td>9x2</td>
-                      <td>18</td>
-                    </tr>
-                    <tr>
-                      <td>Short Answer of 3-4 sentences</td>
-                      <td>9x3</td>
-                      <td>27</td>
-                    </tr>
-                    <tr>
-                      <td>Answer in 5-6 sentences</td>
-                      <td>5x4</td>
-                      <td>20</td>
-                    </tr>
-                    <tr>
-                      <td>Compositions</td>
-                      <td>2x5</td>
-                      <td>10</td>
-                    </tr>
+                  <tbody >
+                    {blueprint?.TypesofQuestions?.map((val, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{val?.QAType}</td>
+                          <td>
+                            {val?.NQA}x{val?.Mask}
+                          </td>
+                          <td></td>
+                        </tr>
+                      );
+                    })}
+
                     <tr>
                       <td>
                         <b>Total</b>
@@ -273,10 +247,10 @@ function AdminBlueprintdetailsview() {
                       <td>Total</td>
                     </tr>
                     <tr>
-                      <td>30</td>
-                      <td>50</td>
-                      <td>20</td>
-                      <td>100</td>
+                      <td>{blueprint?.EasyMask}</td>
+                      <td>{blueprint?.AverageMask}</td>
+                      <td>{blueprint?.DifficultMask}</td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </Table>
