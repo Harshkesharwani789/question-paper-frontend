@@ -1,3 +1,5 @@
+
+/* Login and Sign up page css starts */
 .box {
   background-color: #fff;
   border-radius: 30px;
@@ -22,7 +24,7 @@
   right: 3%;
 }
 
-.line-1 h3{
+.line-1 h3 {
   font-size: 30px;
 }
 /* Animation */
@@ -31,14 +33,13 @@
   /* blinkTextCursor 500ms steps(44) infinite normal; */
 }
 
-
-.login3-bg{
-background-size: cover;
-background-position: center center;
-background-repeat: no-repeat;
-height: 690px;
-position: relative;
-background-image: url(../../../public/loginpage3.jpg);
+.login3-bg {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 690px;
+  position: relative;
+  background-image: url(../../../public/loginpage3.jpg);
 }
 
 .signup-bg-img {
@@ -57,7 +58,6 @@ background-image: url(../../../public/loginpage3.jpg);
   to {
     width: 50%;
   }
-  
 }
 @keyframes blinkTextCursor {
   from {
@@ -67,33 +67,23 @@ background-image: url(../../../public/loginpage3.jpg);
     border-right-color: transparent;
   }
 }
-/* .yoihjij button {
-  background-color: #000;
-  padding: 5px 7px;
-  color: #fff;
-  border: none;
-}
-.yoihjij button:hover {
-  background-color: rgb(8, 52, 148);
-  color: #fff;
-} */
 
-@media screen and (max-width:799px) {
-.login-bg{
-  height: 300px;
-}
-.pe-2{
-  padding: 20px;
-}
-.line-1 {
-  position: absolute;
-  top: 45%;
-  left: 9%;
-}
-.line-1 h3{
-  font-size: 25px;
-}
-.signup-bg-img {
-  height: 200px;
-}
+@media screen and (max-width: 799px) {
+  .login3-bg {
+    height: 300px;
+  }
+  .pe-2 {
+    padding: 20px;
+  }
+  .line-1 {
+    position: absolute;
+    top: 45%;
+    left: 9%;
+  }
+  .line-1 h3 {
+    font-size: 25px;
+  }
+  .signup-bg-img {
+    height: 200px;
+  }
 }

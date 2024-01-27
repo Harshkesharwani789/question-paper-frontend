@@ -603,7 +603,7 @@ const AdminClass = () => {
         </>
       )}
       {/* Add Accomodation modal */}
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Add Class</Modal.Title>
         </Modal.Header>
@@ -651,6 +651,7 @@ const AdminClass = () => {
         onHide={handleClose1}
         backdrop="static"
         keyboard={false}
+        style={{zIndex:"99999"}}
       >
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Edit Class</Modal.Title>
@@ -694,6 +695,7 @@ const AdminClass = () => {
         onHide={handleClose2}
         backdrop="static"
         keyboard={false}
+        style={{zIndex:"99999"}}
       >
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -723,7 +725,7 @@ const AdminClass = () => {
       </Modal>
 
       {/* Add Transport modal */}
-      <Modal show={show3} onHide={handleClose3}>
+      <Modal show={show3} onHide={handleClose3} style={{zIndex:"99999"}}> 
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Add Subclass </Modal.Title>
         </Modal.Header>
@@ -760,6 +762,13 @@ const AdminClass = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
+          <Button
+              className="mx-2"
+              variant="success"
+              onClick={handleClose3}
+            >
+              Close
+            </Button>
             <Button
               className="mx-2"
               variant="primary"
@@ -779,6 +788,7 @@ const AdminClass = () => {
         onHide={handleClose4}
         backdrop="static"
         keyboard={false}
+        style={{zIndex:"99999"}}
       >
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Edit Subclass</Modal.Title>
@@ -816,6 +826,13 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+        <Button
+              className="mx-2"
+              variant="success"
+              onClick={handleClose4}
+            >
+              Close
+            </Button>
           <Button
             variant="primary"
             style={{ backgroundColor: "#26AAE0" }}
@@ -832,21 +849,23 @@ const AdminClass = () => {
         onHide={handleClose5}
         backdrop="static"
         keyboard={false}
+        style={{zIndex:"99999"}}
+
       >
         <Modal.Header closeButton>
-          <Modal.Title className="text-success">Warning</Modal.Title>
+          <Modal.Title className="text-light">Warning</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row">
+         <div className="row">
             <div className="col-md-12">
-              <p className="fs-1" style={{ color: "red" }}>
-                Are You Sure ?
+              <p className="fs-4" style={{ color: "red" }}>
+                Are you sure you want to delete this data?
               </p>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose5}>
+          <Button variant="success" onClick={handleClose5}>
             Close
           </Button>
           <Button

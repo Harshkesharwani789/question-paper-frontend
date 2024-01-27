@@ -303,7 +303,7 @@ function AdminBlueprint() {
 
       let Question = 1;
       Arr.forEach((ele) => {
-        if (ele?.QAType === QAType && ele?.NQA === NQA && ele?.Mask === Mask) {
+        if (ele?.QAType === QAType ) {
           Question = 0;
           swal({
             title: "Oops!",
@@ -459,13 +459,7 @@ function AdminBlueprint() {
     getallweightagecontent();
     getSubject();
   }, []);
-  console.log(getboardname);
-  console.log(getclassname);
-  console.log(getaddsubclass);
-  console.log(Medium);
-  console.log(getalltypesofques);
-  console.log(weightage);
-  console.log(subject);
+
   return (
     <>
       <div className="box_1">
@@ -994,7 +988,7 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0"
-                                        placeholder="Enter No. of Questions"
+                                        placeholder="Enter Total No. of Questions"
                                         onChange={(e) => {
                                           setNQA(e.target.value);
                                         }}
@@ -1004,7 +998,7 @@ function AdminBlueprint() {
                                       <input
                                         type="number"
                                         className="vi_0"
-                                        placeholder="Enter the Marks"
+                                        placeholder="Enter the mask per question"
                                         onChange={(e) => {
                                           setMask(e.target.value);
                                         }}
@@ -1101,6 +1095,7 @@ function AdminBlueprint() {
                                       <label htmlFor="">Total Marks</label>
                                       <input
                                         type="text"
+                                        value={Arr?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}
                                         className="vi_0"
                                         placeholder="Total Marks"
                                       />
