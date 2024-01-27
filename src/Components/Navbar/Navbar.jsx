@@ -6,19 +6,22 @@ import "../Navbar/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { FaRegUserCircle } from "react-icons/fa";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const Navbarr = () => {
+  const Navigate = useNavigate("");
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const logOut = () => {
-    window.location.assign("/login");
     swal({
-      title: "yeah!",
-      text: "Successfully logged Out!",
+      title: "Yeah!",
+      text: "Successfully Logged Out",
       icon: "success",
       button: "Ok!",
     });
-
+    setTimeout(() => {
+      window.location.assign("/login");
+    }, 5000);
     sessionStorage.removeItem("user");
   };
   return (
@@ -40,7 +43,14 @@ const Navbarr = () => {
                 </span>
                 <div class="dropdown-content">
                   <a href="/profile">Profile</a>
-                  <a href="#" onClick={()=>{logOut()}}>Logout</a>
+                  <a
+                    href="/login"
+                    onClick={() => {
+                      logOut();
+                    }}
+                  >
+                    Logout
+                  </a>
                 </div>
               </div>
             </Nav>

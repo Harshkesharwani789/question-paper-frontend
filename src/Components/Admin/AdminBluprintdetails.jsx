@@ -276,7 +276,12 @@ const AdminBlueprintdetails = () => {
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
+<<<<<<< HEAD
+                              // navigate("/admineditblueprint");
+                              navigate(`/admineditblueprint/${val?._id}`)
+=======
                            return navigate("/admineditblueprint",{state:val});
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                             }}
                           />
                         </div>

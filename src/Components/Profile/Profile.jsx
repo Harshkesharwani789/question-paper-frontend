@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaCity,
   FaFileImage,
@@ -14,9 +14,13 @@ import { CiCalendarDate } from "react-icons/ci";
 import { Table } from "react-bootstrap";
 import { BiSolidEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
 
 const Profile = () => {
+  const user=JSON.parse(sessionStorage.getItem("user"));
+
   const navigate= useNavigate();
   const [profile, setprofile] = useState(true);
   const [QuestionPaper, setQuestionPaper] = useState(false);
@@ -28,6 +32,23 @@ const Profile = () => {
   const [show, setShow] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  
+  // const [item, setItem] = useState({});
+
+  // const getSpecificUser = async () => {
+  //   const res = await axios.get(
+  //     `http://localhost:8000/api/user/getUserById/${id}`
+  //   );
+  //   if (res.status === 200) {
+  //     setItem(res.data.success);
+  //   }
+  // };
+
+  // useEffect(()=>{
+  //   getSpecificUser();
+  // },[])
+  
   return (
     <div>
       <div className="container pt-4">
@@ -88,14 +109,14 @@ const Profile = () => {
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <IoPersonSharp /> &nbsp; Name
                       </label>
-                      <p>Mr. Amandeep Singh</p>
+                      <p>{user?.FirstName} {user?.LastName}</p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <MdEmail /> &nbsp; Email
                       </label>
-                      <p>email@gmail.com</p>
+                      <p>{user?.Email}</p>
                       <hr />
                     </div>
                   </div>
@@ -104,14 +125,21 @@ const Profile = () => {
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <FaPhoneAlt /> &nbsp; Phone
                       </label>
-                      <p>+91-0000000000</p>
+                      <p>{user?.Mobile}</p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <CiCalendarDate /> &nbsp; Registration Date
                       </label>
-                      <p> 16/12/2023 </p>
+                      <p>{moment(user?.createdAt)?.format("DD/MM/YYYY")}</p>
+                      <hr />
+                    </div>
+                    <div className="col-md-6 ps-5">
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
+                        <CiCalendarDate /> &nbsp; Registration ID
+                      </label>
+                      <p>{user?.teacherId}</p>
                       <hr />
                     </div>
                     {/* <div className="col-md-6 ps-5">

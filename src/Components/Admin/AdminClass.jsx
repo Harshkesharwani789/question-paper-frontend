@@ -20,6 +20,8 @@ const AdminClass = () => {
   const [show4, setShow4] = useState();
   const [show5, setShow5] = useState();
 
+  const [show6,setShow6] = useState("");
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -37,6 +39,9 @@ const AdminClass = () => {
 
   const handleClose5 = () => setShow5(false);
   const handleShow5 = () => setShow5(true);
+
+  const handleClose6 = () => setShow6(false);
+  const handleShow6 = () => setShow6(true);
   // post method add class
   const [className, setclassName] = useState("");
   const classNamee = async () => {
@@ -341,12 +346,19 @@ const AdminClass = () => {
     });
     setData([...filteredData]);
   };
-  // Pagination
+  // Pagination for class
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(data.length / productPerPage);
+  const displayPage = getclassname.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(getclassname.length / productPerPage);
+
+    // Pagination for subclass
+    const [pageNumber1, setPageNumber1] = useState(0);
+    const productPerPage1 = 5;
+    const visitedPage1 = pageNumber1 * productPerPage1;
+    const displayPage1 = getaddsubclass.slice(visitedPage1, visitedPage1 + productPerPage1);
+    const pageCount1 = Math.ceil(getaddsubclass.length / productPerPage1);
   useEffect(() => {
     getallclassname();
   }, []);
@@ -424,7 +436,7 @@ const AdminClass = () => {
                 </thead>
 
                 <tbody>
-                  {getclassname?.map((val, i) => {
+                  {displayPage?.map((val, i) => {
                     return (
                       <tr key={i}>
                         <td>{i + 1}</td>
@@ -523,7 +535,7 @@ const AdminClass = () => {
                     </thead>
 
                     <tbody>
-                      {getaddsubclass?.map((val, i) => {
+                      {displayPage1?.map((val, i) => {
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -571,30 +583,26 @@ const AdminClass = () => {
                 </div>
 
                 <Pagination style={{ float: "right" }}>
-                  <Pagination.First onClick={() => setPageNumber(0)} />
-                  <Pagination.Prev
-                    onClick={() =>
-                      setPageNumber((prev) => Math.max(prev - 1, 0))
-                    }
-                  />
-                  {Array.from({ length: pageCount }, (_, index) => (
-                    <Pagination.Item
-                      key={index}
-                      active={index === pageNumber}
-                      onClick={() => setPageNumber(index)}
-                    >
-                      {index + 1}
-                    </Pagination.Item>
-                  ))}
-                  <Pagination.Next
-                    onClick={() =>
-                      setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-                    }
-                  />
-                  <Pagination.Last
-                    onClick={() => setPageNumber(pageCount - 1)}
-                  />
-                </Pagination>
+              <Pagination.First onClick={() => setPageNumber1(0)} />
+              <Pagination.Prev
+                onClick={() => setPageNumber1((prev) => Math.max(prev - 1, 0))}
+              />
+              {Array.from({ length: pageCount1 }, (_, index) => (
+                <Pagination.Item
+                  key={index}
+                  active={index === pageNumber1}
+                  onClick={() => setPageNumber1(index)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                onClick={() =>
+                  setPageNumber1((prev) => Math.min(prev + 1, pageCount1 - 1))
+                }
+              />
+              <Pagination.Last onClick={() => setPageNumber1(pageCount1 - 1)} />
+            </Pagination>
               </div>
             </>
           ) : (
@@ -878,6 +886,8 @@ const AdminClass = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+     
     </div>
   );
 };

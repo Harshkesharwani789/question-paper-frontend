@@ -4,8 +4,14 @@ import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import "../Admin/Admin.css";
 import { BsSearch } from "react-icons/bs";
+import axios from "axios";
+import swal from "sweetalert";
 
 const UserList = () => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
+
+ 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -17,6 +23,56 @@ const UserList = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
+  
+ 
+ //get
+ const [Teacher,setTeacher] = useState([]);
+ const getAllTeacher=async()=>{
+  try {
+    let res=await axios.get("http://localhost:8000/api/admin/getAllTeachers")
+    if(res.status===200){
+      setTeacher(res.data.success);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+ }
+  
+  //delete
+  const [delteacher, setdelteacher] = useState("");
+  const DeleteTeacher = async () => {
+    try {
+      const config = {
+        url: "/teacher/deleteTeacher/" + delteacher + "/" + user?._id,
+        baseURL: "http://localhost:8000/api",
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      let res = await axios(config);
+      if (res.status === 200) {
+        handleClose2();
+        getAllTeacher();
+        return swal({
+          title: "Delete!",
+          text: res.data.success,
+          icon: "warning",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -40,8 +96,15 @@ const UserList = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(data.length / productPerPage);
+  const displayPage = Teacher.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(Teacher.length / productPerPage);
+
+  useEffect(() => {
+    getAllTeacher();
+  }, []);
+
+  console.log("Teacher",Teacher)
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -60,13 +123,13 @@ const UserList = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">User List</h2>
-          <button
+          {/* <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}
             onClick={handleShow}
           >
             Add UserList
-          </button>
+          </button> */}
         </div>
 
         <div className="mb-3">
@@ -82,6 +145,9 @@ const UserList = () => {
                   <div>Registration ID</div>
                 </th>
                 <th>
+                  <div>Name</div>
+                </th>
+                <th>
                   <div>Registration Date</div>
                 </th>
                 <th>
@@ -95,40 +161,51 @@ const UserList = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
+              {Teacher?.map((item, i) => {
+                return (
+                  <>
+                  <tr >
+                    <td>{i + 1}ere</td>
+                    <td>{item?.teacherId}werwr</td>
+                    <td>
+                      {item?.FirstName} {item?.LastName}werwe
+                    </td>
+                    <td>{item?.Mobile}werwer</td>
+                    <td>{item?.Email}werwer</td>
 
-                <td>
-                  <img src="" alt="" style={{ width: "75px" }} />
-                </td>
-
-                <td>
-                  {" "}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow1();
-                        }}
-                      />{" "}
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        {/* <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              handleShow1(item?._id);
+                              setupdateTeacher(item?._id);
+                              setDate(item?.Date);
+                              setteacherId(item?.teacherId);
+                              setMobile(item?.Mobile);
+                              setEmail(item?.Email);
+                            }}
+                          />{" "}
+                        </div> */}
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setdelteacher(item?._id);
+                              handleShow2(item?._id);
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </>
+                );
+              })}
             </tbody>
           </Table>
         </div>
@@ -155,7 +232,7 @@ const UserList = () => {
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        {/* <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add UserList</Modal.Title>
           </Modal.Header>
@@ -167,6 +244,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Registration ID"
                   className="vi_0"
+                  onChange={(e) => setteacherId(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -175,6 +253,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Registration Date"
                   className="vi_0"
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -183,6 +262,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Mobile Number"
                   className="vi_0"
+                  onChange={(e) => setMobile(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -191,6 +271,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Email Id"
                   className="vi_0"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -198,35 +279,28 @@ const UserList = () => {
             {/* <div className="do-sear mt-2">
         <label>Title 2</label>
         <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
+      </div>
 
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2">
-        <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
+            
+           
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2" variant="success" onClick={handleClose}>
-                Close
-              </Button>
-              <Button className="mx-2" variant="primary">
+              <Button
+                className="mx-2"
+                variant="primary"
+                // onClick={() => {
+                //   AddTeacher();
+                // }}
+              >
                 Add
               </Button>
             </div>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
 
         {/* Edit Package modal */}
-        <Modal
+        {/* <Modal
           show={show1}
           onHide={handleClose1}
           backdrop="static"
@@ -244,6 +318,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Registration ID"
                   className="vi_0"
+                  onChange={(e) => setteacherId(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -252,6 +327,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Registration Date"
                   className="vi_0"
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -260,6 +336,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Mobile Number"
                   className="vi_0"
+                  onChange={(e) => setMobile(e.target.value)}
                 />
               </div>
               <div className="do-sear mt-2">
@@ -268,6 +345,7 @@ const UserList = () => {
                   type="text"
                   placeholder="Enter Email Id"
                   className="vi_0"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -275,30 +353,29 @@ const UserList = () => {
             {/* <div className="do-sear mt-2">
         <label>Title 2</label>
         <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
+      </div> 
 
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2"> */}
-            {/* <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
+           
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='success' onClick={handleClose1}>
+            <Button
+              variant=""
+              className="btn btn-secondary"
+              onClick={handleClose1}
+            >
               Close
             </Button>
-            <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
+            <Button
+              variant="primary"
+              style={{ backgroundColor: "#FAFA33" }}
+              // onClick={() => {
+              //   UpdateTeacher();
+              // }}
+            >
               Edit
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
         <Modal
           show={show2}
           onHide={handleClose2}
@@ -323,7 +400,14 @@ const UserList = () => {
             <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary">Delete</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                DeleteTeacher();
+              }}
+            >
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

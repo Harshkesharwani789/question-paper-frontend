@@ -5,8 +5,24 @@ import { BsFillMoonStarsFill, BsSearch, BsSun } from "react-icons/bs";
 import { Form, FormCheck } from "react-bootstrap";
 import { AiOutlineLogout } from "react-icons/ai";
 import "../Admin/Admin.css";
+import swal from "sweetalert";
 
 const AdminHeader = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+
+  const logOut = () => {
+    swal({
+      title: "Yeah!",
+      text: "Successfully Logged Out",
+      icon: "success",
+      button: "Ok!",
+    });
+    setTimeout(() => {
+      window.location.assign("/admin");
+    }, 5000);
+    sessionStorage.removeItem("admin");
+  };
+
   return (
     <div>
       <div className="header">
@@ -22,6 +38,7 @@ const AdminHeader = () => {
             <div
               className="d-flex justify-content-end mt-6"
               style={{ fontSize: "40px", padding: "18px 35px" }}
+              onClick={logOut}
             >
               <AiOutlineLogout />
             </div>
