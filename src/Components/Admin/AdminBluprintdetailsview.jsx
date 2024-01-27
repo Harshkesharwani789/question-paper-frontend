@@ -213,7 +213,7 @@ function AdminBlueprintdetailsview() {
                           <td>
                             {val?.NQA}x{val?.Mask}
                           </td>
-                          <td></td>
+                          <td>{val?.NQA*val?.Mask}</td>
                         </tr>
                       );
                     })}
@@ -222,9 +222,9 @@ function AdminBlueprintdetailsview() {
                       <td>
                         <b>Total</b>
                       </td>
-                      <td></td>
+                      <td>{blueprint?.TypesofQuestions?.reduce((a,i)=>a+Number(i?.NQA),0)}</td>
                       <td>
-                        <b>100</b>
+                        <b>{blueprint?.TypesofQuestions?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}</b>
                       </td>
                     </tr>
                   </tbody>
@@ -251,7 +251,7 @@ function AdminBlueprintdetailsview() {
                       <td>{blueprint?.EasyMask}</td>
                       <td>{blueprint?.AverageMask}</td>
                       <td>{blueprint?.DifficultMask}</td>
-                      <td></td>
+                      <td>{blueprint?.EasyMask+blueprint?.AverageMask+blueprint?.DifficultMask}</td>
                     </tr>
                   </tbody>
                 </Table>
