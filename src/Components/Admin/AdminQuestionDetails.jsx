@@ -3,13 +3,15 @@ import { Form } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { BiSolidEdit } from "react-icons/bi";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 const AdminQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+
+  const navigate = useNavigate();
 
   const handleChange = (e, editor) => {
     const data = editor.getData();
@@ -19,93 +21,127 @@ const AdminQuestionDetails = () => {
     const data = editor.getData();
     setAnswer(data);
   };
+  const handleChange2 = (e, editor) => {
+    const data = editor.getData();
+    setInstruction(data);
+  };
+  const handleChange3 = (e, editor) => {
+    const data = editor.getData();
+    setOption_1(data);
+  };
+  const handleChange4 = (e, editor) => {
+    const data = editor.getData();
+    setOption_2(data);
+  };
+  const handleChange5 = (e, editor) => {
+    const data = editor.getData();
+    setOption_3(data);
+  };
+  const handleChange6 = (e, editor) => {
+    const data = editor.getData();
+    setOption_4(data);
+  };
+  const handleChange7 = (e, editor) => {
+    const data = editor.getData();
+    setAnswer(data);
+  };
   //post
 
   const [Board, setBoard] = useState("");
   const [Medium, setMedium] = useState("");
   const [Class, setClass] = useState("");
   const [Sub_Class, setSub_Class] = useState("");
-  const [Subject, setSubject] = useState("");
+  const [Subjects, setSubjects] = useState("");
   const [Chapter_Name, setChapter_Name] = useState("");
+  const [Lesson, setLesson] = useState("");
+  const [Difficulty_level, setDifficulty_level] = useState("");
   const [Types_Question, setTypes_Question] = useState("");
-  const [Question_From, setQuestion_From] = useState("");
+  const [Section, setSection] = useState("");
+  const [Name_of_examination, setName_of_examination] = useState("");
   const [Question, setQuestion] = useState("");
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
   const [Option_3, setOption_3] = useState("");
   const [Option_4, setOption_4] = useState("");
+  const [Objectives, setObjectives] = useState("");
   const [Image, setImage] = useState("");
   const [Marks, setMarks] = useState("");
   const [Answer, setAnswer] = useState("");
+  const [Instruction, setInstruction] = useState("");
+  const [Answer_Time, setAnswer_Time] = useState("");
 
-  const AddQuestion = async () => {
-    const formdata = new FormData();
-    formdata.append("Medium", Medium);
-    formdata.append("Board", Board);
-    formdata.append("Class", Class);
-    formdata.append("Sub_Class", Sub_Class);
-    formdata.append("Subject", Subject);
-    formdata.append("Chapter_Name", Chapter_Name);
-    formdata.append("Types_Question", Types_Question);
-    formdata.append("Question_From", Question_From);
-    formdata.append("Question", Question);
-    formdata.append("Option_1", Option_1);
-    formdata.append("Option_2", Option_2);
-    formdata.append("Option_3", Option_3);
-    formdata.append("Option_4", Option_4);
-    formdata.append("Image", Image);
-    formdata.append("Marks", Marks);
-    formdata.append("Answer", Answer);
-    formdata.append("authId", admin?._id);
+  const addquestions = async () => {
     try {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
         baseURL: "http://localhost:8000/api",
         headers: {
-          "content-type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        data: 
-          // Board:Board,
-          // Medium:Medium,
-          // Class:Class,
-          // Sub_Class:Sub_Class,
-          // Subject:Subject,
-          // Chapter_Name:Chapter_Name,
-          // Types_Question:Types_Question,
-          // Question_From:Question_From,
-          // Question:Question,
-          // Option_1:Option_1,
-          // Option_2:Option_2,
-          // Option_3:Option_3,
-          // Option_4:Option_4,
-          // Image:Image,
-          // Marks:Marks,
-          // Answer:Answer,
-          // authId: admin?._id,
-          formdata
+        data: {
+          Board: Board,
+          Medium: Medium,
+          Class: Class,
+          Sub_Class: Sub_Class,
+          Subject: Subjects,
+          Chapter_Name: Chapter_Name,
+          Difficulty_level: Difficulty_level,
+          Types_Question: Types_Question,
+          Lesson: Lesson,
+          Section: Section,
+          Question: Question,
+          Option_1: Option_1,
+          Option_2: Option_2,
+          Option_3: Option_3,
+          Option_4: Option_4,
+          Name_of_examination: Name_of_examination,
+          Objectives: Objectives,
+          Instruction: Instruction,
+          Image: Image,
+          Marks: Marks,
+          Answer_Time: Answer_Time,
+          Answer: Answer,
+          authId: admin?._id,
+        },
       };
       let res = await axios(config);
-      if (res.status == 200) {
-        return swal({
+      if (res.status === 200) {
+        swal({
           title: "yeah!",
           text: res.data.success,
           icon: "success",
           button: "Ok!",
         });
+        return navigate("/adminquestions");
       }
     } catch (error) {
       console.log(error);
-      return swal({
-        title: "oops!",
+      swal({
+        title: "Oops!",
         text: error.response.data.error,
-        icon: "error",
+        icon: "success",
         button: "Ok!",
       });
     }
   };
-  
+
+  //   get method for weightage
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // get method
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
@@ -198,6 +234,20 @@ const AdminQuestionDetails = () => {
       console.log(error);
     }
   };
+  //get for name of Examination
+  const [NameExam, setNameExam] = useState([]);
+  const getNameExamination = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllNameExamination"
+      );
+      if (res.status == 200) {
+        setNameExam(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -205,13 +255,30 @@ const AdminQuestionDetails = () => {
     getaddsubclasss();
     getSubject();
     getalltypesofquess();
+    getallweightagecontent();
     getChapter();
+    getNameExamination();
   }, []);
+  console.log(weightage);
+  console.log(NameExam);
   return (
     <div>
       <div className="box_1">
         <div className="container">
           <div className="row">
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Section</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Section"
+                  onChange={(e) => {
+                    setSection(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -223,7 +290,9 @@ const AdminQuestionDetails = () => {
                   <option>Select the Board</option>
                   {getboardname?.map((item, i) => {
                     return (
-                      <option value={item?.boardName}>{item?.boardName}</option>
+                      <option value={item?.boardName} key={i}>
+                        {item?.boardName}
+                      </option>
                     );
                   })}
                 </Form.Select>
@@ -237,9 +306,9 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setMedium(e.target.value)}
                 >
                   <option>Select the Medium</option>
-                  {Mediumm?.map((item) => {
+                  {Mediumm?.map((item, i) => {
                     return (
-                      <option value={item?.mediumName}>
+                      <option value={item?.mediumName} key={i}>
                         {item?.mediumName}
                       </option>
                     );
@@ -255,9 +324,11 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setClass(e.target.value)}
                 >
                   <option>Select the Class</option>
-                  {getclassname?.map((item) => {
+                  {getclassname?.map((item, i) => {
                     return (
-                      <option value={item?.className}>{item?.className}</option>
+                      <option value={item?.className} key={i}>
+                        {item?.className}
+                      </option>
                     );
                   })}
                 </Form.Select>
@@ -271,9 +342,9 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setSub_Class(e.target.value)}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((item) => {
+                  {getaddsubclass?.map((item, i) => {
                     return (
-                      <option value={item?.subclassName}>
+                      <option value={item?.subclassName} key={i}>
                         {item?.subclassName}
                       </option>
                     );
@@ -286,16 +357,38 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select Subject</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setSubject(e.target.value)}
+                  onChange={(e) => setSubjects(e.target.value)}
                 >
                   <option>Select the Subject</option>
-                  {subject?.map((item) => {
+                  {subject?.map((item, i) => {
                     return (
-                      <option value={item?.subjectName}>
+                      <option value={item?.subjectName} key={i}>
                         {item?.subjectName}
                       </option>
                     );
                   })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Lesson</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setLesson(e.target.value);
+                  }}
+                >
+                  <option value="">Selete the Lesson</option>
+                  {weightage
+                    ?.filter((ele) => Subjects == ele?.Subject)
+                    ?.map((val, i) => {
+                      return (
+                        <option value={val?.Content} key={i}>
+                          {val?.Content}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -307,9 +400,9 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setChapter_Name(e.target.value)}
                 >
                   <option>Select the Chapter Name</option>
-                  {chapters?.map((item) => {
+                  {chapters?.map((item, i) => {
                     return (
-                      <option value={item?.chapterName}>
+                      <option value={item?.chapterName} key={i}>
                         {item?.chapterName}
                       </option>
                     );
@@ -319,29 +412,56 @@ const AdminQuestionDetails = () => {
             </div>
           </div>
           <div className="row mt-2">
-            {/* <div className="col-md-6">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Difficulty level of Paper</label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setDifficulty_level(e.target.value);
+                  }}
+                >
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="English">English</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Kanada">Kanada</option>
+                  <option value="English">Easy</option>
+                  <option value="Hindi">Average</option>
+                  <option value="Kanada">Difficult</option>
                 </Form.Select>
               </div>
-            </div> */}
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>
+              </div>{" "}
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setTypes_Question(e.target.value);
+                }}
+              >
+                <option>Select the Types of the Question</option>
+                {getalltypesofques?.map((item, i) => {
+                  return (
+                    <option value={item?.Typesofquestion} key={i}>
+                      {item?.Typesofquestion}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setTypes_Question(e.target.value)}
+                  onChange={(e) => {
+                    setName_of_examination(e.target.value);
+                  }}
                 >
-                  <option>Select the Types of the Question</option>
-                  {getalltypesofques?.map((item) => {
+                  <option>Select the Name Of the Examination</option>
+                  {NameExam?.map((item, i) => {
                     return (
-                      <option value={item?.Typesofquestion}>
-                        {item?.Typesofquestion}
+                      <option value={item?.NameExamination} key={i}>
+                        {item?.NameExamination}
                       </option>
                     );
                   })}
@@ -349,13 +469,24 @@ const AdminQuestionDetails = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question From</label>
+              <div className="do-sear">
+                <label htmlFor="">Objectives</label>
                 <input
                   type="text"
                   className="vi_0"
-                  placeholder="Enter Question From "
-                  onChange={(e) => setQuestion_From(e.target.value)}
+                  onChange={(e) => setObjectives(e.target.value)}
+                  placeholder="Please Enter Objectives"
+                />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear">
+                <label htmlFor="">Instructions</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Instruction}
+                  onChange={handleChange2}
                 />
               </div>
             </div>
@@ -369,52 +500,55 @@ const AdminQuestionDetails = () => {
                   rows="5"
                   className="vi_0"
                 ></textarea> */}
-                <CKEditor editor={ClassicEditor} className="vi_0" 
-                data={Question}
-                onChange={handleChange}/>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
-                <input
-                  type="text"
+                <CKEditor
+                  editor={ClassicEditor}
                   className="vi_0"
-                  placeholder="Enter Opion 1"
-                  onChange={(e)=>setOption_1(e.target.value)}
+                  data={Option_1}
+                  onChange={handleChange3}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-                <input
-                  type="text"
+                <CKEditor
+                  editor={ClassicEditor}
                   className="vi_0"
-                  placeholder="Enter Option 2"
-                  onChange={(e)=>setOption_2(e.target.value)}
+                  data={Option_2}
+                  onChange={handleChange4}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3</label>
-                <input
-                  type="text"
+                <CKEditor
+                  editor={ClassicEditor}
                   className="vi_0"
-                  placeholder="Enter Option 3"
-                  onChange={(e)=>setOption_3(e.target.value)}
+                  data={Option_3}
+                  onChange={handleChange5}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                <input
-                  type="text"
+                <CKEditor
+                  editor={ClassicEditor}
                   className="vi_0"
-                  placeholder="Enter Option 4"
-                  onChange={(e)=>setOption_4(e.target.value)}
+                  data={Option_4}
+                  onChange={handleChange6}
                 />
               </div>
             </div>
@@ -422,8 +556,11 @@ const AdminQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear">
                 <label htmlFor="">Image</label>
-                <input type="file" className="vi_0" 
-                onChange={(e)=>setImage(e.target.files[0])}/>
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
               </div>
             </div>
             <div className="col-md-6">
@@ -433,7 +570,7 @@ const AdminQuestionDetails = () => {
                   type="number"
                   className="vi_0"
                   placeholder="Enter The Marks"
-                  onChange={(e)=>setMarks(e.target.value)}
+                  onChange={(e) => setMarks(e.target.value)}
                 />
               </div>
             </div>
@@ -450,17 +587,13 @@ const AdminQuestionDetails = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <div className="do-sear mt-2">
-                  <label htmlFor="">Answer 1</label>
-                  {/* <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="5"
+                  <label htmlFor="">Answer</label>
+                  <CKEditor
+                    editor={ClassicEditor}
                     className="vi_0"
-                  ></textarea> */}
-                  <CKEditor editor={ClassicEditor} className="vi_0" 
-                  data={Answer}
-                  onChange={handleChange1}/>
+                    data={Answer}
+                    onChange={handleChange7}
+                  />
                 </div>
               </div>
             </div>
@@ -471,9 +604,13 @@ const AdminQuestionDetails = () => {
         </div>
       </div>
       <div className="yoihjij text-center my-2">
-        <button onClick={()=>{
-          AddQuestion();
-        }}>Add</button>
+        <button
+          onClick={() => {
+            addquestions();
+          }}
+        >
+          Add
+        </button>
       </div>
     </div>
   );

@@ -32,6 +32,9 @@ import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { LuAlignHorizontalJustifyStart } from "react-icons/lu";
 import { IoEarth } from "react-icons/io5";
 import "../Admin/Admin.css";
+import Navbar from 'react-bootstrap/Navbar';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Side = () => {
   const [Board, setBoard] = useState(false);
@@ -46,20 +49,32 @@ const Side = () => {
   const [UserList, setUserList] = useState(false);
   const [AccountHistory, setAccountHistory] = useState(false);
 
+  // Responsive sidebar
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
     <div>
+       <Navbar expand="lg" className="bg-body-tertiary p-0" >
+          <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse} style={{margin:"10px"}}>
+            <span ><GiHamburgerMenu style={{color:'white'}}/></span>
+          </button>
+          <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarsExample09">
       <div className="si09">
-        <div className="lo-ad">
-          <img
-            src="../Images/logo.png"
-            alt="adminlogo"
-            style={{ width: "245px", height: "102px" }}
-          />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="lo-ad">
+            <img
+              src="../Images/logo.png"
+              alt="adminlogo"
+              className="admin-logo-img"
+            />
+          </div>
+          <div className="sidebar-close-icon" onClick={handleNavCollapse}>
+          <AiOutlineClose />
+          </div>
         </div>
         <ul
-        //  className={`main-content ${isDarkMode ? "dark" : "light"}`}
         >
-          <Link to="/dashboard">
+          <Link to="/dashboard" onClick={handleNavCollapse}>
             <li className="a-ele ">
               <span>
                 <MdOutlineSupportAgent style={{ fontSize: "20px" }} />
@@ -68,7 +83,7 @@ const Side = () => {
             </li>
           </Link>
 
-          <Link to="/adminboard">
+          <Link to="/adminboard" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -91,7 +106,7 @@ const Side = () => {
               <span className="ms-2">Board </span>
             </li>
           </Link>
-          <Link to="/adminclass">
+          <Link to="/adminclass" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -115,7 +130,7 @@ const Side = () => {
             </li>
           </Link>
 
-          <Link to="/adminmedium">
+          <Link to="/adminmedium" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -138,7 +153,7 @@ const Side = () => {
               <span className="ms-2">Medium</span>
             </li>
           </Link>
-          <Link to="/adminexam">
+          <Link to="/adminexam" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -161,7 +176,7 @@ const Side = () => {
               <span className="ms-2">Name Of Examination</span>
             </li>
           </Link>
-          <Link to="/adminsubject">
+          <Link to="/adminsubject" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -184,7 +199,7 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
-          <Link to="/adminchapter">
+          <Link to="/adminchapter" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -205,11 +220,11 @@ const Side = () => {
                 <FaWeightHanging style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">
-               Chapters
+                Chapters
               </span>
             </li>
           </Link>
-          <Link to="/adminblueprintdetails">
+          <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -233,7 +248,7 @@ const Side = () => {
             </li>
           </Link>
 
-          <Link to="/adminquestions">
+          <Link to="/adminquestions" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -256,7 +271,7 @@ const Side = () => {
               <span className="ms-2">Questions</span>
             </li>
           </Link>
-          <Link to="/admintypesofquestion">
+          <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -279,7 +294,7 @@ const Side = () => {
               <span className="ms-2">Type Of Questions </span>
             </li>
           </Link>
-          <Link to="/adminexamlevel">
+          <Link to="/adminexamlevel" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -302,7 +317,7 @@ const Side = () => {
               <span className="ms-2">Exam Level</span>
             </li>
           </Link>
-          <Link to="/weightageofthecontent">
+          <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -325,7 +340,7 @@ const Side = () => {
               <span className="ms-2">Weightage of Content</span>
             </li>
           </Link>
-          <Link to="/adminuserlist">
+          <Link to="/adminuserlist" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -348,7 +363,7 @@ const Side = () => {
               <span className="ms-2">UserList</span>
             </li>
           </Link>
-          <Link to="/adminacchistory">
+          <Link to="/adminacchistory" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -373,6 +388,8 @@ const Side = () => {
           </Link>
         </ul>
       </div>
+      </div>
+      </Navbar>
     </div>
   );
 };

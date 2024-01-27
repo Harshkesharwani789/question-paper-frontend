@@ -278,7 +278,7 @@ const AdminTypeOfQuestions = () => {
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>
               Add Type Of Question
@@ -317,6 +317,9 @@ const AdminTypeOfQuestions = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
+            <Button variant="success" onClick={handleClose}>
+              Close
+            </Button>
               <Button
                 className="mx-2"
                 variant="primary"
@@ -336,6 +339,7 @@ const AdminTypeOfQuestions = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>
@@ -357,7 +361,7 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button
@@ -376,9 +380,10 @@ const AdminTypeOfQuestions = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "#083494" }}>Warning</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -390,7 +395,7 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="btn btn-secondary" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary" onClick={Deletedeletetypsofques}>

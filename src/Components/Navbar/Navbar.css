@@ -42,3 +42,12 @@
   background-color: navy !important;
   color: #fff !important;
 }
+
+@media screen  and (max-width:799px){
+  .dropdown{
+    bottom: 25px;
+    display: flex;
+    float: right;
+    justify-content: flex-end;
+  }
+}

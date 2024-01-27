@@ -9,7 +9,7 @@ const Main = (props) => {
     <div>
       <div className="dash">
         <div className="admin-all">
-          <div className="" style={{ width: "20%" }}>
+          <div className="admin-sidebar-display" >
             <div
               className="left-side"
               style={{ position: "sticky", top: "0", height: "100vh" }}

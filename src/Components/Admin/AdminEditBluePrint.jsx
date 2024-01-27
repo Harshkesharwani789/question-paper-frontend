@@ -15,7 +15,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import swal from "sweetalert";
+<<<<<<< HEAD
 import { BiSolidEdit } from "react-icons/bi";
+=======
+import { useLocation, useNavigate } from "react-router-dom";
+import { AiFillDelete } from "react-icons/ai";
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
 
 const steps = [
   "Blueprint Details",
@@ -24,6 +29,7 @@ const steps = [
   " Weightage of the Difficulty Level",
 ];
 const AdminEditBluePrint = () => {
+<<<<<<< HEAD
   const [View, setView] = useState("");
 
   const [show6, setShow6] = useState("");
@@ -35,8 +41,15 @@ const AdminEditBluePrint = () => {
   const handleShow7 = () => setShow7(true);
 
   const { blueprint_ID } = useParams();
+=======
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+const {state}=useLocation();
+console.log(state);
+
+const admin = JSON.parse(sessionStorage.getItem("admin"));
+const token = sessionStorage.getItem("token");
 
   const totalSteps = () => {
     return steps.length;
@@ -85,6 +98,7 @@ const AdminEditBluePrint = () => {
   };
 
   const navigate = useNavigate();
+<<<<<<< HEAD
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
@@ -100,6 +114,8 @@ const AdminEditBluePrint = () => {
       console.log(error);
     }
   };
+=======
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
   //getmethod for types of questions
   const [getalltypesofques, setgetalltypesofques] = useState([]);
   const getalltypesofquess = async () => {
@@ -190,7 +206,7 @@ const AdminEditBluePrint = () => {
   const [NQA, setNQA] = useState("");
   const [Mask, setMask] = useState("");
   const [DurationOfExam, setDurationOfExam] = useState("");
-  const [TotalMask, setTotalMask] = useState("");
+
   const [Easy, setEasy] = useState("");
   const [EasyMask, setEasyMask] = useState("");
   const [Average, setAverage] = useState("");
@@ -201,10 +217,16 @@ const AdminEditBluePrint = () => {
   const [label, setlabel] = useState("");
   const [Marks, setMarks] = useState("");
   const [TypesofQuestions, setTypesofQuestions] = useState(false);
+<<<<<<< HEAD
+=======
+  const [data, setData] = useState([]);
+  const [TotalMask, setTotalMask] = useState("");
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
 
   // Add for dificulty level
 
   const handleChangeeasy = (e) => {
+<<<<<<< HEAD
     const value = e.target.value;
     setEasyMask(value);
   };
@@ -227,6 +249,24 @@ const AdminEditBluePrint = () => {
         : parsevalue1 + parsevalue2 + pasrsevalue3;
     setTotalDifficultMask(calculatedresult);
   };
+=======
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setEasyMask(newValue);
+    setTotalDifficultMask(newValue + AverageMask + DifficultMask);
+  };
+  const handleChangeaverage = (e) => {
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setAverageMask(newValue);
+    setTotalDifficultMask(EasyMask + newValue + DifficultMask);
+  };
+
+  const handleChangedifficult = (e) => {
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setDifficultMask(newValue);
+    setTotalDifficultMask(EasyMask + AverageMask + newValue);
+  };
+  // Add for map value marks details
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
 
   // Array of object 2
   const [Arr1, setArr1] = useState([]);
@@ -272,7 +312,11 @@ const AdminEditBluePrint = () => {
         console.log("Arr1", Arr1);
         swal({
           title: "Yeah!",
+<<<<<<< HEAD
           text: "Updated Successfully...",
+=======
+          text: "Added Successfully...",
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
           icon: "success",
           button: "OK!",
         });
@@ -333,7 +377,11 @@ const AdminEditBluePrint = () => {
 
       let Question = 1;
       Arr.forEach((ele) => {
+<<<<<<< HEAD
         if (ele?.QAType === QAType && ele?.NQA === NQA && ele?.Mask === Mask) {
+=======
+        if (ele?.QAType === QAType ) {
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
           Question = 0;
           swal({
             title: "Oops!",
@@ -403,13 +451,25 @@ const AdminEditBluePrint = () => {
     }
   };
   const Blueprint = async () => {
+<<<<<<< HEAD
     try {
       const config = {
         url: "/admin/registerBLUEPRINT",
         baseURL: "http://localhost:8000/api",
         method: "post",
         headers: { "content-type": "application/json" },
+=======
+    alert("A")
+    try {
+      const config = {
+        url: "/admin/updateBLUEPRINT",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: { Authorization: `Bearer ${token}`, "content-type": "application/json" },
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
         data: {
+          id:state?._id,
+          authId:admin?._id,
           blName: blName,
           board: board,
           medium: medium,
@@ -443,6 +503,7 @@ const AdminEditBluePrint = () => {
           TotalDifficultMask: TotalDifficultMask,
           TypesofQuestions: Arr,
           Weightageofthecontent: Arr1,
+<<<<<<< HEAD
         },
       };
       let res = await axios(config);
@@ -541,18 +602,43 @@ const AdminEditBluePrint = () => {
           NQA: NQA,
           Mask: Mask,
           id: updatemarksdetails,
+=======
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
-        return swal({
-          title: "Yeah!",
-          text: res.data.success,
+        swal({
+          title: "Success!",
+          text: `Successfully Updated`,
           icon: "success",
-          button: "Ok!",
+          dangerMode: true,
         });
+      return  navigate("/adminblueprintdetails");
       }
     } catch (error) {
+      console.log(error);
+      // swal({
+      //   title: "Oops!",
+      //   text: error.response.data.error,
+      //   icon: "error",
+      //   dangerMode: true,
+      // });
+    }
+  };
+  //get method for subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+<<<<<<< HEAD
       return swal({
         title: "Oops!",
         text: error.response.data.error,
@@ -561,6 +647,58 @@ const AdminEditBluePrint = () => {
       });
     }
   };
+=======
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getallboardname();
+    getallclassname();
+    getaddsubclasss();
+    getAddMedium();
+    getalltypesofquess();
+    getallweightagecontent();
+    getSubject();
+  }, []);
+
+  useEffect(()=>{
+    if(state){
+      setblName(state?.blName);
+      setboard(state?.board);
+      setmedium(state?.medium);
+      setclassName(state?.className);
+      setSubClassName(state?.SubClassName);
+      setsubjects(state?.subjects);
+      setInstructions(state?.Instructions);
+      setRemembering(state?.Remembering);
+      setNQRemembering(state?.NQRemembering);
+      setMaskRemembering(state?.MaskRemembering);
+      setUnderstanding(state?.Understanding);
+      setNQUnderstanding(state?.NQUnderstanding);
+      setMaskUnderstanding(state?.MaskUnderstanding);
+      setExpression(state?.Expression);
+      setNQExpression(state?.NQExpression);
+      setMaskExpression(state?.MaskExpression);
+      setAppreciation(state?.Appreciation);
+      setNQAppreciation(state?.NQAppreciation);
+      setMaskAppreciation(state?.MaskAppreciation);
+      setQAType(state?.QAType);
+      setNQA(state?.NQA);
+      setMarks(state?.Mask);
+      setDurationOfExam(state?.DurationOfExam);
+      setTotalMask(state?.TotalMask);
+      setEasy(state?.Easy);
+      setEasyMask(state?.EasyMask);
+      setAverage(state?.Average);
+      setAverageMask(state?.AverageMask);
+      setDifficult(state?.Difficult);
+      setDifficultMask(state?.DifficultMask);
+      setTotalDifficultMask(state?.TotalDifficultMask);
+      setArr(state?.TypesofQuestions);
+      setArr1(state?.Weightageofthecontent)
+    }
+  },[state]);
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
   return (
     <>
       <div className="box_1">
@@ -621,7 +759,11 @@ const AdminEditBluePrint = () => {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter BluePrint Name"
+<<<<<<< HEAD
                                   value={blueprint?.blName}
+=======
+                                  value={blName}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setblName(e.target.value);
                                   }}
@@ -636,7 +778,11 @@ const AdminEditBluePrint = () => {
                                 </label>
                                 <Form.Select
                                   aria-label="Default select example"
+<<<<<<< HEAD
                                   value={blueprint?.board}
+=======
+                                  value={board}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   className="vi_0"
                                   onChange={(e) => setboard(e.target.value)}
                                 >
@@ -659,13 +805,21 @@ const AdminEditBluePrint = () => {
                                 </label>
                                 <Form.Select
                                   aria-label="Default select example"
+<<<<<<< HEAD
                                   value={blueprint?.subjects}
+=======
+                                  value={subjects}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => setsubjects(e.target.value)}
                                 >
                                   <option>Select the Subjects</option>
                                   {subject?.map((val, i) => {
                                     return (
+<<<<<<< HEAD
                                       <option value={val?.subjectName} key={i}>
+=======
+                                      <option value={val?.subjectName}>
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         {val?.subjectName}
                                       </option>
                                     );
@@ -681,7 +835,11 @@ const AdminEditBluePrint = () => {
                                 </label>
                                 <Form.Select
                                   aria-label="Default select example"
+<<<<<<< HEAD
                                   value={blueprint?.medium}
+=======
+                                  value={medium}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setmedium(e.target.value);
                                   }}
@@ -704,8 +862,13 @@ const AdminEditBluePrint = () => {
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <Form.Select
+<<<<<<< HEAD
                                   aria-label="Default select example"
                                   value={blueprint?.className}
+=======
+                                value={className}
+                                  aria-label="Default select example"
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setclassName(e.target.value);
                                   }}
@@ -728,8 +891,13 @@ const AdminEditBluePrint = () => {
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <Form.Select
+<<<<<<< HEAD
                                   aria-label="Default select example"
                                   value={blueprint?.SubClassName}
+=======
+                                value={SubClassName}
+                                  aria-label="Default select example"
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setSubClassName(e.target.value);
                                   }}
@@ -766,7 +934,11 @@ const AdminEditBluePrint = () => {
                                   type="text"
                                   className="vi_0 mt-2"
                                   placeholder="Enter No. of Questions"
+<<<<<<< HEAD
                                   value={blueprint?.NQRemembering}
+=======
+                                  value={NQRemembering}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setNQRemembering(e.target.value);
                                   }}
@@ -778,7 +950,11 @@ const AdminEditBluePrint = () => {
                                   type="number"
                                   className="vi_0 mt-2"
                                   placeholder="Enter the Marks"
+<<<<<<< HEAD
                                   value={blueprint?.MaskRemembering}
+=======
+                                  value={MaskRemembering}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setMaskRemembering(e.target.value);
                                   }}
@@ -797,7 +973,11 @@ const AdminEditBluePrint = () => {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+<<<<<<< HEAD
                                   value={blueprint?.NQUnderstanding}
+=======
+                                  value={NQUnderstanding}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setNQUnderstanding(e.target.value);
                                   }}
@@ -808,7 +988,11 @@ const AdminEditBluePrint = () => {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+<<<<<<< HEAD
                                   value={blueprint?.MaskUnderstanding}
+=======
+                                  value={MaskUnderstanding}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setMaskUnderstanding(e.target.value);
                                   }}
@@ -827,7 +1011,11 @@ const AdminEditBluePrint = () => {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+<<<<<<< HEAD
                                   value={blueprint?.NQExpression}
+=======
+                                  value={NQExpression}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setNQExpression(e.target.value);
                                   }}
@@ -838,7 +1026,11 @@ const AdminEditBluePrint = () => {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+<<<<<<< HEAD
                                   value={blueprint?.MaskExpression}
+=======
+                                  value={MaskExpression}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setMaskExpression(e.target.value);
                                   }}
@@ -857,7 +1049,11 @@ const AdminEditBluePrint = () => {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter No. of Questions"
+<<<<<<< HEAD
                                   value={blueprint?.NQAppreciation}
+=======
+                                  value={NQAppreciation}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setNQAppreciation(e.target.value);
                                   }}
@@ -868,7 +1064,11 @@ const AdminEditBluePrint = () => {
                                   type="number"
                                   className="vi_0"
                                   placeholder="Enter the Marks"
+<<<<<<< HEAD
                                   value={blueprint?.MaskAppreciation}
+=======
+                                  value={MaskAppreciation}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(e) => {
                                     setMaskAppreciation(e.target.value);
                                   }}
@@ -884,7 +1084,11 @@ const AdminEditBluePrint = () => {
                                 <CKEditor
                                   editor={ClassicEditor}
                                   className="vi_0"
+<<<<<<< HEAD
                                   data={blueprint?.Instructions}
+=======
+                                  data={Instructions}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   onChange={(event, editor) => {
                                     const data = editor.getData();
                                     setInstructions(data);
@@ -916,6 +1120,7 @@ const AdminEditBluePrint = () => {
                                     <label htmlFor="">No. of Marks</label>
                                   </div>
                                 </div>
+<<<<<<< HEAD
                               </div> */}
                               {/* {blueprint?.Weightageofthecontent?.map(
                                 (val, i) => {
@@ -988,6 +1193,65 @@ const AdminEditBluePrint = () => {
                                 }
                               )} */}
 
+=======
+                              </div>
+                              <div className="row">
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Form.Select
+                                      aria-label="Default select example"
+                                      onChange={(e) => {
+                                        setlabel(e.target.value);
+                                      }}
+                                    >
+                                      <option value="">
+                                        Selete the Type of Question
+                                      </option>
+                                      {weightage
+                                        ?.filter(
+                                          (ele) => subjects == ele?.Subject
+                                        )
+                                        .map((val, i) => {
+                                          return (
+                                            <option value={val?.Content}>
+                                              {val?.Content}
+                                            </option>
+                                          );
+                                        })}
+                                    </Form.Select>
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
+                                      placeholder="Enter the Weightage"
+                                      className="vi_0"
+                                      onChange={(e) => {
+                                        setMarks(e.target.value);
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-md-4">
+                                  <div className="do-sear">
+                                    <Button
+                                      style={{
+                                        backgroundColor: "red",
+                                        color: "white",
+                                      }}
+                                      onClick={() => {
+                                        AddWeightageofthecontent();
+                                      }}
+                                    >
+                                      Add
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                               <div className="row mt-4">
                                 <div className="col-md-12">
                                   <Table
@@ -1006,6 +1270,7 @@ const AdminEditBluePrint = () => {
                                       </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                       {blueprint?.Weightageofthecontent?.map(
                                         (item, i) => {
                                           return (
@@ -1044,6 +1309,28 @@ const AdminEditBluePrint = () => {
                                           );
                                         }
                                       )}
+=======
+                                      {Arr1?.map((item, i) => {
+                                        return (
+                                          <tr key={i}>
+                                            <td>{i + 1}</td>
+                                            <td>{item?.label}</td>
+                                            <td>{item?.Marks}</td>
+                                            <td>
+                                              <AiFillDelete
+                                                color="red"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  deletedWeightageofthecontent(
+                                                    i
+                                                  );
+                                                }}
+                                              />
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                     </tbody>
                                   </Table>
                                 </div>
@@ -1170,6 +1457,63 @@ const AdminEditBluePrint = () => {
                                     }
                                   )} */}
 
+<<<<<<< HEAD
+=======
+                                  <div className="row">
+                                    <div className="col-md-3 mt-2">
+                                      <Form.Select
+                                        aria-label="Default select example"
+                                        onChange={(e) => {
+                                          setQAType(e.target.value);
+                                        }}
+                                      >
+                                        <option value="">
+                                          Selete the Type of Question
+                                        </option>
+                                        {getalltypesofques?.map((val, i) => {
+                                          return (
+                                            <option
+                                              value={val?.Typesofquestion}
+                                            >
+                                              {val?.Typesofquestion}
+                                            </option>
+                                          );
+                                        })}
+                                      </Form.Select>
+                                    </div>
+                                    <div className="col-md-3">
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        placeholder="Enter Total No. of Questions"
+                                        onChange={(e) => {
+                                          setNQA(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="col-md-3">
+                                      <input
+                                        type="number"
+                                        className="vi_0"
+                                        placeholder="Enter the mask per question"
+                                        onChange={(e) => {
+                                          setMask(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="col-md-3">
+                                      <Button
+                                        style={{
+                                          backgroundColor: "red",
+                                          color: "white",
+                                        }}
+                                        onClick={AddTypesofquestion}
+                                      >
+                                        Add
+                                      </Button>
+                                    </div>
+                                  </div>
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                   <div className="row mt-4">
                                     <div className="col-md-12">
                                       <Table
@@ -1189,6 +1533,7 @@ const AdminEditBluePrint = () => {
                                           </tr>
                                         </thead>
                                         <tbody>
+<<<<<<< HEAD
                                           {blueprint.TypesofQuestions.map(
                                             (val, i) => {
                                               return (
@@ -1227,6 +1572,28 @@ const AdminEditBluePrint = () => {
                                               );
                                             }
                                           )}
+=======
+                                          {Arr.map((val, i) => {
+                                            return (
+                                              <tr key={i}>
+                                                <td>{i + 1}</td>
+                                                <td>{val?.QAType}</td>
+                                                <td>{val?.NQA}</td>
+                                                <td>{val?.Mask}</td>
+                                                <td>
+                                                  {" "}
+                                                  <AiFillDelete
+                                                    color="red"
+                                                    cursor="pointer"
+                                                    onClick={() =>
+                                                      deleteQuestionType(i)
+                                                    }
+                                                  />
+                                                </td>
+                                              </tr>
+                                            );
+                                          })}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         </tbody>
                                       </Table>
                                     </div>
@@ -1267,6 +1634,7 @@ const AdminEditBluePrint = () => {
                                       <label htmlFor="">Total Marks</label>
                                       <input
                                         type="text"
+                                        value={Arr?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}
                                         className="vi_0"
                                         placeholder="Total Marks"
                                       />
@@ -1297,7 +1665,11 @@ const AdminEditBluePrint = () => {
                                       <input
                                         type="text"
                                         className="vi_0 mt-2"
+<<<<<<< HEAD
                                         value={blueprint?.Easy}
+=======
+                                        value={Easy}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         placeholder="Enter No. of Questions"
                                         onChange={(e) => {
                                           setEasy(e.target.value);
@@ -1310,7 +1682,11 @@ const AdminEditBluePrint = () => {
                                         type="number"
                                         className="vi_0 mt-2"
                                         placeholder="Enter the Marks"
+<<<<<<< HEAD
                                         value={blueprint?.EasyMask}
+=======
+                                        value={EasyMask}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         onChange={handleChangeeasy}
                                       />
                                     </div>
@@ -1326,7 +1702,11 @@ const AdminEditBluePrint = () => {
                                       <input
                                         type="text"
                                         className="vi_0"
+<<<<<<< HEAD
                                         value={blueprint?.Average}
+=======
+                                        value={Average}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         placeholder="Enter No. of Questions"
                                         onChange={(e) => {
                                           setAverage(e.target.value);
@@ -1337,7 +1717,11 @@ const AdminEditBluePrint = () => {
                                       <input
                                         type="number"
                                         className="vi_0"
+<<<<<<< HEAD
                                         value={blueprint?.AverageMask}
+=======
+                                        value={AverageMask}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                         placeholder="Enter the Marks"
                                         onChange={handleChangeaverage}
                                       />
@@ -1354,20 +1738,34 @@ const AdminEditBluePrint = () => {
                                       <input
                                         type="text"
                                         className="vi_0"
+<<<<<<< HEAD
                                         value={blueprint?.Difficult}
                                         placeholder="Enter No. of Questions"
                                         onChange={handleChangedifficult}
+=======
+                                        value={Difficult}
+                                        placeholder="Enter No. of Questions"
+                                        onChange={(e) => {
+                                          setDifficult(e.target.value);
+                                        }}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                       />
                                     </div>
                                     <div className="col-md-4">
                                       <input
                                         type="number"
                                         className="vi_0"
+<<<<<<< HEAD
                                         value={blueprint?.DifficultMask}
                                         placeholder="Enter the Marks"
                                         onChange={(e) => {
                                           setDifficultMask(e.target.value);
                                         }}
+=======
+                                        value={DifficultMask}
+                                        placeholder="Enter the Marks"
+                                        onChange={handleChangedifficult}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                       />
                                     </div>
                                     <div className="col-md-4"></div>
@@ -1384,10 +1782,18 @@ const AdminEditBluePrint = () => {
                                         type="number"
                                         className="vi_0"
                                         placeholder="Total Marks"
+<<<<<<< HEAD
                                         value={blueprint?.TotalDifficultMask}
                                         onClick={(e) => {
                                           setTotalDifficultMask(e.target.value);
                                         }}
+=======
+                                        value={TotalDifficultMask}
+                                        onClick={(e) => {
+                                          setTotalDifficultMask(e.target.value);
+                                        }}
+                                        readOnly
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                                       />
                                     </div>
                                   </div>
@@ -1427,7 +1833,11 @@ const AdminEditBluePrint = () => {
                         <Button varient="success" onClick={handleComplete}>
                           {completedSteps() === totalSteps() - 1
                             ? "Submit"
+<<<<<<< HEAD
                             : "Update & Save"}
+=======
+                            : "Complete Step"}
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
                         </Button>
                       ))}
                   </Box>
@@ -1436,6 +1846,7 @@ const AdminEditBluePrint = () => {
             </div>
           </Box>
         </div>
+<<<<<<< HEAD
         <Modal
           show={show6}
           onHide={handleClose6}
@@ -1590,6 +2001,8 @@ const AdminEditBluePrint = () => {
             );
           })} */}
         </Modal>
+=======
+>>>>>>> e42ae6e0b4bf49d986769669700057c3ce0ed0b7
       </div>
     </>
   );

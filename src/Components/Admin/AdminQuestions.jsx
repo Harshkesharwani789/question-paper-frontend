@@ -40,81 +40,19 @@ const AdminQuestions = () => {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
-  //post
-  const formdata = new FormData();
-  const [Board, setBoard] = useState("");
-  const [Medium, setMedium] = useState("");
-  const [Class, setClass] = useState("");
-  const [Sub_Class, setSub_Class] = useState("");
-  const [Subject, setSubject] = useState("");
-  const [Chapter_Name, setChapter_Name] = useState("");
-  const [Types_Question, setTypes_Question] = useState("");
-  const [Question_From, setQuestion_From] = useState("");
-  const [Question, setQuestion] = useState("");
-  const [Option_1, setOption_1] = useState("");
-  const [Option_2, setOption_2] = useState("");
-  const [Option_3, setOption_3] = useState("");
-  const [Option_4, setOption_4] = useState("");
-  const [Image, setImage] = useState("");
-  const [Marks, setMarks] = useState("");
-  const [Answer, setAnswer] = useState("");
-
-  const AddQuestion = async () => {
-    formdata.set("Board", Board);
-    formdata.set("Medium", Medium);
-    formdata.set("Class", Class);
-    formdata.set("Sub_Class", Sub_Class);
-    formdata.set("Subject", Subject);
-    formdata.set("Chapter_Name", Chapter_Name);
-    formdata.set("Types_Question", Types_Question);
-    formdata.set("Question_From", Question_From);
-    formdata.set("Question", Question);
-    formdata.set("Option_1", Option_1);
-    formdata.set("Option_2", Option_2);
-    formdata.set("Option_3", Option_3);
-    formdata.set("Option_4", Option_4);
-    formdata.set("Image", Image);
-    formdata.set("Marks", Marks);
-    formdata.set("Answer", Answer);
-    formdata.set("id", admin?._id);
-    try {
-      const config = {
-        url: "/admin/AddQuestionPaper",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: formdata,
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        handleClose();
-        return swal({
-          title: "yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      return swal({
-        title: "oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Ok!",
-      });
-    }
-  };
+  const [formdata, setformdata] = useState();
   //get
   const [Questions, setQuestions] = useState([]);
 
   const getAllQuestions = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllQuestionUser"
+        `http://localhost:8000/api/admin/getAllQuestionAdmin/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (res.status == 200) {
         setQuestions(res.data.success);
@@ -129,6 +67,8 @@ const AdminQuestions = () => {
       });
     }
   };
+  // get
+
   //update
   const [updateQuestion, setupdateQuestion] = useState("");
 
@@ -142,7 +82,7 @@ const AdminQuestions = () => {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        data: formdata,
+  
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -245,6 +185,7 @@ const AdminQuestions = () => {
   useEffect(() => {
     getAllQuestions();
   }, []);
+  console.log(Questions);
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -273,65 +214,6 @@ const AdminQuestions = () => {
             Add Questions
           </button>
         </div>
-        {/* <div className="row p-2 align-items-end justify-content-around mb-3">
-          <div className="col-lg-2 " style={{ width: "fit-content" }}>
-            <label>Select :</label>
-            <Form.Select
-              aria-label="Default select example"
-              style={{ height: "35px" }}
-              value={itempage}
-              onChange={(e) => setItempage(e.target.value)}
-            >
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-              <option value={15}>15</option>
-              <option value={15}>20</option>
-              <option value={15}>25</option>
-            </Form.Select>
-          </div>
-
-          <div className="col-lg-2">
-            <label>From :</label>
-            <Form.Control
-              type="date"
-              aria-describedby="basic-addon1"
-              value={startDate}
-              onChange={(e) => setstartDate(e.target.value)}
-            />
-          </div>
-
-          <div className="col-lg-2">
-            <label>To :</label>
-            <Form.Control
-              type="date"
-              aria-describedby="basic-addon1"
-              value={endDate}
-              onChange={(e) => setendDate(e.target.value)}
-            />
-          </div>
-
-          <div className="col-lg-2">
-            <button className="btn btn-primary" onClick={filterData}>
-              Submit
-            </button>
-          </div>
-
-          <div
-            className="input-group col-lg-4 hgjhgyu"
-            style={{ width: "auto", height: "35px", marginTop: "20px" }}
-          >
-            <span class="input-group-text" id="basic-addon1">
-              <BsSearch />
-            </span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search..."
-              aria-describedby="basic-addon1"
-              onChange={handleFilter}
-            />
-          </div>
-        </div> */}
 
         <div className="">
           <Table
@@ -342,12 +224,13 @@ const AdminQuestions = () => {
             <thead style={{ backgroundColor: "orange" }}>
               <tr>
                 <th>S.No</th>
-                <th>Date</th>
+                <th>Section</th>
                 <th>Board</th>
                 <th>Medium</th>
                 <th>Class</th>
                 <th>Subject</th>
                 <th>Sub-Class</th>
+                <th>Types of Question</th>
 
                 <th>
                   <div>View</div>
@@ -355,80 +238,58 @@ const AdminQuestions = () => {
 
                 <th>Action</th>
               </tr>
-              {/* <tr>
-                <th rowSpan={2}>
-                  {" "}
-                  <div>Starting Prices</div>
-                </th>
-                <th>
-                  <div>Ending price</div>
-                </th>
-              </tr> */}
             </thead>
 
             <tbody>
-             
-              <tr>
-                <td>xcvxcv</td>
-                <td>xcvxc</td>
-                <td>xcv</td>
-                <td>xc</td>
-                <td>xcv</td>
-                <td>xcv</td>
-                <td>xcvcv</td>
+              {Questions?.map((val, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{val?.Section}</td>
+                    <td>{val?.Board}</td>
+                    <td>{val?.Medium}</td>
+                    <td>{val?.Class}</td>
+                    <td>{val?.Subject}</td>
+                    <td>{val?.Sub_Class}</td>
+                    <td>{val?.Types_Question}</td>
 
-                <td>
-                  <FaEye
-                    color="blue"
-                    onClick={() => {
-                      navigate("/adminquestiondetailsview");
-                    }}
-                  />
-                </td>
-
-                <td>
-                  {" "}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div>
-                      <BiSolidEdit
-                        className="text-success"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
+                    <td>
+                      <FaEye
+                        color="blue"
                         onClick={() => {
-                          setupdateQuestion();
-                          navigate("/admineditquestiondetails");
-                          // setBoard(item?.Board);
-                          // setMedium(item?.Medium);
-                          // setClass(item?.Class);
-                          // setSub_Class(item?.Sub_Class);
-                          // setSubject(item?.Subject);
-                          // setChapter_Name(item?.Chapter_Name);
-                          // setTypes_Question(item?.Types_Question);
-                          // setQuestion_From(item?.Question_From);
-                          // setQuestion(item?.Question);
-                          // setOption_1(item?.Option_1);
-                          // setOption_2(item?.Option_2);
-                          // setOption_3(item?.Option_3);
-                          // setOption_4(item?.Option_4);
-                          // setImage(item?.Image);
-                          // setMarks(item?.Marks);
-                          // setAnswer(item?.Answer);
+                          navigate(`/adminquestiondetailsview/${val?._id}`);
                         }}
                       />
-                    </div>
-                    <div>
-                      <AiFillDelete
-                        className="text-danger"
-                        style={{ cursor: "pointer", fontSize: "20px" }}
-                        onClick={() => {
-                          setDeleteA();
-                          handleShow2();
-                        }}
-                      />{" "}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-             
+                    </td>
+
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setupdateQuestion();
+                              navigate("/admineditquestiondetails");
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            onClick={() => {
+                              setDeleteA();
+                              handleShow2();
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </div>
@@ -516,7 +377,7 @@ const AdminQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
@@ -524,21 +385,21 @@ const AdminQuestions = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={show2} onHide={handleClose2}>
+        <Modal show={show2} onHide={handleClose2} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-md-12">
-                <p className="fs-1" style={{ color: "red" }}>
-                  Are You Sure ?
+            <div className="col-md-12">
+                <p className="fs-4" style={{ color: "red" }}>
+                  Are you sure you want to delete this data?
                 </p>
               </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary">Delete</Button>

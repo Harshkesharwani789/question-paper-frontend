@@ -164,7 +164,7 @@ function AdminBlueprint() {
   const [NQA, setNQA] = useState("");
   const [Mask, setMask] = useState("");
   const [DurationOfExam, setDurationOfExam] = useState("");
-  const [TotalMask, setTotalMask] = useState("");
+
   const [Easy, setEasy] = useState("");
   const [EasyMask, setEasyMask] = useState("");
   const [Average, setAverage] = useState("");
@@ -175,32 +175,28 @@ function AdminBlueprint() {
   const [label, setlabel] = useState("");
   const [Marks, setMarks] = useState("");
   const [TypesofQuestions, setTypesofQuestions] = useState(false);
+  const [data, setData] = useState([]);
+  const [TotalMask, setTotalMask] = useState("");
 
   // Add for dificulty level
 
   const handleChangeeasy = (e) => {
-    const value = e.target.value;
-    setEasyMask(value);
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setEasyMask(newValue);
+    setTotalDifficultMask(newValue + AverageMask + DifficultMask);
   };
   const handleChangeaverage = (e) => {
-    const value = e.target.value;
-    setAverageMask(value);
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setAverageMask(newValue);
+    setTotalDifficultMask(EasyMask + newValue + DifficultMask);
   };
 
   const handleChangedifficult = (e) => {
-    const value = e.target.value;
-    setDifficultMask(value);
+    const newValue = parseInt(e.target.value, 10) || 0;
+    setDifficultMask(newValue);
+    setTotalDifficultMask(EasyMask + AverageMask + newValue);
   };
-  const updatedadd = (value1, value2, value3) => {
-    const parsevalue1 = parseFloat(value1);
-    const parsevalue2 = parseFloat(value2);
-    const pasrsevalue3 = parseFloat(value3);
-    const calculatedresult =
-      isNaN(parsevalue1) || isNaN(parsevalue2) || isNaN(pasrsevalue3)
-        ? "Invalid Input"
-        : parsevalue1 + parsevalue2 + pasrsevalue3;
-    setTotalDifficultMask(calculatedresult);
-  };
+  // Add for map value marks details
 
   // Array of object 2
   const [Arr1, setArr1] = useState([]);
@@ -307,7 +303,7 @@ function AdminBlueprint() {
 
       let Question = 1;
       Arr.forEach((ele) => {
-        if (ele?.QAType === QAType && ele?.NQA === NQA && ele?.Mask === Mask) {
+        if (ele?.QAType === QAType ) {
           Question = 0;
           swal({
             title: "Oops!",
@@ -463,13 +459,7 @@ function AdminBlueprint() {
     getallweightagecontent();
     getSubject();
   }, []);
-  console.log(getboardname);
-  console.log(getclassname);
-  console.log(getaddsubclass);
-  console.log(Medium);
-  console.log(getalltypesofques);
-  console.log(weightage);
-  console.log(subject);
+
   return (
     <>
       <div className="box_1">
@@ -998,7 +988,7 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0"
-                                        placeholder="Enter No. of Questions"
+                                        placeholder="Enter Total No. of Questions"
                                         onChange={(e) => {
                                           setNQA(e.target.value);
                                         }}
@@ -1008,7 +998,7 @@ function AdminBlueprint() {
                                       <input
                                         type="number"
                                         className="vi_0"
-                                        placeholder="Enter the Marks"
+                                        placeholder="Enter the mask per question"
                                         onChange={(e) => {
                                           setMask(e.target.value);
                                         }}
@@ -1105,6 +1095,7 @@ function AdminBlueprint() {
                                       <label htmlFor="">Total Marks</label>
                                       <input
                                         type="text"
+                                        value={Arr?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}
                                         className="vi_0"
                                         placeholder="Total Marks"
                                       />
@@ -1194,7 +1185,9 @@ function AdminBlueprint() {
                                         className="vi_0"
                                         value={Difficult}
                                         placeholder="Enter No. of Questions"
-                                        onChange={handleChangedifficult}
+                                        onChange={(e) => {
+                                          setDifficult(e.target.value);
+                                        }}
                                       />
                                     </div>
                                     <div className="col-md-4">
@@ -1203,9 +1196,7 @@ function AdminBlueprint() {
                                         className="vi_0"
                                         value={DifficultMask}
                                         placeholder="Enter the Marks"
-                                        onChange={(e) => {
-                                          setDifficultMask(e.target.value);
-                                        }}
+                                        onChange={handleChangedifficult}
                                       />
                                     </div>
                                     <div className="col-md-4"></div>
@@ -1222,10 +1213,11 @@ function AdminBlueprint() {
                                         type="number"
                                         className="vi_0"
                                         placeholder="Total Marks"
-                                        // value={TotalDifficultMask}
+                                        value={TotalDifficultMask}
                                         onClick={(e) => {
                                           setTotalDifficultMask(e.target.value);
                                         }}
+                                        readOnly
                                       />
                                     </div>
                                   </div>
