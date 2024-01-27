@@ -22,6 +22,7 @@ import { Col } from "react-bootstrap";
 import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
 import axios from "axios";
+import swal from "sweetalert";
 
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -66,15 +67,14 @@ const QuestionPaper = ({ text }) => {
     const data = await html2canvas(document.querySelector("#pdf"), {
       useCORS: true,
     });
-    console.log("hhhh", data);
     const img = data.toDataURL("image/png");
-    console.log("ddkd1", img);
+
     const imgProperties = pdf.getImageProperties(img);
-    console.log("ddkd2", imgProperties);
+
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    console.log("ddkd3", pdfWidth);
+  
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-    console.log("ddkd4", pdfHeight);
+
     pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("Question_Paper.pdf");
   };
