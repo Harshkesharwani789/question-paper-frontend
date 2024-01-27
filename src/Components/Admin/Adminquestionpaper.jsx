@@ -22,7 +22,7 @@ import { Col } from "react-bootstrap";
 import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
 
-const QuestionPaper = ({ text }) => {
+const AdminQuestionPaper = ({ text }) => {
   const navigate = useNavigate();
 
   const [show, setShow] = useState("");
@@ -1109,4 +1109,4 @@ const QuestionPaper = ({ text }) => {
   );
 };
 
-export default QuestionPaper;
+export default AdminQuestionPaper;

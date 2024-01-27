@@ -204,10 +204,10 @@ function AdminBlueprintdetailsview() {
               </div>
               <div className="objectives-table">
                 <Table bordered hover size="md" style={{ border: "1px solid" }}>
-                  <tbody key={i}>
+                  <tbody >
                     {blueprint?.TypesofQuestions?.map((val, i) => {
                       return (
-                        <tr>
+                        <tr key={i}>
                           <td>{val?.QAType}</td>
                           <td>
                             {val?.NQA}x{val?.Mask}
