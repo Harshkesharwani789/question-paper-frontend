@@ -228,7 +228,7 @@ const BluePrint = () => {
                             <td>{val?.EasyMask}</td>
                             <td>{val?.AverageMask}</td>
                             <td>{val?.DifficultMask}</td>
-                            <td>{val?.TotalDifficultMask}</td>
+                            <td>{val?.TotalDifficultMask} </td>
                           </tr>
                         </tbody>
                       </Table>
