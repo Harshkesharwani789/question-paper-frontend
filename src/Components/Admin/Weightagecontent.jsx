@@ -311,7 +311,7 @@ const Weightagecontent = () => {
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>
               Add Weightage Of the Content
@@ -369,7 +369,7 @@ const Weightagecontent = () => {
         </Modal>
 
         {/* Edit Package modal */}
-        <Modal show={show1} onHide={handleClose1}>
+        <Modal show={show1} onHide={handleClose1} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>
               Edit Weightage Of the Content
@@ -431,6 +431,7 @@ const Weightagecontent = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
