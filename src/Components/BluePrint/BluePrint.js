@@ -185,7 +185,7 @@ const BluePrint = () => {
                                 <td>
                                   {item?.NQA}x {item?.Mask}
                                 </td>
-                                <td></td>
+                                <td>{val?.NQA * val?.Mask}</td>
                               </tr>
                             );
                           })}
@@ -194,9 +194,19 @@ const BluePrint = () => {
                             <td>
                               <b>Total</b>
                             </td>
-                            <td></td>
                             <td>
-                              <b>100</b>
+                              {blueprint?.TypesofQuestions?.reduce(
+                                (a, i) => a + Number(i?.NQA),
+                                0
+                              )}
+                            </td>
+                            <td>
+                              <b>
+                                {blueprint?.TypesofQuestions?.reduce(
+                                  (a, i) => a + Number(i?.Mask * i?.NQA),
+                                  0
+                                )}
+                              </b>
                             </td>
                           </tr>
                         </tbody>

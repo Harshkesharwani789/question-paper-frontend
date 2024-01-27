@@ -17,7 +17,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
+import parse from "html-react-parser";
 import { Col } from "react-bootstrap";
 import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
@@ -148,33 +148,58 @@ const QuestionPaper = ({ text }) => {
               </div>
             </div>
             <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>1)</b>
-                  <b>What is the color of apple? What is the color of apple?</b>
-                </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) Red</div>
-                  <div className="col-6 mb-3 d-flex">b) Purple</div>
-                </Row>
+            {Questions?.map((item, i) => {
+              return (
+                <div className="question-body mt-2">
+                  <div>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <b>{i + 1}</b>
+                      <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                    </div>
+                    {item?.Image ? (
+                      <div>
+                        <img
+                          src={`http://localhost:8000/Questions/${item?.Image}`}
+                          className="mcq-img"
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) blue</div>
-                  <div className="col-6 mb-3 d-flex">d) yellow</div>
-                </Row>
+                    <Row>
+                      <div className="col-6 mb-3 d-flex">
+                        a) &nbsp;{item?.Option_1 ? parse(item?.Option_1) : ""}
+                      </div>
+                      <div className="col-6 mb-3 d-flex">
+                        b) &nbsp;{item?.Option_2 ? parse(item?.Option_2) : ""}
+                      </div>
+                    </Row>
 
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
+                    <Row>
+                      <div className="col-6 mb-3 d-flex">
+                        c) &nbsp; {item?.Option_3 ? parse(item?.Option_3) : ""}
+                      </div>
+                      <div className="col-6 mb-3 d-flex">
+                        d) &nbsp;{item?.Option_4 ? parse(item?.Option_4) : ""}
+                      </div>
+                    </Row>
+
+                    <Row>
+                      <div className="ans-section">
+                        <div className="ans">Answer: </div>
+                        <div className="ans-box"></div>
+                        <div className="ans-line"></div>
+                      </div>
+                    </Row>
                   </div>
-                </Row>
-              </div>
-            </div>
+                </div>
+              );
+            })}
+
             <br />
-            <div className="question-body">
+            {/* <div className="question-body">
               <div>
                 <div style={{ display: "flex", gap: "12px" }}>
                   <b>2)</b>
@@ -279,7 +304,7 @@ const QuestionPaper = ({ text }) => {
                 </Row>
               </div>
             </div>
-            <br />
+            <br /> */}
           </div>
           <div className="page-footer">
             <div>8th Std. English QP</div>
