@@ -195,38 +195,36 @@ const AdminQuestionDetailsview = () => {
                   data={Option_3}
                   onChange={handleChange5}
                 /> */}
+                <p className="vi_0">
+                  {question_details?.Option_3
+                    ? parse(question_details?.Option_3)
+                    : ""}
+                </p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                {/* <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_4}
-                  onChange={handleChange6}
-                /> */}
+                <p className="vi_0">
+                  {question_details?.Option_4
+                    ? parse(question_details?.Option_4)
+                    : ""}
+                </p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image</label>
-                {/* <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                /> */}
+                <label htmlFor="">Image</label> <br />
+                <img
+                  src={`http://localhost:8000/Questions/${question_details?.Image}`}
+                  alt=""
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
-                {/* <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                  onChange={(e) => setMarks(e.target.value)}
-                /> */}
+                <p className="vi_0">{question_details?.Marks}</p>
               </div>
             </div>
             {/* <div className="col-md-6">
@@ -249,6 +247,11 @@ const AdminQuestionDetailsview = () => {
                     data={Answer}
                     onChange={handleChange7}
                   /> */}
+                  <p className="vi_0">
+                    {question_details?.Answer
+                      ? parse(question_details?.Answer)
+                      : ""}
+                  </p>
                 </div>
               </div>
             </div>
