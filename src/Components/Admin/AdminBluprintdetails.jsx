@@ -131,7 +131,7 @@ const AdminBlueprintdetails = () => {
               navigate("/adminblueprint");
             }}
           >
-            Add Blue Print Details
+            Add Blue Print
           </button>
         </div>
         <div className="row">
@@ -368,7 +368,7 @@ const AdminBlueprintdetails = () => {
         </Modal> */}
 
         {/* Edit Package modal */}
-        <Modal show={show1} onHide={handleClose1}>
+        <Modal show={show1} onHide={handleClose1} style={{zIndex:"99999"}}>
           <Modal.Header style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>
               Edit Service List
@@ -402,21 +402,21 @@ const AdminBlueprintdetails = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={show2} onHide={handleClose2}>
+        <Modal show={show2} onHide={handleClose2} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
+          <div className="row">
               <div className="col-md-12">
-                <p className="fs-1" style={{ color: "red" }}>
-                  Are You Sure ?
+                <p className="fs-4" style={{ color: "red" }}>
+                  Are you sure you want to delete this data?
                 </p>
               </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary">Delete</Button>

@@ -449,7 +449,7 @@ const AdminQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
@@ -457,21 +457,21 @@ const AdminQuestions = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={show2} onHide={handleClose2}>
+        <Modal show={show2} onHide={handleClose2} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-md-12">
-                <p className="fs-1" style={{ color: "red" }}>
-                  Are You Sure ?
+            <div className="col-md-12">
+                <p className="fs-4" style={{ color: "red" }}>
+                  Are you sure you want to delete this data?
                 </p>
               </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary">Delete</Button>

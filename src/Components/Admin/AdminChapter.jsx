@@ -343,7 +343,7 @@ const AdminChapter = () => {
         </Pagination>
 
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Chapter</Modal.Title>
           </Modal.Header>
@@ -381,6 +381,11 @@ const AdminChapter = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
+            <Button className="mx-2" variant="success"
+              onClick={handleClose}>
+                Close
+                
+              </Button>
               <Button
                 className="mx-2"
                 variant="primary"
@@ -400,6 +405,8 @@ const AdminChapter = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
+
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
@@ -475,6 +482,8 @@ const AdminChapter = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
+
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>

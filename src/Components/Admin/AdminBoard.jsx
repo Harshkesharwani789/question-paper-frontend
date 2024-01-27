@@ -284,10 +284,11 @@ const AdminBoard = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
+
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Partners</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Add Board</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -346,6 +347,7 @@ const AdminBoard = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Board</Modal.Title>
@@ -404,6 +406,8 @@ const AdminBoard = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
+          style={{zIndex:"99999"}}
+
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
