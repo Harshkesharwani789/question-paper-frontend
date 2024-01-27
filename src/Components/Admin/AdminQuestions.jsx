@@ -81,7 +81,7 @@ const AdminQuestions = () => {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        data: formdata,
+  
       };
       let res = await axios(config);
       if (res.status == 200) {

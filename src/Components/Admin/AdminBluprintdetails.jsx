@@ -18,6 +18,7 @@ import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 const AdminBlueprintdetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -97,14 +98,47 @@ const AdminBlueprintdetails = () => {
         setblueprint(res.data.success);
       }
     } catch (error) {
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        dangerMode: true,
+      });
       console.log(error);
     }
   };
   useEffect(() => {
     getallblueprint();
   }, []);
-  console.log(blueprint);
-  console.log("first", admin);
+ 
+
+  const [deleteId,setdeleteId]=useState("");
+
+  const makedeleteblueprint=async()=>{
+    try {
+      let data=await axios.delete("http://localhost:8000/api/admin/deleteBLUEPRINT/"+deleteId+"/"+admin?._id,{headers: {
+        Authorization: `Bearer ${token}`,
+      }});
+      if(data.status==200){
+        swal({
+          title: "Success!",
+          text: data.data.success,
+          icon: "success",
+          dangerMode: true,
+        });
+        handleClose2()
+        getallblueprint()
+      }
+    } catch (error) {
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        dangerMode: true,
+      });
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -251,6 +285,7 @@ const AdminBlueprintdetails = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
+                              setdeleteId(val?._id)
                               handleShow2();
                             }}
                           />{" "}
@@ -419,7 +454,7 @@ const AdminBlueprintdetails = () => {
             <Button variant="danger" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary">Delete</Button>
+            <Button variant="primary" onClick={makedeleteblueprint}>Delete</Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>
