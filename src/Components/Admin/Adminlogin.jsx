@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Button, InputGroup, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-// import "../LoginPage3/LoginPage3.css";
-// import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import "../Admin/Admin.css";
@@ -80,23 +78,12 @@ const AdminSignin = () => {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <div
-        className="container d-flex justify-content-center"
-        style={{ paddingTop: "5rem" }}
-      >
+      <div className="container p-3">
         <div className="">
           <div className="box">
             <div className="row">
               <div className="col-md-6">
-                <div
-                  style={{
-                    backgroundImage: "url('../exam.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    height: "480px",
-                  }}
-                >
+                <div className="admin-login-bg">
                   <div style={{ padding: "150px 0px", textAlign: "center" }}>
                     <h3 style={{ color: "white", fontSize: "35px" }}>
                       Welcome To <br></br>Admin Pannel
@@ -131,8 +118,6 @@ const AdminSignin = () => {
                       Password
                     </Form.Label>
                     <InputGroup>
-                      {/* <Form.Control type="password" />
-                      <InputGroup.Text><FaEye /></InputGroup.Text> */}
                       <Form.Control
                         type={PasswordShow ? "text" : "password"}
                         className="login-input"
@@ -222,10 +207,11 @@ const AdminSignin = () => {
           <Button
             variant=""
             style={{
-              backgroundColor: "rgb(236 48 84)",
-              border: "1px solid #rgb(236 48 84)",
+              backgroundColor: "navy",
+              border: "1px solid navy",
               color: "white",
             }}
+            onClick={handleClose}
           >
             OK
           </Button>

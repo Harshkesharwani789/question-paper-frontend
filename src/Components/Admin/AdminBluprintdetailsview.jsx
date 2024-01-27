@@ -114,7 +114,7 @@ function AdminBlueprintdetailsview() {
                 <b>Weightage to Objectives - Marks</b>
               </div>
               <div className="objectives-table">
-                <Table bordered hover style={{ border: "1px solid" }}>
+                <Table responsive bordered hover style={{ border: "1px solid" }}>
                   <thead>
                     <tr>
                       <th>Objectives</th>
@@ -158,6 +158,7 @@ function AdminBlueprintdetailsview() {
               <div className="text-center">
                 <div className="objectives-table">
                   <Table
+                  responsive
                     bordered
                     hover
                     size="sm"

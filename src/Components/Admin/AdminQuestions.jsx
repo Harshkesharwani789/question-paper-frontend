@@ -40,6 +40,7 @@ const AdminQuestions = () => {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
+  const [formdata, setformdata] = useState();
   //get
   const [Questions, setQuestions] = useState([]);
 

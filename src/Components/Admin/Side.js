@@ -34,6 +34,7 @@ import { IoEarth } from "react-icons/io5";
 import "../Admin/Admin.css";
 import Navbar from 'react-bootstrap/Navbar';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Side = () => {
   const [Board, setBoard] = useState(false);
@@ -67,7 +68,9 @@ const Side = () => {
               className="admin-logo-img"
             />
           </div>
-          <div className="sidebar-close-icon" onClick={handleNavCollapse}>X</div>
+          <div className="sidebar-close-icon" onClick={handleNavCollapse}>
+          <AiOutlineClose />
+          </div>
         </div>
         <ul
         >
