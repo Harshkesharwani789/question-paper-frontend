@@ -161,7 +161,7 @@ function App() {
             element={<Main children={<AdminBlueprint />} />}
           />
           <Route
-            path="/admineditblueprint"
+            path="/admineditblueprint/:blueprint_ID"
             element={<Main children={<AdminEditBluePrint />} />}
           />
           <Route

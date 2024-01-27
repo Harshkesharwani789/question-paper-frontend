@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, InputGroup, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 // import "../LoginPage3/LoginPage3.css";
@@ -11,6 +11,8 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 const AdminSignin = () => {
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+
   const navigate = useNavigate();
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(FaEyeSlash);
@@ -26,6 +28,7 @@ const AdminSignin = () => {
       setType("password");
     }
   };
+
   const [email, setemail] = useState("");
   const [passward, setpassward] = useState("");
 
@@ -78,6 +81,16 @@ const AdminSignin = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // useEffect(() => {
+  //   const admin = JSON.parse(sessionStorage.getItem("admin"));
+  //   if (!admin) {
+  //     alert("Please login first");
+  //     window.location.assign("/admin");
+  //   } else {
+  //     window.location.assign("/dashboard")
+  //   }
+  // }, []);
   return (
     <div>
       <div

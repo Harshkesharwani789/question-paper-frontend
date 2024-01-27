@@ -161,12 +161,12 @@ const AdminTypeOfQuestions = () => {
     }
   };
 
-  // // Pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const productPerPage = 5;
-  // const visitedPage = pageNumber * productPerPage;
-  // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  // const pageCount = Math.ceil(subject.length / productPerPage);
+  // Pagination
+  const [pageNumber, setPageNumber] = useState(0);
+  const productPerPage = 5;
+  const visitedPage = pageNumber * productPerPage;
+  const displayPage = getalltypesofques.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(getalltypesofques.length / productPerPage);
   useEffect(() => {
     getalltypesofquess();
   }, []);
@@ -216,7 +216,7 @@ const AdminTypeOfQuestions = () => {
             </thead>
 
             <tbody>
-              {getalltypesofques?.map((item, i) => {
+              {displayPage?.map((item, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
@@ -256,7 +256,7 @@ const AdminTypeOfQuestions = () => {
           </Table>
         </div>
 
-        {/* <Pagination style={{ float: "right" }}>
+        <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -276,7 +276,7 @@ const AdminTypeOfQuestions = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
+        </Pagination>
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
