@@ -159,6 +159,11 @@
       gap: 8px;
       padding: 5px 5px;
     }
+    .share-button {
+      position: absolute;
+      top: 23%;
+      right: 0;
+    
   }
   
- 
+}

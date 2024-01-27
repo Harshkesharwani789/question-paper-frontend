@@ -1,3 +1,5 @@
+/* Admin Panel Starts */
+
 .vi_0 {
   border: 2px solid #dee2e6;
   outline-width: 0px;
@@ -5,7 +7,6 @@
   border-radius: 5px;
   width: 100%;
 }
-/* Admin Panel Starts */
 .header.light {
   padding: 12px 23px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
@@ -40,7 +41,7 @@
 
 .css-za8x2c-MuiButtonBase-root-MuiButton-root {
   color: #f6f7f8 !important;
-  background: rgb(8, 52, 148) !important;
+  background: navy !important;
 }
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
@@ -85,7 +86,6 @@ tr {
   width: 380px;
   height: 421px;
   border-radius: 10px;
-  /* display: flex; */
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
     rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
@@ -195,6 +195,7 @@ label {
   overflow: hidden;
   overflow-y: scroll;
   width: 258px;
+  z-index: 99999;
 }
 
 .webmanagement {
@@ -225,7 +226,7 @@ label {
 .si09 ul {
   list-style: none;
   padding-top: 6px;
-  background-color: #083494;
+  background-color: navy;
   padding-left: unset;
   min-height: 650px;
 }
@@ -402,10 +403,10 @@ table {
 
 /* Style table header (thead) */
 th {
-     /* background-color: #86b7fe !important; */
-     text-align: center;
-     padding: 10px;
-     color: black !important;
+  /* background-color: #86b7fe !important; */
+  text-align: center;
+  padding: 10px;
+  color: black !important;
 }
 
 /* Style table rows (tbody) */
@@ -450,9 +451,6 @@ tr:hover {
   color: var(--bs-pagination-active-color);
   background-color: #abd23b !important;
   border-color: #abd23b !important;
-}
-
-element.style {
 }
 
 .page-item:first-child .page-link {
@@ -524,7 +522,15 @@ table thead tr th {
   color: #083494;
 }
 
-.cards-container{
+.admin-login-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 480px;
+  background-image: url(../../../public/page2bg.png);
+}
+
+.cards-container {
   display: flex;
   text-align: center;
   gap: 10px;
@@ -535,7 +541,7 @@ table thead tr th {
   height: 102px;
 }
 
-.sidebar-close-icon{
+.sidebar-close-icon {
   background-color: white;
   color: black;
   font-family: sans-serif;
@@ -543,7 +549,7 @@ table thead tr th {
   font-size: 18px;
   display: none;
 }
-.admin-sidebar-display{
+.admin-sidebar-display {
   width: 20%;
 }
 /* Admin Panel ends */
@@ -552,7 +558,6 @@ table thead tr th {
   .left-side {
     overflow: unset;
     overflow-y: unset;
-    /* width: auto; */
     width: 0px;
   }
 
@@ -562,36 +567,41 @@ table thead tr th {
   .si09 {
     position: absolute;
     top: 0px;
-    /* top: 80px; */
     left: 0;
   }
   .admin-logo-img {
     width: 200px;
-    /* height: 100px; */
     height: 78px;
   }
-  .admin-sidebar-display{
+  .admin-sidebar-display {
     width: 20%;
     background-color: navy;
     z-index: 99999;
-    /* padding: 15px !important; */
   }
-  .sidebar-close-icon{
+  .sidebar-close-icon {
     display: block;
   }
-  .cards-container{
+  .cards-container {
     display: block;
-    padding:0px 15px;
+    padding: 0px 15px;
   }
-  .right-admin{
+  .right-admin {
     width: 80%;
   }
   .header-c {
     font-size: 18px;
     margin: 5px;
-}
+  }
 
-.css-m5vj9m-MuiStepper-root{
-  display: table-caption !important;
-}
+  .css-m5vj9m-MuiStepper-root {
+    display: table-caption !important;
+  }
+  .box {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-login-bg {
+    height: 300px;
+  }
 }
