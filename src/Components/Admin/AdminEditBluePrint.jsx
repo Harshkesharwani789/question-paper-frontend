@@ -379,7 +379,7 @@ const token = sessionStorage.getItem("token");
     }
   };
   const Blueprint = async () => {
-    alert("A")
+
     try {
       const config = {
         url: "/admin/updateBLUEPRINT",

@@ -192,7 +192,7 @@ const LoginPage3 = () => {
                       placeholder="Enter the 
                       Size of the Question Paper (Recommended-A4)"
                       readOnly
-                      onChange={() => {
+                      onChange={(e) => {
                         setSize_ofthe_Question(e.target.value);
                       }}
                     />

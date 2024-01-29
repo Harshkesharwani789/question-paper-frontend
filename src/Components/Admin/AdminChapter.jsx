@@ -277,7 +277,7 @@ const AdminChapter = () => {
             </thead>
 
             <tbody>
-              {chapters?.map((item, i) => {
+              {displayPage?.map((item, i) => {
                 return (
                   <tr>
                     <td>{i + 1}</td>

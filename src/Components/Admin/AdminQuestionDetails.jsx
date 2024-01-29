@@ -422,9 +422,9 @@ const AdminQuestionDetails = () => {
                   }}
                 >
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="English">Easy</option>
-                  <option value="Hindi">Average</option>
-                  <option value="Kanada">Difficult</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Average">Average</option>
+                  <option value="Difficult">Difficult</option>
                 </Form.Select>
               </div>
             </div>

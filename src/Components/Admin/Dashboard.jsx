@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Admin/Admin.css";
 import Card from "react-bootstrap/Card";
 
 const Dashboard = () => {
+ 
   return (
     <div>
       <h2 className="header-c ">Dashboard</h2>
