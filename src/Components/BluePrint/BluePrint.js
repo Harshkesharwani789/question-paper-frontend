@@ -60,11 +60,11 @@ const BluePrint = () => {
                 {blueprint
                   ?.filter(
                     (ele) =>
-                      ele.board == state?.Board &&
-                      ele.medium == state?.Medium &&
-                      ele.className == state?.Class &&
-                      ele.SubClassName == state?.Sub_Class &&
-                      ele.subjects == state?.Subject
+                      ele?.board == state?.Board &&
+                      ele?.medium == state?.Medium &&
+                      ele?.className == state?.Class &&
+                      ele?.SubClassName == state?.Sub_Class &&
+                      ele?.subjects == state?.Subject
                   )
                   ?.map((val, i) => {
                     return (

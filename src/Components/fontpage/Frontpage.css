@@ -10,9 +10,9 @@
   justify-content: space-around;
 }
 
-.top-logo{
-    display: flex;
-    justify-content: space-between;
+.top-logo {
+  display: flex;
+  justify-content: space-between;
 }
 .square {
   height: 40px;
@@ -29,8 +29,8 @@
 }
 
 /* new  */
-.details-display{
-    padding: 4px 50px;
+.details-display {
+  padding: 4px 50px;
 }
 .top-titles-container {
   padding: 20px 0 0 0px;
@@ -60,109 +60,112 @@
   text-align: center;
   align-items: center;
 }
-.student-details{
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
+.student-details {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
 }
-.line{
-    border-bottom: 1px solid;
-    width: 75%;
+.line {
+  border-bottom: 1px solid;
+  width: 75%;
 }
-.student-number-row{
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
+.student-number-row {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
 }
 
-.number-box{
-    border: 1px solid;
-    padding: 10px 18px;
+.number-box {
+  border: 1px solid;
+  padding: 10px 18px;
 }
 .school-number-row {
-    padding: 10px 0;
-    display: flex;
-    gap: 25px;
+  padding: 10px 0;
+  display: flex;
+  gap: 25px;
 }
-.number-box-1{
-    border: 1px solid;
-    padding: 10px 12px;
+.number-box-1 {
+  border: 1px solid;
+  padding: 10px 12px;
+}
+.line-2 {
+  border-bottom: 1px solid;
+  width: 83%;
+}
 
+.third-row {
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
 }
-.line-2{
-    border-bottom: 1px solid;
-    width: 83%;
+.fourth-row {
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
 }
-
-.third-row{
-    display: flex;
-    padding: 10px 0;
-    justify-content: space-between;
-}
-.fourth-row{
-    display: flex;
-    padding: 10px 0;
-    justify-content: space-between;
-}
-.line-3{
-    border-bottom: 1px solid;
-    width: 100px;
+.line-3 {
+  border-bottom: 1px solid;
+  width: 100px;
 }
 
 .school-details {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  text-align: center;
 }
 
-.line-4{
-    border-bottom: 1px solid;
-    width: 440px;
+.line-4 {
+  border-bottom: 1px solid;
+  width: 440px;
 }
-.line-5{
-    border-bottom: 1px solid;
-    width: 65%;
+.line-5 {
+  border-bottom: 1px solid;
+  width: 65%;
 }
-.line-6{
-    border-bottom: 1px solid;
-    width: 71%;
+.line-6 {
+  border-bottom: 1px solid;
+  width: 71%;
 }
 
-@media screen and (max-width:799px) {
-    .student-number-row, .school-number-row {
-        display: block;
-    }
-    .third-row{
-        display: block;
-    }
-    
-    .details-display {
-        padding: 4px 20px;
-    }
-    .class-data b {
-font-size: 14px;
-    }
-    .line{
-        width: 50%;
-    }
-    .title-1 h4 {
-font-size: 20px;
-    }
-    .line-2{
-        width: 70%;
-    }
-    .line-3{
-        width: 100%;
-    }
-    .line-4{
-        width: 130px;
-    }
-    .ss{
+@media screen and (max-width: 799px) {
+  .student-number-row,
+  .school-number-row {
+    display: block;
+  }
+  .third-row {
+    display: block;
+  }
+
+  .details-display {
+    padding: 4px 20px;
+  }
+  .class-data b {
+    font-size: 14px;
+  }
+  .line {
+    width: 50%;
+  }
+  .title-1 h4 {
+    font-size: 20px;
+  }
+  .line-2 {
+    width: 70%;
+  }
+  .line-3 {
+    width: 100%;
+  }
+  .line-4 {
+    width: 130px;
+  }
+  .ss {
     display: flex;
     margin: auto;
     text-align: center;
     align-items: baseline;
-    }
-   
+  }
+  .top-logo{
+    display: block;
+    text-align: center;
+  }
 }
