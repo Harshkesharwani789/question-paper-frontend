@@ -14,10 +14,10 @@ import {
 } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
+import parse from "html-react-parser";
 import { Col } from "react-bootstrap";
 import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
@@ -27,6 +27,8 @@ import swal from "sweetalert";
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
+  const { state } = useLocation();
+  console.log("state", state);
   //get
   const [Questions, setQuestions] = useState([]);
 
@@ -72,7 +74,7 @@ const QuestionPaper = ({ text }) => {
     const imgProperties = pdf.getImageProperties(img);
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
-  
+
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
     pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
@@ -130,157 +132,109 @@ const QuestionPaper = ({ text }) => {
 
         <div className="question-paper-display">
           <div className="second-page-body">
-            <h3 style={{ textAlign: "center" }}>Section -A</h3>
+            <h3 style={{ textAlign: "center" }}>Section A</h3>
             <div className="question-body-main">
               <div>
                 <div style={{ display: "flex", gap: "12px" }}>
-                  <b>I</b>
-                  <b style={{ textAlign: "left" }}>
-                    Four alternatives are given for each of the following
-                    question/ incomplete <br></br>statements choose the correct
-                    alternative and write the complete answer <br></br> along
-                    with the correctoption for question numbers 1 to 20
-                  </b>
+                  <b>Q 1</b>
+                  <b style={{ textAlign: "left" }}>Types of Question</b>
                 </div>
               </div>
               <div style={{ display: "flex", marginTop: "45px" }}>
-                <b>20x1=20</b>
+                <b>20*1=20</b>
               </div>
             </div>
             <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>1)</b>
-                  <b>What is the color of apple? What is the color of apple?</b>
-                </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) Red</div>
-                  <div className="col-6 mb-3 d-flex">b) Purple</div>
-                </Row>
+            {Questions?.filter((ele) => {
+              return (
+                ele.Board == state.Board &&
+                ele.Medium == state.Medium &&
+                ele.Class == state.Class &&
+                ele.Sub_Class == state.Sub_Class &&
+                ele.Subject == state.Subject
+              );
+            })?.map((item, i) => {
+              return (
+                <div className="question-body mt-2">
+                  <div>
+                    <div style={{ display: "flex", gap: "12px" }} key={i}>
+                      <b>{i + 1}</b>
+                      <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                    </div>
+                    {item?.Image ? (
+                      <div>
+                        <img
+                          src={`http://localhost:8000/Questions/${item?.Image}`}
+                          className="mcq-img"
+                          alt=""
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) blue</div>
-                  <div className="col-6 mb-3 d-flex">d) yellow</div>
-                </Row>
+                    <Row>
+                      <div className="col-6 mb-3 d-flex">
+                        {item?.Option_1 ? (
+                          <>
+                            {" "}
+                            a) &nbsp;
+                            {item?.Option_1 ? parse(item?.Option_1) : ""}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div className="col-6 mb-3 d-flex">
+                        {item?.Option_2 ? (
+                          <>
+                            b) &nbsp;
+                            {item?.Option_2 ? parse(item?.Option_2) : ""}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </Row>
 
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
+                    <Row>
+                      <div className="col-6 mb-3 d-flex">
+                        {item?.Option_3 ? (
+                          <>
+                            {" "}
+                            c) &nbsp;{" "}
+                            {item?.Option_3 ? parse(item?.Option_3) : ""}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div className="col-6 mb-3 d-flex">
+                        {item?.Option_4 ? (
+                          <>
+                            {" "}
+                            d) &nbsp;
+                            {item?.Option_4 ? parse(item?.Option_4) : ""}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </Row>
+
+                    <Row>
+                      <div className="ans-section">
+                        <div className="ans">Answer: </div>
+                        <div className="ans-box"></div>
+                        <div className="ans-line"></div>
+                      </div>
+                    </Row>
                   </div>
-                </Row>
-              </div>
-            </div>
-            <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>2)</b>
-                  <b>What is the color of apple? What is the color of apple?</b>
                 </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) Red</div>
-                  <div className="col-6 mb-3 d-flex">b) Purple</div>
-                </Row>
-
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) blue</div>
-                  <div className="col-6 mb-3 d-flex">d) yellow</div>
-                </Row>
-
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-              </div>
-            </div>
-            <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>3)</b>
-                  <b>What is the color of apple? What is the color of apple?</b>
-                </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) Red</div>
-                  <div className="col-6 mb-3 d-flex">b) Purple</div>
-                </Row>
-
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) blue</div>
-                  <div className="col-6 mb-3 d-flex">d) yellow</div>
-                </Row>
-
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-              </div>
-            </div>
-            <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>4)</b>
-                  <b>What is the color of apple? What is the color of apple?</b>
-                </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) Red</div>
-                  <div className="col-6 mb-3 d-flex">b) Purple</div>
-                </Row>
-
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) blue</div>
-                  <div className="col-6 mb-3 d-flex">d) yellow</div>
-                </Row>
-
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-              </div>
-            </div>
-            <br />
-            <div className="question-body">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>5)</b>
-                  <b>Find the picture and choose the correct answer </b>
-                </div>
-                <div>
-                  <img src="../Images/mcq.jpg" className="mcq-img" alt="" />
-                </div>
-                <Row>
-                  <div className="col-6 mb-3 d-flex">a) School</div>
-                  <div className="col-6 mb-3 d-flex">b) Hospital</div>
-                </Row>
-
-                <Row>
-                  <div className="col-6 mb-3 d-flex">c) Gound</div>
-                  <div className="col-6 mb-3 d-flex">d) Home</div>
-                </Row>
-                <Row>
-                  <div className="ans-section">
-                    <div className="ans">Answer: </div>
-                    <div className="ans-box"></div>
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-              </div>
-            </div>
-            <br />
+              );
+            })}
           </div>
+          <br />
           <div className="page-footer">
             <div>8th Std. English QP</div>
             <div>1</div>
@@ -289,7 +243,7 @@ const QuestionPaper = ({ text }) => {
 
         {/* second page starts here  */}
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
             <div className="question-body">
               <div>
@@ -477,11 +431,11 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>2</div>
           </div>
-        </div>
+        </div> */}
 
         {/* third page start here  */}
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
             <div className="question-body">
               <div>
@@ -621,10 +575,10 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>3</div>
           </div>
-        </div>
+        </div> */}
         {/* fourth page starts here  */}
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
             <div className="question-body">
               <div>
@@ -784,11 +738,11 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>4</div>
           </div>
-        </div>
+        </div> */}
 
         {/* fifth page starts here  */}
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
             <div className="question-body">
               <div>
@@ -964,11 +918,11 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>5</div>
           </div>
-        </div>
+        </div> */}
 
         {/* sixth page starts here  */}
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
             <h3 style={{ textAlign: "center" }}>Section -D</h3>
             <div className="question-body-main">
@@ -1128,7 +1082,6 @@ const QuestionPaper = ({ text }) => {
                 <Row>
                   <div className="ans-line" style={{ padding: "10px 0" }}></div>
                 </Row>
-                {/* <br /> */}
               </div>
             </div>
           </div>
@@ -1136,7 +1089,7 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>6</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
