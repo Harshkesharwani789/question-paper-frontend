@@ -9,6 +9,11 @@
 .asd {
   justify-content: space-around;
 }
+
+.top-logo{
+    display: flex;
+    justify-content: space-between;
+}
 .square {
   height: 40px;
   width: 40px;

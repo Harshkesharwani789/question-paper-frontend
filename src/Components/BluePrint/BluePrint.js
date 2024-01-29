@@ -20,9 +20,48 @@ const BluePrint = () => {
   return (
     <div>
       <div className="blueprint-container">
-        <div className="blueprint-content-display-container">
+        <div className="Answer-paper-display">
           {/* BluePrint display */}
-          <div className="blueprint-content-display">
+
+          <div className="details-display ">
+            {/* <div style={{textAlign:"center"}} >
+              <img src="../Images/logo.png" alt="" style={{ width: "100px" }} />
+            </div> */}
+
+            <div className="top-titles-container">
+              <div className="top-logo">
+                <div>
+                  <img src="../Images/logo.png" alt="" style={{ width: "100px" }} />
+                </div>
+                <div className="title-1">
+                  <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
+                </div>
+              </div>
+              <div className="title-2">
+                <h5>KSQAAC, Malleshwaram, Bengaluru-560003</h5>
+              </div>
+              <div className="title-3">
+                <h4>Assessment-March 2023 Blue Print</h4>
+              </div>
+            </div>
+
+            <div className="class-details">
+              <div className="class-data">
+                <b>Class : 8</b>
+              </div>
+              <div className="class-data">
+                <b>Subject: First Language English</b>
+              </div>
+              <div>
+                <div className="class-data">
+                  <b>Marks: 40</b>
+                </div>
+                <div className="class-data">
+                  <b>Time: 2 Hours</b>
+                </div>
+              </div>
+            </div>
+
             <div className="blueprint-titles">
               <h3>First Language English 2014</h3>
               <h4>DESIGN & BLUE PRINT</h4>
@@ -122,7 +161,7 @@ const BluePrint = () => {
                   bordered
                   hover
                   size="md"
-                  style={{  border: "1px solid" }}
+                  style={{ border: "1px solid" }}
                 >
                   <tbody>
                     <tr>
@@ -195,24 +234,25 @@ const BluePrint = () => {
               </div>
             </div>
           </div>
-
           <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              padding: "10px",
-            }}
-          >
-            <a href="/questionpaper">
-              <Button
-                variant=""
-                style={{ backgroundColor: "navy", color: "white" }}
-              >
-                Generate Question Paper
-              </Button>
-            </a>
-          </div>
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px",
+          }}
+        >
+          <a href="/questionpaper">
+            <Button
+              variant=""
+              style={{ backgroundColor: "navy", color: "white" }}
+            >
+              Generate Question Paper
+            </Button>
+          </a>
+        
         </div>
+        </div>
+      
       </div>
     </div>
   );

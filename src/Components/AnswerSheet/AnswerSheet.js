@@ -12,8 +12,13 @@ const AnswerSheet = () => {
             <div className="Answer-paper-display">
                 <div className="details-display ">
                     <div className="top-titles-container">
-                        <div className="title-1">
-                            <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
+                        <div className="top-logo">
+                            <div>
+                                <img src="../Images/logo.png" alt="" style={{ width: "100px" }} />
+                            </div>
+                            <div className="title-1">
+                                <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
+                            </div>
                         </div>
                         <div className="title-2">
                             <h5>KSQAAC, Malleshwaram, Bengaluru-560003</h5>
