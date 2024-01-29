@@ -366,6 +366,56 @@ const AdminSyllabusCopy = () => {
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div className="row">
+              <div className="do-sear mt-2">
+                <label>Year</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Year"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Class</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter class"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Subject</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Subject"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Sub-Class</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Sub-Class"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Medium</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter medium"
+                />
+              </div>
+            </div>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Chapter Number</label>

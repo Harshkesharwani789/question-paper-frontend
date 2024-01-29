@@ -176,20 +176,7 @@ const UserList = () => {
                     <td>
                       {" "}
                       <div style={{ display: "flex", gap: "20px" }}>
-                        {/* <div>
-                          <BiSolidEdit
-                            className="text-success"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              handleShow1(item?._id);
-                              setupdateTeacher(item?._id);
-                              setDate(item?.Date);
-                              setteacherId(item?.teacherId);
-                              setMobile(item?.Mobile);
-                              setEmail(item?.Email);
-                            }}
-                          />{" "}
-                        </div> */}
+                      
                         <div>
                           <AiFillDelete
                             className="text-danger"
