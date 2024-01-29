@@ -39,12 +39,7 @@ const Weightagecontent = () => {
     });
     setData([...filteredData]);
   };
-  // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(data.length / productPerPage);
+
 
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -195,7 +190,12 @@ const Weightagecontent = () => {
       });
     }
   };
-
+ // Pagination
+ const [pageNumber, setPageNumber] = useState(0);
+ const productPerPage = 5;
+ const visitedPage = pageNumber * productPerPage;
+ const displayPage = weightage.slice(visitedPage, visitedPage + productPerPage);
+ const pageCount = Math.ceil(weightage.length / productPerPage);
   useEffect(() => {
     getSubject();
     getallweightagecontent();
@@ -247,7 +247,7 @@ const Weightagecontent = () => {
             </thead>
 
             <tbody>
-              {weightage?.map((val, i) => {
+              {displayPage?.map((val, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>

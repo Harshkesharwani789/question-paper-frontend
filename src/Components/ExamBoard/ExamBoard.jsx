@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
 import axios from "axios";
+import swal from "sweetalert";
 
 const ExamBoard = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -21,19 +23,67 @@ const ExamBoard = () => {
   const [before, setBefore] = useState(false);
   const [after, setAfter] = useState("");
 
-   // get method of Board
-   const [getboardname, setboardname] = useState([]);
-   const getallboardname = async () => {
-     try {
-       let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-       if (res.status == 200) {
-         setboardname(res.data.success);
-       }
-     } catch (error) {
-       console.log(error);
-     }
-   };
-    //get method of Name of Examination
+  const [Board, setBoard] = useState("");
+  const [Mediumm, setMediumm] = useState("");
+  const [Classs, setClasss] = useState("");
+  const [Sub_Classs, setSub_Classs] = useState("");
+  const [Exam_Name, setExam_Name] = useState("");
+  const [Exam_Lavel, setExam_Lavel] = useState("");
+
+  const tellus = async () => {
+    try {
+      const config = {
+        url: "/teacher/registerGuestionGenrate  ",
+        baseURL: "http://localhost:8000/api",
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          Board: Board,
+          Medium: Mediumm,
+          Class: Classs,
+          Sub_Class: Sub_Classs,
+          Exam_Name: Exam_Name,
+          Exam_Lavel: Exam_Lavel,
+          authId: user?._id,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        swal({
+          title: "Yeah!",
+          text: "Successfully Payment Done !!!",
+          icon: "success",
+          button: "OK!",
+        });
+        navigate("/loginpage3", { state: res.data.success });
+      }
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+
+  // get method of Board
+  const [getboardname, setboardname] = useState([]);
+  const getallboardname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      if (res.status == 200) {
+        setboardname(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get method of Name of Examination
   const [NameExam, setNameExam] = useState([]);
   const getNameExamination = async () => {
     try {
@@ -63,9 +113,7 @@ const ExamBoard = () => {
   const [Examlevell, setExamlevell] = useState([]);
   const getExamLevel = async () => {
     try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getExamLevel"
-      );
+      let res = await axios.get("http://localhost:8000/api/admin/getExamLevel");
       if (res.status == 200) {
         setExamlevell(res.data.success);
       }
@@ -73,26 +121,41 @@ const ExamBoard = () => {
       console.log(error);
     }
   };
-    // get method of add class
-    const [getclassname, setgetclassName] = useState([]);
-    const getallclassname = async () => {
-      try {
-        let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-        if (res.status == 200) {
-          setgetclassName(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
+  // get method of add class
+  const [getclassname, setgetclassName] = useState([]);
+  const getallclassname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      if (res.status == 200) {
+        setgetclassName(res.data.success);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-   useEffect(()=>{
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
     getallboardname();
     getNameExamination();
     getAddMedium();
     getExamLevel();
     getallclassname();
-   },[])
+    getaddsubclasss();
+  }, []);
 
   return (
     <div>
@@ -105,13 +168,13 @@ const ExamBoard = () => {
                   <div className="line-1">
                     <h2>
                       {" "}
-                     
-                      <p className="anim-typewriter text-dark" style={{paddingLeft:"3rem"}}>
-                       Welcome {user?.FirstName} {user?.LastName}!{" "}
+                      <p
+                        className="anim-typewriter text-dark"
+                        style={{ paddingLeft: "3rem" }}
+                      >
+                        Welcome {user?.FirstName} {user?.LastName}!{" "}
                       </p>
-                      <span className="fs-4">
-                        Please Enter Your Details
-                      </span>
+                      <span className="fs-4">Please Enter Your Details</span>
                     </h2>
                   </div>
                 </div>
@@ -162,25 +225,38 @@ const ExamBoard = () => {
                     <>
                       <Row>
                         <div className="col-10 mb-4">
-                          <Form.Select aria-label="Default select example">
-                          
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setBoard(e.target.value);
+                            }}
+                          >
                             <option>Select Education Board</option>
-                           {getboardname?.map((item,i)=>{
-                            return(
-                              <option value={item?.boardName}>{item?.boardName}</option>
-                            )
-                           })}
+                            {getboardname?.map((item, i) => {
+                              return (
+                                <option value={item?.boardName}>
+                                  {item?.boardName}
+                                </option>
+                              );
+                            })}
                           </Form.Select>
                         </div>
                       </Row>
                       <Row>
                         <div className="col-10 mb-4">
-                          <Form.Select aria-label="Default select example">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setExam_Name(e.target.value);
+                            }}
+                          >
                             <option>Select Exams Name</option>
-                            {NameExam?.map((item,i)=>{
-                              return(
-                                <option value={item?.NameExamination}>{item?.NameExamination}</option>
-                              )
+                            {NameExam?.map((item, i) => {
+                              return (
+                                <option value={item?.NameExamination}>
+                                  {item?.NameExamination}
+                                </option>
+                              );
                             })}
                           </Form.Select>
                         </div>
@@ -188,38 +264,77 @@ const ExamBoard = () => {
 
                       <Row>
                         <div className="col-10 mb-4">
-                          <Form.Select aria-label="Default select example">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setMediumm(e.target.value);
+                            }}
+                          >
                             <option>Select Medium</option>
-                            {Medium?.map((item,i)=>{
-                              return(
-                                <option value={item?.mediumName}>{item?.mediumName}</option>
-                              )
+                            {Medium?.map((item, i) => {
+                              return (
+                                <option value={item?.mediumName}>
+                                  {item?.mediumName}
+                                </option>
+                              );
                             })}
                           </Form.Select>
                         </div>
                       </Row>
                       <Row>
                         <div className="col-10 mb-4">
-                          <Form.Select aria-label="Default select example">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setExam_Lavel(e.target.value);
+                            }}
+                          >
                             <option>Select Exam Level</option>
-                            {Examlevell?.map((item,i)=>{
-                              return(
-                                <option value={item?.Examlevel}>{item?.Examlevel}</option>
-                              )
+                            {Examlevell?.map((item, i) => {
+                              return (
+                                <option value={item?.Examlevel}>
+                                  {item?.Examlevel}
+                                </option>
+                              );
                             })}
                           </Form.Select>
                         </div>
                       </Row>
                       <Row>
                         <div className="col-10 mb-4">
-                          <Form.Select aria-label="Default select example">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setClasss(e.target.value);
+                            }}
+                          >
                             <option>Select Class</option>
-                            {getclassname?.map((item,i)=>{
-                              return(
-                                <option value={item?.className}>{item?.className}</option>
-                              )
+                            {getclassname?.map((item, i) => {
+                              return (
+                                <option value={item?.className} key={i}>
+                                  {item?.className}
+                                </option>
+                              );
                             })}
-                           
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setSub_Classs(e.target.value);
+                            }}
+                          >
+                            <option>Select Sub Class</option>
+                            {getaddsubclass?.map((item, i) => {
+                              return (
+                                <option value={item?.subclassName} key={i}>
+                                  {item?.subclassName}
+                                </option>
+                              );
+                            })}
                           </Form.Select>
                         </div>
                       </Row>
@@ -276,7 +391,7 @@ const ExamBoard = () => {
           <Button
             variant="primary"
             onClick={() => {
-              navigate("/loginpage3");
+              tellus();
             }}
           >
             Pay

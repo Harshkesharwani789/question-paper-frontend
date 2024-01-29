@@ -1,9 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../LoginPage3/LoginPage3.css";
 import Form from "react-bootstrap/Form";
 import { Button, FormLabel } from "react-bootstrap";
+import axios from "axios";
+import swal from "sweetalert";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage3 = () => {
+  const { state } = useLocation();
+  console.log("state==>", state);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+  const [School_Logo, setSchool_Logo] = useState("");
+  const [Institute_Name, setInstitute_Name] = useState("");
+  const [Subject, setSubject] = useState("");
+  const [Test_Date, setTest_Date] = useState("");
+  const [Size_ofthe_Question, setSize_ofthe_Question] = useState("");
+  // const [addgenerate, setaddgenerate] = useState("");
+  const generate = async () => {
+    try {
+      const config = {
+        url: "/teacher/upadeteQuestionPaper",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          School_Logo: School_Logo,
+          Institute_Name: Institute_Name,
+          Subject: Subject,
+          Test_Date: Test_Date,
+          Size_ofthe_Question: Size_ofthe_Question,
+          id: state?._id,
+          authId: user?._id,
+        },
+      };
+
+      let res = await axios(config);
+      if (res.status == 200)
+        swal({
+          title: "Yeah!",
+          text: "view blue print !!!",
+          icon: "success",
+          button: "OK!",
+        });
+      navigate("/blueprint", { state: res.data.success });
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+  console.log("first", state?._id);
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getSubject();
+  }, []);
+  console.log(subject);
   return (
     <div>
       <div className="container p-3">
@@ -34,7 +106,12 @@ const LoginPage3 = () => {
                     >
                       School Logo
                     </Form.Label>
-                    <Form.Control type="file" />
+                    <Form.Control
+                      type="file"
+                      onChange={(e) => {
+                        setSchool_Logo(e.target.files[0]);
+                      }}
+                    />
 
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
@@ -45,63 +122,43 @@ const LoginPage3 = () => {
                     <Form.Control
                       type="text"
                       placeholder="Enter Your School / Institute Name"
+                      onChange={(e) => {
+                        setInstitute_Name(e.target.value);
+                      }}
                     />
-                    <Form.Label
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      Class
-                    </Form.Label>
-                    <Form.Select aria-label="Default select example">
-                      <option>Select the Class</option>
-                      <option value="1">LKg</option>
-                      <option value="2">Ukg</option>
-                      <option value="3">Class I</option>
-                      <option value="3">Class II</option>
-                      <option value="3">Class III</option>
-                      <option value="3">Class VI</option>
-                      <option value="3">Class V</option>
-                      <option value="3">Class VI</option>
-                      <option value="3">Class VII</option>
-                      <option value="3">Class VIII</option>
-                      <option value="3">Class IX</option>
-                      <option value="3">Class X</option>
-                      <option value="3">Class XI</option>
-                      <option value="3">Class XII</option>
-                    </Form.Select>
-                    <Form.Label
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      Sub Class
-                    </Form.Label>
-                    <Form.Control type="text" placeholder="Enter Sub Class" />
+
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
                     >
                       Subject
                     </Form.Label>
-                    <Form.Select aria-label="Default select example">
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSubject(e.target.value);
+                      }}
+                    >
                       <option>Select the Subject</option>
-                      <option value="1">English</option>
-                      <option value="2">Hindi</option>
-                      <option value="3">Maths</option>
-                      <option value="3">Science</option>
-                      <option value="3">Social Studies</option>
-                      <option value="3">Language</option>
+                      {subject?.map((item, i) => {
+                        return (
+                          <option value={item?.subjectName} key={i}>
+                            {item?.subjectName}
+                          </option>
+                        );
+                      })}
                     </Form.Select>
-                    <FormLabel
+                    {/* <FormLabel
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
                     >
                       Test Paper Name
-                    </FormLabel>
+                    </FormLabel> */}
                     {/* <Form.Control
                       type="text"
                       placeholder="Enter the Test Paper Name"
                     /> */}
-                    <Form.Select aria-label="Default select example">
+                    {/* <Form.Select aria-label="Default select example">
                       <option>Select Test Paper Name</option>
                       <option value="1">FA-1</option>
                       <option value="2">FA-2</option>
@@ -109,7 +166,7 @@ const LoginPage3 = () => {
                       <option value="3">FA-4</option>
                       <option value="3">FA-5</option>
                       <option value="3">FA-6</option>
-                    </Form.Select>
+                    </Form.Select> */}
                     <FormLabel
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
@@ -119,6 +176,9 @@ const LoginPage3 = () => {
                     <Form.Control
                       type="date"
                       placeholder="Enter the Test Paper Name"
+                      onChange={(e) => {
+                        setTest_Date(e.target.value);
+                      }}
                     />
                     <FormLabel
                       className="fs-6 fw-bold mt-2 "
@@ -127,11 +187,14 @@ const LoginPage3 = () => {
                       Size of the Question Paper
                     </FormLabel>
                     <Form.Control
-                    value="A4"
+                      value="A4"
                       type="text"
                       placeholder="Enter the 
                       Size of the Question Paper (Recommended-A4)"
-                      disabled
+                      readOnly
+                      onChange={(e) => {
+                        setSize_ofthe_Question(e.target.value);
+                      }}
                     />
                   </Form.Group>
 
@@ -140,10 +203,11 @@ const LoginPage3 = () => {
                       margin: "auto",
                       display: "flex",
                       justifyContent: "center",
-                      background:"navy",
+                      background: "navy",
                     }}
+                    onClick={() => generate()}
                   >
-                    <a href="/blueprint" style={{ color:"white", textDecoration:"none"}}>View Blue Print</a>
+                    View Blue Print
                   </Button>
                 </Form>
               </div>
