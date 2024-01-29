@@ -40,14 +40,17 @@ const LoginPage3 = () => {
       };
 
       let res = await axios(config);
+      let am=""
       if (res.status == 200)
+     am= res.data.success;
+    
         swal({
           title: "Yeah!",
           text: "view blue print !!!",
           icon: "success",
           button: "OK!",
         });
-      navigate("/blueprint", { state: res.data.success });
+      navigate("/blueprint", { state:am  });
     } catch (error) {
       console.log(error);
       swal({
