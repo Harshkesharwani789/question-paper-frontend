@@ -39,6 +39,7 @@ import SyllabusCopy from "./Components/SyllabusCopy/SyllabusCopy";
 import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
+import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
 
 function App() {
   return (
@@ -333,6 +334,18 @@ function App() {
                 children={
                   <>
                     <AdminChapter />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/adminsyllabuscopy"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminSyllabusCopy />
                   </>
                 }
               />
