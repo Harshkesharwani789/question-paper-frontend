@@ -252,7 +252,7 @@ const AdminBoard = () => {
               {records?.map((val, i) => {
                 return (
                   <tr key={i}>
-                    <td>{i + 1}</td>
+                    <td>{i + 1 + firstIndex} </td>
                     <td>
                       <p>{val?.boardName}</p>
                     </td>
