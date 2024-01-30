@@ -39,7 +39,6 @@ const AdminBoard = () => {
     });
     setData([...filteredData]);
   };
-  
 
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -176,8 +175,39 @@ const AdminBoard = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = getboardname.slice(visitedPage, visitedPage + productPerPage);
+  const displayPage = getboardname.slice(
+    visitedPage,
+    visitedPage + productPerPage
+  );
   const pageCount = Math.ceil(getboardname.length / productPerPage);
+
+  // newpagination
+  const [data1, setData1] = useState([]);
+  const [Products, setProducts] = useState();
+
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = getboardname.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(getboardname.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
 
   return (
     <>
@@ -197,10 +227,7 @@ const AdminBoard = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Board</h2>
-          <button
-            className="admin-add-btn" 
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Board
           </button>
         </div>
@@ -222,7 +249,7 @@ const AdminBoard = () => {
             </thead>
 
             <tbody>
-              {displayPage?.map((val, i) => {
+              {records?.map((val, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
@@ -263,7 +290,7 @@ const AdminBoard = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -283,10 +310,51 @@ const AdminBoard = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
+
+        <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                       {n}
+                    </a>
+                  </li>
+                );
+              })}
+             
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev"  onClick={() => {
+                    nextpage();
+                  }}>&gt; </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Add Board</Modal.Title>
           </Modal.Header>
@@ -325,10 +393,13 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant=""
-            className="modal-close-btn" onClick={handleClose}>
-              Close
-            </Button>
+              <Button
+                variant=""
+                className="modal-close-btn"
+                onClick={handleClose}
+              >
+                Close
+              </Button>
               <Button
                 className="mx-2 modal-add-btn"
                 variant=""
@@ -348,7 +419,7 @@ const AdminBoard = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Edit Board</Modal.Title>
@@ -388,7 +459,11 @@ const AdminBoard = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose1}
+            >
               Close
             </Button>
             <Button
@@ -409,8 +484,7 @@ const AdminBoard = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
-
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -425,10 +499,14 @@ const AdminBoard = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant=""  className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant=""  className="modal-add-btn" onClick={deleteboard}>
+            <Button variant="" className="modal-add-btn" onClick={deleteboard}>
               Delete
             </Button>
           </Modal.Footer>

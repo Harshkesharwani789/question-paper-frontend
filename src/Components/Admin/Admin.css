@@ -173,7 +173,8 @@ label {
   font-weight: 500;
 }
 
-.paginationBttns {
+/* pgination  */
+/* .paginationBttns {
   width: 80%;
   height: 40px;
   list-style: none;
@@ -201,6 +202,39 @@ label {
   color: white;
   background-color: #fdd12d;
 }
+
+.active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  background-color: #138808 !important;
+  border-color: white !important;
+}
+
+.pagination .page-link{
+  color: #138808 !important;
+}
+
+.page-item span.page-link{
+  color: white !important;
+}
+.page-item:first-child .page-link {
+  border-top-left-radius: var(--bs-pagination-border-radius);
+  border-bottom-left-radius: var(--bs-pagination-border-radius);
+}
+
+.active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: #fff;
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+}
+
+.page-link a{
+  color: #138808 !important;
+} */
+
 
 .add-90 button {
   width: 151px;
@@ -484,46 +518,6 @@ tr:hover {
   padding: 1%;
 }
 
-.active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: var(--bs-pagination-active-color);
-  background-color: #138808 !important;
-  border-color: white !important;
-}
-
-.pagination .page-link{
-  color: #138808 !important;
-}
-
-.page-item span.page-link{
-  color: white !important;
-}
-.page-item:first-child .page-link {
-  border-top-left-radius: var(--bs-pagination-border-radius);
-  border-bottom-left-radius: var(--bs-pagination-border-radius);
-}
-
-.active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: #fff;
-  background-color: var(--bs-pagination-active-bg);
-  border-color: var(--bs-pagination-active-border-color);
-}
-
-/* .active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: var(--bs-pagination-active-color);
-  background-color: #abd23b !important;
-  border-color: #abd23b !important;
-  color: #fff !important;
-} */
-
-.page-link a{
-  color: #138808 !important;
-}
 
 table thead tr th {
   background: navy !important ;
@@ -599,6 +593,9 @@ table thead tr th {
 .admin-sidebar-display {
   width: 20%;
 }
+
+
+
 /* Admin Panel ends */
 
 @media screen and (max-width: 799px) {
