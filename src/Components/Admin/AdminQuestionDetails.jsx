@@ -422,9 +422,9 @@ const AdminQuestionDetails = () => {
                   }}
                 >
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="English">Easy</option>
-                  <option value="Hindi">Average</option>
-                  <option value="Kanada">Difficult</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Average">Average</option>
+                  <option value="Difficult">Difficult</option>
                 </Form.Select>
               </div>
             </div>
@@ -602,8 +602,8 @@ const AdminQuestionDetails = () => {
             </div> */}
           </div>
         </div>
-      </div>
-      <div className="yoihjij text-center my-2">
+
+        <div className="yoihjij text-center my-2 p-2">
         <button
           onClick={() => {
             addquestions();
@@ -612,6 +612,8 @@ const AdminQuestionDetails = () => {
           Add
         </button>
       </div>
+      </div>
+   
     </div>
   );
 };

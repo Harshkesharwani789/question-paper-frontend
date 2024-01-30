@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { Button, Modal, Form, Pagination, Table } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
-const AdminSubject = () => {
+const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+  
+  const [getclassname, setgetclassName] = useState([]);
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -24,18 +30,36 @@ const AdminSubject = () => {
   const handleShow2 = () => setShow2(true);
 
   //Post
-  const [subjectName, setsubjectName] = useState("");
-  const AddSubject = async () => {
-    if (!subjectName)
+  const [chapterName, setChapterName] = useState("");
+  const [description, setDescription] = useState("");
+  const [chapterNumber, setChapterNumber] = useState("");
+  const [marks, setMarks] = useState("");
+
+  const addSyllabus = async () => {
+    if (!chapterName)
       return swal({
         title: "Oops!",
-        text: "Please Enter the Subject",
+        text: "Please Enter the chapter name",
+        icon: "error",
+        button: "Ok!",
+      });
+      if (!marks)
+      return swal({
+        title: "Oops!",
+        text: "Please Enter the marks",
+        icon: "error",
+        button: "Ok!",
+      });
+    if (!description)
+      return swal({
+        title: "Oops!",
+        text: "Please enter description",
         icon: "error",
         button: "Ok!",
       });
     try {
       const config = {
-        url: "/admin/addSubjects",
+        url: "/admin/addSyllabus",
         method: "post",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -43,14 +67,17 @@ const AdminSubject = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          subjectName: subjectName,
+          chapterNumber: chapterNumber,
+          chapterName: chapterName,
+          description: description,
+          marks: marks,
           authId: admin?._id,
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-        getSubject();
+        getAllSyllabus();
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -68,16 +95,17 @@ const AdminSubject = () => {
       });
     }
   };
+
   //get
-  const [subject, setsubject] = useState([]);
+  const [chapters, setchapters] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
-  const getSubject = async () => {
+  const getAllSyllabus = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "http://localhost:8000/api/admin/getAllSyllabus"
       );
       if (res.status == 200) {
-        setsubject(res.data.success);
+        setchapters(res.data.success);
         setnochangedata(res.data.success);
       }
     } catch (error) {
@@ -86,11 +114,11 @@ const AdminSubject = () => {
   };
 
   //update
-  const [updateSubject, setpdateSubject] = useState("");
-  const UpdateSubject = async () => {
+  const [updatechapter, setpdatesetchapter] = useState("");
+  const UpdateSyllabus = async () => {
     try {
       const config = {
-        url: "/admin/updateSubjects",
+        url: "/admin/updateSyllabus",
         method: "put",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -98,16 +126,18 @@ const AdminSubject = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          subjectName: subjectName,
+          chapterNumber: chapterNumber,
+          chapterName: chapterName,
+          description: description,
           authId: admin?._id,
-          id: updateSubject,
+          id: updatechapter,
         },
       };
       let res = await axios(config);
       if (res.status == 200)
         if (res.status == 200) {
           handleClose1();
-          getSubject();
+          getAllSyllabus();
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -126,11 +156,11 @@ const AdminSubject = () => {
     }
   };
   //delete
-  const [sub, setsub] = useState("");
-  const DeleteSubject = async () => {
+  const [chapter, setChapter] = useState("");
+  const DeleteSyllabus = async () => {
     try {
       const config = {
-        url: "/admin/deleteSubjects/" + sub + "/" + admin?._id,
+        url: "/admin/deleteSyllabus/" + chapter + "/" + admin?._id,
         method: "delete",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -141,7 +171,7 @@ const AdminSubject = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose2();
-        getSubject();
+        getAllSyllabus();
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -160,6 +190,22 @@ const AdminSubject = () => {
     }
   };
 
+  //   get method of subject
+  const [subject, setsubject] = useState([]);
+  //   const [nochangedata, setnochangedata] = useState([]);
+//   const getSyllabus = async () => {
+//     try {
+//       let res = await axios.get(
+//         "http://localhost:8000/api/admin/getAllSyllabus"
+//       );
+//       if (res.status == 200) {
+//         setsubject(res.data.success);
+//         setnochangedata(res.data.success);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -173,14 +219,14 @@ const AdminSubject = () => {
           String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
         )
       );
-      setsubject([...filterTableH]);
+      setchapters([...filterTableH]);
     } else {
       setSearchH(e.target.value);
-      setsubject([...nochangedata]);
+      setchapters([...nochangedata]);
     }
   };
   const [searchTermH, setSearchTermH] = useState("");
-  const searchedProductH = subject.filter((item) => {
+  const searchedProductH = chapters.filter((item) => {
     if (searchTermH.value === "") {
       return item;
     }
@@ -194,14 +240,13 @@ const AdminSubject = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(subject.length / productPerPage);
+  const displayPage = chapters.slice(visitedPage, visitedPage + productPerPage);
+  const pageCount = Math.ceil(chapters.length / productPerPage);
   useEffect(() => {
-    getSubject();
+    getAllSyllabus();
   }, []);
-
   return (
-    <>
+    <div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -218,13 +263,13 @@ const AdminSubject = () => {
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Subject</h2>
+          <h2 className="header-c ">Syllabus</h2>
           <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}
             onClick={handleShow}
           >
-            Add Subject
+            Add Syllabus
           </button>
         </div>
 
@@ -238,7 +283,19 @@ const AdminSubject = () => {
               <tr>
                 <th>S.No</th>
                 <th>
-                  <div>Subject</div>
+                  <div>Chapter Number</div>
+                </th>
+                <th>
+                  <div>Chapter Name</div>
+                </th>
+                <th>
+                  <div>Description</div>
+                </th>
+                <th>
+                  <div>Marks</div>
+                </th>
+                <th>
+                  <div>View</div>
                 </th>
                 <th>Action</th>
               </tr>
@@ -248,10 +305,20 @@ const AdminSubject = () => {
               {displayPage?.map((item, i) => {
                 return (
                   <tr>
-                    <td>{i + 1 + visitedPage}</td>
+                    <td>{i + 1}</td>
 
-                    <td>{item?.subjectName}</td>
-
+                    <td>{item?.chapterNumber}</td>
+                    <td>{item?.chapterName}</td>
+                    <td>{item?.description}</td>
+                    <td>{item?.marks}</td>
+                    <td>
+                    <Link
+                        to="/"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        <FaEye color="blue" />
+                      </Link>
+                    </td>
                     <td>
                       {" "}
                       <div style={{ display: "flex", gap: "20px" }}>
@@ -260,10 +327,9 @@ const AdminSubject = () => {
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              handleShow1();
-                              setpdateSubject(item);
-                              setsubjectName(item?.subjectName);
-                              
+                              handleShow1(item);
+                              setpdatesetchapter(item?._id);
+                              setChapterName(item?.chapterName);
                             }}
                           />{" "}
                         </div>
@@ -272,8 +338,8 @@ const AdminSubject = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setsub(item?._id);
-                              handleShow2();
+                              setChapter(item?._id);
+                              handleShow2(item?._id);
                             }}
                           />{" "}
                         </div>
@@ -307,56 +373,124 @@ const AdminSubject = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination>
+
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Subject</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div className="row">
+              <div className="do-sear mt-2">
+                <label>Year</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Year"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Class</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter class"
+                />
+              </div>
+            </div>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Subject</label>
                 <input
                   type="text"
-                  placeholder="Enter Subject"
                   className="vi_0"
-                  onChange={(e) => setsubjectName(e.target.value)}
+                  placeholder="Enter Subject"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Sub-Class</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Sub-Class"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Medium</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter medium"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter Number</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Number"
+                  onChange={(e) => setChapterNumber(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter Name</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Name"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
+              </div>
+            </div>
 
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2">
-        <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Description</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={description}
+                  onChange={(editor) => {
+                    const data = editor.getData();
+                    setDescription(data);
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Marks</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Marks"
+                  onChange={(e) => setMarks(e.target.value)}
+                />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button
-                className="mx-2"
-                variant="success"
-                onClick={handleClose}
-              >
+              <Button className="mx-2" variant="success" onClick={handleClose}>
                 Close
               </Button>
               <Button
                 className="mx-2"
                 variant="primary"
                 onClick={() => {
-                  AddSubject();
+                    addSyllabus();
                 }}
               >
                 Add
@@ -371,64 +505,77 @@ const AdminSubject = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
-            <Modal.Title style={{ color: "white" }}>Edit Subject</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Subject</label>
+                <label>Chapter Number</label>
                 <input
                   type="text"
-                  placeholder="Enter Subject"
                   className="vi_0"
-                  value={subjectName}
-                  onChange={(e) => setsubjectName(e.target.value)}
+                  placeholder="Enter Chapter Number"
+                  onChange={(e) => setChapterName(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter Name</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Name"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
+              </div>
+            </div>
 
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2"> */}
-            {/* <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Description</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Marks</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Marks"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose1}>
+            <Button variant="success" onClick={handleClose1}>
               Close
             </Button>
             <Button
               variant="primary"
               style={{ backgroundColor: "#FAFA33" }}
               onClick={() => {
-                UpdateSubject();
+                UpdateSyllabus();
               }}
             >
               Edit
             </Button>
           </Modal.Footer>
         </Modal>
+
         <Modal
           show={show2}
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -443,17 +590,17 @@ const AdminSubject = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose2}>
+            <Button variant="success" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={DeleteSubject}>
+            <Button variant="primary" onClick={DeleteSyllabus}>
               Delete
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AdminSubject;
+export default AdminSyllabusCopy;

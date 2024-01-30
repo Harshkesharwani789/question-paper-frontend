@@ -51,23 +51,22 @@
   height: 14rem;
 }
 
-.three-4-marks-ans{
-    display: flex;
-    gap: 12px;
-    height: 15rem;
+.three-4-marks-ans {
+  display: flex;
+  gap: 12px;
+  height: 15rem;
 }
 
-.eight-10-marks-ans{
-    display: flex;
-    gap: 12px;
-    height: 63rem;
+.eight-10-marks-ans {
+  display: flex;
+  gap: 12px;
+  height: 63rem;
 }
 .page-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 20px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
 
 @media screen and (max-width: 799px) {
   .top-header {
@@ -94,11 +93,11 @@
   }
   .two-3-marks-ans {
     height: 100%;
-}
-.three-4-marks-ans {
+  }
+  .three-4-marks-ans {
     height: 100%;
-}
-.eight-10-marks-ans{
+  }
+  .eight-10-marks-ans {
     height: 100%;
-}
+  }
 }

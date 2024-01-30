@@ -412,7 +412,7 @@ const AdminClass = () => {
               <h2 className="header-c ">Class</h2>
               <button
                 className=" btn"
-                style={{ backgroundColor: "#083494", color: "white" }}
+                style={{ backgroundColor: "#138808", color: "white" }}
                 onClick={handleShow}
               >
                 Add Class
@@ -507,7 +507,7 @@ const AdminClass = () => {
                   <h2 className="header-c ">Subclass </h2>
                   <button
                     className=" btn"
-                    style={{ backgroundColor: "#083494", color: "white" }}
+                    style={{ backgroundColor: "#138808", color: "white" }}
                     onClick={handleShow3}
                   >
                     Add Subclass
@@ -637,7 +637,7 @@ const AdminClass = () => {
                 classNamee();
               }}
             > */}
-            <Button variant="success" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
             <Button
@@ -684,7 +684,7 @@ const AdminClass = () => {
             style={{ backgroundColor: "#26AAE0" }}
             
           > */}
-          <Button variant="success" onClick={handleClose1}>
+          <Button variant="secondary" onClick={handleClose1}>
             Close
           </Button>
           <Button
@@ -718,7 +718,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose2}>
+          <Button variant="secondary" onClick={handleClose2}>
             Close
           </Button>
           <Button
@@ -772,7 +772,7 @@ const AdminClass = () => {
           <div className="d-flex">
           <Button
               className="mx-2"
-              variant="success"
+              variant="secondary"
               onClick={handleClose3}
             >
               Close
@@ -836,7 +836,7 @@ const AdminClass = () => {
         <Modal.Footer>
         <Button
               className="mx-2"
-              variant="success"
+              variant="secondary"
               onClick={handleClose4}
             >
               Close
@@ -873,7 +873,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose5}>
+          <Button variant="secondary" onClick={handleClose5}>
             Close
           </Button>
           <Button

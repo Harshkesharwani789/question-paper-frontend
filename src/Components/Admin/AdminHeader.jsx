@@ -40,7 +40,7 @@ const AdminHeader = () => {
               style={{ fontSize: "40px", padding: "18px 35px" }}
               onClick={logOut}
             >
-              <AiOutlineLogout />
+              <AiOutlineLogout style={{color:"#000080",cursor:"pointer"}}/>
             </div>
           </div>
 

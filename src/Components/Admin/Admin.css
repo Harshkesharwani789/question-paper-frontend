@@ -103,7 +103,7 @@ tr {
 .header-c {
   font-size: 25px;
   font-weight: 600;
-  color: #083494;
+  color: #138808;
   margin: 10px;
 }
 
@@ -226,7 +226,7 @@ label {
 .si09 ul {
   list-style: none;
   padding-top: 6px;
-  background-color: navy;
+  background-color: #FF9933;
   padding-left: unset;
   min-height: 650px;
 }
@@ -258,8 +258,8 @@ label {
 }
 
 .btn-primary {
-  background: navy !important;
-  border-color: navy !important;
+  background: #138808 !important;
+  border-color: #138808 !important;
   color: white !important;
 }
 
@@ -438,6 +438,13 @@ tr:hover {
   padding: 1%;
 }
 
+.srch-icon{
+  display: flex;
+  padding: 12px;
+  /* width: fit-content; */
+  justify-content: space-between;
+}
+
 .Adminheaderdarkmode {
   background-color: black;
   color: white;
@@ -533,7 +540,8 @@ table thead tr th {
 .cards-container {
   display: flex;
   text-align: center;
-  gap: 10px;
+  padding: 0px 12px;
+  justify-content: space-between;
 }
 
 .admin-logo-img {

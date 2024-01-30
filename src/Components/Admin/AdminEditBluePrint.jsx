@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -6,24 +6,24 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
-import { Form, Modal, Table } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
+import { FaArrowsUpDownLeftRight } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { AiFillDelete } from "react-icons/ai";
 import swal from "sweetalert";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 
 const steps = [
   "Blueprint Details",
-  "Weightage to the Content",
+  "Weightage to the ContentMarks Details",
   "Marks Details",
   " Weightage of the Difficulty Level",
 ];
+
 const AdminEditBluePrint = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -379,7 +379,6 @@ const token = sessionStorage.getItem("token");
     }
   };
   const Blueprint = async () => {
-    alert("A")
     try {
       const config = {
         url: "/admin/updateBLUEPRINT",
@@ -850,7 +849,7 @@ const token = sessionStorage.getItem("token");
                               className="container"
                               style={{ padding: "5px" }}
                             >
-                              {/* <div className="row">
+                              <div className="row">
                                 <div className="col-md-4">
                                   <div className="do-sear">
                                     <label htmlFor="">Select Content</label>
@@ -930,7 +929,7 @@ const token = sessionStorage.getItem("token");
                                     <thead>
                                       <tr>
                                         <th>S No.</th>
-                                        <th>Type of Question</th>
+                                        <th>Content</th>
                                         <th>Marks</th>
                                         <th>Action</th>
                                       </tr>
@@ -998,7 +997,7 @@ const token = sessionStorage.getItem("token");
                                   className="container"
                                   style={{ padding: "5px" }}
                                 >
-                                  {/* <div className="row">
+                                  <div className="row">
                                     <div className="col-md-3">
                                       <label htmlFor="">
                                         Types of Questions
@@ -1010,77 +1009,7 @@ const token = sessionStorage.getItem("token");
                                     <div className="col-md-3">
                                       <label htmlFor="">Marks</label>
                                     </div>
-                                  </div> */}
-                                  {/* {blueprint?.TypesofQuestions?.map(
-                                    (val, i) => {
-                                      return (
-                                        <>
-                                          <div className="row" key={i}>
-                                            <div className="col-md-3 mt-2">
-                                              <Form.Select
-                                                aria-label="Default select example"
-                                                value={val?.QAType}
-                                                onChange={(e) => {
-                                                  setQAType(e.target.value);
-                                                }}
-                                              >
-                                                <option value="">
-                                                  Selete the Type of Question
-                                                </option>
-                                                {getalltypesofques?.map(
-                                                  (val, i) => {
-                                                    return (
-                                                      <option
-                                                        value={
-                                                          val?.Typesofquestion
-                                                        }
-                                                        key={i}
-                                                      >
-                                                        {val?.Typesofquestion}
-                                                      </option>
-                                                    );
-                                                  }
-                                                )}
-                                              </Form.Select>
-                                            </div>
-                                            <div className="col-md-3">
-                                              <input
-                                                type="text"
-                                                className="vi_0"
-                                                placeholder="Enter No. of Questions"
-                                                value={val?.NQA}
-                                                onChange={(e) => {
-                                                  setNQA(e.target.value);
-                                                }}
-                                              />
-                                            </div>
-                                            <div className="col-md-3">
-                                              <input
-                                                type="number"
-                                                className="vi_0"
-                                                placeholder="Enter the Marks"
-                                                value={val?.NQA}
-                                                onChange={(e) => {
-                                                  setMask(e.target.value);
-                                                }}
-                                              />
-                                            </div>
-                                            <div className="col-md-3">
-                                              <Button
-                                                style={{
-                                                  backgroundColor: "red",
-                                                  color: "white",
-                                                }}
-                                                onClick={AddTypesofquestion}
-                                              >
-                                                Update
-                                              </Button>
-                                            </div>
-                                          </div>
-                                        </>
-                                      );
-                                    }
-                                  )} */}
+                                  </div>
 
                                   <div className="row">
                                     <div className="col-md-3 mt-2">
@@ -1148,7 +1077,7 @@ const token = sessionStorage.getItem("token");
                                         <thead>
                                           <tr>
                                             <th>S No.</th>
-                                            <th>Types of Questions</th>
+                                            <th>Content</th>
                                             <th>No. of Question</th>
                                             <th>Marks</th>
                                             <th>Action</th>
@@ -1204,7 +1133,7 @@ const token = sessionStorage.getItem("token");
                                       <input
                                         type="text"
                                         className="vi_0"
-                                        value={blueprint?.DurationOfExam}
+                                        value={DurationOfExam}
                                         placeholder="Enter Duration of Exam"
                                         onChange={(e) => {
                                           setDurationOfExam(e.target.value);

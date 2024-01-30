@@ -48,6 +48,8 @@ const Side = () => {
   const [ExamLevel, setExamLevel] = useState(false);
   const [UserList, setUserList] = useState(false);
   const [AccountHistory, setAccountHistory] = useState(false);
+  const [SyllabusCopy, setsyllabusCopy] = useState(false);
+
 
   // Responsive sidebar
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -98,6 +100,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -121,6 +124,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -145,6 +149,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -168,6 +173,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -191,6 +197,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -214,6 +221,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -222,6 +230,30 @@ const Side = () => {
               <span className="ms-2">
                 Chapters
               </span>
+            </li>
+          </Link>
+          <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(true);
+              }}
+            >
+              <span>
+                <FaWeightHanging style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Syllabus</span>
             </li>
           </Link>
           <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
@@ -239,6 +271,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -262,6 +295,7 @@ const Side = () => {
                 setQuestionLevel(false);
                 setExamLevel(false);
                 setUserList(false);
+                setsyllabusCopy(false);
                 setAccountHistory(false);
               }}
             >
@@ -286,6 +320,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -309,6 +344,7 @@ const Side = () => {
                 setExamLevel(true);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -332,6 +368,7 @@ const Side = () => {
                 setExamLevel(true);
                 setUserList(false);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -355,6 +392,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(true);
                 setAccountHistory(false);
+                setsyllabusCopy(false);
               }}
             >
               <span>
@@ -378,6 +416,7 @@ const Side = () => {
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(true);
+                setsyllabusCopy(false);
               }}
             >
               <span>

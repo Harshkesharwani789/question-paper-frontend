@@ -181,7 +181,7 @@ const AdminBoard = () => {
 
   return (
     <>
-      <div className="col-lg-4 d-flex justify-content-center">
+      {/* <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
             <BsSearch />
@@ -193,13 +193,13 @@ const AdminBoard = () => {
             aria-describedby="basic-addon1"
           />
         </div>
-      </div>
+      </div> */}
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Board</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "#138808", color: "white" }}
             onClick={handleShow}
           >
             Add Board
@@ -326,7 +326,7 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="success" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
               <Button
@@ -388,7 +388,7 @@ const AdminBoard = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button
@@ -423,7 +423,7 @@ const AdminBoard = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary" onClick={deleteboard}>

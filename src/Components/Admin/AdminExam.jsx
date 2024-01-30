@@ -210,7 +210,7 @@ const AdminExam = () => {
           <h2 className="header-c ">Name Of Examination</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "#138808", color: "white" }}
             onClick={handleShow}
           >
             Add Exam
@@ -329,7 +329,7 @@ const AdminExam = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2" variant="success"
+            <Button className="mx-2" variant="secondary"
               onClick={handleClose}>
                 Close
                 
@@ -384,7 +384,7 @@ const AdminExam = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}
@@ -415,7 +415,7 @@ const AdminExam = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="primary"

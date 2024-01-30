@@ -1,7 +1,7 @@
-/* .App {
-  text-align: center;
+ .App {
+  overflow-x: hidden;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -55,7 +55,7 @@
   border-radius: unset !important;
 }
 .modal-header {
-  background-color: navy !important;
+  background-color: #FF9933 !important;
   border-radius: unset !important;
   color: #fff !important;
 }
