@@ -172,14 +172,14 @@ const AdminBoard = () => {
   }, []);
   console.log(getboardname);
   // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = getboardname.slice(
-    visitedPage,
-    visitedPage + productPerPage
-  );
-  const pageCount = Math.ceil(getboardname.length / productPerPage);
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = getboardname.slice(
+  //   visitedPage,
+  //   visitedPage + productPerPage
+  // );
+  // const pageCount = Math.ceil(getboardname.length / productPerPage);
 
   // newpagination
   const [data1, setData1] = useState([]);
