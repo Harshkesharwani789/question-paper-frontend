@@ -13,6 +13,7 @@ const Dashboard = () => {
   return (
     <div>
       <h2 className="header-c ">Dashboard</h2>
+
       <div className="cards-container">
         <Card style={{ width: "15rem" }}>
           <Card.Body>
@@ -45,59 +46,65 @@ const Dashboard = () => {
 
       <div>
         <h2 className="header-c ">User List</h2>
-        <div className="srch-icon">
-        <div class="input-group ">
-          <span class="input-group-text" id="basic-addon1">
-            <BsSearch />
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-          />
-        </div>
 
-        <div><a href="/adminuserlist">View All</a></div>
+        <div className="srch-icon">
+          <div>
+          <div class="input-group ">
+            <span class="input-group-text" id="basic-addon1">
+              <BsSearch />
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          </div>
+
+          <div>
+            <Button >
+            <a style={{color:"white", textDecoration:"none"}} href="/adminuserlist">View All Users</a>
+            </Button>
+          </div>
+
         </div>
         <div className="row">
-        <div className="mb-3 p-3">
-          <Table responsive bordered>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>
-                  <div>Registration ID</div>
-                </th>
-                <th>
-                  <div>Name</div>
-                </th>
-                <th>
-                  <div>Registration Date</div>
-                </th>
-                <th>
-                  <div>Mobile Number</div>
-                </th>
-                <th>
-                  <div>Email Id</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>123456</td>
-                <td>parnets19</td>
-                <td>29-01-2024</td>
-                <td>1234567890</td>
-                <td>parnets19@gmail.com</td>
-              
-              </tr>
-            </tbody>
-          </Table>
+          <div className="mb-3 p-3">
+            <Table responsive bordered>
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>
+                    <div>Registration ID</div>
+                  </th>
+                  <th>
+                    <div>Name</div>
+                  </th>
+                  <th>
+                    <div>Registration Date</div>
+                  </th>
+                  <th>
+                    <div>Mobile Number</div>
+                  </th>
+                  <th>
+                    <div>Email Id</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>123456</td>
+                  <td>parnets19</td>
+                  <td>29-01-2024</td>
+                  <td>1234567890</td>
+                  <td>parnets19@gmail.com</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
         </div>
-        </div>
-      
       </div>
     </div>
   );

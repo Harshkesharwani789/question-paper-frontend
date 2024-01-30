@@ -9,6 +9,8 @@ import swal from "sweetalert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -471,6 +473,9 @@ const AdminSyllabusCopy = () => {
                 <th>
                   <div>View</div>
                 </th>
+                <th>
+                  <div>View</div>
+                </th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -486,6 +491,14 @@ const AdminSyllabusCopy = () => {
                     <td>{item?.SubClass}</td>
                     <td>{item?.medium}</td>
                     <td>{item?.subject}</td>
+                    <td>
+                      <Link
+                        to="/"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        <FaEye color="blue" />
+                      </Link>
+                    </td>
                     <td>
                       {" "}
                       <div style={{ display: "flex", gap: "20px" }}>
