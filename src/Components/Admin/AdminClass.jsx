@@ -363,6 +363,64 @@ const AdminClass = () => {
     getallclassname();
   }, []);
   console.log(getclassname);
+
+
+  // newpagination  for class
+  const [data1, setData1] = useState([]);
+  const [Products, setProducts] = useState();
+
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = getclassname.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(getclassname.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
+
+  // subclass pagination 
+
+  const [data2, setData2] = useState([]);
+  const [Productss, setProductss] = useState();
+
+  const [currenpages, setCurrentpages] = useState(1);
+  const recordsperpages = 6;
+  const lastIndexs = currenpage * recordsperpage;
+  const firstIndexs = lastIndex - recordsperpage;
+  const records1 = getaddsubclass.slice(firstIndex, lastIndex);
+  const npages1 = Math.ceil(getaddsubclass.length / recordsperpage);
+  const numbers1 = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
   return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -381,27 +439,27 @@ const AdminClass = () => {
       <div className="container">
         <div className="row">
           <div className="ad-b mt-4 mb-4 col-md-12">
-            <button
+            <Button
               className=" btn"
-              style={{ backgroundColor: "#ff5200", color: "white" }}
+              style={{ backgroundColor: "navy", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
               onClick={() => {
                 setClass(true);
                 setSubclass(false);
               }}
             >
               Class
-            </button>
+            </Button>
             &nbsp; &nbsp;
-            <button
-              className=" btn"
-              style={{ backgroundColor: "green", color: "white" }}
+            <Button
+              className="btn"
+              style={{ backgroundColor: "#2cb9e7", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
               onClick={() => {
                 setClass(false);
                 setSubclass(true);
               }}
             >
               Subclass
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -436,7 +494,7 @@ const AdminClass = () => {
                 </thead>
 
                 <tbody>
-                  {displayPage?.map((val, i) => {
+                  {records?.map((val, i) => {
                     return (
                       <tr key={i}>
                         <td>{i + 1}</td>
@@ -475,7 +533,47 @@ const AdminClass = () => {
               </Table>
             </div>
 
-            <Pagination style={{ float: "right" }}>
+            <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                       {n}
+                    </a>
+                  </li>
+                );
+              })}
+             
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev"  onClick={() => {
+                    nextpage();
+                  }}>&gt; </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+            {/* <Pagination style={{ float: "right" }}>
               <Pagination.First onClick={() => setPageNumber(0)} />
               <Pagination.Prev
                 onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -495,7 +593,7 @@ const AdminClass = () => {
                 }
               />
               <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-            </Pagination>
+            </Pagination> */}
           </div>
         </>
       ) : (
@@ -535,7 +633,7 @@ const AdminClass = () => {
                     </thead>
 
                     <tbody>
-                      {displayPage1?.map((val, i) => {
+                      {records1?.map((val, i) => {
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -582,7 +680,7 @@ const AdminClass = () => {
                   </Table>
                 </div>
 
-                <Pagination style={{ float: "right" }}>
+                {/* <Pagination style={{ float: "right" }}>
               <Pagination.First onClick={() => setPageNumber1(0)} />
               <Pagination.Prev
                 onClick={() => setPageNumber1((prev) => Math.max(prev - 1, 0))}
@@ -602,7 +700,48 @@ const AdminClass = () => {
                 }
               />
               <Pagination.Last onClick={() => setPageNumber1(pageCount1 - 1)} />
-            </Pagination>
+            </Pagination> */}
+
+<div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                       {n}
+                    </a>
+                  </li>
+                );
+              })}
+             
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev"  onClick={() => {
+                    nextpage();
+                  }}>&gt; </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
               </div>
             </>
           ) : (
@@ -641,9 +780,8 @@ const AdminClass = () => {
               Close
             </Button>
             <Button
-              className="mx-2"
+              className="mx-2 modal-add-btn"
               variant=""
-              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 classNamee();
               }}
@@ -689,8 +827,8 @@ const AdminClass = () => {
             Close
           </Button>
           <Button
-            variant="primary"
-            style={{ backgroundColor: "green" }}
+            variant=""
+            className="modal-add-btn"
             onClick={() => {
               updateclassname();
             }}
@@ -724,7 +862,7 @@ const AdminClass = () => {
           </Button>
           <Button
             variant=""
-            style={{backgroundColor:"green", color:"white"}}
+            className="modal-add-btn"
             onClick={() => {
               deleteallclassname();
             }}
@@ -780,9 +918,8 @@ const AdminClass = () => {
               Close
             </Button>
             <Button
-              className="mx-2"
+              className="mx-2 modal-add-btn"
               variant=""
-              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 subclassnamee();
               }}
@@ -846,7 +983,7 @@ const AdminClass = () => {
             </Button>
           <Button
             variant=""
-            style={{backgroundColor:"green", color:"white"}}
+            className="modal-add-btn"
             onClick={() => {
               editsubbclass();
             }}
@@ -881,7 +1018,7 @@ const AdminClass = () => {
           </Button>
           <Button
             variant=""
-            style={{backgroundColor:"green", color:"white"}}
+            className="modal-add-btn"
             onClick={() => {
               deletesubclasss();
             }}

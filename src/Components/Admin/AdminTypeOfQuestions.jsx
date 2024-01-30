@@ -191,8 +191,7 @@ const AdminTypeOfQuestions = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Type Of Questions</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Type Of Question
@@ -317,13 +316,12 @@ const AdminTypeOfQuestions = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose}>
               Close
             </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   Typesoffquestion();
                 }}
@@ -342,7 +340,7 @@ const AdminTypeOfQuestions = () => {
           keyboard={false}
           style={{zIndex:"99999"}}
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>
               Edit Type Of Question
             </Modal.Title>
@@ -362,12 +360,12 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
               Close
             </Button>
             <Button
               variant=""
-              style={{backgroundColor:"green", color:"white"}}
+              className="modal-add-btn"
                             onClick={() => {
                 updatetypesofquestion();
               }}
@@ -396,10 +394,10 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={Deletedeletetypsofques}>
+            <Button variant="" className="modal-add-btn" onClick={Deletedeletetypsofques}>
               Delete
             </Button>
           </Modal.Footer>

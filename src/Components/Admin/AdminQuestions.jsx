@@ -82,7 +82,6 @@ const AdminQuestions = () => {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-  
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -205,8 +204,7 @@ const AdminQuestions = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Add Questions</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "#fff" }}
+            className="admin-add-btn"
             onClick={() => {
               navigate("/adminquestiondetails");
             }}
@@ -343,7 +341,10 @@ const AdminQuestions = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}>
+              <Button className="mx-2 modal-close-btn" variant="">
+                Cancel
+              </Button>
+              <Button className="mx-2 modal-add-btn" variant="">
                 Add
               </Button>
             </div>
@@ -385,13 +386,13 @@ const AdminQuestions = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={show2} onHide={handleClose2} style={{zIndex:"99999"}}>
+        <Modal show={show2} onHide={handleClose2} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="col-md-12">
+              <div className="col-md-12">
                 <p className="fs-4" style={{ color: "red" }}>
                   Are you sure you want to delete this data?
                 </p>
@@ -399,10 +400,19 @@ const AdminQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}}>Delete</Button>
+            <Button
+              variant=""
+              className="modal-add-btn"
+            >
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>

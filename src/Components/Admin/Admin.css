@@ -42,11 +42,13 @@
 .css-za8x2c-MuiButtonBase-root-MuiButton-root {
   color: #f6f7f8 !important;
   background: navy !important;
+  border-radius: 5px !important;
 }
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
   color: #f6f7f8 !important;
-  background: #ff5200 !important;
+  background: FF9933 !important;
+  border-radius: 5px !important;
 }
 
 .css-a1sg1c-MuiButtonBase-root-MuiButton-root {
@@ -58,7 +60,7 @@
   padding: 6px 8px !important;
   border-radius: 4px !important;
   font-size: 14px !important;
-  background: red !important;
+  background:rgb(5, 107, 5) !important;
   color: white !important;
 }
 
@@ -107,6 +109,36 @@ tr {
   margin: 10px;
 }
 
+.admin-add-btn{
+  background-color: #138808;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px !important;
+}
+
+.modal-add-btn{
+  background-color: #138808;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px !important;
+}
+
+.modal-add-btn:hover{
+  background-color: #107207;
+  color: white;
+}
+
+.modal-close-btn{
+  background-color: rgb(100, 99, 99);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px !important;
+}
+.modal-close-btn:hover{
+  background-color: rgb(75, 74, 74);
+  color: white;
+}
+
 .admin-all {
   display: flex;
 }
@@ -141,7 +173,8 @@ label {
   font-weight: 500;
 }
 
-.paginationBttns {
+/* pgination  */
+/* .paginationBttns {
   width: 80%;
   height: 40px;
   list-style: none;
@@ -169,6 +202,39 @@ label {
   color: white;
   background-color: #fdd12d;
 }
+
+.active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  background-color: #138808 !important;
+  border-color: white !important;
+}
+
+.pagination .page-link{
+  color: #138808 !important;
+}
+
+.page-item span.page-link{
+  color: white !important;
+}
+.page-item:first-child .page-link {
+  border-top-left-radius: var(--bs-pagination-border-radius);
+  border-bottom-left-radius: var(--bs-pagination-border-radius);
+}
+
+.active > .page-link,
+.page-link.active {
+  z-index: 3;
+  color: #fff;
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+}
+
+.page-link a{
+  color: #138808 !important;
+} */
+
 
 .add-90 button {
   width: 151px;
@@ -452,39 +518,6 @@ tr:hover {
   padding: 1%;
 }
 
-.active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: var(--bs-pagination-active-color);
-  background-color: #abd23b !important;
-  border-color: #abd23b !important;
-}
-
-.page-item:first-child .page-link {
-  border-top-left-radius: var(--bs-pagination-border-radius);
-  border-bottom-left-radius: var(--bs-pagination-border-radius);
-}
-
-.active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: #fff;
-  background-color: var(--bs-pagination-active-bg);
-  border-color: var(--bs-pagination-active-border-color);
-}
-
-.active > .page-link,
-.page-link.active {
-  z-index: 3;
-  color: var(--bs-pagination-active-color);
-  background-color: #abd23b !important;
-  border-color: #abd23b !important;
-  color: #fff !important;
-}
-
-.page-link {
-  color: #abd23b !important;
-}
 
 table thead tr th {
   background: navy !important ;
@@ -560,6 +593,9 @@ table thead tr th {
 .admin-sidebar-display {
   width: 20%;
 }
+
+
+
 /* Admin Panel ends */
 
 @media screen and (max-width: 799px) {

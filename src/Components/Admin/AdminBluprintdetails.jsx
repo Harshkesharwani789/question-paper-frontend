@@ -159,8 +159,7 @@ const AdminBlueprintdetails = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Blue Print Details</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={() => {
               navigate("/adminblueprint");
             }}
@@ -449,10 +448,10 @@ const AdminBlueprintdetails = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={makedeleteblueprint}>Delete</Button>
+            <Button variant="" className="modal-add-btn" onClick={makedeleteblueprint}>Delete</Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>

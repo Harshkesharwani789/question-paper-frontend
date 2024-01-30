@@ -439,8 +439,7 @@ const AdminSyllabusCopy = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Syllabus
@@ -725,8 +724,8 @@ const AdminSyllabusCopy = () => {
                 <div className="row">
                   <div className="col-md-12">
                     <Button
-                      variant="danger"
-                      style={{ float: "right", marginTop: "15px" }}
+                      variant=""
+                      style={{ float: "right", marginTop: "15px" , backgroundColor:"navy", color:"white", borderRadius:"5px"}}
                       onClick={() => {
                         setslybus(true);
                         AddTypesofquestion();
@@ -799,17 +798,15 @@ const AdminSyllabusCopy = () => {
           <Modal.Footer>
             <div className="d-flex">
               <Button
-                className="mx-2"
+                className="mx-2 modal-close-btn"
                 variant=""
-                style={{ backgroundColor: "#ff5200", color: "white" }}
                 onClick={handleClose}
               >
                 Close
               </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{ backgroundColor: "green", color: "white" }}
                 onClick={() => {
                   addSyllabus();
                 }}
@@ -828,7 +825,7 @@ const AdminSyllabusCopy = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton  style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -878,14 +875,14 @@ const AdminSyllabusCopy = () => {
           <Modal.Footer>
             <Button
               variant=""
-              style={{ backgroundColor: "#ff5200", color: "white" }}
+              className="modal-close-btn"
               onClick={handleClose1}
             >
               Close
             </Button>
             <Button
               variant=""
-              style={{ backgroundColor: "#ff5200", color: "white" }}
+              className="modal-add-btn"
               onClick={() => {
                 UpdateSyllabus();
               }}
@@ -915,10 +912,10 @@ const AdminSyllabusCopy = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteSyllabus}>
+            <Button variant="" className="modal-add-btn" onClick={DeleteSyllabus}>
               Delete
             </Button>
           </Modal.Footer>

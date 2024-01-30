@@ -249,8 +249,7 @@ const AdminChapter = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Chapters</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Chapters
@@ -382,17 +381,15 @@ const AdminChapter = () => {
           <Modal.Footer>
             <div className="d-flex">
               <Button
-                className="mx-2"
+                className="mx-2 modal-close-btn"
                 variant=""
-                style={{ backgroundColor: "#ff5200", color: "white" }}
                 onClick={handleClose}
               >
                 Close
               </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{ backgroundColor: "green", color: "white" }}
                 onClick={() => {
                   AddChapter();
                 }}
@@ -411,7 +408,7 @@ const AdminChapter = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -468,14 +465,14 @@ const AdminChapter = () => {
           <Modal.Footer>
             <Button
               variant=""
+              className="modal-close-btn"
               onClick={handleClose1}
-              style={{ backgroundColor: "#ff5200", color: "white" }}
             >
               Close
             </Button>
             <Button
               variant=""
-              style={{ backgroundColor: "green", color: "white" }}
+              className="modal-add-btn"
               onClick={() => {
                 UpdateChapter();
               }}
@@ -504,10 +501,10 @@ const AdminChapter = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className= "modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteChapter}>
+            <Button variant="" className="modal-add-btn" onClick={DeleteChapter}>
               Delete
             </Button>
           </Modal.Footer>

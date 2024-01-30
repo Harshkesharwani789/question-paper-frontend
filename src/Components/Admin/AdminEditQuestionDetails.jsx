@@ -253,10 +253,11 @@ const AdminEditQuestionDetails = () => {
             </div> */}
           </div>
         </div>
+        <div className="yoihjij text-center my-2 p-2">
+        <Button className="admin-add-btn">Update</Button>
       </div>
-      <div className="yoihjij text-center my-2">
-        <Button style={{backgroundColor:"green", color:"white"}}>Update</Button>
       </div>
+     
     </div>
   );
 };

@@ -603,12 +603,12 @@ const AdminQuestionDetails = () => {
           </div>
         </div>
 
-        <div className="yoihjij text-center my-2 p-2">
+        <div className="yoihjij text-center my-2 p-2 ">
         <Button
           onClick={() => {
             addquestions();
           }}
-          style={{backgroundColor:"green", color:"white"}}
+          className="modal-add-btn"
         >
           Add
         </Button>

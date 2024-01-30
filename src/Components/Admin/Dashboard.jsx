@@ -49,25 +49,29 @@ const Dashboard = () => {
 
         <div className="srch-icon">
           <div>
-          <div class="input-group ">
-            <span class="input-group-text" id="basic-addon1">
-              <BsSearch />
-            </span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search..."
-              aria-describedby="basic-addon1"
-            />
-          </div>
+            <div class="input-group ">
+              <span class="input-group-text" id="basic-addon1">
+                <BsSearch />
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                aria-describedby="basic-addon1"
+              />
+            </div>
           </div>
 
           <div>
-            <Button  style={{backgroundColor:"green"}}>
-            <a style={{color:"white", textDecoration:"none"}} href="/adminuserlist">View All Users</a>
+            <Button className="admin-add-btn">
+              <a
+                style={{ color: "white", textDecoration: "none" }}
+                href="/adminuserlist"
+              >
+                View All Users
+              </a>
             </Button>
           </div>
-
         </div>
         <div className="row">
           <div className="mb-3 p-3">

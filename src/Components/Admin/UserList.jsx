@@ -396,11 +396,11 @@ const UserList = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
             <Button
-              variant="" style={{backgroundColor:"green", color:"white"}}
+              variant="" className="modal-add-btn"
               onClick={() => {
                 DeleteTeacher();
               }}
