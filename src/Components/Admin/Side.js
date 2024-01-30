@@ -206,6 +206,30 @@ const Side = () => {
               <span className="ms-2">Subject</span>
             </li>
           </Link>
+          <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(true);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+              }}
+            >
+              <span>
+                <PiExamFill style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Subject Part</span>
+            </li>
+          </Link>
           <Link to="/adminchapter" onClick={handleNavCollapse}>
             <li
               className="a-ele "
@@ -353,7 +377,7 @@ const Side = () => {
               <span className="ms-2">Exam Level</span>
             </li>
           </Link>
-          <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
+          {/* <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -374,9 +398,9 @@ const Side = () => {
               <span>
                 <PiExamFill style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Weightage of Content</span>
+              <span className="ms-2">Subject Part</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/adminuserlist" onClick={handleNavCollapse}>
             <li
               className="a-ele "

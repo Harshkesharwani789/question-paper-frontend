@@ -219,13 +219,13 @@ const Weightagecontent = () => {
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Weightage Of the Content</h2>
+          <h2 className="header-c ">Subject Part</h2>
           <button
             className=" btn"
             style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
-            Add Weightage Of the Content
+            Add Subject Part
           </button>
         </div>
 
@@ -240,7 +240,7 @@ const Weightagecontent = () => {
                 <th>S.No</th>
                 <th>Subject</th>
                 <th>
-                  <div>Weightage Of the Content</div>
+                  <div>Subject Part</div>
                 </th>
                 <th>Action</th>
               </tr>

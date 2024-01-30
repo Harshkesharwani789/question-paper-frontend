@@ -222,7 +222,6 @@ const AdminBlueprintdetails = () => {
               <tr>
                 <th>S.No</th>
                 <th>Blueprint Id</th>
-                <th>Date</th>
                 <th>
                   <div>Board</div>
                 </th>
@@ -254,9 +253,7 @@ const AdminBlueprintdetails = () => {
                   <tr key={i}>
                     <td>{i + 1}</td>
                     <td>{val?.blueprintId}</td>
-                    <td></td>
                     <td>{val?.board}</td>
-
                     <td>{val?.medium}</td>
                     <td>{val?.className}</td>
                     <td>{val?.SubClassName}</td>
