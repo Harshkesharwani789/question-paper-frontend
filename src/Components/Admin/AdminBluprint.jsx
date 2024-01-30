@@ -1236,17 +1236,18 @@ function AdminBlueprint() {
 
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                     <Button
+                    className="modal-add-btn"
                       variant=""
                       color="inherit"
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
-                      style={{ backgroundColor: "green", color: "white" }}
+                      style={{ backgroundColor: "green", color: "white" , borderRadius:"5px"}}
                     >
                       Back
                     </Button>
                     <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleNext} sx={{ mr: 1 }}>
+                    <Button style={{borderRadius:"5px"}} onClick={handleNext} sx={{ mr: 1 }}>
                       Next
                     </Button>
                     {activeStep !== steps.length &&
@@ -1258,7 +1259,7 @@ function AdminBlueprint() {
                           Step {activeStep + 1} already completed
                         </Typography>
                       ) : (
-                        <Button varient="success" onClick={handleComplete}>
+                        <Button varient="" onClick={handleComplete}>
                           {completedSteps() === totalSteps() - 1
                             ? "Submit"
                             : "Complete Step"}

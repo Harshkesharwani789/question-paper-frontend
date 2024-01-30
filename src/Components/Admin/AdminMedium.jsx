@@ -214,8 +214,7 @@ const AdminMedium = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Medium</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Medium
@@ -303,7 +302,7 @@ const AdminMedium = () => {
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}
 >
-          <Modal.Header style={{ backgroundColor: "#26AAE0" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Medium</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -339,13 +338,12 @@ const AdminMedium = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose}>
               Close
             </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   Addmedium();
                 }}
@@ -365,7 +363,7 @@ const AdminMedium = () => {
           style={{zIndex:"99999"}}
 
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Medium</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -401,11 +399,11 @@ const AdminMedium = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
               Close
             </Button>
             <Button
-              variant="" style={{backgroundColor:"green", color:"white"}}
+              variant="" className="modal-add-btn"
               onClick={() => {
                 EditAddMedium();
               }}
@@ -435,12 +433,12 @@ const AdminMedium = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
             <Button
               variant=""
-              style={{backgroundColor:"green", color:"white"}}
+              className="modal-add-btn"
               onClick={() => {
                 DeletAddMedium();
               }}

@@ -221,8 +221,7 @@ const Weightagecontent = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Weightage Of the Content</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Weightage Of the Content
@@ -352,12 +351,12 @@ const Weightagecontent = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
+              <Button variant="" className="modal-close-btn" onClick={handleClose}>
                 Close
               </Button>
               <Button
-                className="mx-2"
-                variant="" style={{backgroundColor:"green", color:"white"}}
+                className="mx-2 modal-add-btn"
+                variant="" 
                 onClick={() => {
                   addcontent();
                 }}
@@ -411,12 +410,12 @@ const Weightagecontent = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
+              <Button variant="" className="modal-close-btn" onClick={handleClose1}>
                 Close
               </Button>
               <Button
-                className="mx-2"
-                variant="" style={{backgroundColor:"green", color:"white"}}
+                className="mx-2 modal-add-btn"
+                variant="" 
                 onClick={() => {
                   updatecontent();
                 }}
@@ -446,11 +445,11 @@ const Weightagecontent = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
             <Button
-              variant="" style={{backgroundColor:"green", color:"white"}}
+              variant="" className="modal-add-btn"
               onClick={() => {
                 deletallcontent();
               }}

@@ -220,8 +220,7 @@ const AdminSubject = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subject</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Subject
@@ -346,17 +345,15 @@ const AdminSubject = () => {
           <Modal.Footer>
             <div className="d-flex">
             <Button
-                className="mx-2"
+                className="mx-2 modal-close-btn"
                 variant=""
-                style={{backgroundColor:"#ff5200", color:"white"}}
                 onClick={handleClose}
               >
                 Close
               </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   AddSubject();
                 }}
@@ -375,7 +372,7 @@ const AdminSubject = () => {
           keyboard={false}
           style={{zIndex:"99999"}}
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Subject</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -411,11 +408,11 @@ const AdminSubject = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
               Close
             </Button>
             <Button
-              variant="" style={{backgroundColor:"green", color:"white"}}
+              variant="" className="modal-add-btn"
               onClick={() => {
                 UpdateSubject();
               }}
@@ -444,10 +441,10 @@ const AdminSubject = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteSubject}>
+            <Button variant="" className= "modal-add-btn" onClick={DeleteSubject}>
               Delete
             </Button>
           </Modal.Footer>

@@ -220,8 +220,7 @@ const ExamLevel = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Exam Level</h2>
           <button
-            className=" btn"
-            style={{ backgroundColor: "green", color: "white" }}
+            className="admin-add-btn"
             onClick={handleShow}
           >
             Add Exam Level
@@ -308,7 +307,7 @@ const ExamLevel = () => {
         </Pagination>
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
-          <Modal.Header style={{ backgroundColor: "#26AAE0" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Exam Level</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -346,15 +345,14 @@ const ExamLevel = () => {
             <div className="d-flex">
               <Button
                 variant=""
-                style={{ backgroundColor: "#ff5200", color: "white" }}
+                className="modal-close-btn"
                 onClick={handleClose}
               >
                 Close
               </Button>
               <Button
-                className="mx-2"
+                className="mx-2 modal-add-btn"
                 variant=""
-                style={{ backgroundColor: "green", color: "white" }}
                 onClick={() => {
                   AddExamLevel();
                 }}
@@ -373,7 +371,7 @@ const ExamLevel = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>
               Edit Exam Level
             </Modal.Title>
@@ -411,11 +409,11 @@ const ExamLevel = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
               Close
             </Button>
             <Button
-              variant="" style={{backgroundColor:"green", color:"white"}}
+              variant="" className="modal-add-btn"
               onClick={() => {
                 UpdateExamLevel();
               }}
@@ -444,10 +442,10 @@ const ExamLevel = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
+            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={Deleteexamlevel}>
+            <Button variant="" className="modal-add-btn" onClick={Deleteexamlevel}>
               Delete
             </Button>
           </Modal.Footer>

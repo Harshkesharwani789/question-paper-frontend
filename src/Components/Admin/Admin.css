@@ -42,11 +42,13 @@
 .css-za8x2c-MuiButtonBase-root-MuiButton-root {
   color: #f6f7f8 !important;
   background: navy !important;
+  border-radius: 5px !important;
 }
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
   color: #f6f7f8 !important;
-  background: #ff5200 !important;
+  background: FF9933 !important;
+  border-radius: 5px !important;
 }
 
 .css-a1sg1c-MuiButtonBase-root-MuiButton-root {
@@ -58,7 +60,7 @@
   padding: 6px 8px !important;
   border-radius: 4px !important;
   font-size: 14px !important;
-  background: red !important;
+  background:rgb(5, 107, 5) !important;
   color: white !important;
 }
 
@@ -103,8 +105,38 @@ tr {
 .header-c {
   font-size: 25px;
   font-weight: 600;
-  color: #083494;
+  color: #138808;
   margin: 10px;
+}
+
+.admin-add-btn{
+  background-color: #138808;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px !important;
+}
+
+.modal-add-btn{
+  background-color: #138808;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px !important;
+}
+
+.modal-add-btn:hover{
+  background-color: #107207;
+  color: white;
+}
+
+.modal-close-btn{
+  background-color: rgb(100, 99, 99);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px !important;
+}
+.modal-close-btn:hover{
+  background-color: rgb(75, 74, 74);
+  color: white;
 }
 
 .admin-all {
@@ -226,7 +258,7 @@ label {
 .si09 ul {
   list-style: none;
   padding-top: 6px;
-  background-color: navy;
+  background-color: #FF9933;
   padding-left: unset;
   min-height: 650px;
 }
@@ -456,10 +488,17 @@ tr:hover {
 .page-link.active {
   z-index: 3;
   color: var(--bs-pagination-active-color);
-  background-color: #abd23b !important;
-  border-color: #abd23b !important;
+  background-color: #138808 !important;
+  border-color: white !important;
 }
 
+.pagination .page-link{
+  color: #138808 !important;
+}
+
+.page-item span.page-link{
+  color: white !important;
+}
 .page-item:first-child .page-link {
   border-top-left-radius: var(--bs-pagination-border-radius);
   border-bottom-left-radius: var(--bs-pagination-border-radius);
@@ -473,17 +512,17 @@ tr:hover {
   border-color: var(--bs-pagination-active-border-color);
 }
 
-.active > .page-link,
+/* .active > .page-link,
 .page-link.active {
   z-index: 3;
   color: var(--bs-pagination-active-color);
   background-color: #abd23b !important;
   border-color: #abd23b !important;
   color: #fff !important;
-}
+} */
 
-.page-link {
-  color: #abd23b !important;
+.page-link a{
+  color: #138808 !important;
 }
 
 table thead tr th {
