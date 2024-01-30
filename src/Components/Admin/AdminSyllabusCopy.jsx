@@ -8,13 +8,14 @@ import axios from "axios";
 import swal from "sweetalert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import parse from "html-react-parser";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  const [getclassname, setgetclassName] = useState([]);
+  const [slybus, setslybus] = useState(false);
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -33,6 +34,118 @@ const AdminSyllabusCopy = () => {
   const [description, setDescription] = useState("");
   const [chapterNumber, setChapterNumber] = useState("");
   const [marks, setMarks] = useState("");
+  const [year, setyear] = useState("");
+  const [classs, setclasss] = useState("");
+  const [subclass, setsubclass] = useState("");
+  const [medium, setmedium] = useState("");
+  const [subjectt, setsubjectt] = useState("");
+  // Array of object 1
+  const [Arr, setArr] = useState([]);
+
+  const AddTypesofquestion = () => {
+    try {
+      if (!year) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Question Type",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+
+      if (!classs) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter No. of Questions",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if NQA is not provided
+      }
+
+      if (!subclass) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter Marks",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if Mask is not provided
+      }
+      if (!medium) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter medium",
+          icon: "error",
+          button: "Try Again!",
+        });
+      }
+      if (!subjectt) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter subjectt",
+          icon: "error",
+          button: "Try Again!",
+        });
+      }
+      let Slybus = 1;
+      // Arr.forEach((ele) => {
+      //   if (ele?.QAType === QAType) {
+      //     Question = 0;
+      //     swal({
+      //       title: "Oops!",
+      //       text: "Already Exists...",
+      //       icon: "error",
+      //       button: "Try Again!",
+      //     });
+      //   }
+      // });
+
+      if (Slybus) {
+        const obj = {
+          lesson: chapterNumber,
+          chepterName: chapterName,
+          description: description,
+          mask: marks,
+        };
+
+        Arr.push(obj);
+        setArr([...Arr]); // Ensure you create a new array reference to trigger a re-render
+        console.log("Arr", Arr);
+
+        swal({
+          title: "Yeah!",
+          text: "Added Successfully...",
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteQuestionType = (index) => {
+    try {
+      const deletedQuestion = Arr[index];
+
+      // Create a new array excluding the element at the specified index
+      const updatedArr = Arr.filter((_, i) => i !== index);
+
+      setArr(updatedArr);
+      console.log("Arr after deletion", updatedArr);
+
+      swal({
+        title: "Deleted!",
+        text: " Deleted Successfully.",
+        icon: "warning",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const addSyllabus = async () => {
     if (!chapterName)
@@ -71,6 +184,12 @@ const AdminSyllabusCopy = () => {
           description: description,
           marks: marks,
           authId: admin?._id,
+          year: year,
+          Class: classs,
+          SubClass: subclass,
+          medium: medium,
+          subject: subjectt,
+          SyllabusDetails: Arr,
         },
       };
       let res = await axios(config);
@@ -111,7 +230,44 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
-
+  // get method add class
+  const [getclassname, setgetclassName] = useState([]);
+  const getallclassname = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      if (res.status == 200) {
+        setgetclassName(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //update
   const [updatechapter, setpdatesetchapter] = useState("");
   const UpdateSyllabus = async () => {
@@ -189,7 +345,22 @@ const AdminSyllabusCopy = () => {
     }
   };
 
+  //get method for subject
+  const [subjectss, setsubjectss] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubjectss(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //   get method of subject
+<<<<<<< HEAD
   const [subject, setsubject] = useState([]);
   //   const [nochangedata, setnochangedata] = useState([]);
   //   const getSyllabus = async () => {
@@ -205,6 +376,22 @@ const AdminSyllabusCopy = () => {
   //       console.log(error);
   //     }
   //   };
+=======
+  const [Slybuss, setSlybuss] = useState([]);
+  const getSyllabus = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getAllSyllabus/${admin?._id}`,
+        { headers: { Authorization: `Bearer${token}` } }
+      );
+      if (res.status == 200) {
+        setSlybuss(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+>>>>>>> 02faf35e05f9f9268f72ec0ee1307155f94dc7e3
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -242,8 +429,13 @@ const AdminSyllabusCopy = () => {
   const displayPage = chapters.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(chapters.length / productPerPage);
   useEffect(() => {
-    getAllSyllabus();
+    getSyllabus();
+    getallclassname();
+    getAddMedium();
+    getaddsubclasss();
+    getSubject();
   }, []);
+
   return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -282,16 +474,22 @@ const AdminSyllabusCopy = () => {
               <tr>
                 <th>S.No</th>
                 <th>
-                  <div>Chapter Number</div>
+                  <div>Year</div>
                 </th>
                 <th>
-                  <div>Chapter Name</div>
+                  <div>Class</div>
                 </th>
                 <th>
-                  <div>Description</div>
+                  <div>Sub-Class</div>
                 </th>
                 <th>
-                  <div>Marks</div>
+                  <div>Medium</div>
+                </th>
+                <th>
+                  <div>Subject</div>
+                </th>
+                <th>
+                  <div>View</div>
                 </th>
                 <th>
                   <div>View</div>
@@ -301,15 +499,16 @@ const AdminSyllabusCopy = () => {
             </thead>
 
             <tbody>
-              {displayPage?.map((item, i) => {
+              {Slybuss?.map((item, i) => {
                 return (
                   <tr>
                     <td>{i + 1}</td>
 
-                    <td>{item?.chapterNumber}</td>
-                    <td>{item?.chapterName}</td>
-                    <td>{item?.description}</td>
-                    <td>{item?.marks}</td>
+                    <td>{item?.year}</td>
+                    <td>{item?.Class}</td>
+                    <td>{item?.SubClass}</td>
+                    <td>{item?.medium}</td>
+                    <td>{item?.subject}</td>
                     <td>
                       <Link
                         to="/"
@@ -374,7 +573,12 @@ const AdminSyllabusCopy = () => {
         </Pagination>
 
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          style={{ zIndex: "99999" }}
+          size="lg"
+        >
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
@@ -382,93 +586,230 @@ const AdminSyllabusCopy = () => {
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Year</label>
-                <input type="text" className="vi_0" placeholder="Enter Year" />
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Class</label>
-                <input type="text" className="vi_0" placeholder="Enter class" />
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Subject</label>
                 <input
                   type="text"
                   className="vi_0"
-                  placeholder="Enter Subject"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Sub-Class</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Sub-Class"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Medium</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter medium"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Number</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Number"
-                  onChange={(e) => setChapterNumber(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Name</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Name"
-                  onChange={(e) => setChapterName(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Description</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={description}
-                  onChange={(editor) => {
-                    const data = editor.getData();
-                    setDescription(data);
+                  placeholder="Enter Year"
+                  onChange={(e) => {
+                    setyear(e.target.value);
                   }}
                 />
               </div>
             </div>
-
             <div className="row">
               <div className="do-sear mt-2">
-                <label>Marks</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Marks"
-                  onChange={(e) => setMarks(e.target.value)}
-                />
+                <label>
+                  Select Class <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setclasss(e.target.value);
+                  }}
+                >
+                  <option>Select the Class</option>
+                  {getclassname?.map((val, i) => {
+                    return (
+                      <option value={val?.className} key={i}>
+                        {val?.className}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>
+                  Select Subjects <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setsubjectt(e.target.value)}
+                >
+                  <option>Select the Subjects</option>
+                  {subjectss?.map((val, i) => {
+                    return (
+                      <option value={val?.subjectName} key={i}>
+                        {val?.subjectName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>
+                  Select Sub-Class <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setsubclass(e.target.value);
+                  }}
+                >
+                  <option>Select the Sub-Class</option>
+                  {getaddsubclass?.map((val, i) => {
+                    return (
+                      <option value={val?.subclassName} key={i}>
+                        {val?.subclassName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>
+                  Select Medium <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setmedium(e.target.value);
+                  }}
+                >
+                  <option>Select the Medium</option>
+                  {Medium?.map((val, i) => {
+                    return (
+                      <option value={val?.mediumName} key={i}>
+                        {val?.mediumName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div>
+              <div
+                style={{
+                  border: "2px solid #dee2e6",
+                  padding: "10px",
+                  marginTop: "10px",
+                }}
+              >
+                <div className="row">
+                  <div className="do-sear mt-2">
+                    <label>Chapter Number</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Chapter Number"
+                      onChange={(e) => setChapterNumber(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="do-sear mt-2">
+                    <label>Chapter Name</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Chapter Name"
+                      onChange={(e) => setChapterName(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="do-sear mt-2">
+                    <label>Description</label>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      className="vi_0"
+                      data={description}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setDescription(data);
+                      }}
+                    />
+                  </div>
+                  <div className="row">
+                    <div className="do-sear mt-2">
+                      <label>Marks</label>
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter Marks"
+                        onChange={(e) => setMarks(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <Button
+                      variant="danger"
+                      style={{ float: "right", marginTop: "15px" }}
+                      onClick={() => {
+                        setslybus(true);
+                        AddTypesofquestion();
+                      }}
+                    >
+                      Add
+                    </Button>
+                  </div>
+                </div>
+                {slybus ? (
+                  <>
+                    {" "}
+                    <div className="row">
+                      <div className="col-md-12">
+                        <Table
+                          responsive
+                          bordered
+                          style={{
+                            width: "-webkit-fill-available",
+                            textAlign: "center",
+                          }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>S No.</th>
+                              <th>Chapter No.</th>
+                              <th>Chapter Name</th>
+                              <th>Description</th>
+                              <th>Marks</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Arr?.map((val, i) => {
+                              return (
+                                <tr>
+                                  <td>{i + 1}</td>
+                                  <td>{val?.lesson}</td>
+                                  <td>{val?.chepterName}</td>
+                                  <td>
+                                    {val?.description ? (
+                                      parse(val?.description)
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </td>
+                                  <td>{val?.mask}</td>
+                                  <td>
+                                    {" "}
+                                    <AiFillDelete
+                                      color="red"
+                                      cursor="pointer"
+                                      onClick={() => deleteQuestionType(i)}
+                                    />
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </Modal.Body>
