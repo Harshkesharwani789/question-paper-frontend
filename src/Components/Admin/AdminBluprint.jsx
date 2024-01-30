@@ -303,7 +303,7 @@ function AdminBlueprint() {
 
       let Question = 1;
       Arr.forEach((ele) => {
-        if (ele?.QAType === QAType ) {
+        if (ele?.QAType === QAType) {
           Question = 0;
           swal({
             title: "Oops!",
@@ -640,11 +640,11 @@ function AdminBlueprint() {
                                 </Form.Select>
                               </div>
                             </div>
-                            <div className="col-md-6">
+                            {/* <div className="col-md-6">
                               <div className="do-sear">
                                 <label htmlFor="">Add Chapter Name</label>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <label htmlFor="">Objectives</label>
@@ -1095,7 +1095,11 @@ function AdminBlueprint() {
                                       <label htmlFor="">Total Marks</label>
                                       <input
                                         type="text"
-                                        value={Arr?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}
+                                        value={Arr?.reduce(
+                                          (a, i) =>
+                                            a + Number(i?.Mask * i?.NQA),
+                                          0
+                                        )}
                                         className="vi_0"
                                         placeholder="Total Marks"
                                       />
@@ -1237,7 +1241,7 @@ function AdminBlueprint() {
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
-                      style={{ backgroundColor: "navy", color: "white" }}
+                      style={{ backgroundColor: "green", color: "white" }}
                     >
                       Back
                     </Button>

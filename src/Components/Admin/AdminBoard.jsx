@@ -331,7 +331,8 @@ const AdminBoard = () => {
             </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   AddBoradname();
                 }}
@@ -393,7 +394,7 @@ const AdminBoard = () => {
             </Button>
             <Button
               variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 updateallboardname();
               }}
@@ -426,7 +427,7 @@ const AdminBoard = () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={deleteboard}>
+            <Button variant=""  style={{backgroundColor:"green", color:"white"}} onClick={deleteboard}>
               Delete
             </Button>
           </Modal.Footer>

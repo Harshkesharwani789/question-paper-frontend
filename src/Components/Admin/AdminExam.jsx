@@ -334,7 +334,7 @@ const AdminExam = () => {
                 Close
                 
               </Button>
-              <Button className="mx-2" variant="primary"
+              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={()=>{
                 AddNameExamination();
               }}>
@@ -387,7 +387,7 @@ const AdminExam = () => {
             <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
-            <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} 
             onClick={()=>{
               EditNameExam();
             }}>
@@ -418,7 +418,7 @@ const AdminExam = () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary"
+            <Button variant="" style={{backgroundColor:"green", color:"white"}}
             onClick={()=>{
               DeleteNameExam();
             }}>Delete</Button>

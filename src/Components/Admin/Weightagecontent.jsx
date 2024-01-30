@@ -222,7 +222,7 @@ const Weightagecontent = () => {
           <h2 className="header-c ">Weightage Of the Content</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Weightage Of the Content
@@ -352,12 +352,12 @@ const Weightagecontent = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button variant="success" onClick={handleClose}>
+              <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
                 Close
               </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant="" style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   addcontent();
                 }}
@@ -411,12 +411,12 @@ const Weightagecontent = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button variant="success" onClick={handleClose1}>
+              <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
                 Close
               </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant="" style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   updatecontent();
                 }}
@@ -446,11 +446,11 @@ const Weightagecontent = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 deletallcontent();
               }}

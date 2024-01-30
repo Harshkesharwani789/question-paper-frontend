@@ -287,7 +287,7 @@ const BluePrint = () => {
                         >
                           <Button
                             variant=""
-                            style={{ backgroundColor: "navy", color: "white" }}
+                            style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
                               navigate("/questionpaper", {
                                 state: { ...state, bluePrint: val },

@@ -344,7 +344,8 @@ const AdminMedium = () => {
             </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   Addmedium();
                 }}
@@ -404,8 +405,7 @@ const AdminMedium = () => {
               Close
             </Button>
             <Button
-              variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 EditAddMedium();
               }}
@@ -439,7 +439,8 @@ const AdminMedium = () => {
               Close
             </Button>
             <Button
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 DeletAddMedium();
               }}

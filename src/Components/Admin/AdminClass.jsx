@@ -383,7 +383,7 @@ const AdminClass = () => {
           <div className="ad-b mt-4 mb-4 col-md-12">
             <button
               className=" btn"
-              style={{ backgroundColor: "#083494", color: "white" }}
+              style={{ backgroundColor: "#ff5200", color: "white" }}
               onClick={() => {
                 setClass(true);
                 setSubclass(false);
@@ -394,7 +394,7 @@ const AdminClass = () => {
             &nbsp; &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "#26AAE0", color: "white" }}
+              style={{ backgroundColor: "green", color: "white" }}
               onClick={() => {
                 setClass(false);
                 setSubclass(true);
@@ -642,7 +642,8 @@ const AdminClass = () => {
             </Button>
             <Button
               className="mx-2"
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 classNamee();
               }}
@@ -689,7 +690,7 @@ const AdminClass = () => {
           </Button>
           <Button
             variant="primary"
-            style={{ backgroundColor: "#26AAE0" }}
+            style={{ backgroundColor: "green" }}
             onClick={() => {
               updateclassname();
             }}
@@ -722,7 +723,8 @@ const AdminClass = () => {
             Close
           </Button>
           <Button
-            variant="primary"
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               deleteallclassname();
             }}
@@ -779,7 +781,8 @@ const AdminClass = () => {
             </Button>
             <Button
               className="mx-2"
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 subclassnamee();
               }}
@@ -842,8 +845,8 @@ const AdminClass = () => {
               Close
             </Button>
           <Button
-            variant="primary"
-            style={{ backgroundColor: "#26AAE0" }}
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               editsubbclass();
             }}
@@ -877,7 +880,8 @@ const AdminClass = () => {
             Close
           </Button>
           <Button
-            variant="primary"
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               deletesubclasss();
             }}

@@ -45,7 +45,7 @@ const AccountHistory = () => {
         <h2 className="header-c ">Account History</h2>
         <button
           className=" btn"
-          style={{ backgroundColor: "#083494", color: "white" }}
+          style={{ backgroundColor: "green", color: "white" }}
           onClick={handleShow}
         >
           Add Account History
@@ -195,10 +195,10 @@ const AccountHistory = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
-          <Button className="mx-2" variant="success" onClick={handleClose}>
+          <Button className="mx-2" variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
               Close
             </Button>
-            <Button className="mx-2" variant="primary">
+            <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}>
               Add
             </Button>
           </div>
@@ -271,10 +271,10 @@ const AccountHistory = () => {
         </div>  */}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose1}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
             Close
           </Button>
-          <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}>
+          <Button variant="" style={{backgroundColor:"green", color:"white"}} >
             Edit
           </Button>
         </Modal.Footer>
@@ -299,10 +299,10 @@ const AccountHistory = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose2}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
             Close
           </Button>
-          <Button variant="primary">Delete</Button>
+          <Button variant="" style={{backgroundColor:"green", color:"white"}}>Delete</Button>
         </Modal.Footer>
       </Modal>
     </div>

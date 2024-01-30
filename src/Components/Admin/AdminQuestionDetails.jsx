@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -604,13 +604,14 @@ const AdminQuestionDetails = () => {
         </div>
 
         <div className="yoihjij text-center my-2 p-2">
-        <button
+        <Button
           onClick={() => {
             addquestions();
           }}
+          style={{backgroundColor:"green", color:"white"}}
         >
           Add
-        </button>
+        </Button>
       </div>
       </div>
    

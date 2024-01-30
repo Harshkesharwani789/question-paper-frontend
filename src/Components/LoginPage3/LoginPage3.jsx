@@ -206,7 +206,8 @@ const LoginPage3 = () => {
                       margin: "auto",
                       display: "flex",
                       justifyContent: "center",
-                      background: "navy",
+                      background: "green",
+                      margin:"20px auto",
                     }}
                     onClick={() => generate()}
                   >
