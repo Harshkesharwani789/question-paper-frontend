@@ -250,7 +250,7 @@ const AdminChapter = () => {
           <h2 className="header-c ">Chapters</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Chapters
@@ -343,7 +343,7 @@ const AdminChapter = () => {
         </Pagination>
 
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Chapter</Modal.Title>
           </Modal.Header>
@@ -381,14 +381,18 @@ const AdminChapter = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2" variant="success"
-              onClick={handleClose}>
+              <Button
+                className="mx-2"
+                variant=""
+                style={{ backgroundColor: "#ff5200", color: "white" }}
+                onClick={handleClose}
+              >
                 Close
-                
               </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{ backgroundColor: "green", color: "white" }}
                 onClick={() => {
                   AddChapter();
                 }}
@@ -405,8 +409,7 @@ const AdminChapter = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
-
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
@@ -463,12 +466,16 @@ const AdminChapter = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button
+              variant=""
+              onClick={handleClose1}
+              style={{ backgroundColor: "#ff5200", color: "white" }}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              variant=""
+              style={{ backgroundColor: "green", color: "white" }}
               onClick={() => {
                 UpdateChapter();
               }}
@@ -482,8 +489,7 @@ const AdminChapter = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
-
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -498,10 +504,10 @@ const AdminChapter = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={DeleteChapter}>
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteChapter}>
               Delete
             </Button>
           </Modal.Footer>

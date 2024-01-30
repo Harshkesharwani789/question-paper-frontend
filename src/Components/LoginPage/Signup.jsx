@@ -236,7 +236,7 @@ const SignUp = () => {
                   >
                     <Button
                       variant=""
-                      style={{ backgroundColor: "navy", color: "white" }}
+                      style={{ backgroundColor: "green", color: "white" }}
                       onClick={() => {
                         TeacherRegister();
                       }}
@@ -262,8 +262,8 @@ const SignUp = () => {
                       <Button
                         style={{
                           padding: "7px 30px",
-                          backgroundColor: "navy",
-                          border: "1px solid navy",
+                          backgroundColor: "green",
+                          border: "1px solid green",
                           color: "white",
                         }}
                       >
@@ -302,8 +302,8 @@ const SignUp = () => {
           <Button
             variant=""
             style={{
-              backgroundColor: "navy",
-              border: "1px solid navy",
+              backgroundColor: "green",
+              border: "1px solid green",
               color: "white",
             }}
             onClick={() => navigate("/login")}

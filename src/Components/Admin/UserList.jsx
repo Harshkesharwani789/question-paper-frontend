@@ -384,11 +384,11 @@ const UserList = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 DeleteTeacher();
               }}

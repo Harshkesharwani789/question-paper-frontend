@@ -206,7 +206,7 @@ const AdminQuestions = () => {
           <h2 className="header-c ">Add Questions</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" }}
+            style={{ backgroundColor: "green", color: "#fff" }}
             onClick={() => {
               navigate("/adminquestiondetails");
             }}
@@ -343,7 +343,7 @@ const AdminQuestions = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button className="mx-2" variant="primary">
+              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}>
                 Add
               </Button>
             </div>
@@ -399,10 +399,10 @@ const AdminQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary">Delete</Button>
+            <Button variant="" style={{backgroundColor:"green", color:"white"}}>Delete</Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>
@@ -461,7 +461,7 @@ const AdminQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose3}>
+            <Button variant="success" onClick={handleClose3}>
               Close
             </Button>
           </Modal.Footer>

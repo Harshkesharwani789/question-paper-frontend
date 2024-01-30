@@ -57,6 +57,7 @@ const ExamBoard = () => {
           text: "Successfully Payment Done !!!",
           icon: "success",
           button: "OK!",
+          
         });
         navigate("/loginpage3", { state: res.data.success });
       }
@@ -192,7 +193,7 @@ const ExamBoard = () => {
                             {/* <Button>
                               Syllabus question paper with blue print
                             </Button> */}
-                            <Button>Individual</Button>
+                            <Button style={{backgroundColor:"#ff5200", border:"none"}}>Individual</Button>
                           </div>
                           <div className="col-8 mb-4">
                             <input type="radio" name="fav_language" /> &nbsp;
@@ -216,7 +217,7 @@ const ExamBoard = () => {
                               padding: "0px 20px",
                             }}
                           >
-                            <Button onClick={handleShow}>Start</Button>
+                            <Button onClick={handleShow} style={{backgroundColor:"navy"}}>Start</Button>
                           </div>
                         </div>
                       </Row>
@@ -349,7 +350,7 @@ const ExamBoard = () => {
                         >
                           <Button
                             variant=""
-                            style={{ backgroundColor: "navy", color: "white" }}
+                            style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
                               setBefore(true);
                             }}
@@ -385,11 +386,12 @@ const ExamBoard = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
             Cancel
           </Button>
           <Button
             variant="primary"
+            style={{backgroundColor:"green"}}
             onClick={() => {
               tellus();
             }}

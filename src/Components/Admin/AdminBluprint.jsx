@@ -1237,7 +1237,7 @@ function AdminBlueprint() {
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
-                      style={{ backgroundColor: "navy", color: "white" }}
+                      style={{ backgroundColor: "green", color: "white" }}
                     >
                       Back
                     </Button>

@@ -215,7 +215,7 @@ const AdminMedium = () => {
           <h2 className="header-c ">Medium</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Medium
@@ -339,12 +339,13 @@ const AdminMedium = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="success" onClick={handleClose}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
               Close
             </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   Addmedium();
                 }}
@@ -400,12 +401,11 @@ const AdminMedium = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
               Close
             </Button>
             <Button
-              variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 EditAddMedium();
               }}
@@ -435,11 +435,12 @@ const AdminMedium = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
             <Button
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 DeletAddMedium();
               }}

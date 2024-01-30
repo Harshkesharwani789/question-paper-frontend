@@ -221,7 +221,7 @@ const AdminSubject = () => {
           <h2 className="header-c ">Subject</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Subject
@@ -347,14 +347,16 @@ const AdminSubject = () => {
             <div className="d-flex">
             <Button
                 className="mx-2"
-                variant="success"
+                variant=""
+                style={{backgroundColor:"#ff5200", color:"white"}}
                 onClick={handleClose}
               >
                 Close
               </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   AddSubject();
                 }}
@@ -409,12 +411,11 @@ const AdminSubject = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
               Close
             </Button>
             <Button
-              variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 UpdateSubject();
               }}
@@ -443,10 +444,10 @@ const AdminSubject = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={DeleteSubject}>
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteSubject}>
               Delete
             </Button>
           </Modal.Footer>

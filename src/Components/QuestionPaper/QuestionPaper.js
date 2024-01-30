@@ -153,7 +153,7 @@ const QuestionPaper = ({ text }) => {
                   <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
                 </div>
               </div>
-              <div style={{ display: "flex", marginTop: "45px" }}>
+              <div style={{ display: "flex", marginTop: "10px" }}>
                 <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
               </div>
             </div>
@@ -270,7 +270,7 @@ const QuestionPaper = ({ text }) => {
                   <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
                 </div>
               </div>
-              <div style={{ display: "flex", marginTop: "45px" }}>
+              <div style={{ display: "flex", marginTop: "10px" }}>
                 <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
               </div>
             </div>
@@ -353,7 +353,7 @@ const QuestionPaper = ({ text }) => {
                   <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
                 </div>
               </div>
-              <div style={{ display: "flex", marginTop: "45px" }}>
+              <div style={{ display: "flex", marginTop: "10px" }}>
                 <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
               </div>
             </div>

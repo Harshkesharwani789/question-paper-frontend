@@ -160,7 +160,7 @@ const AdminBlueprintdetails = () => {
           <h2 className="header-c ">Blue Print Details</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={() => {
               navigate("/adminblueprint");
             }}
@@ -452,10 +452,10 @@ const AdminBlueprintdetails = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={makedeleteblueprint}>Delete</Button>
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={makedeleteblueprint}>Delete</Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>

@@ -383,7 +383,7 @@ const AdminClass = () => {
           <div className="ad-b mt-4 mb-4 col-md-12">
             <button
               className=" btn"
-              style={{ backgroundColor: "#083494", color: "white" }}
+              style={{ backgroundColor: "#ff5200", color: "white" }}
               onClick={() => {
                 setClass(true);
                 setSubclass(false);
@@ -394,7 +394,7 @@ const AdminClass = () => {
             &nbsp; &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "#26AAE0", color: "white" }}
+              style={{ backgroundColor: "green", color: "white" }}
               onClick={() => {
                 setClass(false);
                 setSubclass(true);
@@ -412,7 +412,7 @@ const AdminClass = () => {
               <h2 className="header-c ">Class</h2>
               <button
                 className=" btn"
-                style={{ backgroundColor: "#083494", color: "white" }}
+                style={{ backgroundColor: "green", color: "white" }}
                 onClick={handleShow}
               >
                 Add Class
@@ -507,7 +507,7 @@ const AdminClass = () => {
                   <h2 className="header-c ">Subclass </h2>
                   <button
                     className=" btn"
-                    style={{ backgroundColor: "#083494", color: "white" }}
+                    style={{ backgroundColor: "green", color: "white" }}
                     onClick={handleShow3}
                   >
                     Add Subclass
@@ -637,12 +637,13 @@ const AdminClass = () => {
                 classNamee();
               }}
             > */}
-            <Button variant="success" onClick={handleClose}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
               Close
             </Button>
             <Button
               className="mx-2"
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 classNamee();
               }}
@@ -684,12 +685,12 @@ const AdminClass = () => {
             style={{ backgroundColor: "#26AAE0" }}
             
           > */}
-          <Button variant="success" onClick={handleClose1}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
             Close
           </Button>
           <Button
             variant="primary"
-            style={{ backgroundColor: "#26AAE0" }}
+            style={{ backgroundColor: "green" }}
             onClick={() => {
               updateclassname();
             }}
@@ -718,11 +719,12 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose2}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}}onClick={handleClose2}>
             Close
           </Button>
           <Button
-            variant="primary"
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               deleteallclassname();
             }}
@@ -772,14 +774,16 @@ const AdminClass = () => {
           <div className="d-flex">
           <Button
               className="mx-2"
-              variant="success"
+              variant=""
+              style={{backgroundColor:"#ff5200", color:"white"}}
               onClick={handleClose3}
             >
               Close
             </Button>
             <Button
               className="mx-2"
-              variant="primary"
+              variant=""
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 subclassnamee();
               }}
@@ -836,14 +840,15 @@ const AdminClass = () => {
         <Modal.Footer>
         <Button
               className="mx-2"
-              variant="success"
+              variant=""
+              style={{backgroundColor:"#ff5200", color:"white"}}
               onClick={handleClose4}
             >
               Close
             </Button>
           <Button
-            variant="primary"
-            style={{ backgroundColor: "#26AAE0" }}
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               editsubbclass();
             }}
@@ -873,11 +878,12 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleClose5}>
+          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose5}>
             Close
           </Button>
           <Button
-            variant="primary"
+            variant=""
+            style={{backgroundColor:"green", color:"white"}}
             onClick={() => {
               deletesubclasss();
             }}

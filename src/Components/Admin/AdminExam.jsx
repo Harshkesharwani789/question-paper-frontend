@@ -210,7 +210,7 @@ const AdminExam = () => {
           <h2 className="header-c ">Name Of Examination</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Exam
@@ -329,12 +329,12 @@ const AdminExam = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2" variant="success"
+            <Button className="mx-2" variant="" style={{backgroundColor:"#ff5200", color:"white"}}
               onClick={handleClose}>
                 Close
                 
               </Button>
-              <Button className="mx-2" variant="primary"
+              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={()=>{
                 AddNameExamination();
               }}>
@@ -384,10 +384,10 @@ const AdminExam = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant=""style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
               Close
             </Button>
-            <Button variant="primary" style={{ backgroundColor: "#FAFA33" }}
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} 
             onClick={()=>{
               EditNameExam();
             }}>
@@ -415,10 +415,10 @@ const AdminExam = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary"
+            <Button variant="" style={{backgroundColor:"green", color:"white"}}
             onClick={()=>{
               DeleteNameExam();
             }}>Delete</Button>

@@ -42,7 +42,7 @@ const AdminSyllabusCopy = () => {
         icon: "error",
         button: "Ok!",
       });
-      if (!marks)
+    if (!marks)
       return swal({
         title: "Oops!",
         text: "Please Enter the marks",
@@ -192,19 +192,19 @@ const AdminSyllabusCopy = () => {
   //   get method of subject
   const [subject, setsubject] = useState([]);
   //   const [nochangedata, setnochangedata] = useState([]);
-//   const getSyllabus = async () => {
-//     try {
-//       let res = await axios.get(
-//         "http://localhost:8000/api/admin/getAllSyllabus"
-//       );
-//       if (res.status == 200) {
-//         setsubject(res.data.success);
-//         setnochangedata(res.data.success);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  //   const getSyllabus = async () => {
+  //     try {
+  //       let res = await axios.get(
+  //         "http://localhost:8000/api/admin/getAllSyllabus"
+  //       );
+  //       if (res.status == 200) {
+  //         setsubject(res.data.success);
+  //         setnochangedata(res.data.success);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -265,7 +265,7 @@ const AdminSyllabusCopy = () => {
           <h2 className="header-c ">Syllabus</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Syllabus
@@ -311,7 +311,7 @@ const AdminSyllabusCopy = () => {
                     <td>{item?.description}</td>
                     <td>{item?.marks}</td>
                     <td>
-                    <Link
+                      <Link
                         to="/"
                         style={{ textDecoration: "none", color: "white" }}
                       >
@@ -379,24 +379,16 @@ const AdminSyllabusCopy = () => {
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <div className="row">
+            <div className="row">
               <div className="do-sear mt-2">
                 <label>Year</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Year"
-                />
+                <input type="text" className="vi_0" placeholder="Enter Year" />
               </div>
             </div>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Class</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter class"
-                />
+                <input type="text" className="vi_0" placeholder="Enter class" />
               </div>
             </div>
             <div className="row">
@@ -482,14 +474,20 @@ const AdminSyllabusCopy = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-              <Button className="mx-2" variant="success" onClick={handleClose}>
+              <Button
+                className="mx-2"
+                variant=""
+                style={{ backgroundColor: "#ff5200", color: "white" }}
+                onClick={handleClose}
+              >
                 Close
               </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{ backgroundColor: "green", color: "white" }}
                 onClick={() => {
-                    addSyllabus();
+                  addSyllabus();
                 }}
               >
                 Add
@@ -554,12 +552,16 @@ const AdminSyllabusCopy = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button
+              variant=""
+              style={{ backgroundColor: "#ff5200", color: "white" }}
+              onClick={handleClose1}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              variant=""
+              style={{ backgroundColor: "#ff5200", color: "white" }}
               onClick={() => {
                 UpdateSyllabus();
               }}
@@ -589,10 +591,10 @@ const AdminSyllabusCopy = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={DeleteSyllabus}>
+            <Button variant="" style={{backgroundColor:"green", color:"white"}} onClick={DeleteSyllabus}>
               Delete
             </Button>
           </Modal.Footer>

@@ -199,7 +199,7 @@ const AdminBoard = () => {
           <h2 className="header-c ">Board</h2>
           <button
             className=" btn"
-            style={{ backgroundColor: "#083494", color: "white" }}
+            style={{ backgroundColor: "green", color: "white" }}
             onClick={handleShow}
           >
             Add Board
@@ -326,12 +326,13 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="success" onClick={handleClose}>
+            <Button variant=""  style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
               Close
             </Button>
               <Button
                 className="mx-2"
-                variant="primary"
+                variant=""
+                style={{backgroundColor:"green", color:"white"}}
                 onClick={() => {
                   AddBoradname();
                 }}
@@ -388,12 +389,12 @@ const AdminBoard = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose1}>
+            <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose1}>
               Close
             </Button>
             <Button
               variant="primary"
-              style={{ backgroundColor: "#FAFA33" }}
+              style={{backgroundColor:"green", color:"white"}}
               onClick={() => {
                 updateallboardname();
               }}
@@ -423,10 +424,10 @@ const AdminBoard = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" onClick={handleClose2}>
+            <Button variant=""  style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="primary" onClick={deleteboard}>
+            <Button variant=""  style={{backgroundColor:"green", color:"white"}} onClick={deleteboard}>
               Delete
             </Button>
           </Modal.Footer>
