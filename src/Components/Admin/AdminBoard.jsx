@@ -397,9 +397,6 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
               <Button
                 variant=""
                 className="modal-close-btn"

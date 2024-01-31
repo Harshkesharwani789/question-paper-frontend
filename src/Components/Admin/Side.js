@@ -40,6 +40,8 @@ import { PiNumberSquareTwoFill } from "react-icons/pi";
 import { PiNumberSquareThreeFill } from "react-icons/pi";
 import { PiNumberSquareFourFill } from "react-icons/pi";
 import { PiNumberSquareFiveFill } from "react-icons/pi";
+import { TiTick } from "react-icons/ti";
+import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 
 const Side = () => {
   const [Board, setBoard] = useState(false);
@@ -59,6 +61,8 @@ const Side = () => {
   const [threesentence, setThreesentence] = useState(false);
   const [foursentence, setFoursentence] = useState(false);
   const [fivesentence, setFivesentence] = useState(false);
+  const [recorrect, setRecorrect] = useState(false);
+  const [match, setMatch] = useState(false);
 
 
   // Responsive sidebar
@@ -116,6 +120,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -145,6 +151,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -175,6 +183,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -204,6 +214,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -233,6 +245,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -262,6 +276,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -290,7 +306,9 @@ const Side = () => {
                 setTwosentence(false);
                 setThreesentence(false);
                 setFoursentence(false);
+                setRecorrect(false);
                 setFivesentence(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -322,6 +340,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -351,6 +371,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -381,6 +403,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -411,6 +435,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -420,7 +446,7 @@ const Side = () => {
             </li>
           </Link>
 
-          <Link to="/twosentenceanswer" onClick={handleNavCollapse}>
+          <Link to="/twosenteceanswer" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -441,6 +467,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -471,6 +499,8 @@ const Side = () => {
                 setThreesentence(true);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -500,7 +530,9 @@ const Side = () => {
                 setTwosentence(false);
                 setThreesentence(false);
                 setFoursentence(true);
+                setRecorrect(false);
                 setFivesentence(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -509,7 +541,7 @@ const Side = () => {
               <span className="ms-2">4 Sentence Answer </span>
             </li>
           </Link>
-          
+
           <Link to="/fivesentenceanswer" onClick={handleNavCollapse}>
             <li
               className="a-ele "
@@ -531,6 +563,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(true);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -539,6 +573,71 @@ const Side = () => {
               <span className="ms-2">5 Sentence Answer </span>
             </li>
           </Link>
+
+          <Link to="/recorrectionanswer" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(true);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <TiTick   style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Recorret Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/matchthefollowing" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(true);
+              }}
+            >
+              <span>
+                <FaArrowsLeftRightToLine    style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Match the Following </span>
+            </li>
+          </Link>
+
 
           <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
             <li
@@ -551,7 +650,7 @@ const Side = () => {
                 setSubject(false);
                 setWeightage(false);
                 setQuestions(false);
-                setQuestionLevel(true);
+                setQuestionLevel(false);
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
@@ -561,6 +660,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(true);
+                setMatch(false);
               }}
             >
               <span>
@@ -584,12 +685,14 @@ const Side = () => {
                 setExamLevel(true);
                 setUserList(false);
                 setAccountHistory(false);
+                setRecorrect(false);
                 setsyllabusCopy(false);
                 setOnesentence(false);
                 setTwosentence(false);
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -641,7 +744,9 @@ const Side = () => {
                 setOnesentence(false);
                 setTwosentence(false);
                 setThreesentence(false);
+                setRecorrect(false);
                 setFoursentence(false);
+                setMatch(false);
                 setFivesentence(false);
               }}
             >
@@ -672,6 +777,8 @@ const Side = () => {
                 setThreesentence(false);
                 setFoursentence(false);
                 setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>

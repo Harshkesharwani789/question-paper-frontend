@@ -20,7 +20,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const ThreeSentenceAnswer = () => {
+const MatchtheFollowing = () => {
+
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -87,7 +88,7 @@ const ThreeSentenceAnswer = () => {
 
   return (
     <div>
-           <div className="col-lg-4 d-flex justify-content-center">
+         <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
             <BsSearch />
@@ -102,14 +103,14 @@ const ThreeSentenceAnswer = () => {
       </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Three Sentence Question </h2>
+          <h2 className="header-c ">Match the Following</h2>
           <button
             className="admin-add-btn"
             onClick={() => {
-              navigate("/threesentenceaddanswer");
+              navigate("/addmatches");
             }}
           >
-            Add Three Sentence Question Answer
+            Add Match the Following
           </button>
         </div>
 
@@ -151,7 +152,7 @@ const ThreeSentenceAnswer = () => {
                 <FaEye
                   color="blue"
                   onClick={() => {
-                    navigate(`/threesentenceanswerview/`);
+                    navigate(`/viewmatch/`);
                   }}
                 />
               </td>
@@ -165,7 +166,7 @@ const ThreeSentenceAnswer = () => {
                       style={{ cursor: "pointer", fontSize: "20px" }}
                       onClick={() => {
                         // setupdateQuestion();
-                        navigate("/threesentenceeditanswer");
+                        navigate("/editmatch");
                       }}
                     />
                   </div>
@@ -212,4 +213,4 @@ const ThreeSentenceAnswer = () => {
   )
 }
 
-export default ThreeSentenceAnswer
+export default MatchtheFollowing
