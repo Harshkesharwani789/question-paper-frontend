@@ -191,11 +191,34 @@ const AdminSubject = () => {
     }
   });
   // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(subject.length / productPerPage);
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
+  // const pageCount = Math.ceil(subject.length / productPerPage);
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = subject.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(subject.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
   useEffect(() => {
     getSubject();
   }, []);
@@ -219,10 +242,7 @@ const AdminSubject = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subject</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Subject
           </button>
         </div>
@@ -244,10 +264,10 @@ const AdminSubject = () => {
             </thead>
 
             <tbody>
-              {displayPage?.map((item, i) => {
+              {records?.map((item, i) => {
                 return (
                   <tr>
-                    <td>{i + 1 + visitedPage}</td>
+                    <td>{i + 1 + firstIndex}</td>
 
                     <td>{item?.subjectName}</td>
 
@@ -262,7 +282,6 @@ const AdminSubject = () => {
                               handleShow1();
                               setpdateSubject(item);
                               setsubjectName(item?.subjectName);
-                              
                             }}
                           />{" "}
                         </div>
@@ -285,7 +304,7 @@ const AdminSubject = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -305,9 +324,55 @@ const AdminSubject = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
+
+        <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                      {n}
+                    </a>
+                  </li>
+                );
+              })}
+
+              <li className="not-allow">
+                <span>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Subject</Modal.Title>
           </Modal.Header>
@@ -344,7 +409,7 @@ const AdminSubject = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button
+              <Button
                 className="mx-2 modal-close-btn"
                 variant=""
                 onClick={handleClose}
@@ -370,9 +435,12 @@ const AdminSubject = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>Edit Subject</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -412,7 +480,8 @@ const AdminSubject = () => {
               Close
             </Button>
             <Button
-              variant="" className="modal-add-btn"
+              variant=""
+              className="modal-add-btn"
               onClick={() => {
                 UpdateSubject();
               }}
@@ -426,7 +495,7 @@ const AdminSubject = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -444,7 +513,11 @@ const AdminSubject = () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" className= "modal-add-btn" onClick={DeleteSubject}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={DeleteSubject}
+            >
               Delete
             </Button>
           </Modal.Footer>

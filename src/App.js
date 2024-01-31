@@ -40,6 +40,7 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
+import QandA_5to6_Sentences from "./Components/Admin/QandA_5to6_Sentences";
 
 function App() {
   return (
@@ -382,6 +383,18 @@ function App() {
                 children={
                   <>
                     <AdminQuestionLevel />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_Sentences />
                   </>
                 }
               />

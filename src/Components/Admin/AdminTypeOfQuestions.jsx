@@ -162,11 +162,34 @@ const AdminTypeOfQuestions = () => {
   };
 
   // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = getalltypesofques.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(getalltypesofques.length / productPerPage);
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = getalltypesofques.slice(visitedPage, visitedPage + productPerPage);
+  // const pageCount = Math.ceil(getalltypesofques.length / productPerPage);
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = getalltypesofques.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(getalltypesofques.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
   useEffect(() => {
     getalltypesofquess();
   }, []);
@@ -215,7 +238,7 @@ const AdminTypeOfQuestions = () => {
             </thead>
 
             <tbody>
-              {displayPage?.map((item, i) => {
+              {records?.map((item, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
@@ -255,7 +278,7 @@ const AdminTypeOfQuestions = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -275,7 +298,52 @@ const AdminTypeOfQuestions = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
+         <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                      {n}
+                    </a>
+                  </li>
+                );
+              })}
+
+              <li className="not-allow">
+                <span>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>

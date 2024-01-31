@@ -106,11 +106,34 @@ const UserList = () => {
     setData([...filteredData]);
   };
   // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = Teacher.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(Teacher.length / productPerPage);
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = Teacher.slice(visitedPage, visitedPage + productPerPage);
+  // const pageCount = Math.ceil(Teacher.length / productPerPage);
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = Teacher.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(Teacher.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
+  }
+
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
 
   useEffect(() => {
     getAllTeacher();
@@ -174,7 +197,7 @@ const UserList = () => {
             </thead>
 
             <tbody>
-              {Teacher?.map((item, i) => {
+              {records?.map((item, i) => {
                 return (
                   <>
                     <tr>
@@ -210,7 +233,7 @@ const UserList = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -230,7 +253,52 @@ const UserList = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
+        <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                      {n}
+                    </a>
+                  </li>
+                );
+              })}
+
+              <li className="not-allow">
+                <span>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
         {/* Add Package modal */}
         {/* <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
@@ -396,11 +464,16 @@ const UserList = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
             <Button
-              variant="" className="modal-add-btn"
+              variant=""
+              className="modal-add-btn"
               onClick={() => {
                 DeleteTeacher();
               }}
