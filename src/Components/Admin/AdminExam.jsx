@@ -236,7 +236,8 @@ const AdminExam = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Name Of Examination</h2>
           <button
-            className="admin-add-btn"
+            className=" btn"
+            style={{ backgroundColor: "#138808", color: "white" }}
             onClick={handleShow}
           >
             Add Exam
@@ -396,8 +397,12 @@ const AdminExam = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2 modal-close-btn" variant="" onClick={handleClose}>Close</Button>
-              <Button className="mx-2 modal-add-btn" variant="" 
+            <Button className="mx-2" variant="secondary"
+              onClick={handleClose}>
+                Close
+                
+              </Button>
+              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}
               onClick={()=>{
                 AddNameExamination();
               }}>
@@ -447,7 +452,7 @@ const AdminExam = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button variant="" className="modal-add-btn"
@@ -478,7 +483,7 @@ const AdminExam = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="" className="modal-add-btn"

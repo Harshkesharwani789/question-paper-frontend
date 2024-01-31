@@ -324,8 +324,8 @@ label {
 }
 
 .btn-primary {
-  /* background: green !important; */
-  border-color: green !important;
+  background: #138808 !important;
+  border-color: #138808 !important;
   color: white !important;
 }
 

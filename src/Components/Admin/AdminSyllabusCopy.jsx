@@ -15,8 +15,9 @@ import { FaEye } from "react-icons/fa";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+  
   const [slybus, setslybus] = useState(false);
-
+  
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -365,7 +366,7 @@ const AdminSyllabusCopy = () => {
     try {
       let res = await axios.get(
         `http://localhost:8000/api/admin/getAllSyllabus/${admin?._id}`,
-        { headers: { Authorization: `Bearer${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status == 200) {
         setSlybuss(res.data.success);
@@ -482,7 +483,7 @@ const AdminSyllabusCopy = () => {
             <tbody>
               {Slybuss?.map((item, i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>{i + 1}</td>
 
                     <td>{item?.year}</td>

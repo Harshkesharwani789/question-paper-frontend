@@ -242,7 +242,8 @@ const AdminMedium = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Medium</h2>
           <button
-            className="admin-add-btn"
+            className=" btn"
+            style={{ backgroundColor: "#138808", color: "white" }}
             onClick={handleShow}
           >
             Add Medium
@@ -408,7 +409,7 @@ const AdminMedium = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="" className="modal-close-btn" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
               <Button
@@ -469,7 +470,7 @@ const AdminMedium = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button
@@ -503,7 +504,7 @@ const AdminMedium = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button

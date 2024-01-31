@@ -408,7 +408,7 @@ const AdminSubject = () => {
       </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button
@@ -441,7 +441,7 @@ const AdminSubject = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="" className= "modal-add-btn" onClick={DeleteSubject}>

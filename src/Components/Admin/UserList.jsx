@@ -8,10 +8,9 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const UserList = () => {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
- 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -24,42 +23,56 @@ const UserList = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-  
- 
- //get
- const [Teacher,setTeacher] = useState([]);
- const getAllTeacher=async()=>{
-  try {
-    let res=await axios.get("http://localhost:8000/api/admin/getAllTeachers")
-    if(res.status===200){
-      setTeacher(res.data.success);
+  //get
+  const [Teacher, setTeacher] = useState([]);
+  const getAllTeacher = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getAllTeachers/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setTeacher(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
- }
-  
+  };
+
   //delete
   const [delteacher, setdelteacher] = useState("");
   const DeleteTeacher = async () => {
     try {
-      const config = {
-        url: "/teacher/deleteTeacher/" + delteacher + "/" + user?._id,
-        baseURL: "http://localhost:8000/api",
-        method: "delete",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      let res = await axios(config);
+      let res = await axios.delete(
+        `http://localhost:8000/api/admin/deleteTeacher/${delteacher}/${admin?._id}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // const config = {
+      //   url: "/teacher/deleteTeacher/" + delteacher + "/" + admin?._id,
+      //   baseURL: "http://localhost:8000/api",
+      //   method: "delete",
+      //   headers: {
+      //     "content-type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
+      // let res = await axios(config);
       if (res.status === 200) {
         handleClose2();
         getAllTeacher();
         return swal({
           title: "Delete!",
           text: res.data.success,
-          icon: "warning",
+          icon: "success",
           button: "OK!",
         });
       }
@@ -103,7 +116,7 @@ const UserList = () => {
     getAllTeacher();
   }, []);
 
-  console.log("Teacher",Teacher)
+  console.log("Teacher", Teacher);
 
   return (
     <>
@@ -164,32 +177,32 @@ const UserList = () => {
               {Teacher?.map((item, i) => {
                 return (
                   <>
-                  <tr >
-                    <td>{i + 1}ere</td>
-                    <td>{item?.teacherId}werwr</td>
-                    <td>
-                      {item?.FirstName} {item?.LastName}werwe
-                    </td>
-                    <td>{item?.Mobile}werwer</td>
-                    <td>{item?.Email}werwer</td>
+                    <tr>
+                      <td>{i + 1}</td>
+                      <td>{item?.teacherId}</td>
+                      <td>
+                        {item?.FirstName} {item?.LastName}
+                      </td>
+                      <td>{item?.Date}</td>
+                      <td>{item?.Mobile}</td>
+                      <td>{item?.Email}</td>
 
-                    <td>
-                      {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
-                      
-                        <div>
-                          <AiFillDelete
-                            className="text-danger"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setdelteacher(item?._id);
-                              handleShow2(item?._id);
-                            }}
-                          />{" "}
+                      <td>
+                        {" "}
+                        <div style={{ display: "flex", gap: "20px" }}>
+                          <div>
+                            <AiFillDelete
+                              className="text-danger"
+                              style={{ cursor: "pointer", fontSize: "20px" }}
+                              onClick={() => {
+                                setdelteacher(item?._id);
+                                handleShow2(item?._id);
+                              }}
+                            />{" "}
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
                   </>
                 );
               })}
@@ -368,8 +381,7 @@ const UserList = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
-
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>

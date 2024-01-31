@@ -469,7 +469,8 @@ const AdminClass = () => {
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="header-c ">Class</h2>
               <button
-                className="admin-add-btn"
+                className=" btn"
+                style={{ backgroundColor: "#138808", color: "white" }}
                 onClick={handleShow}
               >
                 Add Class
@@ -603,8 +604,9 @@ const AdminClass = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <h2 className="header-c ">Subclass </h2>
                   <button
-                className="admin-add-btn"
-                onClick={handleShow3}
+                    className=" btn"
+                    style={{ backgroundColor: "#138808", color: "white" }}
+                    onClick={handleShow3}
                   >
                     Add Subclass
                   </button>
@@ -774,7 +776,7 @@ const AdminClass = () => {
                 classNamee();
               }}
             > */}
-            <Button variant="" className="modal-close-btn" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
             <Button
@@ -821,7 +823,7 @@ const AdminClass = () => {
             style={{ backgroundColor: "#26AAE0" }}
             
           > */}
-          <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+          <Button variant="secondary" onClick={handleClose1}>
             Close
           </Button>
           <Button
@@ -855,7 +857,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+          <Button variant="secondary" onClick={handleClose2}>
             Close
           </Button>
           <Button
@@ -909,8 +911,8 @@ const AdminClass = () => {
         <Modal.Footer>
           <div className="d-flex">
           <Button
-              className="mx-2 modal-close-btn"
-              variant=""
+              className="mx-2"
+              variant="secondary"
               onClick={handleClose3}
             >
               Close
@@ -973,8 +975,8 @@ const AdminClass = () => {
         </Modal.Body>
         <Modal.Footer>
         <Button
-              className="mx-2 modal-close-btn"
-              variant=""
+              className="mx-2"
+              variant="secondary"
               onClick={handleClose4}
             >
               Close
@@ -1011,7 +1013,7 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" className="modal-close-btn" onClick={handleClose5}>
+          <Button variant="secondary" onClick={handleClose5}>
             Close
           </Button>
           <Button

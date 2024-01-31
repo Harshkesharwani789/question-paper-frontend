@@ -211,7 +211,7 @@ const AdminBoard = () => {
 
   return (
     <>
-      <div className="col-lg-4 d-flex justify-content-center">
+      {/* <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
             <BsSearch />
@@ -223,11 +223,15 @@ const AdminBoard = () => {
             aria-describedby="basic-addon1"
           />
         </div>
-      </div>
+      </div> */}
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Board</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
+          <button
+            className=" btn"
+            style={{ backgroundColor: "#138808", color: "white" }}
+            onClick={handleShow}
+          >
             Add Board
           </button>
         </div>
@@ -393,6 +397,9 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
               <Button
                 variant=""
                 className="modal-close-btn"
@@ -459,11 +466,7 @@ const AdminBoard = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant=""
-              className="modal-close-btn"
-              onClick={handleClose1}
-            >
+            <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
             <Button
@@ -499,11 +502,7 @@ const AdminBoard = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant=""
-              className="modal-close-btn"
-              onClick={handleClose2}
-            >
+            <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
             <Button variant="" className="modal-add-btn" onClick={deleteboard}>
