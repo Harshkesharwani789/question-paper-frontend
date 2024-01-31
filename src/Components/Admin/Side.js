@@ -602,7 +602,7 @@ const Side = () => {
               <span>
                 <TiTick   style={{ fontSize: "20px" }} />
               </span>
-              <span className="ms-2">Recorret Answer </span>
+              <span className="ms-2">Recorret Questions </span>
             </li>
           </Link>
 
