@@ -57,12 +57,7 @@ const AdminBlueprintdetails = () => {
     });
     setData([...filteredData]);
   };
-  // Pagination
-  const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
-  const visitedPage = pageNumber * productPerPage;
-  const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
-  const pageCount = Math.ceil(data.length / productPerPage);
+
   // Search filter
   const [search, setSearch] = useState("");
   const handleFilter = (e) => {
@@ -80,7 +75,7 @@ const AdminBlueprintdetails = () => {
     }
   };
   // get method   for blue print
-  console.log(admin)
+  console.log(admin);
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
@@ -110,24 +105,31 @@ const AdminBlueprintdetails = () => {
   useEffect(() => {
     getallblueprint();
   }, []);
- 
 
-  const [deleteId,setdeleteId]=useState("");
+  const [deleteId, setdeleteId] = useState("");
 
-  const makedeleteblueprint=async()=>{
+  const makedeleteblueprint = async () => {
     try {
-      let data=await axios.delete("http://localhost:8000/api/admin/deleteBLUEPRINT/"+deleteId+"/"+admin?._id,{headers: {
-        Authorization: `Bearer ${token}`,
-      }});
-      if(data.status==200){
+      let data = await axios.delete(
+        "http://localhost:8000/api/admin/deleteBLUEPRINT/" +
+          deleteId +
+          "/" +
+          admin?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (data.status == 200) {
         swal({
           title: "Success!",
           text: data.data.success,
           icon: "success",
           dangerMode: true,
         });
-        handleClose2()
-        getallblueprint()
+        handleClose2();
+        getallblueprint();
       }
     } catch (error) {
       swal({
@@ -138,8 +140,36 @@ const AdminBlueprintdetails = () => {
       });
       console.log(error);
     }
+  };
+  // Pagination
+  // const [pageNumber, setPageNumber] = useState(0);
+  // const productPerPage = 5;
+  // const visitedPage = pageNumber * productPerPage;
+  // const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
+  // const pageCount = Math.ceil(data.length / productPerPage);
+  const [currenpage, setCurrentpage] = useState(1);
+  const recordsperpage = 6;
+  const lastIndex = currenpage * recordsperpage;
+  const firstIndex = lastIndex - recordsperpage;
+  const records = blueprint.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(blueprint.length / recordsperpage);
+  const numbers = [...Array(npages + 1).keys()].slice(1);
+
+  function changePage(id) {
+    setCurrentpage(id);
   }
 
+  function prevpage() {
+    if (currenpage !== firstIndex) {
+      setCurrentpage(currenpage - 1);
+    }
+  }
+
+  function nextpage() {
+    if (currenpage !== lastIndex) {
+      setCurrentpage(currenpage + 1);
+    }
+  }
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -247,7 +277,7 @@ const AdminBlueprintdetails = () => {
               </tr>
             </thead>
             <tbody>
-              {blueprint?.map((val, i) => {
+              {records?.map((val, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
@@ -273,7 +303,7 @@ const AdminBlueprintdetails = () => {
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                               // navigate("/admineditblueprint");
-                              navigate(`/admineditblueprint`,{state:val})
+                              navigate(`/admineditblueprint`, { state: val });
                             }}
                           />
                         </div>
@@ -282,7 +312,7 @@ const AdminBlueprintdetails = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setdeleteId(val?._id)
+                              setdeleteId(val?._id);
                               handleShow2();
                             }}
                           />{" "}
@@ -296,7 +326,7 @@ const AdminBlueprintdetails = () => {
           </Table>
         </div>
 
-        <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
           <Pagination.First onClick={() => setPageNumber(0)} />
           <Pagination.Prev
             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
@@ -316,7 +346,52 @@ const AdminBlueprintdetails = () => {
             }
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination>
+        </Pagination> */}
+        <div>
+          <nav>
+            <ul className="pagination">
+              <li className="not-allow">
+                <span>
+                  <li className="next-prev">
+                    <a
+                      onClick={() => {
+                        prevpage();
+                      }}
+                    >
+                      &lt;
+                    </a>{" "}
+                  </li>
+                </span>
+              </li>
+              {numbers?.map((n, i) => {
+                return (
+                  <li className="active-next" key={i}>
+                    <a
+                      href="#"
+                      className="inactive"
+                      onClick={() => changePage(n)}
+                    >
+                      {n}
+                    </a>
+                  </li>
+                );
+              })}
+
+              <li className="not-allow">
+                <span>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
+                </span>
+              </li>
+            </ul>
+          </nav>
+        </div>
         {/* Add Package modal */}
         {/* <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header style={{ backgroundColor: "orange" }}>
@@ -400,7 +475,7 @@ const AdminBlueprintdetails = () => {
         </Modal> */}
 
         {/* Edit Package modal */}
-        <Modal show={show1} onHide={handleClose1} style={{zIndex:"99999"}}>
+        <Modal show={show1} onHide={handleClose1} style={{ zIndex: "99999" }}>
           <Modal.Header style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>
               Edit Service List
@@ -434,12 +509,12 @@ const AdminBlueprintdetails = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={show2} onHide={handleClose2} style={{zIndex:"99999"}}>
+        <Modal show={show2} onHide={handleClose2} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <div className="row">
+            <div className="row">
               <div className="col-md-12">
                 <p className="fs-4" style={{ color: "red" }}>
                   Are you sure you want to delete this data?
@@ -448,10 +523,20 @@ const AdminBlueprintdetails = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={makedeleteblueprint}>Delete</Button>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={makedeleteblueprint}
+            >
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
         <Modal show={show3} onHide={handleClose3}>

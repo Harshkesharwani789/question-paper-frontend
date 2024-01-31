@@ -405,6 +405,18 @@ function App() {
               />
             }
           />
+          <Route
+            path="/adminquestion5to6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_Sentences />
+                  </>
+                }
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
