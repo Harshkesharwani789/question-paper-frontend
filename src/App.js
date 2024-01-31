@@ -40,7 +40,11 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
-
+import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
+import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
+import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
+import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
+import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer"
 function App() {
   return (
     <div className="App">
@@ -143,6 +147,7 @@ function App() {
               </>
             }
           />
+            
           <Route
             path="/syllabuscopy"
             exact
@@ -291,6 +296,7 @@ function App() {
               />
             }
           />
+        
           <Route
             path="/adminacchistory"
             element={
@@ -370,6 +376,18 @@ function App() {
                 children={
                   <>
                     <AdminQuestions />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/onesentenceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneSentenceAnswer />
                   </>
                 }
               />
