@@ -106,14 +106,20 @@ import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
 import AddMatches from "./Components/Admin/AddMatches";
 import EditMatch from "./Components/Admin/EditMatch";
 import ViewMatch from "./Components/Admin/ViewMatch";
+import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
+import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
+import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
+import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
+import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
 import RelationshipWord from "./Components/Admin/RelationshipWord";
 import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
 import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
 import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
 import OneWordQuestion from "./Components/Admin/OneWordQuestion";
 import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
-import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
 import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+
 function App() {
   return (
     <div className="App">
@@ -816,6 +822,345 @@ function App() {
             }
           />
           <Route
+            path="/adminquestion5to6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_addQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_viewQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_editQandA />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Five and six======== */}
+          {/* ========six======== */}
+          <Route
+            path="/adminquestion6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========six======== */}
+          {/* ========Seven======== */}
+          <Route
+            path="/adminquestion7sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Seven======== */}
+          {/* ========Eight======== */}
+          <Route
+            path="/adminquestion8sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Eight======== */}
+          {/* ========Ten======== */}
+
+          <Route
+            path="/adminquestion10sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Ten======== */}
+          {/* ========Expand and Explain======== */}
+          <Route
+            path="/adminexpandexplain"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainview"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Expand and Explain======== */}
+          {/* ========Odd and Out======== */}
+          <Route
+            path="/adminoddandout"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddandOut_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutview"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_vieww />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_edit />
+                  </>
+                }
+              />
+            }
+          />
+          {/* Relationship wors  */}
+
+          <Route
             path="/relationshipword"
             element={
               <Main
@@ -827,7 +1172,7 @@ function App() {
               />
             }
           />
-          <Route
+           <Route
             path="/addrelationshipword"
             element={
               <Main
@@ -839,7 +1184,7 @@ function App() {
               />
             }
           />
-          <Route
+            <Route
             path="/editrelationshipword"
             element={
               <Main
@@ -851,7 +1196,21 @@ function App() {
               />
             }
           />
+            <Route
+            path="/viewrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
 
+
+          {/* One Word Question  */}
           <Route
             path="/onewordquestion"
             element={
@@ -864,7 +1223,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/addonewordquestion"
             element={
@@ -877,7 +1235,7 @@ function App() {
               />
             }
           />
-          <Route
+           <Route
             path="/editonewordquestion"
             element={
               <Main
@@ -889,7 +1247,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/viewonewordquestion"
             element={
@@ -902,6 +1259,73 @@ function App() {
               />
             }
           />
+
+          {/* ============MCQs=========== */}
+
+          <Route
+            path="/adminmcqquestions"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmcqquestionsedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ============MCQs=========== */}
+          {/* ============Passage =========== */}
+          <Route
+            path="/adminpassage"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_Deatils />
+                  </>
+                }
+              />
+            }
+          />
+         
+          {/* ============Passage =========== */}
         </Routes>
       </BrowserRouter>
     </div>

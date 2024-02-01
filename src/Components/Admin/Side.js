@@ -314,6 +314,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -394,6 +395,7 @@ const Side = () => {
                 setRecorrect(false);
                 setFivesentence(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -415,7 +417,7 @@ const Side = () => {
           </Link>
           <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
             <li
-              className="a-ele"
+              className="a-ele "
               onClick={() => {
                 setBoard(false);
                 setClass(false);
@@ -436,6 +438,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -476,6 +479,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -517,6 +521,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -532,6 +537,90 @@ const Side = () => {
                 <FaShop style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">Questions</span>
+            </li>
+          </Link>
+
+          <Link to="/onewordquestion" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(true);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
+                setRelationship(false);
+                setfiveandsix(false);
+                setsix(false);
+                setseven(false);
+                seteight(false);
+                setten(false);
+                setexpandexplain(false);
+                setoddandout(false);
+                setmcq(false);
+                setpassage(false);
+              }}
+            >
+              <span>
+                <MdLooksOne  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">One Word Question </span>
+            </li>
+          </Link>
+
+          <Link to="/relationshipword" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(true);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
+                setRelationship(false);
+                setfiveandsix(false);
+                setsix(false);
+                setseven(false);
+                seteight(false);
+                setten(false);
+                setexpandexplain(false);
+                setoddandout(false);
+                setmcq(false);
+                setpassage(false);
+              }}
+            >
+              <span>
+                <MdLooksOne  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Relationship Word</span>
             </li>
           </Link>
 
@@ -558,6 +647,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -599,6 +689,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
@@ -640,6 +731,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
                 setfiveandsix(false);
                 setsix(false);
                 setseven(false);
