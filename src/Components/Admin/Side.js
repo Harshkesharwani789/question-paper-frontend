@@ -413,12 +413,8 @@ const Side = () => {
               <span className="ms-2">Questions</span>
             </li>
           </Link>
-<<<<<<< HEAD
-          <Link to="/adminquestion5to6sentences" onClick={handleNavCollapse}>
-=======
 
           <Link to="/onesentenceanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -428,23 +424,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Five & Six Sentences</span>
-            </li>
-          </Link>
-          <Link to="/adminquestion6sentences" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -468,7 +447,6 @@ const Side = () => {
           </Link>
 
           <Link to="/twosenteceanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -478,23 +456,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Six Sentences</span>
-            </li>
-          </Link>
-          <Link to="/adminquestion7sentences" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -518,7 +479,6 @@ const Side = () => {
           </Link>
 
           <Link to="/threesentenceanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -528,23 +488,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Seven Sentences</span>
-            </li>
-          </Link>
-          <Link to="/adminquestion8sentences" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -568,7 +511,6 @@ const Side = () => {
           </Link>
 
           <Link to="/foursentenceanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -578,23 +520,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Eight sentences</span>
-            </li>
-          </Link>
-          <Link to="/adminquestion10sentences" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -618,7 +543,6 @@ const Side = () => {
           </Link>
 
           <Link to="/fivesentenceanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -628,23 +552,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Ten Sentences</span>
-            </li>
-          </Link>
-          <Link to="/adminexpandexplain" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -668,7 +575,6 @@ const Side = () => {
           </Link>
 
           <Link to="/recorrectionanswer" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -678,23 +584,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Expand & Explain </span>
-            </li>
-          </Link>
-          <Link to="/adminoddandout" onClick={handleNavCollapse}>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -718,7 +607,6 @@ const Side = () => {
           </Link>
 
           <Link to="/matchthefollowing" onClick={handleNavCollapse}>
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -728,22 +616,6 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
-<<<<<<< HEAD
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Odd And Out </span>
-            </li>
-          </Link>
-=======
                 setQuestions(false);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -767,7 +639,6 @@ const Side = () => {
           </Link>
 
 
->>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
           <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
             <li
               className="a-ele "
