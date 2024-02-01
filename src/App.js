@@ -40,7 +40,42 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
-import QandA_5to6_Sentences from "./Components/Admin/QandA_5to6_Sentences";
+
+// ====Five and Six=====
+import QandA_5to6_Sentences from "./Components/Admin/FiveAndSixSentences/QandA_5to6_Sentences";
+import QandA_5to6_addQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_addQandA";
+import QandA_5to6_viewQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_viewQandA";
+import QandA_5to6_editQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_editQandA";
+// ========Six=========
+import QandA_6Sentences from "./Components/Admin/SixSentences/QandA_6Sentences";
+import QandA_add6Sentences from "./Components/Admin/SixSentences/QandA_add6Sentences";
+import QandA_edit6Sentences from "./Components/Admin/SixSentences/QandA_edit6Sentences";
+import QandA_view6Sentences from "./Components/Admin/SixSentences/QandA_view6Sentences";
+// =======Seven=========
+import QandA_7Sentences from "./Components/Admin/SevenSentences/QandA_7Sentences";
+import QandA_view7Sentences from "./Components/Admin/SevenSentences/QandA_view7Sentences";
+import QandA_edit7Sentences from "./Components/Admin/SevenSentences/QandA_edit7Sentences";
+import QandA_add7Sentences from "./Components/Admin/SevenSentences/QandA_add7Sentences";
+// =========Eight=========
+import QandA_8Sentences from "./Components/Admin/EightSentences/QandA_8Sentences";
+import QandA_add8Sentences from "./Components/Admin/EightSentences/QandA_add8Sentences";
+import QandA_edit8Sentences from "./Components/Admin/EightSentences/QandA_edit8Sentences";
+import QandA_view8Sentences from "./Components/Admin/EightSentences/QandA_view8Sentences";
+// =======Ten==========
+import QandA_10Sentences from "./Components/Admin/TenSentences/QandA_10Sentences";
+import QandA_add10Sentences from "./Components/Admin/TenSentences/QandA_add10Sentences";
+import QandA_edit10Sentences from "./Components/Admin/TenSentences/QandA_edit10Sentences";
+import QandA_view10Sentences from "./Components/Admin/TenSentences/QandA_view10Sentences";
+// ==========Expand and explain==========
+import ExpandExplain_Details from "./Components/Admin/ExpandAndExplain/ExpandExplain_Details";
+import ExpandExplain_add from "./Components/Admin/ExpandAndExplain/ExpandExplain_add";
+import ExpandExplain_edit from "./Components/Admin/ExpandAndExplain/ExpandExplain_edit";
+import ExpandExplain_view from "./Components/Admin/ExpandAndExplain/ExpandExplain_view";
+// ==========Odd and Out=====
+import OddAndOut_Details from "./Components/Admin/OaddAndout/OddAndOut_Details";
+import OddandOut_add from "./Components/Admin/OaddAndout/OddandOut_add";
+import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
+import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
 
 function App() {
   return (
@@ -123,7 +158,7 @@ function App() {
               </>
             }
           />
-    
+
           <Route
             path="/questionpaper"
             exact
@@ -340,7 +375,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/adminsyllabuscopy"
             element={
               <Main
@@ -388,6 +423,7 @@ function App() {
               />
             }
           />
+          {/* ========Five and six======== */}
           <Route
             path="/adminquestion5to6sentences"
             element={
@@ -400,6 +436,344 @@ function App() {
               />
             }
           />
+          <Route
+            path="/adminquestion5to6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_addQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_viewQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_editQandA />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Five and six======== */}
+          {/* ========six======== */}
+          <Route
+            path="/adminquestion6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========six======== */}
+          {/* ========Seven======== */}
+          <Route
+            path="/adminquestion7sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Seven======== */}
+          {/* ========Eight======== */}
+          <Route
+            path="/adminquestion8sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Eight======== */}
+          {/* ========Ten======== */}
+
+          <Route
+            path="/adminquestion10sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Ten======== */}
+          {/* ========Expand and Explain======== */}
+          <Route
+            path="/adminexpandexplain"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainview"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Expand and Explain======== */}
+          {/* ========Odd and Out======== */}
+          <Route
+            path="/adminoddandout"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddandOut_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminoddandoutview"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_vieww />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminoddandoutedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_edit/>
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Odd and Out======== */}
         </Routes>
       </BrowserRouter>
     </div>

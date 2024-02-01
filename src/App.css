@@ -137,3 +137,9 @@ button{
   outline: none;
 }
 /* pagination End here  */
+
+/* sweet alert starts here*/
+.swal-modal{
+  border-radius: 0px !important;
+}
+/* sweet alert ends here*/

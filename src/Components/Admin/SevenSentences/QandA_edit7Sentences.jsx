@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import "../Admin/Admin.css";
+import { Form, Button, Modal } from "react-bootstrap";
+import "../../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-const QandA_5to6_addQandA = () => {
+const QandA_edit7Sentences = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -261,22 +261,9 @@ const QandA_5to6_addQandA = () => {
   }, []);
   return (
     <div>
-      <div className="box_1">
+      <div className="box_1 mb-4">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Section</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Section"
-                  onChange={(e) => {
-                    setSection(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -408,8 +395,6 @@ const QandA_5to6_addQandA = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
-          <div className="row mt-2">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Difficulty level of Paper</label>
@@ -426,26 +411,8 @@ const QandA_5to6_addQandA = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Types of the Question</label>
-              </div>{" "}
-              <Form.Select
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setTypes_Question(e.target.value);
-                }}
-              >
-                <option>Select the Types of the Question</option>
-                {getalltypesofques?.map((item, i) => {
-                  return (
-                    <option value={item?.Typesofquestion} key={i}>
-                      {item?.Typesofquestion}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </div>
+          </div>
+          <div className="row mt-2">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
@@ -467,93 +434,84 @@ const QandA_5to6_addQandA = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="do-sear">
+              <div className="do-sear mt-2">
                 <label htmlFor="">Objectives</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  onChange={(e) => setObjectives(e.target.value)}
-                  placeholder="Please Enter Objectives"
-                />
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="do-sear">
-                <label htmlFor="">Instructions</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Instruction}
-                  onChange={handleChange2}
-                />
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                {/* <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="5"
-                className="vi_0"
-              ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_1}
-                  onChange={handleChange3}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_2}
-                  onChange={handleChange4}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_3}
-                  onChange={handleChange5}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_4}
-                  onChange={handleChange6}
-                />
-              </div>
+              </div>{" "}
+              <Form.Select
+                aria-label="Default select example"
+                // onChange={(e) => {
+                //   setTypes_Question(e.target.value);
+                // }}
+              >
+                <option>Select the Types of the Objective</option>
+                <option>Remembering</option>
+                <option>Appreciation</option>
+                <option>Expression</option>
+                <option>Understanding</option>
+              </Form.Select>
             </div>
 
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question 1</label>
+                <input
+                  type="text"
+                  placeholder="Enter Question 1"
+                  className="vi_0"
+                />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer 1</label>
+                <input
+                  type="text"
+                  placeholder="Enter Answer 1"
+                  className="vi_0"
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              <label
+                htmlFor=""
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                (OR)
+              </label>
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question 2</label>
+                <input
+                  type="text"
+                  placeholder="Enter Question 2"
+                  className="vi_0"
+                />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer 2</label>
+                <input
+                  type="text"
+                  placeholder="Enter Answer 2"
+                  className="vi_0"
+                />
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image</label>
+                <label htmlFor="">Question 1-Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question 2-Image</label>
                 <input
                   type="file"
                   className="vi_0"
@@ -564,12 +522,52 @@ const QandA_5to6_addQandA = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                  onChange={(e) => setMarks(e.target.value)}
-                />
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Time</option>
+                  <option>1/2 Mnt</option>
+                  <option>1/4 Mnt</option>
+                  <option>1 mnt</option>
+                  <option>1.30 minutes</option>
+                  <option>2 minutes</option>
+                  <option>3 minutes</option>
+                  <option>4 minutes</option>
+                  <option>5 minutes</option>
+                  <option>6 minutes</option>
+                  <option>7 minutes</option>
+                  <option>8 minutes</option>
+                  <option>9 minutes</option>
+                  <option>10 minutes</option>
+                </Form.Select>
               </div>
             </div>
             {/* <div className="col-md-6">
@@ -582,38 +580,22 @@ const QandA_5to6_addQandA = () => {
               />
             </div>
           </div> */}
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={Answer}
-                    onChange={handleChange7}
-                  />
-                </div>
-              </div>
-            </div>
-            {/* <div className="yoihjij my-4">
-            <button style={{ float: "right" }}>Add</button>
-          </div> */}
-          </div>
-        </div>
 
-        <div className="yoihjij text-center my-2 p-2 ">
-          <Button
-            // onClick={() => {
-            //   addquestions();
-            // }}
-            className="modal-add-btn"
-          >
-            Save
-          </Button>
+            <div className="yoihjij text-center my-2 p-2 ">
+              <Button
+                onClick={() => {
+                  //   addquestions();
+                }}
+                className="modal-add-btn"
+              >
+                Update
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default QandA_5to6_addQandA;
+export default QandA_edit7Sentences;

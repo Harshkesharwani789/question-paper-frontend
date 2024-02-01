@@ -258,7 +258,7 @@ const Side = () => {
           </Link>
           <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
             <li
-              className="a-ele "
+              className="a-ele"
               onClick={() => {
                 setBoard(false);
                 setClass(false);
@@ -327,6 +327,174 @@ const Side = () => {
                 <FaShop style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">Questions</span>
+            </li>
+          </Link>
+          <Link to="/adminquestion5to6sentences" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Five & Six Sentences</span>
+            </li>
+          </Link>
+          <Link to="/adminquestion6sentences" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Six Sentences</span>
+            </li>
+          </Link>
+          <Link to="/adminquestion7sentences" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Seven Sentences</span>
+            </li>
+          </Link>
+          <Link to="/adminquestion8sentences" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Eight sentences</span>
+            </li>
+          </Link>
+          <Link to="/adminquestion10sentences" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Ten Sentences</span>
+            </li>
+          </Link>
+          <Link to="/adminexpandexplain" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Expand & Explain </span>
+            </li>
+          </Link>
+          <Link to="/adminoddandout" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(true);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setsyllabusCopy(false);
+                setAccountHistory(false);
+              }}
+            >
+              <span>
+                <FaShop style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Odd And Out </span>
             </li>
           </Link>
           <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
