@@ -108,6 +108,19 @@ import ViewMatch from "./Components/Admin/ViewMatch";
 import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
 import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
 import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+import RelationshipWord from "./Components/Admin/RelationshipWord";
+import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
+import OneWordQuestion from "./Components/Admin/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
+import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
+import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
+import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
+import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
+import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
 function App() {
   return (
     <div className="App">
@@ -1147,22 +1160,197 @@ function App() {
               />
             }
           />
-          {/* ========Odd and Out======== */}
-          {/* Class LKG */}
+          {/* Relationship wors  */}
+
+          <Route
+            path="/relationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <RelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/addrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/editrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/viewrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* One Word Question  */}
+          <Route
+            path="/onewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/editonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* ============MCQs=========== */}
+
+          <Route
+            path="/adminmcqquestions"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmcqquestionsedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ============MCQs=========== */}
+          {/* ============Passage =========== */}
+          <Route
+            path="/adminpassage"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_Deatils />
+                  </>
+                }
+              />
+            }
+          />
+         
+          {/* ============Passage =========== */}
+          {/* onesentence */}
           <Route
             path="/Classlkg"
             element={
-              <>
-                <Main children={<Classlkg />} />
-              </>
+              <Main
+                children={
+                  <>
+                    <Classlkg />
+                  </>
+                }
+              />
             }
           />
           <Route
             path="/addClasslkg"
             element={
-              <>
-                <Main children={<Add />} />
-              </>
+              <Main
+                children={
+                  <>
+                    <Add />
+                  </>
+                }
+              />
             }
           />
         </Routes>

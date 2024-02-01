@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  InputGroup,
-  Modal,
-  Pagination,
-  Table,
-} from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
-import { BiSolidEdit } from "react-icons/bi";
-import { BsSearch } from "react-icons/bs";
-import moment from "moment";
+import { Form, Button, Modal } from "react-bootstrap";
+import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
-import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-const OneSentenceaddAnswer = () => {
+const AddOneWordQuestion = () => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -137,7 +124,12 @@ const OneSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
@@ -148,63 +140,32 @@ const OneSentenceaddAnswer = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Ojectives</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select Objectives</option>
-                  <option>Remembering</option>
-                  <option value="">Understanding</option>
-                  <option value="">Expression</option>
-                  <option value="">Appreciation</option>
-                </Form.Select>
-              </div>
-            </div>
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <input
+                        type="text"
+                        placeholder="Enter Your Question"
+                        className="lined-input"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-            <div>
-              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
-                <b>(OR)</b>
-              </h6>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-            
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Answer</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your Answer"
+                    className="lined-input"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -227,6 +188,7 @@ const OneSentenceaddAnswer = () => {
               <Modal.Title style={{ color: "white" }}>View </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              {/* <div className="box_1"> */}
               <div className="container">
                 <div className="row mt-2">
                   <div className="col-md-12">
@@ -243,12 +205,13 @@ const OneSentenceaddAnswer = () => {
                       <div className="do-sear mt-2">
                         <label htmlFor="">Answer</label>
                         {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
-                        <p>answer</p>
+                        <p>answers</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              {/* </div> */}
             </Modal.Body>
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">
@@ -273,7 +236,7 @@ const OneSentenceaddAnswer = () => {
                   <Button
                     className="modal-add-btn"
                     onClick={() => {
-                      navigate("/onesentenceanswer");
+                      navigate("/twosenteceanswer");
                     }}
                   >
                     Delete
@@ -288,4 +251,4 @@ const OneSentenceaddAnswer = () => {
   );
 };
 
-export default OneSentenceaddAnswer;
+export default AddOneWordQuestion;

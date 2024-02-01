@@ -138,22 +138,23 @@ const ReCorrecteditAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Image</label>
-                  <input type="file" className="vi_0" />
-                </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                />
               </div>
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Marks</label>
-                  <input
-                    type="number"
-                    className="vi_0"
-                    placeholder="Enter marsk"
-                  />
-                </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
               </div>
             </div>
             <div className="col-md-12">
@@ -177,12 +178,12 @@ const ReCorrecteditAnswer = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn" onClick={handleShow}>
-              Add
+            <Button className="modal-add-btn" >
+              Update
             </Button>
           </div>
 
-          <Modal
+          {/* <Modal
             show={show}
             onHide={handleClose}
             style={{ width: "100%" }}
@@ -192,7 +193,6 @@ const ReCorrecteditAnswer = () => {
               <Modal.Title style={{ color: "white" }}>View </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {/* <div className="box_1"> */}
               <div className="container">
                 <div className="row mt-2">
                   <div className="col-md-12">
@@ -213,7 +213,6 @@ const ReCorrecteditAnswer = () => {
                   </div>
                 </div>
               </div>
-              {/* </div> */}
             </Modal.Body>
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">
@@ -226,9 +225,7 @@ const ReCorrecteditAnswer = () => {
                   <Button
                     className="mx-2 modal-close-btn"
                     variant=""
-                    // onClick={() => {
-                    //   navigate("/onesentenceeditanswer");
-                    // }}
+                  
                     onClick={handleClose}
                   >
                     Edit
@@ -246,7 +243,7 @@ const ReCorrecteditAnswer = () => {
                 </div>
               </div>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
         </div>
       </div>
     </div>

@@ -138,41 +138,28 @@ const AddMatches = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Image</label>
-                  <input type="file" className="vi_0" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Marks</label>
-                  <input
-                    type="number"
-                    className="vi_0"
-                    placeholder="Enter marsk"
-                  />
-                </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                />
               </div>
             </div>
-            {/* <div className="col-md-12">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
               </div>
             </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
-                </div>
-              </div>
-            </div> */}
+       
             <Container>
+              <div className="mt-2">
               <label htmlFor=""> Question</label>
 
               <div className="row">
@@ -212,6 +199,7 @@ const AddMatches = () => {
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
                     />
+                  
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -257,6 +245,7 @@ const AddMatches = () => {
                     />
                   </div>
                 </div>
+              </div>
               </div>
             </Container>
 
@@ -338,11 +327,6 @@ const AddMatches = () => {
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
                     />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
                   </div>
                 </div>
               </div>
@@ -353,42 +337,21 @@ const AddMatches = () => {
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
             <Button className="modal-add-btn" onClick={handleShow}>
-              Add
+              Save
             </Button>
           </div>
 
           <Modal
             show={show}
             onHide={handleClose}
-            style={{ width: "100%" }}
             size="lg"
           >
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
               <Modal.Title style={{ color: "white" }}>View </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {/* <div className="box_1"> */}
-              {/* <div className="container">
-                <div className="row mt-2">
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <label htmlFor="">Question</label>
-
-                      <CKEditor editor={ClassicEditor} className="vi_0" />
-                    </div>
-                  </div>
-
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <div className="do-sear mt-2">
-                        <label htmlFor="">Answer</label>
-                        <CKEditor editor={ClassicEditor} className="vi_0" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-              <div>
+              <div className="col-12">
+              <label htmlFor=""> Questions</label>
                 <Table
                   responsive
                   bordered
@@ -397,8 +360,8 @@ const AddMatches = () => {
                 >
                   <thead style={{ backgroundColor: "orange" }}>
                     <tr>
-                      <th>S.No</th>
-                      <th>Board</th>
+                      <th>PART A</th>
+                      <th>PART B</th>
                     </tr>
                   </thead>
 
@@ -428,13 +391,55 @@ const AddMatches = () => {
                       <td>sss</td>
                     </tr>
                     <tr>
+                      <td></td>
+                      <td>sss</td>
+                    </tr>
+                    
+                  </tbody>
+                </Table>
+              </div>
+
+              <div className="col-12">
+              <label htmlFor=""> Answer</label>
+                <Table
+                  responsive
+                  bordered
+                  size="sm"
+                  style={{ textAlign: "center" }}
+                >
+                  <thead style={{ backgroundColor: "orange" }}>
+                    <tr>
+                      <th>PART A</th>
+                      <th>PART B</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
-                      <td></td>
+                      <td>sss</td>
                       <td>sss</td>
                     </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>                 
+                  
                   </tbody>
                 </Table>
               </div>
@@ -444,7 +449,7 @@ const AddMatches = () => {
               <div className="d-flex justify-content-center m-auto">
                 <div className="yoihjij text-center my-2 p-2 ">
                   <Button className="modal-add-btn" onClick={handleShow}>
-                    Save
+                    Submit
                   </Button>
                 </div>
                 <div className="yoihjij text-center my-2 p-2 ">

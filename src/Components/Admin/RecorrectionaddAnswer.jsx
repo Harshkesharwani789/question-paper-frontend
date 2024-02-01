@@ -137,22 +137,23 @@ const RecorrectionaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Image</label>
-                  <input type="file" className="vi_0" />
-                </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                />
               </div>
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Marks</label>
-                  <input
-                    type="number"
-                    className="vi_0"
-                    placeholder="Enter marsk"
-                  />
-                </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
               </div>
             </div>
             <div className="col-md-12">
@@ -177,7 +178,7 @@ const RecorrectionaddAnswer = () => {
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
             <Button className="modal-add-btn" onClick={handleShow}>
-              Add
+              Save
             </Button>
           </div>
 
@@ -198,7 +199,8 @@ const RecorrectionaddAnswer = () => {
                     <div className="do-sear mt-2">
                       <label htmlFor="">Question</label>
 
-                      <CKEditor editor={ClassicEditor} className="vi_0" />
+                      {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                      <p>questions</p>
                     </div>
                   </div>
 
@@ -206,7 +208,8 @@ const RecorrectionaddAnswer = () => {
                     <div className="do-sear mt-2">
                       <div className="do-sear mt-2">
                         <label htmlFor="">Answer</label>
-                        <CKEditor editor={ClassicEditor} className="vi_0" />
+                        {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                        <p>answers</p>
                       </div>
                     </div>
                   </div>
@@ -218,7 +221,7 @@ const RecorrectionaddAnswer = () => {
               <div className="d-flex justify-content-center m-auto">
                 <div className="yoihjij text-center my-2 p-2 ">
                   <Button className="modal-add-btn" onClick={handleShow}>
-                    Save
+                    Submit
                   </Button>
                 </div>
                 <div className="yoihjij text-center my-2 p-2 ">

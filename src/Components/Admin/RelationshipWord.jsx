@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const MatchtheFollowing = () => {
+const RelationshipWord = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -101,14 +101,14 @@ const MatchtheFollowing = () => {
       </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Match the Following</h2>
+          <h2 className="header-c ">Relationship word Questions</h2>
           <button
             className="admin-add-btn"
             onClick={() => {
-              navigate("/addmatches");
+              navigate("/addrelationshipword");
             }}
           >
-            Add Match the Following
+            Add Relationship word Questions
           </button>
         </div>
 
@@ -150,7 +150,7 @@ const MatchtheFollowing = () => {
                 <FaEye
                   color="blue"
                   onClick={() => {
-                    navigate(`/viewmatch/`);
+                    navigate(`/viewrelationshipword`);
                   }}
                 />
               </td>
@@ -164,7 +164,7 @@ const MatchtheFollowing = () => {
                       style={{ cursor: "pointer", fontSize: "20px" }}
                       onClick={() => {
                         // setupdateQuestion();
-                        navigate("/editmatch");
+                        navigate("/editrelationshipword");
                       }}
                     />
                   </div>
@@ -211,4 +211,4 @@ const MatchtheFollowing = () => {
   );
 };
 
-export default MatchtheFollowing;
+export default RelationshipWord;
