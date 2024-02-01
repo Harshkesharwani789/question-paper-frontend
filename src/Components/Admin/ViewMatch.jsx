@@ -132,41 +132,26 @@ const ViewMatch = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Image</label>
-                  <input type="file" className="vi_0" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Marks</label>
-                  <input
-                    type="number"
-                    className="vi_0"
-                    placeholder="Enter marsk"
-                  />
-                </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                />
               </div>
             </div>
-            {/* <div className="col-md-12">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
               </div>
             </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
-                </div>
-              </div>
-            </div> */}
-            <Container>
+            {/* <Container>
               <label htmlFor=""> Question</label>
 
               <div className="row">
@@ -332,15 +317,104 @@ const ViewMatch = () => {
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
                     />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
                   </div>
                 </div>
               </div>
-            </Container>
+            </Container> */}
+
+            <div className="col-12">
+              <label htmlFor=""> Questions</label>
+                <Table
+                  responsive
+                  bordered
+                  size="sm"
+                  style={{ textAlign: "center" }}
+                >
+                  <thead style={{ backgroundColor: "orange" }}>
+                    <tr>
+                      <th>PART A</th>
+                      <th>PART B</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>sss</td>
+                    </tr>
+                    
+                  </tbody>
+                </Table>
+              </div>
+
+              <div className="col-12">
+              <label htmlFor=""> Answer</label>
+                <Table
+                  responsive
+                  bordered
+                  size="sm"
+                  style={{ textAlign: "center" }}
+                >
+                  <thead style={{ backgroundColor: "orange" }}>
+                    <tr>
+                      <th>PART A</th>
+                      <th>PART B</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>                 
+                  
+                  </tbody>
+                </Table>
+              </div>
           </div>
         </div>
         </div>

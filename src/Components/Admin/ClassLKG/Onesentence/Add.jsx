@@ -14,13 +14,13 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../../../Admin/Admin.css";
 import swal from "sweetalert";
 
-const OneSentenceaddAnswer = () => {
+const Add = () => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -137,74 +137,38 @@ const OneSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
+            <div className="row">
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label htmlFor=""> Image</label>
+                  <input type="file" className="vi_0" />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label htmlFor=""> Marks</label>
+                  <input
+                    type="number"
+                    className="vi_0"
+                    placeholder="Enter marsk"
+                  />
+                </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Ojectives</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select Objectives</option>
-                  <option>Remembering</option>
-                  <option value="">Understanding</option>
-                  <option value="">Expression</option>
-                  <option value="">Appreciation</option>
-                </Form.Select>
-              </div>
-            </div>
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
+
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-            <div>
-              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
-                <b>(OR)</b>
-              </h6>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-            
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Answer</label>
+                  <CKEditor editor={ClassicEditor} className="vi_0" />
+                </div>
               </div>
             </div>
           </div>
@@ -213,7 +177,7 @@ const OneSentenceaddAnswer = () => {
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
             <Button className="modal-add-btn" onClick={handleShow}>
-              Save
+              Add
             </Button>
           </div>
 
@@ -227,14 +191,18 @@ const OneSentenceaddAnswer = () => {
               <Modal.Title style={{ color: "white" }}>View </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              {/* <div className="box_1"> */}
               <div className="container">
                 <div className="row mt-2">
                   <div className="col-md-12">
                     <div className="do-sear mt-2">
                       <label htmlFor="">Question</label>
 
-                      {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
-                      <p>questions</p>
+                      <p className="vi_0">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Autem aspernatur deserunt eos laboriosam quam quo
+                        accusantium, quaerat debitis praesentium minus!
+                      </p>
                     </div>
                   </div>
 
@@ -242,19 +210,19 @@ const OneSentenceaddAnswer = () => {
                     <div className="do-sear mt-2">
                       <div className="do-sear mt-2">
                         <label htmlFor="">Answer</label>
-                        {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
-                        <p>answer</p>
+                        <CKEditor editor={ClassicEditor} className="vi_0" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              {/* </div> */}
             </Modal.Body>
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">
                 <div className="yoihjij text-center my-2 p-2 ">
                   <Button className="modal-add-btn" onClick={handleShow}>
-                    Submit
+                    Save
                   </Button>
                 </div>
                 <div className="yoihjij text-center my-2 p-2 ">
@@ -273,7 +241,7 @@ const OneSentenceaddAnswer = () => {
                   <Button
                     className="modal-add-btn"
                     onClick={() => {
-                      navigate("/onesentenceanswer");
+                      navigate("/Classlkg");
                     }}
                   >
                     Delete
@@ -288,4 +256,4 @@ const OneSentenceaddAnswer = () => {
   );
 };
 
-export default OneSentenceaddAnswer;
+export default Add;

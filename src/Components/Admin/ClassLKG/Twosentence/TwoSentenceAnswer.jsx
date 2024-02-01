@@ -14,13 +14,13 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
+import "../../../Admin/Admin.css"
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const MatchtheFollowing = () => {
+const TwoSentenceAnswer = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -101,14 +101,14 @@ const MatchtheFollowing = () => {
       </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Match the Following</h2>
+          <h2 className="header-c ">Two Sentence Question </h2>
           <button
             className="admin-add-btn"
             onClick={() => {
-              navigate("/addmatches");
+              navigate("/twosentenceaddanswer");
             }}
           >
-            Add Match the Following
+            Add Two Sentence Question Answer
           </button>
         </div>
 
@@ -150,7 +150,7 @@ const MatchtheFollowing = () => {
                 <FaEye
                   color="blue"
                   onClick={() => {
-                    navigate(`/viewmatch/`);
+                    navigate(`/twosentenceanswerview/`);
                   }}
                 />
               </td>
@@ -164,7 +164,7 @@ const MatchtheFollowing = () => {
                       style={{ cursor: "pointer", fontSize: "20px" }}
                       onClick={() => {
                         // setupdateQuestion();
-                        navigate("/editmatch");
+                        navigate("/twosentenceeditanswer");
                       }}
                     />
                   </div>
@@ -211,4 +211,4 @@ const MatchtheFollowing = () => {
   );
 };
 
-export default MatchtheFollowing;
+export default TwoSentenceAnswer;

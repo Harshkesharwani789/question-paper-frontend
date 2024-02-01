@@ -581,7 +581,7 @@ const Mcq_add = () => {
                 />
               </div>
             </div>
-           
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 1</label>

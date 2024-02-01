@@ -14,23 +14,23 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import '../../../Admin/Admin.css'
 
 const TwoSentenceeditAnswer = () => {
-    const [show, setShow] = useState();
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
-       <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -137,22 +137,23 @@ const TwoSentenceeditAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Image</label>
-                  <input type="file" className="vi_0" />
-                </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                />
               </div>
-              <div className="col-md-6">
-                <div className="do-sear mt-2">
-                  <label htmlFor=""> Marks</label>
-                  <input
-                    type="number"
-                    className="vi_0"
-                    placeholder="Enter marsk"
-                  />
-                </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
               </div>
             </div>
             <div className="col-md-12">
@@ -176,12 +177,12 @@ const TwoSentenceeditAnswer = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn" onClick={handleShow}>
+            <Button className="modal-add-btn">
               Update
             </Button>
           </div>
 
-          <Modal
+          {/* <Modal
             show={show}
             onHide={handleClose}
             style={{ width: "100%" }}
@@ -191,7 +192,6 @@ const TwoSentenceeditAnswer = () => {
               <Modal.Title style={{ color: "white" }}>View </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {/* <div className="box_1"> */}
               <div className="container">
                 <div className="row mt-2">
                   <div className="col-md-12">
@@ -212,7 +212,6 @@ const TwoSentenceeditAnswer = () => {
                   </div>
                 </div>
               </div>
-              {/* </div> */}
             </Modal.Body>
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">
@@ -225,9 +224,7 @@ const TwoSentenceeditAnswer = () => {
                   <Button
                     className="mx-2 modal-close-btn"
                     variant=""
-                    // onClick={() => {
-                    //     navigate("/onesentenceanswer");
-                    //   }}
+                
                     onClick={handleClose}
                   >
                     Edit
@@ -245,11 +242,11 @@ const TwoSentenceeditAnswer = () => {
                 </div>
               </div>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TwoSentenceeditAnswer
+export default TwoSentenceeditAnswer;

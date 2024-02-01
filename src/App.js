@@ -78,16 +78,12 @@ import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
 import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
 
 import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
-import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
 import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
 import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
 import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
-import OneSentenceeditAnswer from "./Components/Admin/OneSentenceeditAnswer";
-import OneSentenceAnswerView from "./Components/Admin/OneSentenceAnswerView";
-import TwoSentenceaddAnswer from "./Components/Admin/TwoSentenceaddAnswer";
-import TwoSentenceeditAnswer from "./Components/Admin/TwoSentenceeditAnswer";
-import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
+import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
+import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
 import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
 import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
 import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
@@ -106,12 +102,26 @@ import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
 import AddMatches from "./Components/Admin/AddMatches";
 import EditMatch from "./Components/Admin/EditMatch";
 import ViewMatch from "./Components/Admin/ViewMatch";
-import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
+import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
+import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+import RelationshipWord from "./Components/Admin/RelationshipWord";
+import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
+import OneWordQuestion from "./Components/Admin/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
+import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
 import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
 import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
 import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
 import Passage_add from "./Components/Admin/Passage/Passage_add";
+import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceaddAnswer";
+import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
+import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 function App() {
   return (
     <div className="App">
@@ -776,6 +786,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/onesentenceanswer"
             element={
@@ -1150,7 +1161,108 @@ function App() {
               />
             }
           />
-          {/* ========Odd and Out======== */}
+          {/* Relationship wors  */}
+
+          <Route
+            path="/relationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <RelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/addrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/editrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/viewrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* One Word Question  */}
+          <Route
+            path="/onewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/editonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
           {/* ============MCQs=========== */}
 
           <Route
@@ -1228,6 +1340,31 @@ function App() {
             }
           />
           {/* ============Passage =========== */}
+          {/* onesentence */}
+          <Route
+            path="/Classlkg"
+            element={
+              <Main
+                children={
+                  <>
+                    <Classlkg />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addClasslkg"
+            element={
+              <Main
+                children={
+                  <>
+                    <Add />
+                  </>
+                }
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

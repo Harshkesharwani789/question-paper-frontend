@@ -20,9 +20,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-
-const TwoSentenceAnswer = () => {
-
+const RelationshipWord = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -88,7 +86,7 @@ const TwoSentenceAnswer = () => {
 
   return (
     <div>
-         <div className="col-lg-4 d-flex justify-content-center">
+      <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
             <BsSearch />
@@ -103,14 +101,14 @@ const TwoSentenceAnswer = () => {
       </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Two Sentence Question </h2>
+          <h2 className="header-c ">Relationship word Questions</h2>
           <button
             className="admin-add-btn"
             onClick={() => {
-              navigate("/twosentenceaddanswer");
+              navigate("/addrelationshipword");
             }}
           >
-            Add Two Sentence Question Answer
+            Add Relationship word Questions
           </button>
         </div>
 
@@ -152,7 +150,7 @@ const TwoSentenceAnswer = () => {
                 <FaEye
                   color="blue"
                   onClick={() => {
-                    navigate(`/twosentenceanswerview/`);
+                    navigate(`/viewrelationshipword`);
                   }}
                 />
               </td>
@@ -166,7 +164,7 @@ const TwoSentenceAnswer = () => {
                       style={{ cursor: "pointer", fontSize: "20px" }}
                       onClick={() => {
                         // setupdateQuestion();
-                        navigate("/twosentenceeditanswer");
+                        navigate("/editrelationshipword");
                       }}
                     />
                   </div>
@@ -210,7 +208,7 @@ const TwoSentenceAnswer = () => {
         </Modal.Footer>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default TwoSentenceAnswer
+export default RelationshipWord;
