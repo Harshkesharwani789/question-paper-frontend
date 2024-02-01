@@ -646,3 +646,14 @@ table thead tr th {
     height: 300px;
   }
 }
+.hjhu a button{
+  width: 175px;
+  padding: 8px;
+  height: 82px;
+  margin: 1px;
+}
+.hjhu a {
+  font-size: 16px;
+}
+
+

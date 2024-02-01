@@ -432,7 +432,7 @@ const Side = () => {
                 {question ? (
                   <>
                     <div className="webmanagement">
-                      <Link to="/Admin_Gallery">
+                      <Link to="/Classlkg">
                         <li className="a-ele">
                           <span>
                             <i

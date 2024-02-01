@@ -14,23 +14,23 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import '../../../Admin/Admin.css'
 
-const OneSentenceeditAnswer = () => {
-    const [show, setShow] = useState();
+const TwoSentenceeditAnswer = () => {
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
-       <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -237,7 +237,7 @@ const OneSentenceeditAnswer = () => {
                   <Button
                     className="modal-add-btn"
                     onClick={() => {
-                      navigate("/onesentenceanswer");
+                      navigate("/twosenteceanswer");
                     }}
                   >
                     Delete
@@ -249,7 +249,7 @@ const OneSentenceeditAnswer = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OneSentenceeditAnswer
+export default TwoSentenceeditAnswer;

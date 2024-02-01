@@ -83,10 +83,9 @@ import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
 import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
 import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
-import OneSentenceeditAnswer from "./Components/Admin/OneSentenceeditAnswer";
-import OneSentenceAnswerView from "./Components/Admin/OneSentenceAnswerView";
+import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
+import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
 import TwoSentenceaddAnswer from "./Components/Admin/TwoSentenceaddAnswer";
-import TwoSentenceeditAnswer from "./Components/Admin/TwoSentenceeditAnswer";
 import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
 import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
 import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
@@ -106,10 +105,13 @@ import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
 import AddMatches from "./Components/Admin/AddMatches";
 import EditMatch from "./Components/Admin/EditMatch";
 import ViewMatch from "./Components/Admin/ViewMatch";
+import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
+import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter> 
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
@@ -770,6 +772,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/onesentenceanswer"
             element={
@@ -1145,6 +1148,23 @@ function App() {
             }
           />
           {/* ========Odd and Out======== */}
+          {/* Class LKG */}
+          <Route
+            path="/Classlkg"
+            element={
+              <>
+                <Main children={<Classlkg />} />
+              </>
+            }
+          />
+          <Route
+            path="/addClasslkg"
+            element={
+              <>
+                <Main children={<Add />} />
+              </>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
