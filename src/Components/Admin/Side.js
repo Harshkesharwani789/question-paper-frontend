@@ -35,6 +35,13 @@ import "../Admin/Admin.css";
 import Navbar from 'react-bootstrap/Navbar';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import { MdLooksOne } from "react-icons/md";
+import { PiNumberSquareTwoFill } from "react-icons/pi";
+import { PiNumberSquareThreeFill } from "react-icons/pi";
+import { PiNumberSquareFourFill } from "react-icons/pi";
+import { PiNumberSquareFiveFill } from "react-icons/pi";
+import { TiTick } from "react-icons/ti";
+import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 
 const Side = () => {
   const [Board, setBoard] = useState(false);
@@ -49,6 +56,13 @@ const Side = () => {
   const [UserList, setUserList] = useState(false);
   const [AccountHistory, setAccountHistory] = useState(false);
   const [SyllabusCopy, setsyllabusCopy] = useState(false);
+  const [onesentence, setOnesentence] = useState(false);
+  const [twosentence, setTwosentence] = useState(false);
+  const [threesentence, setThreesentence] = useState(false);
+  const [foursentence, setFoursentence] = useState(false);
+  const [fivesentence, setFivesentence] = useState(false);
+  const [recorrect, setRecorrect] = useState(false);
+  const [match, setMatch] = useState(false);
 
 
   // Responsive sidebar
@@ -101,6 +115,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -125,6 +146,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -150,6 +178,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -174,6 +209,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -198,6 +240,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -222,6 +271,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -246,6 +302,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -272,6 +335,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(true);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -296,6 +366,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -321,6 +398,13 @@ const Side = () => {
                 setUserList(false);
                 setsyllabusCopy(false);
                 setAccountHistory(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -329,7 +413,12 @@ const Side = () => {
               <span className="ms-2">Questions</span>
             </li>
           </Link>
+<<<<<<< HEAD
           <Link to="/adminquestion5to6sentences" onClick={handleNavCollapse}>
+=======
+
+          <Link to="/onesentenceanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -339,6 +428,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -354,6 +444,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminquestion6sentences" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(true);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <MdLooksOne  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">1 Sentence Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/twosenteceanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -363,6 +478,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -378,6 +494,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminquestion7sentences" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(true);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <PiNumberSquareTwoFill  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">2 Sentence Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/threesentenceanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -387,6 +528,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -402,6 +544,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminquestion8sentences" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(true);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <PiNumberSquareThreeFill  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">3 Sentence Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/foursentenceanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -411,6 +578,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -426,6 +594,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminquestion10sentences" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(true);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <PiNumberSquareFourFill  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">4 Sentence Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/fivesentenceanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -435,6 +628,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -450,6 +644,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminexpandexplain" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(true);
+                setRecorrect(false);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <PiNumberSquareFiveFill  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">5 Sentence Answer </span>
+            </li>
+          </Link>
+
+          <Link to="/recorrectionanswer" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -459,6 +678,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -474,6 +694,31 @@ const Side = () => {
             </li>
           </Link>
           <Link to="/adminoddandout" onClick={handleNavCollapse}>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(true);
+                setMatch(false);
+              }}
+            >
+              <span>
+                <TiTick   style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Recorret Questions </span>
+            </li>
+          </Link>
+
+          <Link to="/matchthefollowing" onClick={handleNavCollapse}>
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
             <li
               className="a-ele "
               onClick={() => {
@@ -483,6 +728,7 @@ const Side = () => {
                 setExamination(false);
                 setSubject(false);
                 setWeightage(false);
+<<<<<<< HEAD
                 setQuestions(true);
                 setQuestionLevel(false);
                 setExamLevel(false);
@@ -497,6 +743,31 @@ const Side = () => {
               <span className="ms-2">Odd And Out </span>
             </li>
           </Link>
+=======
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(true);
+              }}
+            >
+              <span>
+                <FaArrowsLeftRightToLine    style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Match the Following </span>
+            </li>
+          </Link>
+
+
+>>>>>>> 543169d74f4a46cab05e68e527ed0cf10c5c1701
           <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
             <li
               className="a-ele "
@@ -508,11 +779,18 @@ const Side = () => {
                 setSubject(false);
                 setWeightage(false);
                 setQuestions(false);
-                setQuestionLevel(true);
+                setQuestionLevel(false);
                 setExamLevel(false);
                 setUserList(false);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(true);
+                setMatch(false);
               }}
             >
               <span>
@@ -536,7 +814,14 @@ const Side = () => {
                 setExamLevel(true);
                 setUserList(false);
                 setAccountHistory(false);
+                setRecorrect(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setMatch(false);
               }}
             >
               <span>
@@ -585,6 +870,13 @@ const Side = () => {
                 setUserList(true);
                 setAccountHistory(false);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setRecorrect(false);
+                setFoursentence(false);
+                setMatch(false);
+                setFivesentence(false);
               }}
             >
               <span>
@@ -609,6 +901,13 @@ const Side = () => {
                 setUserList(false);
                 setAccountHistory(true);
                 setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setFivesentence(false);
+                setRecorrect(false);
+                setMatch(false);
               }}
             >
               <span>

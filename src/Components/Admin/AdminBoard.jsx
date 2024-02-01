@@ -256,7 +256,7 @@ const AdminBoard = () => {
               {records?.map((val, i) => {
                 return (
                   <tr key={i}>
-                    <td>{i + 1}</td>
+                    <td>{i + 1 + firstIndex} </td>
                     <td>
                       <p>{val?.boardName}</p>
                     </td>
@@ -397,9 +397,6 @@ const AdminBoard = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
               <Button
                 variant=""
                 className="modal-close-btn"

@@ -497,7 +497,7 @@ const AdminClass = () => {
                   {records?.map((val, i) => {
                     return (
                       <tr key={i}>
-                        <td>{i + 1}</td>
+                    <td>{i + 1 + firstIndex} </td>
                         <td>{val?.className}</td>
 
                         <td>
@@ -636,7 +636,7 @@ const AdminClass = () => {
                       {records1?.map((val, i) => {
                         return (
                           <tr key={i}>
-                            <td>{i + 1}</td>
+                    <td>{i + 1 + firstIndexs} </td>
                             <td>{val?.className}</td>
                             <td>{val?.subclassName}</td>
 
@@ -718,7 +718,7 @@ const AdminClass = () => {
                   </li>
                 </span>
               </li>
-              {numbers?.map((n, i) => {
+              {numbers1?.map((n, i) => {
                 return (
                   <li className="active-next" key={i}>
                     <a
