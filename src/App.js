@@ -40,6 +40,30 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
+import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
+import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
+import AddPoem from "./Components/Admin/CompleteThePoem/AddPoem";
+import AddUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/AddUnderstandAnsQN";
+import AddPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/AddPoetTimePlaceAnsQn";
+import AddGrammerQuestion from "./Components/Admin/GrammerQuestion/AddGrammerQuestion";
+import DrawFigureList from "./Components/Admin/DrawFigure/DrawFigureList";
+import GraphQuestionList from "./Components/Admin/GraphQuestion/GraphQuestionList";
+import PoemList from "./Components/Admin/CompleteThePoem/PoemList";
+import UnderstandAnsQnList from "./Components/Admin/UnderstandAnsQN/UnderstandAnsQnList";
+import PoetTimePlaceAnsQnList from "./Components/Admin/PoetTimePlaceAnsQN/PoetTimePlaceAnsQnList";
+import GrammerQuestionList from "./Components/Admin/GrammerQuestion/GrammerQuestionList";
+import EditDrawFigure from "./Components/Admin/DrawFigure/EditDrawFigure";
+import ViewDrawFigure from "./Components/Admin/DrawFigure/ViewDrawFigure";
+import EditGraphQuestion from "./Components/Admin/GraphQuestion/EditGraphQuestion";
+import ViewGraphQuestion from "./Components/Admin/GraphQuestion/ViewGraphQuestion";
+import EditPoem from "./Components/Admin/CompleteThePoem/EditPoem";
+import ViewPoem from "./Components/Admin/CompleteThePoem/ViewPoem";
+import EditUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/EditUnderstandAnsQN";
+import ViewUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/ViewUnderstandAnsQN";
+import EditPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/EditPoetTimePlaceAnsQn";
+import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPoetTimePlaceAnsQn";
+import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
+import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
 
 function App() {
   return (
@@ -122,7 +146,7 @@ function App() {
               </>
             }
           />
-    
+
           <Route
             path="/questionpaper"
             exact
@@ -339,7 +363,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/adminsyllabuscopy"
             element={
               <Main
@@ -387,6 +411,334 @@ function App() {
               />
             }
           />
+
+          {/* DrawFigure */}
+          <Route
+            path="/adddrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/drawfigurelist"
+            element={
+              <Main
+                children={
+                  <>
+                    <DrawFigureList />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/editdrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewdrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* GraphQuestion */}
+
+          <Route
+            path="/addgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/graphquestionlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <GraphQuestionList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+          {/* Complete The Poem */}
+
+
+          <Route
+            path="/addpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddPoem />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/poemlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <PoemList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditPoem />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewPoem />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+          {/* Situation Understand Answers Questions */}
+
+          <Route
+            path="/addunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/understandansqnlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <UnderstandAnsQnList />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/editunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* Poet,Time , Place , Write the answer the question */}
+
+          <Route
+            path="/addpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/poettimeplaceansqnlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <PoetTimePlaceAnsQnList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* Grammer Question */}
+
+          <Route
+            path="/addgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/grammerquestionlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <GrammerQuestionList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+
+
+
         </Routes>
       </BrowserRouter>
     </div>
