@@ -40,12 +40,48 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
-import QandA_5to6_Sentences from "./Components/Admin/QandA_5to6_Sentences"
+
+// ====Five and Six=====
+import QandA_5to6_Sentences from "./Components/Admin/FiveAndSixSentences/QandA_5to6_Sentences";
+import QandA_5to6_addQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_addQandA";
+import QandA_5to6_viewQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_viewQandA";
+import QandA_5to6_editQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_editQandA";
+// ========Six=========
+import QandA_6Sentences from "./Components/Admin/SixSentences/QandA_6Sentences";
+import QandA_add6Sentences from "./Components/Admin/SixSentences/QandA_add6Sentences";
+import QandA_edit6Sentences from "./Components/Admin/SixSentences/QandA_edit6Sentences";
+import QandA_view6Sentences from "./Components/Admin/SixSentences/QandA_view6Sentences";
+// =======Seven=========
+import QandA_7Sentences from "./Components/Admin/SevenSentences/QandA_7Sentences";
+import QandA_view7Sentences from "./Components/Admin/SevenSentences/QandA_view7Sentences";
+import QandA_edit7Sentences from "./Components/Admin/SevenSentences/QandA_edit7Sentences";
+import QandA_add7Sentences from "./Components/Admin/SevenSentences/QandA_add7Sentences";
+// =========Eight=========
+import QandA_8Sentences from "./Components/Admin/EightSentences/QandA_8Sentences";
+import QandA_add8Sentences from "./Components/Admin/EightSentences/QandA_add8Sentences";
+import QandA_edit8Sentences from "./Components/Admin/EightSentences/QandA_edit8Sentences";
+import QandA_view8Sentences from "./Components/Admin/EightSentences/QandA_view8Sentences";
+// =======Ten==========
+import QandA_10Sentences from "./Components/Admin/TenSentences/QandA_10Sentences";
+import QandA_add10Sentences from "./Components/Admin/TenSentences/QandA_add10Sentences";
+import QandA_edit10Sentences from "./Components/Admin/TenSentences/QandA_edit10Sentences";
+import QandA_view10Sentences from "./Components/Admin/TenSentences/QandA_view10Sentences";
+// ==========Expand and explain==========
+import ExpandExplain_Details from "./Components/Admin/ExpandAndExplain/ExpandExplain_Details";
+import ExpandExplain_add from "./Components/Admin/ExpandAndExplain/ExpandExplain_add";
+import ExpandExplain_edit from "./Components/Admin/ExpandAndExplain/ExpandExplain_edit";
+import ExpandExplain_view from "./Components/Admin/ExpandAndExplain/ExpandExplain_view";
+// ==========Odd and Out=====
+import OddAndOut_Details from "./Components/Admin/OaddAndout/OddAndOut_Details";
+import OddandOut_add from "./Components/Admin/OaddAndout/OddandOut_add";
+import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
+import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
+
 import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
 import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
 import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
 import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
-import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer"
+import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
 import OneSentenceeditAnswer from "./Components/Admin/OneSentenceeditAnswer";
 import OneSentenceAnswerView from "./Components/Admin/OneSentenceAnswerView";
@@ -57,10 +93,10 @@ import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer"
 import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
 import FourSentenceAnswerview from "./Components/Admin/FourSentenceAnswerview";
 import FourSentenceaddAnswer from "./Components/Admin/FourSentenceaddAnswer";
-import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer"
+import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
 import FiveSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
 import FiveSentenceAnswerview from "./Components/Admin/FiveSentenceAnswerview";
-import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer"
+import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer";
 import ReCorrectionAnswer from "./Components/Admin/ReCorrectionAnswer";
 import RecorrectionaddAnswer from "./Components/Admin/RecorrectionaddAnswer";
 import ReCorrecteditAnswer from "./Components/Admin/ReCorrecteditAnswer";
@@ -81,7 +117,7 @@ import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter> 
         <Routes>
           <Route
             path="/"
@@ -766,6 +802,7 @@ function App() {
               />
             }
           />
+          {/* ========Five and six======== */}
           <Route
             path="/adminquestion5to6sentences"
             element={

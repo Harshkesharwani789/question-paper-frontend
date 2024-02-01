@@ -14,13 +14,13 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
+import "../../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const QandA_5to6_Sentences = () => {
+const OddAndOut_Details = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -97,14 +97,14 @@ const QandA_5to6_Sentences = () => {
       </div>
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Add 5 to 6 Sentences Questions & Answers</h2>
+          <h2 className="header-c ">Add Odd and Out Questions & Answers</h2>
           <button
             className="admin-add-btn"
             onClick={() => {
-              navigate("/adminquestiondetails");
+              navigate("/adminoddandoutadd");
             }}
           >
-            Add Questions
+            Add Questions & Answer
           </button>
         </div>
 
@@ -144,7 +144,8 @@ const QandA_5to6_Sentences = () => {
                   <FaEye
                     color="blue"
                     onClick={() => {
-                    //   navigate(`/adminquestiondetailsview/${val?._id}`);
+                      //   navigate(`/adminquestiondetailsview/${val?._id}`);
+                      navigate(`/adminoddandoutview`);
                     }}
                   />
                 </td>
@@ -157,8 +158,8 @@ const QandA_5to6_Sentences = () => {
                         className="text-success"
                         style={{ cursor: "pointer", fontSize: "20px" }}
                         onClick={() => {
-                        //   setupdateQuestion();
-                          navigate("/admineditquestiondetails");
+                          //   setupdateQuestion();
+                          navigate("/adminoddandoutedit");
                         }}
                       />
                     </div>
@@ -167,7 +168,7 @@ const QandA_5to6_Sentences = () => {
                         className="text-danger"
                         style={{ cursor: "pointer", fontSize: "20px" }}
                         onClick={() => {
-                        //   setDeleteA();
+                          //   setDeleteA();
                           handleShow2();
                         }}
                       />{" "}
@@ -180,26 +181,26 @@ const QandA_5to6_Sentences = () => {
         </div>
 
         {/* <Pagination style={{ float: "right" }}>
-          <Pagination.First onClick={() => setPageNumber(0)} />
-          <Pagination.Prev
-            onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
-          />
-          {Array.from({ length: pageCount }, (_, index) => (
-            <Pagination.Item
-              key={index}
-              active={index === pageNumber}
-              onClick={() => setPageNumber(index)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() =>
-              setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-            }
-          />
-          <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
+            <Pagination.First onClick={() => setPageNumber(0)} />
+            <Pagination.Prev
+              onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
+            />
+            {Array.from({ length: pageCount }, (_, index) => (
+              <Pagination.Item
+                key={index}
+                active={index === pageNumber}
+                onClick={() => setPageNumber(index)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() =>
+                setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
+              }
+            />
+            <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
+          </Pagination> */}
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header style={{ backgroundColor: "orange" }}>
@@ -365,4 +366,4 @@ const QandA_5to6_Sentences = () => {
   );
 };
 
-export default QandA_5to6_Sentences;
+export default OddAndOut_Details;
