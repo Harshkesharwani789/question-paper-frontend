@@ -872,6 +872,15 @@ function AddUnderstandAnsQN() {
                 </div>
 
                 <div className="yoihjij text-center my-2 p-2 ">
+                <button
+                    style={{backgroundColor:"orange"}}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        className="modal-add-btn"
+                    >
+                        Back
+                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                         onClick={() => {
                             handleShow();
