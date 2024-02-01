@@ -106,10 +106,15 @@ import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
 import AddMatches from "./Components/Admin/AddMatches";
 import EditMatch from "./Components/Admin/EditMatch";
 import ViewMatch from "./Components/Admin/ViewMatch";
+import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
+import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
+import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
+import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
+import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter> 
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
@@ -1145,6 +1150,71 @@ function App() {
             }
           />
           {/* ========Odd and Out======== */}
+          {/* ============MCQs=========== */}
+
+          <Route
+            path="/adminmcqquestions"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmcqquestionsedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ============MCQs=========== */}
+          {/* ============Passage =========== */}
+          <Route
+            path="/adminpassage"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_Deatils />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ============Passage =========== */}
         </Routes>
       </BrowserRouter>
     </div>
