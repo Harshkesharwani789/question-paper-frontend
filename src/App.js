@@ -111,6 +111,7 @@ import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
 import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
 import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
 import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
+import Passage_add from "./Components/Admin/Passage/Passage_add";
 function App() {
   return (
     <div className="App">
@@ -1209,6 +1210,18 @@ function App() {
                 children={
                   <>
                     <Passage_Deatils />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminpassageadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_add />
                   </>
                 }
               />
