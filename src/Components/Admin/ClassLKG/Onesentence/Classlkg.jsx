@@ -20,6 +20,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import "../../../Admin/Admin.css"
 const Classlkg = () => {
+
+
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -86,6 +88,7 @@ const Classlkg = () => {
       setData([...data]);
     }
   };
+
 
   return (
     <div>
@@ -267,7 +270,7 @@ const Classlkg = () => {
                           <button> RelationShip Words Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={()=>navigate('/addgrammerquestion')}>
                           <button>Grammer Questions</button>
                         </a>{" "}
                         &nbsp;
@@ -333,28 +336,28 @@ const Classlkg = () => {
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a href="">
+                        <a onClick={()=>navigate('/adddrawfigure')}>
                           <button>
                             Answer the Questions and Draw the Figure
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={()=>navigate('/addgraphquestion')}>
                           <button>Graph Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={()=>navigate('/addpoem')}>
                           <button>Complete the Poem</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={()=>navigate('/addunderstandansqn')}>
                           <button>
                             {" "}
                             Situation UnderStatnding answer Questions
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={()=>navigate('/addpoettimeplaceansqn')}>
                           <button>
                             Poet,Time, Place, Writer answer questions
                           </button>
