@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Admin/Admin.css";
 import Card from "react-bootstrap/Card";
 import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
 import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import axios from "axios";
 
 const Dashboard = () => {
+  const admin =JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [show2, setShow2] = useState();
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [Teacher, setTeacher] = useState([]);
+  const getAllTeacher = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getAllTeachers/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setTeacher(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(()=>{
+    getAllTeacher();
+  },[])
   return (
     <div>
       <h2 className="header-c ">Dashboard</h2>
@@ -97,14 +123,19 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>123456</td>
-                  <td>parnets19</td>
-                  <td>29-01-2024</td>
-                  <td>1234567890</td>
-                  <td>parnets19@gmail.com</td>
-                </tr>
+                {Teacher?.map((item,i)=>{
+                  return(
+                    <tr>
+                    <td>{i+1}</td>
+                    <td>123456</td>
+                    <td>parnets19</td>
+                    <td>29-01-2024</td>
+                    <td>1234567890</td>
+                    <td>parnets19@gmail.com</td>
+                  </tr>
+                  )
+                })}
+              
               </tbody>
             </Table>
           </div>

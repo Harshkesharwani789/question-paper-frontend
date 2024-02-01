@@ -27,16 +27,28 @@ import {
   MdOutlineAddComment,
   MdEventAvailable,
   MdSubject,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineReviews,
 } from "react-icons/md";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { LuAlignHorizontalJustifyStart } from "react-icons/lu";
 import { IoEarth } from "react-icons/io5";
 import "../Admin/Admin.css";
-import Navbar from 'react-bootstrap/Navbar';
+import Navbar from "react-bootstrap/Navbar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import { MdLooksOne } from "react-icons/md";
+import { PiNumberSquareTwoFill } from "react-icons/pi";
+import { PiNumberSquareThreeFill } from "react-icons/pi";
+import { PiNumberSquareFourFill } from "react-icons/pi";
+import { PiNumberSquareFiveFill } from "react-icons/pi";
+import { TiTick } from "react-icons/ti";
+import { FaArrowsLeftRightToLine } from "react-icons/fa6";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
 
 const Side = () => {
+  const [question, setquestion] = useState(false);
+
   const [Board, setBoard] = useState(false);
   const [Class, setClass] = useState(false);
   const [Medium, setMedium] = useState(false);
@@ -49,335 +61,1482 @@ const Side = () => {
   const [UserList, setUserList] = useState(false);
   const [AccountHistory, setAccountHistory] = useState(false);
   const [SyllabusCopy, setsyllabusCopy] = useState(false);
+  const [onesentence, setOnesentence] = useState(false);
+  const [twosentence, setTwosentence] = useState(false);
+  const [threesentence, setThreesentence] = useState(false);
+  const [foursentence, setFoursentence] = useState(false);
+  const [fivesentence, setFivesentence] = useState(false);
+  const [recorrect, setRecorrect] = useState(false);
+  const [match, setMatch] = useState(false);
+  const [relationship, setRelationship] = useState(false);
 
+  const [fiveandsix, setfiveandsix] = useState(false);
+  const [six, setsix] = useState(false);
+  const [seven, setseven] = useState(false);
+  const [eight, seteight] = useState(false);
+  const [ten, setten] = useState(false);
+  const [expandexplain, setexpandexplain] = useState(false);
+  const [oddandout, setoddandout] = useState(false);
+  const [mcq, setmcq] = useState(false);
+  const [passage, setpassage] = useState(false);
 
   // Responsive sidebar
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
     <div>
-       <Navbar expand="lg" className="bg-body-tertiary p-0" >
-          <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse} style={{margin:"10px"}}>
-            <span ><GiHamburgerMenu style={{color:'white'}}/></span>
-          </button>
-          <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarsExample09">
-      <div className="si09">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div className="lo-ad">
-            <img
-              src="../Images/logo.png"
-              alt="adminlogo"
-              className="admin-logo-img"
-            />
-          </div>
-          <div className="sidebar-close-icon" onClick={handleNavCollapse}>
-          <AiOutlineClose />
-          </div>
-        </div>
-        <ul
+      <Navbar expand="lg" className="bg-body-tertiary p-0">
+        <button
+          class="custom-toggler navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded={!isNavCollapsed ? true : false}
+          aria-label="Toggle navigation"
+          onClick={handleNavCollapse}
+          style={{ margin: "10px" }}
         >
-          <Link to="/dashboard" onClick={handleNavCollapse}>
-            <li className="a-ele ">
-              <span>
-                <MdOutlineSupportAgent style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Dashboard</span>
-            </li>
-          </Link>
+          <span>
+            <GiHamburgerMenu style={{ color: "white" }} />
+          </span>
+        </button>
+        <div
+          class={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
+          id="navbarsExample09"
+        >
+          <div className="si09">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div className="lo-ad">
+                <img
+                  src="../Images/logo.png"
+                  alt="adminlogo"
+                  className="admin-logo-img"
+                />
+              </div>
+              <div className="sidebar-close-icon" onClick={handleNavCollapse}>
+                <AiOutlineClose />
+              </div>
+            </div>
+            <ul>
+              <Link to="/dashboard" onClick={handleNavCollapse}>
+                <li className="a-ele ">
+                  <span>
+                    <MdOutlineSupportAgent style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Dashboard</span>
+                </li>
+              </Link>
 
-          <Link to="/adminboard" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(true);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Board </span>
-            </li>
-          </Link>
-          <Link to="/adminclass" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(true);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <LuBookMarked style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Class</span>
-            </li>
-          </Link>
+              <Link to="/adminboard" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(true);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <LuAlignHorizontalJustifyStart
+                      style={{ fontSize: "20px" }}
+                    />
+                  </span>
+                  <span className="ms-2">Board </span>
+                </li>
+              </Link>
+              <Link to="/adminclass" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(true);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <LuBookMarked style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Class</span>
+                </li>
+              </Link>
 
-          <Link to="/adminmedium" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(true);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <LuFileQuestion style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Medium</span>
-            </li>
-          </Link>
-          <Link to="/adminexam" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(true);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <IoPeopleOutline style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Name Of Examination</span>
-            </li>
-          </Link>
-          <Link to="/adminsubject" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(true);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <MdSubject style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Subject</span>
-            </li>
-          </Link>
-          <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(true);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <PiExamFill style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Subject Part</span>
-            </li>
-          </Link>
-          <Link to="/adminchapter" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(true);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <FaWeightHanging style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">
-                Chapters
-              </span>
-            </li>
-          </Link>
-          <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(true);
-              }}
-            >
-              <span>
-                <FaWeightHanging style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Syllabus</span>
-            </li>
-          </Link>
-          <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(true);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <FaWeightHanging style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Blue Print</span>
-            </li>
-          </Link>
+              <Link to="/adminmedium" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(true);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <LuFileQuestion style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Medium</span>
+                </li>
+              </Link>
+              <Link to="/adminexam" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(true);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <IoPeopleOutline style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Name Of Examination</span>
+                </li>
+              </Link>
+              <Link to="/adminsubject" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(true);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <MdSubject style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Subject</span>
+                </li>
+              </Link>
+              <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(true);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <PiExamFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Subject Part</span>
+                </li>
+              </Link>
+              <Link to="/adminchapter" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setRecorrect(false);
+                    setFivesentence(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Chapters</span>
+                </li>
+              </Link>
+              <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(true);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Syllabus</span>
+                </li>
+              </Link>
+              <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Blue Print</span>
+                </li>
+              </Link>
+              <Link to="#">
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setquestion(!question);
+                  }}
+                >
+                  <span>
+                    <i
+                      class="fa-solid fa-globe"
+                      style={{ fontSize: "20px" }}
+                    ></i>
+                  </span>{" "}
+                  <span>Add Questions </span>{" "}
+                  {question ? (
+                    <>
+                      {" "}
+                      <span style={{ float: "right" }}>
+                        <MdOutlineKeyboardArrowLeft />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ float: "right" }}>
+                        <MdOutlineKeyboardArrowDown />
+                      </span>
+                    </>
+                  )}
+                </li>
+              </Link>
+              <Link>
+                {question ? (
+                  <>
+                    <div className="webmanagement">
+                      <Link to="/Classlkg">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-image"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>{" "}
+                          <span className="ms-1">Class LKg</span>
+                        </li>
+                      </Link>
+                      {/* <Link to="/admin-safety-rules">
+                  <li
+                    className={`a-ele ${acc10 ? "active2" : "null"}`}
+                    onClick={() => {
+                      setacc(false);
+                      setacc1(false);
+                      setacc2(false);
+                      setacc3(false);
+                      setacc4(false);
+                      setacc5(false);
+                      setacc6(false);
+                      setacc7(false);
+                      setacc8(false);
+                      setacc9(false);
+                      setacc10(true);
+                      setacc11(false);
+                      setacc12(false);
+                      setacc13(false);
+                      setacc14(false);
+                      setacc15(false);
+                      setacc16(false);
+                      setacc17(false);
+                      setacc18(false);
+                      setacc19(false);
+                      setacc20(false);
+                      setacc21(false);
+                      setacc22(false);
+                      setacc23(false);
+                      setacc24(false);
+                      setacc25(false);
+                      setacc26(false);
+                      setacc27(false);
+                      setacc28(false);
+                      setacc29(false);
+                      setacc30(false);
+                      setacc31(false);
+                      setacc32(false);
+                      setacc33(false);
+                      setacc34(false);
+                      setacc35(false);
+                      setacc36(false);
+                      setacc37(false);
+                      setacc38(false);
+                      setacc39(false);
+                      setacc40(false);
+                      setacc41(false);
+                      setacc42(false);
+                    }}
+                  >
+                    {" "}
+                    <span>
+                      <i
+                        class="fa-solid fa-helmet-safety"
+                        style={{ fontSize: "20px" }}
+                      ></i>
+                    </span>
+                    <span className="ms-2">Safety Rules</span>
+                  </li>
+                </Link> */}
+                      <Link to="/testimonials">
+                        <li className="a-ele">
+                          <span>
+                            <MdOutlineReviews style={{ fontSize: "20px" }} />
+                          </span>
+                          <span className="ms-2">Class UKg</span>
+                        </li>
+                      </Link>
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class 1</span>
+                        </li>
+                      </Link>
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class I</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class II</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class III</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class IV</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class V</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VI</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VII</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VIII</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class IX</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class X</span>
+                        </li>
+                      </Link>{" "}
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
+              </Link>
 
-          <Link to="/adminquestions" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(true);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setsyllabusCopy(false);
-                setAccountHistory(false);
-              }}
-            >
-              <span>
-                <FaShop style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Questions</span>
-            </li>
-          </Link>
-          <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(true);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <IoNewspaperOutline style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Type Of Questions </span>
-            </li>
-          </Link>
-          <Link to="/adminexamlevel" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(true);
-                setUserList(false);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <PiExamFill style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Exam Level</span>
-            </li>
-          </Link>
-          {/* <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
+              <Link to="/adminquestions" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(true);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setsyllabusCopy(false);
+                    setAccountHistory(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <FaShop style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Questions</span>
+                </li>
+              </Link>
+
+              <Link to="/onewordquestion" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(true);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <MdLooksOne style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">One Word Question </span>
+                </li>
+              </Link>
+
+              <Link to="/relationshipword" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(true);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <MdLooksOne style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Relationship Word</span>
+                </li>
+              </Link>
+
+              <Link to="/onesentenceanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(true);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <MdLooksOne style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">1 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/twosenteceanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(true);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareTwoFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">2 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/threesentenceanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(true);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareThreeFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">3 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/foursentenceanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(true);
+                    setRecorrect(false);
+                    setFivesentence(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFourFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">4 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/fivesentenceanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(true);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">5 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link
+                to="/adminquestion5to6sentences"
+                onClick={handleNavCollapse}
+              >
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(true);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">5 & 6 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/adminquestion6sentences" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(true);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">6 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/adminquestion7sentences" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(true);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">7 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/adminquestion8sentences" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(true);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">8 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/adminquestion10sentences" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(true);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">10 Sentence Answer </span>
+                </li>
+              </Link>
+
+              <Link to="/adminexpandexplain" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(true);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Expand And Explain </span>
+                </li>
+              </Link>
+
+              <Link to="/adminoddandout" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(true);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Odd and Out </span>
+                </li>
+              </Link>
+
+              <Link to="/adminmcqquestions" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(true);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">MCQs </span>
+                </li>
+              </Link>
+
+              <Link to="/adminpassage" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(true);
+                  }}
+                >
+                  <span>
+                    <PiNumberSquareFiveFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Passage </span>
+                </li>
+              </Link>
+
+              <Link to="/recorrectionanswer" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setRecorrect(false);
+                    setFivesentence(true);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <TiTick style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Recorret Questions </span>
+                </li>
+              </Link>
+
+              <Link to="/matchthefollowing" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setRecorrect(false);
+                    setFivesentence(false);
+                    setMatch(true);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <FaArrowsLeftRightToLine style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Match the Following </span>
+                </li>
+              </Link>
+
+              <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(true);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <IoNewspaperOutline style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Type Of Questions </span>
+                </li>
+              </Link>
+              <Link to="/adminexamlevel" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(true);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setRecorrect(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <PiExamFill style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Exam Level</span>
+                </li>
+              </Link>
+              {/* <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
             <li
               className="a-ele "
               onClick={() => {
@@ -401,57 +1560,89 @@ const Side = () => {
               <span className="ms-2">Subject Part</span>
             </li>
           </Link> */}
-          <Link to="/adminuserlist" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(true);
-                setAccountHistory(false);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <FaCircleUser style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">UserList</span>
-            </li>
-          </Link>
-          <Link to="/adminacchistory" onClick={handleNavCollapse}>
-            <li
-              className="a-ele "
-              onClick={() => {
-                setBoard(false);
-                setClass(false);
-                setMedium(false);
-                setExamination(false);
-                setSubject(false);
-                setWeightage(false);
-                setQuestions(false);
-                setQuestionLevel(false);
-                setExamLevel(false);
-                setUserList(false);
-                setAccountHistory(true);
-                setsyllabusCopy(false);
-              }}
-            >
-              <span>
-                <IoNewspaperOutline style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Account History </span>
-            </li>
-          </Link>
-        </ul>
-      </div>
-      </div>
+              <Link to="/adminuserlist" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(true);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setRecorrect(false);
+                    setFoursentence(false);
+                    setMatch(false);
+                    setFivesentence(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <FaCircleUser style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">UserList</span>
+                </li>
+              </Link>
+              <Link to="/adminacchistory" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(true);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <IoNewspaperOutline style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Account History </span>
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
       </Navbar>
     </div>
   );

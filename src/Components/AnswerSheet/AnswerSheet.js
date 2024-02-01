@@ -7,7 +7,7 @@ import {
   Row,
   Modal,
 } from "react-bootstrap";
-import "../AnswerSheet/AnswerSheet.css";
+import "./AnswerSheet.css";
 const AnswerSheet = () => {
   return (
     <div>

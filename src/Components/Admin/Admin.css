@@ -60,7 +60,7 @@
   padding: 6px 8px !important;
   border-radius: 4px !important;
   font-size: 14px !important;
-  background:rgb(5, 107, 5) !important;
+  background: rgb(5, 107, 5) !important;
   color: white !important;
 }
 
@@ -109,32 +109,32 @@ tr {
   margin: 10px;
 }
 
-.admin-add-btn{
+.admin-add-btn {
   background-color: #138808;
   color: white;
   padding: 8px 12px;
   border-radius: 4px !important;
 }
 
-.modal-add-btn{
+.modal-add-btn {
   background-color: #138808;
   color: white;
   padding: 5px 10px;
   border-radius: 4px !important;
 }
 
-.modal-add-btn:hover{
+.modal-add-btn:hover {
   background-color: #107207;
   color: white;
 }
 
-.modal-close-btn{
+.modal-close-btn {
   background-color: rgb(100, 99, 99);
   color: white;
   padding: 5px 10px;
   border-radius: 4px !important;
 }
-.modal-close-btn:hover{
+.modal-close-btn:hover {
   background-color: rgb(75, 74, 74);
   color: white;
 }
@@ -235,7 +235,6 @@ label {
   color: #138808 !important;
 } */
 
-
 .add-90 button {
   width: 151px;
   border: 1px solid #0d6efd;
@@ -265,11 +264,11 @@ label {
 }
 
 .webmanagement {
-  background-color: #26aae0;
+  background-color: navy;
 }
 
 .webmanagement li {
-  color: #000;
+  color: white;
   margin-top: 10px;
 }
 
@@ -292,7 +291,7 @@ label {
 .si09 ul {
   list-style: none;
   padding-top: 6px;
-  background-color: #FF9933;
+  background-color: #ff9933;
   padding-left: unset;
   min-height: 650px;
 }
@@ -504,7 +503,7 @@ tr:hover {
   padding: 1%;
 }
 
-.srch-icon{
+.srch-icon {
   display: flex;
   padding: 12px;
   /* width: fit-content; */
@@ -517,7 +516,6 @@ tr:hover {
   box-shadow: -1px 10px 12px -7px rgba(32, 149, 140, 0.28);
   padding: 1%;
 }
-
 
 table thead tr th {
   background: navy !important ;
@@ -555,6 +553,7 @@ table thead tr th {
   border-radius: 24px;
   /* border: 1px solid black; */
   width: 100%;
+  padding: 12px 0;
 }
 .box_1 label {
   font-weight: bold;
@@ -594,6 +593,17 @@ table thead tr th {
   width: 20%;
 }
 
+.lined-input{
+  outline-width: 0px;
+  padding: 7px;
+  border-radius: 5px;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none !important;
+}
 
 
 /* Admin Panel ends */
@@ -649,3 +659,14 @@ table thead tr th {
     height: 300px;
   }
 }
+.hjhu a button{
+  width: 175px;
+  padding: 8px;
+  height: 82px;
+  margin: 1px;
+}
+.hjhu a {
+  font-size: 16px;
+}
+
+

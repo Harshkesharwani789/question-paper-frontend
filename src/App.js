@@ -40,6 +40,89 @@ import Weightagecontent from "./Components/Admin/Weightagecontent";
 import AdminChapter from "./Components/Admin/AdminChapter";
 import AdminQuestionPaper from "./Components/Admin/Adminquestionpaper";
 import AdminSyllabusCopy from "./Components/Admin/AdminSyllabusCopy";
+
+// ====Five and Six=====
+import QandA_5to6_Sentences from "./Components/Admin/FiveAndSixSentences/QandA_5to6_Sentences";
+import QandA_5to6_addQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_addQandA";
+import QandA_5to6_viewQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_viewQandA";
+import QandA_5to6_editQandA from "./Components/Admin/FiveAndSixSentences/QandA_5to6_editQandA";
+// ========Six=========
+import QandA_6Sentences from "./Components/Admin/SixSentences/QandA_6Sentences";
+import QandA_add6Sentences from "./Components/Admin/SixSentences/QandA_add6Sentences";
+import QandA_edit6Sentences from "./Components/Admin/SixSentences/QandA_edit6Sentences";
+import QandA_view6Sentences from "./Components/Admin/SixSentences/QandA_view6Sentences";
+// =======Seven=========
+import QandA_7Sentences from "./Components/Admin/SevenSentences/QandA_7Sentences";
+import QandA_view7Sentences from "./Components/Admin/SevenSentences/QandA_view7Sentences";
+import QandA_edit7Sentences from "./Components/Admin/SevenSentences/QandA_edit7Sentences";
+import QandA_add7Sentences from "./Components/Admin/SevenSentences/QandA_add7Sentences";
+// =========Eight=========
+import QandA_8Sentences from "./Components/Admin/EightSentences/QandA_8Sentences";
+import QandA_add8Sentences from "./Components/Admin/EightSentences/QandA_add8Sentences";
+import QandA_edit8Sentences from "./Components/Admin/EightSentences/QandA_edit8Sentences";
+import QandA_view8Sentences from "./Components/Admin/EightSentences/QandA_view8Sentences";
+// =======Ten==========
+import QandA_10Sentences from "./Components/Admin/TenSentences/QandA_10Sentences";
+import QandA_add10Sentences from "./Components/Admin/TenSentences/QandA_add10Sentences";
+import QandA_edit10Sentences from "./Components/Admin/TenSentences/QandA_edit10Sentences";
+import QandA_view10Sentences from "./Components/Admin/TenSentences/QandA_view10Sentences";
+// ==========Expand and explain==========
+import ExpandExplain_Details from "./Components/Admin/ExpandAndExplain/ExpandExplain_Details";
+import ExpandExplain_add from "./Components/Admin/ExpandAndExplain/ExpandExplain_add";
+import ExpandExplain_edit from "./Components/Admin/ExpandAndExplain/ExpandExplain_edit";
+import ExpandExplain_view from "./Components/Admin/ExpandAndExplain/ExpandExplain_view";
+// ==========Odd and Out=====
+import OddAndOut_Details from "./Components/Admin/OaddAndout/OddAndOut_Details";
+import OddandOut_add from "./Components/Admin/OaddAndout/OddandOut_add";
+import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
+import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
+
+import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
+import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
+import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
+import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
+import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
+import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
+import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
+import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
+import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
+import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
+import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
+import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
+import FourSentenceAnswerview from "./Components/Admin/FourSentenceAnswerview";
+import FourSentenceaddAnswer from "./Components/Admin/FourSentenceaddAnswer";
+import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
+import FiveSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
+import FiveSentenceAnswerview from "./Components/Admin/FiveSentenceAnswerview";
+import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer";
+import ReCorrectionAnswer from "./Components/Admin/ReCorrectionAnswer";
+import RecorrectionaddAnswer from "./Components/Admin/RecorrectionaddAnswer";
+import ReCorrecteditAnswer from "./Components/Admin/ReCorrecteditAnswer";
+import ReCorrectAnswerview from "./Components/Admin/ReCorrectAnswerview";
+import FiveSentenceEditAnswers from "./Components/Admin/FiveSentenceEditAnswers";
+import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
+import AddMatches from "./Components/Admin/AddMatches";
+import EditMatch from "./Components/Admin/EditMatch";
+import ViewMatch from "./Components/Admin/ViewMatch";
+import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
+import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+import RelationshipWord from "./Components/Admin/RelationshipWord";
+import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
+import OneWordQuestion from "./Components/Admin/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
+import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
+import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
+import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
+import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
+import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
+import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceaddAnswer";
+
+
 import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
 import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
 import AddPoem from "./Components/Admin/CompleteThePoem/AddPoem";
@@ -70,7 +153,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
+        <Route
             path="/"
             exact
             element={
@@ -167,6 +250,7 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/syllabuscopy"
             exact
@@ -304,6 +388,273 @@ function App() {
             }
           />
           <Route
+            path="/onesentenceaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneSentenceaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/onesentenceeditanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneSentenceeditAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/onesentenceanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneSentenceAnswerView />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/twosenteceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <TwoSentenceAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/twosentenceaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <TwoSentenceaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/twosentenceeditanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <TwoSentenceeditAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/twosentenceanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <TwoSentenceAnswerView />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/threesentenceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <ThreeSentenceAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/threesentenceaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <ThreeSentenceaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/threesentenceeditanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <ThreeSentenceeditAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/threesentenceanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <ThreeSentenceAnswerview />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/foursentenceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <FourSentenceAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/foursentenceaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <FourSentenceaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/foursentenceeditanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <FourSentenceeditAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/foursentenceanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <FourSentenceAnswerview />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/fivesentenceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <FiveSentenceAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/recorrectanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <ReCorrectAnswerview />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/fivesentenceeditanswers"
+            element={
+              <Main
+                children={
+                  <>
+                    {/* <FiveSentenceeditAnswer /> */}
+                    <FiveSentenceEditAnswers />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/fivesentenceanswerview"
+            element={
+              <Main
+                children={
+                  <>
+                    <FiveSentenceAnswerview />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/fivesentenceaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <FiveSentenceaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/recorrectionanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <ReCorrectionAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/recorrectaddanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <RecorrectionaddAnswer />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
             path="/adminuserlist"
             element={
               <Main
@@ -315,6 +666,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/adminacchistory"
             element={
@@ -364,6 +716,67 @@ function App() {
             }
           />
           <Route
+            path="/recorrecteditanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <ReCorrecteditAnswer />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/matchthefollowing"
+            element={
+              <Main
+                children={
+                  <>
+                    <MatchtheFollowing />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addmatches"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddMatches />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editmatch"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditMatch />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewmatch"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewMatch />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
             path="/adminsyllabuscopy"
             element={
               <Main
@@ -399,6 +812,19 @@ function App() {
               />
             }
           />
+
+          <Route
+            path="/onesentenceanswer"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneSentenceAnswer />
+                  </>
+                }
+              />
+            }
+          />
           <Route
             path="/adminquestionlevel"
             element={
@@ -406,6 +832,549 @@ function App() {
                 children={
                   <>
                     <AdminQuestionLevel />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Five and six======== */}
+          <Route
+            path="/adminquestion5to6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_addQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_viewQandA />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion5to6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_5to6_editQandA />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Five and six======== */}
+          {/* ========six======== */}
+          <Route
+            path="/adminquestion6sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion6sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view6Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========six======== */}
+          {/* ========Seven======== */}
+          <Route
+            path="/adminquestion7sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion7sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view7Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Seven======== */}
+          {/* ========Eight======== */}
+          <Route
+            path="/adminquestion8sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion8sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view8Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Eight======== */}
+          {/* ========Ten======== */}
+
+          <Route
+            path="/adminquestion10sentences"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_add10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_edit10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminquestion10sentencesview"
+            element={
+              <Main
+                children={
+                  <>
+                    <QandA_view10Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Ten======== */}
+          {/* ========Expand and Explain======== */}
+          <Route
+            path="/adminexpandexplain"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminexpandexplainview"
+            element={
+              <Main
+                children={
+                  <>
+                    <ExpandExplain_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ========Expand and Explain======== */}
+          {/* ========Odd and Out======== */}
+          <Route
+            path="/adminoddandout"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddandOut_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutview"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_vieww />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminoddandoutedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <OddAndOut_edit />
+                  </>
+                }
+              />
+            }
+          />
+          {/* Relationship wors  */}
+
+          <Route
+            path="/relationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <RelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/addrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/editrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+            <Route
+            path="/viewrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* One Word Question  */}
+          <Route
+            path="/onewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/editonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* ============MCQs=========== */}
+
+          <Route
+            path="/adminmcqquestions"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_Details />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmcqquestionsedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminmcqquestionsview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Mcq_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ============MCQs=========== */}
+          {/* ============Passage =========== */}
+          <Route
+            path="/adminpassage"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_Deatils />
+                  </>
+                }
+              />
+            }
+          />
+         
+          {/* ============Passage =========== */}
+          {/* onesentence */}
+          <Route
+            path="/Classlkg"
+            element={
+              <Main
+                children={
+                  <>
+                    <Classlkg />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addClasslkg"
+            element={
+              <Main
+                children={
+                  <>
+                    <Add />
                   </>
                 }
               />
