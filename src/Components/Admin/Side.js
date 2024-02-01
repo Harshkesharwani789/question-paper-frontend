@@ -27,12 +27,14 @@ import {
   MdOutlineAddComment,
   MdEventAvailable,
   MdSubject,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineReviews,
 } from "react-icons/md";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { LuAlignHorizontalJustifyStart } from "react-icons/lu";
 import { IoEarth } from "react-icons/io5";
 import "../Admin/Admin.css";
-import Navbar from 'react-bootstrap/Navbar';
+import Navbar from "react-bootstrap/Navbar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdLooksOne } from "react-icons/md";
@@ -44,6 +46,8 @@ import { TiTick } from "react-icons/ti";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 
 const Side = () => {
+  const [question, setquestion] = useState(false);
+
   const [Board, setBoard] = useState(false);
   const [Class, setClass] = useState(false);
   const [Medium, setMedium] = useState(false);
@@ -80,34 +84,48 @@ const Side = () => {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
     <div>
-       <Navbar expand="lg" className="bg-body-tertiary p-0" >
-          <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse} style={{margin:"10px"}}>
-            <span ><GiHamburgerMenu style={{color:'white'}}/></span>
-          </button>
-          <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarsExample09">
-      <div className="si09">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div className="lo-ad">
-            <img
-              src="../Images/logo.png"
-              alt="adminlogo"
-              className="admin-logo-img"
-            />
-          </div>
-          <div className="sidebar-close-icon" onClick={handleNavCollapse}>
-          <AiOutlineClose />
-          </div>
-        </div>
-        <ul
+      <Navbar expand="lg" className="bg-body-tertiary p-0">
+        <button
+          class="custom-toggler navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded={!isNavCollapsed ? true : false}
+          aria-label="Toggle navigation"
+          onClick={handleNavCollapse}
+          style={{ margin: "10px" }}
         >
-          <Link to="/dashboard" onClick={handleNavCollapse}>
-            <li className="a-ele ">
-              <span>
-                <MdOutlineSupportAgent style={{ fontSize: "20px" }} />
-              </span>
-              <span className="ms-2">Dashboard</span>
-            </li>
-          </Link>
+          <span>
+            <GiHamburgerMenu style={{ color: "white" }} />
+          </span>
+        </button>
+        <div
+          class={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
+          id="navbarsExample09"
+        >
+          <div className="si09">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div className="lo-ad">
+                <img
+                  src="../Images/logo.png"
+                  alt="adminlogo"
+                  className="admin-logo-img"
+                />
+              </div>
+              <div className="sidebar-close-icon" onClick={handleNavCollapse}>
+                <AiOutlineClose />
+              </div>
+            </div>
+            <ul>
+              <Link to="/dashboard" onClick={handleNavCollapse}>
+                <li className="a-ele ">
+                  <span>
+                    <MdOutlineSupportAgent style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Dashboard</span>
+                </li>
+              </Link>
 
           <Link to="/adminboard" onClick={handleNavCollapse}>
             <li
