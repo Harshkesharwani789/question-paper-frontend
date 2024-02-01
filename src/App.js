@@ -117,7 +117,7 @@ import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter> 
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
