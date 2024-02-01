@@ -595,6 +595,17 @@ table thead tr th {
   width: 20%;
 }
 
+.lined-input{
+  outline-width: 0px;
+  padding: 7px;
+  border-radius: 5px;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: none !important;
+}
 
 
 /* Admin Panel ends */

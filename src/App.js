@@ -70,6 +70,14 @@ import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
 import AddMatches from "./Components/Admin/AddMatches";
 import EditMatch from "./Components/Admin/EditMatch";
 import ViewMatch from "./Components/Admin/ViewMatch";
+import RelationshipWord from "./Components/Admin/RelationshipWord";
+import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
+import OneWordQuestion from "./Components/Admin/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 function App() {
   return (
     <div className="App">
@@ -674,7 +682,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/editmatch"
             element={
               <Main
@@ -686,7 +694,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/viewmatch"
             element={
               <Main
@@ -765,6 +773,93 @@ function App() {
                 children={
                   <>
                     <QandA_5to6_Sentences />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/relationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <RelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editrelationshipword"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditRelationshipWord />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/onewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <OneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/addonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditOneWordQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewonewordquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewOneWordQuestion />
                   </>
                 }
               />

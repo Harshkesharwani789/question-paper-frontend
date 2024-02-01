@@ -42,6 +42,8 @@ import { PiNumberSquareFourFill } from "react-icons/pi";
 import { PiNumberSquareFiveFill } from "react-icons/pi";
 import { TiTick } from "react-icons/ti";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
+
 
 const Side = () => {
   const [Board, setBoard] = useState(false);
@@ -63,6 +65,7 @@ const Side = () => {
   const [fivesentence, setFivesentence] = useState(false);
   const [recorrect, setRecorrect] = useState(false);
   const [match, setMatch] = useState(false);
+  const [relationship, setRelationship] = useState(false);
 
 
   // Responsive sidebar
@@ -122,6 +125,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -153,6 +157,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -185,6 +190,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -216,6 +222,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -247,6 +254,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -278,6 +286,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -309,6 +318,7 @@ const Side = () => {
                 setRecorrect(false);
                 setFivesentence(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -342,6 +352,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -373,6 +384,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -405,6 +417,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -437,6 +450,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -469,6 +483,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -501,6 +516,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -533,6 +549,7 @@ const Side = () => {
                 setRecorrect(false);
                 setFivesentence(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -565,6 +582,7 @@ const Side = () => {
                 setFivesentence(true);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -597,6 +615,7 @@ const Side = () => {
                 setRecorrect(false);
                 setFivesentence(true);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -629,12 +648,79 @@ const Side = () => {
                 setRecorrect(false);
                 setFivesentence(false);
                 setMatch(true);
+                setRelationship(false);
               }}
             >
               <span>
                 <FaArrowsLeftRightToLine    style={{ fontSize: "20px" }} />
               </span>
               <span className="ms-2">Match the Following </span>
+            </li>
+          </Link>
+
+          <Link to="/relationshipword" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(false);
+                setRelationship(true);
+              }}
+            >
+              <span>
+                <FaPersonCircleQuestion  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">Relationship Word </span>
+            </li>
+          </Link>
+
+          <Link to="/onewordquestion" onClick={handleNavCollapse}>
+            <li
+              className="a-ele "
+              onClick={() => {
+                setBoard(false);
+                setClass(false);
+                setMedium(false);
+                setExamination(false);
+                setSubject(false);
+                setWeightage(false);
+                setQuestions(false);
+                setQuestionLevel(false);
+                setExamLevel(false);
+                setUserList(false);
+                setAccountHistory(false);
+                setsyllabusCopy(false);
+                setOnesentence(false);
+                setTwosentence(false);
+                setThreesentence(false);
+                setFoursentence(false);
+                setRecorrect(false);
+                setFivesentence(false);
+                setMatch(false);
+                setRelationship(true);
+              }}
+            >
+              <span>
+                <MdLooksOne  style={{ fontSize: "20px" }} />
+              </span>
+              <span className="ms-2">One Word Question </span>
             </li>
           </Link>
 
@@ -662,6 +748,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(true);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -693,6 +780,7 @@ const Side = () => {
                 setFoursentence(false);
                 setFivesentence(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -748,6 +836,7 @@ const Side = () => {
                 setFoursentence(false);
                 setMatch(false);
                 setFivesentence(false);
+                setRelationship(false);
               }}
             >
               <span>
@@ -779,6 +868,7 @@ const Side = () => {
                 setFivesentence(false);
                 setRecorrect(false);
                 setMatch(false);
+                setRelationship(false);
               }}
             >
               <span>
