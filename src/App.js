@@ -78,14 +78,14 @@ import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
 import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
 
 import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
-import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
+// import TwoSentenceAnswer from "./Components/Admin/";
 import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
 import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
 import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
 import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
 import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
-import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
+// import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
 import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
 import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
 import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
@@ -107,6 +107,7 @@ import ViewMatch from "./Components/Admin/ViewMatch";
 import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
 import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
 import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
 import RelationshipWord from "./Components/Admin/RelationshipWord";
 import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
 import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
@@ -147,6 +148,7 @@ import EditPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/EditPo
 import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPoetTimePlaceAnsQn";
 import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
+import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 
 function App() {
   return (
