@@ -1,284 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import "../../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import "../../../Admin/Admin.css"
 
-const QandA_add7Sentences = () => {
-  const admin = JSON.parse(sessionStorage.getItem("admin"));
-  const token = sessionStorage.getItem("token");
+const AddOneWordQuestion = () => {
+    const [show, setShow] = useState();
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-  const [show, setShow] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleChange = (e, editor) => {
-    const data = editor.getData();
-    setQuestion(data);
-  };
-  const handleChange1 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
-  const handleChange2 = (e, editor) => {
-    const data = editor.getData();
-    setInstruction(data);
-  };
-  const handleChange3 = (e, editor) => {
-    const data = editor.getData();
-    setOption_1(data);
-  };
-  const handleChange4 = (e, editor) => {
-    const data = editor.getData();
-    setOption_2(data);
-  };
-  const handleChange5 = (e, editor) => {
-    const data = editor.getData();
-    setOption_3(data);
-  };
-  const handleChange6 = (e, editor) => {
-    const data = editor.getData();
-    setOption_4(data);
-  };
-  const handleChange7 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
-  //post
-
-  const [Board, setBoard] = useState("");
-  const [Medium, setMedium] = useState("");
-  const [Class, setClass] = useState("");
-  const [Sub_Class, setSub_Class] = useState("");
-  const [Subjects, setSubjects] = useState("");
-  const [Chapter_Name, setChapter_Name] = useState("");
-  const [Lesson, setLesson] = useState("");
-  const [Difficulty_level, setDifficulty_level] = useState("");
-  const [Types_Question, setTypes_Question] = useState("");
-  const [Section, setSection] = useState("");
-  const [Name_of_examination, setName_of_examination] = useState("");
-  const [Question, setQuestion] = useState("");
-  const [Option_1, setOption_1] = useState("");
-  const [Option_2, setOption_2] = useState("");
-  const [Option_3, setOption_3] = useState("");
-  const [Option_4, setOption_4] = useState("");
-  const [Objectives, setObjectives] = useState("");
-  const [Image, setImage] = useState("");
-  const [Marks, setMarks] = useState("");
-  const [Answer, setAnswer] = useState("");
-  const [Instruction, setInstruction] = useState("");
-  const [Answer_Time, setAnswer_Time] = useState("");
-
-  const addquestions = async () => {
-    try {
-      const config = {
-        url: "/admin/AddQuestionPaper",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          Board: Board,
-          Medium: Medium,
-          Class: Class,
-          Sub_Class: Sub_Class,
-          Subject: Subjects,
-          Chapter_Name: Chapter_Name,
-          Difficulty_level: Difficulty_level,
-          Types_Question: Types_Question,
-          Lesson: Lesson,
-          Section: Section,
-          Question: Question,
-          Option_1: Option_1,
-          Option_2: Option_2,
-          Option_3: Option_3,
-          Option_4: Option_4,
-          Name_of_examination: Name_of_examination,
-          Objectives: Objectives,
-          Instruction: Instruction,
-          Image: Image,
-          Marks: Marks,
-          Answer_Time: Answer_Time,
-          Answer: Answer,
-          authId: admin?._id,
-        },
-      };
-      let res = await axios(config);
-      if (res.status === 200) {
-        swal({
-          title: "yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-        return navigate("/adminquestions");
-      }
-    } catch (error) {
-      console.log(error);
-      swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "success",
-        button: "Ok!",
-      });
-    }
-  };
-
-  //   get method for weightage
-  const [weightage, setweightage] = useState([]);
-  const getallweightagecontent = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
-      );
-      if (res.status === 200) {
-        setweightage(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // get method
-  const [getboardname, setboardname] = useState([]);
-  const getallboardname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-      if (res.status == 200) {
-        setboardname(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get method for medium
-  const [Mediumm, setMediumm] = useState([]);
-  const getAddMedium = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
-      if (res.status == 200) {
-        setMediumm(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // get method add class
-  const [getclassname, setgetclassName] = useState([]);
-  const getallclassname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-      if (res.status == 200) {
-        setgetclassName(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // get method for subclass
-  const [getaddsubclass, setgetaddsubclass] = useState([]);
-  const getaddsubclasss = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
-      );
-      if (res.status == 200) {
-        setgetaddsubclass(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for subject
-  const [subject, setsubject] = useState([]);
-  const getSubject = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
-      );
-      if (res.status == 200) {
-        setsubject(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for type of questions
-  const [getalltypesofques, setgetalltypesofques] = useState([]);
-  const getalltypesofquess = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
-      );
-      if (res.status == 200) {
-        setgetalltypesofques(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get of chapters
-  const [chapters, setchapters] = useState([]);
-  const getChapter = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllChapter"
-      );
-      if (res.status == 200) {
-        setchapters(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for name of Examination
-  const [NameExam, setNameExam] = useState([]);
-  const getNameExamination = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllNameExamination"
-      );
-      if (res.status == 200) {
-        setNameExam(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getallboardname();
-    getAddMedium();
-    getallclassname();
-    getaddsubclasss();
-    getSubject();
-    getalltypesofquess();
-    getallweightagecontent();
-    getChapter();
-    getNameExamination();
-  }, []);
-
-     // Line
-     const [twoline, setTwoline] = useState(false);
-     const [threeline, setThreeline] = useState(false);
-     const [fourline, setFourline] = useState(false);
-     const [fiveline, setFiveline] = useState(false);
-     const [sixline, setSixline] = useState(false);
-     const [sevenline, setSevenline] = useState(true);
-     const [eightline, setEightline] = useState(false);
-     const [nineline, setNineline] = useState(false);
-     const [tenline, setTenline] = useState(false);
+      // Line
+  const [oneline, setOneline] = useState(true);
+  const [twoline, setTwoline] = useState(false);
+  const [threeline, setThreeline] = useState(false);
+  const [fourline, setFourline] = useState(false);
+  const [fiveline, setFiveline] = useState(false);
+  const [sixline, setSixline] = useState(false);
+  const [sevenline, setSevenline] = useState(false);
+  const [eightline, setEightline] = useState(false);
+  const [nineline, setNineline] = useState(false);
+  const [tenline, setTenline] = useState(false);
 
   return (
     <div>
-      <div className="box_1">
-      <div className="container">
+       <div className="box_1">
+          <div className="container">
           <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
@@ -422,6 +174,7 @@ const QandA_add7Sentences = () => {
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
+                    setOneline(selectedValue === "1");
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");
@@ -435,10 +188,29 @@ const QandA_add7Sentences = () => {
                 >
                   <option>Select Answer Line</option>
                   <option
+                    value="1"
+                    onClick={() => {
+                      setOneline(true);
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    1
+                  </option>
+
+                  <option
                     value="2"
                     onClick={() => {
-                      setTwoline(false);
-                      setThreeline(true);
+                      setOneline(false);
+                      setTwoline(true);
+                      setThreeline(false);
                       setFourline(false);
                       setFiveline(false);
                       setSixline(false);
@@ -584,22 +356,17 @@ const QandA_add7Sentences = () => {
             </div>
 
             <div className="col-8">
-              {twoline ? (
+              {oneline ? (
                 <>
                   <div className="col-md-12">
-                    <div className="do-sear mt-4">
-                      <p type="text" className="lined-input"></p>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
+                    <div className="do-sear mt-5">
                       <p type="text" className="lined-input"></p>
                     </div>
                   </div>
                 </>
               ) : (
                 <>
-                  {threeline ? (
+                  {twoline ? (
                     <>
                       <div className="col-md-12">
                         <div className="do-sear mt-4">
@@ -611,15 +378,10 @@ const QandA_add7Sentences = () => {
                           <p type="text" className="lined-input"></p>
                         </div>
                       </div>
-                      <div className="col-md-12">
-                        <div className="do-sear mt-2">
-                          <p type="text" className="lined-input"></p>
-                        </div>
-                      </div>
                     </>
                   ) : (
                     <>
-                      {fourline ? (
+                      {threeline ? (
                         <>
                           <div className="col-md-12">
                             <div className="do-sear mt-4">
@@ -636,15 +398,10 @@ const QandA_add7Sentences = () => {
                               <p type="text" className="lined-input"></p>
                             </div>
                           </div>
-                          <div className="col-md-12">
-                            <div className="do-sear mt-2">
-                              <p type="text" className="lined-input"></p>
-                            </div>
-                          </div>
                         </>
                       ) : (
                         <>
-                          {fiveline ? (
+                          {fourline ? (
                             <>
                               <div className="col-md-12">
                                 <div className="do-sear mt-4">
@@ -666,15 +423,10 @@ const QandA_add7Sentences = () => {
                                   <p type="text" className="lined-input"></p>
                                 </div>
                               </div>
-                              <div className="col-md-12">
-                                <div className="do-sear mt-2">
-                                  <p type="text" className="lined-input"></p>
-                                </div>
-                              </div>
                             </>
                           ) : (
                             <>
-                              {sixline ? (
+                              {fiveline ? (
                                 <>
                                   <div className="col-md-12">
                                     <div className="do-sear mt-4">
@@ -683,7 +435,7 @@ const QandA_add7Sentences = () => {
                                         className="lined-input"
                                       ></p>
                                     </div>
-                                  </div>{" "}
+                                  </div>
                                   <div className="col-md-12">
                                     <div className="do-sear mt-2">
                                       <p
@@ -691,7 +443,7 @@ const QandA_add7Sentences = () => {
                                         className="lined-input"
                                       ></p>
                                     </div>
-                                  </div>{" "}
+                                  </div>
                                   <div className="col-md-12">
                                     <div className="do-sear mt-2">
                                       <p
@@ -699,7 +451,7 @@ const QandA_add7Sentences = () => {
                                         className="lined-input"
                                       ></p>
                                     </div>
-                                  </div>{" "}
+                                  </div>
                                   <div className="col-md-12">
                                     <div className="do-sear mt-2">
                                       <p
@@ -707,15 +459,7 @@ const QandA_add7Sentences = () => {
                                         className="lined-input"
                                       ></p>
                                     </div>
-                                  </div>{" "}
-                                  <div className="col-md-12">
-                                    <div className="do-sear mt-2">
-                                      <p
-                                        type="text"
-                                        className="lined-input"
-                                      ></p>
-                                    </div>
-                                  </div>{" "}
+                                  </div>
                                   <div className="col-md-12">
                                     <div className="do-sear mt-2">
                                       <p
@@ -727,18 +471,10 @@ const QandA_add7Sentences = () => {
                                 </>
                               ) : (
                                 <>
-                                  {sevenline ? (
+                                  {sixline ? (
                                     <>
                                       <div className="col-md-12">
                                         <div className="do-sear mt-4">
-                                          <p
-                                            type="text"
-                                            className="lined-input"
-                                          ></p>
-                                        </div>
-                                      </div>{" "}
-                                      <div className="col-md-12">
-                                        <div className="do-sear mt-2">
                                           <p
                                             type="text"
                                             className="lined-input"
@@ -788,18 +524,10 @@ const QandA_add7Sentences = () => {
                                     </>
                                   ) : (
                                     <>
-                                      {eightline ? (
+                                      {sevenline ? (
                                         <>
                                           <div className="col-md-12">
                                             <div className="do-sear mt-4">
-                                              <p
-                                                type="text"
-                                                className="lined-input"
-                                              ></p>
-                                            </div>
-                                          </div>{" "}
-                                          <div className="col-md-12">
-                                            <div className="do-sear mt-2">
                                               <p
                                                 type="text"
                                                 className="lined-input"
@@ -857,18 +585,10 @@ const QandA_add7Sentences = () => {
                                         </>
                                       ) : (
                                         <>
-                                          {nineline ? (
+                                          {eightline ? (
                                             <>
                                               <div className="col-md-12">
                                                 <div className="do-sear mt-4">
-                                                  <p
-                                                    type="text"
-                                                    className="lined-input"
-                                                  ></p>
-                                                </div>
-                                              </div>{" "}
-                                              <div className="col-md-12">
-                                                <div className="do-sear mt-2">
                                                   <p
                                                     type="text"
                                                     className="lined-input"
@@ -934,7 +654,7 @@ const QandA_add7Sentences = () => {
                                             </>
                                           ) : (
                                             <>
-                                              {tenline ? (
+                                              {nineline ? (
                                                 <>
                                                   <div className="col-md-12">
                                                     <div className="do-sear mt-4">
@@ -1007,18 +727,97 @@ const QandA_add7Sentences = () => {
                                                         className="lined-input"
                                                       ></p>
                                                     </div>
-                                                  </div>{" "}
-                                                  <div className="col-md-12">
-                                                    <div className="do-sear mt-2">
-                                                      <p
-                                                        type="text"
-                                                        className="lined-input"
-                                                      ></p>
-                                                    </div>
                                                   </div>
                                                 </>
                                               ) : (
-                                                <></>
+                                                <>
+                                                  {tenline ? (
+                                                    <>
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-4">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>
+                                                    </>
+                                                  ) : (
+                                                    <></>
+                                                  )}
+                                                </>
                                               )}
                                             </>
                                           )}
@@ -1079,107 +878,84 @@ const QandA_add7Sentences = () => {
           </div>
         </div>
 
-        <div className="yoihjij text-center my-2 p-2 ">
-        <button
-                    style={{backgroundColor:"orange"}}
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                        className="modal-add-btn"
-                    >
-                        Back
-                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button
-            onClick={() => {
-              //   addquestions();
-              handleShow();
-            }}
-            className="modal-add-btn"
+        <div className="d-flex justify-content-center">
+          <div className="yoihjij text-center my-2 p-2 ">
+            <Button className="modal-add-btn" onClick={handleShow}>
+              Save
+            </Button>
+          </div>
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            style={{ width: "100%" }}
+            size="lg"
           >
-            Save
-          </Button>
+            <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* <div className="box_1"> */}
+              <div className="container">
+                <div className="row mt-2">
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Question</label>
+
+                      {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                      <p>questions</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <div className="do-sear mt-2">
+                        <label htmlFor="">Answer</label>
+                        {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                        <p>answers</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* </div> */}
+            </Modal.Body>
+            <Modal.Footer>
+              <div className="d-flex justify-content-center m-auto">
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button className="modal-add-btn" onClick={handleShow}>
+                    Submit
+                  </Button>
+                </div>
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button
+                    className="mx-2 modal-close-btn"
+                    variant=""
+                    // onClick={() => {
+                    //   navigate("/onesentenceeditanswer");
+                    // }}
+                    onClick={handleClose}
+                  >
+                    Edit
+                  </Button>
+                </div>
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button
+                    className="modal-add-btn"
+                    onClick={() => {
+                      navigate("/Classlkg");
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
-      <Modal
-        size="lg"
-        show={show}
-        onHide={handleClose}
-        style={{ zIndex: "99999" }}
-      >
-        <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-          <Modal.Title style={{ color: "white" }}>Preview</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Question 1</label>
-              <p className="vi_0"></p>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Answer 1</label>
-              <p className="vi_0"></p>
-            </div>
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor=""
-              style={{ display: "flex", justifyContent: "space-around" }}
-            >
-              (OR)
-            </label>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Question 2</label>
-              <p className="vi_0"></p>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Answer 2</label>
-              <p className="vi_0"></p>
-            </div>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <div className="d-flex">
-            <Button
-              className="mx-2 modal-add-btn"
-              variant=""
-              onClick={() => {
-                // AddSubject();
-                handleClose();
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              className="mx-2 modal-add-btn"
-              variant=""
-              onClick={() => {
-                //   AddSubject();
-                handleClose();
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              className="mx-2 modal-close-btn"
-              variant=""
-              onClick={() => {
-                handleClose();
-                navigate(`/Classlkg`);
-              }}
-            >
-              Delete
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default QandA_add7Sentences;
+export default AddOneWordQuestion

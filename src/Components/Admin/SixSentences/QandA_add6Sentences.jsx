@@ -715,7 +715,7 @@ const QandA_add6Sentences = () => {
             variant=""
             onClick={() => {
               handleClose();
-              navigate(`/adminquestion6sentences`);
+              navigate(`/Classlkg`);
             }}
           >
             Delete

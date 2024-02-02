@@ -19,6 +19,7 @@ import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import "../../../Admin/Admin.css";
 const TwoSentenceaddAnswer = () => {
   const [show, setShow] = useState();
 
@@ -49,15 +50,6 @@ const TwoSentenceaddAnswer = () => {
                   <option>English</option>
                   <option>Hindi</option>
                   <option>Kannada</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Class</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Fifth Class</option>
-                  <option>LKG Class</option>
                 </Form.Select>
               </div>
             </div>
@@ -113,8 +105,6 @@ const TwoSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
-          <div className="row mt-2">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
@@ -125,6 +115,8 @@ const TwoSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
+          </div>
+          <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
@@ -244,7 +236,7 @@ const TwoSentenceaddAnswer = () => {
                   <Button
                     className="modal-add-btn"
                     onClick={() => {
-                      navigate("/twosenteceanswer");
+                      navigate("/Classlkg");
                     }}
                   >
                     Delete

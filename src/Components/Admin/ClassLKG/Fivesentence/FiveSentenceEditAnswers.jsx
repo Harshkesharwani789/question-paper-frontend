@@ -18,12 +18,19 @@ import "../../../Admin/Admin.css"
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+import swal from "sweetalert"
 
-const OneSentenceAnswerView = () => {
+const FiveSentenceEditAnswers = () => {
+    const [show, setShow] = useState();
+
+    const navigate = useNavigate();
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
   return (
     <div>
-      <div className="box_1">
+        <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -140,7 +147,6 @@ const OneSentenceAnswerView = () => {
                 />
               </div>
             </div>
-
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Ojectives</label>
@@ -157,17 +163,18 @@ const OneSentenceAnswerView = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <p className="vi_0"></p>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <p className="vi_0"></p>
+                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
-
+            
             <div>
               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
@@ -179,7 +186,7 @@ const OneSentenceAnswerView = () => {
                 <input type="file" className="vi_0" />
               </div>
             </div>
-
+            
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
@@ -190,21 +197,91 @@ const OneSentenceAnswerView = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <p className="vi_0"></p>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <p className="vi_0"></p>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
           </div>
         </div>
+
+        <div className="d-flex justify-content-center">
+          <div className="yoihjij text-center my-2 p-2 ">
+            <Button className="modal-add-btn">
+              Update
+            </Button>
+          </div>
+
+          {/* <Modal
+            show={show}
+            onHide={handleClose}
+            style={{ width: "100%" }}
+            size="lg"
+          >
+            <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="container">
+                <div className="row mt-2">
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Question</label>
+
+                      <CKEditor editor={ClassicEditor} className="vi_0" />
+                    </div>
+                  </div>
+
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <div className="do-sear mt-2">
+                        <label htmlFor="">Answer</label>
+                        <CKEditor editor={ClassicEditor} className="vi_0" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <div className="d-flex justify-content-center m-auto">
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button className="modal-add-btn" onClick={handleShow}>
+                    Save
+                  </Button>
+                </div>
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button
+                    className="mx-2 modal-close-btn"
+                    variant=""
+                  
+                    onClick={handleClose}
+                  >
+                    Edit
+                  </Button>
+                </div>
+                <div className="yoihjij text-center my-2 p-2 ">
+                  <Button
+                    className="modal-add-btn"
+                    onClick={() => {
+                      navigate("/fivesentenceanswer");
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </Modal.Footer>
+          </Modal> */}
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OneSentenceAnswerView;
+export default FiveSentenceEditAnswers

@@ -57,10 +57,10 @@ import QandA_view7Sentences from "./Components/Admin/SevenSentences/QandA_view7S
 import QandA_edit7Sentences from "./Components/Admin/SevenSentences/QandA_edit7Sentences";
 import QandA_add7Sentences from "./Components/Admin/SevenSentences/QandA_add7Sentences";
 // =========Eight=========
-import QandA_8Sentences from "./Components/Admin/EightSentences/QandA_8Sentences";
-import QandA_add8Sentences from "./Components/Admin/EightSentences/QandA_add8Sentences";
-import QandA_edit8Sentences from "./Components/Admin/EightSentences/QandA_edit8Sentences";
-import QandA_view8Sentences from "./Components/Admin/EightSentences/QandA_view8Sentences";
+import QandA_8Sentences from "./Components/Admin/ClassLKG/EightSentences/QandA_8Sentences";
+import QandA_add8Sentences from "./Components/Admin/ClassLKG/EightSentences/QandA_add8Sentences";
+import QandA_edit8Sentences from "./Components/Admin/ClassLKG/EightSentences/QandA_edit8Sentences";
+import QandA_view8Sentences from "./Components/Admin/ClassLKG/EightSentences/QandA_view8Sentences";
 // =======Ten==========
 import QandA_10Sentences from "./Components/Admin/TenSentences/QandA_10Sentences";
 import QandA_add10Sentences from "./Components/Admin/TenSentences/QandA_add10Sentences";
@@ -78,52 +78,50 @@ import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
 import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
 
 import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
-import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
-import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
-import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
 import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
-import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
-import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
-import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
-import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
-import FourSentenceAnswerview from "./Components/Admin/FourSentenceAnswerview";
-import FourSentenceaddAnswer from "./Components/Admin/FourSentenceaddAnswer";
-import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
-import FiveSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
-import FiveSentenceAnswerview from "./Components/Admin/FiveSentenceAnswerview";
-import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer";
-import ReCorrectionAnswer from "./Components/Admin/ReCorrectionAnswer";
-import RecorrectionaddAnswer from "./Components/Admin/RecorrectionaddAnswer";
-import ReCorrecteditAnswer from "./Components/Admin/ReCorrecteditAnswer";
-import ReCorrectAnswerview from "./Components/Admin/ReCorrectAnswerview";
-import FiveSentenceEditAnswers from "./Components/Admin/FiveSentenceEditAnswers";
-import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
-import AddMatches from "./Components/Admin/AddMatches";
-import EditMatch from "./Components/Admin/EditMatch";
-import ViewMatch from "./Components/Admin/ViewMatch";
 import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
 import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
+
 import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
 import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
-import RelationshipWord from "./Components/Admin/RelationshipWord";
-import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
-import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
-import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
-import OneWordQuestion from "./Components/Admin/OneWordQuestion";
-import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
-import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
-import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
+
 import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
 import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
 import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
 import Mcq_view from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_view";
 import Passage_Deatils from "./Components/Admin/Passage/Passage_Deatils";
-import Passage_add from "./Components/Admin/Passage/Passage_add";
 import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceaddAnswer";
-// import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
-import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
-// import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceaddAnswer";
+import ThreeSentenceaddAnswer from "./Components/Admin/ClassLKG/ThreeSentence/ThreeSentenceaddAnswer";
+import ThreeSentenceAnswer from "./Components/Admin/ClassLKG/ThreeSentence/ThreeSentenceAnswer";
+import ThreeSentenceeditAnswer from "./Components/Admin/ClassLKG/ThreeSentence/ThreeSentenceeditAnswer";
+import ThreeSentenceAnswerview from "./Components/Admin/ClassLKG/ThreeSentence/ThreeSentenceAnswerview";
+import FiveSentenceaddAnswer from "./Components/Admin/ClassLKG/Fivesentence/FiveSentenceaddAnswer";
+import FiveSentenceAnswerview from "./Components/Admin/ClassLKG/Fivesentence/FiveSentenceAnswerview";
+import FiveSentenceEditAnswers from "./Components/Admin/ClassLKG/Fivesentence/FiveSentenceEditAnswers";
+import FiveSentenceAnswer from "./Components/Admin/ClassLKG/Fivesentence/FiveSentenceAnswer";
+import RelationshipWord from "./Components/Admin/ClassLKG/Relationship/RelationshipWord";
+import ReCorrectAnswerview from "./Components/Admin/ClassLKG/Recorrect/ReCorrectAnswerview";
+import ReCorrectionAnswer from "./Components/Admin/ClassLKG/Recorrect/ReCorrectionAnswer";
+import RecorrectionaddAnswer from "./Components/Admin/ClassLKG/Recorrect/RecorrectionaddAnswer";
+import ViewMatch from "./Components/Admin/ClassLKG/Matchthefollowing/ViewMatch";
+import AddMatches from "./Components/Admin/ClassLKG/Matchthefollowing/AddMatches";
+import MatchtheFollowing from "./Components/Admin/ClassLKG/Matchthefollowing/MatchtheFollowing";
+import EditMatch from "./Components/Admin/ClassLKG/Matchthefollowing/EditMatch";
+import OneWordQuestion from "./Components/Admin/ClassLKG/Oneword/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/ClassLKG/Oneword/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/ClassLKG/Oneword/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ClassLKG/Oneword/ViewOneWordQuestion";
+import FourSentenceaddAnswer from "./Components/Admin/ClassLKG/foursentence/FourSentenceaddAnswer";
+import FourSentenceAnswer from "./Components/Admin/ClassLKG/foursentence/FourSentenceAnswer";
+import FourSentenceAnswerview from "./Components/Admin/ClassLKG/foursentence/FourSentenceAnswerview";
+import FourSentenceeditAnswer from "./Components/Admin/ClassLKG/foursentence/FourSentenceeditAnswer";
+import AddRelationshipWord from "./Components/Admin/ClassLKG/Relationship/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/ClassLKG/Relationship/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ClassLKG/Relationship/ViewRelationshipWord";
+import ReCorrecteditAnswer from "./Components/Admin/ClassLKG/Recorrect/ReCorrecteditAnswer";
+
 
 import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
 import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
@@ -149,13 +147,8 @@ import EditPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/EditPo
 import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPoetTimePlaceAnsQn";
 import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
-import Fillintheblanks_add from "./Components/Admin/FillInTheBlanks/Fillintheblanks_add";
-import FillInTheBlanks from "./Components/Admin/FillInTheBlanks/FillInTheBlanks";
-import FillInTheBlanks_edit from "./Components/Admin/FillInTheBlanks/FillInTheBlanks_edit";
-import FillInTheBlanks_view from "./Components/Admin/FillInTheBlanks/FillInTheBlanks_view";
+import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
-import { Navbar } from "react-bootstrap";
-// import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 
 function App() {
   return (
@@ -1247,6 +1240,7 @@ function App() {
             }
           />
 
+
           {/* One Word Question  */}
           <Route
             path="/onewordquestion"
@@ -1361,18 +1355,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/adminpassageadd"
-            element={
-              <Main
-                children={
-                  <>
-                    <Passage_add />
-                  </>
-                }
-              />
-            }
-          />
+
           {/* ============Passage =========== */}
           {/* onesentence */}
           <Route
@@ -1453,6 +1436,7 @@ function App() {
             }
           />
 
+
           {/* GraphQuestion */}
 
           <Route
@@ -1504,7 +1488,10 @@ function App() {
             }
           />
 
+
+
           {/* Complete The Poem */}
+
 
           <Route
             path="/addpoem"
@@ -1555,6 +1542,8 @@ function App() {
               />
             }
           />
+
+
 
           {/* Situation Understand Answers Questions */}
 
@@ -1609,6 +1598,7 @@ function App() {
               />
             }
           />
+
 
           {/* Poet,Time , Place , Write the answer the question */}
 
@@ -1714,65 +1704,23 @@ function App() {
               />
             }
           />
-          {/* ===========Fill In The Blanks============ */}
-          <Route
-            path="/adminFillintheblanks"
+{/* ===============10th Question Paper (ENGLISH MEDIUM)=========================== */}
+<Route
+            path="/10th_QP_maths"
             element={
-              <Main
-                children={
+              
                   <>
-                    <FillInTheBlanks />
+                  <Navbarr />
+                    <Maths_Pattern />
                   </>
-                }
-              />
+               
             }
           />
-          <Route
-            path="/adminFillintheblanksadd"
-            element={
-              <Main
-                children={
-                  <>
-                    <Fillintheblanks_add />
-                  </>
-                }
-              />
-            }
-          />
-          <Route
-            path="/adminFillintheblanksedit"
-            element={
-              <Main
-                children={
-                  <>
-                    <FillInTheBlanks_edit />
-                  </>
-                }
-              />
-            }
-          />
-          <Route
-            path="/adminFillintheblanksview"
-            element={
-              <Main
-                children={
-                  <>
-                    <FillInTheBlanks_view />
-                  </>
-                }
-              />
-            }
-          />
-          {/* ===========10th QuestionPapper Generation (ENGLISH MEDIUM)============ */}
-          <Route
-            path="/10thQPMaths_EnglishMedium"
-            element={
-              <>
-              <Navbarr />
-                <Maths_Pattern />
-              </>
-            }
-          />
+
+
+
+
+
         </Routes>
       </BrowserRouter>
     </div>

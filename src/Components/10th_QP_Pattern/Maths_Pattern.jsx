@@ -896,7 +896,7 @@ const Maths_Pattern = () => {
                   marginTop: "-12px",
                 }}
               >
-                <p>12)</p>
+                <p>20)</p>
               </div>
               <div
                 className="col-md-11"
@@ -909,10 +909,7 @@ const Maths_Pattern = () => {
                 }}
               >
                 <p>
-                  In ABC, ABC=90 <sup>0</sup> ,BD{" "}
-                  <span style={{ textDecoration: "underline" }}>|</span> AC{" "}
-                  <br />
-                  If BD = 8cm and AD = 4cm find CD
+                  Simply : 
                 </p>
                 <img
                   src="maths-1.png"

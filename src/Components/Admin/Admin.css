@@ -593,7 +593,7 @@ table thead tr th {
   width: 20%;
 }
 
-.lined-input{
+.lined-input {
   outline-width: 0px;
   padding: 7px;
   border-radius: 5px;
@@ -604,7 +604,6 @@ table thead tr th {
   border-top: none;
   border-radius: none !important;
 }
-
 
 /* Admin Panel ends */
 
@@ -659,14 +658,10 @@ table thead tr th {
     height: 300px;
   }
 }
-.hjhu a button{
+.hjhu button {
   width: 175px;
   padding: 8px;
   height: 82px;
   margin: 1px;
-}
-.hjhu a {
   font-size: 16px;
 }
-
-
