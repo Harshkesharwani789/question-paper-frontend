@@ -624,14 +624,15 @@ const QandA_5to6_addQandA = () => {
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
-        <Button
-            onClick={() => {
-              navigate("/")
-            }}
-            className="modal-add-btn"
-          >
-            Back
-          </Button>
+        <button
+                    style={{backgroundColor:"orange"}}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        className="modal-add-btn"
+                    >
+                        Back
+                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();

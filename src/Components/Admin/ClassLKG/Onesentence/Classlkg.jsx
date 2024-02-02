@@ -18,10 +18,8 @@ import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import "../../../Admin/Admin.css"
+import "../../../Admin/Admin.css";
 const Classlkg = () => {
-
-
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -88,7 +86,6 @@ const Classlkg = () => {
       setData([...data]);
     }
   };
-
 
   return (
     <div>
@@ -240,11 +237,11 @@ const Classlkg = () => {
                           <button> Objective Questions</button>
                         </a>
                         &nbsp;
-                        <a href="/adminmcqquestions">
+                        <a onClick={() => navigate("/adminmcqquestions")}>
                           <button>Multiple Choice Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="">
+                        <a onClick={() => navigate("/adminFillintheblanks")}>
                           <button>Fill in the Blanks</button>
                         </a>{" "}
                         &nbsp;
@@ -260,7 +257,7 @@ const Classlkg = () => {
                           <button> Classifications of Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminoddandout">
+                        <a onClick={() => navigate("/adminoddandout")}>
                           <button>Odd and out words Questions</button>
                         </a>{" "}
                         &nbsp;
@@ -270,7 +267,7 @@ const Classlkg = () => {
                           <button> RelationShip Words Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addgrammerquestion')}>
+                        <a onClick={() => navigate("/addgrammerquestion")}>
                           <button>Grammer Questions</button>
                         </a>{" "}
                         &nbsp;
@@ -278,7 +275,7 @@ const Classlkg = () => {
                           <button>One Word Question</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/addClasslkg">
+                        <a onClick={() => navigate("/addClasslkg")}>
                           <button> One Sentence Answer Questions</button>
                         </a>{" "}
                         &nbsp;
@@ -305,30 +302,36 @@ const Classlkg = () => {
                           <button>Five Sentence Answer Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminquestion5to6sentences">
+                        <a
+                          onClick={() =>
+                            navigate("/adminquestion5to6sentences")
+                          }
+                        >
                           <button>
                             {" "}
                             Five and Six Sentence Answer Questions
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminquestion6sentences">
+                        <a onClick={() => navigate("/adminquestion6sentences")}>
                           <button> Six Sentence Answer Questions </button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminquestion7sentences">
+                        <a onClick={() => navigate("/adminquestion7sentences")}>
                           <button> Seven Sentence Answer Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminquestion8sentences">
+                        <a onClick={() => navigate("/adminquestion8sentences")}>
                           <button>Eight Sentence Answer Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminquestion10sentences">
+                        <a
+                          onClick={() => navigate("/adminquestion10sentences")}
+                        >
                           <button> Ten Sentence Answer Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminexpandexplain">
+                        <a onClick={() => navigate("/adminexpandexplain")}>
                           <button>
                             Expanding and Explanations Answer Questions
                           </button>
@@ -336,44 +339,41 @@ const Classlkg = () => {
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a onClick={()=>navigate('/adddrawfigure')}>
+                        <a onClick={() => navigate("/adddrawfigure")}>
                           <button>
                             Answer the Questions and Draw the Figure
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addgraphquestion')}>
+                        <a onClick={() => navigate("/addgraphquestion")}>
                           <button>Graph Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addpoem')}>
+                        <a onClick={() => navigate("/addpoem")}>
                           <button>Complete the Poem</button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addunderstandansqn')}>
+                        <a onClick={() => navigate("/addunderstandansqn")}>
                           <button>
                             {" "}
                             Situation UnderStatnding answer Questions
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addpoettimeplaceansqn')}>
+                        <a onClick={() => navigate("/addpoettimeplaceansqn")}>
                           <button>
                             Poet,Time, Place, Writer answer questions
                           </button>
                         </a>{" "}
                         &nbsp;
-                        <a href="/adminpassage">
-                          <button>
-                            Passage Reading
-                          </button>
+                        <a onClick={() => navigate("/adminpassage")}>
+                          <button>Passage Reading</button>
                         </a>{" "}
-                         &nbsp;
+                        &nbsp;
                       </div>
                     </div>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>

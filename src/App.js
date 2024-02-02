@@ -125,7 +125,6 @@ import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSen
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 // import TwoSentenceaddAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceaddAnswer";
 
-
 import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
 import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
 import AddPoem from "./Components/Admin/CompleteThePoem/AddPoem";
@@ -150,6 +149,12 @@ import EditPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/EditPo
 import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPoetTimePlaceAnsQn";
 import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
+import Fillintheblanks_add from "./Components/Admin/FillInTheBlanks/Fillintheblanks_add";
+import FillInTheBlanks from "./Components/Admin/FillInTheBlanks/FillInTheBlanks";
+import FillInTheBlanks_edit from "./Components/Admin/FillInTheBlanks/FillInTheBlanks_edit";
+import FillInTheBlanks_view from "./Components/Admin/FillInTheBlanks/FillInTheBlanks_view";
+import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
+import { Navbar } from "react-bootstrap";
 // import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 
 function App() {
@@ -157,7 +162,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route
+          <Route
             path="/"
             exact
             element={
@@ -1205,7 +1210,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/addrelationshipword"
             element={
               <Main
@@ -1217,7 +1222,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/editrelationshipword"
             element={
               <Main
@@ -1229,7 +1234,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/viewrelationshipword"
             element={
               <Main
@@ -1241,7 +1246,6 @@ function App() {
               />
             }
           />
-
 
           {/* One Word Question  */}
           <Route
@@ -1268,7 +1272,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/editonewordquestion"
             element={
               <Main
@@ -1319,7 +1323,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmcqquestionsedit"
             element={
               <Main
@@ -1357,7 +1361,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminpassageadd"
             element={
               <Main
@@ -1449,7 +1453,6 @@ function App() {
             }
           />
 
-
           {/* GraphQuestion */}
 
           <Route
@@ -1501,10 +1504,7 @@ function App() {
             }
           />
 
-
-
           {/* Complete The Poem */}
-
 
           <Route
             path="/addpoem"
@@ -1555,8 +1555,6 @@ function App() {
               />
             }
           />
-
-
 
           {/* Situation Understand Answers Questions */}
 
@@ -1611,7 +1609,6 @@ function App() {
               />
             }
           />
-
 
           {/* Poet,Time , Place , Write the answer the question */}
 
@@ -1717,12 +1714,65 @@ function App() {
               />
             }
           />
-
-
-
-
-
-
+          {/* ===========Fill In The Blanks============ */}
+          <Route
+            path="/adminFillintheblanks"
+            element={
+              <Main
+                children={
+                  <>
+                    <FillInTheBlanks />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminFillintheblanksadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Fillintheblanks_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminFillintheblanksedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <FillInTheBlanks_edit />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminFillintheblanksview"
+            element={
+              <Main
+                children={
+                  <>
+                    <FillInTheBlanks_view />
+                  </>
+                }
+              />
+            }
+          />
+          {/* ===========10th QuestionPapper Generation (ENGLISH MEDIUM)============ */}
+          <Route
+            path="/10thQPMaths_EnglishMedium"
+            element={
+              <>
+              <Navbarr />
+                <Maths_Pattern />
+              </>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
