@@ -78,52 +78,15 @@ import OddAndOut_vieww from "./Components/Admin/OaddAndout/OddAndOut_vieww";
 import OddAndOut_edit from "./Components/Admin/OaddAndout/OddAndOut_edit";
 
 import OneSentenceAnswer from "./Components/Admin/OneSentenceAnswer";
-import TwoSentenceAnswer from "./Components/Admin/TwoSentenceAnswer";
 import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
 import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
-import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
-import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
 import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
 import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
-import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
-// import TwoSentenceAnswer from "./Components/Admin/";
-import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
-import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
-import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
-import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
-import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
 import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
-// import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
-import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
-import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
-import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
-import FourSentenceAnswerview from "./Components/Admin/FourSentenceAnswerview";
-import FourSentenceaddAnswer from "./Components/Admin/FourSentenceaddAnswer";
-import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
-import FiveSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
-import FiveSentenceAnswerview from "./Components/Admin/FiveSentenceAnswerview";
-import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer";
-import ReCorrectionAnswer from "./Components/Admin/ReCorrectionAnswer";
-import RecorrectionaddAnswer from "./Components/Admin/RecorrectionaddAnswer";
-import ReCorrecteditAnswer from "./Components/Admin/ReCorrecteditAnswer";
-import ReCorrectAnswerview from "./Components/Admin/ReCorrectAnswerview";
-import FiveSentenceEditAnswers from "./Components/Admin/FiveSentenceEditAnswers";
-import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
-import AddMatches from "./Components/Admin/AddMatches";
-import EditMatch from "./Components/Admin/EditMatch";
-import ViewMatch from "./Components/Admin/ViewMatch";
-import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
-import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+
 import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
 import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
-import RelationshipWord from "./Components/Admin/RelationshipWord";
-import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
-import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
-import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
-import OneWordQuestion from "./Components/Admin/OneWordQuestion";
-import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
-import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
-import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
+
 import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
 import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
 import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
@@ -191,7 +154,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route
+          <Route
             path="/"
             exact
             element={
@@ -637,7 +600,7 @@ function App() {
                 children={
                   <>
                     {/* <FiveSentenceeditAnswer /> */}
-                    <FiveSentenceEditAnswers/>
+                    <FiveSentenceEditAnswers />
                   </>
                 }
               />
@@ -1239,7 +1202,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/addrelationshipword"
             element={
               <Main
@@ -1251,7 +1214,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/editrelationshipword"
             element={
               <Main
@@ -1263,7 +1226,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/viewrelationshipword"
             element={
               <Main
@@ -1302,7 +1265,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/editonewordquestion"
             element={
               <Main
@@ -1353,7 +1316,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmcqquestionsedit"
             element={
               <Main
@@ -1391,7 +1354,7 @@ function App() {
               />
             }
           />
-         
+
           {/* ============Passage =========== */}
           {/* onesentence */}
           <Route
