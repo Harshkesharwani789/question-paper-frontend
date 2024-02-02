@@ -131,6 +131,7 @@ const Classlkg = () => {
                 <th>Subject</th>
                 <th>Subject Part</th>
                 <th>Sub-Class</th>
+                <th>Types Of Questions</th>
 
                 <th>
                   <div>View</div>
@@ -147,7 +148,7 @@ const Classlkg = () => {
               <td>sss</td>
               <td>sss</td>
               <td>sss</td>
-
+              <td>sss</td>
               <td>sss</td>
 
               <td>
@@ -167,8 +168,7 @@ const Classlkg = () => {
                       className="text-success"
                       style={{ cursor: "pointer", fontSize: "20px" }}
                       onClick={() => {
-                        // setupdateQuestion();
-                        navigate("/onesentenceeditanswer");
+                        handleShow3()
                       }}
                     />
                   </div>
@@ -233,132 +233,284 @@ const Classlkg = () => {
                   <div className="container">
                     <div className="row">
                       <div className="col-md-3">
-                        <a href="">
-                          <button> Objective Questions</button>
-                        </a>
+                          <button onClick={()=>navigate("/")}> Objective Questions</button>
                         &nbsp;
-                        <a href="">
-                          <button>Multiple Choice Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=>{navigate("/adminmcqquestionsadd")}}>Multiple Choice Questions</button>
+                        
                         &nbsp;
-                        <a href="">
+                       
                           <button>Fill in the Blanks</button>
-                        </a>{" "}
+                        
                         &nbsp;
-                        <a href="">
-                          <button> Match the Following</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate("/addmatches")}> Match the Following</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button> Recorrect the Answers</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=>{navigate("/recorrecteditanswer")}}> Recorrect the Answers</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button> Classifications of Questions</button>
-                        </a>{" "}
+                       
+                          <button > Classifications of Questions</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button>Odd and out words Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=>{navigate("/adminoddandoutadd")}}>Odd and out words Questions</button>
+                        
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a href="">
-                          <button> RelationShip Words Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate("/addrelationshipword")}> RelationShip Words Questions</button>
+                        
                         &nbsp;
-                        <a href="">
+                       
                           <button>Grammer Questions</button>
-                        </a>{" "}
+                        
                         &nbsp;
-                        <a href="">
-                          <button>One Word Question</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate('/addonewordquestion')}>One Word Question</button>
+                        
                         &nbsp;
-                        <a href="/addClasslkg">
-                          <button> One Sentence Answer Questions</button>
-                        </a>{" "}
+                          <button onClick={()=> navigate('/addClasslkg')}> One Sentence Answer Questions</button>
                         &nbsp;
-                        <a href="">
-                          <button> Two Words Sentence Answer Questions</button>
-                        </a>{" "}
+                          <button onClick={()=>navigate('/twosentenceaddanswer')}> Two  Sentence Answer Questions</button>
                         &nbsp;
-                        <a href="">
-                          <button>
+                          <button onClick={()=> navigate("/threesentenceaddanswer")}>
                             {" "}
                             Two and three Sentence Answer Questions
                           </button>
-                        </a>{" "}
                         &nbsp;
-                        <a href="">
-                          <button>
+                          <button onClick={()=> navigate("/foursentenceaddanswer")}>
                             Three and Four Sentence Answer Questions
                           </button>
-                        </a>{" "}
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a href="">
-                          <button>Five Sentence Answer Questions</button>
-                        </a>{" "}
+                      
+                          <button onClick={()=>navigate('/fivesentenceaddanswer')}>Five Sentence Answer Questions</button>
                         &nbsp;
-                        <a href="">
-                          <button>
+                          <button onClick={()=> navigate('/adminquestion5to6sentencesadd')}>
                             {" "}
                             Five and Six Sentence Answer Questions
                           </button>
-                        </a>{" "}
                         &nbsp;
-                        <a href="">
-                          <button> Six Sentence Answer Questions </button>
-                        </a>{" "}
+                       
+                          <button onClick={()=>navigate('/adminquestion6sentencesadd')}> Six Sentence Answer Questions </button>
                         &nbsp;
-                        <a href="">
-                          <button> Seven Sentence Answer Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate("/adminquestion7sentencesadd")}> Seven Sentence Answer Questions</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button>Eight Sentence Answer Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate("/adminquestion8sentencesadd")} >Eight Sentence Answer Questions</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button> Ten Sentence Answer Questions</button>
-                        </a>{" "}
+                       
+                          <button onClick={()=> navigate("/adminquestion10sentencesadd")}> Ten Sentence Answer Questions</button>
+                        
                         &nbsp;
-                        <a href="">
-                          <button>
+                       
+                          <button onClick={()=>navigate("/adminexpandexplainadd")}>
                             Expanding and Explanations Answer Questions
                           </button>
-                        </a>{" "}
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a href="">
-                          <button>
+                       
+                          <button >
                             Answer the Questions and Draw the Figure
                           </button>
-                        </a>{" "}
+                        
                         &nbsp;
-                        <a href="">
-                          <button>Graph Questions</button>
-                        </a>{" "}
+                       
+                          <button >Graph Questions</button>
+                        
                         &nbsp;
-                        <a href="">
+                       
                           <button>Complete the Poem</button>
-                        </a>{" "}
+                        
                         &nbsp;
-                        <a href="">
+                       
                           <button>
                             {" "}
                             Situation UnderStatnding answer Questions
                           </button>
-                        </a>{" "}
+                        
                         &nbsp;
-                        <a href="">
+                       
                           <button>
                             Poet,Time, Place, Writer answer questions
                           </button>
-                        </a>{" "}
+                        
+                        &nbsp;
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        {/* <Modal.Footer>
+          <Button variant="" className="modal-close-btn" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="" className="modal-add-btn" onClick={submit}>
+            Submit
+          </Button>
+        </Modal.Footer> */}
+      </Modal>
+      <Modal
+        show={show3}
+        onHide={handleClose3}
+        style={{ zIndex: "99999" }}
+        size="lg"
+      >
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>Edit Question</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="do-sear">
+                <label htmlFor="" className="fw-bold fs-3 mb-4">
+                  {" "}
+                  Select Types Of Question
+                </label>{" "}
+                <br />
+                <div className="hjhu">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-3">
+                       
+                          <button> Objective Questions</button>
+                       
+                        &nbsp;
+                       
+                          <button>Multiple Choice Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>Fill in the Blanks</button>
+                        
+                        &nbsp;
+                       
+                          <button> Match the Following</button>
+                        
+                        &nbsp;
+                       
+                          <button> Recorrect the Answers</button>
+                        
+                        &nbsp;
+                       
+                          <button> Classifications of Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>Odd and out words Questions</button>
+                        
+                        &nbsp;
+                      </div>
+                      <div className="col-md-3">
+                       
+                          <button> RelationShip Words Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>Grammer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>One Word Question</button>
+                        
+                        &nbsp;
+                       
+                          <button> One Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                        
+                          <button> Two  Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            {" "}
+                            Two and three Sentence Answer Questions
+                          </button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            Three and Four Sentence Answer Questions
+                          </button>
+                        
+                        &nbsp;
+                      </div>
+                      <div className="col-md-3">
+                       
+                          <button>Five Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            {" "}
+                            Five and Six Sentence Answer Questions
+                          </button>
+                        
+                        &nbsp;
+                       
+                          <button> Six Sentence Answer Questions </button>
+                        
+                        &nbsp;
+                       
+                          <button> Seven Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>Eight Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button> Ten Sentence Answer Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            Expanding and Explanations Answer Questions
+                          </button>
+                        
+                        &nbsp;
+                      </div>
+                      <div className="col-md-3">
+                       
+                          <button>
+                            Answer the Questions and Draw the Figure
+                          </button>
+                        
+                        &nbsp;
+                       
+                          <button>Graph Questions</button>
+                        
+                        &nbsp;
+                       
+                          <button>Complete the Poem</button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            {" "}
+                            Situation UnderStatnding answer Questions
+                          </button>
+                        
+                        &nbsp;
+                       
+                          <button>
+                            Poet,Time, Place, Writer answer questions
+                          </button>
+                        
                         &nbsp;
                       </div>
                     </div>

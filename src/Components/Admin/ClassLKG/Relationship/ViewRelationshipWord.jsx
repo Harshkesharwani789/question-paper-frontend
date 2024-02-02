@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  InputGroup,
-  Modal,
-  Pagination,
-  Table,
-} from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
-import { BiSolidEdit } from "react-icons/bi";
-import { BsSearch } from "react-icons/bs";
-import moment from "moment";
+import { Form, Button, Modal } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FaEye } from "react-icons/fa";
-import "../../../Admin/Admin.css"
-import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import "../../../Admin/Admin.css";
 
-const OneSentenceAnswerView = () => {
+const ViewRelationshipWord = () => {
   return (
     <div>
       <div className="box_1">
@@ -132,6 +119,12 @@ const OneSentenceAnswerView = () => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
+                <label htmlFor="">Image</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <input
                   type="number"
@@ -140,65 +133,87 @@ const OneSentenceAnswerView = () => {
                 />
               </div>
             </div>
-
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Ojectives</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select Objectives</option>
-                  <option>Remembering</option>
-                  <option value="">Understanding</option>
-                  <option value="">Expression</option>
-                  <option value="">Appreciation</option>
-                </Form.Select>
-              </div>
-            </div>
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
+
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                <div className="row">
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                    <p className="vi_0"></p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                    <p className="vi_0"></p>
+
+                      <p className="m-2 ">::</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                    <p className="vi_0"></p>
+
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2">
+                      <p
+                        className=""
+                        style={{
+                          borderBottom: "1px solid",
+                          marginTop: "25px",
+                          marginBottom: "0px",
+                        }}
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option A)</label>
                 <p className="vi_0"></p>
+
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option B)</label>
+                <p className="vi_0"></p>
+
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option C)</label>
+                <p className="vi_0"></p>
+
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option D)</label>
+                <p className="vi_0"></p>
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-
-            <div>
-              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
-                <b>(OR)</b>
-              </h6>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                <p className="vi_0"></p>
-              </div>
+                  <label htmlFor="">Answer</label>
+                  <p className="vi_0"></p>
+                </div>
             </div>
           </div>
         </div>
@@ -207,4 +222,4 @@ const OneSentenceAnswerView = () => {
   );
 };
 
-export default OneSentenceAnswerView;
+export default ViewRelationshipWord;

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import "../../Admin/Admin.css";
+import "../../../Admin/Admin.css"
+
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-const Mcq_add = () => {
+const QandA_add8Sentences = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -459,12 +460,12 @@ const Mcq_add = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 1</label>
                 {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -473,125 +474,16 @@ const Mcq_add = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 5</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 6</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-           
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 1</label>
                 {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -608,80 +500,55 @@ const Mcq_add = () => {
                 (OR)
               </label>
             </div>
-
             <div className="col-md-12">
-              <div className="do-sear">
-                <label htmlFor="">Image Question</label>
-                <input
-                  type="file"
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question 2</label>
+                {/* <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
                   className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 1</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 2</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 3</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 4</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 5</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 6</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  data={Question}
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer 2</label>
+                {/* <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Answer Image</label>
+                <label htmlFor="">Question 1-Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question 2-Image</label>
                 <input
                   type="file"
                   className="vi_0"
@@ -741,19 +608,19 @@ const Mcq_add = () => {
               </div>
             </div>
             {/* <div className="col-md-6">
-          <div className="do-sear">
-            <label htmlFor="">Answer Time</label>
-            <input
-              type="text"
-              className="vi_0"
-              placeholder="Enter the answer time"
-            />
-          </div>
-        </div> */}
+            <div className="do-sear">
+              <label htmlFor="">Answer Time</label>
+              <input
+                type="text"
+                className="vi_0"
+                placeholder="Enter the answer time"
+              />
+            </div>
+          </div> */}
 
             {/* <div className="yoihjij my-4">
-          <button style={{ float: "right" }}>Add</button>
-        </div> */}
+            <button style={{ float: "right" }}>Add</button>
+          </div> */}
           </div>
         </div>
 
@@ -781,51 +648,13 @@ const Mcq_add = () => {
         <Modal.Body>
           <div className="col-md-12">
             <div className="do-sear mt-2">
-              <label htmlFor="">Question </label>
+              <label htmlFor="">Question 1</label>
               <p className="vi_0"></p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 5 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 6 </label>
-                <p className="vi_0"></p>
-              </div>
             </div>
           </div>
           <div className="col-md-12">
             <div className="do-sear mt-2">
-              <label htmlFor="">Answer</label>
+              <label htmlFor="">Answer 1</label>
               <p className="vi_0"></p>
             </div>
           </div>
@@ -839,51 +668,13 @@ const Mcq_add = () => {
           </div>
           <div className="col-md-12">
             <div className="do-sear mt-2">
-              <label htmlFor="">Image Question</label>
+              <label htmlFor="">Question 2</label>
               <p className="vi_0"></p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 5 </label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 6 </label>
-                <p className="vi_0"></p>
-              </div>
             </div>
           </div>
           <div className="col-md-12">
             <div className="do-sear mt-2">
-              <label htmlFor="">Image Answer</label>
+              <label htmlFor="">Answer 2</label>
               <p className="vi_0"></p>
             </div>
           </div>
@@ -915,7 +706,7 @@ const Mcq_add = () => {
               variant=""
               onClick={() => {
                 handleClose();
-                navigate(`/Classlkg`);
+                navigate(`/adminquestion8sentences`);
               }}
             >
               Delete
@@ -927,4 +718,4 @@ const Mcq_add = () => {
   );
 };
 
-export default Mcq_add;
+export default QandA_add8Sentences;

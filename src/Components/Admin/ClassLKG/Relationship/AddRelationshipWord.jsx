@@ -1,31 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  InputGroup,
-  Modal,
-  Pagination,
-  Table,
-} from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
-import { BiSolidEdit } from "react-icons/bi";
-import { BsSearch } from "react-icons/bs";
-import moment from "moment";
+import { Form, Button, Modal } from "react-bootstrap";
+import "../../../Admin/Admin.css"
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FaEye } from "react-icons/fa";
-import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import "../../../Admin/Admin.css";
-const TwoSentenceaddAnswer = () => {
+
+const AddRelationshipWord = () => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   return (
     <div>
       <div className="box_1">
@@ -49,6 +38,15 @@ const TwoSentenceaddAnswer = () => {
                   <option>English</option>
                   <option>Hindi</option>
                   <option>Kannada</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select Class</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Fifth Class</option>
+                  <option>LKG Class</option>
                 </Form.Select>
               </div>
             </div>
@@ -104,6 +102,8 @@ const TwoSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
+          </div>
+          <div className="row mt-2">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
@@ -114,8 +114,6 @@ const TwoSentenceaddAnswer = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
-          <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
@@ -146,7 +144,98 @@ const TwoSentenceaddAnswer = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
 
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                <div className="row">
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                      />
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                      />
+                      <p className="m-2 ">::</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                      />
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2">
+                      <p
+                        className=""
+                        style={{
+                          borderBottom: "1px solid",
+                          marginTop: "45px",
+                          marginBottom: "0px",
+                        }}
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option A)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                />
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option B)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                />
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option C)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                />
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option D)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                />
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
 
@@ -154,7 +243,12 @@ const TwoSentenceaddAnswer = () => {
               <div className="do-sear mt-2">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Answer</label>
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
+                  {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter The question"
+                  />
                 </div>
               </div>
             </div>
@@ -241,4 +335,4 @@ const TwoSentenceaddAnswer = () => {
   );
 };
 
-export default TwoSentenceaddAnswer;
+export default AddRelationshipWord;
