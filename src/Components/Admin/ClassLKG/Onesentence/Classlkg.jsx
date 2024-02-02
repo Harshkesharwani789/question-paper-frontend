@@ -20,6 +20,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import "../../../Admin/Admin.css"
 const Classlkg = () => {
+
+
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -86,6 +88,7 @@ const Classlkg = () => {
       setData([...data]);
     }
   };
+
 
   return (
     <div>
@@ -265,9 +268,9 @@ const Classlkg = () => {
                           <button onClick={()=> navigate("/addrelationshipword")}> RelationShip Words Questions</button>
                         
                         &nbsp;
-                       
+                        <a onClick={()=>navigate('/addgrammerquestion')}>
                           <button>Grammer Questions</button>
-                        
+                        </a>
                         &nbsp;
                        
                           <button onClick={()=> navigate('/addonewordquestion')}>One Word Question</button>
@@ -318,32 +321,32 @@ const Classlkg = () => {
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                       
-                          <button >
+                        <a onClick={()=>navigate('/adddrawfigure')}>
+                          <button>
                             Answer the Questions and Draw the Figure
                           </button>
-                        
+                        </a>
                         &nbsp;
-                       
-                          <button >Graph Questions</button>
-                        
+                        <a onClick={()=>navigate('/addgraphquestion')}>
+                          <button>Graph Questions</button>
+                        </a>{" "}
                         &nbsp;
-                       
+                        <a onClick={()=>navigate('/addpoem')}>
                           <button>Complete the Poem</button>
-                        
+                        </a>
                         &nbsp;
-                       
+                        <a onClick={()=>navigate('/addunderstandansqn')}>
                           <button>
                             {" "}
                             Situation UnderStatnding answer Questions
                           </button>
-                        
+                        </a>
                         &nbsp;
-                       
+                        <a onClick={()=>navigate('/addpoettimeplaceansqn')}>
                           <button>
                             Poet,Time, Place, Writer answer questions
                           </button>
-                        
+                        </a>
                         &nbsp;
                       </div>
                     </div>

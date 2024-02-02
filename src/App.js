@@ -86,6 +86,44 @@ import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
 import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
 import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
 import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+// import TwoSentenceAnswer from "./Components/Admin/";
+import ThreeSentenceAnswer from "./Components/Admin/ThreeSentenceAnswer";
+import FourSentenceAnswer from "./Components/Admin/FourSentenceAnswer";
+import FiveSentenceAnswer from "./Components/Admin/FiveSentenceAnswer";
+import OneSentenceaddAnswer from "./Components/Admin/OneSentenceaddAnswer";
+import OneSentenceeditAnswer from "./Components/Admin/ClassLKG/Onesentence/OneSentenceeditAnswer";
+import OneSentenceAnswerView from "./Components/Admin/ClassLKG/Onesentence/OneSentenceAnswerView";
+// import TwoSentenceAnswerView from "./Components/Admin/TwoSentenceAnswerView";
+import ThreeSentenceaddAnswer from "./Components/Admin/ThreeSentenceaddAnswer";
+import ThreeSentenceeditAnswer from "./Components/Admin/ThreeSentenceeditAnswer";
+import ThreeSentenceAnswerview from "./Components/Admin/ThreeSentenceAnswerview";
+import FourSentenceAnswerview from "./Components/Admin/FourSentenceAnswerview";
+import FourSentenceaddAnswer from "./Components/Admin/FourSentenceaddAnswer";
+import FourSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
+import FiveSentenceeditAnswer from "./Components/Admin/FourSentenceeditAnswer";
+import FiveSentenceAnswerview from "./Components/Admin/FiveSentenceAnswerview";
+import FiveSentenceaddAnswer from "./Components/Admin/FiveSentenceaddAnswer";
+import ReCorrectionAnswer from "./Components/Admin/ReCorrectionAnswer";
+import RecorrectionaddAnswer from "./Components/Admin/RecorrectionaddAnswer";
+import ReCorrecteditAnswer from "./Components/Admin/ReCorrecteditAnswer";
+import ReCorrectAnswerview from "./Components/Admin/ReCorrectAnswerview";
+import FiveSentenceEditAnswers from "./Components/Admin/FiveSentenceEditAnswers";
+import MatchtheFollowing from "./Components/Admin/MatchtheFollowing";
+import AddMatches from "./Components/Admin/AddMatches";
+import EditMatch from "./Components/Admin/EditMatch";
+import ViewMatch from "./Components/Admin/ViewMatch";
+import Classlkg from "./Components/Admin/ClassLKG/Onesentence/Classlkg";
+import Add from "./Components/Admin/ClassLKG/Onesentence/Add";
+import TwoSentenceeditAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceeditAnswer";
+import TwoSentenceAnswer from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswer";
+import RelationshipWord from "./Components/Admin/RelationshipWord";
+import AddRelationshipWord from "./Components/Admin/AddRelationshipWord";
+import EditRelationshipWord from "./Components/Admin/EditRelationshipWord";
+import ViewRelationshipWord from "./Components/Admin/ViewRelationshipWord";
+import OneWordQuestion from "./Components/Admin/OneWordQuestion";
+import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
+import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 import Mcq_add from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_add";
 import Mcq_Details from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_Details";
 import Mcq_edit from "./Components/Admin/MultipleChoiceQuestion.jsx/Mcq_edit";
@@ -120,12 +158,40 @@ import AddRelationshipWord from "./Components/Admin/ClassLKG/Relationship/AddRel
 import EditRelationshipWord from "./Components/Admin/ClassLKG/Relationship/EditRelationshipWord";
 import ViewRelationshipWord from "./Components/Admin/ClassLKG/Relationship/ViewRelationshipWord";
 import ReCorrecteditAnswer from "./Components/Admin/ClassLKG/Recorrect/ReCorrecteditAnswer";
+
+
+import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
+import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
+import AddPoem from "./Components/Admin/CompleteThePoem/AddPoem";
+import AddUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/AddUnderstandAnsQN";
+import AddPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/AddPoetTimePlaceAnsQn";
+import AddGrammerQuestion from "./Components/Admin/GrammerQuestion/AddGrammerQuestion";
+import DrawFigureList from "./Components/Admin/DrawFigure/DrawFigureList";
+import GraphQuestionList from "./Components/Admin/GraphQuestion/GraphQuestionList";
+import PoemList from "./Components/Admin/CompleteThePoem/PoemList";
+import UnderstandAnsQnList from "./Components/Admin/UnderstandAnsQN/UnderstandAnsQnList";
+import PoetTimePlaceAnsQnList from "./Components/Admin/PoetTimePlaceAnsQN/PoetTimePlaceAnsQnList";
+import GrammerQuestionList from "./Components/Admin/GrammerQuestion/GrammerQuestionList";
+import EditDrawFigure from "./Components/Admin/DrawFigure/EditDrawFigure";
+import ViewDrawFigure from "./Components/Admin/DrawFigure/ViewDrawFigure";
+import EditGraphQuestion from "./Components/Admin/GraphQuestion/EditGraphQuestion";
+import ViewGraphQuestion from "./Components/Admin/GraphQuestion/ViewGraphQuestion";
+import EditPoem from "./Components/Admin/CompleteThePoem/EditPoem";
+import ViewPoem from "./Components/Admin/CompleteThePoem/ViewPoem";
+import EditUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/EditUnderstandAnsQN";
+import ViewUnderstandAnsQN from "./Components/Admin/UnderstandAnsQN/ViewUnderstandAnsQN";
+import EditPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/EditPoetTimePlaceAnsQn";
+import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPoetTimePlaceAnsQn";
+import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
+import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
+import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
+        <Route
             path="/"
             exact
             element={
@@ -1352,6 +1418,334 @@ function App() {
               />
             }
           />
+
+          {/* DrawFigure */}
+          <Route
+            path="/adddrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/drawfigurelist"
+            element={
+              <Main
+                children={
+                  <>
+                    <DrawFigureList />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/editdrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewdrawfigure"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewDrawFigure />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* GraphQuestion */}
+
+          <Route
+            path="/addgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/graphquestionlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <GraphQuestionList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewgraphquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewGraphQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+          {/* Complete The Poem */}
+
+
+          <Route
+            path="/addpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddPoem />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/poemlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <PoemList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditPoem />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewpoem"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewPoem />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+          {/* Situation Understand Answers Questions */}
+
+          <Route
+            path="/addunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/understandansqnlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <UnderstandAnsQnList />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/editunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewunderstandansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewUnderstandAnsQN />
+                  </>
+                }
+              />
+            }
+          />
+
+
+          {/* Poet,Time , Place , Write the answer the question */}
+
+          <Route
+            path="/addpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/poettimeplaceansqnlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <PoetTimePlaceAnsQnList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/viewpoettimeplaceansqn"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewPoetTimePlaceAnsQn />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* Grammer Question */}
+
+          <Route
+            path="/addgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/grammerquestionlist"
+            element={
+              <Main
+                children={
+                  <>
+                    <GrammerQuestionList />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewgrammerquestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewGrammerQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+
+
+
         </Routes>
       </BrowserRouter>
     </div>
