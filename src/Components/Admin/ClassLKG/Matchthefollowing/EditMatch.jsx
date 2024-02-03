@@ -177,7 +177,7 @@ const EditMatch = () => {
               <label htmlFor=""> Question</label>
 
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -215,7 +215,7 @@ const EditMatch = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -258,6 +258,52 @@ const EditMatch = () => {
                     />
                   </div>
                 </div>
+                <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                       <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
+                  </div>
               </div>
             </Container>
 
@@ -265,7 +311,7 @@ const EditMatch = () => {
               <label htmlFor=""> Answer</label>
 
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -303,7 +349,7 @@ const EditMatch = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -341,6 +387,47 @@ const EditMatch = () => {
                     />
                   </div>
                 </div>
+                <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                       <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
+                  </div>
               </div>
             </Container>
           </div>
