@@ -119,6 +119,12 @@ import OneWordQuestion from "./Components/Admin/OneWordQuestion";
 import AddOneWordQuestion from "./Components/Admin/AddOneWordQuestion";
 import ViewOneWordQuestion from "./Components/Admin/ViewOneWordQuestion";
 import EditOneWordQuestion from "./Components/Admin/EditOneWordQuestion";
+import Classification from "./Components/Admin/Classification_QandA/Classification";
+import AddClassification from "./Components/Admin/Classification_QandA/AddClassification";
+import EditClassification from "./Components/Admin/Classification_QandA/EditClassification";
+import ViewClassification from "./Components/Admin/Classification_QandA/ViewClassification";
+import English_QP from "./Components/10th_QP_Pattern/English_QP";
+import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
 
 function App() {
   return (
@@ -230,6 +236,28 @@ function App() {
               <>
                 <Navbarr />
                 <SyllabusCopy />
+              </>
+            }
+          />
+
+          <Route
+            path="/englishqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <English_QP />
+              </>
+            }
+          />
+
+          <Route
+            path="/socialqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <Social_QP />
               </>
             }
           />
@@ -1172,7 +1200,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/addrelationshipword"
             element={
               <Main
@@ -1184,7 +1212,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/editrelationshipword"
             element={
               <Main
@@ -1196,7 +1224,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/viewrelationshipword"
             element={
               <Main
@@ -1235,7 +1263,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/editonewordquestion"
             element={
               <Main
@@ -1286,7 +1314,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmcqquestionsedit"
             element={
               <Main
@@ -1324,9 +1352,63 @@ function App() {
               />
             }
           />
-         
+
           {/* ============Passage =========== */}
+          {/* ============Classification Questions and Answer =========== */}
+          <Route
+            path="/classification"
+            element={
+              <Main
+                children={
+                  <>
+                    <Classification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/addclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewClassification />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* ============Classification Questions and Answer =========== */}
+
         </Routes>
+
+
       </BrowserRouter>
     </div>
   );

@@ -14,18 +14,13 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../Admin/Admin.css";
+import "../../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-const ThreeSentenceeditAnswer = () => {
-  const [show, setShow] = useState();
 
-  const navigate = useNavigate();
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const ViewClassification = () => {
   return (
     <div>
       <div className="box_1">
@@ -145,6 +140,7 @@ const ThreeSentenceeditAnswer = () => {
                 />
               </div>
             </div>
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Ojectives</label>
@@ -161,15 +157,14 @@ const ThreeSentenceeditAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <p className="vi_0"></p>
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <p className="vi_0"></p>
               </div>
             </div>
 
@@ -195,89 +190,21 @@ const ThreeSentenceeditAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <p className="vi_0"></p>
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <p className="vi_0"></p>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="d-flex justify-content-center">
-          <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn">Update</Button>
-          </div>
-
-          {/* <Modal
-            show={show}
-            onHide={handleClose}
-            style={{ width: "100%" }}
-            size="lg"
-          >
-            <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="container">
-                <div className="row mt-2">
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <label htmlFor="">Question</label>
-
-                      <CKEditor editor={ClassicEditor} className="vi_0" />
-                    </div>
-                  </div>
-
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <div className="do-sear mt-2">
-                        <label htmlFor="">Answer</label>
-                        <CKEditor editor={ClassicEditor} className="vi_0" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <div className="d-flex justify-content-center m-auto">
-                <div className="yoihjij text-center my-2 p-2 ">
-                  <Button className="modal-add-btn" onClick={handleShow}>
-                    Save
-                  </Button>
-                </div>
-                <div className="yoihjij text-center my-2 p-2 ">
-                  <Button
-                    className="mx-2 modal-close-btn"
-                    variant=""
-              
-                    onClick={handleClose}
-                  >
-                    Edit
-                  </Button>
-                </div>
-                <div className="yoihjij text-center my-2 p-2 ">
-                  <Button
-                    className="modal-add-btn"
-                    onClick={() => {
-                      navigate("/threesentenceanswer");
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            </Modal.Footer>
-          </Modal> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default ThreeSentenceeditAnswer;
+export default ViewClassification;

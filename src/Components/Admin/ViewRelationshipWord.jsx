@@ -141,32 +141,22 @@ const ViewRelationshipWord = () => {
                 <div className="row">
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                      />
+                      <p className="vi_0"></p>
                       <p className="m-2">:</p>
                     </div>
                   </div>
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                      />
+                      <p className="vi_0"></p>
+
                       <p className="m-2 ">::</p>
                     </div>
                   </div>
 
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                      />
+                      <p className="vi_0"></p>
+
                       <p className="m-2">:</p>
                     </div>
                   </div>
@@ -176,7 +166,7 @@ const ViewRelationshipWord = () => {
                         className=""
                         style={{
                           borderBottom: "1px solid",
-                          marginTop: "45px",
+                          marginTop: "25px",
                           marginBottom: "0px",
                         }}
                       ></p>
@@ -189,22 +179,16 @@ const ViewRelationshipWord = () => {
             <div className="col-md-3">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option A)</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter The question"
-                />
+                <p className="vi_0"></p>
+
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
             <div className="col-md-3">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option B)</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter The question"
-                />
+                <p className="vi_0"></p>
+
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -212,37 +196,23 @@ const ViewRelationshipWord = () => {
             <div className="col-md-3">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option C)</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter The question"
-                />
+                <p className="vi_0"></p>
+
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
             <div className="col-md-3">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option D)</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter The question"
-                />
+                <p className="vi_0"></p>
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
-                  <input
-                    type="text"
-                    className="vi_0"
-                    placeholder="Enter The question"
-                  />
-                </div>
+                <label htmlFor="">Answer</label>
+                <p className="vi_0"></p>
               </div>
             </div>
           </div>

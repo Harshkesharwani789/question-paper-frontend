@@ -136,33 +136,13 @@ const ViewOneWordQuestion = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <input
-                        type="text"
-                        placeholder="Enter Your Question"
-                        className="lined-input"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                      <input
-                        type="text"
-                        placeholder="Enter Your Answer"
-                        className="lined-input"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <label htmlFor="">Answer</label>
+                <p className="vi_0"></p>
               </div>
             </div>
           </div>
