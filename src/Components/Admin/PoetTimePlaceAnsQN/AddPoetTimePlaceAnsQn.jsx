@@ -278,9 +278,9 @@ function AddPoetTimePlaceAnsQn() {
   console.log(NameExam);
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -428,9 +428,9 @@ function AddPoetTimePlaceAnsQn() {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -449,8 +449,8 @@ function AddPoetTimePlaceAnsQn() {
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <label htmlFor="">Objectives</label>
               <Form.Select
                 aria-label="Default select example"
@@ -461,7 +461,7 @@ function AddPoetTimePlaceAnsQn() {
                 <option value=""></option>
                 <option value=""></option>
               </Form.Select>
-            </div>
+            </div> */}
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>

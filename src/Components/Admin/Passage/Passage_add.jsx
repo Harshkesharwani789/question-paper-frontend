@@ -288,9 +288,9 @@ const Passage_add = () => {
   }, []);
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -438,9 +438,9 @@ const Passage_add = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -459,8 +459,8 @@ const Passage_add = () => {
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Objectives</label>
               </div>{" "}
@@ -476,7 +476,7 @@ const Passage_add = () => {
                 <option>Expression</option>
                 <option>Understanding</option>
               </Form.Select>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -503,7 +503,7 @@ const Passage_add = () => {
                   addFields();
                 }}
               >
-                Add SubQuestion
+                Add Sub Question
               </button>
             </div>
             <Form onSubmit={submit()}>

@@ -16,11 +16,16 @@ import AddDrawFigure from "./DrawFigure/AddDrawFigure";
 import AddGraphQuestion from "./GraphQuestion/AddGraphQuestion";
 import AddPoem from "./CompleteThePoem/AddPoem";
 import ExpandExplain_add from "./ExpandAndExplain/ExpandExplain_add";
+import Fillintheblanks_add from "./FillInTheBlanks/Fillintheblanks_add";
+import AddPoetTimePlaceAnsQn from "./PoetTimePlaceAnsQN/AddPoetTimePlaceAnsQn";
+import AddUnderstandAnsQN from "./UnderstandAnsQN/AddUnderstandAnsQN";
+import FiveSentenceaddAnswer from "./ClassLKG/Fivesentence/FiveSentenceaddAnswer";
+import FourSentenceaddAnswer from "./ClassLKG/foursentence/FourSentenceaddAnswer";
 
 const componentMap = {
     // "Objective Questions",
     "Multiple Choice Questions": <Mcq_add />,
-    // "Fill in the Blanks Questions",
+    "Fill in the Blanks Questions":<Fillintheblanks_add/>,
     "Match the Following Questions":<AddMatches/>,
     "Recorrect the Answers Questions":<RecorrectionaddAnswer/>,
     "Odd and out words Questions":<OddandOut_add/>,
@@ -29,8 +34,8 @@ const componentMap = {
     "One Word Question":<AddOneWordQuestion/>,
     "Two  Sentence Answer Questions":<TwoSentenceaddAnswer/>,
     "Two and three Sentence Answer Questions":<ThreeSentenceaddAnswer/>,
-    // "Three and Four Sentence Answer Questions":,
-    // "Five Sentence Answer Question":,
+    "Three and Four Sentence Answer Questions":<FourSentenceaddAnswer/>,
+    "Five Sentence Answer Question":<FiveSentenceaddAnswer/>,
     "Five and Six Sentence Answer Questions":<QandA_5to6_addQandA/>,
     "Six Sentence Answer Questions":<QandA_add6Sentences/>,
     "Seven Sentence Answer Questions":<QandA_add7Sentences/>,
@@ -40,8 +45,8 @@ const componentMap = {
     "Answer the Questions and Draw the Figure Questions":<AddDrawFigure/>,
     "Graph Questions":<AddGraphQuestion/>,
     "Complete the Poem":<AddPoem/>,
-    // "Situation UnderStatnding answer Questions",
-    // "Poet,Time, Place, Writer answer questions",
+    "Situation UnderStatnding answer Questions":<AddUnderstandAnsQN/>,
+    "Poet,Time, Place, Writer answer questions":<AddPoetTimePlaceAnsQn/>,
     // "Letter Writting",
     // "Map Reading",
 
