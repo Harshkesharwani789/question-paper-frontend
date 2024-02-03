@@ -475,19 +475,7 @@ const Social_QP = () => {
                     </Row>
                   </div>
                 </div>
-                <div className="question-body ">
-                  <div>
-                    <div style={{ display: "flex", gap: "12px" }}>
-                      <p>20.</p>
-                      <p>What is the human body compared to</p>
-                    </div>
-                    <Row>
-                      <div className="ans-section mt-3">
-                        <div className="ans-line"></div>
-                      </div>
-                    </Row>
-                  </div>
-                </div>
+             
               </main>
               <div className="footer-text">
                 <footer>
@@ -507,6 +495,19 @@ const Social_QP = () => {
                 <div className="pageno">3</div>
               </header>
               <main style={{ flex: "1" }}>
+              <div className="question-body ">
+                  <div>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <p>20.</p>
+                      <p>What is the human body compared to</p>
+                    </div>
+                    <Row>
+                      <div className="ans-section mt-3">
+                        <div className="ans-line"></div>
+                      </div>
+                    </Row>
+                  </div>
+                </div>
                 <div className="question-body mb-2">
                   <div>
                     <div style={{ display: "flex", gap: "12px" }}>
@@ -1219,11 +1220,11 @@ const Social_QP = () => {
                   </Row>
                 </div>
               </main>
-              <div className="footer-text">
+              {/* <div className="footer-text">
                 <footer>
                   <div>[Turn over]</div>
                 </footer>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -158,6 +158,7 @@ import EditClassification from "./Components/Admin/Classification_QandA/EditClas
 import ViewClassification from "./Components/Admin/Classification_QandA/ViewClassification";
 import English_QP from "./Components/10th_QP_Pattern/English_QP";
 import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
+import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 
 
 
@@ -220,6 +221,16 @@ function App() {
               <>
                 <Navbarr />
                 <ExamBoard />
+              </>
+            }
+          />
+              <Route
+            path="/loginpage5"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <LoginPage5 />
               </>
             }
           />
