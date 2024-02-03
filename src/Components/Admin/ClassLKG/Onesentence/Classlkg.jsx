@@ -18,10 +18,8 @@ import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import "../../../Admin/Admin.css"
+import "../../../Admin/Admin.css";
 const Classlkg = () => {
-
-
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -88,7 +86,6 @@ const Classlkg = () => {
       setData([...data]);
     }
   };
-
 
   return (
     <div>
@@ -268,7 +265,7 @@ const Classlkg = () => {
                           <button onClick={()=> navigate("/addrelationshipword")}> RelationShip Words Questions</button>
                         
                         &nbsp;
-                        <a onClick={()=>navigate('/addgrammerquestion')}>
+                        <a onClick={() => navigate("/addgrammerquestion")}>
                           <button>Grammer Questions</button>
                         </a>
                         &nbsp;
@@ -321,28 +318,28 @@ const Classlkg = () => {
                         &nbsp;
                       </div>
                       <div className="col-md-3">
-                        <a onClick={()=>navigate('/adddrawfigure')}>
+                        <a onClick={() => navigate("/adddrawfigure")}>
                           <button>
                             Answer the Questions and Draw the Figure
                           </button>
                         </a>
                         &nbsp;
-                        <a onClick={()=>navigate('/addgraphquestion')}>
+                        <a onClick={() => navigate("/addgraphquestion")}>
                           <button>Graph Questions</button>
                         </a>{" "}
                         &nbsp;
-                        <a onClick={()=>navigate('/addpoem')}>
+                        <a onClick={() => navigate("/addpoem")}>
                           <button>Complete the Poem</button>
                         </a>
                         &nbsp;
-                        <a onClick={()=>navigate('/addunderstandansqn')}>
+                        <a onClick={() => navigate("/addunderstandansqn")}>
                           <button>
                             {" "}
                             Situation UnderStatnding answer Questions
                           </button>
                         </a>
                         &nbsp;
-                        <a onClick={()=>navigate('/addpoettimeplaceansqn')}>
+                        <a onClick={() => navigate("/addpoettimeplaceansqn")}>
                           <button>
                             Poet,Time, Place, Writer answer questions
                           </button>
@@ -515,11 +512,14 @@ const Classlkg = () => {
                           </button>
                         
                         &nbsp;
+                        <a onClick={() => navigate("/adminpassage")}>
+                          <button>Passage Reading</button>
+                        </a>{" "}
+                        &nbsp;
                       </div>
                     </div>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>

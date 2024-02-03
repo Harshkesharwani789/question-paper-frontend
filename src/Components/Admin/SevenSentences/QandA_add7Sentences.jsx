@@ -277,7 +277,7 @@ const QandA_add7Sentences = () => {
 
   return (
     <div>
-      <div className="box_1">
+      <div className="">
       <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -364,7 +364,7 @@ const QandA_add7Sentences = () => {
             </div>
           </div>
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -393,9 +393,9 @@ const QandA_add7Sentences = () => {
                   placeholder="Enter The Marks"
                 />
               </div>
-            </div>
+            </div> */}
 
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Ojectives</label>
                 <Form.Select aria-label="Default select example">
@@ -406,7 +406,7 @@ const QandA_add7Sentences = () => {
                   <option value="">Appreciation</option>
                 </Form.Select>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -1076,10 +1076,70 @@ const QandA_add7Sentences = () => {
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Time</option>
+                  <option>1/2 Mnt</option>
+                  <option>1/4 Mnt</option>
+                  <option>1 mnt</option>
+                  <option>1.30 minutes</option>
+                  <option>2 minutes</option>
+                  <option>3 minutes</option>
+                  <option>4 minutes</option>
+                  <option>5 minutes</option>
+                  <option>6 minutes</option>
+                  <option>7 minutes</option>
+                  <option>8 minutes</option>
+                  <option>9 minutes</option>
+                  <option>10 minutes</option>
+                </Form.Select>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
+        <button
+                    style={{backgroundColor:"orange"}}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        className="modal-add-btn"
+                    >
+                        Back
+                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();

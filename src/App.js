@@ -148,6 +148,7 @@ import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPo
 import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
+import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
 
 function App() {
   return (
@@ -1703,7 +1704,18 @@ function App() {
               />
             }
           />
-
+{/* ===============10th Question Paper (ENGLISH MEDIUM)=========================== */}
+<Route
+            path="/10th_QP_maths"
+            element={
+              
+                  <>
+                  <Navbarr />
+                    <Maths_Pattern />
+                  </>
+               
+            }
+          />
 
 
 

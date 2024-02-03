@@ -7,7 +7,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-const OddandOut_add = () => {
+const Passage_add = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -19,7 +19,7 @@ const OddandOut_add = () => {
 
   const handleChange = (e, editor) => {
     const data = editor.getData();
-    setQuestion(data);
+    setFormFields(data);
   };
   const handleChange1 = (e, editor) => {
     const data = editor.getData();
@@ -49,6 +49,29 @@ const OddandOut_add = () => {
     const data = editor.getData();
     setAnswer(data);
   };
+
+  const [formFields, setFormFields] = useState([{ SubQue: "" }]);
+
+  const handleFormChange = (event, index) => {
+    let data = [...formFields];
+    data[index][event.target.SubQue] = event.target.value;
+    setFormFields(data);
+  };
+  const submit = () => {
+    // e.preventDefault();
+  };
+  const addFields = () => {
+    let object = {
+      SubQue: "",
+    };
+    setFormFields([...formFields, object]);
+  };
+  const removeFields = (index) => {
+    let data = [...formFields];
+    data.splice(index, 1);
+    setFormFields(data);
+  };
+
   //post
 
   const [Board, setBoard] = useState("");
@@ -265,9 +288,9 @@ const OddandOut_add = () => {
   }, []);
   return (
     <div>
-      <div className="">
+      <div className="box_1">
         <div className="container">
-          {/* <div className="row">
+          <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -415,9 +438,9 @@ const OddandOut_add = () => {
                 </Form.Select>
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="row mt-2">
-            {/* <div className="col-md-6">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -453,18 +476,18 @@ const OddandOut_add = () => {
                 <option>Expression</option>
                 <option>Understanding</option>
               </Form.Select>
-            </div> */}
+            </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
+                <label htmlFor="">Question 1</label>
                 {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -473,130 +496,71 @@ const OddandOut_add = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
+            <div className="text-end">
+              <button
+                className="btn btn-success mt-2 "
+                onClick={() => {
+                  addFields();
+                }}
+              >
+                Add SubQuestion
+              </button>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
+            <Form onSubmit={submit()}>
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Questions</label>
+                  {formFields?.map((form, index) => {
+                    return (
+                      <div className="d-flex gap-2 mb-1">
+                        <CKEditor
+                          style={{ width: "100%" }}
+                          editor={ClassicEditor}
+                          className="vi_0"
+                          data={form.SubQue}
+                          onChange={(event) => {
+                            handleChange();
+                            handleFormChange(event, index);
+                          }}
+                          // value={form.SubQue}
+                        />
+                        <div style={{ padding: "1rem" }}>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => {
+                              removeFields(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
+
+              <div className="text-center">
+                <button className="btn btn-success" onClick={()=>{submit()}}>
+                  Submit
+                </button>
               </div>
-            </div>
+            </Form>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
                 {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                className="vi_0"
+              ></textarea> */}
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <label
-                htmlFor=""
-                style={{ display: "flex", justifyContent: "space-around" }}
-              >
-                (OR)
-              </label>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 2</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 3</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image 4</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Image Answer</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
                 />
               </div>
             </div>
@@ -653,19 +617,19 @@ const OddandOut_add = () => {
               </div>
             </div>
             {/* <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Answer Time</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter the answer time"
-                />
-              </div>
-            </div> */}
+            <div className="do-sear">
+              <label htmlFor="">Answer Time</label>
+              <input
+                type="text"
+                className="vi_0"
+                placeholder="Enter the answer time"
+              />
+            </div>
+          </div> */}
 
             {/* <div className="yoihjij my-4">
-              <button style={{ float: "right" }}>Add</button>
-            </div> */}
+            <button style={{ float: "right" }}>Add</button>
+          </div> */}
           </div>
         </div>
 
@@ -700,67 +664,112 @@ const OddandOut_add = () => {
           <Modal.Title style={{ color: "white" }}>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Question </label>
+              <p className="vi_0"></p>
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
+                <label htmlFor="">Option 1 </label>
                 <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
+                <label htmlFor="">Option 2 </label>
                 <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
+                <label htmlFor="">Option 3 </label>
                 <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                <p className="vi_0"></p>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
+                <label htmlFor="">Option 4 </label>
                 <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="">Option 5 </label>
+                <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="">Option 6 </label>
+                <p className="vi_0"></p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Answer</label>
+              <p className="vi_0"></p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              htmlFor=""
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
+              (OR)
+            </label>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Image Question</label>
+              <p className="vi_0"></p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 1 </label>
+                <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image 3</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="">Option 2 </label>
+                <p className="vi_0"></p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image 4</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="">Option 3 </label>
+                <p className="vi_0"></p>
               </div>
             </div>
-            <div className="col-md-12">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image Answer</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="">Option 4 </label>
+                <p className="vi_0"></p>
               </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 5 </label>
+                <p className="vi_0"></p>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 6 </label>
+                <p className="vi_0"></p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Image Answer</label>
+              <p className="vi_0"></p>
             </div>
           </div>
         </Modal.Body>
@@ -791,7 +800,7 @@ const OddandOut_add = () => {
               variant=""
               onClick={() => {
                 handleClose();
-                navigate(`/adminoddandout`);
+                navigate(`/adminmcqquestions`);
               }}
             >
               Delete
@@ -802,4 +811,5 @@ const OddandOut_add = () => {
     </div>
   );
 };
-export default OddandOut_add;
+
+export default Passage_add;

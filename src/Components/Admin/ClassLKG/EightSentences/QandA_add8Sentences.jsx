@@ -263,22 +263,22 @@ const QandA_add8Sentences = () => {
     getChapter();
     getNameExamination();
   }, []);
-    // Line
-    const [twoline, setTwoline] = useState(false);
-    const [threeline, setThreeline] = useState(false);
-    const [fourline, setFourline] = useState(false);
-    const [fiveline, setFiveline] = useState(false);
-    const [sixline, setSixline] = useState(false);
-    const [sevenline, setSevenline] = useState(false);
-    const [eightline, setEightline] = useState(true);
-    const [nineline, setNineline] = useState(false);
-    const [tenline, setTenline] = useState(false);
+  // Line
+  const [twoline, setTwoline] = useState(false);
+  const [threeline, setThreeline] = useState(false);
+  const [fourline, setFourline] = useState(false);
+  const [fiveline, setFiveline] = useState(false);
+  const [sixline, setSixline] = useState(false);
+  const [sevenline, setSevenline] = useState(false);
+  const [eightline, setEightline] = useState(true);
+  const [nineline, setNineline] = useState(false);
+  const [tenline, setTenline] = useState(false);
 
   return (
     <div>
-      <div className="box_1">
-      <div className="container">
-          <div className="row">
+      <div className="">
+        <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -361,9 +361,9 @@ const QandA_add8Sentences = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -372,29 +372,9 @@ const QandA_add8Sentences = () => {
                   <option value="">FA-2</option>
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
-              </div>
-            </div>
+            </div> */}
 
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Ojectives</label>
                 <Form.Select aria-label="Default select example">
@@ -405,7 +385,7 @@ const QandA_add8Sentences = () => {
                   <option value="">Appreciation</option>
                 </Form.Select>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -1075,10 +1055,40 @@ const QandA_add8Sentences = () => {
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Answer Timing</option>
+                  <option value="">5 minuts</option>
+                  <option value="">4 minuts</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
+          <button
+            style={{ backgroundColor: "orange" }}
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="modal-add-btn"
+          >
+            Back
+          </button>{" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();

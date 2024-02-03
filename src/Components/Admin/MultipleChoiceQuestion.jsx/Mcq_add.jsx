@@ -265,9 +265,9 @@ const Mcq_add = () => {
   }, []);
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -415,9 +415,9 @@ const Mcq_add = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -443,9 +443,7 @@ const Mcq_add = () => {
               </div>{" "}
               <Form.Select
                 aria-label="Default select example"
-                // onChange={(e) => {
-                //   setTypes_Question(e.target.value);
-                // }}
+               
               >
                 <option>Select the Types of the Objective</option>
                 <option>Remembering</option>
@@ -453,18 +451,12 @@ const Mcq_add = () => {
                 <option>Expression</option>
                 <option>Understanding</option>
               </Form.Select>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 1</label>
-                {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
+             
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -758,6 +750,15 @@ const Mcq_add = () => {
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
+        <button
+                    style={{backgroundColor:"orange"}}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        className="modal-add-btn"
+                    >
+                        Back
+                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();

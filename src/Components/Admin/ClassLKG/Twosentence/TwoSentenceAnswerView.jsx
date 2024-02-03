@@ -14,7 +14,7 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../../Admin.css"
+import "../../../Admin/Admin.css"
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,7 +23,7 @@ import swal from "sweetalert";
 const TwoSentenceAnswerView = () => {
   return (
     <div>
-       <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -133,10 +133,7 @@ const TwoSentenceAnswerView = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                />
+                <input type="file" className="vi_0" />
               </div>
             </div>
             <div className="col-md-6">
@@ -169,9 +166,9 @@ const TwoSentenceAnswerView = () => {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default TwoSentenceAnswerView
+export default TwoSentenceAnswerView;
