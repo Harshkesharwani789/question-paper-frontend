@@ -268,7 +268,7 @@ function AddGraphQuestion() {
   console.log(NameExam);
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
           {/* <div className="row">
             <div className="col-md-6">

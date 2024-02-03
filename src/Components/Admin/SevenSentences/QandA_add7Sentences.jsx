@@ -279,7 +279,7 @@ const QandA_add7Sentences = () => {
     <div>
       <div className="">
       <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -362,7 +362,7 @@ const QandA_add7Sentences = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
             {/* <div className="col-md-6">
               <div className="do-sear mt-2">
