@@ -276,9 +276,9 @@ const QandA_add10Sentences = () => {
 
   return (
     <div>
-      <div className="box_1">
-        <div className="container">
-          <div className="row">
+      <div className="">
+      <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -361,9 +361,9 @@ const QandA_add10Sentences = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -405,7 +405,7 @@ const QandA_add10Sentences = () => {
                   <option value="">Appreciation</option>
                 </Form.Select>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -1075,10 +1075,54 @@ const QandA_add10Sentences = () => {
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Answer Timing</option>
+                  <option value="">5 minuts</option>
+                  <option value="">4 minuts</option>
+                </Form.Select>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
+        <button
+                    style={{backgroundColor:"orange"}}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        className="modal-add-btn"
+                    >
+                        Back
+                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();
@@ -1160,7 +1204,7 @@ const QandA_add10Sentences = () => {
               variant=""
               onClick={() => {
                 handleClose();
-                navigate(`/adminquestion10sentences`);
+                navigate(`/Classlkg`);
               }}
             >
               Delete

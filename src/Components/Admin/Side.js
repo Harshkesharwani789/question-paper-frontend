@@ -46,7 +46,6 @@ import { TiTick } from "react-icons/ti";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { FaPersonCircleQuestion } from "react-icons/fa6";
 
-
 const Side = () => {
   const [question, setquestion] = useState(false);
 
@@ -80,7 +79,6 @@ const Side = () => {
   const [oddandout, setoddandout] = useState(false);
   const [mcq, setmcq] = useState(false);
   const [passage, setpassage] = useState(false);
-
 
   // Responsive sidebar
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -274,15 +272,6 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
@@ -314,16 +303,6 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
@@ -355,15 +334,6 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
@@ -395,29 +365,17 @@ const Side = () => {
                     setRecorrect(false);
                     setFivesentence(false);
                     setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">
-                    Chapters
-                  </span>
+                  <span className="ms-2">Chapters</span>
                 </li>
               </Link>
               <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
                 <li
-                  className="a-ele "
+                  className="a-ele"
                   onClick={() => {
                     setBoard(false);
                     setClass(false);
@@ -438,16 +396,6 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
@@ -479,16 +427,6 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
                   }}
                 >
                   <span>
@@ -496,6 +434,245 @@ const Side = () => {
                   </span>
                   <span className="ms-2">Blue Print</span>
                 </li>
+              </Link>
+              <Link to="#">
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setquestion(!question);
+                  }}
+                >
+                  <span>
+                    <i
+                      class="fa-solid fa-globe"
+                      style={{ fontSize: "20px" }}
+                    ></i>
+                  </span>{" "}
+                  <span>Add Questions </span>{" "}
+                  {question ? (
+                    <>
+                      {" "}
+                      <span style={{ float: "right" }}>
+                        <MdOutlineKeyboardArrowLeft />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ float: "right" }}>
+                        <MdOutlineKeyboardArrowDown />
+                      </span>
+                    </>
+                  )}
+                </li>
+              </Link>
+              <Link>
+                {question ? (
+                  <>
+                    <div className="webmanagement">
+                      <Link to="/Classlkg">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-image"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>{" "}
+                          <span className="ms-1">Class LKg</span>
+                        </li>
+                      </Link>
+                      {/* <Link to="/admin-safety-rules">
+                  <li
+                    className={`a-ele ${acc10 ? "active2" : "null"}`}
+                    onClick={() => {
+                      setacc(false);
+                      setacc1(false);
+                      setacc2(false);
+                      setacc3(false);
+                      setacc4(false);
+                      setacc5(false);
+                      setacc6(false);
+                      setacc7(false);
+                      setacc8(false);
+                      setacc9(false);
+                      setacc10(true);
+                      setacc11(false);
+                      setacc12(false);
+                      setacc13(false);
+                      setacc14(false);
+                      setacc15(false);
+                      setacc16(false);
+                      setacc17(false);
+                      setacc18(false);
+                      setacc19(false);
+                      setacc20(false);
+                      setacc21(false);
+                      setacc22(false);
+                      setacc23(false);
+                      setacc24(false);
+                      setacc25(false);
+                      setacc26(false);
+                      setacc27(false);
+                      setacc28(false);
+                      setacc29(false);
+                      setacc30(false);
+                      setacc31(false);
+                      setacc32(false);
+                      setacc33(false);
+                      setacc34(false);
+                      setacc35(false);
+                      setacc36(false);
+                      setacc37(false);
+                      setacc38(false);
+                      setacc39(false);
+                      setacc40(false);
+                      setacc41(false);
+                      setacc42(false);
+                    }}
+                  >
+                    {" "}
+                    <span>
+                      <i
+                        class="fa-solid fa-helmet-safety"
+                        style={{ fontSize: "20px" }}
+                      ></i>
+                    </span>
+                    <span className="ms-2">Safety Rules</span>
+                  </li>
+                </Link> */}
+                      <Link to="/testimonials">
+                        <li className="a-ele">
+                          <span>
+                            <MdOutlineReviews style={{ fontSize: "20px" }} />
+                          </span>
+                          <span className="ms-2">Class UKg</span>
+                        </li>
+                      </Link>
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class 1</span>
+                        </li>
+                      </Link>
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class I</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class II</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class III</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class IV</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class V</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VI</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VII</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class VIII</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class IX</span>
+                        </li>
+                      </Link>{" "}
+                      <Link to="/adminblog">
+                        <li className="a-ele">
+                          <span>
+                            <i
+                              class="fa-solid fa-blog"
+                              style={{ fontSize: "20px" }}
+                            ></i>
+                          </span>
+                          <span className="ms-2">Class X</span>
+                        </li>
+                      </Link>{" "}
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </Link>
 
               <Link to="/adminquestions" onClick={handleNavCollapse}>
@@ -624,47 +801,6 @@ const Side = () => {
                 </li>
               </Link>
 
-              <Link to="/classification" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(false);
-                    setOnesentence(true);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
-                  }}
-                >
-                  <span>
-                    <MdLooksOne style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Classification Question</span>
-                </li>
-              </Link>
               <Link to="/onesentenceanswer" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
@@ -787,7 +923,7 @@ const Side = () => {
                   <span>
                     <PiNumberSquareThreeFill style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">2 & 3 Sentence Answer </span>
+                  <span className="ms-2">3 Sentence Answer </span>
                 </li>
               </Link>
 
@@ -1323,7 +1459,6 @@ const Side = () => {
                   <span className="ms-2">Match the Following </span>
                 </li>
               </Link>
-
 
               <Link to="/admintypesofquestion" onClick={handleNavCollapse}>
                 <li

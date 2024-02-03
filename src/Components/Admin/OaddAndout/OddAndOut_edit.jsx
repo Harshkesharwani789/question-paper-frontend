@@ -364,7 +364,7 @@ const OddAndOut_edit = () => {
                     setLesson(e.target.value);
                   }}
                 >
-                  <option value="">Selete the Lesson</option>
+                  <option value="">Select the Lesson</option>
                   {weightage
                     ?.filter((ele) => Subjects == ele?.Subject)
                     ?.map((val, i) => {
