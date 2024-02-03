@@ -122,7 +122,6 @@ import EditRelationshipWord from "./Components/Admin/ClassLKG/Relationship/EditR
 import ViewRelationshipWord from "./Components/Admin/ClassLKG/Relationship/ViewRelationshipWord";
 import ReCorrecteditAnswer from "./Components/Admin/ClassLKG/Recorrect/ReCorrecteditAnswer";
 
-
 import AddDrawFigure from "./Components/Admin/DrawFigure/AddDrawFigure";
 import AddGraphQuestion from "./Components/Admin/GraphQuestion/AddGraphQuestion";
 import AddPoem from "./Components/Admin/CompleteThePoem/AddPoem";
@@ -149,6 +148,7 @@ import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQ
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
+import Map_Details from "./Components/Admin/Map/Map_Details";
 
 function App() {
   return (
@@ -174,6 +174,7 @@ function App() {
               </>
             }
           />
+          
           <Route
             path="/profile"
             element={
@@ -1240,7 +1241,6 @@ function App() {
             }
           />
 
-
           {/* One Word Question  */}
           <Route
             path="/onewordquestion"
@@ -1436,7 +1436,6 @@ function App() {
             }
           />
 
-
           {/* GraphQuestion */}
 
           <Route
@@ -1488,10 +1487,7 @@ function App() {
             }
           />
 
-
-
           {/* Complete The Poem */}
-
 
           <Route
             path="/addpoem"
@@ -1542,8 +1538,6 @@ function App() {
               />
             }
           />
-
-
 
           {/* Situation Understand Answers Questions */}
 
@@ -1598,7 +1592,6 @@ function App() {
               />
             }
           />
-
 
           {/* Poet,Time , Place , Write the answer the question */}
 
@@ -1704,23 +1697,29 @@ function App() {
               />
             }
           />
-{/* ===============10th Question Paper (ENGLISH MEDIUM)=========================== */}
-<Route
-            path="/10th_QP_maths"
+           {/* Map */}
+           <Route
+            path="/adminmap"
             element={
-              
+              <Main
+                children={
                   <>
-                  <Navbarr />
-                    <Maths_Pattern />
+                    <Map_Details />
                   </>
-               
+                }
+              />
             }
           />
-
-
-
-
-
+          {/* ===============10th Question Paper (ENGLISH MEDIUM)=========================== */}
+          <Route
+            path="/10th_QP_maths"
+            element={
+              <>
+                <Navbarr />
+                <Maths_Pattern />
+              </>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
