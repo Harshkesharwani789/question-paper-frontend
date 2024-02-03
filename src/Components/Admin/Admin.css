@@ -596,13 +596,12 @@ table thead tr th {
 .lined-input {
   outline-width: 0px;
   padding: 7px;
-  border-radius: 5px;
   width: 100%;
   border-bottom: 1px solid;
   border-left: none;
   border-right: none;
   border-top: none;
-  border-radius: none !important;
+  border-radius: 0;
 }
 
 /* Admin Panel ends */

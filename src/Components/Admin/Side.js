@@ -163,9 +163,7 @@ const Side = () => {
                   }}
                 >
                   <span>
-                    <LuAlignHorizontalJustifyStart
-                      style={{ fontSize: "20px" }}
-                    />
+                    <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
                   </span>
                   <span className="ms-2">Board </span>
                 </li>
@@ -234,6 +232,15 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
                   }}
                 >
                   <span>
@@ -957,7 +964,7 @@ const Side = () => {
                   <span>
                     <PiNumberSquareFourFill style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">4 Sentence Answer </span>
+                  <span className="ms-2">3 & 4 Sentence Answer </span>
                 </li>
               </Link>
 
@@ -1002,10 +1009,7 @@ const Side = () => {
                 </li>
               </Link>
 
-              <Link
-                to="/adminquestion5to6sentences"
-                onClick={handleNavCollapse}
-              >
+              <Link to="/adminquestion5to6sentences" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {

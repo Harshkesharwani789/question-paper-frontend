@@ -160,6 +160,17 @@ import SituationAnalysis_add from "./Components/Admin/SituationAnalysis/Situatio
 import SituationAnalysis_edit from "./Components/Admin/SituationAnalysis/SituationAnalysis_edit";
 import Objective_add from "./Components/Admin/ObjectiveType/Objective_add";
 
+
+
+import Classification from "./Components/Admin/Classification_QandA/Classification";
+import AddClassification from "./Components/Admin/Classification_QandA/AddClassification";
+import EditClassification from "./Components/Admin/Classification_QandA/EditClassification";
+import ViewClassification from "./Components/Admin/Classification_QandA/ViewClassification";
+import English_QP from "./Components/10th_QP_Pattern/English_QP";
+import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
+
+
+
 function App() {
   return (
     <div className="App">
@@ -271,6 +282,28 @@ function App() {
               <>
                 <Navbarr />
                 <SyllabusCopy />
+              </>
+            }
+          />
+
+          <Route
+            path="/englishqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <English_QP />
+              </>
+            }
+          />
+
+          <Route
+            path="/socialqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <Social_QP />
               </>
             }
           />
@@ -1391,26 +1424,50 @@ function App() {
           />
 
           {/* ============Passage =========== */}
-          {/* onesentence */}
+          {/* ============Classification Questions and Answer =========== */}
           <Route
-            path="/Classlkg"
+            path="/classification"
             element={
               <Main
                 children={
                   <>
-                    <Classlkg />
+                    <Classification />
                   </>
                 }
               />
             }
           />
           <Route
-            path="/addClasslkg"
+            path="/addclassification"
             element={
               <Main
                 children={
                   <>
-                    <Add />
+                    <AddClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewClassification />
                   </>
                 }
               />
@@ -1866,6 +1923,8 @@ function App() {
             }
           />
         </Routes>
+
+
       </BrowserRouter>
     </div>
   );

@@ -18,19 +18,19 @@ import "../../../Admin/Admin.css"
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 const FiveSentenceEditAnswers = () => {
-    const [show, setShow] = useState();
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
-        <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -174,7 +174,6 @@ const FiveSentenceEditAnswers = () => {
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
-            
             <div>
               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
@@ -186,7 +185,6 @@ const FiveSentenceEditAnswers = () => {
                 <input type="file" className="vi_0" />
               </div>
             </div>
-            
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
@@ -212,9 +210,7 @@ const FiveSentenceEditAnswers = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn">
-              Update
-            </Button>
+            <Button className="modal-add-btn">Update</Button>
           </div>
 
           {/* <Modal
@@ -281,7 +277,7 @@ const FiveSentenceEditAnswers = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FiveSentenceEditAnswers
+export default FiveSentenceEditAnswers;

@@ -264,16 +264,16 @@ const QandA_add7Sentences = () => {
     getNameExamination();
   }, []);
 
-     // Line
-     const [twoline, setTwoline] = useState(false);
-     const [threeline, setThreeline] = useState(false);
-     const [fourline, setFourline] = useState(false);
-     const [fiveline, setFiveline] = useState(false);
-     const [sixline, setSixline] = useState(false);
-     const [sevenline, setSevenline] = useState(true);
-     const [eightline, setEightline] = useState(false);
-     const [nineline, setNineline] = useState(false);
-     const [tenline, setTenline] = useState(false);
+  // Line
+  const [twoline, setTwoline] = useState(false);
+  const [threeline, setThreeline] = useState(false);
+  const [fourline, setFourline] = useState(false);
+  const [fiveline, setFiveline] = useState(false);
+  const [sixline, setSixline] = useState(false);
+  const [sevenline, setSevenline] = useState(true);
+  const [eightline, setEightline] = useState(false);
+  const [nineline, setNineline] = useState(false);
+  const [tenline, setTenline] = useState(false);
 
   return (
     <div>
@@ -1104,26 +1104,10 @@ const QandA_add7Sentences = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
-                >
-                  <option>Select the Time</option>
-                  <option>1/2 Mnt</option>
-                  <option>1/4 Mnt</option>
-                  <option>1 mnt</option>
-                  <option>1.30 minutes</option>
-                  <option>2 minutes</option>
-                  <option>3 minutes</option>
-                  <option>4 minutes</option>
-                  <option>5 minutes</option>
-                  <option>6 minutes</option>
-                  <option>7 minutes</option>
-                  <option>8 minutes</option>
-                  <option>9 minutes</option>
-                  <option>10 minutes</option>
+                <Form.Select aria-label="Default select example">
+                  <option>Answer Timing</option>
+                  <option value="">5 minuts</option>
+                  <option value="">4 minuts</option>
                 </Form.Select>
               </div>
             </div>

@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  InputGroup,
+  Modal,
+  Pagination,
+  Table,
+} from "react-bootstrap";
+import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { BiSolidEdit } from "react-icons/bi";
+import { BsSearch } from "react-icons/bs";
+import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { FaEye } from "react-icons/fa";
+import "../../Admin/Admin.css";
+import { IoSearch } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import "../../../Admin/Admin.css";
 
-const ViewOneWordQuestion = () => {
+const ViewClassification = () => {
   return (
     <div>
       <div className="box_1">
@@ -119,12 +132,6 @@ const ViewOneWordQuestion = () => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image</label>
-                <input type="file" className="vi_0" />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <input
                   type="number"
@@ -133,12 +140,60 @@ const ViewOneWordQuestion = () => {
                 />
               </div>
             </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Ojectives</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Select Objectives</option>
+                  <option>Remembering</option>
+                  <option value="">Understanding</option>
+                  <option value="">Expression</option>
+                  <option value="">Appreciation</option>
+                </Form.Select>
+              </div>
+            </div>
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
                 <p className="vi_0"></p>
               </div>
             </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <p className="vi_0"></p>
+              </div>
+            </div>
+
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 1</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 2</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <p className="vi_0"></p>
+              </div>
+            </div>
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
@@ -152,4 +207,4 @@ const ViewOneWordQuestion = () => {
   );
 };
 
-export default ViewOneWordQuestion;
+export default ViewClassification;

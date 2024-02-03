@@ -20,15 +20,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 const ThreeSentenceeditAnswer = () => {
-    const [show, setShow] = useState();
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div>
-         <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -137,15 +137,6 @@ const ThreeSentenceeditAnswer = () => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <input
                   type="number"
@@ -154,20 +145,64 @@ const ThreeSentenceeditAnswer = () => {
                 />
               </div>
             </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Ojectives</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Select Objectives</option>
+                  <option>Remembering</option>
+                  <option value="">Understanding</option>
+                  <option value="">Expression</option>
+                  <option value="">Appreciation</option>
+                </Form.Select>
+              </div>
+            </div>
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
-                </div>
+                <label htmlFor="">Answer</label>
+                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 1</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 2</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
           </div>
@@ -254,7 +289,7 @@ const ThreeSentenceeditAnswer = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ThreeSentenceeditAnswer
+export default ThreeSentenceeditAnswer;
