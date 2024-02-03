@@ -149,6 +149,16 @@ import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQ
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
 import Map_Details from "./Components/Admin/Map/Map_Details";
+import Map_add from "./Components/Admin/Map/Map_add";
+import Map_edit from "./Components/Admin/Map/Map_edit";
+import Map_view from "./Components/Admin/Map/Map_view";
+import LetterWriting_add from "./Components/Admin/LetterWriting.jsx/LetterWriting_add";
+import LetterWriting_edit from "./Components/Admin/LetterWriting.jsx/LetterWriting_edit";
+import Passage_add from "./Components/Admin/Passage/Passage_add";
+import Passage_edit from "./Components/Admin/Passage/Passage_edit";
+import SituationAnalysis_add from "./Components/Admin/SituationAnalysis/SituationAnalysis_add";
+import SituationAnalysis_edit from "./Components/Admin/SituationAnalysis/SituationAnalysis_edit";
+import Objective_add from "./Components/Admin/ObjectiveType/Objective_add";
 
 function App() {
   return (
@@ -1355,6 +1365,30 @@ function App() {
               />
             }
           />
+           <Route
+            path="/adminpassageadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminpassageedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_edit />
+                  </>
+                }
+              />
+            }
+          />
 
           {/* ============Passage =========== */}
           {/* onesentence */}
@@ -1705,6 +1739,117 @@ function App() {
                 children={
                   <>
                     <Map_Details />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmapadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmapedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_edit />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmapview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_view />
+                  </>
+                }
+              />
+            }
+          />
+            {/* Letter Writing */}
+            <Route
+            path="/adminletteradd"
+            element={
+              <Main
+                children={
+                  <>
+                    <LetterWriting_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminletteredit"
+            element={
+              <Main
+                children={
+                  <>
+                    <LetterWriting_edit />
+                  </>
+                }
+              />
+            }
+          />
+           {/* Situation Analysis*/}
+           <Route
+            path="/adminsituationanalysisadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <SituationAnalysis_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminsituationanalysisedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <SituationAnalysis_edit />
+                  </>
+                }
+              />
+            }
+          />
+          {/* Objective Type of Questions */}
+          <Route
+            path="/adminobjectiveadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Objective_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminobjectiveedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Objective_add />
                   </>
                 }
               />

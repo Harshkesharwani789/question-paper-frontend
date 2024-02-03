@@ -20,8 +20,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const Map_Details = () => {
-  const admin = JSON.parse(sessionStorage.getItem("admin"));
+const LetterWriting_Details = () => {
+    const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
   
     const [show, setShow] = useState();
@@ -202,11 +202,11 @@ const Map_Details = () => {
     </div>
     <div className="customerhead p-2 mt-4">
       <div className="d-flex justify-content-between align-items-center">
-        <h2 className="header-c ">Add Map Questions</h2>
+        <h2 className="header-c ">Add Letter Writing Questions</h2>
         <button
           className="admin-add-btn"
           onClick={() => {
-            navigate("/adminmapadd");
+            navigate("/adminletteradd");
           }}
         >
           Add Questions
@@ -255,7 +255,7 @@ const Map_Details = () => {
                     <FaEye
                       color="blue"
                       onClick={() => {
-                        navigate(`/adminmapview`);
+                        navigate(`/adminletterview`);
                       }}
                     />
                   </td>
@@ -269,7 +269,7 @@ const Map_Details = () => {
                           style={{ cursor: "pointer", fontSize: "20px" }}
                           onClick={() => {
                             setupdateQuestion();
-                            navigate("/adminmapedit");
+                            navigate("/adminletteredit");
                           }}
                         />
                       </div>
@@ -481,4 +481,4 @@ const Map_Details = () => {
   )
 }
 
-export default Map_Details
+export default LetterWriting_Details
