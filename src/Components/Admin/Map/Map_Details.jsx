@@ -202,7 +202,7 @@ const Map_Details = () => {
     </div>
     <div className="customerhead p-2 mt-4">
       <div className="d-flex justify-content-between align-items-center">
-        <h2 className="header-c ">Add Questions</h2>
+        <h2 className="header-c ">Add Map Questions</h2>
         <button
           className="admin-add-btn"
           onClick={() => {
