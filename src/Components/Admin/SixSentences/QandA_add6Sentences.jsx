@@ -266,9 +266,9 @@ const QandA_add6Sentences = () => {
     }, []);
   return (
     <div>
-    <div className="box_1">
+    <div className="">
       <div className="container">
-        <div className="row">
+        {/* <div className="row">
           <div className="col-md-6">
             <div className="do-sear mt-2">
               <label htmlFor=""> Examination Board</label>
@@ -416,9 +416,9 @@ const QandA_add6Sentences = () => {
               </Form.Select>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="row mt-2">
-          <div className="col-md-6">
+          {/* <div className="col-md-6">
             <div className="do-sear mt-2">
               <label htmlFor="">Name Of the Examination</label>
               <Form.Select
@@ -444,9 +444,7 @@ const QandA_add6Sentences = () => {
             </div>{" "}
             <Form.Select
               aria-label="Default select example"
-              // onChange={(e) => {
-              //   setTypes_Question(e.target.value);
-              // }}
+             
             >
               <option>Select the Types of the Objective</option>
               <option>Remembering</option>
@@ -454,7 +452,7 @@ const QandA_add6Sentences = () => {
               <option>Expression</option>
               <option>Understanding</option>
             </Form.Select>
-          </div>
+          </div> */}
 
           <div className="col-md-12">
             <div className="do-sear mt-2">

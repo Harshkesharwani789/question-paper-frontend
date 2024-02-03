@@ -273,9 +273,9 @@ function AddPoem() {
     const [Dash, setDash] = useState("4")
     return (
         <div>
-            <div className="box_1">
+            <div className="">
                 <div className="container">
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-md-6">
                             <div className="do-sear mt-2">
                                 <label htmlFor=""> Examination Board</label>
@@ -423,9 +423,9 @@ function AddPoem() {
                                 </Form.Select>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row mt-2">
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                             <div className="do-sear mt-2">
                                 <label htmlFor="">Name Of the Examination</label>
                                 <Form.Select
@@ -457,7 +457,7 @@ function AddPoem() {
                                 <option value=""></option>
 
                             </Form.Select>
-                        </div>
+                        </div> */}
                         <div className="col-md-12">
                             <div className="do-sear mt-2">
                                 <label htmlFor="">Question</label>
