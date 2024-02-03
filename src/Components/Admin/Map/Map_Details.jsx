@@ -206,7 +206,7 @@ const Map_Details = () => {
         <button
           className="admin-add-btn"
           onClick={() => {
-            navigate("/adminmap");
+            navigate("/adminmapadd");
           }}
         >
           Add Questions

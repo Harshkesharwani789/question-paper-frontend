@@ -31,9 +31,9 @@ const EditMatch = () => {
 
   return (
     <div>
-        <div className="box_1">
+        <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -116,9 +116,9 @@ const EditMatch = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -127,135 +127,106 @@ const EditMatch = () => {
                   <option value="">FA-2</option>
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
-                </Form.Select>
-              </div>
-            </div>
+            </div> */}
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
-              </div>
-            </div>
-            {/* <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <input type="file" className="vi_0" />
               </div>
             </div>
 
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor editor={ClassicEditor} className="vi_0" />
-                </div>
-              </div>
-            </div> */}
             <Container>
-              <label htmlFor=""> Question</label>
+              <div className="mt-2">
+                <label htmlFor=""> Question</label>
 
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="do-sear mt-2">
-                    <label htmlFor="" className="d-flex justify-content-center">
-                      {" "}
-                      PART A
-                    </label>
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Question"
-                    />
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART A
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="do-sear mt-2">
-                    <label htmlFor="" className="d-flex justify-content-center">
-                      {" "}
-                      PART B
-                    </label>
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
-                    <input
-                      type="text"
-                      className="vi_0 mb-2"
-                      placeholder="Enter Your Answer"
-                    />
+                  <div className="col-md-6">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART B
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -343,6 +314,26 @@ const EditMatch = () => {
                 </div>
               </div>
             </Container>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select aria-label="Default select example">
+                  <option>Answer Timing</option>
+                  <option value="">5 minuts</option>
+                  <option value="">4 minuts</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <input
+                  type="number"
+                  className="vi_0"
+                  placeholder="Enter The Marks"
+                />
+              </div>
+            </div>
           </div>
         </div>
 

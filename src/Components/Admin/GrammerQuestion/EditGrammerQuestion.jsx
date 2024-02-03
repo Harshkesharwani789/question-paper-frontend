@@ -272,9 +272,9 @@ function EditGrammerQuestion() {
     const [Dash, setDash] = useState("")
     return (
         <div>
-            <div className="box_1">
-                <div className="container">
-                    <div className="row">
+            <div className="">
+            <div className="container">
+                    {/* <div className="row">
                         <div className="col-md-6">
                             <div className="do-sear mt-2">
                                 <label htmlFor=""> Examination Board</label>
@@ -422,9 +422,9 @@ function EditGrammerQuestion() {
                                 </Form.Select>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row mt-2">
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                             <div className="do-sear mt-2">
                                 <label htmlFor="">Name Of the Examination</label>
                                 <Form.Select
@@ -443,8 +443,8 @@ function EditGrammerQuestion() {
                                     })}
                                 </Form.Select>
                             </div>
-                        </div>
-                        <div className="col-md-6">
+                        </div> */}
+                        {/* <div className="col-md-6">
                             <label htmlFor="">Objectives</label>
                             <Form.Select
                                 aria-label="Default select example"
@@ -456,69 +456,82 @@ function EditGrammerQuestion() {
                                 <option value=""></option>
 
                             </Form.Select>
+                        </div> */}
+
+
+
+                        <div className="col-md-3">
+                            <label htmlFor="">Dash (--)</label>
+                            <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) => setDash(e.target.value)}
+                            >
+                                <option value="">Select Dash</option>
+                                <option value="true">1</option>
+                                <option value="false">2</option>
+
+
+                            </Form.Select>
                         </div>
-                    
-                        <h3 style={{ textAlign: "center" }} className="mt-4">==: Grammer Questions :==</h3>
+                        {Dash === "true" ? (<>
+                            <div className="col-md-9 d-flex align-items-end ">
+                                <input
+                                    className="vi_0"
+                                    type="text"
+                                    placeholder="enter text"
+                                />
 
-<div className="col-md-3">
-    <label htmlFor="">Dash (--)</label>
-    <Form.Select
-        aria-label="Default select example"
-        onChange={(e) => setDash(e.target.value)}
-    >
-        <option value="">Select Dash</option>
-        <option value="true">1</option>
-        <option value="false">2</option>
+                                <span>___________</span>
 
+                                <input
+                                    className="vi_0"
+                                    type="text"
+                                    placeholder="enter text"
 
-    </Form.Select>
-</div>
-{Dash === "true" ? (<>
-    <div className="col-md-9 d-flex align-items-end ">
-        <input
-            className="vi_0"
-            type="text"
-            placeholder="enter text"
-        />
+                                />
 
-        <span>___________</span>
+                            </div>
+                        </>) : (<>
+                            <div className="col-md-9 d-flex align-items-end ">
+                                <input
+                                    className="vi_0"
+                                    type="text"
+                                    placeholder="enter text"
 
-        <input
-            className="vi_0"
-            type="text"
-            placeholder="enter text"
+                                />
 
-        />
+                                <span>___________</span>
 
-    </div>
-</>) : (<>
-    <div className="col-md-9 d-flex align-items-end ">
-        <input
-            className="vi_0"
-            type="text"
-            placeholder="enter text"
+                                <input
+                                    className="vi_0"
+                                    type="text"
+                                    placeholder="enter text"
 
-        />
+                                />
+                                <span>___________</span>
+                                <input
+                                    className="vi_0"
+                                    type="text"
+                                    placeholder="enter text"
 
-        <span>___________</span>
-
-        <input
-            className="vi_0"
-            type="text"
-            placeholder="enter text"
-
-        />
-        <span>___________</span>
-        <input
-            className="vi_0"
-            type="text"
-            placeholder="enter text"
-
-        />
-    </div>
-</>)}
+                                />
+                            </div>
+                        </>)}
 
 
+                        {/* <textarea
+                                    name=""
+                                    id=""
+                                    cols="30"
+                                    rows="5"
+                                    className="vi_0"
+                                ></textarea> */}
+                        {/* <CKEditor
+                            editor={ClassicEditor}
+                            className="vi_0"
+                            data={Question}
+                            onChange={handleChange}
+                        /> */}
 
                         {/* <div className="col-md-6">
     <div className="do-sear mt-2">
@@ -573,7 +586,7 @@ function EditGrammerQuestion() {
                             className="vi_0"
                             onChange={(e) => setImage(e.target.files[0])}
                         />
-                    </div>
+                    </div>                  
                 </div> */}
                         <div className="col-md-6">
                             <div className="do-sear mt-2">
@@ -639,9 +652,7 @@ function EditGrammerQuestion() {
 
                 <div className="yoihjij text-center my-2 p-2 ">
                     <Button
-                        onClick={() => {
-                            window.location.assign("/grammerquestionlist")
-                        }}
+                        
                         className="modal-add-btn"
                     >
                         Update

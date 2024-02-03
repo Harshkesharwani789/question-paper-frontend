@@ -272,9 +272,9 @@ const FillInTheBlanks_edit = () => {
   const [Dash, setDash] = useState("");
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -422,9 +422,9 @@ const FillInTheBlanks_edit = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -443,8 +443,8 @@ const FillInTheBlanks_edit = () => {
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <label htmlFor="">Objectives</label>
               <Form.Select
                 aria-label="Default select example"
@@ -455,11 +455,11 @@ const FillInTheBlanks_edit = () => {
                 <option value=""></option>
                 <option value=""></option>
               </Form.Select>
-            </div>
+            </div> */}
 
-            <h3 style={{ textAlign: "center" }} className="mt-4">
+            {/* <h3 style={{ textAlign: "center" }} className="mt-4">
               ==: Fill In The Blanks :==
-            </h3>
+            </h3> */}
 
             <div className="col-md-3">
               <label htmlFor="">Dash (--)</label>

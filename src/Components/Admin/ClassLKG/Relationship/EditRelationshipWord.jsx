@@ -8,11 +8,22 @@ import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 const EditRelationshipWord = () => {
+   // Line
+   const [twoline, setTwoline] = useState(false);
+   const [threeline, setThreeline] = useState(false);
+   const [fourline, setFourline] = useState(false);
+   const [fiveline, setFiveline] = useState(false);
+   const [sixline, setSixline] = useState(false);
+   const [sevenline, setSevenline] = useState(false);
+   const [eightline, setEightline] = useState(true);
+   const [nineline, setNineline] = useState(false);
+   const [tenline, setTenline] = useState(false);
+
   return (
     <div>
-      <div className="box_1">
-        <div className="container">
-          <div className="row">
+      <div className="">
+      <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -95,9 +106,9 @@ const EditRelationshipWord = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -106,33 +117,15 @@ const EditRelationshipWord = () => {
                   <option value="">FA-2</option>
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
-                </Form.Select>
-              </div>
-            </div>
+            </div> */}
+            
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image</label>
                 <input type="file" className="vi_0" />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
-              </div>
-            </div>
+           
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -243,6 +236,57 @@ const EditRelationshipWord = () => {
                     placeholder="Enter The question"
                   />
                 </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Time</option>
+                  <option>1/2 Mnt</option>
+                  <option>1/4 Mnt</option>
+                  <option>1 mnt</option>
+                  <option>1.30 minutes</option>
+                  <option>2 minutes</option>
+                  <option>3 minutes</option>
+                  <option>4 minutes</option>
+                  <option>5 minutes</option>
+                  <option>6 minutes</option>
+                  <option>7 minutes</option>
+                  <option>8 minutes</option>
+                  <option>9 minutes</option>
+                  <option>10 minutes</option>
+                </Form.Select>
               </div>
             </div>
           </div>

@@ -21,16 +21,20 @@ import AddPoetTimePlaceAnsQn from "./PoetTimePlaceAnsQN/AddPoetTimePlaceAnsQn";
 import AddUnderstandAnsQN from "./UnderstandAnsQN/AddUnderstandAnsQN";
 import FiveSentenceaddAnswer from "./ClassLKG/Fivesentence/FiveSentenceaddAnswer";
 import FourSentenceaddAnswer from "./ClassLKG/foursentence/FourSentenceaddAnswer";
+import Map_add from "./Map/Map_add";
+import Objective_add from "./ObjectiveType/Objective_add";
+import LetterWriting_add from "./LetterWriting.jsx/LetterWriting_add";
+import AddGrammerQuestion from "./GrammerQuestion/AddGrammerQuestion";
 
 const componentMap = {
-    // "Objective Questions",
+    "Objective Questions":<Objective_add/>,
     "Multiple Choice Questions": <Mcq_add />,
     "Fill in the Blanks Questions":<Fillintheblanks_add/>,
     "Match the Following Questions":<AddMatches/>,
     "Recorrect the Answers Questions":<RecorrectionaddAnswer/>,
     "Odd and out words Questions":<OddandOut_add/>,
     "RelationShip Words Questions":<AddRelationshipWord/>,
-    // "Grammer Questions",
+    "Grammer Questions":<AddGrammerQuestion/>,
     "One Word Question":<AddOneWordQuestion/>,
     "Two  Sentence Answer Questions":<TwoSentenceaddAnswer/>,
     "Two and three Sentence Answer Questions":<ThreeSentenceaddAnswer/>,
@@ -47,8 +51,8 @@ const componentMap = {
     "Complete the Poem":<AddPoem/>,
     "Situation UnderStatnding answer Questions":<AddUnderstandAnsQN/>,
     "Poet,Time, Place, Writer answer questions":<AddPoetTimePlaceAnsQn/>,
-    // "Letter Writting",
-    // "Map Reading",
+    "Letter Writting":<LetterWriting_add/>,
+    "Map Reading":<Map_add/>,
 
 
     

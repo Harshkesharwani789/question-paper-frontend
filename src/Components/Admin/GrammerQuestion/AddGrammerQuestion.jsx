@@ -460,7 +460,6 @@ function AddGrammerQuestion() {
                         </div> */}
 
 
-                        <h3 style={{ textAlign: "center" }} className="mt-4">==: Grammer Questions :==</h3>
 
                         <div className="col-md-3">
                             <label htmlFor="">Dash (--)</label>

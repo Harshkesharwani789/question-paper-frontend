@@ -149,6 +149,27 @@ import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQ
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
 import Maths_Pattern from "./Components/10th_QP_Pattern/Maths_Pattern";
 import Map_Details from "./Components/Admin/Map/Map_Details";
+import Map_add from "./Components/Admin/Map/Map_add";
+import Map_edit from "./Components/Admin/Map/Map_edit";
+import Map_view from "./Components/Admin/Map/Map_view";
+import LetterWriting_add from "./Components/Admin/LetterWriting.jsx/LetterWriting_add";
+import LetterWriting_edit from "./Components/Admin/LetterWriting.jsx/LetterWriting_edit";
+import Passage_add from "./Components/Admin/Passage/Passage_add";
+import Passage_edit from "./Components/Admin/Passage/Passage_edit";
+import SituationAnalysis_add from "./Components/Admin/SituationAnalysis/SituationAnalysis_add";
+import SituationAnalysis_edit from "./Components/Admin/SituationAnalysis/SituationAnalysis_edit";
+import Objective_add from "./Components/Admin/ObjectiveType/Objective_add";
+
+
+
+import Classification from "./Components/Admin/Classification_QandA/Classification";
+import AddClassification from "./Components/Admin/Classification_QandA/AddClassification";
+import EditClassification from "./Components/Admin/Classification_QandA/EditClassification";
+import ViewClassification from "./Components/Admin/Classification_QandA/ViewClassification";
+import English_QP from "./Components/10th_QP_Pattern/English_QP";
+import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
+
+
 
 function App() {
   return (
@@ -261,6 +282,28 @@ function App() {
               <>
                 <Navbarr />
                 <SyllabusCopy />
+              </>
+            }
+          />
+
+          <Route
+            path="/englishqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <English_QP />
+              </>
+            }
+          />
+
+          <Route
+            path="/socialqp"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <Social_QP />
               </>
             }
           />
@@ -1355,28 +1398,76 @@ function App() {
               />
             }
           />
-
-          {/* ============Passage =========== */}
-          {/* onesentence */}
-          <Route
-            path="/Classlkg"
+           <Route
+            path="/adminpassageadd"
             element={
               <Main
                 children={
                   <>
-                    <Classlkg />
+                    <Passage_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminpassageedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Passage_edit />
+                  </>
+                }
+              />
+            }
+          />
+
+          {/* ============Passage =========== */}
+          {/* ============Classification Questions and Answer =========== */}
+          <Route
+            path="/classification"
+            element={
+              <Main
+                children={
+                  <>
+                    <Classification />
                   </>
                 }
               />
             }
           />
           <Route
-            path="/addClasslkg"
+            path="/addclassification"
             element={
               <Main
                 children={
                   <>
-                    <Add />
+                    <AddClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/editclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <EditClassification />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/viewclassification"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewClassification />
                   </>
                 }
               />
@@ -1710,6 +1801,117 @@ function App() {
               />
             }
           />
+           <Route
+            path="/adminmapadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmapedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_edit />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminmapview"
+            element={
+              <Main
+                children={
+                  <>
+                    <Map_view />
+                  </>
+                }
+              />
+            }
+          />
+            {/* Letter Writing */}
+            <Route
+            path="/adminletteradd"
+            element={
+              <Main
+                children={
+                  <>
+                    <LetterWriting_add />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminletteredit"
+            element={
+              <Main
+                children={
+                  <>
+                    <LetterWriting_edit />
+                  </>
+                }
+              />
+            }
+          />
+           {/* Situation Analysis*/}
+           <Route
+            path="/adminsituationanalysisadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <SituationAnalysis_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminsituationanalysisedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <SituationAnalysis_edit />
+                  </>
+                }
+              />
+            }
+          />
+          {/* Objective Type of Questions */}
+          <Route
+            path="/adminobjectiveadd"
+            element={
+              <Main
+                children={
+                  <>
+                    <Objective_add />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminobjectiveedit"
+            element={
+              <Main
+                children={
+                  <>
+                    <Objective_add />
+                  </>
+                }
+              />
+            }
+          />
           {/* ===============10th Question Paper (ENGLISH MEDIUM)=========================== */}
           <Route
             path="/10th_QP_maths"
@@ -1721,6 +1923,8 @@ function App() {
             }
           />
         </Routes>
+
+
       </BrowserRouter>
     </div>
   );

@@ -6,12 +6,32 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+
 const EditOneWordQuestion = () => {
+  const [show, setShow] = useState();
+
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Line
+  const [oneline, setOneline] = useState(true);
+  const [twoline, setTwoline] = useState(false);
+  const [threeline, setThreeline] = useState(false);
+  const [fourline, setFourline] = useState(false);
+  const [fiveline, setFiveline] = useState(false);
+  const [sixline, setSixline] = useState(false);
+  const [sevenline, setSevenline] = useState(false);
+  const [eightline, setEightline] = useState(false);
+  const [nineline, setNineline] = useState(false);
+  const [tenline, setTenline] = useState(false);
+
   return (
     <div>
-        <div className="box_1">
-        <div className="container">
-          <div className="row">
+      <div className="">
+      <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -94,9 +114,9 @@ const EditOneWordQuestion = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -105,55 +125,784 @@ const EditOneWordQuestion = () => {
                   <option value="">FA-2</option>
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
+                <label htmlFor="">Ojectives</label>
                 <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
+                  <option>Select Objectives</option>
+                  <option>Remembering</option>
+                  <option value="">Understanding</option>
+                  <option value="">Expression</option>
+                  <option value="">Appreciation</option>
+                </Form.Select>
+              </div>
+            </div> */}
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select Number of Line</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    setOneline(selectedValue === "1");
+                    setTwoline(selectedValue === "2");
+                    setThreeline(selectedValue === "3");
+                    setFourline(selectedValue === "4");
+                    setFiveline(selectedValue === "5");
+                    setSixline(selectedValue === "6");
+                    setSevenline(selectedValue === "7");
+                    setEightline(selectedValue === "8");
+                    setNineline(selectedValue === "9");
+                    setTenline(selectedValue === "10");
+                  }}
+                >
+                  <option>Select Answer Line</option>
+                  <option
+                    value="1"
+                    onClick={() => {
+                      setOneline(true);
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    1
+                  </option>
+
+                  <option
+                    value="2"
+                    onClick={() => {
+                      setOneline(false);
+                      setTwoline(true);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    2
+                  </option>
+
+                  <option
+                    value="3"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(true);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    3
+                  </option>
+                  <option
+                    value="4"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(true);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    4
+                  </option>
+                  <option
+                    value="5"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(true);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    5
+                  </option>
+                  <option
+                    value="6"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(true);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    6
+                  </option>
+                  <option
+                    value="7"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(true);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    7
+                  </option>
+                  <option
+                    value="8"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(true);
+                      setNineline(false);
+                      setTenline(false);
+                    }}
+                  >
+                    8
+                  </option>
+                  <option
+                    value="9"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(true);
+                      setTenline(false);
+                    }}
+                  >
+                    9
+                  </option>
+                  <option
+                    value="10"
+                    onClick={() => {
+                      setTwoline(false);
+                      setThreeline(false);
+                      setFourline(false);
+                      setFiveline(false);
+                      setSixline(false);
+                      setSevenline(false);
+                      setEightline(false);
+                      setNineline(false);
+                      setTenline(true);
+                    }}
+                  >
+                    10
+                  </option>
                 </Form.Select>
               </div>
             </div>
+
+            <div className="col-8">
+              {oneline ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-5">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {twoline ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {threeline ? (
+                        <>
+                          <div className="col-md-12">
+                            <div className="do-sear mt-4">
+                              <p type="text" className="lined-input"></p>
+                            </div>
+                          </div>
+                          <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                              <p type="text" className="lined-input"></p>
+                            </div>
+                          </div>
+                          <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                              <p type="text" className="lined-input"></p>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {fourline ? (
+                            <>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-4">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-2">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-2">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-2">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {fiveline ? (
+                                <>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-4">
+                                      <p
+                                        type="text"
+                                        className="lined-input"
+                                      ></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p
+                                        type="text"
+                                        className="lined-input"
+                                      ></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p
+                                        type="text"
+                                        className="lined-input"
+                                      ></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p
+                                        type="text"
+                                        className="lined-input"
+                                      ></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p
+                                        type="text"
+                                        className="lined-input"
+                                      ></p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  {sixline ? (
+                                    <>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-4">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>{" "}
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>{" "}
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>{" "}
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>{" "}
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>{" "}
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {sevenline ? (
+                                        <>
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-4">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <>
+                                          {eightline ? (
+                                            <>
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-4">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <>
+                                              {nineline ? (
+                                                <>
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-4">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <>
+                                                  {tenline ? (
+                                                    <>
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-4">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>
+                                                    </>
+                                                  ) : (
+                                                    <></>
+                                                  )}
+                                                </>
+                                              )}
+                                            </>
+                                          )}
+                                        </>
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image</label>
+                <label htmlFor="">Image 1</label>
                 <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 2</label>
+                <input type="file" className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
               </div>
             </div>
-            <div className="col-md-12">
+            <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                        <input type="text" placeholder="Enter Your Question" className="lined-input"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                        <input type="text" placeholder="Enter Your Answer" className="lined-input"/>
-                    </div>
-                  </div>
-                </div>
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Time</option>
+                  <option>1/2 Mnt</option>
+                  <option>1/4 Mnt</option>
+                  <option>1 mnt</option>
+                  <option>1.30 minutes</option>
+                  <option>2 minutes</option>
+                  <option>3 minutes</option>
+                  <option>4 minutes</option>
+                  <option>5 minutes</option>
+                  <option>6 minutes</option>
+                  <option>7 minutes</option>
+                  <option>8 minutes</option>
+                  <option>9 minutes</option>
+                  <option>10 minutes</option>
+                </Form.Select>
               </div>
             </div>
           </div>
@@ -168,7 +917,7 @@ const EditOneWordQuestion = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default EditOneWordQuestion

@@ -21,16 +21,16 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const OneSentenceeditAnswer = () => {
-    // const [show, setShow] = useState();
+  // const [show, setShow] = useState();
 
-    // const navigate = useNavigate();
-  
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+  // const navigate = useNavigate();
+
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   return (
     <div>
-       <div className="box_1">
+      <div className="box_1">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -170,11 +170,10 @@ const OneSentenceeditAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                {/* <input type="text" placeholder="Enter Your Answer" className="lined-input"/> */}
                 <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
             </div>
-            
+
             <div>
               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
@@ -186,7 +185,6 @@ const OneSentenceeditAnswer = () => {
                 <input type="file" className="vi_0" />
               </div>
             </div>
-            
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
@@ -212,9 +210,7 @@ const OneSentenceeditAnswer = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn">
-              Update
-            </Button>
+            <Button className="modal-add-btn">Update</Button>
           </div>
 
           {/* <Modal
@@ -280,7 +276,7 @@ const OneSentenceeditAnswer = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OneSentenceeditAnswer
+export default OneSentenceeditAnswer;

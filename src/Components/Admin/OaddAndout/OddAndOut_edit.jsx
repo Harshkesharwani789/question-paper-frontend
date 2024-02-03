@@ -261,9 +261,9 @@ const OddAndOut_edit = () => {
   }, []);
   return (
     <div>
-      <div className="box_1 mb-4">
-        <div className="container">
-          <div className="row">
+      <div className=" mb-4">
+      <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -364,7 +364,7 @@ const OddAndOut_edit = () => {
                     setLesson(e.target.value);
                   }}
                 >
-                  <option value="">Select the Lesson</option>
+                  <option value="">Selete the Lesson</option>
                   {weightage
                     ?.filter((ele) => Subjects == ele?.Subject)
                     ?.map((val, i) => {
@@ -411,9 +411,9 @@ const OddAndOut_edit = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -449,7 +449,7 @@ const OddAndOut_edit = () => {
                 <option>Expression</option>
                 <option>Understanding</option>
               </Form.Select>
-            </div>
+            </div> */}
 
             <div className="col-md-6">
               <div className="do-sear mt-2">
@@ -596,6 +596,7 @@ const OddAndOut_edit = () => {
                 />
               </div>
             </div>
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
@@ -658,7 +659,13 @@ const OddAndOut_edit = () => {
               </div>
             </div> */}
 
-            <div className="yoihjij text-center my-2 p-2 ">
+            {/* <div className="yoihjij my-4">
+              <button style={{ float: "right" }}>Add</button>
+            </div> */}
+          </div>
+        </div>
+
+        <div className="yoihjij text-center my-2 p-2 ">
               <Button
                 onClick={() => {
                   //   addquestions();
@@ -668,8 +675,6 @@ const OddAndOut_edit = () => {
                 Update
               </Button>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );

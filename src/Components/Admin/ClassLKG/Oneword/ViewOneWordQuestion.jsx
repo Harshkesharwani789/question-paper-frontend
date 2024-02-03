@@ -141,9 +141,9 @@ const ViewOneWordQuestion = () => {
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                      <p className="vi_0"></p>
-                  </div>
+                <label htmlFor="">Answer</label>
+                <p className="vi_0"></p>
+              </div>
             </div>
           </div>
         </div>
