@@ -8,7 +8,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-function EditPoetTimePlaceAnsQn() {
+const Map_edit = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -281,17 +281,17 @@ function EditPoetTimePlaceAnsQn() {
       <div className="box_1">
         <div className="container">
           <div className="row">
-           
+            
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
                 {/* <textarea
-name=""
-id=""
-cols="30"
-rows="5"
-className="vi_0"
-></textarea> */}
+  name=""
+  id=""
+  cols="30"
+  rows="5"
+  className="vi_0"
+  ></textarea> */}
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -301,49 +301,49 @@ className="vi_0"
               </div>
             </div>
             {/* <div className="col-md-6">
-<div className="do-sear mt-2">
-<label htmlFor="">Option 1</label>
-<CKEditor
-editor={ClassicEditor}
-className="vi_0"
-data={Option_1}
-onChange={handleChange3}
-/>
-</div>
-</div>
-<div className="col-md-6">
-<div className="do-sear mt-2">
-<label htmlFor="">Option 2</label>
-<CKEditor
-editor={ClassicEditor}
-className="vi_0"
-data={Option_2}
-onChange={handleChange4}
-/>
-</div>
-</div>
-<div className="col-md-6">
-<div className="do-sear mt-2">
-<label htmlFor="">Option 3</label>
-<CKEditor
-editor={ClassicEditor}
-className="vi_0"
-data={Option_3}
-onChange={handleChange5}
-/>
-</div>
-</div>
-<div className="col-md-6">
-<div className="do-sear mt-2">
-<label htmlFor="">Option 4</label>
-<CKEditor
-editor={ClassicEditor}
-className="vi_0"
-data={Option_4}
-onChange={handleChange6}
-/>
-</div>
-</div> */}
+  <div className="do-sear mt-2">
+  <label htmlFor="">Option 1</label>
+  <CKEditor
+  editor={ClassicEditor}
+  className="vi_0"
+  data={Option_1}
+  onChange={handleChange3}
+  />
+  </div>
+  </div>
+  <div className="col-md-6">
+  <div className="do-sear mt-2">
+  <label htmlFor="">Option 2</label>
+  <CKEditor
+  editor={ClassicEditor}
+  className="vi_0"
+  data={Option_2}
+  onChange={handleChange4}
+  />
+  </div>
+  </div>
+  <div className="col-md-6">
+  <div className="do-sear mt-2">
+  <label htmlFor="">Option 3</label>
+  <CKEditor
+  editor={ClassicEditor}
+  className="vi_0"
+  data={Option_3}
+  onChange={handleChange5}
+  />
+  </div>
+  </div>
+  <div className="col-md-6">
+  <div className="do-sear mt-2">
+  <label htmlFor="">Option 4</label>
+  <CKEditor
+  editor={ClassicEditor}
+  className="vi_0"
+  data={Option_4}
+  onChange={handleChange6}
+  />
+  </div>
+  </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -357,16 +357,16 @@ onChange={handleChange6}
               </div>
             </div>
             {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Write the answer :</label>
-                <div>
-                  <span>_________________________________________________</span>
-                  <br />
-                  <span>_________________________________________________</span>
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Write the answer :</label>
+                  <div>
+                    <span>_________________________________________________</span>
+                    <br />
+                    <span>_________________________________________________</span>
+                  </div>
                 </div>
-              </div>
-            </div> */}
-             <div className="col-md-4">
+              </div> */}
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Number of Line</label>
                 <Form.Select
@@ -1031,8 +1031,8 @@ onChange={handleChange6}
               </div>
             </div>
             {/* <div className="yoihjij my-4">
-<button style={{ float: "right" }}>Add</button>
-</div> */}
+  <button style={{ float: "right" }}>Add</button>
+  </div> */}
           </div>
         </div>
 
@@ -1087,6 +1087,6 @@ onChange={handleChange6}
       </Modal>
     </div>
   );
-}
+};
 
-export default EditPoetTimePlaceAnsQn;
+export default Map_edit;
