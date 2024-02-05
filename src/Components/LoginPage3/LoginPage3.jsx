@@ -4,63 +4,32 @@ import Form from "react-bootstrap/Form";
 import { Button, FormLabel } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage3 = () => {
   const { state } = useLocation();
   console.log("state==>", state);
   const user = JSON.parse(sessionStorage.getItem("user"));
+
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
   const [School_Logo, setSchool_Logo] = useState("");
+  const [SchoolAddress, setSchoolAddress] = useState("");
   const [Institute_Name, setInstitute_Name] = useState("");
   const [Subject, setSubject] = useState("");
   const [Test_Date, setTest_Date] = useState("");
-  const [Size_ofthe_Question, setSize_ofthe_Question] = useState("");
+  const [Size_ofthe_Question, setSize_ofthe_Question] = useState("A4");
   // const [addgenerate, setaddgenerate] = useState("");
-  const generate = async () => {
-    try {
-      const config = {
-        url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
-        method: "put",
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          School_Logo: School_Logo,
-          Institute_Name: Institute_Name,
-          Subject: Subject,
-          Test_Date: Test_Date,
-          Size_ofthe_Question: Size_ofthe_Question,
-          id: state?._id,
-          authId: user?._id,
-        },
-      };
 
-      let res = await axios(config);
-      let am = "";
-      if (res.status == 200) am = res.data.success;
+  const schooldetails = {
+    School_Logo:School_Logo,
+    Institute_Name:Institute_Name,
+    SchoolAddress:SchoolAddress,
+    Subject:Subject,
+    Test_Date:Test_Date,
+    Size_ofthe_Question:Size_ofthe_Question
+  }
 
-      swal({
-        title: "Yeah!",
-        text: "view blue print !!!",
-        icon: "success",
-        button: "OK!",
-      });
-      navigate("/blueprint", { state: am });
-    } catch (error) {
-      console.log(error);
-      swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "OK!",
-      });
-    }
-  };
-  console.log("first", state?._id);
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
     try {
@@ -77,7 +46,7 @@ const LoginPage3 = () => {
   useEffect(() => {
     getSubject();
   }, []);
-  console.log(subject);
+
   return (
     <div>
       <div className="container p-3">
@@ -90,7 +59,7 @@ const LoginPage3 = () => {
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
-                        Welcome Amandeep Singh !{" "}
+                        Welcome  {user?.FirstName} {user?.LastName} !{" "}
                       </p>{" "}
                       <span className="fs-4" style={{ textAlign: "center" }}>
                         Start Generating Your Paper
@@ -126,6 +95,20 @@ const LoginPage3 = () => {
                       placeholder="Enter Your School / Institute Name"
                       onChange={(e) => {
                         setInstitute_Name(e.target.value);
+                      }}
+                    />
+
+                    <Form.Label
+                      className="fs-6 fw-bold mt-2 "
+                      style={{ letterSpacing: "0.5px" }}
+                    >
+                      Address Details
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Your Address Details"
+                      onChange={(e) => {
+                        setSchoolAddress(e.target.value);
                       }}
                     />
 
@@ -199,16 +182,16 @@ const LoginPage3 = () => {
                       }}
                     />
                   </Form.Group>
-                  <a href="/loginpage5" style={{textDecoration:"none"}}>
+                  <a  style={{ textDecoration: "none" }}>
                     <Button
                       style={{
                         margin: "auto",
                         display: "flex",
                         justifyContent: "center",
                         background: "green",
-                        margin: "20px auto",
+                        // margin: "20px auto",
                       }}
-                      // onClick={() => generate()}
+                      onClick={() => navigate("/loginpage5", { state: { schooldetails } })}
                     >
                       Save
                     </Button>
