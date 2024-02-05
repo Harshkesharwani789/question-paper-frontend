@@ -38,9 +38,9 @@ const AdminHeader = () => {
             <div
               className="d-flex justify-content-end mt-6"
               style={{ fontSize: "40px", padding: "18px 35px" }}
-              onClick={logOut}
+             
             >
-              <AiOutlineLogout style={{color:"#000080",cursor:"pointer"}}/>
+              <AiOutlineLogout style={{color:"#000080",cursor:"pointer"}}  onClick={logOut}/>
             </div>
           </div>
 

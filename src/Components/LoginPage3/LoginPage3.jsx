@@ -40,17 +40,16 @@ const LoginPage3 = () => {
       };
 
       let res = await axios(config);
-      let am=""
-      if (res.status == 200)
-     am= res.data.success;
-    
-        swal({
-          title: "Yeah!",
-          text: "view blue print !!!",
-          icon: "success",
-          button: "OK!",
-        });
-      navigate("/blueprint", { state:am  });
+      let am = "";
+      if (res.status == 200) am = res.data.success;
+
+      swal({
+        title: "Yeah!",
+        text: "view blue print !!!",
+        icon: "success",
+        button: "OK!",
+      });
+      navigate("/blueprint", { state: am });
     } catch (error) {
       console.log(error);
       swal({
@@ -200,19 +199,20 @@ const LoginPage3 = () => {
                       }}
                     />
                   </Form.Group>
-
-                  <Button
-                    style={{
-                      margin: "auto",
-                      display: "flex",
-                      justifyContent: "center",
-                      background: "green",
-                      margin:"20px auto",
-                    }}
-                    onClick={() => generate()}
-                  >
-                    View Blue Print
-                  </Button>
+                  <a href="/loginpage5" style={{textDecoration:"none"}}>
+                    <Button
+                      style={{
+                        margin: "auto",
+                        display: "flex",
+                        justifyContent: "center",
+                        background: "green",
+                        margin: "20px auto",
+                      }}
+                      // onClick={() => generate()}
+                    >
+                      Save
+                    </Button>
+                  </a>
                 </Form>
               </div>
             </div>

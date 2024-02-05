@@ -159,18 +159,7 @@ const FourSentenceaddAnswer = () => {
               </div>
             </div> */}
 
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Ojectives</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select Objectives</option>
-                  <option>Remembering</option>
-                  <option value="">Understanding</option>
-                  <option value="">Expression</option>
-                  <option value="">Appreciation</option>
-                </Form.Select>
-              </div>
-            </div>
+           
 
             <div className="col-md-12">
               <div className="do-sear mt-2">

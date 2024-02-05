@@ -25,6 +25,7 @@ import Map_add from "./Map/Map_add";
 import Objective_add from "./ObjectiveType/Objective_add";
 import LetterWriting_add from "./LetterWriting.jsx/LetterWriting_add";
 import AddGrammerQuestion from "./GrammerQuestion/AddGrammerQuestion";
+import SituationAnalysis_add from "./SituationAnalysis/SituationAnalysis_add";
 
 const componentMap = {
     "Objective Questions":<Objective_add/>,
@@ -49,7 +50,7 @@ const componentMap = {
     "Answer the Questions and Draw the Figure Questions":<AddDrawFigure/>,
     "Graph Questions":<AddGraphQuestion/>,
     "Complete the Poem":<AddPoem/>,
-    "Situation UnderStatnding answer Questions":<AddUnderstandAnsQN/>,
+    "Situation UnderStatnding answer Questions":<SituationAnalysis_add/>,
     "Poet,Time, Place, Writer answer questions":<AddPoetTimePlaceAnsQn/>,
     "Letter Writting":<LetterWriting_add/>,
     "Map Reading":<Map_add/>,

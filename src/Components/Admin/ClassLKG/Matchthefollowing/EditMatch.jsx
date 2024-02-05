@@ -22,16 +22,16 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const EditMatch = () => {
-    const [show, setShow] = useState();
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
-        <div className="">
+      <div className="">
         <div className="container">
           {/* <div className="row">
             <div className="col-md-6">
@@ -141,7 +141,7 @@ const EditMatch = () => {
                 <label htmlFor=""> Question</label>
 
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="do-sear mt-2">
                       <label
                         htmlFor=""
@@ -182,7 +182,7 @@ const EditMatch = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="do-sear mt-2">
                       <label
                         htmlFor=""
@@ -190,6 +190,52 @@ const EditMatch = () => {
                       >
                         {" "}
                         PART B
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
                       </label>
                       <input
                         type="text"
@@ -236,7 +282,7 @@ const EditMatch = () => {
               <label htmlFor=""> Answer</label>
 
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -274,11 +320,49 @@ const EditMatch = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
                       PART B
+                    </label>
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                    <input
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="do-sear mt-2">
+                    <label htmlFor="" className="d-flex justify-content-center">
+                      {" "}
+                      PART C
                     </label>
                     <input
                       type="text"
@@ -339,9 +423,7 @@ const EditMatch = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-            <Button className="modal-add-btn">
-              Update
-            </Button>
+            <Button className="modal-add-btn">Update</Button>
           </div>
 
           {/* <Modal
@@ -439,7 +521,7 @@ const EditMatch = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditMatch
+export default EditMatch;

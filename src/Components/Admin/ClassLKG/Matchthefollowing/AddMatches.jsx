@@ -141,7 +141,7 @@ const AddMatches = () => {
                 <label htmlFor=""> Question</label>
 
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="do-sear mt-2">
                       <label
                         htmlFor=""
@@ -182,7 +182,7 @@ const AddMatches = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="do-sear mt-2">
                       <label
                         htmlFor=""
@@ -190,6 +190,52 @@ const AddMatches = () => {
                       >
                         {" "}
                         PART B
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
                       </label>
                       <input
                         type="text"
@@ -236,7 +282,7 @@ const AddMatches = () => {
               <label htmlFor=""> Answer</label>
 
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -274,7 +320,7 @@ const AddMatches = () => {
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="do-sear mt-2">
                     <label htmlFor="" className="d-flex justify-content-center">
                       {" "}
@@ -312,6 +358,47 @@ const AddMatches = () => {
                     />
                   </div>
                 </div>
+                <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
+                      </label>
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                      />
+                    </div>
+                  </div>
               </div>
             </Container>
             <div className="col-md-6">
@@ -371,6 +458,7 @@ const AddMatches = () => {
                     <tr>
                       <th>PART A</th>
                       <th>PART B</th>
+                      <th>PART C</th>
                     </tr>
                   </thead>
 
@@ -378,30 +466,44 @@ const AddMatches = () => {
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td></td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                   </tbody>
                 </Table>
@@ -418,7 +520,9 @@ const AddMatches = () => {
                   <thead style={{ backgroundColor: "orange" }}>
                     <tr>
                       <th>PART A</th>
-                      <th>PART B</th>
+                      <th>PART B</th>    
+                      <th>PART C</th>
+
                     </tr>
                   </thead>
 
@@ -426,26 +530,37 @@ const AddMatches = () => {
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                     <tr>
                       <td>sss</td>
-                      <td>sss</td>
-                    </tr>
-                    <tr>
-                      <td>sss</td>
-                      <td>sss</td>
-                    </tr>
-                    <tr>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
+
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+
                     </tr>
                   </tbody>
                 </Table>

@@ -542,10 +542,9 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
+                  <option value="">Knowledge</option>
+                  <option value="">Appreciation</option>
+                  <option value="">Understanding</option>
                 </Form.Select>
               </div>
             </div>

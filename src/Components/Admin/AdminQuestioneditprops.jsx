@@ -25,6 +25,7 @@ import EditUnderstandAnsQN from "./UnderstandAnsQN/EditUnderstandAnsQN";
 import EditPoetTimePlaceAnsQn from "./PoetTimePlaceAnsQN/EditPoetTimePlaceAnsQn";
 import LetterWriting_edit from "./LetterWriting.jsx/LetterWriting_edit";
 import Map_edit from "./Map/Map_edit";
+import SituationAnalysis_edit from "./SituationAnalysis/SituationAnalysis_edit";
 
 const componentMap = {
     "Objective Questions":<Objective_edit/>,
@@ -49,7 +50,7 @@ const componentMap = {
     "Answer the Questions and Draw the Figure Questions":<EditDrawFigure/>,
     "Graph Questions":<EditGraphQuestion/>,
     "Complete the Poem":<EditPoem/>,
-    "Situation UnderStatnding answer Questions":<EditUnderstandAnsQN/>,
+    "Situation UnderStatnding answer Questions":<SituationAnalysis_edit/>,
     "Poet,Time, Place, Writer answer questions":<EditPoetTimePlaceAnsQn/>,
     "Letter Writting":<LetterWriting_edit/>,
     "Map Reading":<Map_edit/>,

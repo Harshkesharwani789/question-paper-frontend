@@ -335,6 +335,7 @@ const ViewMatch = () => {
                     <tr>
                       <th>PART A</th>
                       <th>PART B</th>
+                      <th>PART C</th>
                     </tr>
                   </thead>
 
@@ -342,29 +343,36 @@ const ViewMatch = () => {
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
-                    </tr>
-                    <tr>
-                      <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td>sss</td>
-                      <td>sss</td>
-                    </tr>
-                    <tr>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
                     </tr>
                     <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td></td>
+                      <td>sss</td>
                       <td>sss</td>
                     </tr>
                     
@@ -384,6 +392,7 @@ const ViewMatch = () => {
                     <tr>
                       <th>PART A</th>
                       <th>PART B</th>
+                      <th>PART C</th>
                     </tr>
                   </thead>
 
@@ -391,24 +400,30 @@ const ViewMatch = () => {
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
-                    </tr>
-                    <tr>
-                      <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td>sss</td>
-                      <td>sss</td>
-                    </tr>
-                    <tr>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>
                     <tr>
                       <td>sss</td>
                       <td>sss</td>
+                      <td>sss</td>
                     </tr>
                     <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
+                      <td>sss</td>
+                      <td>sss</td>
+                    </tr>
+                    <tr>
+                      <td>sss</td>
                       <td>sss</td>
                       <td>sss</td>
                     </tr>                 
