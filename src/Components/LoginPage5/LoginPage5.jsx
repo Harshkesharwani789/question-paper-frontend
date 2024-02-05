@@ -7,8 +7,10 @@ import swal from "sweetalert";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage5 = () => {
-  const { state } = useLocation();
-  console.log("state==>", state);
+  const location = useLocation();
+  const { schooldetails } = location.state;
+
+  console.log("schooldetails", schooldetails);
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ const LoginPage5 = () => {
           Subject: Subject,
           Test_Date: Test_Date,
           Size_ofthe_Question: Size_ofthe_Question,
-          id: state?._id,
+          // id: state?._id,
           authId: user?._id,
         },
       };
@@ -60,7 +62,7 @@ const LoginPage5 = () => {
       });
     }
   };
-  console.log("first", state?._id);
+  // console.log("first", state?._id);
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
     try {
@@ -117,40 +119,100 @@ const LoginPage5 = () => {
                         </Form.Select>
                       </div>
                     </Row> */}
+                    <div style={{textAlign:"center"}}><h5>-: School Details :-</h5></div>
                     <Row>
-                      <div className="col-12 mb-2">
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
                           style={{ letterSpacing: "0.5px" }}
                         >
-                          Exam Name
+                          School Logo :
                         </Form.Label>
-                        <Form.Select aria-label="Default select example">
-                          <option>Select Exams Name</option>
-                          <option>FA-2</option>
-                          <option>FA-3</option>
-                          <option>FA-5</option>
-                        </Form.Select>
+                        <div className="" >
+                          <img
+                          style={{width:"142px",height:"139px",borderRadius:"50%"}}
+                           src={schooldetails?.School_Logo && URL.createObjectURL(schooldetails.School_Logo)}                   
+                            alt="school logo"
+                          />
+
+                        </div>
+
+
                       </div>
                     </Row>
 
                     <Row>
-                      <div className="col-12 mb-2">
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
                           style={{ letterSpacing: "0.5px" }}
                         >
-                          Medium
+                          Institute_Name :
                         </Form.Label>
-                        <Form.Select aria-label="Default select example">
-                          <option>Select Medium</option>
-                          <option>Kannada</option>
-                          <option>English</option>
-                          <option>Hindi</option>
-                        </Form.Select>
+                        
+                        <div>                  
+                          <h6>{schooldetails?.Institute_Name}</h6>
+                      </div>
                       </div>
                     </Row>
                     <Row>
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Subject :
+                        </Form.Label>
+                        
+                        <div>                  
+                          <h6>{schooldetails?.Subject}</h6>
+                      </div>
+                      </div>
+                    </Row>
+
+                    <Row>
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Test_Date :
+                        </Form.Label>
+                        
+                        <div>                  
+                          <h6>{schooldetails?.Test_Date}</h6>
+                      </div>
+                      </div>
+                    </Row>
+                    <Row>
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          School Address :
+                        </Form.Label>
+                        
+                        <div>                  
+                          <h6>{schooldetails?.SchoolAddress}</h6>
+                      </div>
+                      </div>
+                    </Row>
+                    <Row>
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Paper Size :
+                        </Form.Label>
+                        
+                        <div>                  
+                          <h6>{schooldetails?.Size_ofthe_Question}</h6>
+                      </div>
+                      </div>
+                    </Row>
+                    {/* <Row>
                       <div className="col-12 mb-2">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
@@ -196,8 +258,8 @@ const LoginPage5 = () => {
                           <option>sixth class</option>
                         </Form.Select>
                       </div>
-                    </Row>
-
+                    </Row> */}
+{/* 
                     <Form.Label
                       className="fs-6 fw-bold"
                       style={{ letterSpacing: "0.5px" }}
@@ -212,6 +274,7 @@ const LoginPage5 = () => {
                     >
                       School / Institute Name
                     </Form.Label>
+
                     <Form.Control
                       type="text"
                       placeholder="Enter Your School / Institute Name"
@@ -252,16 +315,16 @@ const LoginPage5 = () => {
                       placeholder="Enter the 
                       Size of the Question Paper (Recommended-A4)"
                       readOnly
-                    />
+                    /> */}
                   </Form.Group>
 
                   <div className="d-flex justify-content-center">
                     <Button
-                      style={{                      
+                      style={{
                         background: "green",
                         margin: "20px",
                       }}
-                      onClick={() => generate()}
+                    
                     >
                       Submit
                     </Button>
@@ -271,20 +334,21 @@ const LoginPage5 = () => {
                         background: "gray",
                         margin: "20px",
                       }}
+                      onClick={() =>{ navigate(-1)}}
                     >
                       Edit
                     </Button>
-                    <a href="/blueprint" style={{textDecoration:"none"}}>
-                    <Button
-                      style={{
-                        background: "green",
-                        margin: "20px",
-                      }}
-                    //   onClick={() => generate()}
-                    
-                    >
-                      View Blue Print
-                    </Button>
+                    <a href="/blueprint" style={{ textDecoration: "none" }}>
+                      <Button
+                        style={{
+                          background: "green",
+                          margin: "20px",
+                        }}
+                        onClick={() => generate()}
+
+                      >
+                        View Blue Print
+                      </Button>
                     </a>
                   </div>
                 </Form>
