@@ -270,214 +270,211 @@ function EditPoem() {
     const [Dash, setDash] = useState("4");
   return (
     <div>
-    <div className="box_1">
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor=""> Examination Board</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            className="vi_0"
-                            onChange={(e) => setBoard(e.target.value)}
-                        >
-                            <option>Select the Board</option>
-                            {getboardname?.map((item, i) => {
-                                return (
-                                    <option value={item?.boardName} key={i}>
-                                        {item?.boardName}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select Medium</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => setMedium(e.target.value)}
-                        >
-                            <option>Select the Medium</option>
-                            {Mediumm?.map((item, i) => {
-                                return (
-                                    <option value={item?.mediumName} key={i}>
-                                        {item?.mediumName}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select Class</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => setClass(e.target.value)}
-                        >
-                            <option>Select the Class</option>
-                            {getclassname?.map((item, i) => {
-                                return (
-                                    <option value={item?.className} key={i}>
-                                        {item?.className}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select Sub-Class</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => setSub_Class(e.target.value)}
-                        >
-                            <option>Select the Sub-Class</option>
-                            {getaddsubclass?.map((item, i) => {
-                                return (
-                                    <option value={item?.subclassName} key={i}>
-                                        {item?.subclassName}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select Subject</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => setSubjects(e.target.value)}
-                        >
-                            <option>Select the Subject</option>
-                            {subject?.map((item, i) => {
-                                return (
-                                    <option value={item?.subjectName} key={i}>
-                                        {item?.subjectName}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Subject Part</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                                setLesson(e.target.value);
-                            }}
-                        >
-                            <option value="">Selete the Lesson</option>
-                            {weightage
-                                ?.filter((ele) => Subjects == ele?.Subject)
-                                ?.map((val, i) => {
-                                    return (
-                                        <option value={val?.Content} key={i}>
-                                            {val?.Content}
-                                        </option>
-                                    );
-                                })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select Chapter Name</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => setChapter_Name(e.target.value)}
-                        >
-                            <option>Select the Chapter Name</option>
-                            {chapters?.map((item, i) => {
-                                return (
-                                    <option value={item?.chapterName} key={i}>
-                                        {item?.chapterName}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Select the Difficulty level of Paper</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                                setDifficulty_level(e.target.value);
-                            }}
-                        >
-                            <option>Select the Difficulty level of Paper</option>
-                            <option value="Easy">Easy</option>
-                            <option value="Average">Average</option>
-                            <option value="Difficult">Difficult</option>
-                        </Form.Select>
-                    </div>
-                </div>
-            </div>
-            <div className="row mt-2">
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Name Of the Examination</label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                                setName_of_examination(e.target.value);
-                            }}
-                        >
-                            <option>Select the Name Of the Examination</option>
-                            {NameExam?.map((item, i) => {
-                                return (
-                                    <option value={item?.NameExamination} key={i}>
-                                        {item?.NameExamination}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <label htmlFor="">Objectives</label>
-                    <Form.Select
-                        aria-label="Default select example"
-                        onChange={(e) => setObjectives(e.target.value)}
-                    >
-                        <option value="">Select Objecticves</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+    <div className="">
+    <div className="container">
+                    {/* <div className="row">
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor=""> Examination Board</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    className="vi_0"
+                                    onChange={(e) => setBoard(e.target.value)}
+                                >
+                                    <option>Select the Board</option>
+                                    {getboardname?.map((item, i) => {
+                                        return (
+                                            <option value={item?.boardName} key={i}>
+                                                {item?.boardName}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select Medium</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => setMedium(e.target.value)}
+                                >
+                                    <option>Select the Medium</option>
+                                    {Mediumm?.map((item, i) => {
+                                        return (
+                                            <option value={item?.mediumName} key={i}>
+                                                {item?.mediumName}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select Class</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => setClass(e.target.value)}
+                                >
+                                    <option>Select the Class</option>
+                                    {getclassname?.map((item, i) => {
+                                        return (
+                                            <option value={item?.className} key={i}>
+                                                {item?.className}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select Sub-Class</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => setSub_Class(e.target.value)}
+                                >
+                                    <option>Select the Sub-Class</option>
+                                    {getaddsubclass?.map((item, i) => {
+                                        return (
+                                            <option value={item?.subclassName} key={i}>
+                                                {item?.subclassName}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select Subject</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => setSubjects(e.target.value)}
+                                >
+                                    <option>Select the Subject</option>
+                                    {subject?.map((item, i) => {
+                                        return (
+                                            <option value={item?.subjectName} key={i}>
+                                                {item?.subjectName}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Subject Part</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => {
+                                        setLesson(e.target.value);
+                                    }}
+                                >
+                                    <option value="">Selete the Lesson</option>
+                                    {weightage
+                                        ?.filter((ele) => Subjects == ele?.Subject)
+                                        ?.map((val, i) => {
+                                            return (
+                                                <option value={val?.Content} key={i}>
+                                                    {val?.Content}
+                                                </option>
+                                            );
+                                        })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select Chapter Name</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => setChapter_Name(e.target.value)}
+                                >
+                                    <option>Select the Chapter Name</option>
+                                    {chapters?.map((item, i) => {
+                                        return (
+                                            <option value={item?.chapterName} key={i}>
+                                                {item?.chapterName}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Select the Difficulty level of Paper</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => {
+                                        setDifficulty_level(e.target.value);
+                                    }}
+                                >
+                                    <option>Select the Difficulty level of Paper</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Average">Average</option>
+                                    <option value="Difficult">Difficult</option>
+                                </Form.Select>
+                            </div>
+                        </div>
+                    </div> */}
+                    <div className="row mt-2">
+                        {/* <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Name Of the Examination</label>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={(e) => {
+                                        setName_of_examination(e.target.value);
+                                    }}
+                                >
+                                    <option>Select the Name Of the Examination</option>
+                                    {NameExam?.map((item, i) => {
+                                        return (
+                                            <option value={item?.NameExamination} key={i}>
+                                                {item?.NameExamination}
+                                            </option>
+                                        );
+                                    })}
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="">Objectives</label>
+                            <Form.Select
+                                aria-label="Default select example"
+                                onChange={(e) => setObjectives(e.target.value)}
+                            >
+                                <option value="">Select Objecticves</option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
 
-                    </Form.Select>
-                </div>
-                <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                        <label htmlFor="">Question</label>
-                        {/* <textarea
+                            </Form.Select>
+                        </div> */}
+                        <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Question</label>
+                                {/* <textarea
         name=""
         id=""
         cols="30"
         rows="5"
         className="vi_0"
       ></textarea> */}
-                        <CKEditor
-                            editor={ClassicEditor}
-                            className="vi_0"
-                            data={Question}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
+                                <CKEditor
+                                    editor={ClassicEditor}
+                                    className="vi_0"
+                                    data={Question}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
 
-
-
-
-                <div className="col-md-5">
+                        <div className="col-md-5">
                             <div className="do-sear mt-2">
                                 <label htmlFor="">  Poem </label>
                                 <Form.Select
@@ -598,10 +595,11 @@ function EditPoem() {
                                 </div>
                             </div>
                         </>) : (<> </>)}
+                  
 
 
 
-                {/* <div className="col-md-6">
+                        {/* <div className="col-md-6">
     <div className="do-sear mt-2">
       <label htmlFor="">Option 1</label>
       <CKEditor
@@ -646,68 +644,89 @@ function EditPoem() {
     </div>
   </div> */}
 
-              
-                <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                        <label htmlFor=""> Marks</label>
-                        <Form.Select
-                            onChange={(e) => setMarks(e.target.value)}
-                        >
-                            <option value="">Select Marks</option>
-                            <option value="">1/2</option>
-                            <option value="">1/4</option>
-                            <option value="">1/3</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">10</option>
-                        </Form.Select>
-                    </div>
-                </div>
-                <div className="col-md-6">
+                        {/* <div className="col-md-6">
                     <div className="do-sear">
-                        <label htmlFor="">Answer Time</label>
-                        <Form.Select>
-                            <option value="">1/2 Mnt</option>
-                            <option value="">1/4 Mnt</option>
-                            <option value="">1 Mnt</option>
-                            <option value="">1.30 minutes</option>
-                            <option value="">1 minutes</option>
-                            <option value="">2 minutes</option>
-                            <option value="">3 minutes</option>
-                            <option value="">4 minutes</option>
-                            <option value=""> 5 minutes</option>
-                            <option value="">6 minutes</option>
-                            <option value=""> 7 minutes</option>
-                            <option value=""> 8 minutes</option>
-                            <option value=""> 9 minutes</option>
-                            <option value="">10 minutes</option>
-                        </Form.Select>
+                        <label htmlFor="">Image</label>
+                        <input
+                            type="file"
+                            className="vi_0"
+                            onChange={(e) => setImage(e.target.files[0])}
+                        />
                     </div>
-                </div>
-                <div className="col-md-12">
-                    <div className="do-sear mt-2">
-                        <div className="do-sear mt-2">
-                            <label htmlFor="">Answer</label>
-                            <CKEditor
-                                editor={ClassicEditor}
-                                className="vi_0"
-                                data={Answer}
-                                onChange={handleChange7}
-                            />
+                </div> */}
+
+                        {/* <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor="">Write The Poem</label>
+                                <CKEditor
+                                    editor={ClassicEditor}
+                                    className="vi_0"
+                                    data={Option_1}
+                                    onChange={handleChange3}
+                                />
+                            </div>
+                        </div> */}
+                        <div className="col-md-6">
+                            <div className="do-sear mt-2">
+                                <label htmlFor=""> Marks</label>
+                                <Form.Select
+                                    onChange={(e) => setMarks(e.target.value)}
+                                >
+                                    <option value="">Select Marks</option>
+                                    <option value="">1/2</option>
+                                    <option value="">1/4</option>
+                                    <option value="">1/3</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                    <option value="">6</option>
+                                    <option value="">7</option>
+                                    <option value="">8</option>
+                                    <option value="">10</option>
+                                </Form.Select>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {/* <div className="yoihjij my-4">
+                        <div className="col-md-6">
+                            <div className="do-sear">
+                                <label htmlFor="">Answer Time</label>
+                                <Form.Select>
+                                    <option value="">1/2 Mnt</option>
+                                    <option value="">1/4 Mnt</option>
+                                    <option value="">1 Mnt</option>
+                                    <option value="">1.30 minutes</option>
+                                    <option value="">1 minutes</option>
+                                    <option value="">2 minutes</option>
+                                    <option value="">3 minutes</option>
+                                    <option value="">4 minutes</option>
+                                    <option value=""> 5 minutes</option>
+                                    <option value="">6 minutes</option>
+                                    <option value=""> 7 minutes</option>
+                                    <option value=""> 8 minutes</option>
+                                    <option value=""> 9 minutes</option>
+                                    <option value="">10 minutes</option>
+                                </Form.Select>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                                <div className="do-sear mt-2">
+                                    <label htmlFor="">Answer</label>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        className="vi_0"
+                                        data={Answer}
+                                        onChange={handleChange7}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div className="yoihjij my-4">
     <button style={{ float: "right" }}>Add</button>
   </div> */}
-            </div>
-        </div>
+                    </div>
+                </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
             <Button

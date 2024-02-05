@@ -14,15 +14,13 @@ import moment from "moment";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
-import "../../Admin.css";
+import "../../../Admin/Admin.css"
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-
 const TwoSentenceAnswer = () => {
-
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -88,7 +86,7 @@ const TwoSentenceAnswer = () => {
 
   return (
     <div>
-         <div className="col-lg-4 d-flex justify-content-center">
+      <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
             <BsSearch />
@@ -210,7 +208,7 @@ const TwoSentenceAnswer = () => {
         </Modal.Footer>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default TwoSentenceAnswer
+export default TwoSentenceAnswer;
