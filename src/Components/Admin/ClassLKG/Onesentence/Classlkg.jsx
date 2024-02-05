@@ -236,7 +236,7 @@ const Classlkg = () => {
                   <div className="container">
                     <div className="row">
                       <div className="col-md-3">
-                        <a href="">
+                        <a onClick={()=>navigate('/addobjectivequestion')}>
                           <button> Objective Questions</button>
                         </a>
                         &nbsp;

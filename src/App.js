@@ -149,13 +149,15 @@ import ViewPoetTimePlaceAnsQn from "./Components/Admin/PoetTimePlaceAnsQN/ViewPo
 import EditGrammerQuestion from "./Components/Admin/GrammerQuestion/EditGrammerQuestion";
 import ViewGrammerQuestion from "./Components/Admin/GrammerQuestion/ViewGrammerQuestion";
 import TwoSentenceAnswerView from "./Components/Admin/ClassLKG/Twosentence/TwoSentenceAnswerView";
+import AddObjectiveQuestion from "./Components/Admin/ObjectiveQuestion/AddObjectiveQuestion";
+
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-        <Route
+          <Route
             path="/"
             exact
             element={
@@ -1203,7 +1205,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/addrelationshipword"
             element={
               <Main
@@ -1215,7 +1217,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/editrelationshipword"
             element={
               <Main
@@ -1227,7 +1229,7 @@ function App() {
               />
             }
           />
-            <Route
+          <Route
             path="/viewrelationshipword"
             element={
               <Main
@@ -1266,7 +1268,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/editonewordquestion"
             element={
               <Main
@@ -1317,7 +1319,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmcqquestionsedit"
             element={
               <Main
@@ -1355,7 +1357,7 @@ function App() {
               />
             }
           />
-         
+
           {/* ============Passage =========== */}
           {/* onesentence */}
           <Route
@@ -1705,7 +1707,24 @@ function App() {
             }
           />
 
+          {/* Objective Question  */}
 
+          <Route
+            path="/addobjectivequestion"
+            element={
+              <Main
+                children={
+                  <>
+                    <AddObjectiveQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+
+
+        
 
 
 
