@@ -131,4 +131,10 @@ h6 {
   .englishqp-page-body {
     margin: 14px 10px;
   }
+  .footer-text {
+    position: absolute;
+    bottom: -4px;
+    right: 10px;
+}
+
 }
