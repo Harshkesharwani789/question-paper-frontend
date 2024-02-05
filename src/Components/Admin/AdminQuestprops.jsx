@@ -26,6 +26,8 @@ import Objective_add from "./ObjectiveType/Objective_add";
 import LetterWriting_add from "./LetterWriting.jsx/LetterWriting_add";
 import AddGrammerQuestion from "./GrammerQuestion/AddGrammerQuestion";
 import SituationAnalysis_add from "./SituationAnalysis/SituationAnalysis_add";
+import AddClassification from "./Classification_QandA/AddClassification";
+import Add from "./ClassLKG/Onesentence/Add";
 
 const componentMap = {
     "Objective Questions":<Objective_add/>,
@@ -34,6 +36,8 @@ const componentMap = {
     "Match the Following Questions":<AddMatches/>,
     "Recorrect the Answers Questions":<RecorrectionaddAnswer/>,
     "Odd and out words Questions":<OddandOut_add/>,
+    "Classifications of Questions":<AddClassification/>,
+    "One Sentence Answer Question":<Add/>,
     "RelationShip Words Questions":<AddRelationshipWord/>,
     "Grammer Questions":<AddGrammerQuestion/>,
     "One Word Question":<AddOneWordQuestion/>,

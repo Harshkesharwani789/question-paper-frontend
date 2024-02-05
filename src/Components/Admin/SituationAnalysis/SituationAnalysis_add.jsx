@@ -288,7 +288,7 @@ const SituationAnalysis_add = () => {
   }, []);
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -306,6 +306,26 @@ const SituationAnalysis_add = () => {
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 1</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  placeholder="Enter the answer time"
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Image 2</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  placeholder="Enter the answer time"
                 />
               </div>
             </div>

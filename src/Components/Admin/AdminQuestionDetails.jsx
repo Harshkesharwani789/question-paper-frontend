@@ -463,6 +463,7 @@ const AdminQuestionDetails = () => {
                 </option>
                 <option value="Grammer Questions">Grammer Questions</option>
                 <option value="One Word Question">One Word Question</option>
+                <option value="One Sentence Answer Question">One Sentence Answer Question</option>
                 <option value="Two  Sentence Answer Questions">
                   Two Sentence Answer Questions
                 </option>
@@ -472,9 +473,9 @@ const AdminQuestionDetails = () => {
                 <option value="Three and Four Sentence Answer Questions">
                   Three and Four Sentence Answer Questions
                 </option>
-                <option value="Five Sentence Answer Questions">
+                {/* <option value="Five Sentence Answer Questions">
                   Five Sentence Answer Questions
-                </option>
+                </option> */}
                 <option value="Five and Six Sentence Answer Questions">
                   Five and Six Sentence Answer Questions
                 </option>

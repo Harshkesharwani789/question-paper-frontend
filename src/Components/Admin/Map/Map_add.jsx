@@ -299,29 +299,19 @@ const Map_add = () => {
                 />
               </div>
             </div>
-            {/* <div className="col-md-6">
+           <div className="col-md-6">
       <div className="do-sear mt-2">
-        <label htmlFor="">Option 1</label>
-        <CKEditor
-          editor={ClassicEditor}
-          className="vi_0"
-          data={Option_1}
-          onChange={handleChange3}
-        />
+        <label htmlFor="">Image 1</label>
+        <input type="file" className="vi_0" />
       </div>
     </div>
     <div className="col-md-6">
-      <div className="do-sear mt-2">
-        <label htmlFor="">Option 2</label>
-        <CKEditor
-          editor={ClassicEditor}
-          className="vi_0"
-          data={Option_2}
-          onChange={handleChange4}
-        />
+    <div className="do-sear mt-2">
+        <label htmlFor="">Image 2</label>
+        <input type="file" className="vi_0" />
       </div>
     </div>
-    <div className="col-md-6">
+    {/* <div className="col-md-6">
       <div className="do-sear mt-2">
         <label htmlFor="">Option 3</label>
         <CKEditor
@@ -331,8 +321,8 @@ const Map_add = () => {
           onChange={handleChange5}
         />
       </div>
-    </div>
-    <div className="col-md-6">
+    </div> */}
+    {/* <div className="col-md-6">
       <div className="do-sear mt-2">
         <label htmlFor="">Option 4</label>
         <CKEditor
@@ -342,7 +332,7 @@ const Map_add = () => {
           onChange={handleChange6}
         />
       </div>
-    </div> */}
+    </div> */} 
 
             <div className="col-md-12">
               <div className="do-sear mt-2">

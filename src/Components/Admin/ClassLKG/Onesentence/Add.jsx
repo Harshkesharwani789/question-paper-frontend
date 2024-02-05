@@ -42,9 +42,9 @@ const Add = () => {
 
   return (
     <div>
-      <div className="box_1">
+      <div className="">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -127,9 +127,9 @@ const Add = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select aria-label="Default select example">
@@ -138,7 +138,7 @@ const Add = () => {
                   <option value="">FA-2</option>
                 </Form.Select>
               </div>
-            </div>
+            </div> */}
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
@@ -160,7 +160,7 @@ const Add = () => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Ojectives</label>
                 <Form.Select aria-label="Default select example">
@@ -171,7 +171,7 @@ const Add = () => {
                   <option value="">Appreciation</option>
                 </Form.Select>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -893,7 +893,6 @@ const Add = () => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-          twosenteceanswer
             <Button className="modal-add-btn" onClick={handleShow}>
               Save
             </Button>
