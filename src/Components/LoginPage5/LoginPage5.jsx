@@ -102,7 +102,7 @@ const LoginPage5 = () => {
               <div className="col-md-12 yoihjij ">
                 <Form className="pe-2 pt-3">
                   <Form.Group controlId="formFile" className="mb-2">
-                    <Row>
+                    {/* <Row>
                       <div className="col-12 mb-2">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
@@ -116,7 +116,7 @@ const LoginPage5 = () => {
                           <option>STATE</option>
                         </Form.Select>
                       </div>
-                    </Row>
+                    </Row> */}
                     <Row>
                       <div className="col-12 mb-2">
                         <Form.Label
