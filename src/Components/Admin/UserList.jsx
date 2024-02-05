@@ -6,6 +6,7 @@ import "../Admin/Admin.css";
 import { BsSearch } from "react-icons/bs";
 import axios from "axios";
 import swal from "sweetalert";
+import moment from "moment";
 
 const UserList = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -206,7 +207,7 @@ const UserList = () => {
                       <td>
                         {item?.FirstName} {item?.LastName}
                       </td>
-                      <td>{item?.Date}</td>
+                      <td>{moment(item?.createdAt)?.format("DD/MM/YYYY")}</td>
                       <td>{item?.Mobile}</td>
                       <td>{item?.Email}</td>
 
