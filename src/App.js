@@ -170,6 +170,7 @@ import English_QP from "./Components/10th_QP_Pattern/English_QP";
 import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
 import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 import Science10th from "./Components/10th_QP_Pattern/Science10th";
+import AdminObjectives from "./Components/Admin/AdminObjectives";
 
 
 
@@ -1466,6 +1467,18 @@ function App() {
                 children={
                   <>
                     <AddClassification />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/adminobjectives"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminObjectives />
                   </>
                 }
               />

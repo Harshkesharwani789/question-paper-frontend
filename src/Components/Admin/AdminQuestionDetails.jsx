@@ -265,10 +265,11 @@ const AdminQuestionDetails = () => {
   console.log(NameExam);
   return (
     <div>
+      
       <div className="box_1">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Section</label>
                 <input
@@ -281,7 +282,7 @@ const AdminQuestionDetails = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
                 <Form.Select
@@ -300,7 +301,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Medium</label>
                 <Form.Select
@@ -318,7 +319,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Class</label>
                 <Form.Select
@@ -336,7 +337,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Sub-Class</label>
                 <Form.Select
@@ -354,7 +355,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Subject</label>
                 <Form.Select
@@ -372,7 +373,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Lesson</label>
                 <Form.Select
@@ -394,7 +395,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Chapter Name</label>
                 <Form.Select
@@ -412,9 +413,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Difficulty level of Paper</label>
                 <Form.Select
@@ -430,7 +429,41 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Name Of the Examination</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setName_of_examination(e.target.value);
+                  }}
+                >
+                  <option>Select the Name Of the Examination</option>
+                  {NameExam?.map((item, i) => {
+                    return (
+                      <option value={item?.NameExamination} key={i}>
+                        {item?.NameExamination}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Objectives</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setObjectives(e.target.value)}
+                >
+                  <option>Select Objectives</option>
+                  <option value="">Knowledge</option>
+                  <option value="">Appreciation</option>
+                  <option value="">Understanding</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>
               </div>{" "}
@@ -447,8 +480,12 @@ const AdminQuestionDetails = () => {
                 <option value="Multiple Choice Questions">
                   Multiple Choice Questions
                 </option>
-                <option value="Fill in the Blanks Questions">Fill in the Blanks</option>
-                <option value="Match the Following Questions">Match the Following</option>
+                <option value="Fill in the Blanks Questions">
+                  Fill in the Blanks
+                </option>
+                <option value="Match the Following Questions">
+                  Match the Following
+                </option>
                 <option value="Recorrect the Answers Questions">
                   Recorrect the Answers
                 </option>
@@ -463,7 +500,9 @@ const AdminQuestionDetails = () => {
                 </option>
                 <option value="Grammer Questions">Grammer Questions</option>
                 <option value="One Word Question">One Word Question</option>
-                <option value="One Sentence Answer Question">One Sentence Answer Question</option>
+                <option value="One Sentence Answer Question">
+                  One Sentence Answer Question
+                </option>
                 <option value="Two  Sentence Answer Questions">
                   Two Sentence Answer Questions
                 </option>
@@ -515,56 +554,22 @@ const AdminQuestionDetails = () => {
                 <option value=""></option> */}
               </Form.Select>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Name Of the Examination</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setName_of_examination(e.target.value);
-                  }}
-                >
-                  <option>Select the Name Of the Examination</option>
-                  {NameExam?.map((item, i) => {
-                    return (
-                      <option value={item?.NameExamination} key={i}>
-                        {item?.NameExamination}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear">
+              <label htmlFor="">Instructions</label>
+              <CKEditor
+                editor={ClassicEditor}
+                className="vi_0"
+                data={Instruction}
+                onChange={handleChange2}
+              />
             </div>
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Objectives</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setObjectives(e.target.value)}
-                >
-                  <option>Select Objectives</option>
-                  <option value="">Knowledge</option>
-                  <option value="">Appreciation</option>
-                  <option value="">Understanding</option>
-                </Form.Select>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear">
-                <label htmlFor="">Instructions</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Instruction}
-                  onChange={handleChange2}
-                />
-              </div>
-            </div>
-            <div className="col-md-12 mt-3">
-              <AdminQuestprops Types_Question={Types_Question} />
-            </div>
-            {/* <div className="col-md-12">
+          </div>
+          <div className="col-md-12 mt-3">
+            <AdminQuestprops Types_Question={Types_Question} />
+          </div>
+          {/* <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
                 
@@ -576,7 +581,7 @@ const AdminQuestionDetails = () => {
                 />
               </div>
             </div> */}
-            {/* <div className="col-md-6">
+          {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
                 <CKEditor
@@ -655,7 +660,6 @@ const AdminQuestionDetails = () => {
                 </div>
               </div>
             </div> */}
-          </div>
         </div>
 
         {/* <div className="yoihjij text-center my-2 p-2 ">
