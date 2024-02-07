@@ -91,6 +91,9 @@ const AdminEditQuestionDetails = () => {
   const [Question, setQuestion] = useState("");
   const [ImageAns, setImageAns] = useState("");
   const [Answer, setAnswer] = useState("");
+  const [Dash, setDash] = useState("4")
+  const [PoemSat, setPoemSat] = useState("");
+  const [PoemEnd, setPoemEnd] = useState("");
 
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
@@ -123,6 +126,9 @@ const AdminEditQuestionDetails = () => {
       setMarks(question_details.Marks || '')
       setAnswer_Time(question_details.Answer_Time || '')
       setAnswer(question_details.Answer || '')
+      setDash(question_details.NumberOfLine || '')
+      setPoemSat(question_details.PoemSt || '')
+      setPoemEnd(question_details.PoemEnd || '')
     }
 
 
@@ -255,18 +261,18 @@ const AdminEditQuestionDetails = () => {
 
 
   const UpdateQuestion = async () => {
-  
+
     try {
       const config = {
-        url: "/admin/UpdateQuestionPaper" ,
+        url: "/admin/UpdateQuestionPaper",
         method: "put",
         baseURL: "http://localhost:8000/api",
         headers: {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        data:{
-          Section :section,
+        data: {
+          Section: section,
           Board: Board,
           Medium: Medium,
           Class: Class,
@@ -276,15 +282,21 @@ const AdminEditQuestionDetails = () => {
           Chapter_Name: Chapter_Name,
           Difficulty_level: Difficulty_level,
           Name_of_examination: Name_of_examination,
-          Objectives: Objectives,          
+          Objectives: Objectives,
           Instruction: Instruction,
-          Question:Question,
-          Image_Ans:ImageAns,
-          Marks:Marks,
-          Answer_Time:Answer_Time,
-          Answer:Answer,
-          id:question_details?._id,
-          authId:admin?._id
+
+
+          Question: Question,
+          Image_Ans: ImageAns,
+          Marks: Marks,
+          Answer_Time: Answer_Time,
+          Answer: Answer,
+
+          PoemSt: PoemSat,
+          PoemEnd: PoemEnd,
+
+          id: question_details?._id,
+          authId: admin?._id
         }
       };
       let res = await axios(config);
@@ -551,9 +563,6 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
-            {/* <div className="col-md-12 mt-3">
-              <AdminQuestioneditprops Types_Question={Types_Question} />
-            </div> */}
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -566,7 +575,10 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
-            {question_details.Image_Ans ? (
+
+            {/* Answer  The Question Draw The Figure */}
+
+            {question_details?.Image_Ans ? (
               <div className="col-md-6">
                 <div className="do-sear">
                   <label htmlFor="">Answer Image</label>
@@ -576,7 +588,7 @@ const AdminEditQuestionDetails = () => {
                       src={ImageAns
                         ?
                         ImageAns && URL.createObjectURL(ImageAns) :
-                        `http://localhost:8000/Questions/${question_details.Image_Ans}`
+                        `http://localhost:8000/Questions/${question_details?.Image_Ans}`
                       }
                       alt="Ans_fig"
                     />
@@ -598,8 +610,144 @@ const AdminEditQuestionDetails = () => {
               </div>
             ) : ("")}
 
+            {/* Complete The Poem */}
+            <div className="col-md-5">
+              <div className="do-sear mt-2">
+                <label htmlFor="">  Poem Line </label>
+                <Form.Select
+                  value={Dash}
+                  className="vi_0"
+                  onChange={(e) => setDash(e.target.value)}
+                >
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                </Form.Select>
+              </div>
+            </div>
 
-         
+            {Dash === "4" ? (<>
+              <div className="col-md-7">
+                <label htmlFor=""> Write Poem </label>
+                <div className="d-flex align-items-end">
+
+                  <input
+                    value={PoemSat}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemSat(e.target.value)}
+                  />
+                  <div className="ans-line mb-3 mt-2"></div>
+                </div>
+
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+
+                <div className="d-flex align-items-end">
+
+
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <input
+                    value={PoemEnd}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemEnd(e.target.value)}
+                  />
+                </div>
+              </div>
+            </>) : (<> </>)}
+            {Dash === "5" ? (<>
+              <div className="col-md-7">
+                <label htmlFor=""> Write Poem </label>
+                <div className="d-flex align-items-end">
+                  <input
+                    value={PoemSat}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemSat(e.target.value)}
+
+                  />
+                  <div className="ans-line mb-3 mt-2"></div>
+                </div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="d-flex align-items-end">
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <input
+                    className="vi_0"
+                    value={PoemEnd}
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemEnd(e.target.value)}
+                  />
+                </div>
+              </div>
+            </>) : (<> </>)}
+            {Dash === "6" ? (<>
+              <div className="col-md-7">
+                <label htmlFor=""> Write Poem </label>
+                <div className="d-flex align-items-end">
+                  <input
+                    value={PoemSat}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemSat(e.target.value)}
+                  />
+                  <div className="ans-line mb-3 mt-2"></div>
+                </div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="d-flex align-items-end">
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <input
+                    value={PoemEnd}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemEnd(e.target.value)}
+                  />
+                </div>
+              </div>
+            </>) : (<> </>)}
+            {Dash === "7" ? (<>
+              <div className="col-md-7">
+                <label htmlFor=""> Write Poem </label>
+                <div className="d-flex align-items-end">
+                  <input
+                    value={PoemSat}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemSat(e.target.value)}
+                  />
+                  <div className="ans-line mb-3 mt-2"></div>
+                </div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="ans-line mb-3 mt-2"></div>
+                <div className="d-flex align-items-end">
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <input
+                    value={PoemEnd}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setPoemEnd(e.target.value)}
+                  />
+                </div>
+              </div>
+            </>) : (<> </>)}
+
 
             <div className="col-md-6">
               <div className="do-sear mt-2">
@@ -629,8 +777,8 @@ const AdminEditQuestionDetails = () => {
               <div className="do-sear">
                 <label htmlFor="">Answer Time</label>
                 <Form.Select
-                value={Answer_Time}
-                 className="vi_0"
+                  value={Answer_Time}
+                  className="vi_0"
                   onChange={(e) => setAnswer_Time(e.target.value)}>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
@@ -736,13 +884,13 @@ const AdminEditQuestionDetails = () => {
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
-        <Button       
-          className="modal-add-btn"
-          onClick={UpdateQuestion}
-        >
-          Update
-        </Button>
-      </div>
+          <Button
+            className="modal-add-btn"
+            onClick={UpdateQuestion}
+          >
+            Update
+          </Button>
+        </div>
       </div>
     </div>
   );
