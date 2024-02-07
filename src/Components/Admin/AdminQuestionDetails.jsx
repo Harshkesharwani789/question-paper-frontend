@@ -72,6 +72,30 @@ const AdminQuestionDetails = () => {
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
 
+  const selectdetails ={
+    Section: Section,
+    Board: Board,
+    Medium: Medium,
+    Sub_Class: Sub_Class,
+    Class:Class,
+    Subjects: Subjects,
+    Lesson: Lesson,
+    Chapter_Name: Chapter_Name,
+    Difficulty_level: Difficulty_level,
+    Name_of_examination: Name_of_examination,
+    Objectives: Objectives,
+    Types_Question: Types_Question,
+    Instruction:Instruction,
+}
+
+useEffect(() => {
+    if ( selectdetails.Instruction) {
+        sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
+    }
+}, [selectdetails.Instruction]);
+  
+
+
   const addquestions = async () => {
     try {
       const config = {
@@ -263,6 +287,7 @@ const AdminQuestionDetails = () => {
   }, []);
   console.log(weightage);
   console.log(NameExam);
+
   return (
     <div>
       
@@ -384,7 +409,7 @@ const AdminQuestionDetails = () => {
                 >
                   <option value="">Selete the Lesson</option>
                   {weightage
-                    ?.filter((ele) => Subjects == ele?.Subject)
+                    ?.filter((ele) => Subjects === ele?.Subject)
                     ?.map((val, i) => {
                       return (
                         <option value={val?.Content} key={i}>
@@ -457,9 +482,9 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  <option value="">Knowledge</option>
-                  <option value="">Appreciation</option>
-                  <option value="">Understanding</option>
+                  <option value="Knowledge">Knowledge</option>
+                  <option value="Appreciation">Appreciation</option>
+                  <option value="Understanding">Understanding</option>
                 </Form.Select>
               </div>
             </div>

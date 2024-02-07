@@ -360,7 +360,7 @@ function App() {
             element={<Main children={<Weightagecontent />} />}
           />
           <Route
-            path="/admineditquestiondetails"
+            path="/admineditquestiondetails/:question_Id"
             element={<Main children={<AdminEditQuestionDetails />} />}
           />
           <Route

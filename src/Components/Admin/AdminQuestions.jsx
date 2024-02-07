@@ -26,7 +26,7 @@ const AdminQuestions = () => {
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
-  const [show2, setShow2] = useState();
+ 
   const [show3, setShow3] = useState();
   const navigate = useNavigate();
 
@@ -35,10 +35,13 @@ const AdminQuestions = () => {
 
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
+
+  const [show2, setShow2] = useState();
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   const [formdata, setformdata] = useState();
   //get
@@ -69,47 +72,13 @@ const AdminQuestions = () => {
   };
   // get
 
-  //update
-  const [updateQuestion, setupdateQuestion] = useState("");
 
-  const UpdateQuestion = async () => {
-    try {
-      const config = {
-        url: "/admin/UpdateQuestionPaper" + updateQuestion + "/" + admin?._id,
-        method: "put",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        handleClose1();
-        getAllQuestions();
-        return swal({
-          title: "Yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      return swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Ok!",
-      });
-    }
-  };
-  //delete
+  //Delete
   const [deleteA, setDeleteA] = useState("");
   const DeleteQuestion = async () => {
     try {
       const config = {
-        url: "/admin/deleteQuestionPaper" + deleteA + "/" + admin?._id,
+        url: "/admin/deleteQuestionPaper/" + deleteA + "/" + admin?._id,
         method: "delete",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -130,12 +99,13 @@ const AdminQuestions = () => {
       }
     } catch (error) {
       console.log(error);
-      return swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Ok!",
-      });
+      // handleClose2();
+      // return swal({
+      //   title: "Oops!",
+      //   text: error.response.data.error,
+      //   icon: "error",
+      //   button: "Ok!",
+      // });
     }
   };
 
@@ -267,9 +237,8 @@ const AdminQuestions = () => {
                           <BiSolidEdit
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setupdateQuestion();
-                              navigate("/admineditquestiondetails");
+                            onClick={() => {                            
+                              navigate(`/admineditquestiondetails/${val?._id}`);
                             }}
                           />
                         </div>
@@ -277,8 +246,8 @@ const AdminQuestions = () => {
                           <AiFillDelete
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setDeleteA();
+                            onClick={() => {                            
+                              setDeleteA(val?._id);
                               handleShow2();
                             }}
                           />{" "}
@@ -410,6 +379,7 @@ const AdminQuestions = () => {
             <Button
               variant=""
               className="modal-add-btn"
+              onClick={DeleteQuestion}
             >
               Delete
             </Button>
