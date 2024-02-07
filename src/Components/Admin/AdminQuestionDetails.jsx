@@ -6,12 +6,14 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import AdminQuestprops from "./AdminQuestprops";
 
 const AdminQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
   const navigate = useNavigate();
+  const [selectedOption, setSelectedOption] = useState("default");
 
   const handleChange = (e, editor) => {
     const data = editor.getData();
@@ -69,6 +71,30 @@ const AdminQuestionDetails = () => {
   const [Answer, setAnswer] = useState("");
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
+
+  const selectdetails ={
+    Section: Section,
+    Board: Board,
+    Medium: Medium,
+    Sub_Class: Sub_Class,
+    Class:Class,
+    Subjects: Subjects,
+    Lesson: Lesson,
+    Chapter_Name: Chapter_Name,
+    Difficulty_level: Difficulty_level,
+    Name_of_examination: Name_of_examination,
+    Objectives: Objectives,
+    Types_Question: Types_Question,
+    Instruction:Instruction,
+}
+
+useEffect(() => {
+    if ( selectdetails.Instruction) {
+        sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
+    }
+}, [selectdetails.Instruction]);
+  
+
 
   const addquestions = async () => {
     try {
@@ -261,12 +287,14 @@ const AdminQuestionDetails = () => {
   }, []);
   console.log(weightage);
   console.log(NameExam);
+
   return (
     <div>
+      
       <div className="box_1">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Section</label>
                 <input
@@ -279,7 +307,7 @@ const AdminQuestionDetails = () => {
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
                 <Form.Select
@@ -298,7 +326,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Medium</label>
                 <Form.Select
@@ -316,7 +344,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Class</label>
                 <Form.Select
@@ -334,7 +362,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Sub-Class</label>
                 <Form.Select
@@ -352,7 +380,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Subject</label>
                 <Form.Select
@@ -370,7 +398,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Lesson</label>
                 <Form.Select
@@ -381,7 +409,7 @@ const AdminQuestionDetails = () => {
                 >
                   <option value="">Selete the Lesson</option>
                   {weightage
-                    ?.filter((ele) => Subjects == ele?.Subject)
+                    ?.filter((ele) => Subjects === ele?.Subject)
                     ?.map((val, i) => {
                       return (
                         <option value={val?.Content} key={i}>
@@ -392,7 +420,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Chapter Name</label>
                 <Form.Select
@@ -410,9 +438,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Difficulty level of Paper</label>
                 <Form.Select
@@ -428,27 +454,7 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Types of the Question</label>
-              </div>{" "}
-              <Form.Select
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setTypes_Question(e.target.value);
-                }}
-              >
-                <option>Select the Types of the Question</option>
-                {getalltypesofques?.map((item, i) => {
-                  return (
-                    <option value={item?.Typesofquestion} key={i}>
-                      {item?.Typesofquestion}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -468,38 +474,130 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear">
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
                 <label htmlFor="">Objectives</label>
-                <input
-                  type="text"
-                  className="vi_0"
+                <Form.Select
+                  aria-label="Default select example"
                   onChange={(e) => setObjectives(e.target.value)}
-                  placeholder="Please Enter Objectives"
-                />
+                >
+                  <option>Select Objectives</option>
+                  <option value="Knowledge">Knowledge</option>
+                  <option value="Appreciation">Appreciation</option>
+                  <option value="Understanding">Understanding</option>
+                </Form.Select>
               </div>
             </div>
-            <div className="col-md-12">
-              <div className="do-sear">
-                <label htmlFor="">Instructions</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Instruction}
-                  onChange={handleChange2}
-                />
-              </div>
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select the Types of the Question</label>
+              </div>{" "}
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setTypes_Question(e.target.value);
+                }}
+              >
+                <option value="default">
+                  Select the Types of the Question
+                </option>
+                <option value="Objective Questions">Objective Questions</option>
+                <option value="Multiple Choice Questions">
+                  Multiple Choice Questions
+                </option>
+                <option value="Fill in the Blanks Questions">
+                  Fill in the Blanks
+                </option>
+                <option value="Match the Following Questions">
+                  Match the Following
+                </option>
+                <option value="Recorrect the Answers Questions">
+                  Recorrect the Answers
+                </option>
+                <option value="Classifications of Questions">
+                  Classifications of Questions
+                </option>
+                <option value="Odd and out words Questions">
+                  Odd and out words Questions
+                </option>
+                <option value="RelationShip Words Questions">
+                  RelationShip Words Questions
+                </option>
+                <option value="Grammer Questions">Grammer Questions</option>
+                <option value="One Word Question">One Word Question</option>
+                <option value="One Sentence Answer Question">
+                  One Sentence Answer Question
+                </option>
+                <option value="Two  Sentence Answer Questions">
+                  Two Sentence Answer Questions
+                </option>
+                <option value="Two and three Sentence Answer Questions">
+                  Two and three Sentence Answer Questions
+                </option>
+                <option value="Three and Four Sentence Answer Questions">
+                  Three and Four Sentence Answer Questions
+                </option>
+                {/* <option value="Five Sentence Answer Questions">
+                  Five Sentence Answer Questions
+                </option> */}
+                <option value="Five and Six Sentence Answer Questions">
+                  Five and Six Sentence Answer Questions
+                </option>
+                <option value="Six Sentence Answer Questions">
+                  Six Sentence Answer Questions
+                </option>
+                <option value="Seven Sentence Answer Questions">
+                  Seven Sentence Answer Questions
+                </option>
+                <option value="Eight Sentence Answer Questions">
+                  Eight Sentence Answer Questions
+                </option>
+                <option value="Ten Sentence Answer Questions">
+                  Ten Sentence Answer Questions
+                </option>
+                <option value="Expanding and Explanations Answer Questions">
+                  {" "}
+                  Expanding and Explanations Answer Questions
+                </option>
+                <option value="Answer the Questions and Draw the Figure Questions">
+                  Answer the Questions and Draw the Figure Questions{" "}
+                </option>
+                <option value="Graph Questions">Graph Questions</option>
+                <option value="Complete the Poem">Complete the Poem</option>
+                <option value="Situation UnderStatnding answer Questions">
+                  {" "}
+                  Situation UnderStatnding answer Questions
+                </option>
+                <option value="Poet,Time, Place, Writer answer questions">
+                  {" "}
+                  Poet,Time, Place, Writer answer questions
+                </option>
+                <option value="Letter Writting">Letter Writting</option>
+                <option value="Map Reading">Map Reading</option>
+                {/* <option value=""></option>
+                <option value=""></option>
+                <option value=""></option> */}
+              </Form.Select>
             </div>
-            <div className="col-md-12">
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear">
+              <label htmlFor="">Instructions</label>
+              <CKEditor
+                editor={ClassicEditor}
+                className="vi_0"
+                data={Instruction}
+                onChange={handleChange2}
+              />
+            </div>
+          </div>
+          <div className="col-md-12 mt-3">
+            <AdminQuestprops Types_Question={Types_Question} />
+          </div>
+          {/* <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+                
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -507,8 +605,8 @@ const AdminQuestionDetails = () => {
                   onChange={handleChange}
                 />
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+          {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
                 <CKEditor
@@ -574,16 +672,6 @@ const AdminQuestionDetails = () => {
                 />
               </div>
             </div>
-            {/* <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Answer Time</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter the answer time"
-                />
-              </div>
-            </div> */}
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <div className="do-sear mt-2">
@@ -596,14 +684,10 @@ const AdminQuestionDetails = () => {
                   />
                 </div>
               </div>
-            </div>
-            {/* <div className="yoihjij my-4">
-              <button style={{ float: "right" }}>Add</button>
             </div> */}
-          </div>
         </div>
 
-        <div className="yoihjij text-center my-2 p-2 ">
+        {/* <div className="yoihjij text-center my-2 p-2 ">
         <Button
           onClick={() => {
             addquestions();
@@ -612,9 +696,8 @@ const AdminQuestionDetails = () => {
         >
           Add
         </Button>
+      </div> */}
       </div>
-      </div>
-   
     </div>
   );
 };

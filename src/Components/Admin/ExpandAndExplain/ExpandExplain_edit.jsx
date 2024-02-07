@@ -261,9 +261,9 @@ const ExpandExplain_edit = () => {
   }, []);
   return (
     <div>
-      <div className="box_1 mb-4">
-        <div className="container">
-          <div className="row">
+      <div className="mb-4">
+      <div className="container">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Examination Board</label>
@@ -411,9 +411,9 @@ const ExpandExplain_edit = () => {
                 </Form.Select>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row mt-2">
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
@@ -432,8 +432,8 @@ const ExpandExplain_edit = () => {
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Objectives</label>
               </div>{" "}
@@ -449,25 +449,41 @@ const ExpandExplain_edit = () => {
                 <option>Expression</option>
                 <option>Understanding</option>
               </Form.Select>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 1</label>
-                <input
-                  type="text"
-                  placeholder="Enter Question 1"
+                {/* <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="5"
                   className="vi_0"
+                ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 1</label>
-                <input
-                  type="text"
-                  placeholder="Enter Answer 1"
+                {/* <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="5"
                   className="vi_0"
+                ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -482,20 +498,36 @@ const ExpandExplain_edit = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 2</label>
-                <input
-                  type="text"
-                  placeholder="Enter Question 2"
+                {/* <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="5"
                   className="vi_0"
+                ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 2</label>
-                <input
-                  type="text"
-                  placeholder="Enter Answer 2"
+                {/* <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="5"
                   className="vi_0"
+                ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -570,27 +602,11 @@ const ExpandExplain_edit = () => {
                 </Form.Select>
               </div>
             </div>
-            {/* <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Answer Time</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter the answer time"
-                />
-              </div>
-            </div> */}
-
-            <div className="yoihjij text-center my-2 p-2 ">
-              <Button
-                onClick={() => {
-                  //   addquestions();
-                }}
-                className="modal-add-btn"
-              >
-                Update
-              </Button>
-            </div>
+          </div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <div className="yoihjij text-center my-2 p-2 ">
+            <Button className="modal-add-btn">Update</Button>
           </div>
         </div>
       </div>

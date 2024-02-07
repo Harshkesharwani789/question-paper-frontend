@@ -593,18 +593,16 @@ table thead tr th {
   width: 20%;
 }
 
-.lined-input{
+.lined-input {
   outline-width: 0px;
   padding: 7px;
-  border-radius: 5px;
   width: 100%;
   border-bottom: 1px solid;
   border-left: none;
   border-right: none;
   border-top: none;
-  border-radius: none !important;
+  border-radius: 0;
 }
-
 
 /* Admin Panel ends */
 
@@ -659,14 +657,28 @@ table thead tr th {
     height: 300px;
   }
 }
-.hjhu a button{
+.hjhu button {
   width: 175px;
   padding: 8px;
   height: 82px;
   margin: 1px;
-}
-.hjhu a {
   font-size: 16px;
 }
 
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
+/* .blinking {
+  animation: blink 1s infinite;
+} */
+.gradient-background {
+  background: linear-gradient(45deg, #FFD700, #FF69B4); /* Adjust gradient colors */
+}
+
+.glow-text {
+  color: #FFFFFF; /* Text color */
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FF69B4; /* Adjust glow effect */
+}
