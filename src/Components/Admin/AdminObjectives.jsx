@@ -45,6 +45,7 @@ const AdminObjectives = () => {
 
   // post method
   const [Objectivesname, setObjectivesname] = useState("");
+
   const objectivesnamee = async () => {
     try {
       const config = {
@@ -53,63 +54,19 @@ const AdminObjectives = () => {
         method: "post",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer${token}`,
-        },
-        data: {
-          Objectivesname: Objectivesname,
-          authId: admin?._id,
-
-        },
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        handleClose();
-        return swal({
-          title: "Success!",
-          text: res.data.success,
-          icon: "success",
-          button: "OK!",
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // get method
-  const [getboardname, setboardname] = useState([]);
-  const getallboardname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-      if (res.status == 200) {
-        setboardname(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // edit method
-  const [updateboardname, setupdateboardname] = useState("");
-
-  const updateallboardname = async () => {
-    try {
-      const config = {
-        url: "/admin/updateBoard",
-        method: "put",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
           Objectivesname: Objectivesname,
           authId: admin?._id,
-          id: updateboardname,
         },
       };
-      const res = await axios(config);
-      if (res.status == 200) {
-        handleClose1();
-        getallboardname();
+
+      let res = await axios(config);
+
+      if (res.status === 200) {
+        handleClose();
+        getObjectives();
         return swal({
           title: "Success!",
           text: res.data.success,
@@ -119,20 +76,94 @@ const AdminObjectives = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const [getobjectives, setgetobjectives] = useState([]);
+
+  const getObjectives = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/admin/getobjective`
+      );
+
+      if (res.status === 200) {
+        setgetobjectives(res.data.success);
+      } else {
+        // Handle non-200 status codes here if needed
+        console.error(`Request failed with status code ${res.status}`);
+      }
+    } catch (error) {
+      console.error("Error fetching objectives:", error);
+    }
+  };
+
+  const [update, setUpdate] = useState(""); // Corrected variable naming
+
+  const updateObjectives = async () => {
+    try {
+      if (!Objectivesname || !update) {
+        // Check if Objectivesname and update are defined and not empty
+        console.error(
+          "Objectivesname and update must be defined and not empty"
+        );
+        return;
+      }
+
+      const config = {
+        url: "/admin/updateObjectives",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          Objectivesname: Objectivesname,
+          id: update,
+          authId: admin?._id,
+        },
+      };
+
+      const res = await axios(config);
+
+      if (res.status === 200) {
+        handleClose1();
+        getObjectives()
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      } else {
+        // Handle non-200 status codes here if needed
+        console.error(`Request failed with status code ${res.status}`);
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error("Error updating objectives:", error);
       swal({
-        title: "Error!",
+        title: "Oops!",
         text: error.response.data.error,
-        icon: "error",
+        icon: "success",
         button: "OK!",
       });
     }
   };
+
   // delete method
   const [deleteA, setDeleteA] = useState("");
-  const deleteboard = async () => {
+
+  const deleteObjectives = async () => {
     try {
+      if (!deleteA || !admin?._id) {
+        console.error("deleteA and admin?._id must be defined and not empty");
+        return;
+      }
+  
       const config = {
-        url: "/admin/deleteBoard/" + deleteA + "/" + admin?._id,
+        url: `/admin/deleteobjectives/${deleteA}/${admin?._id}`,
         baseURL: "http://localhost:8000/api",
         method: "delete",
         headers: {
@@ -140,23 +171,44 @@ const AdminObjectives = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      let res = await axios(config);
+  
+      const res = await axios(config);
+  
       if (res.status === 200) {
         handleClose2();
-        getallboardname();
+        getObjectives();
         return swal({
           title: "Delete!",
           text: res.data.success,
           icon: "warning",
           button: "OK!",
         });
+      } else {
+        // Handle non-200 status codes here if needed
+        console.error(`Request failed with status code ${res.status}`);
+        return swal({
+          title: "Oops!",
+          text: "Something went wrong. Please try again later.",
+          icon: "warning",
+          button: "OK!",
+        });
       }
-    } catch (error) {}
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error("Error deleting objectives:", error);
+      return swal({
+        title: "Oops!",
+        text: "Something went wrong. Please try again later.",
+        icon: "warning",
+        button: "OK!",
+      });
+    }
   };
+  
   useEffect(() => {
-    getallboardname();
+    getObjectives();
   }, []);
-  console.log(getboardname);
+  console.log(getobjectives);
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
   // const productPerPage = 5;
@@ -175,8 +227,8 @@ const AdminObjectives = () => {
   const recordsperpage = 6;
   const lastIndex = currenpage * recordsperpage;
   const firstIndex = lastIndex - recordsperpage;
-  const records = getboardname.slice(firstIndex, lastIndex);
-  const npages = Math.ceil(getboardname.length / recordsperpage);
+  const records = getobjectives.slice(firstIndex, lastIndex);
+  const npages = Math.ceil(getobjectives.length / recordsperpage);
   const numbers = [...Array(npages + 1).keys()].slice(1);
 
   function changePage(id) {
@@ -239,12 +291,12 @@ const AdminObjectives = () => {
             </thead>
 
             <tbody>
-              {records?.map((val, i) => {
+              {getobjectives?.map((val, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1 + firstIndex} </td>
                     <td>
-                      <p></p>
+                      <p>{val?.Objectivesname}</p>
                     </td>
 
                     <td>
@@ -256,7 +308,7 @@ const AdminObjectives = () => {
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                               handleShow1();
-                              setupdateboardname(val?._id);
+                              setUpdate(val?._id);
                               setObjectivesname(val?.Objectivesname);
                             }}
                           />{" "}
@@ -463,7 +515,7 @@ const AdminObjectives = () => {
               variant=""
               className="modal-add-btn"
               onClick={() => {
-                updateallboardname();
+                updateObjectives();
               }}
             >
               Edit
@@ -495,7 +547,7 @@ const AdminObjectives = () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={deleteboard}>
+            <Button variant="" className="modal-add-btn" onClick={deleteObjectives}>
               Delete
             </Button>
           </Modal.Footer>
