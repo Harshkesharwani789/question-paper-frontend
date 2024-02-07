@@ -43,50 +43,36 @@ const AdminObjectives = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-  // Post method Integration
-  const [boardName, setboardName] = useState("");
-  const AddBoradname = async () => {
+  // post method
+  const [Objectivesname, setObjectivesname] = useState("");
+  const objectivesnamee = async () => {
     try {
-      if (!boardName)
-        return swal({
-          title: "Opps!",
-          text: "Please Enter boardName ",
-          icon: "error",
-          button: "Try Again!",
-        });
       const config = {
-        url: "/admin/addBoard",
-        method: "post",
+        url: "/admin/addobjectives",
         baseURL: "http://localhost:8000/api",
+        method: "post",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer${token}`,
         },
         data: {
-          boardName: boardName,
+          Objectivesname: Objectivesname,
           authId: admin?._id,
+
         },
       };
-      const response = await axios(config);
-
-      if (response.status === 200) {
-        swal({
+      let res = await axios(config);
+      if (res.status == 200) {
+        handleClose();
+        return swal({
           title: "Success!",
-          text: response.data.success,
+          text: res.data.success,
           icon: "success",
           button: "OK!",
         });
-        handleClose();
-        getallboardname();
       }
     } catch (error) {
-      console.error(error);
-      swal({
-        title: "Opps!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Try Again!",
-      });
+      console.log(error);
     }
   };
   // get method
@@ -115,7 +101,7 @@ const AdminObjectives = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          boardName: boardName,
+          Objectivesname: Objectivesname,
           authId: admin?._id,
           id: updateboardname,
         },
@@ -271,7 +257,7 @@ const AdminObjectives = () => {
                             onClick={() => {
                               handleShow1();
                               setupdateboardname(val?._id);
-                              setboardName(val?.boardName);
+                              setObjectivesname(val?.Objectivesname);
                             }}
                           />{" "}
                         </div>
@@ -376,7 +362,7 @@ const AdminObjectives = () => {
                   placeholder="Enter Objectives"
                   className="vi_0"
                   onChange={(e) => {
-                    setboardName(e.target.value);
+                    setObjectivesname(e.target.value);
                   }}
                 />
               </div>
@@ -413,7 +399,7 @@ const AdminObjectives = () => {
                 className="mx-2 modal-add-btn"
                 variant=""
                 onClick={() => {
-                  AddBoradname();
+                  objectivesnamee();
                 }}
               >
                 Add
@@ -431,7 +417,9 @@ const AdminObjectives = () => {
           style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
-            <Modal.Title style={{ color: "white" }}>Edit Objectives</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Edit Objectives
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -441,9 +429,9 @@ const AdminObjectives = () => {
                   type="text"
                   placeholder="Enter Objectives"
                   className="vi_0"
-                  value={boardName}
+                  value={Objectivesname}
                   onChange={(e) => {
-                    setboardName(e.target.value);
+                    setObjectivesname(e.target.value);
                   }}
                 />
               </div>
