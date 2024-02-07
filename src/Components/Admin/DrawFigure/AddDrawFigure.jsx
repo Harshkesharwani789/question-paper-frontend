@@ -13,7 +13,7 @@ function AddDrawFigure() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
     const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-    console.log("questiondata", questiondata);
+   
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -36,7 +36,6 @@ function AddDrawFigure() {
     const [Answer, setAnswer] = useState("");
     const [Answer_Time, setAnswer_Time] = useState("");
 
-console.log("Image",Image);
     const addquestions = async () => {
         try {
             const config = {
