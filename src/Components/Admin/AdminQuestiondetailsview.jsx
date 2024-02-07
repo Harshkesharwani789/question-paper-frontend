@@ -24,21 +24,7 @@ const AdminQuestionDetailsview = () => {
       console.log(error);
     }
   };
-  // get method
-  const [getboardname, setboardname] = useState([]);
-  const getallboardname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-      if (res.status == 200) {
-        setboardname(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getallboardname();
     getquestionbyid();
   }, []);
 
@@ -138,115 +124,40 @@ const AdminQuestionDetailsview = () => {
                   {question_details?.Question
                     ? parse(question_details?.Question)
                     : ""}
-                </p>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
-                {/* <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                /> */}
+                </p>             
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
-                {/* <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_1}
-                  onChange={handleChange3}
-                /> */}
-                <p className="vi_0">
-                  {question_details?.Option_1
-                    ? parse(question_details?.Option_1)
-                    : ""}
-                </p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
-                {/* <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_2}
-                  onChange={handleChange4}
-                /> */}
-                <p className="vi_0">
-                  {question_details?.Option_1
-                    ? parse(question_details?.Option_1)
-                    : ""}
-                </p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
-                {/* <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_3}
-                  onChange={handleChange5}
-                /> */}
-                <p className="vi_0">
-                  {question_details?.Option_3
-                    ? parse(question_details?.Option_3)
-                    : ""}
-                </p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                <p className="vi_0">
-                  {question_details?.Option_4
-                    ? parse(question_details?.Option_4)
-                    : ""}
-                </p>
-              </div>
-            </div>
+
+          
+          {question_details?.Image_Ans ? (<>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image</label> <br />
+                <label htmlFor="">Answer Image</label> <br />
                 <img
-                  src={`http://localhost:8000/Questions/${question_details?.Image}`}
+                className="img-fluid h-50"
+                  src={`http://localhost:8000/Questions/${question_details?.Image_Ans}`}
                   alt=""
                 />
               </div>
             </div>
+          </>):(<></>)}
+           
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Time</label>
+                <p className="vi_0">{question_details?.Answer_Time}</p>
+              </div>
+            </div>  
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <p className="vi_0">{question_details?.Marks}</p>
               </div>
-            </div>
-            {/* <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Answer Time</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter the answer time"
-                />
-              </div>
-            </div> */}
+            </div>           
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  {/* <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={Answer}
-                    onChange={handleChange7}
-                  /> */}
+                  <label htmlFor="">Answer</label>                 
                   <p className="vi_0">
                     {question_details?.Answer
                       ? parse(question_details?.Answer)
@@ -255,15 +166,10 @@ const AdminQuestionDetailsview = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="yoihjij my-4">
-              <button style={{ float: "right" }}>Add</button>
-            </div> */}
+          
           </div>
         </div>
       </div>
-      {/* <div className="yoihjij text-center my-2">
-        <button style={{}}>Submit</button>
-      </div> */}
     </div>
   );
 };

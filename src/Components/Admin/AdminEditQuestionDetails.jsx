@@ -1,17 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import AdminQuestprops from "./AdminQuestprops";
 import AdminQuestioneditprops from "./AdminQuestioneditprops";
+import { CiEdit } from "react-icons/ci";
 
 const AdminEditQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+  const { question_Id } = useParams();
+
+  const fileInputRef = useRef(null);
+
+  const handleEditClick = () => {
+    if (fileInputRef.current) {
+      // Trigger click event on the file input element when the edit icon is clicked
+      fileInputRef.current.click();
+    }
+  };
+
+
+  const [question_details, setquestion_details] = useState([]);
+  const getquestionbyid = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getQuestionpaperadminbyid/${question_Id}`
+      );
+      if (res.status === 200) {
+        setquestion_details(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getquestionbyid();
+  }, []);
+
+  console.log("question_details", question_details);
 
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("default");
@@ -44,12 +75,10 @@ const AdminEditQuestionDetails = () => {
     const data = editor.getData();
     setOption_4(data);
   };
-  const handleChange7 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
-  //post
 
+
+  // Update
+  const [section, setSection] = useState('');
   const [Board, setBoard] = useState("");
   const [Medium, setMedium] = useState("");
   const [Class, setClass] = useState("");
@@ -58,77 +87,47 @@ const AdminEditQuestionDetails = () => {
   const [Chapter_Name, setChapter_Name] = useState("");
   const [Lesson, setLesson] = useState("");
   const [Difficulty_level, setDifficulty_level] = useState("");
-  const [Types_Question, setTypes_Question] = useState("");
-  const [Section, setSection] = useState("");
   const [Name_of_examination, setName_of_examination] = useState("");
   const [Question, setQuestion] = useState("");
+  const [ImageAns, setImageAns] = useState("");
+  const [Answer, setAnswer] = useState("");
+
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
   const [Option_3, setOption_3] = useState("");
   const [Option_4, setOption_4] = useState("");
   const [Objectives, setObjectives] = useState("");
-  const [Image, setImage] = useState("");
+
   const [Marks, setMarks] = useState("");
-  const [Answer, setAnswer] = useState("");
+
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
 
-  const addquestions = async () => {
-    try {
-      const config = {
-        url: "/admin/AddQuestionPaper",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          Board: Board,
-          Medium: Medium,
-          Class: Class,
-          Sub_Class: Sub_Class,
-          Subject: Subjects,
-          Chapter_Name: Chapter_Name,
-          Difficulty_level: Difficulty_level,
-          Types_Question: Types_Question,
-          Lesson: Lesson,
-          Section: Section,
-          Question: Question,
-          Option_1: Option_1,
-          Option_2: Option_2,
-          Option_3: Option_3,
-          Option_4: Option_4,
-          Name_of_examination: Name_of_examination,
-          Objectives: Objectives,
-          Instruction: Instruction,
-          Image: Image,
-          Marks: Marks,
-          Answer_Time: Answer_Time,
-          Answer: Answer,
-          authId: admin?._id,
-        },
-      };
-      let res = await axios(config);
-      if (res.status === 200) {
-        swal({
-          title: "yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-        return navigate("/adminquestions");
-      }
-    } catch (error) {
-      console.log(error);
-      swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "success",
-        button: "Ok!",
-      });
+  console.log("ImageAns", ImageAns);
+
+  useEffect(() => {
+    if (question_details) {
+      setSection(question_details.Section || ''); // Set section if question_details is defined
+      setBoard(question_details.Board || '')
+      setMedium(question_details.Medium || '')
+      setClass(question_details.Class || '')
+      setSub_Class(question_details.Sub_Class || '')
+      setSubjects(question_details.Subject || '')
+      setLesson(question_details.Lesson || '')
+      setChapter_Name(question_details.Chapter_Name || '')
+      setDifficulty_level(question_details.Difficulty_level || '')
+      setName_of_examination(question_details.Name_of_examination || '')
+      setObjectives(question_details.Objectives || '')
+      setInstruction(question_details.Instruction || '')
+      setQuestion(question_details.Question || '')
+      setMarks(question_details.Marks || '')
+      setAnswer_Time(question_details.Answer_Time || '')
+      setAnswer(question_details.Answer || '')
     }
-  };
+
+
+  }, [question_details]);
+
 
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
@@ -251,6 +250,56 @@ const AdminEditQuestionDetails = () => {
       console.log(error);
     }
   };
+
+  //Update
+
+
+  const UpdateQuestion = async () => {
+  
+    try {
+      const config = {
+        url: "/admin/UpdateQuestionPaper" ,
+        method: "put",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data:{
+          Section :section,
+          Board: Board,
+          Medium: Medium,
+          Class: Class,
+          Sub_Class: Sub_Class,
+          Subject: Subjects,
+          Lesson: Lesson,
+          Chapter_Name: Chapter_Name,
+          Difficulty_level: Difficulty_level,
+          Name_of_examination: Name_of_examination,
+          Objectives: Objectives,          
+          Instruction: Instruction,
+          Question:Question,
+          Image_Ans:ImageAns,
+          Marks:Marks,
+          Answer_Time:Answer_Time,
+          Answer:Answer,
+          id:question_details?._id,
+          authId:admin?._id
+        }
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -262,13 +311,16 @@ const AdminEditQuestionDetails = () => {
     getChapter();
     getNameExamination();
   }, []);
-  console.log(weightage);
-  console.log(NameExam);
   return (
     <div>
       <div className="box_1">
         <div className="container">
           <div className="row">
+            <div className="text-align-center gradient-background">
+              <span className="blinking">
+                <h4 className="glow-text"><b>{question_details?.Types_Question}</b></h4>
+              </span>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Section</label>
@@ -276,6 +328,7 @@ const AdminEditQuestionDetails = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Section"
+                  value={section}
                   onChange={(e) => {
                     setSection(e.target.value);
                   }}
@@ -288,6 +341,7 @@ const AdminEditQuestionDetails = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
+                  value={Board}
                   onChange={(e) => setBoard(e.target.value)}
                 >
                   <option>Select the Board</option>
@@ -305,7 +359,9 @@ const AdminEditQuestionDetails = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Medium</label>
                 <Form.Select
+                  className="vi_0"
                   aria-label="Default select example"
+                  value={Medium}
                   onChange={(e) => setMedium(e.target.value)}
                 >
                   <option>Select the Medium</option>
@@ -324,6 +380,8 @@ const AdminEditQuestionDetails = () => {
                 <label htmlFor="">Select Class</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Class}
                   onChange={(e) => setClass(e.target.value)}
                 >
                   <option>Select the Class</option>
@@ -342,6 +400,8 @@ const AdminEditQuestionDetails = () => {
                 <label htmlFor="">Select Sub-Class</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Sub_Class}
                   onChange={(e) => setSub_Class(e.target.value)}
                 >
                   <option>Select the Sub-Class</option>
@@ -359,6 +419,8 @@ const AdminEditQuestionDetails = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Subject</label>
                 <Form.Select
+                  className="vi_0"
+                  value={Subjects}
                   aria-label="Default select example"
                   onChange={(e) => setSubjects(e.target.value)}
                 >
@@ -378,6 +440,8 @@ const AdminEditQuestionDetails = () => {
                 <label htmlFor="">Lesson</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Lesson}
                   onChange={(e) => {
                     setLesson(e.target.value);
                   }}
@@ -399,6 +463,8 @@ const AdminEditQuestionDetails = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Chapter Name</label>
                 <Form.Select
+                  className="vi_0"
+                  value={Chapter_Name}
                   aria-label="Default select example"
                   onChange={(e) => setChapter_Name(e.target.value)}
                 >
@@ -420,6 +486,8 @@ const AdminEditQuestionDetails = () => {
                 <label htmlFor="">Select the Difficulty level of Paper</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Difficulty_level}
                   onChange={(e) => {
                     setDifficulty_level(e.target.value);
                   }}
@@ -431,95 +499,14 @@ const AdminEditQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Types of the Question</label>
-              </div>{" "}
-              <Form.Select
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setTypes_Question(e.target.value);
-                }}
-              >
-                <option value="default">
-                  Select the Types of the Question
-                </option>
-                <option value="Objective Questions">Objective Questions</option>
-                <option value="Multiple Choice Questions">
-                  Multiple Choice Questions
-                </option>
-                <option value="Fill in the Blanks Questions">Fill in the Blanks</option>
-                <option value="Match the Following Questions">Match the Following</option>
-                <option value="Recorrect the Answers Questions">
-                  Recorrect the Answers
-                </option>
-                <option value="Classifications of Questions">
-                  Classifications of Questions
-                </option>
-                <option value="Odd and out words Questions">
-                  Odd and out words Questions
-                </option>
-                <option value="RelationShip Words Questions">
-                  RelationShip Words Questions
-                </option>
-                <option value="Grammer Questions">Grammer Questions</option>
-                <option value="One Word Question">One Word Question</option>
-                <option value="Two  Sentence Answer Questions">
-                  Two Sentence Answer Questions
-                </option>
-                <option value="Two and three Sentence Answer Questions">
-                  Two and three Sentence Answer Questions
-                </option>
-                <option value="Three and Four Sentence Answer Questions">
-                  Three and Four Sentence Answer Questions
-                </option>
-                <option value="Five Sentence Answer Questions">
-                  Five Sentence Answer Questions
-                </option>
-                <option value="Five and Six Sentence Answer Questions">
-                  Five and Six Sentence Answer Questions
-                </option>
-                <option value="Six Sentence Answer Questions">
-                  Six Sentence Answer Questions
-                </option>
-                <option value="Seven Sentence Answer Questions">
-                  Seven Sentence Answer Questions
-                </option>
-                <option value="Eight Sentence Answer Questions">
-                  Eight Sentence Answer Questions
-                </option>
-                <option value="Ten Sentence Answer Questions">
-                  Ten Sentence Answer Questions
-                </option>
-                <option value="Expanding and Explanations Answer Questions">
-                  {" "}
-                  Expanding and Explanations Answer Questions
-                </option>
-                <option value="Answer the Questions and Draw the Figure Questions">
-                  Answer the Questions and Draw the Figure Questions{" "}
-                </option>
-                <option value="Graph Questions">Graph Questions</option>
-                <option value="Complete the Poem">Complete the Poem</option>
-                <option value="Situation UnderStatnding answer Questions">
-                  {" "}
-                  Situation UnderStatnding answer Questions
-                </option>
-                <option value="Poet,Time, Place, Writer answer questions">
-                  {" "}
-                  Poet,Time, Place, Writer answer questions
-                </option>
-                <option value="Letter Writting">Letter Writting</option>
-                <option value="Map Reading">Map Reading</option>
-                {/* <option value=""></option>
-                <option value=""></option>
-                <option value=""></option> */}
-              </Form.Select>
-            </div>
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Name_of_examination}
                   onChange={(e) => {
                     setName_of_examination(e.target.value);
                   }}
@@ -540,13 +527,15 @@ const AdminEditQuestionDetails = () => {
                 <label htmlFor="">Objectives</label>
                 <Form.Select
                   aria-label="Default select example"
+                  className="vi_0"
+                  value={Objectives}
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
-                  <option value=""></option>
+                  <option value="Knowledge">Knowledge</option>
+                  <option value="Appreciation">Appreciation</option>
+                  <option value="Understanding">Understanding</option>
+
                 </Form.Select>
               </div>
             </div>
@@ -562,13 +551,13 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
-            <div className="col-md-12 mt-3">
+            {/* <div className="col-md-12 mt-3">
               <AdminQuestioneditprops Types_Question={Types_Question} />
-            </div>
-            {/* <div className="col-md-12">
+            </div> */}
+            <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                
+
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -576,7 +565,103 @@ const AdminEditQuestionDetails = () => {
                   onChange={handleChange}
                 />
               </div>
-            </div> */}
+            </div>
+            {question_details.Image_Ans ? (
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                      className="img-fluid h-50"
+                      src={ImageAns
+                        ?
+                        ImageAns && URL.createObjectURL(ImageAns) :
+                        `http://localhost:8000/Questions/${question_details.Image_Ans}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={handleEditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        onChange={(e) => setImageAns(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            ) : ("")}
+
+
+         
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <Form.Select
+                  className="vi_0"
+                  value={Marks}
+                  onChange={(e) => setMarks(e.target.value)}
+                >
+                  <option value="">Select Marks</option>
+                  <option value="1/2">1/2</option>
+                  <option value="1/4">1/4</option>
+                  <option value="1/3">1/3</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Answer Time</label>
+                <Form.Select
+                value={Answer_Time}
+                 className="vi_0"
+                  onChange={(e) => setAnswer_Time(e.target.value)}>
+                  <option value="1/2 Mnt">1/2 Mnt</option>
+                  <option value="1/4 Mnt">1/4 Mnt</option>
+                  <option value="1 Mnt">1 Mnt</option>
+                  <option value="1.30 minutes">1.30 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
+                  <option value="2 minutes">2 minutes</option>
+                  <option value="3 minutes">3 minutes</option>
+                  <option value="4 minutes">4 minutes</option>
+                  <option value="5 minutes"> 5 minutes</option>
+                  <option value="6 minutes">6 minutes</option>
+                  <option value="7 minutes"> 7 minutes</option>
+                  <option value="8 minutes"> 8 minutes</option>
+                  <option value="9 minutes"> 9 minutes</option>
+                  <option value="10 minutes">10 minutes</option>
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+
             {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
@@ -622,16 +707,7 @@ const AdminEditQuestionDetails = () => {
               </div>
             </div>
 
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
+           
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
@@ -659,16 +735,14 @@ const AdminEditQuestionDetails = () => {
           </div>
         </div>
 
-        {/* <div className="yoihjij text-center my-2 p-2 ">
-        <Button
-          onClick={() => {
-            addquestions();
-          }}
+        <div className="yoihjij text-center my-2 p-2 ">
+        <Button       
           className="modal-add-btn"
+          onClick={UpdateQuestion}
         >
-          Add
+          Update
         </Button>
-      </div> */}
+      </div>
       </div>
     </div>
   );

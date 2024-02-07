@@ -664,3 +664,21 @@ table thead tr th {
   margin: 1px;
   font-size: 16px;
 }
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* .blinking {
+  animation: blink 1s infinite;
+} */
+.gradient-background {
+  background: linear-gradient(45deg, #FFD700, #FF69B4); /* Adjust gradient colors */
+}
+
+.glow-text {
+  color: #FFFFFF; /* Text color */
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FF69B4; /* Adjust glow effect */
+}
