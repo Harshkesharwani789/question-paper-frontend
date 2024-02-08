@@ -12,6 +12,7 @@ const AdminQuestionDetailsview = () => {
   const token = sessionStorage.getItem("token");
 
   const [question_details, setquestion_details] = useState([]);
+  // const [first, setfirst] = useState(second)
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
@@ -28,11 +29,18 @@ const AdminQuestionDetailsview = () => {
     getquestionbyid();
   }, []);
 
+
+
   return (
     <div>
       <div className="box_1">
         <div className="container">
           <div className="row">
+          <div className="text-align-center gradient-background">
+              <span className="blinking">
+                <h4 className="glow-text"><b>{question_details?.Types_Question}</b></h4>
+              </span>
+            </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Section</label>
@@ -128,6 +136,154 @@ const AdminQuestionDetailsview = () => {
               </div>
             </div>
 
+            {/* Situation And Understanding Question And Answer */}
+            {question_details?.Image_1 ? (<>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question Image 1</label> <br />
+                <img
+                className="img-fluid h-50"
+                  src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                  alt=""
+                />
+              </div>
+            </div>
+          </>):(<></>)}
+          {question_details?.Image_2 ? (<>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question Image 2</label> <br />
+                <img
+                className="img-fluid h-50"
+                  src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                  alt=""
+                />
+              </div>
+            </div>
+          </>):(<></>)}
+
+          {question_details?.PassiveQuesion?.length ?  (<>
+            <div className="col-md-12">
+              <div className="do-sear">
+                <label htmlFor=""> Sub Questions</label> <br />
+                {question_details?.PassiveQuesion?.map((item,i)=>{
+                  return(
+                    <p className="vi_0" >{parse(`<div>${item?.question}</div>`)}</p>
+                  )
+                })}
+              </div>
+            </div>
+          </>):(<></>)}
+
+
+
+            {/* Complete The Poem */}
+            {question_details?.NumberOfLine ? (<>
+              <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Poem Line</label>
+                <p className="vi_0">{question_details?.NumberOfLine}</p>
+              </div>
+            </div> 
+            </>):(<></>)}
+
+            {question_details?.PoemSt ? (<>
+              {question_details.NumberOfLine === "4" ? (<>
+                            <div className="col-md-8">
+                                <label htmlFor=""> Write Poem </label>
+                                <div className="d-flex align-items-end">
+
+                                    <p className="vi_0" >
+                                        {question_details?.PoemSt}
+                                    </p>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                </div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="d-flex align-items-end">
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <p className="vi_0">
+                                        {question_details?.PoemEnd}
+                                    </p>
+                                </div>
+                            </div>
+                        </>) : (<> </>)}
+                        {question_details.NumberOfLine === "5" ? (<>
+                            <div className="col-md-8">
+                                <label htmlFor=""> Write Poem </label>
+                                <div className="d-flex align-items-end">
+                                    <p
+                                        className="vi_0"
+                                    >{question_details?.PoemSt}</p>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                </div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="d-flex align-items-end">
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <p
+                                        className="vi_0"
+                                    >
+                                        {question_details?.PoemEnd}
+                                    </p>
+                                </div>
+                            </div>
+                        </>) : (<> </>)}
+                        {question_details.NumberOfLin === "6" ? (<>
+                            <div className="col-md-8">
+                                <label htmlFor=""> Write Poem </label>
+                                <div className="d-flex align-items-end">
+                                    <p
+                                        className="vi_0"
+                                    >
+                                        {question_details?.PoemSt}
+                                    </p>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                </div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="d-flex align-items-end">
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <p
+                                        className="vi_0"
+                                    >
+                                        {question_details?.PoemEnd}
+                                    </p>
+                                </div>
+                            </div>
+                        </>) : (<> </>)}
+                        {question_details.NumberOfLin === "7" ? (<>
+                            <div className="col-md-8">
+                                <label htmlFor=""> Write Poem </label>
+                                <div className="d-flex align-items-end">
+                                    <p
+                                        className="vi_0"
+                                    >
+                                      {question_details?.PoemSt}
+                                    </p>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                </div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="ans-line mb-3 mt-2"></div>
+                                <div className="d-flex align-items-end">
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <p
+                                        className="vi_0"
+                                    >
+                                      {question_details?.PoemEnd}
+                                    </p>
+                                </div>
+                            </div>
+                        </>) : (<> </>)}
+            </>):(<></>)}
+            
+               {/* Answer The Question And Draw The Figure */}
           
           {question_details?.Image_Ans ? (<>
             <div className="col-md-6">

@@ -6,265 +6,107 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-
+import parse from "html-react-parser";
 
 const QandA_add6Sentences = () => {
-    const admin = JSON.parse(sessionStorage.getItem("admin"));
-    const token = sessionStorage.getItem("token");
-  
-    const navigate = useNavigate();
-  
-    const [show, setShow] = useState();
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-  
-    const handleChange = (e, editor) => {
-      const data = editor.getData();
-      setQuestion(data);
-    };
-    const handleChange1 = (e, editor) => {
-      const data = editor.getData();
-      setAnswer(data);
-    };
-    const handleChange2 = (e, editor) => {
-      const data = editor.getData();
-      setInstruction(data);
-    };
-    const handleChange3 = (e, editor) => {
-      const data = editor.getData();
-      setOption_1(data);
-    };
-    const handleChange4 = (e, editor) => {
-      const data = editor.getData();
-      setOption_2(data);
-    };
-    const handleChange5 = (e, editor) => {
-      const data = editor.getData();
-      setOption_3(data);
-    };
-    const handleChange6 = (e, editor) => {
-      const data = editor.getData();
-      setOption_4(data);
-    };
-    const handleChange7 = (e, editor) => {
-      const data = editor.getData();
-      setAnswer(data);
-    };
-    //post
-  
-    const [Board, setBoard] = useState("");
-    const [Medium, setMedium] = useState("");
-    const [Class, setClass] = useState("");
-    const [Sub_Class, setSub_Class] = useState("");
-    const [Subjects, setSubjects] = useState("");
-    const [Chapter_Name, setChapter_Name] = useState("");
-    const [Lesson, setLesson] = useState("");
-    const [Difficulty_level, setDifficulty_level] = useState("");
-    const [Types_Question, setTypes_Question] = useState("");
-    const [Section, setSection] = useState("");
-    const [Name_of_examination, setName_of_examination] = useState("");
-    const [Question, setQuestion] = useState("");
-    const [Option_1, setOption_1] = useState("");
-    const [Option_2, setOption_2] = useState("");
-    const [Option_3, setOption_3] = useState("");
-    const [Option_4, setOption_4] = useState("");
-    const [Objectives, setObjectives] = useState("");
-    const [Image, setImage] = useState("");
-    const [Marks, setMarks] = useState("");
-    const [Answer, setAnswer] = useState("");
-    const [Instruction, setInstruction] = useState("");
-    const [Answer_Time, setAnswer_Time] = useState("");
-  
-    const addquestions = async () => {
-      try {
-        const config = {
-          url: "/admin/AddQuestionPaper",
-          method: "post",
-          baseURL: "http://localhost:8000/api",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-          data: {
-            Board: Board,
-            Medium: Medium,
-            Class: Class,
-            Sub_Class: Sub_Class,
-            Subject: Subjects,
-            Chapter_Name: Chapter_Name,
-            Difficulty_level: Difficulty_level,
-            Types_Question: Types_Question,
-            Lesson: Lesson,
-            Section: Section,
-            Question: Question,
-            Option_1: Option_1,
-            Option_2: Option_2,
-            Option_3: Option_3,
-            Option_4: Option_4,
-            Name_of_examination: Name_of_examination,
-            Objectives: Objectives,
-            Instruction: Instruction,
-            Image: Image,
-            Marks: Marks,
-            Answer_Time: Answer_Time,
-            Answer: Answer,
-            authId: admin?._id,
-          },
-        };
-        let res = await axios(config);
-        if (res.status === 200) {
-          swal({
-            title: "yeah!",
-            text: res.data.success,
-            icon: "success",
-            button: "Ok!",
-          });
-          return navigate("/adminquestions");
-        }
-      } catch (error) {
-        console.log(error);
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+  const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
+
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleChange = (e, editor) => {
+    const data = editor.getData();
+    setQuestion(data);
+  };
+  const handleChange1 = (e, editor) => {
+    const data = editor.getData();
+    setAnswer(data);
+  };
+  const handleChange2 = (e, editor) => {
+    const data = editor.getData();
+    setorQuestion(data);
+  };
+  const handleChange3 = (e, editor) => {
+    const data = editor.getData();
+    setorAnswer(data);
+  };
+  //post
+
+  const [Question, setQuestion] = useState("");
+  const [Answer, setAnswer] = useState([]);
+  const [orQuestion, setorQuestion] = useState("");
+  const [orAnswer, setorAnswer] = useState("");
+  const [Marks, setMarks] = useState("");
+  const [Image_1, setImage_1] = useState("");
+  const [orImageQ, setorImageQ] = useState("");
+  const [Answer_Time, setAnswer_Time] = useState("");
+
+  const addquestions = async () => {
+    try {
+      const config = {
+        url: "/admin/AddQuestionPaper",
+        method: "post",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          Board: questiondata?.Board,
+          Chapter_Name: questiondata?.Chapter_Name,
+          Difficulty_level: questiondata?.Difficulty_level,
+          Lesson: questiondata?.Lesson,
+          Medium: questiondata?.Medium,
+          Name_of_examination: questiondata?.Name_of_examination,
+          Objectives: questiondata?.Objectives,
+          Section: questiondata?.Section,
+          Sub_Class: questiondata?.Sub_Class,
+          Subject: questiondata?.Subjects,
+          Types_Question: questiondata?.Types_Question,
+          Class: questiondata?.Class,
+          Instruction: questiondata?.Instruction,
+
+          Question: Question,
+          Answer: Answer,
+          orQuestion: orQuestion,
+          orAnswer: orAnswer,
+          Image_1: Image_1,
+          orImageQ: orImageQ,
+
+          Marks: Marks,
+          Answer_Time: Answer_Time,
+          authId: admin?._id,
+        },
+      };
+      let res = await axios(config);
+      if (res.status === 200) {
         swal({
-          title: "Oops!",
-          text: error.response.data.error,
+          title: "yeah!",
+          text: res.data.success,
           icon: "success",
           button: "Ok!",
         });
+        handleClose();
+        sessionStorage.removeItem("selectdetails");
+        return navigate("/adminquestions");
       }
-    };
-  
-    //   get method for weightage
-    const [weightage, setweightage] = useState([]);
-    const getallweightagecontent = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getallcontent"
-        );
-        if (res.status === 200) {
-          setweightage(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    // get method
-    const [getboardname, setboardname] = useState([]);
-    const getallboardname = async () => {
-      try {
-        let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-        if (res.status == 200) {
-          setboardname(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    //get method for medium
-    const [Mediumm, setMediumm] = useState([]);
-    const getAddMedium = async () => {
-      try {
-        let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
-        if (res.status == 200) {
-          setMediumm(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // get method add class
-    const [getclassname, setgetclassName] = useState([]);
-    const getallclassname = async () => {
-      try {
-        let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-        if (res.status == 200) {
-          setgetclassName(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // get method for subclass
-    const [getaddsubclass, setgetaddsubclass] = useState([]);
-    const getaddsubclasss = async () => {
-      try {
-        const res = await axios.get(
-          "http://localhost:8000/api/admin/getAllSubClass"
-        );
-        if (res.status == 200) {
-          setgetaddsubclass(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    //get for subject
-    const [subject, setsubject] = useState([]);
-    const getSubject = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllSujects"
-        );
-        if (res.status == 200) {
-          setsubject(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    //get for type of questions
-    const [getalltypesofques, setgetalltypesofques] = useState([]);
-    const getalltypesofquess = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllTypesofquestion"
-        );
-        if (res.status == 200) {
-          setgetalltypesofques(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    //get of chapters
-    const [chapters, setchapters] = useState([]);
-    const getChapter = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllChapter"
-        );
-        if (res.status == 200) {
-          setchapters(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    //get for name of Examination
-    const [NameExam, setNameExam] = useState([]);
-    const getNameExamination = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllNameExamination"
-        );
-        if (res.status == 200) {
-          setNameExam(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    useEffect(() => {
-      getallboardname();
-      getAddMedium();
-      getallclassname();
-      getaddsubclasss();
-      getSubject();
-      getalltypesofquess();
-      getallweightagecontent();
-      getChapter();
-      getNameExamination();
-    }, []);
-    // Line
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "success",
+        button: "Ok!",
+      });
+    }
+  };
+
+  // Line
   const [twoline, setTwoline] = useState(false);
   const [threeline, setThreeline] = useState(false);
   const [fourline, setFourline] = useState(false);
@@ -276,144 +118,33 @@ const QandA_add6Sentences = () => {
   const [tenline, setTenline] = useState(false);
   return (
     <div>
-    <div className="">
-    <div className="container">
-          {/* <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Examination Board</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Board</option>
-                  <option value="Easy">CBSE</option>
-                  <option value="Average">STATE</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Medium</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Medium</option>
-                  <option>English</option>
-                  <option>Hindi</option>
-                  <option>Kannada</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Class</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Fifth Class</option>
-                  <option>LKG Class</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Sub-Class</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Sub-Class</option>
-                  <option>Primary</option>
-                  <option>Secondary</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Subject</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select subject</option>
-                  <option>Hindi</option>
-                  <option>English</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select subject part</label>
-                <Form.Select aria-label="Default select example">
-                  <option value="">Select subject part</option>
-                  <option value="">aerfsd</option>
-                  <option value="">tyrtg</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Chapter Name</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Chapter Name</option>
-                  <option value="">r6</option>
-                  <option value="">wfd</option>
-                </Form.Select>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Difficulty level of Paper</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Difficulty level of Paper</option>
-                  <option value="Easy">Easy</option>
-                  <option value="Average">Average</option>
-                  <option value="Difficult">Difficult</option>
-                </Form.Select>
-              </div>
-            </div>
-          </div> */}
+      <div className="">
+        <div className="container">
           <div className="row mt-2">
-            {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Name Of the Examination</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Name Of the Examination</option>
-                  <option value="">FA-3</option>
-                  <option value="">FA-2</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                />
-              </div>
-            </div> */}
-
-            {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Ojectives</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select Objectives</option>
-                  <option>Remembering</option>
-                  <option value="">Understanding</option>
-                  <option value="">Expression</option>
-                  <option value="">Appreciation</option>
-                </Form.Select>
-              </div>
-            </div> */}
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
+         
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
             <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Number of Line</label>
@@ -1036,13 +767,6 @@ const QandA_add6Sentences = () => {
                 </>
               )}
             </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-
             <div>
               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
@@ -1051,28 +775,46 @@ const QandA_add6Sentences = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage_1(e.target.files[0])}
+                />
               </div>
             </div>
 
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setorImageQ(e.target.files[0])}
+                />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={orQuestion}
+                  onChange={handleChange2}
+                />
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={orAnswer}
+                  onChange={handleChange3}
+                />
               </div>
             </div>
             <div className="col-md-6">
@@ -1080,9 +822,7 @@ const QandA_add6Sentences = () => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
+                  onChange={(e) => setMarks(e.target.value)}
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -1101,119 +841,134 @@ const QandA_add6Sentences = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Answer Timing</option>
-                  <option value="">5 minuts</option>
-                  <option value="">4 minuts</option>
+              <div className="do-sear">
+                <label htmlFor="">Answer Time</label>
+                <Form.Select
+                  className="vi_0"
+                  onChange={(e) => setAnswer_Time(e.target.value)}
+                >
+                  <option value="1/2 Mnt">1/2 Mnt</option>
+                  <option value="1/4 Mnt">1/4 Mnt</option>
+                  <option value="1 Mnt">1 Mnt</option>
+                  <option value="1.30 minutes">1.30 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
+                  <option value="2 minutes">2 minutes</option>
+                  <option value="3 minutes">3 minutes</option>
+                  <option value="4 minutes">4 minutes</option>
+                  <option value="5 minutes"> 5 minutes</option>
+                  <option value="6 minutes">6 minutes</option>
+                  <option value="7 minutes"> 7 minutes</option>
+                  <option value="8 minutes"> 8 minutes</option>
+                  <option value="9 minutes"> 9 minutes</option>
+                  <option value="10 minutes">10 minutes</option>
                 </Form.Select>
               </div>
             </div>
           </div>
         </div>
 
-      <div className="yoihjij text-center my-2 p-2 ">
-      <button
-                    style={{backgroundColor:"orange"}}
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                        className="modal-add-btn"
-                    >
-                        Back
-                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button
-          onClick={() => {
-            //   addquestions();
-            handleShow();
-          }}
-          className="modal-add-btn"
-        >
-          Save
-        </Button>
+        <div className="yoihjij text-center my-2 p-2 ">
+          <button
+            style={{ backgroundColor: "orange" }}
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="modal-add-btn"
+          >
+            Back
+          </button>{" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button
+            onClick={() => {
+              
+              handleShow();
+            }}
+            className="modal-add-btn"
+          >
+            Save
+          </Button>
+        </div>
       </div>
+      <Modal
+        size="lg"
+        show={show}
+        onHide={handleClose}
+        style={{ zIndex: "99999" }}
+      >
+        <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
+          <Modal.Title style={{ color: "white" }}>Preview</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Question 1</label>
+              <p className="vi_0">{parse(`<div>${Question}</div>`)}</p>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Answer 1</label>
+              <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label
+              htmlFor=""
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
+              (OR)
+            </label>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Question 2</label>
+              <p className="vi_0">{parse(`<div>${orQuestion}</div>`)}</p>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="do-sear mt-2">
+              <label htmlFor="">Answer 2</label>
+              <p className="vi_0">{parse(`<div>${orAnswer}</div>`)}</p>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <div className="d-flex">
+            <Button
+              className="mx-2 modal-add-btn"
+              variant=""
+              onClick={() => {
+                // AddSubject();
+                handleClose();
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              className="mx-2 modal-add-btn"
+              variant=""
+              onClick={() => {
+                addquestions();
+                handleClose();
+              }}
+            >
+              Submit
+            </Button>
+            <Button
+              className="mx-2 modal-close-btn"
+              variant=""
+              onClick={() => {
+                handleClose();
+                navigate(`/Classlkg`);
+              }}
+            >
+              Delete
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </div>
-    <Modal
-      size="lg"
-      show={show}
-      onHide={handleClose}
-      style={{ zIndex: "99999" }}
-    >
-      <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-        <Modal.Title style={{ color: "white" }}>Preview</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="col-md-12">
-          <div className="do-sear mt-2">
-            <label htmlFor="">Question 1</label>
-            <p className="vi_0"></p>
-          </div>
-        </div>
-        <div className="col-md-12">
-          <div className="do-sear mt-2">
-            <label htmlFor="">Answer 1</label>
-            <p className="vi_0"></p>
-          </div>
-        </div>
-        <div className="mt-4">
-          <label
-            htmlFor=""
-            style={{ display: "flex", justifyContent: "space-around" }}
-          >
-            (OR)
-          </label>
-        </div>
-        <div className="col-md-12">
-          <div className="do-sear mt-2">
-            <label htmlFor="">Question 2</label>
-             <p className="vi_0"></p>
-          </div>
-        </div>
-        <div className="col-md-12">
-          <div className="do-sear mt-2">
-            <label htmlFor="">Answer 2</label>
-             <p className="vi_0"></p>
-          </div>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <div className="d-flex">
-          <Button
-            className="mx-2 modal-add-btn"
-            variant=""
-            onClick={() => {
-              // AddSubject();
-              handleClose();
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            className="mx-2 modal-add-btn"
-            variant=""
-            onClick={() => {
-              //   AddSubject();
-              handleClose();
-            }}
-          >
-            Submit
-          </Button>
-          <Button
-            className="mx-2 modal-close-btn"
-            variant=""
-            onClick={() => {
-              handleClose();
-              navigate(`/Classlkg`);
-            }}
-          >
-            Delete
-          </Button>
-        </div>
-      </Modal.Footer>
-    </Modal>
-  </div>
-  )
-}
+  );
+};
 
-export default QandA_add6Sentences
+export default QandA_add6Sentences;

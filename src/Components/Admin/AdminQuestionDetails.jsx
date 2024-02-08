@@ -47,6 +47,25 @@ const AdminQuestionDetails = () => {
     const data = editor.getData();
     setAnswer(data);
   };
+// get method for objectives
+  const [getobjectives, setgetobjectives] = useState([]);
+
+  const getObjectives = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/admin/getobjective`
+      );
+
+      if (res.status === 200) {
+        setgetobjectives(res.data.success);
+      } else {
+        // Handle non-200 status codes here if needed
+        console.error(`Request failed with status code ${res.status}`);
+      }
+    } catch (error) {
+      console.error("Error fetching objectives:", error);
+    }
+  };
   //post
 
   const [Board, setBoard] = useState("");
@@ -96,62 +115,62 @@ useEffect(() => {
   
 
 
-  const addquestions = async () => {
-    try {
-      const config = {
-        url: "/admin/AddQuestionPaper",
-        method: "post",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          Board: Board,
-          Medium: Medium,
-          Class: Class,
-          Sub_Class: Sub_Class,
-          Subject: Subjects,
-          Chapter_Name: Chapter_Name,
-          Difficulty_level: Difficulty_level,
-          Types_Question: Types_Question,
-          Lesson: Lesson,
-          Section: Section,
-          Question: Question,
-          Option_1: Option_1,
-          Option_2: Option_2,
-          Option_3: Option_3,
-          Option_4: Option_4,
-          Name_of_examination: Name_of_examination,
-          Objectives: Objectives,
-          Instruction: Instruction,
-          Image: Image,
-          Marks: Marks,
-          Answer_Time: Answer_Time,
-          Answer: Answer,
-          authId: admin?._id,
-        },
-      };
-      let res = await axios(config);
-      if (res.status === 200) {
-        swal({
-          title: "yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-        return navigate("/adminquestions");
-      }
-    } catch (error) {
-      console.log(error);
-      swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "success",
-        button: "Ok!",
-      });
-    }
-  };
+  // const addquestions = async () => {
+  //   try {
+  //     const config = {
+  //       url: "/admin/AddQuestionPaper",
+  //       method: "post",
+  //       baseURL: "http://localhost:8000/api",
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       data: {
+  //         Board: Board,
+  //         Medium: Medium,
+  //         Class: Class,
+  //         Sub_Class: Sub_Class,
+  //         Subject: Subjects,
+  //         Chapter_Name: Chapter_Name,
+  //         Difficulty_level: Difficulty_level,
+  //         Types_Question: Types_Question,
+  //         Lesson: Lesson,
+  //         Section: Section,
+  //         Question: Question,
+  //         Option_1: Option_1,
+  //         Option_2: Option_2,
+  //         Option_3: Option_3,
+  //         Option_4: Option_4,
+  //         Name_of_examination: Name_of_examination,
+  //         Objectives: Objectives,
+  //         Instruction: Instruction,
+  //         Image: Image,
+  //         Marks: Marks,
+  //         Answer_Time: Answer_Time,
+  //         Answer: Answer,
+  //         authId: admin?._id,
+  //       },
+  //     };
+  //     let res = await axios(config);
+  //     if (res.status === 200) {
+  //       swal({
+  //         title: "yeah!",
+  //         text: res.data.success,
+  //         icon: "success",
+  //         button: "Ok!",
+  //       });
+  //       return navigate("/adminquestions");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     swal({
+  //       title: "Oops!",
+  //       text: error.response.data.error,
+  //       icon: "success",
+  //       button: "Ok!",
+  //     });
+  //   }
+  // };
 
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
@@ -284,9 +303,11 @@ useEffect(() => {
     getallweightagecontent();
     getChapter();
     getNameExamination();
+    getObjectives()
   }, []);
   console.log(weightage);
   console.log(NameExam);
+  console.log(getobjectives);
 
   return (
     <div>
@@ -482,9 +503,11 @@ useEffect(() => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  <option value="Knowledge">Knowledge</option>
-                  <option value="Appreciation">Appreciation</option>
-                  <option value="Understanding">Understanding</option>
+                  {getobjectives?.map((val,i)=>{
+                    return (
+                      <option value={val?.Objectivesname}>{val?.Objectivesname}</option>
+                    )
+                  })}
                 </Form.Select>
               </div>
             </div>
