@@ -824,19 +824,19 @@ const QandA_add6Sentences = () => {
                   aria-label="Default select example"
                   onChange={(e) => setMarks(e.target.value)}
                 >
-                  <option>Select the Marks</option>
-                  <option>1/2</option>
-                  <option>1/4</option>
-                  <option>1/3</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>10</option>
+                  <option value="">Select the Marks</option>
+                  <option value={"1/2"}>1/2</option>
+                  <option value={'1/4'}>1/4</option>
+                  <option value={'1/3'}>1/3</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                  <option value={7}>7</option>
+                  <option value={8}>8</option>
+                  <option value={10}>10</option>
                 </Form.Select>
               </div>
             </div>
@@ -847,6 +847,7 @@ const QandA_add6Sentences = () => {
                   className="vi_0"
                   onChange={(e) => setAnswer_Time(e.target.value)}
                 >
+                      <option value="">Select</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
