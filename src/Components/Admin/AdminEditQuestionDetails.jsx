@@ -16,14 +16,27 @@ const AdminEditQuestionDetails = () => {
   const { question_Id } = useParams();
 
   const fileInputRef = useRef(null);
-
   const handleEditClick = () => {
     if (fileInputRef.current) {
-      // Trigger click event on the file input element when the edit icon is clicked
       fileInputRef.current.click();
     }
   };
 
+  const Image1Ref = useRef(null);
+  const Image1EditClick = () => {
+    if (Image1Ref.current) {
+      Image1Ref.current.click();
+    }
+  };
+
+  const Image2Ref = useRef(null);
+  const Image2EditClick = () => {
+    if (Image2Ref.current) {
+      Image2Ref.current.click();
+    }
+  };
+
+  const [Types_Question, setTypes_Question] = useState("");
 
   const [question_details, setquestion_details] = useState([]);
   const getquestionbyid = async () => {
@@ -59,10 +72,7 @@ const AdminEditQuestionDetails = () => {
     const data = editor.getData();
     setInstruction(data);
   };
-  const handleChange3 = (e, editor) => {
-    const data = editor.getData();
-    setOption_1(data);
-  };
+
   const handleChange4 = (e, editor) => {
     const data = editor.getData();
     setOption_2(data);
@@ -90,12 +100,14 @@ const AdminEditQuestionDetails = () => {
   const [Name_of_examination, setName_of_examination] = useState("");
   const [Question, setQuestion] = useState("");
   const [ImageAns, setImageAns] = useState("");
+  const [Image1, setImage1] = useState("");
+  const [Image2, setImage2] = useState("");
   const [Answer, setAnswer] = useState("");
   const [Dash, setDash] = useState("4")
   const [PoemSat, setPoemSat] = useState("");
   const [PoemEnd, setPoemEnd] = useState("");
-
-  const [Option_1, setOption_1] = useState("");
+console.log("Image1",Image1);
+console.log("Image2",Image2);
   const [Option_2, setOption_2] = useState("");
   const [Option_3, setOption_3] = useState("");
   const [Option_4, setOption_4] = useState("");
@@ -106,7 +118,15 @@ const AdminEditQuestionDetails = () => {
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
 
-  console.log("ImageAns", ImageAns);
+  const [subquestions, setSubquestions] = useState([]);
+
+  const handleSubquestionChange = (index, data) => {
+    const updatedSubquestions = [...subquestions];
+    updatedSubquestions[index] =  { question: data };
+    setSubquestions(updatedSubquestions);
+  };
+  
+
 
   useEffect(() => {
     if (question_details) {
@@ -129,6 +149,7 @@ const AdminEditQuestionDetails = () => {
       setDash(question_details.NumberOfLine || '')
       setPoemSat(question_details.PoemSt || '')
       setPoemEnd(question_details.PoemEnd || '')
+     
     }
 
 
@@ -294,6 +315,11 @@ const AdminEditQuestionDetails = () => {
 
           PoemSt: PoemSat,
           PoemEnd: PoemEnd,
+
+          Image_1:Image1,
+          Image_2:Image2,
+          PassiveQuesion:subquestions,
+
 
           id: question_details?._id,
           authId: admin?._id
@@ -551,6 +577,93 @@ const AdminEditQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
+            {/* <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select the Types of the Question</label>
+              </div>{" "}
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setTypes_Question(e.target.value);
+                }}
+              >
+                <option value="default">
+                  Select the Types of the Question
+                </option>
+                <option value="Objective Questions">Objective Questions</option>
+                <option value="Multiple Choice Questions">
+                  Multiple Choice Questions
+                </option>
+                <option value="Fill in the Blanks Questions">
+                  Fill in the Blanks
+                </option>
+                <option value="Match the Following Questions">
+                  Match the Following
+                </option>
+                <option value="Recorrect the Answers Questions">
+                  Recorrect the Answers
+                </option>
+                <option value="Classifications of Questions">
+                  Classifications of Questions
+                </option>
+                <option value="Odd and out words Questions">
+                  Odd and out words Questions
+                </option>
+                <option value="RelationShip Words Questions">
+                  RelationShip Words Questions
+                </option>
+                <option value="Grammer Questions">Grammer Questions</option>
+                <option value="One Word Question">One Word Question</option>
+                <option value="One Sentence Answer Question">
+                  One Sentence Answer Question
+                </option>
+                <option value="Two  Sentence Answer Questions">
+                  Two Sentence Answer Questions
+                </option>
+                <option value="Two and three Sentence Answer Questions">
+                  Two and three Sentence Answer Questions
+                </option>
+                <option value="Three and Four Sentence Answer Questions">
+                  Three and Four Sentence Answer Questions
+                </option>
+             
+                <option value="Five and Six Sentence Answer Questions">
+                  Five and Six Sentence Answer Questions
+                </option>
+                <option value="Six Sentence Answer Questions">
+                  Six Sentence Answer Questions
+                </option>
+                <option value="Seven Sentence Answer Questions">
+                  Seven Sentence Answer Questions
+                </option>
+                <option value="Eight Sentence Answer Questions">
+                  Eight Sentence Answer Questions
+                </option>
+                <option value="Ten Sentence Answer Questions">
+                  Ten Sentence Answer Questions
+                </option>
+                <option value="Expanding and Explanations Answer Questions">
+                  {" "}
+                  Expanding and Explanations Answer Questions
+                </option>
+                <option value="Answer the Questions and Draw the Figure Questions">
+                  Answer the Questions and Draw the Figure Questions{" "}
+                </option>
+                <option value="Graph Questions">Graph Questions</option>
+                <option value="Complete the Poem">Complete the Poem</option>
+                <option value="Situation UnderStatnding answer Questions">
+                  {" "}
+                  Situation UnderStatnding answer Questions
+                </option>
+                <option value="Poet,Time, Place, Writer answer questions">
+                  {" "}
+                  Poet,Time, Place, Writer answer questions
+                </option>
+                <option value="Letter Writting">Letter Writting</option>
+                <option value="Map Reading">Map Reading</option>
+           
+              </Form.Select>
+            </div> */}
 
             <div className="col-md-12">
               <div className="do-sear">
@@ -563,6 +676,10 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
+            {/* <div className="col-md-12 mt-3">
+            <AdminQuestioneditprops Types_Question={Types_Question} />
+          </div> */}
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -575,6 +692,386 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
+
+            {/* Poet,Time,Place ,Writer */}
+{question_details?.Types_Question === "Poet,Time, Place, Writer answer questions" ? (<>
+
+  <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select Number of Line</label>
+                <Form.Select
+                value={Dash}
+                className="vi_0"
+                  aria-label="Default select example"
+                  onChange={(e) => setDash(e.target.value)}
+                >
+                  <option>Select Answer Line</option>
+                  <option value="2"> 2 </option>
+                  <option value="3"> 3 </option>
+                  <option value="4"> 4 </option>
+                  <option value="5"> 5 </option>
+                  <option value="6"> 6 </option>
+                  <option value="7"> 7 </option>
+                  <option value="8"> 8 </option>
+                  <option value="9"> 9 </option>
+
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="col-8">
+              {Dash === "2" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "3" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "4" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "5" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p type="text" className="lined-input"></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "6" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "7" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "8" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+              {Dash === "9" ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear mt-4">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>{" "}
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <p
+                        type="text"
+                        className="lined-input"
+                      ></p>
+                    </div>
+                  </div>
+                </>
+              ) : (<></>)}
+            </div>
+</>):(<></>)}
 
             {/* Answer  The Question Draw The Figure */}
 
@@ -611,7 +1108,8 @@ const AdminEditQuestionDetails = () => {
             ) : ("")}
 
             {/* Complete The Poem */}
-            <div className="col-md-5">
+            {question_details?.Types_Question === "Complete the Poem" ? (<>
+              <div className="col-md-5">
               <div className="do-sear mt-2">
                 <label htmlFor="">  Poem Line </label>
                 <Form.Select
@@ -747,6 +1245,96 @@ const AdminEditQuestionDetails = () => {
                 </div>
               </div>
             </>) : (<> </>)}
+            </>):(<></>)}
+           
+
+            {/* Situation And UnderStanding Ans Question */}
+
+            {question_details?.Image_1 ? (
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload1">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                      className="img-fluid h-50"
+                      src={Image1
+                        ?
+                        Image1 && URL.createObjectURL(Image1) :
+                        `http://localhost:8000/Questions/${question_details?.Image_1}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image1EditClick} style={{cursor:"pointer"}} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload1"
+                        ref={Image1Ref}
+                        onChange={(e) => setImage1(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            ) : ("")}
+              {question_details?.Image_2 ? (
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload2">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                      className="img-fluid h-50"
+                      src={Image2
+                        ?
+                        Image2 && URL.createObjectURL(Image2) :
+                        `http://localhost:8000/Questions/${question_details?.Image_2}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image2EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload2"
+                        ref={Image2Ref}
+                        onChange={(e) => setImage2(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            ) : ("")}
+
+            {question_details?.PassiveQuesion?.length ? (<>
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Questions</label>
+                  {question_details?.PassiveQuesion?.map((form, index) => {
+                    return (
+                      <div className="d-flex gap-2 mb-1">
+                        <CKEditor
+                          style={{ width: "100%" }}
+                          editor={ClassicEditor}
+                          className="vi_0"
+                          data={form.question}                      
+                          onChange={(e, editor) => handleSubquestionChange(index, editor.getData())}
+                        />                      
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>):(<></>)}
 
 
             <div className="col-md-6">
