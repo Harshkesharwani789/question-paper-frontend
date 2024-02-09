@@ -79,9 +79,7 @@ const Map_add = () => {
 
           Question: Question,
           Answer: Answer,
-          orQuestion: orQuestion,
-          orAnswer: orAnswer,
-          Image: Image,
+   
           Image_1: Image_1,
           NumberOfLine: NumberOfLine,
           Marks: Marks,

@@ -46,7 +46,7 @@ const QandA_5to6_addQandA = () => {
   const [Image_1, setImage_1] = useState("");
   const [orImageQ, setorImageQ] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
-
+  const [NumberOfLine, setNumberOfLine] = useState(4);
   const addquestions = async () => {
     try {
       const config = {
@@ -77,7 +77,8 @@ const QandA_5to6_addQandA = () => {
           orQuestion: orQuestion,
           orAnswer: orAnswer,
           Image_1: Image_1,
-          orImageQ: orImageQ,
+          Image_2: orImageQ,
+          NumberOfLine:NumberOfLine,
 
           Marks: Marks,
           Answer_Time: Answer_Time,
@@ -154,6 +155,7 @@ const QandA_5to6_addQandA = () => {
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
+                    setNumberOfLine(selectedValue);
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");
