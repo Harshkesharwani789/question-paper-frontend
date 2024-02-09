@@ -171,6 +171,7 @@ import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
 import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 import Science10th from "./Components/10th_QP_Pattern/Science10th";
 import AdminObjectives from "./Components/Admin/AdminObjectives";
+import Fakedata from "./Components/Fake/Fakedata";
 
 
 
@@ -1957,6 +1958,14 @@ function App() {
               </>
             }
           />
+           {/* <Route
+            path="/fake"
+            element={
+              <>
+                <Fakedata/>
+              </>
+            }
+          /> */}
         </Routes>
 
 

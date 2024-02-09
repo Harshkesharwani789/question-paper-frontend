@@ -855,7 +855,7 @@ const RecorrectionaddAnswer = () => {
                   className="vi_0"
                   onChange={(e) => setAnswer_Time(e.target.value)}
                 >
-                     <option value="">Select</option>
+                  <option value="">Select</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
@@ -892,7 +892,8 @@ const RecorrectionaddAnswer = () => {
                   <option value={6}>6</option>
                   <option value={7}>7</option>
                   <option value={8}>8</option>
-                  <option value={10}>10</option>                </Form.Select>
+                  <option value={10}>10</option>{" "}
+                </Form.Select>
               </div>
             </div>
           </div>
@@ -1520,9 +1521,7 @@ const RecorrectionaddAnswer = () => {
                   <Button
                     className="mx-2 modal-close-btn"
                     variant=""
-                    // onClick={() => {
-                    //   navigate("/onesentenceeditanswer");
-                    // }}
+             
                     onClick={handleClose}
                   >
                     Edit

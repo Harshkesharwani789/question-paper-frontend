@@ -84,6 +84,7 @@ function AddPoem() {
                     icon: "success",
                     button: "Ok!",
                 });
+      sessionStorage.removeItem("selectdetails");
                 return navigate("/adminquestions");
             }
         } catch (error) {
