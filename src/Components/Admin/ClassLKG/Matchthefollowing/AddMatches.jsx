@@ -38,6 +38,7 @@ const AddMatches = () => {
   const [Part_A4, setPart_A4] = useState("");
   const [Part_A5, setPart_A5] = useState("");
   const [Part_A6, setPart_A6] = useState("");
+
   const [Part_B1, setPart_B1] = useState("");
   const [Part_B2, setPart_B2] = useState("");
   const [Part_B3, setPart_B3] = useState("");
@@ -45,6 +46,7 @@ const AddMatches = () => {
   const [Part_B5, setPart_B5] = useState("");
   const [Part_B6, setPart_B6] = useState("");
   const [Part_B7, setPart_B7] = useState("");
+
   const [Part_C1, setPart_C1] = useState("");
   const [Part_C2, setPart_C2] = useState("");
   const [Part_C3, setPart_C3] = useState("");
@@ -52,12 +54,14 @@ const AddMatches = () => {
   const [Part_C5, setPart_C5] = useState("");
   const [Part_C6, setPart_C6] = useState("");
   const [Part_C7, setPart_C7] = useState("");
+
   const [Part_A1_A, setPart_A1_A] = useState("");
   const [Part_A2_A, setPart_A2_A] = useState("");
   const [Part_A3_A, setPart_A3_A] = useState("");
   const [Part_A4_A, setPart_A4_A] = useState("");
   const [Part_A5_A, setPart_A5_A] = useState("");
   const [Part_A6_A, setPart_A6_A] = useState("");
+
   const [Part_B1_A, setPart_B1_A] = useState("");
   const [Part_B2_A, setPart_B2_A] = useState("");
   const [Part_B3_A, setPart_B3_A] = useState("");
@@ -65,15 +69,16 @@ const AddMatches = () => {
   const [Part_B5_A, setPart_B5_A] = useState("");
   const [Part_B6_A, setPart_B6_A] = useState("");
   const [Part_B7_A, setPart_B7_A] = useState("");
+
   const [Part_C1_A, setPart_C1_A] = useState("");
   const [Part_C2_A, setPart_C2_A] = useState("");
   const [Part_C3_A, setPart_C3_A] = useState("");
   const [Part_C4_A, setPart_C4_A] = useState("");
   const [Part_C5_A, setPart_C5_A] = useState("");
   const [Part_C6_A, setPart_C6_A] = useState("");
-  const [Question, setQuestion] = useState("");
+
   const [Marks, setMarks] = useState("");
-  const [Answer, setAnswer] = useState("");
+
   const [Answer_Time, setAnswer_Time] = useState("");
   const [ImageQ, setImageQ] = useState("");
 
@@ -141,10 +146,9 @@ const AddMatches = () => {
           Part_C5_A: Part_C5_A,
           Part_C6_A: Part_C6_A,
           authId: admin?._id,
-          Answer: Answer,
+      
           Marks: Marks,
           Answer_Time: Answer_Time,
-          Question: Question,
           ImageQ: ImageQ,
         },
       };
@@ -173,102 +177,9 @@ const AddMatches = () => {
     <div>
       <div className="">
         <div className="container">
-          {/* <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Examination Board</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Board</option>
-                  <option value="Easy">CBSE</option>
-                  <option value="Average">STATE</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Medium</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Medium</option>
-                  <option>English</option>
-                  <option>Hindi</option>
-                  <option>Kannada</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Class</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Fifth Class</option>
-                  <option>LKG Class</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Sub-Class</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Sub-Class</option>
-                  <option>Primary</option>
-                  <option>Secondary</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Subject</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select subject</option>
-                  <option>Hindi</option>
-                  <option>English</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select subject part</label>
-                <Form.Select aria-label="Default select example">
-                  <option value="">Select subject part</option>
-                  <option value="">aerfsd</option>
-                  <option value="">tyrtg</option>
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Chapter Name</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Chapter Name</option>
-                  <option value="">r6</option>
-                  <option value="">wfd</option>
-                </Form.Select>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Difficulty level of Paper</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Difficulty level of Paper</option>
-                  <option value="Easy">Easy</option>
-                  <option value="Average">Average</option>
-                  <option value="Difficult">Difficult</option>
-                </Form.Select>
-              </div>
-            </div>
-          </div> */}
+          
           <div className="row mt-2">
-            {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Name Of the Examination</label>
-                <Form.Select aria-label="Default select example">
-                  <option>Select the Name Of the Examination</option>
-                  <option value="">FA-3</option>
-                  <option value="">FA-2</option>
-                </Form.Select>
-              </div>
-            </div> */}
-
+           
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label
