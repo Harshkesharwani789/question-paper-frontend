@@ -44,7 +44,7 @@ const componentMap = {
     "Two  Sentence Answer Questions":<TwoSentenceaddAnswer/>,
     "Two and three Sentence Answer Questions":<ThreeSentenceaddAnswer/>,
     "Three and Four Sentence Answer Questions":<FourSentenceaddAnswer/>,
-    "Five Sentence Answer Question":<FiveSentenceaddAnswer/>,
+    "Five Sentence Answer Questions":<FiveSentenceaddAnswer/>,
     "Five and Six Sentence Answer Questions":<QandA_5to6_addQandA/>,
     "Six Sentence Answer Questions":<QandA_add6Sentences/>,
     "Seven Sentence Answer Questions":<QandA_add7Sentences/>,
