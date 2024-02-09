@@ -24,6 +24,40 @@ const steps = [
 ];
 
 function AdminBlueprint() {
+const editorConfiguration = {
+    toolbar: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        '|',
+        'bulletedList',
+        'numberedList',
+        'blockQuote',
+        '|',
+        'link',
+        'imageUpload',
+        'mediaEmbed',
+        '|',
+        'alignment',
+        'fontFamily',
+        'fontSize',
+        'fontColor',
+        'fontBackgroundColor',
+        '|',
+        'indent',
+        'outdent',
+        '|',
+        'undo',
+        'redo',
+        '|',
+        'insertMath', // Include the new button in the toolbar
+    ],
+  }
+
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -777,6 +811,7 @@ function AdminBlueprint() {
                                   General Instructions
                                 </label>
                                 <CKEditor
+                                config={editorConfiguration}
                                   editor={ClassicEditor}
                                   className="vi_0"
                                   data={Instructions}

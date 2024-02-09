@@ -6,6 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import parse from "html-react-parser";
 
 const OddandOut_add = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -25,10 +26,7 @@ const OddandOut_add = () => {
     const data = editor.getData();
     setAnswer(data);
   };
-  const handleChange2 = (e, editor) => {
-    const data = editor.getData();
-    setInstruction(data);
-  };
+
   const handleChange3 = (e, editor) => {
     const data = editor.getData();
     setOption_1(data);
@@ -51,28 +49,25 @@ const OddandOut_add = () => {
   };
   //post
 
-  const [Board, setBoard] = useState("");
-  const [Medium, setMedium] = useState("");
-  const [Class, setClass] = useState("");
-  const [Sub_Class, setSub_Class] = useState("");
-  const [Subjects, setSubjects] = useState("");
-  const [Chapter_Name, setChapter_Name] = useState("");
-  const [Lesson, setLesson] = useState("");
-  const [Difficulty_level, setDifficulty_level] = useState("");
-  const [Types_Question, setTypes_Question] = useState("");
-  const [Section, setSection] = useState("");
-  const [Name_of_examination, setName_of_examination] = useState("");
   const [Question, setQuestion] = useState("");
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
   const [Option_3, setOption_3] = useState("");
   const [Option_4, setOption_4] = useState("");
-  const [Objectives, setObjectives] = useState("");
-  const [Image, setImage] = useState("");
+
+  const [Image_1, setImage_1] = useState("");
+  const [Image_2, setImage_2] = useState("");
+  const [Image_3, setImage_3] = useState("");
+  const [Image_4, setImage_4] = useState("");
+const [Image_Ans,setImage_Ans]=useState("");
+
   const [Marks, setMarks] = useState("");
   const [Answer, setAnswer] = useState("");
-  const [Instruction, setInstruction] = useState("");
+ 
   const [Answer_Time, setAnswer_Time] = useState("");
+
+  
+  const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
 
   const addquestions = async () => {
     try {
@@ -85,25 +80,31 @@ const OddandOut_add = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Board: Board,
-          Medium: Medium,
-          Class: Class,
-          Sub_Class: Sub_Class,
-          Subject: Subjects,
-          Chapter_Name: Chapter_Name,
-          Difficulty_level: Difficulty_level,
-          Types_Question: Types_Question,
-          Lesson: Lesson,
-          Section: Section,
+          Board: questiondata?.Board,
+          Chapter_Name: questiondata?.Chapter_Name,
+          Difficulty_level: questiondata?.Difficulty_level,
+          Lesson: questiondata?.Lesson,
+          Medium: questiondata?.Medium,
+          Name_of_examination: questiondata?.Name_of_examination,
+          Objectives: questiondata?.Objectives,
+          Section: questiondata?.Section,
+          Sub_Class: questiondata?.Sub_Class,
+          Subject: questiondata?.Subjects,
+          Types_Question: questiondata?.Types_Question,
+          Class: questiondata?.Class,
+          Instruction: questiondata?.Instruction,
+
           Question: Question,
           Option_1: Option_1,
           Option_2: Option_2,
           Option_3: Option_3,
           Option_4: Option_4,
-          Name_of_examination: Name_of_examination,
-          Objectives: Objectives,
-          Instruction: Instruction,
-          Image: Image,
+       
+          Image_Ans:Image_Ans,
+          Image_1: Image_1,
+          Image_2: Image_2,
+          Image_3: Image_3,
+          Image_4: Image_4,
           Marks: Marks,
           Answer_Time: Answer_Time,
           Answer: Answer,
@@ -131,417 +132,70 @@ const OddandOut_add = () => {
     }
   };
 
-  //   get method for weightage
-  const [weightage, setweightage] = useState([]);
-  const getallweightagecontent = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
-      );
-      if (res.status === 200) {
-        setweightage(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // get method
-  const [getboardname, setboardname] = useState([]);
-  const getallboardname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-      if (res.status == 200) {
-        setboardname(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get method for medium
-  const [Mediumm, setMediumm] = useState([]);
-  const getAddMedium = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
-      if (res.status == 200) {
-        setMediumm(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // get method add class
-  const [getclassname, setgetclassName] = useState([]);
-  const getallclassname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-      if (res.status == 200) {
-        setgetclassName(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // get method for subclass
-  const [getaddsubclass, setgetaddsubclass] = useState([]);
-  const getaddsubclasss = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
-      );
-      if (res.status == 200) {
-        setgetaddsubclass(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for subject
-  const [subject, setsubject] = useState([]);
-  const getSubject = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
-      );
-      if (res.status == 200) {
-        setsubject(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for type of questions
-  const [getalltypesofques, setgetalltypesofques] = useState([]);
-  const getalltypesofquess = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
-      );
-      if (res.status == 200) {
-        setgetalltypesofques(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get of chapters
-  const [chapters, setchapters] = useState([]);
-  const getChapter = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllChapter"
-      );
-      if (res.status == 200) {
-        setchapters(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //get for name of Examination
-  const [NameExam, setNameExam] = useState([]);
-  const getNameExamination = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllNameExamination"
-      );
-      if (res.status == 200) {
-        setNameExam(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getallboardname();
-    getAddMedium();
-    getallclassname();
-    getaddsubclasss();
-    getSubject();
-    getalltypesofquess();
-    getallweightagecontent();
-    getChapter();
-    getNameExamination();
-  }, []);
   return (
     <div>
       <div className="">
         <div className="container">
-          {/* <div className="row">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Examination Board</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  className="vi_0"
-                  onChange={(e) => setBoard(e.target.value)}
-                >
-                  <option>Select the Board</option>
-                  {getboardname?.map((item, i) => {
-                    return (
-                      <option value={item?.boardName} key={i}>
-                        {item?.boardName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Medium</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setMedium(e.target.value)}
-                >
-                  <option>Select the Medium</option>
-                  {Mediumm?.map((item, i) => {
-                    return (
-                      <option value={item?.mediumName} key={i}>
-                        {item?.mediumName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Class</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setClass(e.target.value)}
-                >
-                  <option>Select the Class</option>
-                  {getclassname?.map((item, i) => {
-                    return (
-                      <option value={item?.className} key={i}>
-                        {item?.className}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Sub-Class</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setSub_Class(e.target.value)}
-                >
-                  <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((item, i) => {
-                    return (
-                      <option value={item?.subclassName} key={i}>
-                        {item?.subclassName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Subject</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setSubjects(e.target.value)}
-                >
-                  <option>Select the Subject</option>
-                  {subject?.map((item, i) => {
-                    return (
-                      <option value={item?.subjectName} key={i}>
-                        {item?.subjectName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Lesson</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setLesson(e.target.value);
-                  }}
-                >
-                  <option value="">Selete the Lesson</option>
-                  {weightage
-                    ?.filter((ele) => Subjects == ele?.Subject)
-                    ?.map((val, i) => {
-                      return (
-                        <option value={val?.Content} key={i}>
-                          {val?.Content}
-                        </option>
-                      );
-                    })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Chapter Name</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setChapter_Name(e.target.value)}
-                >
-                  <option>Select the Chapter Name</option>
-                  {chapters?.map((item, i) => {
-                    return (
-                      <option value={item?.chapterName} key={i}>
-                        {item?.chapterName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select the Difficulty level of Paper</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setDifficulty_level(e.target.value);
-                  }}
-                >
-                  <option>Select the Difficulty level of Paper</option>
-                  <option value="Easy">Easy</option>
-                  <option value="Average">Average</option>
-                  <option value="Difficult">Difficult</option>
-                </Form.Select>
-              </div>
-            </div>
-          </div> */}
+       
           <div className="row mt-2">
-            {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Name Of the Examination</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setName_of_examination(e.target.value);
-                  }}
-                >
-                  <option>Select the Name Of the Examination</option>
-                  {NameExam?.map((item, i) => {
-                    return (
-                      <option value={item?.NameExamination} key={i}>
-                        {item?.NameExamination}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Objectives</label>
-              </div>{" "}
-              <Form.Select
-                aria-label="Default select example"
-                // onChange={(e) => {
-                //   setTypes_Question(e.target.value);
-                // }}
-              >
-                <option>Select the Types of the Objective</option>
-                <option>Remembering</option>
-                <option>Appreciation</option>
-                <option>Expression</option>
-                <option>Understanding</option>
-              </Form.Select>
-            </div> */}
-
+           
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+               
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
+                  data={Option_1}
+                  onChange={handleChange3}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+               
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
+                  data={Option_2}
+                  onChange={handleChange4}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+               
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
+                  data={Option_3}
+                  onChange={handleChange5}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+                
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
+                  data={Option_4}
+                  onChange={handleChange6}
                 />
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                {/* <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="vi_0"
-                ></textarea> */}
+               
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
+                  data={Answer}
+                  onChange={handleChange7}
                 />
               </div>
             </div>
@@ -556,37 +210,43 @@ const OddandOut_add = () => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
+                <label htmlFor="upload1">Image 1</label>
+                <input type="file" className="vi_0"  id="upload1" accept="images/*" onChange={(e)=>setImage_1(e.target.files[0])} />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image 2</label>
+                <label htmlFor="upload2">Image 2</label>
                 <input
                   type="file"
                   className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  id="upload2"
+                  accept="images/*"
+                  onChange={(e) => setImage_2(e.target.files[0])}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image 3</label>
+                <label htmlFor="upload3">Image 3</label>
                 <input
                   type="file"
                   className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  id="upload3"
+                  accept="images/*"
+                  onChange={(e) => setImage_3(e.target.files[0])}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Image 4</label>
+                <label htmlFor="upload4">Image 4</label>
                 <input
                   type="file"
                   className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  id="upload4"
+                  accept="images/*"
+                  onChange={(e) => setImage_4(e.target.files[0])}
                 />
               </div>
             </div>
@@ -596,7 +256,7 @@ const OddandOut_add = () => {
                 <input
                   type="file"
                   className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImage_Ans(e.target.files[0])}
                 />
               </div>
             </div>
@@ -606,49 +266,45 @@ const OddandOut_add = () => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
+                  onChange={(e) => setMarks(e.target.value)}
                 >
-                  <option>Select the Marks</option>
-                  <option>1/2</option>
-                  <option>1/4</option>
-                  <option>1/3</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>10</option>
-                </Form.Select>
+                  <option value="">Select the Marks</option>
+                  <option value={"1/2"}>1/2</option>
+                  <option value={"1/4"}>1/4</option>
+                  <option value={"1/3"}>1/3</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                  <option value={7}>7</option>
+                  <option value={8}>8</option>
+                  <option value={10}>10</option>                </Form.Select>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
-                  aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
+                  className="vi_0"
+                  onChange={(e) => setAnswer_Time(e.target.value)}
                 >
-                  <option>Select the Time</option>
-                  <option>1/2 Mnt</option>
-                  <option>1/4 Mnt</option>
-                  <option>1 mnt</option>
-                  <option>1.30 minutes</option>
-                  <option>2 minutes</option>
-                  <option>3 minutes</option>
-                  <option>4 minutes</option>
-                  <option>5 minutes</option>
-                  <option>6 minutes</option>
-                  <option>7 minutes</option>
-                  <option>8 minutes</option>
-                  <option>9 minutes</option>
-                  <option>10 minutes</option>
+                     <option value="">Select</option>
+                  <option value="1/2 Mnt">1/2 Mnt</option>
+                  <option value="1/4 Mnt">1/4 Mnt</option>
+                  <option value="1 Mnt">1 Mnt</option>
+                  <option value="1.30 minutes">1.30 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
+                  <option value="2 minutes">2 minutes</option>
+                  <option value="3 minutes">3 minutes</option>
+                  <option value="4 minutes">4 minutes</option>
+                  <option value="5 minutes"> 5 minutes</option>
+                  <option value="6 minutes">6 minutes</option>
+                  <option value="7 minutes"> 7 minutes</option>
+                  <option value="8 minutes"> 8 minutes</option>
+                  <option value="9 minutes"> 9 minutes</option>
+                  <option value="10 minutes">10 minutes</option>
                 </Form.Select>
               </div>
             </div>
@@ -704,62 +360,122 @@ const OddandOut_add = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
-                <p className="vi_0"></p>
+                <p className="vi_0">{Option_1 ? parse(Option_1) : ""}</p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-                <p className="vi_0"></p>
+                <p className="vi_0">{Option_2 ? parse(Option_2) : ""}</p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3</label>
-                <p className="vi_0"></p>
+                <p className="vi_0">{Option_3 ? parse(Option_3) : ""}</p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                <p className="vi_0"></p>
+                <p className="vi_0">{Option_4 ? parse(Option_4) : ""}</p>
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <p className="vi_0"></p>
+                <p className="vi_0">{Answer ? parse(Answer) : ""}</p>
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1</label>
-                <input type="file" className="vi_0" />
+                {Image_1 ? (
+                      <img
+                        className=""
+                        src={Image_1 && URL.createObjectURL(Image_1)}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
-                <input type="file" className="vi_0" />
+                {Image_2 ? (
+                      <img
+                        className=""
+                        src={Image_2 && URL.createObjectURL(Image_2)}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 3</label>
-                <input type="file" className="vi_0" />
+                {Image_3 ? (
+                      <img
+                        className=""
+                        src={Image_3 && URL.createObjectURL(Image_3)}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 4</label>
-                <input type="file" className="vi_0" />
+                {Image_4 ? (
+                      <img
+                        className=""
+                        src={Image_4 && URL.createObjectURL(Image_4)}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image Answer</label>
-                <input type="file" className="vi_0" />
+                {Image_Ans ? (
+                      <img
+                        className=""
+                        src={Image_Ans && URL.createObjectURL(Image_Ans)}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
               </div>
             </div>
           </div>
@@ -780,8 +496,7 @@ const OddandOut_add = () => {
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-                //   AddSubject();
-                handleClose();
+              addquestions()
               }}
             >
               Submit
