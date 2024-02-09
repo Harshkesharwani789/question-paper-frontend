@@ -20,15 +20,49 @@ const LoginPage3 = () => {
   const [Test_Date, setTest_Date] = useState("");
   const [Size_ofthe_Question, setSize_ofthe_Question] = useState("A4");
   // const [addgenerate, setaddgenerate] = useState("");
+  const generate = async () => {
+    // alert("Callling")
+    try {
+      const config = {
+        url: "/teacher/upadeteQuestionPaper",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          School_Logo: School_Logo,
+          Institute_Name: Institute_Name,
+          Subject: Subject,
+          Test_Date: Test_Date,
+          Size_ofthe_Question: Size_ofthe_Question,
+          id: state?._id,
+          authId: user?._id,
+        },
+      };
 
-  const schooldetails = {
-    School_Logo:School_Logo,
-    Institute_Name:Institute_Name,
-    SchoolAddress:SchoolAddress,
-    Subject:Subject,
-    Test_Date:Test_Date,
-    Size_ofthe_Question:Size_ofthe_Question
-  }
+      let res = await axios(config);
+      let am = "";
+      if (res.status == 200){
+      swal({
+        title: "Yeah!",
+        text: "view blue print !!!",
+        icon: "success",
+        button: "OK!",
+      });
+      navigate("/loginpage5", { state:res.data.success });}
+    } catch (error) {
+      console.log(error);
+      swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+
 
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
@@ -191,7 +225,7 @@ const LoginPage3 = () => {
                         background: "green",
                         // margin: "20px auto",
                       }}
-                      onClick={() => navigate("/loginpage5", { state: { schooldetails } })}
+                      onClick={() =>generate()}
                     >
                       Save
                     </Button>

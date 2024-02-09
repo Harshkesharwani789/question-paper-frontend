@@ -7,10 +7,10 @@ import swal from "sweetalert";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage5 = () => {
-  const location = useLocation();
-  const { schooldetails } = location.state;
 
-  console.log("schooldetails", schooldetails);
+  const { state } = useLocation();;
+
+  console.log("state", state);
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const LoginPage5 = () => {
   const [Size_ofthe_Question, setSize_ofthe_Question] = useState("");
 
   const generate = async () => {
+    // alert("Callling")
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
@@ -36,22 +37,24 @@ const LoginPage5 = () => {
           Subject: Subject,
           Test_Date: Test_Date,
           Size_ofthe_Question: Size_ofthe_Question,
-          // id: state?._id,
+          id: state?._id,
           authId: user?._id,
         },
       };
 
       let res = await axios(config);
-      let am = "";
-      if (res.status == 200) am = res.data.success;
 
-      swal({
-        title: "Yeah!",
-        text: "view blue print !!!",
-        icon: "success",
-        button: "OK!",
-      });
-      navigate("/blueprint", { state: am });
+      if (res.status == 200) {
+
+
+        swal({
+          title: "Yeah!",
+          text: "view blue print !!!",
+          icon: "success",
+          button: "OK!",
+        });
+        navigate("/blueprint", { state: res.data.success });
+      }
     } catch (error) {
       console.log(error);
       swal({
@@ -119,7 +122,7 @@ const LoginPage5 = () => {
                         </Form.Select>
                       </div>
                     </Row> */}
-                    <div style={{textAlign:"center"}}><h5>-: School Details :-</h5></div>
+                    <div style={{ textAlign: "center" }}><h5>-: School Details :-</h5></div>
                     <Row>
                       <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
@@ -130,8 +133,8 @@ const LoginPage5 = () => {
                         </Form.Label>
                         <div className="" >
                           <img
-                          style={{width:"142px",height:"139px",borderRadius:"50%"}}
-                           src={schooldetails?.School_Logo && URL.createObjectURL(schooldetails.School_Logo)}                   
+                            style={{ width: "142px", height: "139px", borderRadius: "50%" }}
+                            src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
                             alt="school logo"
                           />
 
@@ -149,10 +152,10 @@ const LoginPage5 = () => {
                         >
                           Institute_Name :
                         </Form.Label>
-                        
-                        <div>                  
-                          <h6>{schooldetails?.Institute_Name}</h6>
-                      </div>
+
+                        <div>
+                          <h6>{state?.Institute_Name}</h6>
+                        </div>
                       </div>
                     </Row>
                     <Row>
@@ -163,10 +166,10 @@ const LoginPage5 = () => {
                         >
                           Subject :
                         </Form.Label>
-                        
-                        <div>                  
-                          <h6>{schooldetails?.Subject}</h6>
-                      </div>
+
+                        <div>
+                          <h6>{state?.Subject}</h6>
+                        </div>
                       </div>
                     </Row>
 
@@ -178,10 +181,10 @@ const LoginPage5 = () => {
                         >
                           Test_Date :
                         </Form.Label>
-                        
-                        <div>                  
-                          <h6>{schooldetails?.Test_Date}</h6>
-                      </div>
+
+                        <div>
+                          <h6>{state?.Test_Date}</h6>
+                        </div>
                       </div>
                     </Row>
                     <Row>
@@ -192,10 +195,10 @@ const LoginPage5 = () => {
                         >
                           School Address :
                         </Form.Label>
-                        
-                        <div>                  
-                          <h6>{schooldetails?.SchoolAddress}</h6>
-                      </div>
+
+                        <div>
+                          <h6>{state?.SchoolAddress}</h6>
+                        </div>
                       </div>
                     </Row>
                     <Row>
@@ -206,10 +209,10 @@ const LoginPage5 = () => {
                         >
                           Paper Size :
                         </Form.Label>
-                        
-                        <div>                  
-                          <h6>{schooldetails?.Size_ofthe_Question}</h6>
-                      </div>
+
+                        <div>
+                          <h6>{state?.Size_ofthe_Question}</h6>
+                        </div>
                       </div>
                     </Row>
                     {/* <Row>
@@ -259,7 +262,7 @@ const LoginPage5 = () => {
                         </Form.Select>
                       </div>
                     </Row> */}
-{/* 
+                    {/* 
                     <Form.Label
                       className="fs-6 fw-bold"
                       style={{ letterSpacing: "0.5px" }}
@@ -324,7 +327,7 @@ const LoginPage5 = () => {
                         background: "green",
                         margin: "20px",
                       }}
-                    
+
                     >
                       Submit
                     </Button>
@@ -334,11 +337,11 @@ const LoginPage5 = () => {
                         background: "gray",
                         margin: "20px",
                       }}
-                      onClick={() =>{ navigate(-1)}}
+                      onClick={() => { navigate(-1) }}
                     >
                       Edit
                     </Button>
-                    <a href="/blueprint" style={{ textDecoration: "none" }}>
+                
                       <Button
                         style={{
                           background: "green",
@@ -349,7 +352,7 @@ const LoginPage5 = () => {
                       >
                         View Blue Print
                       </Button>
-                    </a>
+                  
                   </div>
                 </Form>
               </div>
