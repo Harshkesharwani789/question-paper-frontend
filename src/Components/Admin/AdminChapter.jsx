@@ -261,34 +261,29 @@ const AdminChapter = () => {
     }
   });
   // Pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const productPerPage = 5;
-  // const visitedPage = pageNumber * productPerPage;
-  // const displayPage = chapters.slice(visitedPage, visitedPage + productPerPage);
-  // const pageCount = Math.ceil(chapters.length / productPerPage);
-  const [currenpage, setCurrentpage] = useState(1);
-  const recordsperpage = 6;
-  const lastIndex = currenpage * recordsperpage;
-  const firstIndex = lastIndex - recordsperpage;
-  const records = chapters.slice(firstIndex, lastIndex);
-  const npages = Math.ceil(chapters.length / recordsperpage);
-  const numbers = [...Array(npages + 1).keys()].slice(1);
+  // const [currenpage, setCurrentpage] = useState(1);
+  // const recordsperpage = 6;
+  // const lastIndex = currenpage * recordsperpage;
+  // const firstIndex = lastIndex - recordsperpage;
+  // const records = chapters.slice(firstIndex, lastIndex);
+  // const npages = Math.ceil(chapters.length / recordsperpage);
+  // const numbers = [...Array(npages + 1).keys()].slice(1);
 
-  function changePage(id) {
-    setCurrentpage(id);
-  }
+  // function changePage(id) {
+  //   setCurrentpage(id);
+  // }
 
-  function prevpage() {
-    if (currenpage !== firstIndex) {
-      setCurrentpage(currenpage - 1);
-    }
-  }
+  // function prevpage() {
+  //   if (currenpage !== firstIndex) {
+  //     setCurrentpage(currenpage - 1);
+  //   }
+  // }
 
-  function nextpage() {
-    if (currenpage !== lastIndex) {
-      setCurrentpage(currenpage + 1);
-    }
-  }
+  // function nextpage() {
+  //   if (currenpage !== lastIndex) {
+  //     setCurrentpage(currenpage + 1);
+  //   }
+  // }
 
   useEffect(() => {
     getChapter();
@@ -296,7 +291,7 @@ const AdminChapter = () => {
     getallweightagecontent();
     getaddsubclasss();
   }, []);
-  console.log("weightage", weightage);
+  console.log("Sub_classname", Sub_classname);
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
   );
@@ -414,45 +409,47 @@ const AdminChapter = () => {
             </thead>
 
             <tbody>
-              {records?.map((item, i) => {
-                return (
-                  <tr>
-                    <td>{i + 1}</td>
+              {chapters
+                ?.filter((val) => val?.Sub_classname == Sub_classname)
+                ?.map((item, i) => {
+                  return (
+                    <tr>
+                      <td>{i + 1}</td>
 
-                    <td>{item?.subjectName}</td>
-                    <td>{item?.SubjectPart}</td>
-                    <td>{item?.chapterName}</td>
+                      <td>{item?.subjectName}</td>
+                      <td>{item?.SubjectPart}</td>
+                      <td>{item?.chapterName}</td>
 
-                    <td>
-                      {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
-                        <div>
-                          <BiSolidEdit
-                            className="text-success"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              handleShow1(item);
-                              setpdatesetchapter(item?._id);
-                              setChapterName(item?.chapterName);
-                              setSubjectName(item?.subjectName);
-                            }}
-                          />{" "}
+                      <td>
+                        {" "}
+                        <div style={{ display: "flex", gap: "20px" }}>
+                          <div>
+                            <BiSolidEdit
+                              className="text-success"
+                              style={{ cursor: "pointer", fontSize: "20px" }}
+                              onClick={() => {
+                                handleShow1(item);
+                                setpdatesetchapter(item?._id);
+                                setChapterName(item?.chapterName);
+                                setSubjectName(item?.subjectName);
+                              }}
+                            />{" "}
+                          </div>
+                          <div>
+                            <AiFillDelete
+                              className="text-danger"
+                              style={{ cursor: "pointer", fontSize: "20px" }}
+                              onClick={() => {
+                                setChapter(item?._id);
+                                handleShow2(item?._id);
+                              }}
+                            />{" "}
+                          </div>
                         </div>
-                        <div>
-                          <AiFillDelete
-                            className="text-danger"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setChapter(item?._id);
-                              handleShow2(item?._id);
-                            }}
-                          />{" "}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </Table>
         </div>
@@ -478,7 +475,7 @@ const AdminChapter = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-        <div>
+        {/* <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -522,7 +519,7 @@ const AdminChapter = () => {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
 
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
