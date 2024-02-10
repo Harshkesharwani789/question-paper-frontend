@@ -662,26 +662,14 @@ const AdminSyllabusCopy = () => {
                     setclasss(e.target.value);
                   }}
                 >
-                  <option>Select the Class</option>
-                  <option value="Lower Primary">Lower Primary</option>
-                  <option value="One Class">One Class</option>
-                  <option value="Two Class">Two Class</option>
-                  <option value="Three Class">Three Class</option>
-                  <option value="Four Class">Four Class</option>
-                  <option value="Five Class">Five Class</option>
-                  <option value="Six Class">Six Class</option>
-                  <option value="Seven Class">Seven Class</option>
-                  <option value="Eight Class">Eight Class</option>
-                  <option value="Nine Class">Nine Class</option>
-                  <option value="ten Class">Ten Class</option>
-               
-                  {/* {getclassname?.map((val, i) => {
+                  <option>Select the Class</option>                 
+                  {getclassname?.map((val, i) => {
                     return (
                       <option value={val?.className} key={i}>
                         {val?.className}
                       </option>
                     );
-                  })} */}
+                  })}
                 </Form.Select>
               </div>
             </div>
