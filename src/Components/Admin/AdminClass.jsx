@@ -438,8 +438,8 @@ const AdminClass = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="ad-b mt-4 mb-4 col-md-12">
-            <Button
+          <div className="ad-b col-md-12">
+            {/* <Button
               className=" btn"
               style={{ backgroundColor: "navy", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
               onClick={() => {
@@ -449,8 +449,8 @@ const AdminClass = () => {
             >
               Class
             </Button>
-            &nbsp; &nbsp;
-            <Button
+            &nbsp; &nbsp; */}
+            {/* <Button
               className="btn"
               style={{ backgroundColor: "#2cb9e7", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
               onClick={() => {
@@ -459,11 +459,11 @@ const AdminClass = () => {
               }}
             >
               Subclass
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
-      {Class ? (
+      {/* {Class ? (
         <>
           <div className="customerhead p-2">
             <div className="d-flex justify-content-between align-items-center">
@@ -573,33 +573,13 @@ const AdminClass = () => {
             </ul>
           </nav>
         </div>
-            {/* <Pagination style={{ float: "right" }}>
-              <Pagination.First onClick={() => setPageNumber(0)} />
-              <Pagination.Prev
-                onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
-              />
-              {Array.from({ length: pageCount }, (_, index) => (
-                <Pagination.Item
-                  key={index}
-                  active={index === pageNumber}
-                  onClick={() => setPageNumber(index)}
-                >
-                  {index + 1}
-                </Pagination.Item>
-              ))}
-              <Pagination.Next
-                onClick={() =>
-                  setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-                }
-              />
-              <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-            </Pagination> */}
+            
           </div>
         </>
       ) : (
         <>
           {Subclass ? (
-            <>
+            <> */}
               <div className="customerhead p-2">
                 <div className="d-flex justify-content-between align-items-center">
                   <h2 className="header-c ">Subclass </h2>
@@ -743,12 +723,12 @@ const AdminClass = () => {
           </nav>
         </div>
               </div>
-            </>
+            {/* </>
           ) : (
             <></>
           )}
         </>
-      )}
+      )} */}
       {/* Add Accomodation modal */}
       <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
@@ -880,21 +860,23 @@ const AdminClass = () => {
         <Modal.Body>
           <div className="do-sear mt-2">
             <label>Class</label>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => {
-                setclasssname(e.target.value);
-              }}
-            >
-              <option>Select Class</option>
-              {getclassname?.map((val, i) => {
-                return (
-                  <option value={val?.className} key={i}>
-                    {val?.className}
-                  </option>
-                );
-              })}
-            </Form.Select>
+            <Form.Select aria-label="Default select example">
+                <option value="">Select Class</option>
+                <option value="LKG">LKG</option>
+                <option value="UKG">UKG</option>
+                <option value="Class I">Class I</option>
+                <option value="Class II">Class II</option>
+                <option value="Class III">Class III</option>
+                <option value="Class IV">Class IV</option>
+                <option value="Class V">Class V</option>
+                <option value="Class VI">Class VI</option>
+                <option value="Class VII">Class VII</option>
+                <option value="Class VIII">Class VIII</option>
+                <option value="Class IX">Class IX</option>
+                <option value="Class X">Class X</option>
+                <option value="Class XI">Class XI</option>
+                <option value="Class XII">Class XII</option>
+              </Form.Select>
           </div>
           <div className="do-sear mt-2">
             <label>Subclass</label>

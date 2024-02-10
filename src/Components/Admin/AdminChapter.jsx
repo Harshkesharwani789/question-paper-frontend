@@ -27,6 +27,7 @@ const AdminChapter = () => {
   //Post
   const [chapterName, setChapterName] = useState("");
   const [subjectName, setSubjectName] = useState("");
+  const [SubjectPart, setSubjectPart] = useState("");
 
   const AddChapter = async () => {
     if (!chapterName)
@@ -43,6 +44,13 @@ const AdminChapter = () => {
         icon: "error",
         button: "Ok!",
       });
+    if (!SubjectPart)
+      return swal({
+        title: "Oops!",
+        text: "Please Enter select subject Part",
+        icon: "error",
+        button: "Ok!",
+      });
     try {
       const config = {
         url: "/admin/addChapter",
@@ -55,6 +63,7 @@ const AdminChapter = () => {
         data: {
           chapterName: chapterName,
           subjectName: subjectName,
+          SubjectPart: SubjectPart,
           authId: admin?._id,
         },
       };
@@ -79,7 +88,19 @@ const AdminChapter = () => {
       });
     }
   };
-
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //get
   const [chapters, setchapters] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
@@ -112,6 +133,7 @@ const AdminChapter = () => {
         data: {
           chapterName: chapterName,
           subjectName: subjectName,
+          SubjectPart: SubjectPart,
           authId: admin?._id,
           id: updatechapter,
         },
@@ -208,6 +230,20 @@ const AdminChapter = () => {
       setchapters([...nochangedata]);
     }
   };
+  // get method for subclass
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const [searchTermH, setSearchTermH] = useState("");
   const searchedProductH = chapters.filter((item) => {
     if (searchTermH.value === "") {
@@ -251,7 +287,10 @@ const AdminChapter = () => {
   useEffect(() => {
     getChapter();
     getSubject();
+    getallweightagecontent();
+    getaddsubclasss();
   }, []);
+  console.log("weightage", weightage);
   return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -269,14 +308,41 @@ const AdminChapter = () => {
         </div>
       </div>
       <div className="customerhead p-2">
-        <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Chapters</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+      <h2 className="header-c ">Chapters</h2>
+
+        <div>
+          <div className="container">
+          <div className="row mb-4">
+            <div className="col-md-4">
+              <label htmlFor="">Select Class</label>
+              <Form.Select aria-label="Default select example">
+                <option value="">Select Class</option>
+                <option value="LKG">LKG</option>
+                <option value="UKG">UKG</option>
+                <option value="Class I">Class I</option>
+                <option value="Class II">Class II</option>
+                <option value="Class III">Class III</option>
+                <option value="Class IV">Class IV</option>
+                <option value="Class V">Class V</option>
+                <option value="Class VI">Class VI</option>
+                <option value="Class VII">Class VII</option>
+                <option value="Class VIII">Class VIII</option>
+                <option value="Class IX">Class IX</option>
+                <option value="Class X">Class X</option>
+                <option value="Class XI">Class XI</option>
+                <option value="Class XII">Class XII</option>
+              </Form.Select>
+            </div>
+            <div className="col-md-8">
+            <button className="admin-add-btn mt-4" style={{float:"right"}} onClick={()=>{handleShow()}}>
             Add Chapters
           </button>
+            </div>
+          </div>
+          </div>
+        
+
+         
         </div>
 
         <div className="mb-3">
@@ -292,6 +358,9 @@ const AdminChapter = () => {
                   <div>Subject</div>
                 </th>
                 <th>
+                  <div>Subject Part</div>
+                </th>
+                <th>
                   <div>Chapter Name</div>
                 </th>
                 <th>Action</th>
@@ -305,7 +374,7 @@ const AdminChapter = () => {
                     <td>{i + 1}</td>
 
                     <td>{item?.subjectName}</td>
-
+                    <td>{item?.SubjectPart}</td>
                     <td>{item?.chapterName}</td>
 
                     <td>
@@ -363,7 +432,7 @@ const AdminChapter = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-          <div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -416,6 +485,46 @@ const AdminChapter = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Class</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setSubjectPart(e.target.value)}
+                  >
+                    <option value="">Select Sub Class</option>
+                    {getaddsubclass.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Class</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => e.target.value}
+                  >
+                    <option value="">Select Sub Class</option>
+                    {getaddsubclass.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+            </div>
+            <div className="row">
               <div className="do-sear mt-2">
                 <label>Subject</label>
                 <Form.Select
@@ -431,6 +540,26 @@ const AdminChapter = () => {
                     );
                   })}
                 </Form.Select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Subject Part</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setSubjectPart(e.target.value)}
+                  >
+                    <option value="">Select Subject Part</option>
+                    {weightage
+                      ?.filter((ele) => subjectName == ele?.Subject)
+                      .map((val, i) => {
+                        return (
+                          <option value={val?.Content}>{val?.Content}</option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
               </div>
             </div>
 
@@ -476,7 +605,10 @@ const AdminChapter = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -569,10 +701,18 @@ const AdminChapter = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className= "modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={DeleteChapter}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={DeleteChapter}
+            >
               Delete
             </Button>
           </Modal.Footer>
