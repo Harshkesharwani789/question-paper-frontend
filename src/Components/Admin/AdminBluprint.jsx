@@ -6,7 +6,7 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
-import { Form, Table } from "react-bootstrap";
+import { Form, Modal, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
@@ -20,44 +20,82 @@ const steps = [
   "Blueprint Details",
   "Weightage to the Content",
   "Marks Details",
-  " Weightage of the Difficulty Level",
+  "Weightage of the Difficulty Level",
+  "Blue Print Generation Chapterwise",
 ];
 
 function AdminBlueprint() {
-const editorConfiguration = {
+  const editorConfiguration = {
     toolbar: [
-        'heading',
-        '|',
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough',
-        '|',
-        'bulletedList',
-        'numberedList',
-        'blockQuote',
-        '|',
-        'link',
-        'imageUpload',
-        'mediaEmbed',
-        '|',
-        'alignment',
-        'fontFamily',
-        'fontSize',
-        'fontColor',
-        'fontBackgroundColor',
-        '|',
-        'indent',
-        'outdent',
-        '|',
-        'undo',
-        'redo',
-        '|',
-        'insertMath', // Include the new button in the toolbar
+      "heading",
+      "|",
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+      "|",
+      "bulletedList",
+      "numberedList",
+      "blockQuote",
+      "|",
+      "link",
+      "imageUpload",
+      "mediaEmbed",
+      "|",
+      "alignment",
+      "fontFamily",
+      "fontSize",
+      "fontColor",
+      "fontBackgroundColor",
+      "|",
+      "indent",
+      "outdent",
+      "|",
+      "undo",
+      "redo",
+      "|",
+      "insertMath", // Include the new button in the toolbar
     ],
-  }
+  };
+  // Array of object 3
+  const [Arr3, setArr3] = useState([]);
+  const [Arr, setArr] = useState([]);
+  const [view, setview] = useState({});
+  const [Arr4, setarr4] = useState([]);
+  const [Arr5, setArr5] = useState([]);
 
+  const addOuestionType = (data) => {
+    if (data) {
+      if (!Arr4.some((ele) => ele?.QTyp == data)) {
+        setarr4([...Arr4, { QTyp: data }]);
+      }
+    }
+  };
+  const deleteQuType = (data) => {
+    setarr4(Arr4.filter((ele) => ele?.QTyp !== data));
+  };
+  const finalsubmit = () => {
+    const am = Arr3.map((ele) => {
+      if (ele.Objective == view.Objective) {
+        return { ...ele, AllQType: Arr4 };
+      }
+      return ele;
+    });
+    setArr3(am);
+    swal({
+      title: "Yeah!",
+      text: "Added Successfully...",
+      icon: "success",
+      button: "OK!",
+    });
 
+    handleClose();
+    return setarr4([]);
+  };
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -175,6 +213,25 @@ const editorConfiguration = {
     }
   };
 
+  const [getobjectives, setgetobjectives] = useState([]);
+
+  const getObjectives = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/api/admin/getobjective`
+      );
+
+      if (res.status === 200) {
+        setgetobjectives(res.data.success);
+      } else {
+        // Handle non-200 status codes here if needed
+        console.error(`Request failed with status code ${res.status}`);
+      }
+    } catch (error) {
+      console.error("Error fetching objectives:", error);
+    }
+  };
+  const [objectiveadd, setobjectiveadd] = useState(false);
   const [blName, setblName] = useState("");
   const [board, setboard] = useState("");
   const [medium, setmedium] = useState("");
@@ -211,7 +268,15 @@ const editorConfiguration = {
   const [TypesofQuestions, setTypesofQuestions] = useState(false);
   const [data, setData] = useState([]);
   const [TotalMask, setTotalMask] = useState("");
-
+  const [Objective, setObjective] = useState("");
+  const [NoofQues, setNoofQues] = useState("");
+  const [objMarks, setobjMarks] = useState("");
+  const [Blueprintchapter, setBlueprintchapter] = useState("");
+  const [Blueprintobjective, setblueprintobjective] = useState("");
+  const [Blueprintnoofquestion, setBlueprintnoofquestion] = useState("");
+  const [BluePrintQuestiontype, setBluePrintQuestiontype] = useState("");
+  const [BluePrintmarksperquestion, setBluePrintmarksperquestion] =
+    useState("");
   // Add for dificulty level
 
   const handleChangeeasy = (e) => {
@@ -301,7 +366,6 @@ const editorConfiguration = {
     }
   };
   // Array of object 1
-  const [Arr, setArr] = useState([]);
 
   const AddTypesofquestion = () => {
     try {
@@ -392,6 +456,212 @@ const editorConfiguration = {
     }
   };
 
+  const Addobjectivess = () => {
+    try {
+      if (!Objective) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Objective",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+
+      if (!NoofQues) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter No. of Questions",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if NQA is not provided
+      }
+
+      if (!objMarks) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter Objectives Marks",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if Mask is not provided
+      }
+
+      let objectives = 1;
+      Arr3.forEach((ele) => {
+        if (ele?.Objective === Objective) {
+          objectives = 0;
+          swal({
+            title: "Oops!",
+            text: "Already Exists...",
+            icon: "error",
+            button: "Try Again!",
+          });
+        }
+      });
+
+      if (objectives) {
+        const obj = {
+          Objective: Objective,
+          NoofQues: NoofQues,
+          Marks: objMarks,
+        };
+
+        setArr3([...Arr3, obj]); // Corrected this line to update the state correctly
+
+        swal({
+          title: "Yeah!",
+          text: "Added Successfully...",
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteobjectivess = (index) => {
+    try {
+      // const deletedQuestion = Arr[index];
+
+      // Create a new array excluding the element at the specified index
+      const updatedArr = Arr3.filter((_, i) => i !== index);
+
+      setArr3(updatedArr);
+      console.log("Arr after deletion", updatedArr);
+
+      swal({
+        title: "Deleted!",
+        text: " Deleted Successfully.",
+        icon: "warning",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const Addblueprint = () => {
+    try {
+      if (!Blueprintnoofquestion) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter No. of Questions",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+      if (!BluePrintQuestiontype) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Question Type",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+      if (!BluePrintmarksperquestion) {
+        swal({
+          title: "Oops!",
+          text: "Please enter marks per question",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+
+      if (!Blueprintchapter) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Chapter",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if NQA is not provided
+      }
+
+      if (!Blueprintobjective) {
+        swal({
+          title: "Oops!",
+          text: "Please Select Objectives",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if Mask is not provided
+      }
+      let content = 1;
+      Arr5.forEach((ele) => {
+        if (
+          ele?.Blueprintobjective === Blueprintobjective &&
+          ele?.Blueprintchapter === Blueprintchapter &&
+          ele?.Blueprintnoofquestion == Blueprintnoofquestion &&
+          ele?.BluePrintQuestiontype == BluePrintQuestiontype &&
+          ele?.BluePrintmarksperquestion == BluePrintmarksperquestion
+        ) {
+          content = 0;
+          swal({
+            title: "Oops!",
+            text: "Already Exists...",
+            icon: "error",
+            button: "Try Again!",
+          });
+        }
+      });
+      if (content) {
+        const obj = {
+          Blueprintobjective: Blueprintobjective,
+          Blueprintchapter: Blueprintchapter,
+          Blueprintnoofquestion: Blueprintnoofquestion,
+          BluePrintQuestiontype: BluePrintQuestiontype,
+          BluePrintmarksperquestion: BluePrintmarksperquestion,
+        };
+        Arr5.push(obj);
+        setArr5([...Arr1]);
+        console.log("Arr5", Arr5);
+        swal({
+          title: "Yeah!",
+          text: "Added Successfully...",
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {}
+  };
+
+  const deletedAddblueprint = (index) => {
+    try {
+      const deletedcontent = Arr1[index];
+      const updatedArr5 = Arr5.filter((_, i) => i !== index);
+      setArr1(updatedArr5);
+      console.log("Arr after deletion", updatedArr5);
+      swal({
+        title: "Deleted!",
+        text: " Deleted Successfully.",
+        icon: "warning",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //get method for chapters
+  const [chapters, setchapters] = useState([]);
+  const getChapter = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllChapter"
+      );
+      if (res.status == 200) {
+        setchapters(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
@@ -492,8 +762,11 @@ const editorConfiguration = {
     getalltypesofquess();
     getallweightagecontent();
     getSubject();
+    getObjectives();
+    getChapter();
   }, []);
 
+  console.log("Arr3===>", Arr3);
   return (
     <>
       <div className="box_1">
@@ -682,14 +955,141 @@ const editorConfiguration = {
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <label htmlFor="">Objectives</label>
-                                <p className="fs-5 mt-2">
+                                {/* <p className="fs-5 mt-2">
                                   <MdPlayArrow
                                     style={{ marginRight: "15px" }}
                                   />
                                   Remembering
-                                </p>
+                                </p> */}
                               </div>
-                              <div className="col-md-4">
+
+                              <div className="row mt-2">
+                                <div className="col-md-3">
+                                  <div className="do-sear">
+                                    <label htmlFor="">Select Objectives</label>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear">
+                                    <label htmlFor="">No. of Questions</label>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear">
+                                    <label htmlFor="">No. of Marks</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="col-md-3">
+                                  <div className="do-sear mt-2">
+                                    <Form.Select
+                                      aria-label="Default select example"
+                                      onChange={(e) => {
+                                        setObjective(e.target.value);
+                                      }}
+                                    >
+                                      <option value="">
+                                        Selete the Type of Question
+                                      </option>
+                                      {getobjectives.map((val, i) => {
+                                        return (
+                                          <option value={val?.Objectivesname}>
+                                            {val?.Objectivesname}
+                                          </option>
+                                        );
+                                      })}
+                                    </Form.Select>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear mt-2">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
+                                      placeholder="Enter the Weightage"
+                                      className="vi_0"
+                                      onChange={(e) => {
+                                        setNoofQues(e.target.value);
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear mt-2">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
+                                      placeholder="Enter the marks"
+                                      className="vi_0"
+                                      onChange={(e) => {
+                                        setobjMarks(e.target.value);
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear mt-2">
+                                    <Button
+                                      style={{
+                                        backgroundColor: "red",
+                                        color: "white",
+                                      }}
+                                      onClick={() => {
+                                        Addobjectivess();
+                                        // setobjectiveadd(true);
+                                      }}
+                                    >
+                                      Add
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row mt-4">
+                                <div className="col-md-12">
+                                  <Table
+                                    responsive
+                                    bordered
+                                    style={{
+                                      width: "-webkit-fill-available",
+                                    }}
+                                  >
+                                    <thead>
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Objectives</th>
+                                        <th>No of Question</th>
+                                        <th>No of Marks</th>
+                                        <th>Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {Arr3?.map((item, i) => {
+                                        return (
+                                          <tr key={i}>
+                                            <td>{i + 1}</td>
+                                            <td>{item?.Objective}</td>
+                                            <td>{item?.NoofQues}</td>
+                                            <td>{item?.Marks}</td>
+                                            <td>
+                                              <AiFillDelete
+                                                color="red"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  deleteobjectivess(i);
+                                                }}
+                                              />
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
+                                    </tbody>
+                                  </Table>
+                                </div>
+                              </div>
+                              {/* <div className="col-md-4">
                                 <label htmlFor="">No. of Questions</label>
                                 <input
                                   type="text"
@@ -802,7 +1202,7 @@ const editorConfiguration = {
                                     setMaskAppreciation(e.target.value);
                                   }}
                                 />
-                              </div>
+                              </div> */}
                             </div>
 
                             <div className="col-md-12">
@@ -811,7 +1211,7 @@ const editorConfiguration = {
                                   General Instructions
                                 </label>
                                 <CKEditor
-                                config={editorConfiguration}
+                                  config={editorConfiguration}
                                   editor={ClassicEditor}
                                   className="vi_0"
                                   data={Instructions}
@@ -1005,18 +1405,105 @@ const editorConfiguration = {
                                           setQAType(e.target.value);
                                         }}
                                       >
-                                        <option value="">
-                                          Selete the Type of Question
+                                        <option value="default">
+                                          Select the Types of the Question
                                         </option>
-                                        {getalltypesofques?.map((val, i) => {
-                                          return (
-                                            <option
-                                              value={val?.Typesofquestion}
-                                            >
-                                              {val?.Typesofquestion}
-                                            </option>
-                                          );
-                                        })}
+                                        <option value="Objective Questions">
+                                          Objective Questions
+                                        </option>
+                                        <option value="Multiple Choice Questions">
+                                          Multiple Choice Questions
+                                        </option>
+                                        <option value="Fill in the Blanks Questions">
+                                          Fill in the Blanks
+                                        </option>
+                                        <option value="Match the Following Questions">
+                                          Match the Following
+                                        </option>
+                                        <option value="Recorrect the Answers Questions">
+                                          Recorrect the Answers
+                                        </option>
+                                        <option value="Classifications of Questions">
+                                          Classifications of Questions
+                                        </option>
+                                        <option value="Odd and out words Questions">
+                                          Odd and out words Questions
+                                        </option>
+                                        <option value="RelationShip Words Questions">
+                                          RelationShip Words Questions
+                                        </option>
+                                        <option value="Grammer Questions">
+                                          Grammer Questions
+                                        </option>
+                                        <option value="One Word Question">
+                                          One Word Question
+                                        </option>
+                                        <option value="One Sentence Answer Question">
+                                          One Sentence Answer Question
+                                        </option>
+                                        <option value="Two  Sentence Answer Questions">
+                                          Two Sentence Answer Questions
+                                        </option>
+                                        <option value="Two and three Sentence Answer Questions">
+                                          Two and three Sentence Answer
+                                          Questions
+                                        </option>
+                                        <option value="Three and Four Sentence Answer Questions">
+                                          Three and Four Sentence Answer
+                                          Questions
+                                        </option>
+                                        {/* <option value="Five Sentence Answer Questions">
+                  Five Sentence Answer Questions
+                </option> */}
+                                        <option value="Five and Six Sentence Answer Questions">
+                                          Five and Six Sentence Answer Questions
+                                        </option>
+                                        <option value="Six Sentence Answer Questions">
+                                          Six Sentence Answer Questions
+                                        </option>
+                                        <option value="Seven Sentence Answer Questions">
+                                          Seven Sentence Answer Questions
+                                        </option>
+                                        <option value="Eight Sentence Answer Questions">
+                                          Eight Sentence Answer Questions
+                                        </option>
+                                        <option value="Ten Sentence Answer Questions">
+                                          Ten Sentence Answer Questions
+                                        </option>
+                                        <option value="Expanding and Explanations Answer Questions">
+                                          {" "}
+                                          Expanding and Explanations Answer
+                                          Questions
+                                        </option>
+                                        <option value="Answer the Questions and Draw the Figure Questions">
+                                          Answer the Questions and Draw the
+                                          Figure Questions{" "}
+                                        </option>
+                                        <option value="Graph Questions">
+                                          Graph Questions
+                                        </option>
+                                        <option value="Complete the Poem">
+                                          Complete the Poem
+                                        </option>
+                                        <option value="Situation UnderStatnding answer Questions">
+                                          {" "}
+                                          Situation UnderStatnding answer
+                                          Questions
+                                        </option>
+                                        <option value="Poet,Time, Place, Writer answer questions">
+                                          {" "}
+                                          Poet,Time, Place, Writer answer
+                                          questions
+                                        </option>
+                                        <option value="Letter Writting">
+                                          Letter Writting
+                                        </option>
+                                        <option value="Map Reading">
+                                          Map Reading
+                                        </option>
+                                        {/* <option value=""></option>
+                <option value=""></option>
+                <option value=""></option> */}
                                       </Form.Select>
                                     </div>
                                     <div className="col-md-3">
@@ -1145,123 +1632,408 @@ const editorConfiguration = {
                             </>
                           ) : (
                             <>
-                              <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                                <div
-                                  className="container"
-                                  style={{ padding: "5px" }}
-                                >
-                                  <div className="row mt-3">
-                                    <div className="col-md-4">
-                                      <label htmlFor="">Dificulty Level</label>
-                                      <p className="fs-5 mt-2">
-                                        <MdPlayArrow
-                                          style={{ marginRight: "15px" }}
-                                        />
-                                        Easy
-                                      </p>
+                              {activeStep == 3 ? (
+                                <>
+                                  <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                                    <div
+                                      className="container"
+                                      style={{ padding: "5px" }}
+                                    >
+                                      <div className="row mt-3">
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            Dificulty Level
+                                          </label>
+                                          <p className="fs-5 mt-2">
+                                            <MdPlayArrow
+                                              style={{ marginRight: "15px" }}
+                                            />
+                                            Easy
+                                          </p>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            No. of Questions
+                                          </label>
+                                          <input
+                                            type="text"
+                                            className="vi_0 mt-2"
+                                            value={Easy}
+                                            placeholder="Enter No. of Questions"
+                                            onChange={(e) => {
+                                              setEasy(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">Marks</label>
+                                          <input
+                                            type="number"
+                                            className="vi_0 mt-2"
+                                            placeholder="Enter the Marks"
+                                            value={EasyMask}
+                                            onChange={handleChangeeasy}
+                                          />
+                                        </div>
+                                        <div className="col-md-4 mt-2">
+                                          <p className="fs-5">
+                                            <MdPlayArrow
+                                              style={{ marginRight: "15px" }}
+                                            />
+                                            Average
+                                          </p>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <input
+                                            type="text"
+                                            className="vi_0"
+                                            value={Average}
+                                            placeholder="Enter No. of Questions"
+                                            onChange={(e) => {
+                                              setAverage(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                        <div className="col-md-4">
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            value={AverageMask}
+                                            placeholder="Enter the Marks"
+                                            onChange={handleChangeaverage}
+                                          />
+                                        </div>
+                                        <div className="col-md-4 mt-2">
+                                          <p className="fs-5">
+                                            <MdPlayArrow
+                                              style={{ marginRight: "15px" }}
+                                            />
+                                            Difficult
+                                          </p>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <input
+                                            type="text"
+                                            className="vi_0"
+                                            value={Difficult}
+                                            placeholder="Enter No. of Questions"
+                                            onChange={(e) => {
+                                              setDifficult(e.target.value);
+                                            }}
+                                          />
+                                        </div>
+                                        <div className="col-md-4">
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            value={DifficultMask}
+                                            placeholder="Enter the Marks"
+                                            onChange={handleChangedifficult}
+                                          />
+                                        </div>
+                                        <div className="col-md-4"></div>
+                                        <div className="col-md-4 mt-2">
+                                          <label
+                                            htmlFor=""
+                                            style={{ float: "right" }}
+                                          >
+                                            Total Marks
+                                          </label>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            placeholder="Total Marks"
+                                            value={TotalDifficultMask}
+                                            onClick={(e) => {
+                                              setTotalDifficultMask(
+                                                e.target.value
+                                              );
+                                            }}
+                                            readOnly
+                                          />
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div className="col-md-4">
-                                      <label htmlFor="">No. of Questions</label>
-                                      <input
-                                        type="text"
-                                        className="vi_0 mt-2"
-                                        value={Easy}
-                                        placeholder="Enter No. of Questions"
-                                        onChange={(e) => {
-                                          setEasy(e.target.value);
-                                        }}
-                                      />
+                                  </Typography>
+                                </>
+                              ) : (
+                                <>
+                                  <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
+                                    <div
+                                      className="container"
+                                      style={{ padding: "5px" }}
+                                    >
+                                      <div className="row">
+                                        {/* <div className="col-md-5">
+                                          <label htmlFor="">Objectives</label>
+                                          <div className="do-sear mt-2">
+                                            <Form.Select
+                                              aria-label="Default select example"
+                                              // onChange={(e) => {
+                                              //   setObjective(e.target.value);
+                                              // }}
+                                            >
+                                              <option value="">
+                                                Selete the Objectives
+                                              </option>
+                                              {getobjectives.map((val, i) => {
+                                                return (
+                                                  <option
+                                                    value={val?.Objectivesname}
+                                                  >
+                                                    {val?.Objectivesname}
+                                                  </option>
+                                                );
+                                              })}
+                                            </Form.Select>
+                                          </div>
+                                        </div>
+                                        <div className="col-md-5">
+                                          <div className="do-sear mt-2">
+                                            <button className="btn btn-danger mt-4">
+                                              Add
+                                            </button>
+                                          </div>
+                                        </div> */}
+                                        <div className="col-md-12">
+                                          <div className="do-sear mt-2">
+                                            <Table
+                                              responsive
+                                              bordered
+                                              style={{
+                                                width: "-webkit-fill-available",
+                                              }}
+                                            >
+                                              <thead>
+                                                <tr>
+                                                  <th>S No.</th>
+                                                  <th>Objectives</th>
+                                                  <th>Add Question Type</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {Arr3?.map((val, i) => {
+                                                  return (
+                                                    <>
+                                                      <tr key={i}>
+                                                        <td>{i + 1}</td>
+                                                        <td>
+                                                          {val?.Objective}
+                                                        </td>
+                                                        <td>
+                                                          <Table
+                                                            responsive
+                                                            bordered
+                                                            style={{
+                                                              width:
+                                                                "-webkit-fill-available",
+                                                            }}
+                                                          >
+                                                            <thead>
+                                                              <tr>
+                                                                <th>S No.</th>
+                                                                <th>
+                                                                  Question Type{" "}
+                                                                  <button
+                                                                    className="btn btn-success"
+                                                                    style={{
+                                                                      float:
+                                                                        "right",
+                                                                      height:
+                                                                        "30px",
+                                                                      borderRadius:
+                                                                        "20px",
+                                                                    }}
+                                                                    onClick={() => {
+                                                                      handleShow();
+                                                                      setview(
+                                                                        val
+                                                                      );
+                                                                      setarr4(
+                                                                        val.AllQType
+                                                                          ? val.AllQType
+                                                                          : []
+                                                                      );
+                                                                    }}
+                                                                  >
+                                                                    Add
+                                                                  </button>
+                                                                </th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              {val?.AllQType?.map(
+                                                                (
+                                                                  item,
+                                                                  index
+                                                                ) => (
+                                                                  <tr
+                                                                    key={index}
+                                                                  >
+                                                                    <td>
+                                                                      {index +
+                                                                        1}
+                                                                    </td>
+                                                                    <td>
+                                                                      {
+                                                                        item?.QTyp
+                                                                      }
+                                                                    </td>
+                                                                  </tr>
+                                                                )
+                                                              )}
+                                                            </tbody>
+                                                          </Table>
+                                                        </td>
+                                                      </tr>
+                                                    </>
+                                                  );
+                                                })}
+                                              </tbody>
+                                            </Table>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="row">
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            Select Chapters
+                                          </label>
+                                          <Form.Select
+                                            aria-label="Default select example"
+                                            onChange={(e) => {
+                                              setBlueprintchapter(
+                                                e.target.value
+                                              );
+                                            }}
+                                          >
+                                            <option value="">
+                                              Selete the Chapter
+                                            </option>
+                                            {chapters?.map((val, i) => {
+                                              return (
+                                                <option
+                                                  value={val?.chapterName}
+                                                >
+                                                  {val?.chapterName}
+                                                </option>
+                                              );
+                                            })}
+
+                                          </Form.Select>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">Objectives</label>
+                                          <Form.Select
+                                            aria-label="Default select example"
+                                            onChange={(e) => {
+                                              setblueprintobjective(e.target.value);
+                                            }}
+                                          >
+
+                                            <option value="">
+                                              Selete Objectives
+                                            </option>
+                                            {getobjectives?.map((item,i)=>{
+                                              return (
+                                                <option value={item?.Objectivesname} key={i}>{item?.Objectivesname}</option>
+
+                                              )
+                                            })}
+                                          </Form.Select>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            Question Type
+                                          </label>
+                                          <Form.Select
+                                            aria-label="Default select example"
+                                           onChange={(e)=>{setBluePrintQuestiontype(e.target.value)}}
+                                          >
+                                            <option value="">
+                                              Selete Question Type
+                                            </option>
+                                            <option value=""></option>
+                                            <option value=""></option>
+                                          </Form.Select>
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            No. of Questions
+                                          </label>
+
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            placeholder="Enter No.of Questions"
+                                          />
+                                        </div>
+                                        <div className="col-md-4">
+                                          <label htmlFor="">
+                                            Marks Per Question
+                                          </label>
+
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            placeholder="Marks Per Question"
+                                          />
+                                        </div>
+                                        <div className="col-md-4">
+                                          <button
+                                            className="btn btn-danger mt-4"
+                                            style={{ float: "right" }}
+                                          >
+                                            Add
+                                          </button>
+                                        </div>
+                                        <div className="col-md-12">
+                                          <div className="do-sear mt-2">
+                                            <Table
+                                              responsive
+                                              bordered
+                                              style={{
+                                                width: "-webkit-fill-available",
+                                              }}
+                                            >
+                                              <thead>
+                                                <tr>
+                                                  <th>S No.</th>
+                                                  <th>Chapters</th>
+                                                  <th>Objectives</th>
+                                                  <th>Question Type</th>
+                                                  <th> No. of Questions</th>
+                                                  <th>Marks Per Question</th>
+                                                  <th>Action</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td>1</td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>
+                                                    {" "}
+                                                    <AiFillDelete
+                                                      color="red"
+                                                      cursor="pointer"
+                                                    />
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </Table>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div className="col-md-4">
-                                      <label htmlFor="">Marks</label>
-                                      <input
-                                        type="number"
-                                        className="vi_0 mt-2"
-                                        placeholder="Enter the Marks"
-                                        value={EasyMask}
-                                        onChange={handleChangeeasy}
-                                      />
-                                    </div>
-                                    <div className="col-md-4 mt-2">
-                                      <p className="fs-5">
-                                        <MdPlayArrow
-                                          style={{ marginRight: "15px" }}
-                                        />
-                                        Average
-                                      </p>
-                                    </div>
-                                    <div className="col-md-4">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        value={Average}
-                                        placeholder="Enter No. of Questions"
-                                        onChange={(e) => {
-                                          setAverage(e.target.value);
-                                        }}
-                                      />
-                                    </div>
-                                    <div className="col-md-4">
-                                      <input
-                                        type="number"
-                                        className="vi_0"
-                                        value={AverageMask}
-                                        placeholder="Enter the Marks"
-                                        onChange={handleChangeaverage}
-                                      />
-                                    </div>
-                                    <div className="col-md-4 mt-2">
-                                      <p className="fs-5">
-                                        <MdPlayArrow
-                                          style={{ marginRight: "15px" }}
-                                        />
-                                        Difficult
-                                      </p>
-                                    </div>
-                                    <div className="col-md-4">
-                                      <input
-                                        type="text"
-                                        className="vi_0"
-                                        value={Difficult}
-                                        placeholder="Enter No. of Questions"
-                                        onChange={(e) => {
-                                          setDifficult(e.target.value);
-                                        }}
-                                      />
-                                    </div>
-                                    <div className="col-md-4">
-                                      <input
-                                        type="number"
-                                        className="vi_0"
-                                        value={DifficultMask}
-                                        placeholder="Enter the Marks"
-                                        onChange={handleChangedifficult}
-                                      />
-                                    </div>
-                                    <div className="col-md-4"></div>
-                                    <div className="col-md-4 mt-2">
-                                      <label
-                                        htmlFor=""
-                                        style={{ float: "right" }}
-                                      >
-                                        Total Marks
-                                      </label>
-                                    </div>
-                                    <div className="col-md-4">
-                                      <input
-                                        type="number"
-                                        className="vi_0"
-                                        placeholder="Total Marks"
-                                        value={TotalDifficultMask}
-                                        onClick={(e) => {
-                                          setTotalDifficultMask(e.target.value);
-                                        }}
-                                        readOnly
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </Typography>
+                                  </Typography>
+                                </>
+                              )}
                             </>
                           )}
                         </>
@@ -1271,18 +2043,26 @@ const editorConfiguration = {
 
                   <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                     <Button
-                    className="modal-add-btn"
+                      className="modal-add-btn"
                       variant=""
                       color="inherit"
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}
-                      style={{ backgroundColor: "green", color: "white" , borderRadius:"5px"}}
+                      style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        borderRadius: "5px",
+                      }}
                     >
                       Back
                     </Button>
                     <Box sx={{ flex: "1 1 auto" }} />
-                    <Button style={{borderRadius:"5px"}} onClick={handleNext} sx={{ mr: 1 }}>
+                    <Button
+                      style={{ borderRadius: "5px" }}
+                      onClick={handleNext}
+                      sx={{ mr: 1 }}
+                    >
                       Next
                     </Button>
                     {activeStep !== steps.length &&
@@ -1307,6 +2087,82 @@ const editorConfiguration = {
           </Box>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>
+            Add Question Type{" "}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+                <label htmlFor="">Objective</label>
+                <p className="vi_0">{view?.Objective}</p>
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="">Question Type</label>
+
+                <div>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => addOuestionType(e.target.value)}
+                  >
+                    <option value="">Select Question Types</option>
+                    <option value="M C">M.C (Multiple Choice)</option>
+                    <option value="V.S.A">V.S.A (Very Short Answer)</option>
+                    <option value="S.A">S.A (Short Answer)</option>
+                    <option value="L.A 1">L.A (Long Answer 1)</option>
+                    <option value="L.A 2">L.A (Long Answer 2)</option>
+                    <option value="L.A 3">L.A (Long Answer 3)</option>
+                  </Form.Select>
+                </div>
+              </div>
+            </div>
+            {Arr4.length ? (
+              <div className="row">
+                <div className="col-md-12">
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                        <th>Question Type</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr4?.map((item, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{item?.QTyp}</td>
+                            <td>
+                              <AiFillDelete
+                                style={{ color: "red", cursor: "pointer" }}
+                                onClick={() => deleteQuType(item.QTyp)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                  <button
+                    className="btn btn-danger"
+                    style={{ float: "right" }}
+                    onClick={finalsubmit}
+                  >
+                    Sumbit
+                  </button>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
