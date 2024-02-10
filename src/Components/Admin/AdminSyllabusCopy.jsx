@@ -149,6 +149,10 @@ const AdminSyllabusCopy = () => {
   };
 
   const addSyllabus = async () => {
+    if(!year){
+      return alert( "Please Enter the year");
+    }
+
     if (!chapterName)
       return swal({
         title: "Oops!",
@@ -257,6 +261,8 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
+
+
   //get method for medium
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
@@ -441,8 +447,11 @@ const AdminSyllabusCopy = () => {
     getaddsubclasss();
     getSubject();
   }, []);
+console.log("getaddsubclass",getaddsubclass);
 
-  return (
+const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
+const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
@@ -637,6 +646,7 @@ const AdminSyllabusCopy = () => {
               <div className="do-sear mt-2">
                 <label>Year</label>
                 <input
+                value={year}
                   type="text"
                   className="vi_0"
                   placeholder="Enter Year"
@@ -657,11 +667,11 @@ const AdminSyllabusCopy = () => {
                     setclasss(e.target.value);
                   }}
                 >
-                  <option>Select the Class</option>
-                  {getclassname?.map((val, i) => {
+                  <option>Select the Class</option>                 
+                  {uniqueClassNamesArray?.map((val, i) => {
                     return (
-                      <option value={val?.className} key={i}>
-                        {val?.className}
+                      <option value={val} key={i}>
+                        {val}
                       </option>
                     );
                   })}
@@ -700,7 +710,7 @@ const AdminSyllabusCopy = () => {
                   }}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((val, i) => {
+                  {getaddsubclass?.filter((ele)=>ele.className === classs )?.map((val, i) => {
                     return (
                       <option value={val?.subclassName} key={i}>
                         {val?.subclassName}
@@ -879,7 +889,7 @@ const AdminSyllabusCopy = () => {
                   addSyllabus();
                 }}
               >
-                Add
+               Submit
               </Button>
             </div>
           </Modal.Footer>

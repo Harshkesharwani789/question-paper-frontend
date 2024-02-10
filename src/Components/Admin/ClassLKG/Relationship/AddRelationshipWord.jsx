@@ -112,7 +112,8 @@ const AddRelationshipWord = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload1">Image</label>
-                <input type="file" className="vi_0" id="upload1" onChange={(e)=>setImage(e.target.files[0])}/>
+                <input type="file" className="vi_0" id="upload1" 
+                onChange={(e)=>setImage(e.target.files[0])}/>
               </div>
             </div>
            
