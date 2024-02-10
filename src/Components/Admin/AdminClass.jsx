@@ -20,7 +20,7 @@ const AdminClass = () => {
   const [show4, setShow4] = useState();
   const [show5, setShow5] = useState();
 
-  const [show6,setShow6] = useState("");
+  const [show6, setShow6] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -350,20 +350,25 @@ const AdminClass = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 5;
   const visitedPage = pageNumber * productPerPage;
-  const displayPage = getclassname.slice(visitedPage, visitedPage + productPerPage);
+  const displayPage = getclassname.slice(
+    visitedPage,
+    visitedPage + productPerPage
+  );
   const pageCount = Math.ceil(getclassname.length / productPerPage);
 
-    // Pagination for subclass
-    const [pageNumber1, setPageNumber1] = useState(0);
-    const productPerPage1 = 5;
-    const visitedPage1 = pageNumber1 * productPerPage1;
-    const displayPage1 = getaddsubclass.slice(visitedPage1, visitedPage1 + productPerPage1);
-    const pageCount1 = Math.ceil(getaddsubclass.length / productPerPage1);
+  // Pagination for subclass
+  const [pageNumber1, setPageNumber1] = useState(0);
+  const productPerPage1 = 5;
+  const visitedPage1 = pageNumber1 * productPerPage1;
+  const displayPage1 = getaddsubclass.slice(
+    visitedPage1,
+    visitedPage1 + productPerPage1
+  );
+  const pageCount1 = Math.ceil(getaddsubclass.length / productPerPage1);
   useEffect(() => {
     getallclassname();
   }, []);
   console.log(getclassname);
-
 
   // newpagination  for class
   const [data1, setData1] = useState([]);
@@ -393,7 +398,7 @@ const AdminClass = () => {
     }
   }
 
-  // subclass pagination 
+  // subclass pagination
 
   const [data2, setData2] = useState([]);
   const [Productss, setProductss] = useState();
@@ -580,87 +585,87 @@ const AdminClass = () => {
         <>
           {Subclass ? (
             <> */}
-              <div className="customerhead p-2">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h2 className="header-c ">Subclass </h2>
-                  <button
-                    className=" btn"
-                    style={{ backgroundColor: "#138808", color: "white" }}
-                    onClick={handleShow3}
-                  >
-                    Add Subclass
-                  </button>
-                </div>
+      <div className="customerhead p-2">
+        <div className="d-flex justify-content-between align-items-center">
+          <h2 className="header-c ">Subclass </h2>
+          <button
+            className=" btn"
+            style={{ backgroundColor: "#138808", color: "white" }}
+            onClick={handleShow3}
+          >
+            Add Subclass
+          </button>
+        </div>
 
-                <div className="mb-3">
-                  <Table
-                    responsive
-                    bordered
-                    style={{ width: "-webkit-fill-available" }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>S.No</th>
-                        <th>
-                          <div>Class</div>
-                        </th>
-                        <th>
-                          <div>Subclass</div>
-                        </th>
+        <div className="mb-3">
+          <Table
+            responsive
+            bordered
+            style={{ width: "-webkit-fill-available" }}
+          >
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>
+                  <div>Class</div>
+                </th>
+                <th>
+                  <div>Subclass</div>
+                </th>
 
-                        <th>Action</th>
-                      </tr>
-                    </thead>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-                    <tbody>
-                      {records1?.map((val, i) => {
-                        return (
-                          <tr key={i}>
+            <tbody>
+              {records1?.map((val, i) => {
+                return (
+                  <tr key={i}>
                     <td>{i + 1 + firstIndexs} </td>
-                            <td>{val?.className}</td>
-                            <td>{val?.subclassName}</td>
+                    <td>{val?.className}</td>
+                    <td>{val?.subclassName}</td>
 
-                            <td>
-                              {" "}
-                              <div style={{ display: "flex", gap: "20px" }}>
-                                <div>
-                                  <BiSolidEdit
-                                    className="text-success"
-                                    style={{
-                                      cursor: "pointer",
-                                      fontSize: "20px",
-                                    }}
-                                    onClick={() => {
-                                      handleShow4();
-                                      seteditsubclass(val?._id);
-                                      setclasssname(val?.className);
-                                      setsubclasssname(val?.subclassName);
-                                    }}
-                                  />{" "}
-                                </div>
-                                <div>
-                                  <AiFillDelete
-                                    className="text-danger"
-                                    style={{
-                                      cursor: "pointer",
-                                      fontSize: "20px",
-                                    }}
-                                    onClick={() => {
-                                      handleShow5(val?._id);
-                                      setdeletesubclass(val?._id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </div>
+                    <td>
+                      {" "}
+                      <div style={{ display: "flex", gap: "20px" }}>
+                        <div>
+                          <BiSolidEdit
+                            className="text-success"
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => {
+                              handleShow4();
+                              seteditsubclass(val?._id);
+                              setclasssname(val?.className);
+                              setsubclasssname(val?.subclassName);
+                            }}
+                          />{" "}
+                        </div>
+                        <div>
+                          <AiFillDelete
+                            className="text-danger"
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => {
+                              handleShow5(val?._id);
+                              setdeletesubclass(val?._id);
+                            }}
+                          />{" "}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
 
-                {/* <Pagination style={{ float: "right" }}>
+        {/* <Pagination style={{ float: "right" }}>
               <Pagination.First onClick={() => setPageNumber1(0)} />
               <Pagination.Prev
                 onClick={() => setPageNumber1((prev) => Math.max(prev - 1, 0))}
@@ -682,7 +687,7 @@ const AdminClass = () => {
               <Pagination.Last onClick={() => setPageNumber1(pageCount1 - 1)} />
             </Pagination> */}
 
-<div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -706,31 +711,36 @@ const AdminClass = () => {
                       className="inactive"
                       onClick={() => changePage(n)}
                     >
-                       {n}
+                      {n}
                     </a>
                   </li>
                 );
               })}
-             
+
               <li className="not-allow">
                 <span>
-                  <li className="next-prev"  onClick={() => {
-                    nextpage();
-                  }}>&gt; </li>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
                 </span>
               </li>
             </ul>
           </nav>
         </div>
-              </div>
-            {/* </>
+      </div>
+      {/* </>
           ) : (
             <></>
           )}
         </>
       )} */}
       {/* Add Accomodation modal */}
-      <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+      <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Add Class</Modal.Title>
         </Modal.Header>
@@ -778,7 +788,7 @@ const AdminClass = () => {
         onHide={handleClose1}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Edit Class</Modal.Title>
@@ -822,7 +832,7 @@ const AdminClass = () => {
         onHide={handleClose2}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -853,50 +863,54 @@ const AdminClass = () => {
       </Modal>
 
       {/* Add Transport modal */}
-      <Modal show={show3} onHide={handleClose3} style={{zIndex:"99999"}}> 
+      <Modal show={show3} onHide={handleClose3} style={{ zIndex: "99999" }}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-          <Modal.Title style={{ color: "white" }}>Add Subclass </Modal.Title>
+          <Modal.Title style={{ color: "white" }}>Add Class </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="do-sear mt-2">
             <label>Class</label>
-            <Form.Select aria-label="Default select example">
-                <option value="">Select Class</option>
-                <option value="LKG">LKG</option>
-                <option value="UKG">UKG</option>
-                <option value="Class I">Class I</option>
-                <option value="Class II">Class II</option>
-                <option value="Class III">Class III</option>
-                <option value="Class IV">Class IV</option>
-                <option value="Class V">Class V</option>
-                <option value="Class VI">Class VI</option>
-                <option value="Class VII">Class VII</option>
-                <option value="Class VIII">Class VIII</option>
-                <option value="Class IX">Class IX</option>
-                <option value="Class X">Class X</option>
-                <option value="Class XI">Class XI</option>
-                <option value="Class XII">Class XII</option>
-              </Form.Select>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
+                setclasssname(e.target.value);
+              }}
+            >
+              <option value="">Select Class</option>
+              <option value="Primary">Primary </option>
+              <option value="Upper Primary">Upper Primary</option>
+              <option value="Secondary">Secondary</option>
+            </Form.Select>
           </div>
           <div className="do-sear mt-2">
-            <label>Subclass</label>
-            <input
-              type="text"
-              className="vi_0"
-              placeholder="Enter Subclass"
+            <label>Sub-Class</label>
+            <Form.Select
+              aria-label="Default select example"
               onChange={(e) => {
                 setsubclasssname(e.target.value);
               }}
-            />
+            >
+              <option value="">Select Sub-Class</option>
+              <option value="LKG">LKG</option>
+              <option value="UKG">UKG</option>
+              <option value="Class I">Class I</option>
+              <option value="Class II">Class II</option>
+              <option value="Class III">Class III</option>
+              <option value="Class IV">Class IV</option>
+              <option value="Class V">Class V</option>
+              <option value="Class VI">Class VI</option>
+              <option value="Class VII">Class VII</option>
+              <option value="Class VIII">Class VIII</option>
+              <option value="Class IX">Class IX</option>
+              <option value="Class X">Class X</option>
+              <option value="Class XI">Class XI</option>
+              <option value="Class XII">Class XII</option>
+            </Form.Select>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
-          <Button
-              className="mx-2"
-              variant="secondary"
-              onClick={handleClose3}
-            >
+            <Button className="mx-2" variant="secondary" onClick={handleClose3}>
               Close
             </Button>
             <Button
@@ -918,7 +932,7 @@ const AdminClass = () => {
         onHide={handleClose4}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Edit Subclass</Modal.Title>
@@ -956,13 +970,9 @@ const AdminClass = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-        <Button
-              className="mx-2"
-              variant="secondary"
-              onClick={handleClose4}
-            >
-              Close
-            </Button>
+          <Button className="mx-2" variant="secondary" onClick={handleClose4}>
+            Close
+          </Button>
           <Button
             variant=""
             className="modal-add-btn"
@@ -979,14 +989,13 @@ const AdminClass = () => {
         onHide={handleClose5}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
-
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton>
           <Modal.Title className="text-light">Warning</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <div className="row">
+          <div className="row">
             <div className="col-md-12">
               <p className="fs-4" style={{ color: "red" }}>
                 Are you sure you want to delete this data?
@@ -1009,8 +1018,6 @@ const AdminClass = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-     
     </div>
   );
 };

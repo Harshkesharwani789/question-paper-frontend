@@ -23,6 +23,7 @@ const AdminChapter = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+  const [classtype, setClasstype] = useState({});
 
   //Post
   const [chapterName, setChapterName] = useState("");
@@ -308,41 +309,47 @@ const AdminChapter = () => {
         </div>
       </div>
       <div className="customerhead p-2">
-      <h2 className="header-c ">Chapters</h2>
+        <h2 className="header-c ">Chapters</h2>
 
         <div>
           <div className="container">
-          <div className="row mb-4">
-            <div className="col-md-4">
-              <label htmlFor="">Select Class</label>
-              <Form.Select aria-label="Default select example">
-                <option value="">Select Class</option>
-                <option value="LKG">LKG</option>
-                <option value="UKG">UKG</option>
-                <option value="Class I">Class I</option>
-                <option value="Class II">Class II</option>
-                <option value="Class III">Class III</option>
-                <option value="Class IV">Class IV</option>
-                <option value="Class V">Class V</option>
-                <option value="Class VI">Class VI</option>
-                <option value="Class VII">Class VII</option>
-                <option value="Class VIII">Class VIII</option>
-                <option value="Class IX">Class IX</option>
-                <option value="Class X">Class X</option>
-                <option value="Class XI">Class XI</option>
-                <option value="Class XII">Class XII</option>
-              </Form.Select>
-            </div>
-            <div className="col-md-8">
-            <button className="admin-add-btn mt-4" style={{float:"right"}} onClick={()=>{handleShow()}}>
-            Add Chapters
-          </button>
+            <div className="row mb-4">
+              <div className="col-md-4">
+                <label htmlFor="">Select Class</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setClasstype(e.target.value)}
+                >
+                  <option value="">Select Class</option>
+                  <option value="LKG">LKG</option>
+                  <option value="UKG">UKG</option>
+                  <option value="Class I">Class I</option>
+                  <option value="Class II">Class II</option>
+                  <option value="Class III">Class III</option>
+                  <option value="Class IV">Class IV</option>
+                  <option value="Class V">Class V</option>
+                  <option value="Class VI">Class VI</option>
+                  <option value="Class VII">Class VII</option>
+                  <option value="Class VIII">Class VIII</option>
+                  <option value="Class IX">Class IX</option>
+                  <option value="Class X">Class X</option>
+                  <option value="Class XI">Class XI</option>
+                  <option value="Class XII">Class XII</option>
+                </Form.Select>
+              </div>
+              <div className="col-md-4">
+                <button
+                  className="admin-add-btn mt-4"
+                  style={{ float: "right" }}
+                  onClick={() => {
+                    handleShow();
+                  }}
+                >
+                  Add Chapters
+                </button>
+              </div>
             </div>
           </div>
-          </div>
-        
-
-         
         </div>
 
         <div className="mb-3">
@@ -481,7 +488,7 @@ const AdminChapter = () => {
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Chapter</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Add Chapter for {classtype}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
