@@ -149,6 +149,10 @@ const AdminSyllabusCopy = () => {
   };
 
   const addSyllabus = async () => {
+    if(!year){
+      return alert( "Please Enter the year");
+    }
+
     if (!chapterName)
       return swal({
         title: "Oops!",
@@ -637,6 +641,7 @@ const AdminSyllabusCopy = () => {
               <div className="do-sear mt-2">
                 <label>Year</label>
                 <input
+                value={year}
                   type="text"
                   className="vi_0"
                   placeholder="Enter Year"
@@ -658,13 +663,25 @@ const AdminSyllabusCopy = () => {
                   }}
                 >
                   <option>Select the Class</option>
-                  {getclassname?.map((val, i) => {
+                  <option value="Lower Primary">Lower Primary</option>
+                  <option value="One Class">One Class</option>
+                  <option value="Two Class">Two Class</option>
+                  <option value="Three Class">Three Class</option>
+                  <option value="Four Class">Four Class</option>
+                  <option value="Five Class">Five Class</option>
+                  <option value="Six Class">Six Class</option>
+                  <option value="Seven Class">Seven Class</option>
+                  <option value="Eight Class">Eight Class</option>
+                  <option value="Nine Class">Nine Class</option>
+                  <option value="ten Class">Ten Class</option>
+               
+                  {/* {getclassname?.map((val, i) => {
                     return (
                       <option value={val?.className} key={i}>
                         {val?.className}
                       </option>
                     );
-                  })}
+                  })} */}
                 </Form.Select>
               </div>
             </div>
@@ -879,7 +896,7 @@ const AdminSyllabusCopy = () => {
                   addSyllabus();
                 }}
               >
-                Add
+               Submit
               </Button>
             </div>
           </Modal.Footer>
