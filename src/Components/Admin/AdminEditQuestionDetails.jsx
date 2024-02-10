@@ -22,6 +22,20 @@ const AdminEditQuestionDetails = () => {
     }
   };
 
+  const QuesImgRef = useRef(null);
+  const QuestionimgEditClick = () => {
+    if (QuesImgRef.current) {
+      QuesImgRef.current.click();
+    }
+  };
+
+  const ImageRef = useRef(null);
+  const ImageEditClick = () => {
+    if (ImageRef.current) {
+      ImageRef.current.click();
+    }
+  };
+
   const Image1Ref = useRef(null);
   const Image1EditClick = () => {
     if (Image1Ref.current) {
@@ -33,6 +47,34 @@ const AdminEditQuestionDetails = () => {
   const Image2EditClick = () => {
     if (Image2Ref.current) {
       Image2Ref.current.click();
+    }
+  };
+
+  const Image3Ref = useRef(null);
+  const Image3EditClick = () => {
+    if (Image3Ref.current) {
+      Image3Ref.current.click();
+    }
+  };
+
+  const Image4Ref = useRef(null);
+  const Image4EditClick = () => {
+    if (Image4Ref.current) {
+      Image4Ref.current.click();
+    }
+  };
+
+  const Image5Ref = useRef(null);
+  const Image5EditClick = () => {
+    if (Image5Ref.current) {
+      Image5Ref.current.click();
+    }
+  };
+
+  const Image6Ref = useRef(null);
+  const Image6EditClick = () => {
+    if (Image6Ref.current) {
+      Image6Ref.current.click();
     }
   };
 
@@ -81,10 +123,7 @@ const AdminEditQuestionDetails = () => {
     const data = editor.getData();
     setorAnswer(data);
   };
-  const handleChange6 = (e, editor) => {
-    const data = editor.getData();
-    setOption_4(data);
-  };
+
 
 
   // Update
@@ -100,19 +139,33 @@ const AdminEditQuestionDetails = () => {
   const [Name_of_examination, setName_of_examination] = useState("");
   const [Question, setQuestion] = useState("");
   const [ImageAns, setImageAns] = useState("");
+  const [ImageQues, setImageQues] = useState("");
+  const [Image, setImage] = useState("");
   const [Image1, setImage1] = useState("");
   const [Image2, setImage2] = useState("");
+  const [Image_3, setImage_3] = useState("");
+  const [Image_4, setImage_4] = useState("");
+  const [Image_5, setImage_5] = useState("");
+  const [Image_6, setImage_6] = useState("");
   const [Answer, setAnswer] = useState("");
   const [Dash, setDash] = useState("4")
   const [PoemSat, setPoemSat] = useState("");
   const [PoemEnd, setPoemEnd] = useState("");
   const [orQuestion, setorQuestion] = useState("");
-  const [Option_2, setOption_2] = useState("");
-  const [Option_3, setOption_3] = useState("");
-  const [Option_4, setOption_4] = useState("");
   const [Objectives, setObjectives] = useState("");
   const [orAnswer, setorAnswer] = useState("");
   const [Marks, setMarks] = useState("");
+
+  const [Option_1, setOption_1] = useState("");
+  const [Option_2, setOption_2] = useState("");
+  const [Option_3, setOption_3] = useState("");
+  const [Option_4, setOption_4] = useState("");
+  const [Option_5, setOption_5] = useState("");
+  const [Option_6, setOption_6] = useState("");
+
+  const [input1, setinput1] = useState("");
+  const [input2, setinput2] = useState("");
+  const [input3, setinput3] = useState("");
 
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
@@ -150,6 +203,17 @@ const AdminEditQuestionDetails = () => {
       setDash(question_details.NumberOfLine || '')
       setPoemSat(question_details.PoemSt || '')
       setPoemEnd(question_details.PoemEnd || '')
+      setOption_1(question_details.Option_1 || '')
+      setOption_2(question_details.Option_2 || '')
+      setOption_3(question_details.Option_3 || '')
+      setOption_4(question_details.Option_4 || '')
+      setOption_5(question_details.Option_5 || '')
+      setOption_6(question_details.Option_6 || '')
+      setinput1(question_details.input1 || '')
+      setinput2(question_details.input2 || '')
+      setinput3(question_details.input3 || '')
+
+
       setOneline(question_details.NumberOfLine == "1");
       setTwoline(question_details.NumberOfLine == "2");
       setThreeline(question_details.NumberOfLine == "3");
@@ -327,10 +391,27 @@ const AdminEditQuestionDetails = () => {
 
           PoemSt: PoemSat,
           PoemEnd: PoemEnd,
-
+          Image: Image,
           Image_1: Image1,
           Image_2: Image2,
+          Image_3: Image_3,
+          Image_4: Image_4,
+          Image_5: Image_5,
+          Image_6: Image_6,
           PassiveQuesion: subquestions,
+
+
+          Option_1: Option_1,
+          Option_2: Option_2,
+          Option_3: Option_3,
+          Option_4: Option_4,
+          Option_5: Option_5,
+          Option_6: Option_6,
+          ImageQ:ImageQues,
+
+          input1: input1,
+          input2: input2,
+          input3: input3,
 
 
           id: question_details?._id,
@@ -1513,6 +1594,1450 @@ const AdminEditQuestionDetails = () => {
             </div>
 
               </>) : (<></>)}
+
+              {/* Match the Following Questions */}
+
+              {/* Recorrect the Answers Questions */}
+
+              {question_details?.Types_Question === "Recorrect the Answers Questions" ||
+              question_details?.Types_Question === "Expanding and Explanations Answer Questions"
+              
+              ? (<>
+                <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload"> Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image
+                        ?
+                        Image && URL.createObjectURL(Image) :
+                        `http://localhost:8000/Questions/${question_details?.Image}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={ImageEditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload"
+                        ref={ImageRef}
+                        onChange={(e) => setImage(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6"></div>
+
+                <div className="col-md-4">
+                  <div className="do-sear mt-2">
+                    <label htmlFor="">Select Number of Line</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      value={Dash}
+                      onChange={(e) => {
+                        const selectedValue = e.target.value;
+                        setDash(selectedValue);
+                        setOneline(selectedValue === "1");
+                        setTwoline(selectedValue === "2");
+                        setThreeline(selectedValue === "3");
+                        setFourline(selectedValue === "4");
+                        setFiveline(selectedValue === "5");
+                        setSixline(selectedValue === "6");
+                        setSevenline(selectedValue === "7");
+                        setEightline(selectedValue === "8");
+                        setNineline(selectedValue === "9");
+                        setTenline(selectedValue === "10");
+                      }}
+                    >
+                      <option>Select Answer Line</option>
+                      <option
+                        value="1"
+                        onClick={() => {
+                          setOneline(true);
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        1
+                      </option>
+
+                      <option
+                        value="2"
+                        onClick={() => {
+                          setOneline(false);
+                          setTwoline(true);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        2
+                      </option>
+
+                      <option
+                        value="3"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(true);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        3
+                      </option>
+                      <option
+                        value="4"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(true);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        4
+                      </option>
+                      <option
+                        value="5"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(true);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        5
+                      </option>
+                      <option
+                        value="6"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(true);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        6
+                      </option>
+                      <option
+                        value="7"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(true);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        7
+                      </option>
+                      <option
+                        value="8"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(true);
+                          setNineline(false);
+                          setTenline(false);
+                        }}
+                      >
+                        8
+                      </option>
+                      <option
+                        value="9"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(true);
+                          setTenline(false);
+                        }}
+                      >
+                        9
+                      </option>
+                      <option
+                        value="10"
+                        onClick={() => {
+                          setTwoline(false);
+                          setThreeline(false);
+                          setFourline(false);
+                          setFiveline(false);
+                          setSixline(false);
+                          setSevenline(false);
+                          setEightline(false);
+                          setNineline(false);
+                          setTenline(true);
+                        }}
+                      >
+                        10
+                      </option>
+                    </Form.Select>
+                  </div>
+                </div>
+
+                <div className="col-8">
+                  {oneline ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-5">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {twoline ? (
+                        <>
+                          <div className="col-md-12">
+                            <div className="do-sear mt-4">
+                              <p type="text" className="lined-input"></p>
+                            </div>
+                          </div>
+                          <div className="col-md-12">
+                            <div className="do-sear mt-2">
+                              <p type="text" className="lined-input"></p>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {threeline ? (
+                            <>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-4">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-2">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="do-sear mt-2">
+                                  <p type="text" className="lined-input"></p>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {fourline ? (
+                                <>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-4">
+                                      <p type="text" className="lined-input"></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p type="text" className="lined-input"></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p type="text" className="lined-input"></p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div className="do-sear mt-2">
+                                      <p type="text" className="lined-input"></p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  {fiveline ? (
+                                    <>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-4">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-12">
+                                        <div className="do-sear mt-2">
+                                          <p
+                                            type="text"
+                                            className="lined-input"
+                                          ></p>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {sixline ? (
+                                        <>
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-4">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>{" "}
+                                          <div className="col-md-12">
+                                            <div className="do-sear mt-2">
+                                              <p
+                                                type="text"
+                                                className="lined-input"
+                                              ></p>
+                                            </div>
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <>
+                                          {sevenline ? (
+                                            <>
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-4">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>{" "}
+                                              <div className="col-md-12">
+                                                <div className="do-sear mt-2">
+                                                  <p
+                                                    type="text"
+                                                    className="lined-input"
+                                                  ></p>
+                                                </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <>
+                                              {eightline ? (
+                                                <>
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-4">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>{" "}
+                                                  <div className="col-md-12">
+                                                    <div className="do-sear mt-2">
+                                                      <p
+                                                        type="text"
+                                                        className="lined-input"
+                                                      ></p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <>
+                                                  {nineline ? (
+                                                    <>
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-4">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>{" "}
+                                                      <div className="col-md-12">
+                                                        <div className="do-sear mt-2">
+                                                          <p
+                                                            type="text"
+                                                            className="lined-input"
+                                                          ></p>
+                                                        </div>
+                                                      </div>
+                                                    </>
+                                                  ) : (
+                                                    <>
+                                                      {tenline ? (
+                                                        <>
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-4">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>{" "}
+                                                          <div className="col-md-12">
+                                                            <div className="do-sear mt-2">
+                                                              <p
+                                                                type="text"
+                                                                className="lined-input"
+                                                              ></p>
+                                                            </div>
+                                                          </div>
+                                                        </>
+                                                      ) : (
+                                                        <></>
+                                                      )}
+                                                    </>
+                                                  )}
+                                                </>
+                                              )}
+                                            </>
+                                          )}
+                                        </>
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+
+                <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
+
+            <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload1">Question Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image1
+                        ?
+                        Image1 && URL.createObjectURL(Image1) :
+                        `http://localhost:8000/Questions/${question_details?.Image_1}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image1EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload1"
+                        ref={Image1Ref}
+                        onChange={(e) => setImage1(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload2">Question Image</label>
+                  <div className="d-flex">
+                    <img
+                      style={{    width: "65%",
+                      height: "262px",
+                      imageRendering: "pixelated"
+                  }}
+                      src={Image2
+                        ?
+                        Image2 && URL.createObjectURL(Image2) :
+                        `http://localhost:8000/Questions/${question_details?.Image_2}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image2EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload2"
+                        ref={Image2Ref}
+                        onChange={(e) => setImage2(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={orQuestion}
+                  onChange={handleChange4}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={orAnswer}
+                  onChange={handleChange5}
+                />
+              </div>
+            </div>
+              </>):(<></>)}
+
+
+              {/* Objective Questions */}
+
+              {question_details?.Types_Question === "Objective Questions" ? (<>
+                <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 1</label>
+                <input
+                value={Option_1}
+                  type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_1(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 2</label>
+                <input
+                value={Option_2}
+                  type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_2(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
+
+            <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="quesimg"> Question Image </label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={ImageQues
+                        ?
+                        ImageQues && URL.createObjectURL(ImageQues) :
+                        `http://localhost:8000/Questions/${question_details?.ImageQ}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={QuestionimgEditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="quesimg"
+                        ref={QuesImgRef}
+                        onChange={(e) => setImageQues(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="col-sm-6"></div>
+
+            <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload1"> Image 1</label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={Image1
+                        ?
+                        Image1 && URL.createObjectURL(Image1) :
+                        `http://localhost:8000/Questions/${question_details?.Image_1}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image1EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload1"
+                        ref={Image1Ref}
+                        onChange={(e) => setImage1(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload2"> Image 2</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image2
+                        ?
+                        Image2 && URL.createObjectURL(Image2) :
+                        `http://localhost:8000/Questions/${question_details?.Image_2}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image2EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload2"
+                        ref={Image2Ref}
+                        onChange={(e) => setImage2(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                      height: "262px",
+                      imageRendering: "pixelated"
+                  }}
+                     
+                      src={ImageAns
+                        ?
+                        ImageAns && URL.createObjectURL(ImageAns) :
+                        `http://localhost:8000/Questions/${question_details?.Image_Ans}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={handleEditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        onChange={(e) => setImageAns(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              
+              </>):(<></>)}
+
+
+              {/* Multiple Choice Questions */}
+
+              {question_details?.Types_Question === "Multiple Choice Questions" ? (<>
+              
+                <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 1</label>
+                <input
+               value={Option_1}
+                  type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_1(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 2</label>
+                <input
+                value={Option_2}
+                type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_2(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 3</label>
+                <input
+                value={Option_3}
+                type="text"                  
+                  className="vi_0"
+                  onChange={(e) => setOption_3(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 4</label>
+                <input
+                value={Option_4}
+                type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_4(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 5</label>
+                <input
+                value={Option_5}
+                type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_5(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 6</label>
+                <input
+                value={Option_6}
+                type="text"
+                  className="vi_0"
+                  onChange={(e) => setOption_6(e.target.value)}
+                />
+              </div>
+            </div>
+              
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+                <b>(OR)</b>
+              </h6>
+            </div>
+            <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="quesimg"> Question Image </label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={ImageQues
+                        ?
+                        ImageQues && URL.createObjectURL(ImageQues) :
+                        `http://localhost:8000/Questions/${question_details?.ImageQ}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={QuestionimgEditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="quesimg"
+                        ref={QuesImgRef}
+                        onChange={(e) => setImageQues(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="col-sm-6"></div>
+
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload1"> Image 1</label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={Image1
+                        ?
+                        Image1 && URL.createObjectURL(Image1) :
+                        `http://localhost:8000/Questions/${question_details?.Image_1}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image1EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload1"
+                        ref={Image1Ref}
+                        onChange={(e) => setImage1(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload2"> Image 2</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image2
+                        ?
+                        Image2 && URL.createObjectURL(Image2) :
+                        `http://localhost:8000/Questions/${question_details?.Image_2}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image2EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload2"
+                        ref={Image2Ref}
+                        onChange={(e) => setImage2(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload3"> Image 3</label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={Image_3
+                        ?
+                        Image_3 && URL.createObjectURL(Image_3) :
+                        `http://localhost:8000/Questions/${question_details?.Image_3}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image3EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload3"
+                        ref={Image3Ref}
+                        onChange={(e) => setImage_3(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload4"> Image 4</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image_4
+                        ?
+                        Image_4 && URL.createObjectURL(Image_4) :
+                        `http://localhost:8000/Questions/${question_details?.Image_4}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image4EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload4"
+                        ref={Image4Ref}
+                        onChange={(e) => setImage_4(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload5"> Image 5</label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={Image_5
+                        ?
+                        Image_5 && URL.createObjectURL(Image_5) :
+                        `http://localhost:8000/Questions/${question_details?.Image_5}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image5EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload5"
+                        ref={Image5Ref}
+                        onChange={(e) => setImage_5(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload6"> Image 6</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image_6
+                        ?
+                        Image_6 && URL.createObjectURL(Image_6) :
+                        `http://localhost:8000/Questions/${question_details?.Image_6}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image6EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload6"
+                        ref={Image6Ref}
+                        onChange={(e) => setImage_6(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                      height: "262px",
+                      imageRendering: "pixelated"
+                  }}
+                     
+                      src={ImageAns
+                        ?
+                        ImageAns && URL.createObjectURL(ImageAns) :
+                        `http://localhost:8000/Questions/${question_details?.Image_Ans}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={handleEditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        onChange={(e) => setImageAns(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              </>):(<></>)}
+
+
+              {/* Fill in the Blanks Questions */}
+
+              {question_details?.Types_Question === "Fill in the Blanks Questions" ? (<>
+                <div className="col-md-3">
+              <label htmlFor="">Dash (--)</label>
+              <Form.Select
+              value={Dash}
+                aria-label="Default select example"
+                onChange={(e) => setDash(e.target.value)}
+              >
+                <option value="">Select Dash</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </Form.Select>
+            </div>
+            {Dash === "1" ? (
+              <>
+                <div className="col-md-9 d-flex align-items-end ">
+                  <input
+                  value={input1}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setinput1(e.target.value)}
+                  />
+
+                  <span>___________</span>
+
+                  <input
+                  value={input2}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setinput2(e.target.value)}
+                  />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {Dash === "2" ? (
+              <>
+                <div className="col-md-9 d-flex align-items-end ">
+                  <input
+                  value={input1}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setinput1(e.target.value)}
+                  />
+
+                  <span>___________</span>
+
+                  <input
+                  value={input2}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setinput2(e.target.value)}
+                  />
+                  <span>___________</span>
+                  <input
+                  value={input3}
+                    className="vi_0"
+                    type="text"
+                    placeholder="enter text"
+                    onChange={(e) => setinput3(e.target.value)}
+                  />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+              </>):(<></>)}
 
 
               {/* Latter Writting */}
@@ -3957,7 +5482,11 @@ const AdminEditQuestionDetails = () => {
              question_details?.Types_Question === "Five and Six Sentence Answer Questions" ||
              question_details?.Types_Question === "Six Sentence Answer Questions"||
              question_details?.Types_Question === "Seven Sentence Answer Questions"||
-             question_details?.Types_Question === "Classifications of Questions"
+             question_details?.Types_Question === "Classifications of Questions" ||
+             question_details?.Types_Question === "Recorrect the Answers Questions" ||
+             question_details?.Types_Question === "Expanding and Explanations Answer Questions" ||
+             question_details?.Types_Question === "Objective Questions" ||
+             question_details?.Types_Question === "Multiple Choice Questions"
           
           ? (<></>):(<>
           <div className="col-md-12">
