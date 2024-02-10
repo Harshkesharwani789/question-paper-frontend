@@ -619,7 +619,7 @@ function AdminBlueprint() {
           BluePrintmarksperquestion: BluePrintmarksperquestion,
         };
         Arr5.push(obj);
-        setArr5([...Arr1]);
+        setArr5([...Arr5]);
         console.log("Arr5", Arr5);
         swal({
           title: "Yeah!",
@@ -633,9 +633,9 @@ function AdminBlueprint() {
 
   const deletedAddblueprint = (index) => {
     try {
-      const deletedcontent = Arr1[index];
+      // const deletedcontent = Arr1[index];
       const updatedArr5 = Arr5.filter((_, i) => i !== index);
-      setArr1(updatedArr5);
+      setArr5(updatedArr5);
       console.log("Arr after deletion", updatedArr5);
       swal({
         title: "Deleted!",
@@ -717,6 +717,10 @@ function AdminBlueprint() {
           TotalDifficultMask: TotalDifficultMask,
           TypesofQuestions: Arr,
           Weightageofthecontent: Arr1,
+          objectives:Arr3,
+          Objective:Arr3,
+          AllChapter:Arr5
+
         },
       };
       let res = await axios(config);
@@ -767,6 +771,7 @@ function AdminBlueprint() {
   }, []);
 
   console.log("Arr3===>", Arr3);
+  console.log("view==>", view);
   return (
     <>
       <div className="box_1">
@@ -1624,6 +1629,7 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
+                                        onChange={(e)=>{setTotalMask(e.target.value)}}
                                       />
                                     </div>
                                   </div>
@@ -1921,7 +1927,6 @@ function AdminBlueprint() {
                                                 </option>
                                               );
                                             })}
-
                                           </Form.Select>
                                         </div>
                                         <div className="col-md-4">
@@ -1929,18 +1934,29 @@ function AdminBlueprint() {
                                           <Form.Select
                                             aria-label="Default select example"
                                             onChange={(e) => {
-                                              setblueprintobjective(e.target.value);
+                                              if (e.target.value) {
+                                                let am = JSON.parse(
+                                                  e.target.value
+                                                );
+                                                setblueprintobjective(
+                                                  am?.Objective
+                                                );
+                                                setview(am);
+                                              }
                                             }}
                                           >
-
                                             <option value="">
                                               Selete Objectives
                                             </option>
-                                            {getobjectives?.map((item,i)=>{
+                                            {Arr3?.map((item, i) => {
                                               return (
-                                                <option value={item?.Objectivesname} key={i}>{item?.Objectivesname}</option>
-
-                                              )
+                                                <option
+                                                  value={JSON.stringify(item)}
+                                                  key={i}
+                                                >
+                                                  {item?.Objective}
+                                                </option>
+                                              );
                                             })}
                                           </Form.Select>
                                         </div>
@@ -1950,13 +1966,20 @@ function AdminBlueprint() {
                                           </label>
                                           <Form.Select
                                             aria-label="Default select example"
-                                           onChange={(e)=>{setBluePrintQuestiontype(e.target.value)}}
+                                            onChange={(e) => {
+                                              setBluePrintQuestiontype(
+                                                e.target.value
+                                              );
+                                            }}
                                           >
                                             <option value="">
                                               Selete Question Type
                                             </option>
-                                            <option value=""></option>
-                                            <option value=""></option>
+                                            {view?.AllQType?.map((ele) => (
+                                              <option value={ele?.QTyp}>
+                                                {ele?.QTyp}
+                                              </option>
+                                            ))}
                                           </Form.Select>
                                         </div>
                                         <div className="col-md-4">
@@ -1967,6 +1990,11 @@ function AdminBlueprint() {
                                           <input
                                             type="number"
                                             className="vi_0"
+                                            onChange={(e) => {
+                                              setBlueprintnoofquestion(
+                                                e.target.value
+                                              );
+                                            }}
                                             placeholder="Enter No.of Questions"
                                           />
                                         </div>
@@ -1978,6 +2006,11 @@ function AdminBlueprint() {
                                           <input
                                             type="number"
                                             className="vi_0"
+                                            onChange={(e) => {
+                                              setBluePrintmarksperquestion(
+                                                e.target.value
+                                              );
+                                            }}
                                             placeholder="Marks Per Question"
                                           />
                                         </div>
@@ -1985,6 +2018,7 @@ function AdminBlueprint() {
                                           <button
                                             className="btn btn-danger mt-4"
                                             style={{ float: "right" }}
+                                            onClick={Addblueprint}
                                           >
                                             Add
                                           </button>
@@ -2010,21 +2044,27 @@ function AdminBlueprint() {
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                <tr>
-                                                  <td>1</td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>
-                                                    {" "}
-                                                    <AiFillDelete
-                                                      color="red"
-                                                      cursor="pointer"
-                                                    />
-                                                  </td>
-                                                </tr>
+                                                {Arr5?.map((val,i)=>{
+                                                  return(
+                                                    <tr key={i}>
+                                                    <td>{i+1}</td>
+                                                    <td>{val?.Blueprintchapter}</td>
+                                                    <td>{val?.Blueprintobjective}</td>
+                                                    <td>{val?.BluePrintQuestiontype}</td>
+                                                    <td>{val?.Blueprintnoofquestion}</td>
+                                                    <td>{val?.BluePrintmarksperquestion}</td>
+                                                    <td>
+                                                      {" "}
+                                                      <AiFillDelete
+                                                        color="red"
+                                                        cursor="pointer"
+                                                        onClick={()=>{deletedAddblueprint(i)}}
+                                                      />
+                                                    </td>
+                                                  </tr>
+                                                  )
+                                                })}
+                                               
                                               </tbody>
                                             </Table>
                                           </div>
