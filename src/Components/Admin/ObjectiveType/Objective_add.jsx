@@ -13,7 +13,7 @@ const Objective_add = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-console.log("object",questiondata)
+
 
   const navigate = useNavigate();
 
