@@ -3,7 +3,8 @@ import "../fontpage/Frontpage.css";
 import { IoCheckmark } from "react-icons/io5";
 import Table from "react-bootstrap/Table";
 
-const Frontpage = () => {
+const Frontpage = ({data}) => {
+  console.log("Data-===>",data);
   return (
     <div>
       {/* new  */}
@@ -12,33 +13,33 @@ const Frontpage = () => {
           <div className="top-titles-container">
             <div className="top-logo">
             <div>
-            <img src="../Images/logo.png" alt="" style={{ width: "100px" }} />
+            <img src={`http://localhost:8000/Teacher/${data?.School_Logo}`} alt="" style={{ width: "100px" }} />
             </div>
             <div className="title-1">
               <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
             </div>
             </div>
             <div className="title-2">
-              <h5>KSQAAC, Malleshwaram, Bengaluru-560003</h5>
+              <h5>{data?.Institute_Name},{data?.Address}</h5>
             </div>
             <div className="title-3">
-              <h4>Assessment-March 2023 Model Paper</h4>
+              <h4>{data?.Exam_Name} {" "}{data?.Exam_Lavel}</h4>
             </div>
           </div>
 
           <div className="class-details">
             <div className="class-data">
-              <b>Class : 8</b>
+              <b>Class : {data?.Class}</b>
             </div>
             <div className="class-data">
-              <b>Subject: First Language English</b>
+              <b>Subject: {data?.Subject}</b>
             </div>
             <div>
               <div className="class-data">
-                <b>Marks: 40</b>
+                <b>Marks: {data?.bluePrint?.TotalDifficultMask}</b>
               </div>
               <div className="class-data">
-                <b>Time: 2 Hours</b>
+                <b>Time: {parseInt(data?.bluePrint?.DurationOfExam)} Hours</b>
               </div>
             </div>
           </div>
@@ -65,6 +66,7 @@ const Frontpage = () => {
                 <div className="number-box"></div>
                 <div className="number-box"></div>
                 <div className="number-box"></div>
+                <div className="number-box"></div>
               </div>
               <div className="ss">
                 <p>Signature of the Student:</p>
@@ -83,6 +85,9 @@ const Frontpage = () => {
                 <p>School IDSE Code:</p>
               </div>
               <div className="d-flex">
+                <div className="number-box"></div>
+                <div className="number-box"></div>
+                <div className="number-box"></div>
                 <div className="number-box"></div>
                 <div className="number-box"></div>
                 <div className="number-box"></div>
