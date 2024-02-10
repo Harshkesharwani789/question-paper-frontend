@@ -261,6 +261,8 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
+
+
   //get method for medium
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
@@ -445,8 +447,11 @@ const AdminSyllabusCopy = () => {
     getaddsubclasss();
     getSubject();
   }, []);
+console.log("getaddsubclass",getaddsubclass);
 
-  return (
+const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
+const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
@@ -663,10 +668,10 @@ const AdminSyllabusCopy = () => {
                   }}
                 >
                   <option>Select the Class</option>                 
-                  {getclassname?.map((val, i) => {
+                  {uniqueClassNamesArray?.map((val, i) => {
                     return (
-                      <option value={val?.className} key={i}>
-                        {val?.className}
+                      <option value={val} key={i}>
+                        {val}
                       </option>
                     );
                   })}
@@ -705,7 +710,7 @@ const AdminSyllabusCopy = () => {
                   }}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((val, i) => {
+                  {getaddsubclass?.filter((ele)=>ele.className === classs )?.map((val, i) => {
                     return (
                       <option value={val?.subclassName} key={i}>
                         {val?.subclassName}
