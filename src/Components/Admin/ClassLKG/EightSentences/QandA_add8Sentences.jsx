@@ -37,7 +37,7 @@ const QandA_add8Sentences = () => {
   //post
 
   const [Question, setQuestion] = useState("");
-  const [Answer, setAnswer] = useState([]);
+  const [Answer, setAnswer] = useState("");
   const [orQuestion, setorQuestion] = useState("");
   const [orAnswer, setorAnswer] = useState("");
   const [Marks, setMarks] = useState("");
