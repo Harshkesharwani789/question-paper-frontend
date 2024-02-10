@@ -39,11 +39,13 @@ const LoginPage3 = () => {
           Size_ofthe_Question: Size_ofthe_Question,
           id: state?._id,
           authId: user?._id,
+          teacherId:user?._id,
+          teacheName:user?.FirstName
         },
       };
 
       let res = await axios(config);
-      let am = "";
+
       if (res.status == 200){
       swal({
         title: "Yeah!",

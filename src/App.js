@@ -171,8 +171,7 @@ import Social_QP from "./Components/10th_QP_Pattern/Social_QP";
 import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 import Science10th from "./Components/10th_QP_Pattern/Science10th";
 import AdminObjectives from "./Components/Admin/AdminObjectives";
-import Fakedata from "./Components/Fake/Fakedata";
-
+import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
 
 
 function App() {
@@ -376,6 +375,10 @@ function App() {
             path="/Adminquestion_paper"
             element={<Main children={<AdminQuestionPaper />} />}
           />
+          <Route
+            path="/Admin_generated_question"
+            element={<Main children={<UserGenratedQuestion />} />}
+          />
           {/* Admin Panel Starts here */}
           <Route
             path="/admin"
@@ -385,6 +388,7 @@ function App() {
               </>
             }
           />
+        
           <Route
             path="/dashboard"
             element={

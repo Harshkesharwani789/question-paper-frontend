@@ -132,11 +132,8 @@ const QuestionPaper = ({ text }) => {
         )}
       </div>
 
-      <Frontpage />
+      <Frontpage data={state} />
       <div className="question-paper-display-container" id="pdf">
-        {/* questions start here  */}
-
-        {/* first qp starts here  */}
 
         <div className="question-paper-display">
           <div className="second-page-body">
@@ -162,7 +159,7 @@ const QuestionPaper = ({ text }) => {
 
                 if(i<Number(ele?.NQA)){
                   count=(i+1);
-                  // console.log("count==>",count);
+                
                    return (
                 <div className="question-body mt-2">
                   <div>
