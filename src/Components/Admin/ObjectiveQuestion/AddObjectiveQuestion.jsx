@@ -11,7 +11,8 @@ import swal from "sweetalert";
 function AddObjectiveQuestion() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
-
+    const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
+    
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
