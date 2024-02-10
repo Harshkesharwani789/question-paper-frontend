@@ -46,7 +46,8 @@ const RecorrectionaddAnswer = () => {
   const [orQuestion, setorQuestion] = useState("");
   const [orAnswer, setorAnswer] = useState("");
   const [Marks, setMarks] = useState("");
-  const [Image, setImage] = useState("");
+  const [ImageQ, setImageQ] = useState("");
+  const [orImage_Ans,setorImage_Ans] = useState("");
   const [Image_1, setImage_1] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
   const [NumberOfLine, setNumberOfLine] = useState(4);
@@ -81,7 +82,8 @@ const RecorrectionaddAnswer = () => {
           Answer: Answer,
           orQuestion: orQuestion,
           orAnswer: orAnswer,
-          Image: Image,
+          ImageQ: ImageQ,
+          orImage_Ans:orImage_Ans,
           Image_1: Image_1,
           NumberOfLine: NumberOfLine,
           Marks: Marks,
@@ -137,13 +139,25 @@ const RecorrectionaddAnswer = () => {
           <div className="row mt-2">
             <div className="col-md-6">
               <div className="do-sear mt-2">
-                <label htmlFor="upload1">Image</label>
+                <label htmlFor="upload1">Image Question</label>
                 <input
                   type="file"
                   className="vi_0"
                   id="upload1"
                   accept="images/*"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImageQ(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="upload1">Image Answer</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  id="upload1"
+                  accept="images/*"
+                  onChange={(e) => setorImage_Ans(e.target.files[0])}
                 />
               </div>
             </div>
@@ -930,9 +944,9 @@ const RecorrectionaddAnswer = () => {
               <div className="container">
                 <div className="row mt-2">
                   <div className="col-md-12">
-                    <div className="do-sear mt-2">
+                    <div className="do-sear mt-2 ">
                       <label htmlFor="">Question</label>
-                      <p>{Question ? parse(Question) : ""}</p>
+                      <p className="vi_0">{Question ? parse(Question) : ""}</p>
                       <div className="col-12">
                         {twoline ? (
                           <>
@@ -1415,10 +1429,17 @@ const RecorrectionaddAnswer = () => {
                         )}
                       </div>
                     </div>
-                    {Image ? (
+                   
+                     
+                  </div>
+                  <div className="col-md-6">
+                  <div className="do-sear mt-2 ">
+                    <label htmlFor="">Image Question</label>
+                    <br />
+                    {ImageQ ? (
                       <img
                         className=""
-                        src={Image && URL.createObjectURL(Image)}
+                        src={ImageQ && URL.createObjectURL(ImageQ)}
                         alt="fig."
                         style={{
                           width: "30%",
@@ -1428,6 +1449,27 @@ const RecorrectionaddAnswer = () => {
                     ) : (
                       <></>
                     )}
+                    </div>
+                   
+                  </div>
+                  <div className="col-md-6">
+                  <div className="do-sear mt-2 ">
+                    <label htmlFor="">Image Answer</label>
+                    <br />
+                    {orImage_Ans ? (
+                      <img
+                        className=""
+                        src={orImage_Ans  && URL.createObjectURL(orImage_Ans )}
+                        alt="fig."
+                        style={{
+                          width: "30%",
+                          height: "40%",
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    </div>
                   </div>
 
                   <div className="col-md-12">
@@ -1435,7 +1477,7 @@ const RecorrectionaddAnswer = () => {
                       <div className="do-sear mt-2">
                         <label htmlFor="">Answer</label>
 
-                        <p>{Answer ? parse(Answer) : ""}</p>
+                        <p className="vi_0">{Answer ? parse(Answer) : ""}</p>
                       </div>
                     </div>
                   </div>
@@ -1448,6 +1490,7 @@ const RecorrectionaddAnswer = () => {
                     <div className="col-md-6">
                       <div className="do-sear mt-2">
                         <label>Image 1</label>
+                        <br />
                         <img
                           className=""
                           src={Image_1 && URL.createObjectURL(Image_1)}
@@ -1466,6 +1509,7 @@ const RecorrectionaddAnswer = () => {
                     <div className="col-md-6">
                       <div className="do-sear mt-2">
                         <label>Image 2</label>
+                        <br />
                         <img
                           className=""
                           src={Image_2 && URL.createObjectURL(Image_2)}
@@ -1483,29 +1527,18 @@ const RecorrectionaddAnswer = () => {
 
                   <div className="col-md-12">
                     <div className="do-sear mt-2">
-                      <label htmlFor="">Question</label>
-                      <p>{orQuestion ? parse(orQuestion) : ""}</p>
+                      <label htmlFor="">Question Image</label>
+                      <p className="vi_0">{orQuestion ? parse(orQuestion) : ""}</p>
                     </div>
                   </div>
 
                   <div className="col-md-12">
                     <div className="do-sear mt-2">
-                      <label htmlFor="">Answer</label>
-                      <p>{orAnswer ? parse(orAnswer) : ""}</p>
+                      <label htmlFor="">Answer Image</label>
+                      <p className="vi_0">{orAnswer ? parse(orAnswer) : ""}</p>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                      <label htmlFor=""> Answer Timing</label>
-                      <p>{Answer_Time}</p>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="do-sear mt-2">
-                      <label htmlFor=""> Marks</label>
-                      <p>{Marks}</p>
-                    </div>
-                  </div>
+                 
                 </div>
               </div>
               {/* </div> */}

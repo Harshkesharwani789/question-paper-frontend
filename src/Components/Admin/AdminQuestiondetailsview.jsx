@@ -13,6 +13,9 @@ const AdminQuestionDetailsview = () => {
 
   const [question_details, setquestion_details] = useState([]);
   // const [first, setfirst] = useState(second)
+
+  const [Dash, setDash] = useState("2");
+
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
@@ -27,6 +30,7 @@ const AdminQuestionDetailsview = () => {
   };
   useEffect(() => {
     getquestionbyid();
+    setDash(question_details.Dash || "");
   }, []);
 
   return (
@@ -130,7 +134,14 @@ const AdminQuestionDetailsview = () => {
             question_details?.Types_Question ===
               "Match the Following Questions" ||
             question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ? (
+              "Recorrect the Answers Questions" ||
+            question_details?.Types_Question ===
+              "Recorrect the Answers Questions" ||
+            question_details?.Types_Question ===
+              "RelationShip Words Questions" ||
+            question_details?.Types_Question ===
+              "Expanding and Explanations Answer Questions" ||
+              question_details?.Types_Question ==="Fill in the Blanks Questions" ? (
               <> </>
             ) : (
               <>
@@ -146,18 +157,357 @@ const AdminQuestionDetailsview = () => {
                 </div>
               </>
             )}
-            {/* Recorrect the following */}
+            {/* Fill In the Blanks */}
             {question_details?.Types_Question ===
-            "Recorrect the Answers Questions" ? (
+            "Fill in the Blanks Questions" ? (
               <>
-                {question_details?.ImageQ ? (
+                {question_details?.NumberOfLine == "2" ? (
                   <>
-                    <div className="col-md-12">
+                    <div className="col-md-9 d-flex align-items-end">
+                      <div className="do-sear ">
+                        <label htmlFor="">Fill in the blanks</label> <br />
+                       <div className="d-flex gap-1">
+                       <p className="vi_0">
+                          {parse(`<div>${question_details?.input1}</div>`)}
+                        </p>
+                        <span className="mt-3">___________</span>
+                        <p className="vi_0">
+                          {parse(`<div>${question_details?.input2}</div>`)}
+                        </p>
+                        <span className="mt-3">___________</span>
+                        <p className="vi_0">
+                          {parse(`<div>${question_details?.input3}</div>`)}
+                        </p>
+                       </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine == "1" ? (
+                  <>
+                    <div className="col-md-9 d-flex align-items-end">
+                      <div className="do-sear ">
+                        <label htmlFor="">Fill in the blanks</label> <br />
+                       <div className="d-flex gap-1">
+                       <p className="vi_0">
+                          {parse(`<div>${question_details?.input1}</div>`)}
+                        </p>
+                        <span className="mt-3">___________</span>
+                        <p className="vi_0">
+                          {parse(`<div>${question_details?.input2}</div>`)}
+                        </p>
+                       </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Letter Writing */}
+            {question_details?.Types_Question === "Letter Writting" ||
+            question_details?.Types_Question === "Map Reading" ? (
+              <>
+                <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Image_1 ? (
+                  <>
+                    <div className="col-md-6">
                       <div className="do-sear">
-                        <label htmlFor="">Image question</label> <br />
+                        <label htmlFor="">Question Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.ImageQ}`}
+                          src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -166,7 +516,1533 @@ const AdminQuestionDetailsview = () => {
                 ) : (
                   <></>
                 )}
-                 <div className="col-md-12">
+                {question_details?.Image_2 ? (
+                  <>
+                    <div className="col-md-6">
+                      <div className="do-sear">
+                        <label htmlFor="">Answer Image</label> <br />
+                        <img
+                          className="img-fluid h-50"
+                          src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Answer</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Answer}</div>`)}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Expand and Explain*/}
+            {question_details?.Types_Question ===
+            "Expanding and Explanations Answer Questions" ? (
+              <>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Question</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.Question}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Answer</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.Answer}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-5">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_1 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_2 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image Answer</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Question</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.orQuestion}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Answer</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.orAnswer}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* One word */}
+            {question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question ===
+              "One Sentence Answer Question" ||
+            question_details?.Types_Question ===
+              "Two  Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Two and three Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Three and Four Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Five and Six Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Six Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Seven Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Eight Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Ten Sentence Answer Questions" ? (
+              <>
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Answer</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.Answer}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_1 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_2 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image Answer</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Question</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.orQuestion}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear ">
+                    <label htmlFor="">Answer</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.orAnswer}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* RelationShip Words Questions */}
+            {question_details?.Types_Question ===
+            "RelationShip Words Questions" ? (
+              <>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image ? (
+                      <>
+                        <div className="col-md-12">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-3">
+                  <div className="do-sear ">
+                    <label htmlFor="">Realetion_A</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.RealetionA}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Realetion_B</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.RealetionA}</div>`)}
+                      </p>
+                      <p className="m-2">::</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Realetion_C</label> <br />
+                    <div className="d-flex">
+                      <p className="vi_0">
+                        {parse(`<div>${question_details?.RealetionA}</div>`)}
+                      </p>
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <p
+                      className=""
+                      style={{
+                        borderBottom: "1px solid",
+                        marginTop: "60px",
+                        marginBottom: "0px",
+                      }}
+                    ></p>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Option 1</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Option_1}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Option 2</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Option_2}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Option 3</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Option_3}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="do-sear">
+                    <label htmlFor="">Option 4</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Option_4}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Answer</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Answer}</div>`)}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Classificatio of question */}
+            {question_details?.Types_Question ===
+            "Classifications of Questions" ? (
+              <>
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Answer</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.Answer}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_1 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_2 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image Answer</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Question</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.orQuestion}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Answer</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.orAnswer}</div>`)}
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Recorrect the following */}
+            {question_details?.Types_Question ===
+            "Recorrect the Answers Questions" ? (
+              <>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.ImageQ ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.ImageQ}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.orImage_Ans ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image Answer</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.orImage_Ans}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
                   <div className="do-sear">
                     <label htmlFor="">Question</label> <br />
                     <p className="vi_0">
@@ -182,38 +2058,388 @@ const AdminQuestionDetailsview = () => {
                     </p>
                   </div>
                 </div>
-                {question_details?.Image_1 ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear">
-                        <label htmlFor="">Image question</label> <br />
-                        <img
-                          className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
-                          alt=""
-                        />
+                <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.Image_2 ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear">
-                        <label htmlFor="">Image question</label> <br />
-                        <img
-                          className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
-                          alt=""
-                        />
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
                       </div>
-                    </div>
-                  </>
-                ) : (
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
                   <></>
+                ) : (
+                  <>
+                    {question_details?.Image_1 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
+
+                {question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
+                  <></>
+                ) : (
+                  <>
+                    {question_details?.Image_2 ? (
+                      <>
+                        <div className="col-md-6">
+                          <div className="do-sear">
+                            <label htmlFor="">Image Answer</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Question</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.orQuestion}</div>`)}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="do-sear">
+                    <label htmlFor="">Answer</label> <br />
+                    <p className="vi_0">
+                      {parse(`<div>${question_details?.orAnswer}</div>`)}
+                    </p>
+                  </div>
+                </div>
               </>
             ) : (
               <></>
@@ -283,21 +2509,46 @@ const AdminQuestionDetailsview = () => {
                     </div>
                   </div>
                 </div>
-                {question_details?.ImageQ ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear">
-                        <label htmlFor="">Image question</label> <br />
-                        <img
-                          className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.ImageQ}`}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
+                {question_details?.Types_Question ===
+                  "Recorrect the Answers Questions" ||
+                question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
                   <></>
+                ) : (
+                  <>
+                    {question_details?.ImageQ ? (
+                      <>
+                        <div className="col-md-12">
+                          <div className="do-sear">
+                            <label htmlFor="">Image question</label> <br />
+                            <img
+                              className="img-fluid h-50"
+                              src={`http://localhost:8000/Questions/${question_details?.ImageQ}`}
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
                 {question_details?.Image_1 ? (
                   <>
@@ -396,7 +2647,27 @@ const AdminQuestionDetailsview = () => {
                   <></>
                 )}
                 {question_details?.Types_Question ===
-                "Multiple Choice Questions" ? (
+                  "Multiple Choice Questions" ||
+                question_details?.Types_Question ===
+                  "Recorrect the Answers Questions" ||
+                question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
                   <>
@@ -689,7 +2960,13 @@ const AdminQuestionDetailsview = () => {
                 question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
                 question_details?.Types_Question ===
-                  "Recorrect the Answers Questions" ? (
+                  "Recorrect the Answers Questions" ||
+                question_details?.Types_Question ===
+                  "Classifications of Questions" ||
+                question_details?.Types_Question === "One Word Question" ||
+                question_details?.Types_Question ===
+                  "Expanding and Explanations Answer Questions" ||
+                question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
@@ -715,11 +2992,16 @@ const AdminQuestionDetailsview = () => {
                 question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
                 question_details?.Types_Question ===
-                  "Recorrect the Answers Questions" ? (
+                  "Recorrect the Answers Questions" ||
+                question_details?.Types_Question ===
+                  "Classifications of Questions" ||
+                question_details?.Types_Question === "One Word Question" ||
+                question_details?.Types_Question ===
+                  "Expanding and Explanations Answer Questions" ||
+                question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
-                    {" "}
                     {question_details?.Image_2 ? (
                       <>
                         <div className="col-md-6">
@@ -783,7 +3065,25 @@ const AdminQuestionDetailsview = () => {
                   </>
                 )}
 
-                {question_details?.Types_Question === "Objective Questions" ? (
+                {question_details?.Types_Question === "Objective Questions" ||
+                question_details?.Types_Question ===
+                  "One Sentence Answer Question" ||
+                question_details?.Types_Question ===
+                  "Two  Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Two and three Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Three and Four Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Five and Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Six Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Seven Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Eight Sentence Answer Questions" ||
+                question_details?.Types_Question ===
+                  "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
                   <>
@@ -825,6 +3125,17 @@ const AdminQuestionDetailsview = () => {
                 </div>
 
                 <div className="col-8">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                   {question_details?.NumberOfLine === "2" ? (
                     <>
                       <div className="col-md-12">
@@ -1110,7 +3421,13 @@ const AdminQuestionDetailsview = () => {
             question_details?.Types_Question === "Objective Questions" ||
             question_details?.Types_Question === "Multiple Choice Questions" ||
             question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ? (
+              "Recorrect the Answers Questions" ||
+            question_details?.Types_Question ===
+              "Classifications of Questions" ||
+            question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question ===
+              "Expanding and Explanations Answer Questions" ||
+            question_details?.Types_Question === "Map Reading" ? (
               <></>
             ) : (
               <>
@@ -1138,7 +3455,13 @@ const AdminQuestionDetailsview = () => {
             question_details?.Types_Question === "Objective Questions" ||
             question_details?.Types_Question === "Multiple Choice Questions" ||
             question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ? (
+              "Recorrect the Answers Questions" ||
+            question_details?.Types_Question ===
+              "Classifications of Questions" ||
+            question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question ===
+              "Expanding and Explanations Answer Questions" ||
+            question_details?.Types_Question === "Map Reading" ? (
               <></>
             ) : (
               <>
@@ -1328,7 +3651,34 @@ const AdminQuestionDetailsview = () => {
               "Match the Following Questions" ||
             question_details?.Types_Question === "Multiple Choice Questions" ||
             question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ? (
+              "Recorrect the Answers Questions" ||
+            question_details?.Types_Question ===
+              "Classifications of Questions" ||
+            question_details?.Types_Question ===
+              "RelationShip Words Questions" ||
+            question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question ===
+              "Expanding and Explanations Answer Questions" ||
+            question_details?.Types_Question === "Letter Writting" ||
+            question_details?.Types_Question === "Map Reading" ||
+            question_details?.Types_Question ===
+              "One Sentence Answer Question" ||
+            question_details?.Types_Question ===
+              "Two  Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Two and three Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Three and Four Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Five and Six Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Six Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Seven Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Eight Sentence Answer Questions" ||
+            question_details?.Types_Question ===
+              "Ten Sentence Answer Questions" ? (
               <></>
             ) : (
               <>

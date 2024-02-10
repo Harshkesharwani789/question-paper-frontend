@@ -802,6 +802,7 @@ const AdminEditQuestionDetails = () => {
             </div>
             {/* One Word Question...... */}
             {question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question === "One Sentence Answer Question" ||
              question_details?.Types_Question ===  "Two  Sentence Answer Questions" ||
              question_details?.Types_Question === "Two and three Sentence Answer Questions"||
              question_details?.Types_Question === "Three and Four Sentence Answer Questions" ||
@@ -3040,7 +3041,7 @@ const AdminEditQuestionDetails = () => {
               </>):(<></>)}
 
 
-              {/* Latter Writting */}
+              {/* Letter Writting */}
 
               {question_details?.Types_Question === "Letter Writting" ? (<>
                 <div className="col-md-4">
@@ -5474,6 +5475,7 @@ const AdminEditQuestionDetails = () => {
               </div>
             </div>
         {question_details?.Types_Question === "One Word Question" ||
+        question_details?.Types_Question === "One Sentence Answer Question" ||
              question_details?.Types_Question ===  "Two  Sentence Answer Questions" ||
              question_details?.Types_Question === "Two and three Sentence Answer Questions"||
              question_details?.Types_Question === "Three and Four Sentence Answer Questions"||
