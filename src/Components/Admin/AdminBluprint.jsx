@@ -1629,6 +1629,7 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
+                                        onChange={(e)=>{setTotalMask(e.target.value)}}
                                       />
                                     </div>
                                   </div>
