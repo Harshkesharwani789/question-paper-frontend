@@ -618,7 +618,7 @@ const AdminClass = () => {
             </thead>
 
             <tbody>
-              {records1?.map((val, i) => {
+              {getaddsubclass?.map((val, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1 + firstIndexs} </td>
