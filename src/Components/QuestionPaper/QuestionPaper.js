@@ -92,6 +92,8 @@ const QuestionPaper = ({ text }) => {
   }, [state,token]);
  var count=(1)
  var count2=0
+ const SectionArr=["A","B","C","D","E","F","G","H","I","J"]
+ const RomanAA=["I","II","III","IV","V","VI","VII","VIII","IX","X"]
   return (
     <div>
       <div className="top-header">
@@ -137,27 +139,28 @@ const QuestionPaper = ({ text }) => {
 
         <div className="question-paper-display">
           <div className="second-page-body">
-            <h3 style={{ textAlign: "center" }}>Section A</h3>
+          
            
-            {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
-              if(ele?.QAType=="Multiple Choice Questions"){
-
+            {state?.bluePrint?.TypesofQuestions?.map((ele1,a)=>{
+             
                  return (<>
+                  {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
+
                   <div className="question-body-main">
               <div>
                 <div style={{ display: "flex", gap: "12px" }}>
-                  <b>Q 1</b>
-                  <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
+                  <b> {RomanAA[a]}</b>
+                  <b style={{ textAlign: "left" }}>{ele1?.QAType}</b>
                 </div>
               </div>
               <div style={{ display: "flex", marginTop: "10px" }}>
-                <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
+                <b>{ele1?.NQA}*{ele1?.Mask}={ele1?.NQA*ele1?.Mask}</b>
               </div>
             </div>
             <br />
-              {Questions?.filter((ele)=>ele?.Types_Question=="Multiple Choice Questions")?.map((item, i) => {
+              {Questions?.filter((ele)=>ele?.Types_Question==ele1?.QAType)?.map((item, i) => {
 
-                if(i<Number(ele?.NQA)){
+                if(i<Number(ele1?.NQA)){
                   count=(i+1);
                 
                    return (
@@ -242,7 +245,7 @@ const QuestionPaper = ({ text }) => {
              
             })}
               </>)
-              }
+              
              
             })}
             
@@ -253,7 +256,7 @@ const QuestionPaper = ({ text }) => {
             <div>1</div>
           </div>
         </div>
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
           <div className="second-page-body">
           <h3 style={{ textAlign: "center" }}>Section B</h3>
           {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
@@ -331,11 +334,11 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>5</div>
           </div>
-        </div>
+        </div> */}
 
-        {/* sixth page starts here  */}
+      
 
-        <div className="question-paper-display">
+        {/* <div className="question-paper-display">
          
           <div className="second-page-body">
             <h3 style={{ textAlign: "center" }}>Section -D</h3>
@@ -388,16 +391,7 @@ const QuestionPaper = ({ text }) => {
                     <div className="ans-line"></div>
                   </div>
                 </Row>
-                {/* <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row> */}
-                {/* <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row> */}
+               
                   
                   </div>
                 </div>
@@ -415,7 +409,7 @@ const QuestionPaper = ({ text }) => {
             <div>8th Std. English QP</div>
             <div>6</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
