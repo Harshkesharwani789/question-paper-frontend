@@ -1803,7 +1803,7 @@ function AdminBlueprint() {
                                             </button>
                                           </div>
                                         </div> */}
-                                        <div className="col-md-12">
+                                        {/* <div className="col-md-12">
                                           <div className="do-sear mt-2">
                                             <Table
                                               responsive
@@ -1900,7 +1900,7 @@ function AdminBlueprint() {
                                               </tbody>
                                             </Table>
                                           </div>
-                                        </div>
+                                        </div> */}
                                       </div>
                                       <div className="row">
                                         <div className="col-md-4">
@@ -1972,14 +1972,19 @@ function AdminBlueprint() {
                                               );
                                             }}
                                           >
-                                            <option value="">
-                                              Selete Question Type
-                                            </option>
-                                            {view?.AllQType?.map((ele) => (
+                                       
+                                            <option value="">Select Question Types</option>
+                    <option value="M C">M.C (Multiple Choice)</option>
+                    <option value="V.S.A">V.S.A (Very Short Answer)</option>
+                    <option value="S.A">S.A (Short Answer)</option>
+                    <option value="L.A 1">L.A (Long Answer 1)</option>
+                    <option value="L.A 2">L.A (Long Answer 2)</option>
+                    <option value="L.A 3">L.A (Long Answer 3)</option>
+                                            {/* {view?.AllQType?.map((ele) => (
                                               <option value={ele?.QTyp}>
                                                 {ele?.QTyp}
                                               </option>
-                                            ))}
+                                            ))} */}
                                           </Form.Select>
                                         </div>
                                         <div className="col-md-4">
@@ -2064,9 +2069,20 @@ function AdminBlueprint() {
                                                   </tr>
                                                   )
                                                 })}
-                                               
+                                               <tr>
+                                               <td></td>
+                                                <td>
+                                                
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>  Total Question:- {Arr5?.reduce((a,ele)=>a+Number(ele?.Blueprintnoofquestion),0)}</td>
+                                                <td>Total Marks:- {Arr5?.reduce((a,ele)=>a+Number(ele?.BluePrintmarksperquestion*ele?.Blueprintnoofquestion),0)}</td>
+                                                <td></td>
+                                               </tr>
                                               </tbody>
                                             </Table>
+                                          
                                           </div>
                                         </div>
                                       </div>
