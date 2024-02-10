@@ -124,6 +124,26 @@ const AdminEditQuestionDetails = () => {
     setorAnswer(data);
   };
 
+  const Option1 = (e, editor) => {
+    const data = editor.getData();
+    setOption_1(data);
+  };
+  const Option2 = (e, editor) => {
+    const data = editor.getData();
+    setOption_2(data);
+  };
+
+  const Option3 = (e, editor) => {
+    const data = editor.getData();
+    setOption_3(data);
+  };
+
+  const Option4 = (e, editor) => {
+    const data = editor.getData();
+    setOption_4(data);
+  };
+               
+
 
 
   // Update
@@ -167,8 +187,59 @@ const AdminEditQuestionDetails = () => {
   const [input2, setinput2] = useState("");
   const [input3, setinput3] = useState("");
 
+
+  const [Part_A1, setPart_A1] = useState("");
+  const [Part_A2, setPart_A2] = useState("");
+  const [Part_A3, setPart_A3] = useState("");
+  const [Part_A4, setPart_A4] = useState("");
+  const [Part_A5, setPart_A5] = useState("");
+  const [Part_A6, setPart_A6] = useState("");
+
+  const [Part_B1, setPart_B1] = useState("");
+  const [Part_B2, setPart_B2] = useState("");
+  const [Part_B3, setPart_B3] = useState("");
+  const [Part_B4, setPart_B4] = useState("");
+  const [Part_B5, setPart_B5] = useState("");
+  const [Part_B6, setPart_B6] = useState("");
+  const [Part_B7, setPart_B7] = useState("");
+
+  const [Part_C1, setPart_C1] = useState("");
+  const [Part_C2, setPart_C2] = useState("");
+  const [Part_C3, setPart_C3] = useState("");
+  const [Part_C4, setPart_C4] = useState("");
+  const [Part_C5, setPart_C5] = useState("");
+  const [Part_C6, setPart_C6] = useState("");
+  const [Part_C7, setPart_C7] = useState("");
+
+  const [Part_A1_A, setPart_A1_A] = useState("");
+  const [Part_A2_A, setPart_A2_A] = useState("");
+  const [Part_A3_A, setPart_A3_A] = useState("");
+  const [Part_A4_A, setPart_A4_A] = useState("");
+  const [Part_A5_A, setPart_A5_A] = useState("");
+  const [Part_A6_A, setPart_A6_A] = useState("");
+
+  const [Part_B1_A, setPart_B1_A] = useState("");
+  const [Part_B2_A, setPart_B2_A] = useState("");
+  const [Part_B3_A, setPart_B3_A] = useState("");
+  const [Part_B4_A, setPart_B4_A] = useState("");
+  const [Part_B5_A, setPart_B5_A] = useState("");
+  const [Part_B6_A, setPart_B6_A] = useState("");
+  const [Part_B7_A, setPart_B7_A] = useState("");
+
+  const [Part_C1_A, setPart_C1_A] = useState("");
+  const [Part_C2_A, setPart_C2_A] = useState("");
+  const [Part_C3_A, setPart_C3_A] = useState("");
+  const [Part_C4_A, setPart_C4_A] = useState("");
+  const [Part_C5_A, setPart_C5_A] = useState("");
+  const [Part_C6_A, setPart_C6_A] = useState("");
+
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
+
+  const [RealetionA, setRealetionA] = useState("");
+  const [RealetionB, setRealetionB] = useState("");
+  const [RealetionC, setRealetionC] = useState("");
+
 
   const [subquestions, setSubquestions] = useState([]);
 
@@ -182,6 +253,10 @@ const AdminEditQuestionDetails = () => {
 
   useEffect(() => {
     if (question_details) {
+      setRealetionA(question_details.RealetionA || '')
+      setRealetionB(question_details.RealetionB || '')
+      setRealetionC(question_details.RealetionC || '')
+
       setSection(question_details.Section || ''); // Set section if question_details is defined
       setBoard(question_details.Board || '')
       setMedium(question_details.Medium || '')
@@ -213,6 +288,55 @@ const AdminEditQuestionDetails = () => {
       setinput2(question_details.input2 || '')
       setinput3(question_details.input3 || '')
 
+      setPart_A1(question_details.Part_A1 || '')
+      setPart_A2(question_details.Part_A2 || '')
+      setPart_A3(question_details.Part_A3 || '')
+      setPart_A4(question_details.Part_A4 || '')
+      setPart_A5(question_details.Part_A5 || '')
+      setPart_A6(question_details.Part_A6 || '')
+
+      setPart_B1(question_details.Part_B1 || '')
+      setPart_B2(question_details.Part_B2 || '')
+      setPart_B3(question_details.Part_B3 || '')
+      setPart_B4(question_details.Part_B4 || '')
+      setPart_B5(question_details.Part_B5 || '')
+      setPart_B6(question_details.Part_B6 || '')
+      setPart_B7(question_details.Part_B7 || '')
+
+      setPart_C1(question_details.Part_C1 || '')
+      setPart_C2(question_details.Part_C2 || '')
+      setPart_C3(question_details.Part_C3 || '')
+      setPart_C4(question_details.Part_C4 || '')
+      setPart_C5(question_details.Part_C5 || '')
+      setPart_C6(question_details.Part_C6 || '')
+      setPart_C7(question_details.Part_C7 || '')
+
+      setPart_A1_A(question_details.Part_A1_A || '')
+      setPart_A2_A(question_details.Part_A2_A || '')
+      setPart_A3_A(question_details.Part_A3_A || '')
+      setPart_A4_A(question_details.Part_A4_A || '')
+      setPart_A5_A(question_details.Part_A5_A || '')
+      setPart_A6_A(question_details.Part_A6_A || '')
+
+      setPart_B1_A(question_details.Part_B1_A || '')
+      setPart_B2_A(question_details.Part_B2_A || '')
+      setPart_B3_A(question_details.Part_B3_A || '')
+      setPart_B4_A(question_details.Part_B4_A || '')
+      setPart_B5_A(question_details.Part_B5_A || '')
+      setPart_B6_A(question_details.Part_B6_A || '')
+
+      setPart_C1_A(question_details.Part_C1_A || '')
+      setPart_C2_A(question_details.Part_C2_A || '')
+      setPart_C3_A(question_details.Part_C3_A || '')
+      setPart_C4_A(question_details.Part_C4_A || '')
+      setPart_C5_A(question_details.Part_C5_A || '')
+      setPart_C6_A(question_details.Part_C6_A || '')
+
+
+
+
+     
+
 
       setOneline(question_details.NumberOfLine == "1");
       setTwoline(question_details.NumberOfLine == "2");
@@ -229,6 +353,7 @@ const AdminEditQuestionDetails = () => {
 
   }, [question_details]);
 
+  console.log("question_details.Answer",question_details.Answer);
 
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
@@ -409,9 +534,54 @@ const AdminEditQuestionDetails = () => {
           Option_6: Option_6,
           ImageQ:ImageQues,
 
+
+          Part_A1: Part_A1,
+          Part_A2: Part_A2,
+          Part_A3: Part_A3,
+          Part_A4: Part_A4,
+          Part_A5: Part_A5,
+          Part_A6: Part_A6,
+          Part_B1: Part_B1,
+          Part_B2: Part_B2,
+          Part_B3: Part_B3,
+          Part_B4: Part_B4,
+          Part_B5: Part_B5,
+          Part_B6: Part_B6,
+          Part_B7: Part_B7,
+          Part_C1: Part_C1,
+          Part_C2: Part_C2,
+          Part_C3: Part_C3,
+          Part_C4: Part_C4,
+          Part_C5: Part_C5,
+          Part_C6: Part_C6,
+          Part_C7: Part_C7,
+          Part_A1_A: Part_A1_A,
+          Part_A2_A: Part_A2_A,
+          Part_A3_A: Part_A3_A,
+          Part_A4_A: Part_A4_A,
+          Part_A5_A: Part_A5_A,
+          Part_A6_A: Part_A6_A,
+          Part_B1_A: Part_B1_A,
+          Part_B2_A: Part_B2_A,
+          Part_B3_A: Part_B3_A,
+          Part_B4_A: Part_B4_A,
+          Part_B5_A: Part_B5_A,
+          Part_B6_A: Part_B6_A,
+          Part_B7_A: Part_B7_A,
+          Part_C1_A: Part_C1_A,
+          Part_C2_A: Part_C2_A,
+          Part_C3_A: Part_C3_A,
+          Part_C4_A: Part_C4_A,
+          Part_C5_A: Part_C5_A,
+          Part_C6_A: Part_C6_A,
+
           input1: input1,
           input2: input2,
           input3: input3,
+
+          RealetionB: RealetionB,
+          RealetionC: RealetionC,
+          RealetionA: RealetionA,
 
 
           id: question_details?._id,
@@ -787,11 +957,17 @@ const AdminEditQuestionDetails = () => {
             {/* <div className="col-md-12 mt-3">
             <AdminQuestioneditprops Types_Question={Types_Question} />
           </div> */}
+{question_details?.Types_Question === "Match the Following Questions" ||
+question_details?.Types_Question === "Odd and out words Questions" ||
+question_details?.Types_Question === "RelationShip Words Questions"
 
-            <div className="col-md-12">
+? (<>
+
+</>):(<>
+
+<div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-
                 <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
@@ -800,6 +976,167 @@ const AdminEditQuestionDetails = () => {
                 />
               </div>
             </div>
+</>)}
+
+            {/* RelationShip Words Questions */}
+
+            {question_details.Types_Question === "RelationShip Words Questions" ? (<>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload"> Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image
+                        ?
+                        Image && URL.createObjectURL(Image) :
+                        `http://localhost:8000/Questions/${question_details?.Image}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={ImageEditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload"
+                        ref={ImageRef}
+                        onChange={(e) => setImage(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-sm-6"></div>
+
+              <div className="row">
+              <label htmlFor="">Question</label>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                     
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                        value={RealetionA}
+                        onChange={(e)=>setRealetionA(e.target.value)}
+                      />
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                        value={RealetionB}
+                        onChange={(e)=>setRealetionB(e.target.value)}
+                      />
+                      <p className="m-2 ">::</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2 d-flex">
+                      <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter The question"
+                        value={RealetionC}
+                        onChange={(e)=>setRealetionC(e.target.value)}
+                      />
+                      <p className="m-2">:</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2">
+                      <p
+                        className=""
+                        style={{
+                          borderBottom: "1px solid",
+                          marginTop: "45px",
+                          marginBottom: "0px",
+                        }}
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option A)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                  value={Option_1}
+                  onChange={(e)=>setOption_1(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option B)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                  value={Option_2}
+                  onChange={(e)=>setOption_2(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option C)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                  value={Option_3}
+                  onChange={(e)=>setOption_3(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option D)</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter The question"
+                  value={Option_4}
+                  onChange={(e)=>setOption_4(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Answer</label>               
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter The question"
+                    value={Answer}
+                    onChange={(e)=>setAnswer(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+            
+            </>):(<></>)}
+            
             {/* One Word Question...... */}
             {question_details?.Types_Question === "One Word Question" ||
              question_details?.Types_Question ===  "Two  Sentence Answer Questions" ||
@@ -1595,7 +1932,693 @@ const AdminEditQuestionDetails = () => {
 
               </>) : (<></>)}
 
+              {/* Odd and out words Questions */}
+
+              {question_details?.Types_Question === "Odd and out words Questions" ? (<>
+              
+                <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 1</label>
+               
+                <CKEditor
+
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Option_1}
+                  onChange={Option1}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 2</label>
+               
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Option_2}
+                  onChange={Option2}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 3</label>
+               
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Option_3}
+                  onChange={Option3}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Option 4</label>
+                
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Option_4}
+                  onChange={Option4}
+                />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Answer}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+             <div className="mt-4">
+              <label
+                htmlFor=""
+                style={{ display: "flex", justifyContent: "space-around" }}
+              >
+                (OR)
+              </label>
+            </div>
+            <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload1"> Image 1</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image1
+                        ?
+                        Image1 && URL.createObjectURL(Image1) :
+                        `http://localhost:8000/Questions/${question_details?.Image_1}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image1EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload1"
+                        ref={Image1Ref}
+                        onChange={(e) => setImage1(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload2"> Image 2</label>
+                  <div className="d-flex">
+                    <img
+                      style={{    width: "65%",
+                      height: "262px",
+                      imageRendering: "pixelated"
+                  }}
+                      src={Image2
+                        ?
+                        Image2 && URL.createObjectURL(Image2) :
+                        `http://localhost:8000/Questions/${question_details?.Image_2}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image2EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload2"
+                        ref={Image2Ref}
+                        onChange={(e) => setImage2(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload3"> Image 3</label>
+                  <div className="d-flex">
+                    <img
+                    style={{    width: "65%",
+                    height: "262px",
+                    imageRendering: "pixelated"
+                }}
+                      src={Image_3
+                        ?
+                        Image_3 && URL.createObjectURL(Image_3) :
+                        `http://localhost:8000/Questions/${question_details?.Image_3}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image3EditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload3"
+                        ref={Image3Ref}
+                        onChange={(e) => setImage_3(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload4"> Image 4</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={Image_4
+                        ?
+                        Image_4 && URL.createObjectURL(Image_4) :
+                        `http://localhost:8000/Questions/${question_details?.Image_4}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={Image4EditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload4"
+                        ref={Image4Ref}
+                        onChange={(e) => setImage_4(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="">Answer Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                      height: "262px",
+                      imageRendering: "pixelated"
+                  }}
+                     
+                      src={ImageAns
+                        ?
+                        ImageAns && URL.createObjectURL(ImageAns) :
+                        `http://localhost:8000/Questions/${question_details?.Image_Ans}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={handleEditClick} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        onChange={(e) => setImageAns(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+              </>):(<></>)}
+
               {/* Match the Following Questions */}
+
+              {question_details?.Types_Question === "Match the Following Questions" ? (<>
+               <div className="col-md-6">
+                <div className="do-sear">
+                  <label htmlFor="upload"> Image</label>
+                  <div className="d-flex">
+                    <img
+                     style={{    width: "65%",
+                     height: "262px",
+                     imageRendering: "pixelated"
+                 }}
+                      src={ImageQues
+                        ?
+                        ImageQues && URL.createObjectURL(ImageQues) :
+                        `http://localhost:8000/Questions/${question_details?.Image}`
+                      }
+                      alt="Ans_fig"
+                    />
+                    <span
+                      className="text-danger "
+                      onClick={QuestionimgEditClick} style={{ cursor: "pointer" }} >
+                      <CiEdit
+                        className="me-2 fs-2 cursor-pointer" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="upload"
+                        ref={QuesImgRef}
+                        onChange={(e) => setImageQues(e.target.files[0])}
+                      />
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+                <div className="mt-2">
+                <label htmlFor=""> Question</label>
+
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART A
+                      </label>
+                      <input
+                      value={Part_A1}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A1(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_A2}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A2(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_A3}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A3(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_A4}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A4(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_A5}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A5(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_A6}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Question"
+                        onChange={(e) => {
+                          setPart_A6(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART B
+                      </label>
+                      <input
+                      value={Part_B1}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B1(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B2}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B2(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B3}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B3(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B4}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B4(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B5}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B5(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B6}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B6(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_B7}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_B7(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="do-sear mt-2">
+                      <label
+                        htmlFor=""
+                        className="d-flex justify-content-center"
+                      >
+                        {" "}
+                        PART C
+                      </label>
+                      <input
+                      value={Part_C1}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C1(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C2}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C2(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C3}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C3(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C4}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C4(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C5}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C5(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C6}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C6(e.target.value);
+                        }}
+                      />
+                      <input
+                      value={Part_C7}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder="Enter Your Answer"
+                        onChange={(e) => {
+                          setPart_C7(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+               <label htmlFor=""> Answer</label>
+
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="do-sear mt-2">
+                    <label htmlFor="" className="d-flex justify-content-center">
+                      {" "}
+                      PART A
+                    </label>
+                    <input
+                      value={Part_A1_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A1_A(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={Part_A2_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A2_A(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={Part_A3_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A3_A(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={Part_A4_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A4_A(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={Part_A5_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A5_A(e.target.value);
+                      }}
+                    />
+                    <input
+                      value={Part_A6_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Question"
+                      onChange={(e) => {
+                        setPart_A6_A(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="do-sear mt-2">
+                    <label htmlFor="" className="d-flex justify-content-center">
+                      {" "}
+                      PART B
+                    </label>
+                    <input
+                    value={Part_B1_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B1_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_B2_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B2_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_B3_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B3_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_B4_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B4_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_B5_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B5_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_B6_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_B6_A(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="do-sear mt-2">
+                    <label htmlFor="" className="d-flex justify-content-center">
+                      {" "}
+                      PART C
+                    </label>
+                    <input
+                    value={Part_C1_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C1_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_C2_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C2_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_C3_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C3_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_C4_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C4_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_C5_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C5_A(e.target.value);
+                      }}
+                    />
+                    <input
+                    value={Part_C6_A}
+                      type="text"
+                      className="vi_0 mb-2"
+                      placeholder="Enter Your Answer"
+                      onChange={(e) => {
+                        setPart_C6_A(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              </>):(<></>)}
 
               {/* Recorrect the Answers Questions */}
 
@@ -5486,7 +6509,10 @@ const AdminEditQuestionDetails = () => {
              question_details?.Types_Question === "Recorrect the Answers Questions" ||
              question_details?.Types_Question === "Expanding and Explanations Answer Questions" ||
              question_details?.Types_Question === "Objective Questions" ||
-             question_details?.Types_Question === "Multiple Choice Questions"
+             question_details?.Types_Question === "Multiple Choice Questions" ||
+             question_details?.Types_Question === "Match the Following Questions" ||
+             question_details?.Types_Question === "Odd and out words Questions" ||
+             question_details?.Types_Question === "RelationShip Words Questions"
           
           ? (<></>):(<>
           <div className="col-md-12">
