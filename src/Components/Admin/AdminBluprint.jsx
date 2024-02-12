@@ -366,6 +366,7 @@ function AdminBlueprint() {
     }
   };
   // Array of object 1
+  const [QAInstruction, setQAInstruction] = useState("");
 
   const AddTypesofquestion = () => {
     try {
@@ -373,6 +374,15 @@ function AdminBlueprint() {
         swal({
           title: "Oops!",
           text: "Please Select Question Type",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if QAType is not provided
+      }
+      if (!QAInstruction) {
+        swal({
+          title: "Oops!",
+          text: "Please write Question Instruction",
           icon: "error",
           button: "Try Again!",
         });
@@ -417,6 +427,7 @@ function AdminBlueprint() {
           QAType: QAType,
           NQA: NQA,
           Mask: Mask,
+          QAInstruction: QAInstruction,
         };
 
         Arr.push(obj);
@@ -717,10 +728,9 @@ function AdminBlueprint() {
           TotalDifficultMask: TotalDifficultMask,
           TypesofQuestions: Arr,
           Weightageofthecontent: Arr1,
-          objectives:Arr3,
-          Objective:Arr3,
-          AllChapter:Arr5
-
+          objectives: Arr3,
+          Objective: Arr3,
+          AllChapter: Arr5,
         },
       };
       let res = await axios(config);
@@ -976,7 +986,7 @@ function AdminBlueprint() {
                                 </div>
                                 <div className="col-md-3">
                                   <div className="do-sear">
-                                    <label htmlFor="">No. of Questions</label>
+                                    <label htmlFor="">Percentage of Questions </label>
                                   </div>
                                 </div>
                                 <div className="col-md-3">
@@ -1013,7 +1023,7 @@ function AdminBlueprint() {
                                       type="number"
                                       name=""
                                       id=""
-                                      placeholder="Enter the Weightage"
+                                      placeholder="Enter the Percentage"
                                       className="vi_0"
                                       onChange={(e) => {
                                         setNoofQues(e.target.value);
@@ -1065,8 +1075,8 @@ function AdminBlueprint() {
                                       <tr>
                                         <th>S No.</th>
                                         <th>Objectives</th>
-                                        <th>No of Question</th>
-                                        <th>No of Marks</th>
+                                        <th>Percentage of Question</th>
+                                        <th>No of Marks </th>
                                         <th>Action</th>
                                       </tr>
                                     </thead>
@@ -1077,7 +1087,7 @@ function AdminBlueprint() {
                                             <td>{i + 1}</td>
                                             <td>{item?.Objective}</td>
                                             <td>{item?.NoofQues}</td>
-                                            <td>{item?.Marks}</td>
+                                            <td>{item?.Marks}%</td>
                                             <td>
                                               <AiFillDelete
                                                 color="red"
@@ -1394,24 +1404,32 @@ function AdminBlueprint() {
                                         Types of Questions
                                       </label>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-4">
+                                      <label htmlFor="">
+                                        Questions of Instruction
+                                      </label>
+                                    </div>
+                                    <div className="col-md-2">
                                       <label htmlFor="">No. of Questions</label>
                                     </div>
-                                    <div className="col-md-3">
-                                      <label htmlFor="">Marks</label>
+                                    <div className="col-md-2">
+                                      <label htmlFor="">
+                                        Marks Per Questions
+                                      </label>
                                     </div>
                                   </div>
 
                                   <div className="row">
-                                    <div className="col-md-3 mt-2">
+                                    <div className="col-md-3 ">
                                       <Form.Select
+                                        className="vi_0"
                                         aria-label="Default select example"
                                         onChange={(e) => {
                                           setQAType(e.target.value);
                                         }}
                                       >
                                         <option value="default">
-                                          Select the Types of the Question
+                                          Types of the Question
                                         </option>
                                         <option value="Objective Questions">
                                           Objective Questions
@@ -1506,12 +1524,19 @@ function AdminBlueprint() {
                                         <option value="Map Reading">
                                           Map Reading
                                         </option>
-                                        {/* <option value=""></option>
-                <option value=""></option>
-                <option value=""></option> */}
                                       </Form.Select>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-4">
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        placeholder="Enter the head of question instracustion"
+                                        onChange={(e) => {
+                                          setQAInstruction(e.target.value);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="col-md-2">
                                       <input
                                         type="text"
                                         className="vi_0"
@@ -1521,7 +1546,7 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-2">
                                       <input
                                         type="number"
                                         className="vi_0"
@@ -1531,17 +1556,17 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
-                                    <div className="col-md-3">
-                                      <Button
-                                        style={{
-                                          backgroundColor: "red",
-                                          color: "white",
-                                        }}
-                                        onClick={AddTypesofquestion}
-                                      >
-                                        Add
-                                      </Button>
-                                    </div>
+                                  </div>
+                                  <div style={{ float: "right" }}>
+                                    <Button
+                                      style={{
+                                        backgroundColor: "red",
+                                        color: "white",
+                                      }}
+                                      onClick={AddTypesofquestion}
+                                    >
+                                      Add
+                                    </Button>
                                   </div>
                                   <div className="row mt-4">
                                     <div className="col-md-12">
@@ -1556,6 +1581,7 @@ function AdminBlueprint() {
                                           <tr>
                                             <th>S No.</th>
                                             <th>Content</th>
+                                            <th>Question Instruction</th>
                                             <th>No. of Question</th>
                                             <th>Marks</th>
                                             <th>Action</th>
@@ -1567,6 +1593,7 @@ function AdminBlueprint() {
                                               <tr key={i}>
                                                 <td>{i + 1}</td>
                                                 <td>{val?.QAType}</td>
+                                                <td>{val?.QAInstruction}</td>
                                                 <td>{val?.NQA}</td>
                                                 <td>{val?.Mask}</td>
                                                 <td>
@@ -1606,7 +1633,7 @@ function AdminBlueprint() {
                                     </div>
                                   </div> */}
                                   <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                       <label htmlFor="">Duration of Exam</label>
                                       <input
                                         type="text"
@@ -1618,7 +1645,20 @@ function AdminBlueprint() {
                                         }}
                                       />
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
+                                      <label htmlFor="">Total Question</label>
+                                      <input
+                                        type="text"
+                                        value={Arr?.reduce(
+                                          (a, i) => a + Number(i?.NQA),
+                                          0
+                                        )}
+                                        className="vi_0"
+                                        placeholder="Total Marks"
+                                        // onChange={(e)=>{setTotalMask(e.target.value)}}
+                                      />
+                                    </div>
+                                    <div className="col-md-4">
                                       <label htmlFor="">Total Marks</label>
                                       <input
                                         type="text"
@@ -1629,7 +1669,9 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
-                                        onChange={(e)=>{setTotalMask(e.target.value)}}
+                                        onChange={(e) => {
+                                          setTotalMask(e.target.value);
+                                        }}
                                       />
                                     </div>
                                   </div>
@@ -1972,14 +2014,27 @@ function AdminBlueprint() {
                                               );
                                             }}
                                           >
-                                       
-                                            <option value="">Select Question Types</option>
-                    <option value="M C">M.C (Multiple Choice)</option>
-                    <option value="V.S.A">V.S.A (Very Short Answer)</option>
-                    <option value="S.A">S.A (Short Answer)</option>
-                    <option value="L.A 1">L.A (Long Answer 1)</option>
-                    <option value="L.A 2">L.A (Long Answer 2)</option>
-                    <option value="L.A 3">L.A (Long Answer 3)</option>
+                                            <option value="">
+                                              Select Question Types
+                                            </option>
+                                            <option value="M C">
+                                              M.C (Multiple Choice)
+                                            </option>
+                                            <option value="V.S.A">
+                                              V.S.A (Very Short Answer)
+                                            </option>
+                                            <option value="S.A">
+                                              S.A (Short Answer)
+                                            </option>
+                                            <option value="L.A 1">
+                                              L.A (Long Answer 1)
+                                            </option>
+                                            <option value="L.A 2">
+                                              L.A (Long Answer 2)
+                                            </option>
+                                            <option value="L.A 3">
+                                              L.A (Long Answer 3)
+                                            </option>
                                             {/* {view?.AllQType?.map((ele) => (
                                               <option value={ele?.QTyp}>
                                                 {ele?.QTyp}
@@ -2049,40 +2104,81 @@ function AdminBlueprint() {
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                {Arr5?.map((val,i)=>{
-                                                  return(
+                                                {Arr5?.map((val, i) => {
+                                                  return (
                                                     <tr key={i}>
-                                                    <td>{i+1}</td>
-                                                    <td>{val?.Blueprintchapter}</td>
-                                                    <td>{val?.Blueprintobjective}</td>
-                                                    <td>{val?.BluePrintQuestiontype}</td>
-                                                    <td>{val?.Blueprintnoofquestion}</td>
-                                                    <td>{val?.BluePrintmarksperquestion}</td>
-                                                    <td>
-                                                      {" "}
-                                                      <AiFillDelete
-                                                        color="red"
-                                                        cursor="pointer"
-                                                        onClick={()=>{deletedAddblueprint(i)}}
-                                                      />
-                                                    </td>
-                                                  </tr>
-                                                  )
+                                                      <td>{i + 1}</td>
+                                                      <td>
+                                                        {val?.Blueprintchapter}
+                                                      </td>
+                                                      <td>
+                                                        {
+                                                          val?.Blueprintobjective
+                                                        }
+                                                      </td>
+                                                      <td>
+                                                        {
+                                                          val?.BluePrintQuestiontype
+                                                        }
+                                                      </td>
+                                                      <td>
+                                                        {
+                                                          val?.Blueprintnoofquestion
+                                                        }
+                                                      </td>
+                                                      <td>
+                                                        {
+                                                          val?.BluePrintmarksperquestion
+                                                        }
+                                                      </td>
+                                                      <td>
+                                                        {" "}
+                                                        <AiFillDelete
+                                                          color="red"
+                                                          cursor="pointer"
+                                                          onClick={() => {
+                                                            deletedAddblueprint(
+                                                              i
+                                                            );
+                                                          }}
+                                                        />
+                                                      </td>
+                                                    </tr>
+                                                  );
                                                 })}
-                                               <tr>
-                                               <td></td>
-                                                <td>
-                                                
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>  Total Question:- {Arr5?.reduce((a,ele)=>a+Number(ele?.Blueprintnoofquestion),0)}</td>
-                                                <td>Total Marks:- {Arr5?.reduce((a,ele)=>a+Number(ele?.BluePrintmarksperquestion*ele?.Blueprintnoofquestion),0)}</td>
-                                                <td></td>
-                                               </tr>
+                                                <tr>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td>
+                                                    {" "}
+                                                    Total Question:-{" "}
+                                                    {Arr5?.reduce(
+                                                      (a, ele) =>
+                                                        a +
+                                                        Number(
+                                                          ele?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                  </td>
+                                                  <td>
+                                                    Total Marks:-{" "}
+                                                    {Arr5?.reduce(
+                                                      (a, ele) =>
+                                                        a +
+                                                        Number(
+                                                          ele?.BluePrintmarksperquestion *
+                                                            ele?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                  </td>
+                                                  <td></td>
+                                                </tr>
                                               </tbody>
                                             </Table>
-                                          
                                           </div>
                                         </div>
                                       </div>

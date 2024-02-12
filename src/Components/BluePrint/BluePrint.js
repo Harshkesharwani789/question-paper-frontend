@@ -695,7 +695,12 @@ var TotalMask=0
                             variant=""
                             style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
-                              navigate("/questionpaper", {
+                              if(val?.SubClassName?.toLowerCase()=="class 10"&&val?.subjects?.toLowerCase()=="math"){
+                                 return  navigate("/10th_QP_maths", {
+                                  state: { ...state, bluePrint: val },
+                                });
+                              }else
+                              return navigate("/questionpaper", {
                                 state: { ...state, bluePrint: val },
                               });
                             }}
