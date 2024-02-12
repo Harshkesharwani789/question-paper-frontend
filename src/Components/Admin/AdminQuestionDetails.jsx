@@ -47,7 +47,7 @@ const AdminQuestionDetails = () => {
     const data = editor.getData();
     setAnswer(data);
   };
-// get method for objectives
+  // get method for objectives
   const [getobjectives, setgetobjectives] = useState([]);
 
   const getObjectives = async () => {
@@ -91,12 +91,12 @@ const AdminQuestionDetails = () => {
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
 
-  const selectdetails ={
+  const selectdetails = {
     Section: Section,
     Board: Board,
     Medium: Medium,
     Sub_Class: Sub_Class,
-    Class:Class,
+    Class: Class,
     Subjects: Subjects,
     Lesson: Lesson,
     Chapter_Name: Chapter_Name,
@@ -104,16 +104,14 @@ const AdminQuestionDetails = () => {
     Name_of_examination: Name_of_examination,
     Objectives: Objectives,
     Types_Question: Types_Question,
-    Instruction:Instruction,
-}
+    Instruction: Instruction,
+  };
 
-useEffect(() => {
-    if ( selectdetails.Instruction) {
-        sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
+  useEffect(() => {
+    if (selectdetails.Instruction) {
+      sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
     }
-}, [selectdetails.Instruction]);
-  
-
+  }, [selectdetails.Instruction]);
 
   // const addquestions = async () => {
   //   try {
@@ -303,15 +301,19 @@ useEffect(() => {
     getallweightagecontent();
     getChapter();
     getNameExamination();
-    getObjectives()
+    getObjectives();
   }, []);
   console.log(weightage);
   console.log(NameExam);
   console.log(getobjectives);
 
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+
   return (
     <div>
-      
       <div className="box_1">
         <div className="container">
           <div className="row">
@@ -372,11 +374,11 @@ useEffect(() => {
                   aria-label="Default select example"
                   onChange={(e) => setClass(e.target.value)}
                 >
-                  <option>Select the Class</option>
-                  {getclassname?.map((item, i) => {
+                  <option value="">Select Class</option>
+                  {uniqueClassNamesArray?.map((val, i) => {
                     return (
-                      <option value={item?.className} key={i}>
-                        {item?.className}
+                      <option value={val} key={i}>
+                        {val}
                       </option>
                     );
                   })}
@@ -391,13 +393,15 @@ useEffect(() => {
                   onChange={(e) => setSub_Class(e.target.value)}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((item, i) => {
-                    return (
-                      <option value={item?.subclassName} key={i}>
-                        {item?.subclassName}
-                      </option>
-                    );
-                  })}
+                  {getaddsubclass
+                    ?.filter((ele) => ele.className === Class)
+                    ?.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName} key={i}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -503,10 +507,12 @@ useEffect(() => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  {getobjectives?.map((val,i)=>{
+                  {getobjectives?.map((val, i) => {
                     return (
-                      <option value={val?.Objectivesname}>{val?.Objectivesname}</option>
-                    )
+                      <option value={val?.Objectivesname}>
+                        {val?.Objectivesname}
+                      </option>
+                    );
                   })}
                 </Form.Select>
               </div>

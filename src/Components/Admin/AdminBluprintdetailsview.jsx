@@ -62,7 +62,7 @@ function AdminBlueprintdetailsview() {
     setCompleted(newCompleted);
     handleNext();
   };
-
+  const [AllChapterData, setAllChapterData] = useState([]);
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
     try {
@@ -72,6 +72,7 @@ function AdminBlueprintdetailsview() {
 
       if (res.status == 200) {
         setblueprint(res.data.success);
+        setAllChapterData(res.data.success?.AllChapter);
       }
     } catch (error) {
       console.log(error);
@@ -95,8 +96,63 @@ function AdminBlueprintdetailsview() {
     getallblueprint();
     getallweightagecontent();
   }, []);
-  console.log("blueprint", blueprint);
-  console.log("weightage", weightage);
+
+  const uniqueObjectsArray = [];
+  const uniqueNames = new Set(); // Using a Set to keep track of unique names
+
+  AllChapterData?.forEach((ele, i) => {
+    const chapterName = ele?.Blueprintchapter;
+    if (!uniqueNames.has(chapterName)) {
+      uniqueNames.add(chapterName);
+      uniqueObjectsArray.push({
+        index: i + 1,
+        name: chapterName,
+      });
+    }
+  });
+
+  // console.log("uniqueObjectsArray", uniqueObjectsArray);
+
+  function bluePrintTotalQues(chapterName,Qtype) {
+    let obj = { TotalQ: "", totalMas: 0 };
+    let am = AllChapterData?.filter(
+      (item) =>
+        item?.BluePrintQuestiontype == Qtype &&
+        item?.Blueprintchapter == chapterName
+    );
+    if (am.length != 0) {
+      obj["TotalQ"] = am?.reduce(
+        (a, am) => a + Number(am?.Blueprintnoofquestion),
+        0
+      );
+      obj["totalMas"] = am?.reduce(
+        (a, am) =>
+          a + Number(am?.Blueprintnoofquestion * am?.BluePrintmarksperquestion),
+        0
+      );
+
+    }
+    return obj;
+  }
+var TotalMask=0
+  const QuestionNameWiseMask=(chapterName)=>{
+    let obj = { TotalQ: "", totalMas: "" };
+    let am = AllChapterData?.filter(
+      (item) =>
+        item?.Blueprintchapter == chapterName
+    );
+    if (am.length != 0) {
+      
+      obj["totalMas"] = am?.reduce(
+        (a, am) =>
+          a + Number(am?.Blueprintnoofquestion * am?.BluePrintmarksperquestion),
+        0
+      );
+      TotalMask=TotalMask+obj.totalMas
+
+    }
+    return obj;
+  }
   return (
     <>
       <div className="box_1">
@@ -114,7 +170,12 @@ function AdminBlueprintdetailsview() {
                 <b>Weightage to Objectives - Marks</b>
               </div>
               <div className="objectives-table">
-                <Table responsive bordered hover style={{ border: "1px solid" }}>
+                <Table
+                  responsive
+                  bordered
+                  hover
+                  style={{ border: "1px solid" }}
+                >
                   <thead>
                     <tr>
                       <th>Objectives</th>
@@ -123,27 +184,15 @@ function AdminBlueprintdetailsview() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Remembering</td>
-                      <td>{blueprint?.NQRemembering}</td>
-                      <td>{blueprint?.MaskRemembering}</td>
-                    </tr>
-                    <tr>
-                      <td>Understanding</td>
-                      <td>{blueprint?.NQUnderstanding}</td>
-                      <td>{blueprint?.MaskUnderstanding}</td>
-                    </tr>
-
-                    <tr>
-                      <td>Expression</td>
-                      <td>{blueprint?.NQExpression}</td>
-                      <td>{blueprint?.MaskExpression}</td>
-                    </tr>
-                    <tr>
-                      <td>Appreciation</td>
-                      <td>{blueprint?.NQAppreciation}</td>
-                      <td>{blueprint?.MaskAppreciation}</td>
-                    </tr>
+                    {blueprint?.objectives?.map((ele, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{ele?.Objective}</td>
+                          <td>{ele?.NoofQues}%</td>
+                          <td>{ele?.Marks}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </Table>
               </div>
@@ -158,7 +207,7 @@ function AdminBlueprintdetailsview() {
               <div className="text-center">
                 <div className="objectives-table">
                   <Table
-                  responsive
+                    responsive
                     bordered
                     hover
                     size="sm"
@@ -174,23 +223,7 @@ function AdminBlueprintdetailsview() {
                         );
                       })}
 
-                      {/* <tr>
-                        <td>Poetry</td>
-                        <td>{blueprint?.PoetryWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>Non-details</td>
-                        <td>{blueprint?.NonDetailedWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Grammer 20 + <br></br> Vocabulary
-                        </td>
-                        <td>
-                          <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
-                          <br></br>100
-                        </td>
-                      </tr> */}
+                    
                     </tbody>
                   </Table>
                 </div>
@@ -205,7 +238,7 @@ function AdminBlueprintdetailsview() {
               </div>
               <div className="objectives-table">
                 <Table bordered hover size="md" style={{ border: "1px solid" }}>
-                  <tbody >
+                  <tbody>
                     {blueprint?.TypesofQuestions?.map((val, i) => {
                       return (
                         <tr key={i}>
@@ -213,7 +246,7 @@ function AdminBlueprintdetailsview() {
                           <td>
                             {val?.NQA}x{val?.Mask}
                           </td>
-                          <td>{val?.NQA*val?.Mask}</td>
+                          <td>{val?.NQA * val?.Mask}</td>
                         </tr>
                       );
                     })}
@@ -222,9 +255,19 @@ function AdminBlueprintdetailsview() {
                       <td>
                         <b>Total</b>
                       </td>
-                      <td>{blueprint?.TypesofQuestions?.reduce((a,i)=>a+Number(i?.NQA),0)}</td>
                       <td>
-                        <b>{blueprint?.TypesofQuestions?.reduce((a,i)=>a+Number(i?.Mask*i?.NQA),0)}</b>
+                        {blueprint?.TypesofQuestions?.reduce(
+                          (a, i) => a + Number(i?.NQA),
+                          0
+                        )}
+                      </td>
+                      <td>
+                        <b>
+                          {blueprint?.TypesofQuestions?.reduce(
+                            (a, i) => a + Number(i?.Mask * i?.NQA),
+                            0
+                          )}
+                        </b>
                       </td>
                     </tr>
                   </tbody>
@@ -251,7 +294,11 @@ function AdminBlueprintdetailsview() {
                       <td>{blueprint?.EasyMask}</td>
                       <td>{blueprint?.AverageMask}</td>
                       <td>{blueprint?.DifficultMask}</td>
-                      <td>{blueprint?.EasyMask+blueprint?.AverageMask+blueprint?.DifficultMask}</td>
+                      <td>
+                        {blueprint?.EasyMask +
+                          blueprint?.AverageMask +
+                          blueprint?.DifficultMask}
+                      </td>
                     </tr>
                   </tbody>
                 </Table>
@@ -263,17 +310,28 @@ function AdminBlueprintdetailsview() {
           <div style={{ fontFamily: "sans-serif" }}>
             <div
               className="blueprint2-container"
-              style={{ padding: "20px 0px" }}
+              style={{ padding: "20px 8px" }}
             >
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div>
-                  <b>Time : 3 hrs.</b>
+                  <b>Time : {blueprint?.DurationOfExam}</b>
                 </div>
                 <div>
                   <b>BLUE PRINT</b>
                 </div>
                 <div>
-                  <b>Marks : 100</b>
+                  <b>
+                    Marks :-
+                    {blueprint?.AllChapter?.reduce(
+                      (a, ele) =>
+                        a +
+                        Number(
+                          ele?.BluePrintmarksperquestion *
+                            ele?.Blueprintnoofquestion
+                        ),
+                      0
+                    )}
+                  </b>
                 </div>
               </div>
 
@@ -284,400 +342,324 @@ function AdminBlueprintdetailsview() {
                   style={{ border: "1px solid" }}
                   size="sm"
                 >
+               
                   <thead>
                     <tr>
-                      <th>Sr.No</th>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <th key={index}>Table heading</th>
-                                ))} */}
-                      <th>content</th>
+                      <th>S No.</th>
+                      <th style={{ width: "200px" }}>Content</th>
+                      {blueprint?.objectives?.map((ele) => {
+                        return (
+                          <>
+                            <th colSpan={3}>{ele?.Objective}</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </>
+                        );
+                      })}
+
+                      <th colSpan={3}>Total Questions</th>
                       <th></th>
                       <th></th>
                       <th></th>
-                      <th>comprehension</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>expression</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>appreciation</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>total question</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>total marks</th>
+                      <th colSpan={2}>Total Marks</th>
+                    
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1</td>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <td key={index}>Table cell {index}</td>
-                                ))} */}
-                      <td></td>
-                      <td>M.C</td>
-                      <td>V.S.A</td>
-                      <td>S.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td>M.C</td>
-                      <td>V.S.A</td>
-                      <td>S.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td>M.C</td>
-                      <td>V.S.A</td>
-                      <td>S.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td>L.A</td>
-                      <td></td>
-                      <td></td>
+                      <th></th>
+
+                      <th style={{ width: "200px" }}></th>
+                      {blueprint?.objectives?.map((ele) => {
+                        return (
+                          <>
+                            <th>M.C</th>
+                            <th>V.S.A</th>
+                            <th>S.A</th>
+                            <th>L.A.1</th>
+                            <th>L.A.2</th>
+                            <th>L.A.3</th>
+                          </>
+                        );
+                      })}
+
+                      <th>M.C</th>
+                      <th>V.S.A</th>
+                      <th>S.A</th>
+                      <th>L.A.1</th>
+                      <th>L.A.2</th>
+                      <th>L.A.3</th>
+                      <th></th>
+
                     </tr>
+                    {uniqueObjectsArray?.map((ele, i) => {
+                      return (
+                        <tr>
+                          <td>{i + 1}</td>
+                          <td style={{ width: "200px" }}>{ele?.name}</td>
+                          {blueprint?.objectives?.map((ele1) => {
+                            return (
+                              <>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "M C" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "V.S.A" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "V.S.A" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "V.S.A" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "S.A" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 1" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "L.A 1" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 1" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 2" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "L.A 2" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 2" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 3" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.Blueprintnoofquestion
+                                  }
+                                  {AllChapterData?.some(
+                                    (item) =>
+                                      item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                      item?.BluePrintQuestiontype == "L.A 3" &&
+                                      item?.Blueprintchapter == ele?.name
+                                  )
+                                    ? "*"
+                                    : ""}
+                                  {
+                                    AllChapterData?.find(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 3" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )?.BluePrintmarksperquestion
+                                  }
+                                </td>
+                              </>
+                            );
+                          })}
+
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"M C")?.TotalQ}
+                          </td>
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"V.S.A")?.TotalQ}
+                          </td>
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"S.A")?.TotalQ}
+                          </td>
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"L.A 1")?.TotalQ}
+                          </td>
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"L.A 2")?.TotalQ}
+                          </td>
+                          <td>
+                            {bluePrintTotalQues(ele?.name,"L.A 3")?.TotalQ}
+                          </td>
+                       
+                          <td>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
+                          
+                        </tr>
+                      );
+                    })}
                     <tr>
-                      <td>2</td>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <td key={index}>Table cell {index}</td>
-                                ))} */}
                       <td></td>
+                      <td>Total</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <td key={index}>Table cell {index}</td>
-                                ))} */}
-                      <td>lesson name</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <td key={index}>Table cell {index}</td>
-                                ))} */}
-                      <td>lesson name</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      {/* {Array.from({ length: 23 }).map((_, index) => (
-                                    <td key={index}>Table cell {index}</td>
-                                ))} */}
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td>lesson name</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td></td>
+                      <td>{blueprint?.AllChapter?.reduce(
+                      (a, ele) =>
+                        a +
+                        Number(
+                          ele?.BluePrintmarksperquestion *
+                            ele?.Blueprintnoofquestion
+                        ),
+                      0
+                    )}</td>
+                  
                     </tr>
                   </tbody>
+               
                 </Table>
+
+
               </div>
             </div>
           </div>

@@ -208,9 +208,9 @@ const AdminClass = () => {
       };
       let res = await axios(config);
       if (res.status == 200) {
-        handleClose();
+        handleClose3();
         getaddsubclasss();
-        return swal({
+        swal({
           title: "Success!",
           text: res.data.success,
           icon: "success",
@@ -877,6 +877,7 @@ const AdminClass = () => {
               }}
             >
               <option value="">Select Class</option>
+              <option value="Lower Primary">Lower Primary</option>
               <option value="Primary">Primary </option>
               <option value="Upper Primary">Upper Primary</option>
               <option value="Secondary">Secondary</option>
@@ -893,18 +894,18 @@ const AdminClass = () => {
               <option value="">Select Sub-Class</option>
               <option value="LKG">LKG</option>
               <option value="UKG">UKG</option>
-              <option value="Class I">Class I</option>
-              <option value="Class II">Class II</option>
-              <option value="Class III">Class III</option>
-              <option value="Class IV">Class IV</option>
-              <option value="Class V">Class V</option>
-              <option value="Class VI">Class VI</option>
-              <option value="Class VII">Class VII</option>
-              <option value="Class VIII">Class VIII</option>
-              <option value="Class IX">Class IX</option>
-              <option value="Class X">Class X</option>
-              <option value="Class XI">Class XI</option>
-              <option value="Class XII">Class XII</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+              <option value="Class 9">Class 9</option>
+              <option value="Class 10">Class 10</option>
+              <option value="Class 11">Class 11</option>
+              <option value="Class 12">Class 12</option>
             </Form.Select>
           </div>
         </Modal.Body>

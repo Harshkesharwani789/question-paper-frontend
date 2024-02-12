@@ -29,6 +29,8 @@ const AdminChapter = () => {
   const [chapterName, setChapterName] = useState("");
   const [subjectName, setSubjectName] = useState("");
   const [SubjectPart, setSubjectPart] = useState("");
+  const [Classname, setClassname] = useState("");
+  const [Sub_classname, setSub_classname] = useState("");
 
   const AddChapter = async () => {
     if (!chapterName)
@@ -65,6 +67,8 @@ const AdminChapter = () => {
           chapterName: chapterName,
           subjectName: subjectName,
           SubjectPart: SubjectPart,
+          Classname: Classname,
+          Sub_classname: Sub_classname,
           authId: admin?._id,
         },
       };
@@ -285,6 +289,7 @@ const AdminChapter = () => {
       setCurrentpage(currenpage + 1);
     }
   }
+
   useEffect(() => {
     getChapter();
     getSubject();
@@ -292,6 +297,10 @@ const AdminChapter = () => {
     getaddsubclasss();
   }, []);
   console.log("weightage", weightage);
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
   return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -310,18 +319,28 @@ const AdminChapter = () => {
       </div>
       <div className="customerhead p-2">
         <h2 className="header-c ">Chapters</h2>
-
         <div>
           <div className="container">
             <div className="row mb-4">
               <div className="col-md-4">
                 <label htmlFor="">Select Class</label>
+
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setClasstype(e.target.value)}
+                  onChange={(e) => {
+                    // setClasstype(e.target.value);
+                    setClassname(e.target.value);
+                  }}
                 >
                   <option value="">Select Class</option>
-                  <option value="LKG">LKG</option>
+                  {uniqueClassNamesArray?.map((val, i) => {
+                    return (
+                      <option value={val} key={i}>
+                        {val}
+                      </option>
+                    );
+                  })}
+                  {/* <option value="LKG">LKG</option>
                   <option value="UKG">UKG</option>
                   <option value="Class I">Class I</option>
                   <option value="Class II">Class II</option>
@@ -334,7 +353,27 @@ const AdminChapter = () => {
                   <option value="Class IX">Class IX</option>
                   <option value="Class X">Class X</option>
                   <option value="Class XI">Class XI</option>
-                  <option value="Class XII">Class XII</option>
+                  <option value="Class XII">Class XII</option> */}
+                </Form.Select>
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="">Select Sub Class</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setSub_classname(e.target.value);
+                  }}
+                >
+                  <option value="">Select Sub Class</option>
+                  {getaddsubclass
+                    ?.filter((ele) => ele.className === Classname)
+                    ?.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName} key={i}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
               <div className="col-md-4">
@@ -488,10 +527,12 @@ const AdminChapter = () => {
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Chapter for {classtype}</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Add Chapter for {Sub_classname}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
+            {/* <div className="row">
               <div className="col-md-12">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Sub Class</label>
@@ -510,8 +551,8 @@ const AdminChapter = () => {
                   </Form.Select>
                 </div>
               </div>
-            </div>
-            <div className="row">
+            </div> */}
+            {/* <div className="row">
               <div className="col-md-12">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Sub Class</label>
@@ -530,7 +571,7 @@ const AdminChapter = () => {
                   </Form.Select>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Subject</label>
