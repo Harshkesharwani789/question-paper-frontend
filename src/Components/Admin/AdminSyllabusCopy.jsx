@@ -15,9 +15,9 @@ import { FaEye } from "react-icons/fa";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  
+
   const [slybus, setslybus] = useState(false);
-  
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -30,6 +30,24 @@ const AdminSyllabusCopy = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getallweightagecontent()
+  }, [])
+  console.log("weightage", weightage);
   //Post
   const [chapterName, setChapterName] = useState("");
   const [description, setDescription] = useState("");
@@ -149,8 +167,8 @@ const AdminSyllabusCopy = () => {
   };
 
   const addSyllabus = async () => {
-    if(!year){
-      return alert( "Please Enter the year");
+    if (!year) {
+      return alert("Please Enter the year");
     }
 
     if (!chapterName)
@@ -447,11 +465,16 @@ const AdminSyllabusCopy = () => {
     getaddsubclasss();
     getSubject();
   }, []);
-console.log("getaddsubclass",getaddsubclass);
+  console.log("getaddsubclass", getaddsubclass);
 
-const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
-const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
-return (
+  const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+
+
+  //  Add Chapter Name
+
+  const [AddChapter, setAddChapter] = useState([])
+  return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
@@ -585,7 +608,7 @@ return (
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-         <div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -636,17 +659,18 @@ return (
           show={show}
           onHide={handleClose}
           style={{ zIndex: "99999" }}
-          size="lg"
+          size="xl"
         >
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+              <div className="col-sm-4">
               <div className="do-sear mt-2">
                 <label>Year</label>
                 <input
-                value={year}
+                  value={year}
                   type="text"
                   className="vi_0"
                   placeholder="Enter Year"
@@ -655,8 +679,9 @@ return (
                   }}
                 />
               </div>
-            </div>
-            <div className="row">
+              </div>
+              <div className="col-sm-4">
+
               <div className="do-sear mt-2">
                 <label>
                   Select Class <span style={{ color: "red" }}>*</span>
@@ -667,7 +692,7 @@ return (
                     setclasss(e.target.value);
                   }}
                 >
-                  <option>Select the Class</option>                 
+                  <option>Select the Class</option>
                   {uniqueClassNamesArray?.map((val, i) => {
                     return (
                       <option value={val} key={i}>
@@ -677,28 +702,8 @@ return (
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Subjects <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setsubjectt(e.target.value)}
-                >
-                  <option>Select the Subjects</option>
-                  {subjectss?.map((val, i) => {
-                    return (
-                      <option value={val?.subjectName} key={i}>
-                        {val?.subjectName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
               </div>
-            </div>
-            <div className="row">
+              <div className="col-sm-4">
               <div className="do-sear mt-2">
                 <label>
                   Select Sub-Class <span style={{ color: "red" }}>*</span>
@@ -710,7 +715,7 @@ return (
                   }}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.filter((ele)=>ele.className === classs )?.map((val, i) => {
+                  {getaddsubclass?.filter((ele) => ele.className === classs)?.map((val, i) => {
                     return (
                       <option value={val?.subclassName} key={i}>
                         {val?.subclassName}
@@ -719,8 +724,27 @@ return (
                   })}
                 </Form.Select>
               </div>
-            </div>
-            <div className="row">
+              </div>
+              <div className="col-sm-4">
+              <div className="do-sear mt-2">
+                <label>
+                  Select Subjects <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setsubjectt(e.target.value)}
+                >
+                  <option>Select the Subjects</option>
+                  {[...new Set(weightage?.map(item => item?.Subject))]?.map((subject, i) => (
+                    <option value={subject} key={i}>
+                      {subject}
+                    </option>
+                  ))}
+                </Form.Select>
+              </div>
+              </div>
+             
+              <div className="col-sm-4">
               <div className="do-sear mt-2">
                 <label>
                   Select Medium <span style={{ color: "red" }}>*</span>
@@ -741,8 +765,10 @@ return (
                   })}
                 </Form.Select>
               </div>
+              </div>
             </div>
-            <div>
+ 
+           
               <div
                 style={{
                   border: "2px solid #dee2e6",
@@ -751,6 +777,7 @@ return (
                 }}
               >
                 <div className="row">
+                  <div className="col-sm-6">
                   <div className="do-sear mt-2">
                     <label>Chapter Number</label>
                     <input
@@ -759,19 +786,31 @@ return (
                       placeholder="Enter Chapter Number"
                       onChange={(e) => setChapterNumber(e.target.value)}
                     />
-                  </div>
-                </div>
 
-                <div className="row">
+
+                  </div>
+                  </div>
+                  <div className="col-sm-6">
                   <div className="do-sear mt-2">
                     <label>Chapter Name</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Chapter Name"
-                      onChange={(e) => setChapterName(e.target.value)}
-                    />
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setmedium(e.target.value);
+                      }}
+                    >
+                      <option>Select the Medium</option>
+                      {weightage?.filter((ele) => ele.Content === subjectt)?.map((val, i) => {
+                        return (
+                          <option value={val?.Content} key={i}>
+                            {val?.Content}
+                          </option>
+                        );
+                      })}
+                    </Form.Select>
                   </div>
+                  </div>
+                
                 </div>
 
                 <div className="row">
@@ -787,7 +826,10 @@ return (
                       }}
                     />
                   </div>
+                  </div>
+
                   <div className="row">
+                    <div className="col-sm-6">
                     <div className="do-sear mt-2">
                       <label>Marks</label>
                       <input
@@ -797,13 +839,38 @@ return (
                         onChange={(e) => setMarks(e.target.value)}
                       />
                     </div>
+                    </div>
+                    <div className="col-sm-6">
+                    <div className="do-sear mt-2">
+                      <label>Exam Name</label>                
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setmedium(e.target.value);
+                        }}
+                      >
+                        <option>Select the Medium</option>
+                        {Medium?.map((val, i) => {
+                          return (
+                            <option value={val?.mediumName} key={i}>
+                              {val?.mediumName}
+                            </option>
+                          );
+                        })}
+                      </Form.Select>
+                    </div>
+                    </div>                   
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
+
+               
                     <Button
                       variant=""
-                      style={{ float: "right", marginTop: "15px" , backgroundColor:"navy", color:"white", borderRadius:"5px"}}
+                      style={{ 
+                        float: "right", 
+                        marginTop: "15px", 
+                        backgroundColor: "navy", 
+                        color: "white", 
+                        borderRadius: "5px" }}
                       onClick={() => {
                         setslybus(true);
                         AddTypesofquestion();
@@ -811,8 +878,7 @@ return (
                     >
                       Add
                     </Button>
-                  </div>
-                </div>
+                 
                 {slybus ? (
                   <>
                     {" "}
@@ -871,7 +937,7 @@ return (
                   <></>
                 )}
               </div>
-            </div>
+            
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -889,7 +955,7 @@ return (
                   addSyllabus();
                 }}
               >
-               Submit
+                Submit
               </Button>
             </div>
           </Modal.Footer>
@@ -903,7 +969,7 @@ return (
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton  style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
