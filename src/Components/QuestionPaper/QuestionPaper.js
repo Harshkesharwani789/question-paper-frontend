@@ -4,22 +4,13 @@ import "../QuestionPaper/QuestionPaper.css";
 import { CiSaveDown2 } from "react-icons/ci";
 import { LuPrinter } from "react-icons/lu";
 import { IoMdShare } from "react-icons/io";
-import {
-  Button,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-  Modal,
-} from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import parse from "html-react-parser";
-import { Col } from "react-bootstrap";
-import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
 import axios from "axios";
 import swal from "sweetalert";
@@ -31,19 +22,18 @@ const QuestionPaper = ({ text }) => {
   console.log("state", state);
   //get
   const [Questions, setQuestions] = useState([]);
-
   const getAllQuestions = async () => {
     try {
       const config = {
-        url: "/admin/getQuestionByClasswise/"+user?._id,
+        url: "/admin/getQuestionByClasswise/" + user?._id,
         baseURL: "http://localhost:8000/api",
         method: "put",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: { 
-          Board:state.Board,Medium:state.Medium,Class:state.Class,Sub_Class:state.Sub_Class,Subject:state.Subject
+        data: {
+          Board: state.Board, Medium: state.Medium, Class: state.Class, Sub_Class: state.Sub_Class, Subject: state.Subject
         },
       };
       let res = await axios(config)
@@ -60,6 +50,8 @@ const QuestionPaper = ({ text }) => {
       });
     }
   };
+
+  console.log("Questions", Questions);
   const navigate = useNavigate();
 
   const [show, setShow] = useState("");
@@ -86,14 +78,22 @@ const QuestionPaper = ({ text }) => {
     pdf.save("Question_Paper.pdf");
   };
   useEffect(() => {
-    if(state._id&&token){
-        getAllQuestions();
+    if (state._id && token) {
+      getAllQuestions();
     }
-  }, [state,token]);
- var count=(1)
- var count2=0
- const SectionArr=["A","B","C","D","E","F","G","H","I","J"]
- const RomanAA=["I","II","III","IV","V","VI","VII","VIII","IX","X"]
+  }, [state, token]);
+  var count = (1)
+  var count2 = 0
+  const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+  const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+  const lines = [
+    <div className="col-md-12">
+      <div className="do-sear mt-2">
+        <p type="text" className="lined-input"></p>
+      </div>
+    </div>
+  ];
   return (
     <div>
       <div className="top-header">
@@ -139,121 +139,309 @@ const QuestionPaper = ({ text }) => {
 
         <div className="question-paper-display">
           <div className="second-page-body">
-          
-           
-            {state?.bluePrint?.TypesofQuestions?.map((ele1,a)=>{
-             
-                 return (<>
-                  {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
 
-                  <div className="question-body-main">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b> {RomanAA[a]}</b>
-                  <b style={{ textAlign: "left" }}>{ele1?.QAType}</b>
-                </div>
-              </div>
-              <div style={{ display: "flex", marginTop: "10px" }}>
-                <b>{ele1?.NQA}*{ele1?.Mask}={ele1?.NQA*ele1?.Mask}</b>
-              </div>
-            </div>
-            <br />
-              {Questions?.filter((ele)=>ele?.Types_Question==ele1?.QAType)?.map((item, i) => {
 
-                if(i<Number(ele1?.NQA)){
-                  count=(i+1);
-                
-                   return (
-                <div className="question-body mt-2">
+            {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
+
+              return (<>
+                {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
+                <br />
+                <div className="question-body-main">
                   <div>
-                    <div style={{ display: "flex", gap: "12px" }} key={i}>
-                      <b>{i + 1}</b>
-                      <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <b> {RomanAA[a]}</b>
+
+                      <b style={{ textAlign: "left" }}>{ele1?.QAType}</b>
                     </div>
-                    {item?.Image ? (
-                      <div>
-                        <img
-                          src={`http://localhost:8000/Questions/${item?.Image}`}
-                          className="mcq-img"
-                          alt=""
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-
-                    <Row>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_1 ? (
-                          <>
-                            {" "}
-                            a) &nbsp;
-                            {item?.Option_1 ? parse(item?.Option_1) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_2 ? (
-                          <>
-                            b) &nbsp;
-                            {item?.Option_2 ? parse(item?.Option_2) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </Row>
-
-                    <Row>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_3 ? (
-                          <>
-                            {" "}
-                            c) &nbsp;{" "}
-                            {item?.Option_3 ? parse(item?.Option_3) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_4 ? (
-                          <>
-                            {" "}
-                            d) &nbsp;
-                            {item?.Option_4 ? parse(item?.Option_4) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </Row>
-
-                    <Row>
-                      <div className="ans-section">
-                        <div className="ans">Answer: </div>
-                        <div className="ans-box"></div>
-                        <div className="ans-line"></div>
-                      </div>
-                    </Row>
+                  </div>
+                  <div style={{ display: "flex", marginTop: "10px" }}>
+                    <b>{ele1?.NQA}*{ele1?.Mask}={ele1?.NQA * ele1?.Mask}</b>
                   </div>
                 </div>
-              );
-                }
-             
-            })}
+                <br />
+                {Questions?.filter((ele) => ele?.Types_Question == ele1?.QAType)?.map((item, i) => {
+
+                  if (i < Number(ele1?.NQA)) {
+                    count = (i + 1);
+
+                    return (
+                      <div className="question-body mt-2">
+                        {item?.Types_Question == "Multiple Choice Questions" ? (<div>
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+                            <b>{i + 1}</b>
+                            <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          {item?.Image ? (
+                            <div>
+                              <img
+                                src={`http://localhost:8000/Questions/${item?.Image}`}
+                                className="mcq-img"
+                                alt=""
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+
+                          <Row>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_1 ? (
+                                <>
+                                  {" "}
+                                  a) &nbsp;
+                                  {item?.Option_1 ? parse(item?.Option_1) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_2 ? (
+                                <>
+                                  b) &nbsp;
+                                  {item?.Option_2 ? parse(item?.Option_2) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </Row>
+
+                          <Row>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_3 ? (
+                                <>
+                                  {" "}
+                                  c) &nbsp;{" "}
+                                  {item?.Option_3 ? parse(item?.Option_3) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_4 ? (
+                                <>
+                                  {" "}
+                                  d) &nbsp;
+                                  {item?.Option_4 ? parse(item?.Option_4) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </Row>
+
+                          <Row>
+                            <div className="ans-section">
+                              <div className="ans">Answer: </div>
+                              <div className="ans-box"></div>
+                              <div className="ans-line"></div>
+                            </div>
+                          </Row>
+                        </div>) : (<></>)}
+
+                        {item?.Types_Question == "Fill in the Blanks Questions" ? (<>
+
+                          {item?.NumberOfLine == "2" ? (
+                            <>
+                              <div className="d-flex">
+                                <b>{i + 1}).</b>
+                                <p> {parse(`<div>${item?.input1}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input2}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input3}</div>`)}</p>
+                              </div>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {item?.NumberOfLine == "1" ? (
+                            <>
+                              <b>{i + 1}).</b>
+                              <div className="d-flex">
+                                <p> {parse(`<div>${item?.input1}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input2}</div>`)}</p>
+
+                              </div>
+
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </>) : (<></>)}
+
+                        {item?.Types_Question == "Recorrect the Answers Questions" ? (<>
+                          <div>
+                            <div className="d-flex">
+                              <b>{i + 1}).</b>  {item?.Question ? parse(item?.Question) : ""}
+                            </div>
+                            <div>
+
+                              {item?.NumberOfLine && (
+                                <>
+                                  {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                    <React.Fragment key={index}>
+                                      {lines.map((line, idx) => (
+                                        <React.Fragment key={idx}>{line}</React.Fragment>
+                                      ))}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </>) : (<></>)}
+
+                        {item?.Types_Question == "RelationShip Words Questions" ? (<>
+
+                          <div className="row">
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <b>{i+1}). </b>
+                                <p >{item?.RealetionA}</p>
+                                <p >:</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <p >{item?.RealetionB}</p>
+                                <p >::</p>
+                              </div>
+                            </div>
+
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <p>{item?.RealetionC}</p>
+                                <p >:</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2">
+                                <p
+                                  className=""
+                                  style={{
+                                    borderBottom: "1px solid",
+                                    marginTop: "45px",
+                                    marginBottom: "0px",
+                                  }}
+                                ></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="row">
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <label htmlFor=""> i)</label>
+                                <p>{item?.Option_1}</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <label htmlFor=""> ii)</label>
+                                <p>{item?.Option_2}</p>
+                              </div>
+                            </div>
+
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <label htmlFor="">iii)</label>
+                                <p>{item?.Option_3}</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <label htmlFor=""> iv)</label>
+                                <p>{item?.Option_4}</p>
+                              </div>
+                            </div>
+                            </div>
+                           
+                          </div>
+                        </>) : (<></>)}
+
+                        {item?.Types_Question == "Grammer Questions" ? (<>
+                        
+                        </>):(<></>)}
+
+                        {item?.Types_Question == "One Word Question" ? (<>
+                        <div className="d-flex mt-2">
+                          <b>{i+1}).</b>                        
+                          <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                        </div>
+                        <div>
+                        {item?.NumberOfLine && (
+                                <>
+                                  {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                    <React.Fragment key={index}>
+                                      {lines.map((line, idx) => (
+                                        <React.Fragment key={idx}>{line}</React.Fragment>
+                                      ))}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
+                        </div>                        
+                        </>):(<></>)}
+                        {item?.Types_Question == "Three and Four Sentence Answer Questions" ? (<>
+                        <div className="d-flex mt-2">
+                          <b>{i+1}).</b>                        
+                          <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                        </div>
+                        <div>
+                        {item?.NumberOfLine && (
+                                <>
+                                  {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                    <React.Fragment key={index}>
+                                      {lines.map((line, idx) => (
+                                        <React.Fragment key={idx}>{line}</React.Fragment>
+                                      ))}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
+                        </div>                        
+                        </>):(<></>)}
+
+                        {item?.Types_Question == "One Sentence Answer Question" ? (<>
+                        <div className="d-flex mt-2">
+                          <b>{i+1}).</b>                        
+                          <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                        </div>
+                        <div>
+                        {item?.NumberOfLine && (
+                                <>
+                                  {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                    <React.Fragment key={index}>
+                                      {lines.map((line, idx) => (
+                                        <React.Fragment key={idx}>{line}</React.Fragment>
+                                      ))}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
+                        </div>                        
+                        </>):(<></>)}
+
+                      </div>
+                    );
+                  }
+
+                })}
               </>)
-              
-             
+
+
             })}
-            
+
           </div>
           <br />
           <div className="page-footer">
-            <div>8th Std. English QP</div>
-            <div>1</div>
+            <div>{state?.Sub_Class},{state?.Subject}</div>
+            
           </div>
         </div>
         {/* <div className="question-paper-display">
@@ -336,7 +524,7 @@ const QuestionPaper = ({ text }) => {
           </div>
         </div> */}
 
-      
+
 
         {/* <div className="question-paper-display">
          
