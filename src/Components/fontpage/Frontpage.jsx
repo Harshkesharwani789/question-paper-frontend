@@ -29,7 +29,7 @@ const Frontpage = ({data}) => {
 
           <div className="class-details">
             <div className="class-data">
-              <b>Class : {data?.Class}</b>
+              <b>Class : {data?.Sub_Class}</b>
             </div>
             <div className="class-data">
               <b>Subject: {data?.Subject}</b>

@@ -1,7 +1,7 @@
 .question-paper-display {
   border: 1px solid lightgray;
   width: 800px;
-  height: 1145px;
+  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }
