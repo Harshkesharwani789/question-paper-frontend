@@ -111,7 +111,7 @@ function AdminBlueprintdetailsview() {
     }
   });
 
-  console.log("uniqueObjectsArray", uniqueObjectsArray);
+  // console.log("uniqueObjectsArray", uniqueObjectsArray);
 
   function bluePrintTotalQues(chapterName,Qtype) {
     let obj = { TotalQ: "", totalMas: 0 };
@@ -223,23 +223,7 @@ var TotalMask=0
                         );
                       })}
 
-                      {/* <tr>
-                        <td>Poetry</td>
-                        <td>{blueprint?.PoetryWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>Non-details</td>
-                        <td>{blueprint?.NonDetailedWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Grammer 20 + <br></br> Vocabulary
-                        </td>
-                        <td>
-                          <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
-                          <br></br>100
-                        </td>
-                      </tr> */}
+                    
                     </tbody>
                   </Table>
                 </div>
