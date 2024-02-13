@@ -8,8 +8,8 @@ import swal from "sweetalert";
 import parse from "html-react-parser";
 
 const Maths_Pattern = () => {
-  const {state}=useLocation();
-  console.log("Math==>",state);
+  const { state } = useLocation();
+  console.log("Math==>", state);
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
   const [Questions, setQuestions] = useState([]);
@@ -17,18 +17,22 @@ const Maths_Pattern = () => {
   const getAllQuestions = async () => {
     try {
       const config = {
-        url: "/admin/getQuestionByClasswise/"+user?._id,
+        url: "/admin/getQuestionByClasswise/" + user?._id,
         baseURL: "http://localhost:8000/api",
         method: "put",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: { 
-          Board:state.Board,Medium:state.Medium,Class:state.Class,Sub_Class:state.Sub_Class,Subject:state.Subject
+        data: {
+          Board: state.Board,
+          Medium: state.Medium,
+          Class: state.Class,
+          Sub_Class: state.Sub_Class,
+          Subject: state.Subject,
         },
       };
-      let res = await axios(config)
+      let res = await axios(config);
       if (res.status == 200) {
         setQuestions(res.data.success);
       }
@@ -43,15 +47,24 @@ const Maths_Pattern = () => {
     }
   };
 
-  useEffect(()=>{
-    if(token){
-      getAllQuestions()
+  useEffect(() => {
+    if (token) {
+      getAllQuestions();
     }
-  },[token]);
-  const SectionArr=["A","B","C","D","E","F","G","H","I","J"]
-  const RomanAA=["I","II","III","IV","V","VI","VII","VIII","IX","X"]
+  }, [token]);
 
-  console.log("Questions==>",Questions);
+  const lines = [
+    <div className="col-md-12">
+      <div className="do-sear mt-2">
+        <p type="text" className="lined-input"></p>
+      </div>
+    </div>,
+  ];
+
+  const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+  console.log("Questions==>", Questions);
   return (
     <div>
       {/* first page starts here */}
@@ -67,581 +80,1573 @@ const Maths_Pattern = () => {
             </h5>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h6>Time: {state?.bluePrint?.DurationOfExam}</h6>
-              <h6>Max.Marks: {state?.bluePrint?.AllChapter?.reduce(
-                      (a, ele) =>
-                        a +
-                        Number(
-                          ele?.BluePrintmarksperquestion *
-                            ele?.Blueprintnoofquestion
-                        ),
-                      0
-                    )}</h6>
+              <h6>
+                Max.Marks:{" "}
+                {state?.bluePrint?.AllChapter?.reduce(
+                  (a, ele) =>
+                    a +
+                    Number(
+                      ele?.BluePrintmarksperquestion *
+                        ele?.Blueprintnoofquestion
+                    ),
+                  0
+                )}
+              </h6>
             </div>
 
             <div className="question-body-mainM">
               <div className="container-fluid">
-                {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
-                  return (<> <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{ paddingLeft: "unset", paddingRight: "unset" }}
-                  >
-                    <b>{RomanAA[a]}.</b>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                      textAlign: "justify",
-                    }}
-                  >
-                    <b>
-                     {ele?.QAInstruction}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <b></b>
-                        <b>({ele?.NQA} X {ele?.Mask} = {ele?.NQA*ele?.Mask})</b>
+                {state?.bluePrint?.TypesofQuestions?.map((ele, a) => {
+                  return (
+                    <>
+                      {" "}
+                      <div className="row">
+                        <div
+                          className="col-md-1"
+                          style={{
+                            paddingLeft: "unset",
+                            paddingRight: "unset",
+                          }}
+                        >
+                          <b>{RomanAA[a]}.</b>
+                        </div>
+                        <div
+                          className="col-md-11"
+                          style={{
+                            paddingLeft: "unset",
+                            paddingRight: "unset",
+                            textAlign: "justify",
+                          }}
+                        >
+                          <b>
+                            {ele?.QAInstruction}
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <b></b>
+                              <b>
+                                ({ele?.NQA} X {ele?.Mask} ={" "}
+                                {ele?.NQA * ele?.Mask})
+                              </b>
+                            </div>
+                          </b>
+                        </div>
                       </div>
-                    </b>
-                  </div>
+                      {Questions?.filter(
+                        (ama) => ama?.Types_Question == ele?.QAType
+                      )?.map((item, i) => {
+                        if (i < Number(ele?.NQA)) {
+                          return (
+                            <div className="container-fluid">
+                              {/* MCQ */}
+                              {item?.Types_Question ==
+                              "Multiple Choice Questions" ? (
+                                <div className="row">
+                                  <div
+                                    className="col-md-1"
+                                    style={{
+                                      paddingLeft: "unset",
+                                      paddingRight: "unset",
+                                    }}
+                                  >
+                                    <p>{i + 1})</p>
+                                  </div>
+                                  <div
+                                    className="col-md-11"
+                                    style={{
+                                      paddingLeft: "unset",
+                                      paddingRight: "unset",
+                                    }}
+                                  >
+                                    <div className="container-fluid">
+                                      <div className="row">
+                                        <div
+                                          className="col-md-12"
+                                          style={{ paddingLeft: "unset" }}
+                                        >
+                                          <p style={{ textAlign: "justify" }}>
+                                            {item?.Question
+                                              ? parse(item?.Question)
+                                              : ""}
+                                          </p>
+                                        </div>
+                                        {item?.Image ? (
+                                          <div>
+                                            <img
+                                              src={`http://localhost:8000/Questions/${item?.Image}`}
+                                              className="mcq-img"
+                                              alt=""
+                                            />
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_1 ? (
+                                              <>
+                                                {" "}
+                                                (A) &nbsp;
+                                                {item?.Option_1
+                                                  ? parse(item?.Option_1)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_2 ? (
+                                              <>
+                                                (B) &nbsp;
+                                                {item?.Option_2
+                                                  ? parse(item?.Option_2)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_3 ? (
+                                              <>
+                                                {" "}
+                                                (C) &nbsp;{" "}
+                                                {item?.Option_3
+                                                  ? parse(item?.Option_3)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {" "}
+                                            {item?.Option_4 ? (
+                                              <>
+                                                {" "}
+                                                (D) &nbsp;
+                                                {item?.Option_4
+                                                  ? parse(item?.Option_4)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        {item?.Option_5 ? (
+                                          <div
+                                            className="col-md-3"
+                                            style={{
+                                              paddingLeft: "unset",
+                                              marginTop: "-10px",
+                                            }}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {item?.Option_5 ? (
+                                                <>
+                                                  {" "}
+                                                  (E) &nbsp;
+                                                  {item?.Option_5
+                                                    ? parse(item?.Option_5)
+                                                    : ""}
+                                                </>
+                                              ) : (
+                                                <></>
+                                              )}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
 
-                </div>
-                {Questions?.filter((ama)=>ama?.Types_Question==ele?.QAType)?.map((item, i) => {
+                                        {item?.Option_6 ? (
+                                          <div
+                                            className="col-md-3"
+                                            style={{
+                                              paddingLeft: "unset",
+                                              marginTop: "-10px",
+                                            }}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {item?.Option_6 ? (
+                                                <>
+                                                  {" "}
+                                                  (F) &nbsp;
+                                                  {item?.Option_6
+                                                    ? parse(item?.Option_6)
+                                                    : ""}
+                                                </>
+                                              ) : (
+                                                <></>
+                                              )}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
+                                      </div>
+                                    </div>
+                                    <div
+                                      className="ans-section"
+                                      style={{ marginTop: "-10px" }}
+                                    >
+                                      <div className="ans">Answer: </div>
+                                      <div className="ans-box"></div>
+                                      <div className="ans-line"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                               {item?.Types_Question ==
+                              "Objective Questions" ? (
+                                <div className="row">
+                                  <div
+                                    className="col-md-1"
+                                    style={{
+                                      paddingLeft: "unset",
+                                      paddingRight: "unset",
+                                    }}
+                                  >
+                                    <p>{i + 1})</p>
+                                  </div>
+                                  <div
+                                    className="col-md-11"
+                                    style={{
+                                      paddingLeft: "unset",
+                                      paddingRight: "unset",
+                                    }}
+                                  >
+                                    <div className="container-fluid">
+                                      <div className="row">
+                                        <div
+                                          className="col-md-12"
+                                          style={{ paddingLeft: "unset" }}
+                                        >
+                                          <p style={{ textAlign: "justify" }}>
+                                            {item?.Question
+                                              ? parse(item?.Question)
+                                              : ""}
+                                          </p>
+                                        </div>
+                                        {item?.Image ? (
+                                          <div>
+                                            <img
+                                              src={`http://localhost:8000/Questions/${item?.Image}`}
+                                              className="mcq-img"
+                                              alt=""
+                                            />
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_1 ? (
+                                              <>
+                                                {" "}
+                                                (A) &nbsp;
+                                                {item?.Option_1
+                                                  ? parse(item?.Option_1)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_2 ? (
+                                              <>
+                                                (B) &nbsp;
+                                                {item?.Option_2
+                                                  ? parse(item?.Option_2)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {item?.Option_3 ? (
+                                              <>
+                                                {" "}
+                                                (C) &nbsp;{" "}
+                                                {item?.Option_3
+                                                  ? parse(item?.Option_3)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        <div
+                                          className="col-md-3"
+                                          style={{
+                                            paddingLeft: "unset",
+                                            marginTop: "-10px",
+                                          }}
+                                        >
+                                          <p>
+                                            {" "}
+                                            {item?.Option_4 ? (
+                                              <>
+                                                {" "}
+                                                (D) &nbsp;
+                                                {item?.Option_4
+                                                  ? parse(item?.Option_4)
+                                                  : ""}
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </p>
+                                        </div>
+                                        {item?.Option_5 ? (
+                                          <div
+                                            className="col-md-3"
+                                            style={{
+                                              paddingLeft: "unset",
+                                              marginTop: "-10px",
+                                            }}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {item?.Option_5 ? (
+                                                <>
+                                                  {" "}
+                                                  (E) &nbsp;
+                                                  {item?.Option_5
+                                                    ? parse(item?.Option_5)
+                                                    : ""}
+                                                </>
+                                              ) : (
+                                                <></>
+                                              )}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
 
-if(i<Number(ele?.NQA)){
-   return (<div className="container-fluid">
-   <div className="row">
-     <div
-       className="col-md-1"
-       style={{ paddingLeft: "unset", paddingRight: "unset" }}
-     >
-       <p>{i+1})</p>
-     </div>
-     <div
-       className="col-md-11"
-       style={{ paddingLeft: "unset", paddingRight: "unset" }}
-     >
-       <div className="container-fluid">
-         <div className="row">
-           <div
-             className="col-md-12"
-             style={{ paddingLeft: "unset" }}
-           >
-             <p style={{ textAlign: "justify" }}>
-               If the third term of a Geometric Progression is 2,
-               then the product of its first five terms is,
-             </p>
-           </div>
+                                        {item?.Option_6 ? (
+                                          <div
+                                            className="col-md-3"
+                                            style={{
+                                              paddingLeft: "unset",
+                                              marginTop: "-10px",
+                                            }}
+                                          >
+                                            <p>
+                                              {" "}
+                                              {item?.Option_6 ? (
+                                                <>
+                                                  {" "}
+                                                  (F) &nbsp;
+                                                  {item?.Option_6
+                                                    ? parse(item?.Option_6)
+                                                    : ""}
+                                                </>
+                                              ) : (
+                                                <></>
+                                              )}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
+                                      </div>
+                                    </div>
+                                    <div
+                                      className="ans-section"
+                                      style={{ marginTop: "-10px" }}
+                                    >
+                                      <div className="ans">Answer: </div>
+                                      <div className="ans-box"></div>
+                                      <div className="ans-line"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
 
-           <div
-             className="col-md-3"
-             style={{ paddingLeft: "unset", marginTop: "-10px" }}
-           >
-             <p>
-               (A) 5<sup>2</sup>
-             </p>
-           </div>
-           <div
-             className="col-md-3"
-             style={{ paddingLeft: "unset", marginTop: "-10px" }}
-           >
-             <p>
-               (B) 2<sup>5</sup>
-             </p>
-           </div>
-           <div
-             className="col-md-3"
-             style={{ paddingLeft: "unset", marginTop: "-10px" }}
-           >
-             <p>(C) 15</p>
-           </div>
-           <div
-             className="col-md-3"
-             style={{ paddingLeft: "unset", marginTop: "-10px" }}
-           >
-             <p>(D) 10</p>
-           </div>
-         </div>
-       </div>
-       <div className="ans-section" style={{ marginTop: "-10px" }}>
-         <div className="ans">Answer: </div>
-         <div className="ans-box"></div>
-         <div className="ans-line"></div>
-       </div>
-     </div>
-   </div>
- </div>)}})}
-                  
-                </>)
+                              {item?.Types_Question ==
+                              "Fill in the Blanks Questions" ? (
+                                <>
+                                  {item?.NumberOfLine == "2" ? (
+                                    <>
+                                      <div className="d-flex">
+                                        <b>{i + 1}).</b>
+                                        <p>
+                                          {" "}
+                                          {parse(`<div>${item?.input1}</div>`)}
+                                        </p>
+                                        <div className="ques-line"></div>
+                                        <p>
+                                          {" "}
+                                          {parse(`<div>${item?.input2}</div>`)}
+                                        </p>
+                                        <div className="ques-line"></div>
+                                        <p>
+                                          {" "}
+                                          {parse(`<div>${item?.input3}</div>`)}
+                                        </p>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.NumberOfLine == "1" ? (
+                                    <>
+                                      <b>{i + 1}).</b>
+                                      <div className="d-flex">
+                                        <p>
+                                          {" "}
+                                          {parse(`<div>${item?.input1}</div>`)}
+                                        </p>
+                                        <div className="ques-line"></div>
+                                        <p>
+                                          {" "}
+                                          {parse(`<div>${item?.input2}</div>`)}
+                                        </p>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question == "One Word Question" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "One Sentence Answer Question" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                              {item?.Types_Question ==
+                              "Two  Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                              {item?.Types_Question ==
+                              "Two and three Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Three and Four Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Five and Six Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Six Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Seven Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Eight Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item?.Types_Question ==
+                              "Ten Sentence Answer Questions" ? (
+                                <>
+                                  <div className="row">
+                                    <div
+                                      className="col-md-1"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>{i + 1}).</p>
+                                    </div>
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.Question
+                                          ? parse(item?.Question)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {item?.orQuestion || item?.Image_1 ? (
+                                    <div>
+                                      <p
+                                        style={{
+                                          padding: "20px 0px 0px",
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        (OR)
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {item?.orQuestion ? (
+                                    <div
+                                      className="col-md-11"
+                                      style={{
+                                        paddingLeft: "unset",
+                                        paddingRight: "unset",
+                                      }}
+                                    >
+                                      <p>
+                                        {item?.orQuestion
+                                          ? parse(item?.orQuestion)
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div className="row">
+                                    {item?.Image_1 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {item?.Image_2 ? (
+                                      <div className="col-md-6">
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+
+                                  <div>
+                                    {item?.NumberOfLine && (
+                                      <>
+                                        {Array.from(
+                                          { length: item?.NumberOfLine },
+                                          (_, index) => (
+                                            <React.Fragment key={index}>
+                                              {lines.map((line, idx) => (
+                                                <React.Fragment key={idx}>
+                                                  {line}
+                                                </React.Fragment>
+                                              ))}
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          );
+                        }
+                      })}
+                    </>
+                  );
                 })}
-               
-              </div>
-            
-
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>2)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If <sup>n</sup>C<sub>8</sub>=<sup>n</sup>C
-                            <sub>12</sub> then the value of n is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(A) 10</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(B) 20</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 25</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 30</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>3)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If the third term of a Geometric Progression is 2,
-                            then the product of its first five terms is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (A) 5<sup>2</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (B) 2<sup>5</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 15</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 10</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>4)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If <sup>n</sup>C<sub>8</sub>=<sup>n</sup>C
-                            <sub>12</sub> then the value of n is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(A) 10</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(B) 20</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 25</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 30</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>5)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If the third term of a Geometric Progression is 2,
-                            then the product of its first five terms is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (A) 5<sup>2</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (B) 2<sup>5</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 15</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 10</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>6)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If <sup>n</sup>C<sub>8</sub>=<sup>n</sup>C
-                            <sub>12</sub> then the value of n is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(A) 10</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(B) 20</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 25</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 30</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>7)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If the third term of a Geometric Progression is 2,
-                            then the product of its first five terms is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (A) 5<sup>2</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (B) 2<sup>5</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 15</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 10</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <p>8)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{
-                      paddingLeft: "unset",
-                      paddingRight: "unset",
-                    }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If <sup>n</sup>C<sub>8</sub>=<sup>n</sup>C
-                            <sub>12</sub> then the value of n is,
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(A) 10</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(B) 20</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 25</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 30</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
-
+          <br />
           <div className="footer-text">
             <footer>
               <div>[Turn over]</div>
@@ -652,7 +1657,7 @@ if(i<Number(ele?.NQA)){
       {/* first page End here */}
 
       {/* second page starts here */}
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -953,11 +1958,11 @@ if(i<Number(ele?.NQA)){
             </footer>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* second page end here */}
 
       {/* third page starts here */}
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -1124,11 +2129,11 @@ if(i<Number(ele?.NQA)){
             </footer>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* third page end here */}
 
       {/* fourth page starts here */}
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -1297,11 +2302,11 @@ if(i<Number(ele?.NQA)){
             </footer>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* fourth page end here */}
 
       {/* five page strats here */}
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -1517,12 +2522,12 @@ if(i<Number(ele?.NQA)){
             </footer>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* five page end here */}
 
       {/* six page start here */}
 
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -1692,12 +2697,12 @@ if(i<Number(ele?.NQA)){
             </footer>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* six page end here */}
 
       {/* seven page starts here */}
 
-      <div className="page-starts">
+      {/* <div className="page-starts">
         <div className="question-paper-display">
           <div className="second-page-body ">
             <header>
@@ -1755,7 +2760,7 @@ if(i<Number(ele?.NQA)){
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* seven page end here */}
     </div>
   );
