@@ -699,6 +699,12 @@ var TotalMask=0
                                  return  navigate("/10th_QP_maths", {
                                   state: { ...state, bluePrint: val },
                                 });
+                                
+                              }else if(val?.SubClassName?.toLowerCase()=="class 10"&&val?.subjects?.toLowerCase()=="science"){
+                                return  navigate("/science10th", {
+                                 state: { ...state, bluePrint: val },
+                               });
+                              
                               }else
                               return navigate("/questionpaper", {
                                 state: { ...state, bluePrint: val },
