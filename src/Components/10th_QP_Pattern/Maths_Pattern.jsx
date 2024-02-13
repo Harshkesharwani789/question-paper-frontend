@@ -5,6 +5,7 @@ import { BsSuperscript } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import parse from "html-react-parser";
 
 const Maths_Pattern = () => {
   const {state}=useLocation();
@@ -79,13 +80,13 @@ const Maths_Pattern = () => {
 
             <div className="question-body-mainM">
               <div className="container-fluid">
-                {}
-                <div className="row">
+                {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
+                  return (<> <div className="row">
                   <div
                     className="col-md-1"
                     style={{ paddingLeft: "unset", paddingRight: "unset" }}
                   >
-                    <b>I.</b>
+                    <b>{RomanAA[a]}.</b>
                   </div>
                   <div
                     className="col-md-11"
@@ -96,86 +97,91 @@ const Maths_Pattern = () => {
                     }}
                   >
                     <b>
-                      Four alternatives are given for each of the folloeing
-                      question / incomplete statements. only one of them is
-                      correct or most appropriate. Choose the correct
-                      alternative and write the complete answer along with its
-                      alphabet in
+                     {ele?.QAInstruction}
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
                         }}
                       >
-                        <b>space provided againist each question.</b>
-                        <b>(1 X 8 = 8)</b>
+                        <b></b>
+                        <b>({ele?.NQA} X {ele?.Mask} = {ele?.NQA*ele?.Mask})</b>
                       </div>
                     </b>
                   </div>
-                </div>
-              </div>
-              <div className="container-fluid">
-                <div className="row">
-                  <div
-                    className="col-md-1"
-                    style={{ paddingLeft: "unset", paddingRight: "unset" }}
-                  >
-                    <p>1)</p>
-                  </div>
-                  <div
-                    className="col-md-11"
-                    style={{ paddingLeft: "unset", paddingRight: "unset" }}
-                  >
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div
-                          className="col-md-12"
-                          style={{ paddingLeft: "unset" }}
-                        >
-                          <p style={{ textAlign: "justify" }}>
-                            If the third term of a Geometric Progression is 2,
-                            then the product of its first five terms is,
-                          </p>
-                        </div>
 
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (A) 5<sup>2</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>
-                            (B) 2<sup>5</sup>
-                          </p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(C) 15</p>
-                        </div>
-                        <div
-                          className="col-md-3"
-                          style={{ paddingLeft: "unset", marginTop: "-10px" }}
-                        >
-                          <p>(D) 10</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ans-section" style={{ marginTop: "-10px" }}>
-                      <div className="ans">Answer: </div>
-                      <div className="ans-box"></div>
-                      <div className="ans-line"></div>
-                    </div>
-                  </div>
                 </div>
+                {Questions?.filter((ama)=>ama?.Types_Question==ele?.QAType)?.map((item, i) => {
+
+if(i<Number(ele?.NQA)){
+   return (<div className="container-fluid">
+   <div className="row">
+     <div
+       className="col-md-1"
+       style={{ paddingLeft: "unset", paddingRight: "unset" }}
+     >
+       <p>{i+1})</p>
+     </div>
+     <div
+       className="col-md-11"
+       style={{ paddingLeft: "unset", paddingRight: "unset" }}
+     >
+       <div className="container-fluid">
+         <div className="row">
+           <div
+             className="col-md-12"
+             style={{ paddingLeft: "unset" }}
+           >
+             <p style={{ textAlign: "justify" }}>
+               If the third term of a Geometric Progression is 2,
+               then the product of its first five terms is,
+             </p>
+           </div>
+
+           <div
+             className="col-md-3"
+             style={{ paddingLeft: "unset", marginTop: "-10px" }}
+           >
+             <p>
+               (A) 5<sup>2</sup>
+             </p>
+           </div>
+           <div
+             className="col-md-3"
+             style={{ paddingLeft: "unset", marginTop: "-10px" }}
+           >
+             <p>
+               (B) 2<sup>5</sup>
+             </p>
+           </div>
+           <div
+             className="col-md-3"
+             style={{ paddingLeft: "unset", marginTop: "-10px" }}
+           >
+             <p>(C) 15</p>
+           </div>
+           <div
+             className="col-md-3"
+             style={{ paddingLeft: "unset", marginTop: "-10px" }}
+           >
+             <p>(D) 10</p>
+           </div>
+         </div>
+       </div>
+       <div className="ans-section" style={{ marginTop: "-10px" }}>
+         <div className="ans">Answer: </div>
+         <div className="ans-box"></div>
+         <div className="ans-line"></div>
+       </div>
+     </div>
+   </div>
+ </div>)}})}
+                  
+                </>)
+                })}
+               
               </div>
+            
 
               <div className="container-fluid">
                 <div className="row">
