@@ -29,7 +29,7 @@
 .question-paper-display {
   border: 1px solid lightgray;
   width: 800px;
-  height: 1145px;
+  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }
@@ -90,6 +90,11 @@
 .ans-line {
   border-bottom: 1px solid;
   width: 100%;
+}
+
+.ques-line {
+  border-bottom: 1px solid;
+  width: 20%;
 }
 
 .mcq-img {
@@ -248,7 +253,7 @@ h6 {
 .question-paper-display {
   border: 1px solid lightgray;
   width: 800px;
-  height: 1145px;
+  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }
