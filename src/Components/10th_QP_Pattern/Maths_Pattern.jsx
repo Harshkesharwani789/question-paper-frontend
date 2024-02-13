@@ -1,9 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Table } from "react-bootstrap";
 import "../10th_QP_Pattern/Maths_Pattern.css";
 import { BsSuperscript } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 
 const Maths_Pattern = () => {
+  const {state}=useLocation();
+  console.log("Math==>",state);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
+  const [Questions, setQuestions] = useState([]);
+
+  const getAllQuestions = async () => {
+    try {
+      const config = {
+        url: "/admin/getQuestionByClasswise/"+user?._id,
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: { 
+          Board:state.Board,Medium:state.Medium,Class:state.Class,Sub_Class:state.Sub_Class,Subject:state.Subject
+        },
+      };
+      let res = await axios(config)
+      if (res.status == 200) {
+        setQuestions(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+
+  useEffect(()=>{
+    if(token){
+      getAllQuestions()
+    }
+  },[token]);
+  const SectionArr=["A","B","C","D","E","F","G","H","I","J"]
+  const RomanAA=["I","II","III","IV","V","VI","VII","VIII","IX","X"]
+
+  console.log("Questions==>",Questions);
   return (
     <div>
       {/* first page starts here */}
@@ -18,12 +65,21 @@ const Maths_Pattern = () => {
               SUBJECT: MATHEMATICS
             </h5>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h6>Time: 2 Hours 45 min.</h6>
-              <h6>Max.Marks: 80</h6>
+              <h6>Time: {state?.bluePrint?.DurationOfExam}</h6>
+              <h6>Max.Marks: {state?.bluePrint?.AllChapter?.reduce(
+                      (a, ele) =>
+                        a +
+                        Number(
+                          ele?.BluePrintmarksperquestion *
+                            ele?.Blueprintnoofquestion
+                        ),
+                      0
+                    )}</h6>
             </div>
 
             <div className="question-body-mainM">
               <div className="container-fluid">
+                {}
                 <div className="row">
                   <div
                     className="col-md-1"
