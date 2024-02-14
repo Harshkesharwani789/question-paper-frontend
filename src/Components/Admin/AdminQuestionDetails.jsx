@@ -306,6 +306,7 @@ const AdminQuestionDetails = () => {
   console.log(weightage);
   console.log(NameExam);
   console.log(getobjectives);
+  console.log("chapters",chapters);
 
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
@@ -453,7 +454,7 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setChapter_Name(e.target.value)}
                 >
                   <option>Select the Chapter Name</option>
-                  {chapters?.map((item, i) => {
+                  {chapters?.filter((ele)=>ele?.subjectName ==Subjects)?.map((item, i) => {
                     return (
                       <option value={item?.chapterName} key={i}>
                         {item?.chapterName}
