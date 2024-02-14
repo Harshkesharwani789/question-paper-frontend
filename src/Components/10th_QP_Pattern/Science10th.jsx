@@ -92,7 +92,7 @@ function Science10th() {
                               <b>{RomanAA[a]}</b>
                               <b style={{ textAlign: "left" }}>
                                 {" "}
-                                {ele1?.QAType}
+                                {ele1?.QAInstruction}
                               </b>
                             </div>
                           </div>

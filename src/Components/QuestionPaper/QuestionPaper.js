@@ -137,7 +137,6 @@ const QuestionPaper = ({ text }) => {
       <Frontpage data={state} />
       
       <div className="question-paper-display-container" id="pdf">
-
         <div className="question-paper-display">
           <div className="second-page-body">
 
@@ -152,7 +151,7 @@ const QuestionPaper = ({ text }) => {
                     <div style={{ display: "flex", gap: "12px" }}>
                       <b> {RomanAA[a]}</b>
 
-                      <b style={{ textAlign: "left" }}>{ele1?.QAType}</b>
+                      <b style={{ textAlign: "left" }}>{ele1?.QAInstruction}</b>
                     </div>
                   </div>
                   <div style={{ display: "flex", marginTop: "10px" }}>
