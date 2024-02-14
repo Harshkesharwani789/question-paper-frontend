@@ -29,7 +29,6 @@
 .question-paper-display {
   border: 1px solid lightgray;
   width: 800px;
-  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }
@@ -98,8 +97,9 @@
 }
 
 .mcq-img {
-  width: 50%;
+  width: 48%;
   height: 158px;
+  border: groove;
 }
 .qp-end-buttons {
   display: flex;
@@ -252,8 +252,6 @@ h6 {
 
 .question-paper-display {
   border: 1px solid lightgray;
-  width: 800px;
-  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }

@@ -135,6 +135,7 @@ const QuestionPaper = ({ text }) => {
       </div>
 
       <Frontpage data={state} />
+      
       <div className="question-paper-display-container" id="pdf">
 
         <div className="question-paper-display">
