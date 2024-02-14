@@ -1085,9 +1085,9 @@ function AdminBlueprint() {
                                         return (
                                           <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td>{item?.Objective}</td>
+                                            <td>{item?.Objective}%</td>
                                             <td>{item?.NoofQues}</td>
-                                            <td>{item?.Marks}%</td>
+                                            <td>{item?.Marks}</td>
                                             <td>
                                               <AiFillDelete
                                                 color="red"
