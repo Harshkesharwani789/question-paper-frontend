@@ -705,6 +705,15 @@ var TotalMask=0
                                  state: { ...state, bluePrint: val },
                                });
                               
+                              }else if(val?.SubClassName?.toLowerCase()=="class 10"&&val?.subjects?.toLowerCase()=="social science"){
+                                return  navigate("/socialqp", {
+                                 state: { ...state, bluePrint: val },
+                               });                             
+                              }else if(val?.SubClassName?.toLowerCase()=="class 10"&&val?.subjects?.toLowerCase()=="english"){
+                                return  navigate("/englishqp", {
+                                 state: { ...state, bluePrint: val },
+                               });                             
+                              
                               }else
                               return navigate("/questionpaper", {
                                 state: { ...state, bluePrint: val },
