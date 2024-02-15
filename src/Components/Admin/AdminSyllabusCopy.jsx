@@ -30,6 +30,22 @@ const AdminSyllabusCopy = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  //Get All Subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Get All Subject Part
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
     try {
@@ -44,8 +60,40 @@ const AdminSyllabusCopy = () => {
     }
   };
 
+    //Get Chapter 
+    const [chapters, setchapters] = useState([]);
+    const getChapter = async () => {
+      try {
+        let res = await axios.get(
+          "http://localhost:8000/api/admin/getAllChapter"
+        );
+        if (res.status == 200) {
+          setchapters(res.data.success);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  // Get Exam Name
+  const [NameExam, setNameExam] = useState([]);
+  const getNameExamination = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllNameExamination"
+      );
+      if (res.status == 200) {
+        setNameExam(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getallweightagecontent()
+    getChapter()
+    getNameExamination()
   }, [])
   console.log("weightage", weightage);
   //Post
@@ -58,92 +106,48 @@ const AdminSyllabusCopy = () => {
   const [subclass, setsubclass] = useState("");
   const [medium, setmedium] = useState("");
   const [subjectt, setsubjectt] = useState("");
+  const [SelectChapter, setSelectChapter] = useState("")
+  const [selectsubjectpart, setSelectsubjectpart] = useState("")
+  const [Examinationname, setExaminationname] = useState("")
   // Array of object 1
   const [Arr, setArr] = useState([]);
-
   const AddTypesofquestion = () => {
     try {
-      if (!year) {
-        swal({
-          title: "Oops!",
-          text: "Please Select Question Type",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if QAType is not provided
+      if (!chapterNumber) {       
+        return alert("write chapter name")
       }
 
-      if (!classs) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter No. of Questions",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if NQA is not provided
-      }
+      const existingElement = Arr.find(ele => 
+        ele.chapterno === chapterNumber || 
+        ele.chapter === SelectChapter ||
+        ele.subjectpart === selectsubjectpart ||
+        ele.description === description || 
+        ele.mask === marks || 
+        ele.chepterName === Examinationname
+      );
 
-      if (!subclass) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter Marks",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if Mask is not provided
-      }
-      if (!medium) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter medium",
-          icon: "error",
-          button: "Try Again!",
-        });
-      }
-      if (!subjectt) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter subjectt",
-          icon: "error",
-          button: "Try Again!",
-        });
-      }
-      let Slybus = 1;
-      // Arr.forEach((ele) => {
-      //   if (ele?.QAType === QAType) {
-      //     Question = 0;
-      //     swal({
-      //       title: "Oops!",
-      //       text: "Already Exists...",
-      //       icon: "error",
-      //       button: "Try Again!",
-      //     });
-      //   }
-      // });
-
-      if (Slybus) {
-        const obj = {
-          lesson: chapterNumber,
-          chepterName: chapterName,
-          description: description,
-          mask: marks,
-        };
-
-        Arr.push(obj);
-        setArr([...Arr]); // Ensure you create a new array reference to trigger a re-render
-        console.log("Arr", Arr);
-
-        swal({
-          title: "Yeah!",
-          text: "Added Successfully...",
-          icon: "success",
-          button: "OK!",
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // if (existingElement) {
+  //     return alert("already exist")
+  //   }
+    const newObj = {
+      chapterno: chapterNumber,
+      chapter: SelectChapter,
+      subjectpart: selectsubjectpart,
+      description: description,
+      mask: marks,
+      examname: Examinationname,        
+    };
+    setArr([...Arr, newObj]);
+    swal({
+      title: "Yeah!",
+      text: "Added Successfully...",
+      icon: "success",
+      button: "OK!",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const deleteQuestionType = (index) => {
     try {
@@ -170,28 +174,6 @@ const AdminSyllabusCopy = () => {
     if (!year) {
       return alert("Please Enter the year");
     }
-
-    if (!chapterName)
-      return swal({
-        title: "Oops!",
-        text: "Please Enter the chapter name",
-        icon: "error",
-        button: "Ok!",
-      });
-    if (!marks)
-      return swal({
-        title: "Oops!",
-        text: "Please Enter the marks",
-        icon: "error",
-        button: "Ok!",
-      });
-    if (!description)
-      return swal({
-        title: "Oops!",
-        text: "Please enter description",
-        icon: "error",
-        button: "Ok!",
-      });
     try {
       const config = {
         url: "/admin/addSyllabus",
@@ -202,23 +184,19 @@ const AdminSyllabusCopy = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          chapterNumber: chapterNumber,
-          chapterName: chapterName,
-          description: description,
-          marks: marks,
-          authId: admin?._id,
           year: year,
+          medium: medium,
           Class: classs,
           SubClass: subclass,
-          medium: medium,
-          subject: subjectt,
+          subject: subjectt,  
+          authId: admin?._id,
           SyllabusDetails: Arr,
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-        getAllSyllabus();
+
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -237,22 +215,7 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-  //get
-  const [chapters, setchapters] = useState([]);
-  const [nochangedata, setnochangedata] = useState([]);
-  const getAllSyllabus = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSyllabus"
-      );
-      if (res.status == 200) {
-        setchapters(res.data.success);
-        setnochangedata(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   // get method add class
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
@@ -317,7 +280,7 @@ const AdminSyllabusCopy = () => {
       if (res.status == 200)
         if (res.status == 200) {
           handleClose1();
-          getAllSyllabus();
+       
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -351,7 +314,7 @@ const AdminSyllabusCopy = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose2();
-        getAllSyllabus();
+    
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -370,21 +333,8 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-  //get method for subject
-  const [subjectss, setsubjectss] = useState([]);
-  const getSubject = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
-      );
-      if (res.status == 200) {
-        setsubjectss(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //   get method of subject
+
+  //Get All Syllabus
   const [Slybuss, setSlybuss] = useState([]);
   const getSyllabus = async () => {
     try {
@@ -399,36 +349,8 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
-  //   Row Filter
-  const [itempage, setItempage] = useState(5);
+  console.log("Slybuss",Slybuss);
 
-  //   DateRange Filter
-  const [searchH, setSearchH] = useState("");
-  const handleFilterH = (e) => {
-    if (e.target.value != "") {
-      setSearchH(e.target.value);
-      const filterTableH = nochangedata.filter((o) =>
-        Object.keys(o).some((k) =>
-          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
-        )
-      );
-      setchapters([...filterTableH]);
-    } else {
-      setSearchH(e.target.value);
-      setchapters([...nochangedata]);
-    }
-  };
-  const [searchTermH, setSearchTermH] = useState("");
-  const searchedProductH = chapters.filter((item) => {
-    if (searchTermH.value === "") {
-      return item;
-    }
-    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
-      return item;
-    } else {
-      return console.log("not found");
-    }
-  });
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
   // const productPerPage = 5;
@@ -486,7 +408,7 @@ const AdminSyllabusCopy = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
-            onChange={handleFilterH}
+           
           />
         </div>
       </div>
@@ -528,9 +450,7 @@ const AdminSyllabusCopy = () => {
                 <th>
                   <div>View</div>
                 </th>
-                <th>
-                  <div>View</div>
-                </th>
+              
                 <th>Action</th>
               </tr>
             </thead>
@@ -548,7 +468,7 @@ const AdminSyllabusCopy = () => {
                     <td>{item?.subject}</td>
                     <td>
                       <Link
-                        to="/"
+                        to="#"
                         style={{ textDecoration: "none", color: "white" }}
                       >
                         <FaEye color="blue" />
@@ -586,28 +506,6 @@ const AdminSyllabusCopy = () => {
             </tbody>
           </Table>
         </div>
-
-        {/* <Pagination style={{ float: "right" }}>
-          <Pagination.First onClick={() => setPageNumber(0)} />
-          <Pagination.Prev
-            onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
-          />
-          {Array.from({ length: pageCount }, (_, index) => (
-            <Pagination.Item
-              key={index}
-              active={index === pageNumber}
-              onClick={() => setPageNumber(index)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() =>
-              setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-            }
-          />
-          <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
         <div>
           <nav>
             <ul className="pagination">
@@ -681,7 +579,28 @@ const AdminSyllabusCopy = () => {
               </div>
               </div>
               <div className="col-sm-4">
-
+              <div className="do-sear mt-2">
+                <label>
+                  Select Medium <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setmedium(e.target.value);
+                  }}
+                >
+                  <option>Select the Medium</option>
+                  {Medium?.map((val, i) => {
+                    return (
+                      <option value={val?.mediumName} key={i}>
+                        {val?.mediumName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+              </div>
+              <div className="col-sm-4">
               <div className="do-sear mt-2">
                 <label>
                   Select Class <span style={{ color: "red" }}>*</span>
@@ -734,38 +653,18 @@ const AdminSyllabusCopy = () => {
                   aria-label="Default select example"
                   onChange={(e) => setsubjectt(e.target.value)}
                 >
-                  <option>Select the Subjects</option>
-                  {[...new Set(weightage?.map(item => item?.Subject))]?.map((subject, i) => (
-                    <option value={subject} key={i}>
-                      {subject}
-                    </option>
-                  ))}
-                </Form.Select>
-              </div>
-              </div>
-             
-              <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Medium <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setmedium(e.target.value);
-                  }}
-                >
-                  <option>Select the Medium</option>
-                  {Medium?.map((val, i) => {
-                    return (
-                      <option value={val?.mediumName} key={i}>
-                        {val?.mediumName}
-                      </option>
-                    );
+                  <option>Select the Subjects</option>              
+                  {subject?.map((item,i)=>{
+                    return(
+                      <>
+                      <option value={item?.subjectName}>{item?.subjectName}</option>
+                      </>
+                    )
                   })}
                 </Form.Select>
               </div>
-              </div>
+              </div> 
+                             
             </div>
  
            
@@ -777,7 +676,7 @@ const AdminSyllabusCopy = () => {
                 }}
               >
                 <div className="row">
-                  <div className="col-sm-6">
+                  <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Chapter Number</label>
                     <input
@@ -790,17 +689,39 @@ const AdminSyllabusCopy = () => {
 
                   </div>
                   </div>
-                  <div className="col-sm-6">
+                 
+                  <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Chapter Name</label>
                     <Form.Select
                       aria-label="Default select example"
                       onChange={(e) => {
-                        setmedium(e.target.value);
+                        setSelectChapter(e.target.value);
                       }}
                     >
-                      <option>Select the Medium</option>
-                      {weightage?.filter((ele) => ele.Content === subjectt)?.map((val, i) => {
+                      <option>Select the Chapter</option>
+                      {chapters?.filter((ele) => ele.SubjectPart === selectsubjectpart)?.map((val, i) => {
+                        return (
+                          <option value={val?.chapterName} key={i}>
+                            {val?.chapterName}
+                          </option>
+                        );
+                      })}
+                    </Form.Select>
+                  </div>
+                  </div>
+
+                  <div className="col-sm-4">
+                  <div className="do-sear mt-2">
+                    <label>Subject Part</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSelectsubjectpart(e.target.value);
+                      }}
+                    >
+                      <option>Select the Subject Part</option>
+                      {weightage?.filter((ele) => ele.Subject === subjectt)?.map((val, i) => {
                         return (
                           <option value={val?.Content} key={i}>
                             {val?.Content}
@@ -809,7 +730,7 @@ const AdminSyllabusCopy = () => {
                       })}
                     </Form.Select>
                   </div>
-                  </div>
+                  </div>  
                 
                 </div>
 
@@ -842,18 +763,18 @@ const AdminSyllabusCopy = () => {
                     </div>
                     <div className="col-sm-6">
                     <div className="do-sear mt-2">
-                      <label>Exam Name</label>                
+                      <label> Name Of the Examination</label>                
                       <Form.Select
                         aria-label="Default select example"
                         onChange={(e) => {
-                          setmedium(e.target.value);
+                          setExaminationname(e.target.value);
                         }}
                       >
-                        <option>Select the Medium</option>
-                        {Medium?.map((val, i) => {
+                        <option>Select examination</option>
+                        {NameExam?.map((val, i) => {
                           return (
-                            <option value={val?.mediumName} key={i}>
-                              {val?.mediumName}
+                            <option value={val?.NameExamination} key={i}>
+                              {val?.NameExamination}
                             </option>
                           );
                         })}
@@ -868,20 +789,16 @@ const AdminSyllabusCopy = () => {
                       style={{ 
                         float: "right", 
                         marginTop: "15px", 
-                        backgroundColor: "navy", 
+                        backgroundColor: "green", 
                         color: "white", 
                         borderRadius: "5px" }}
                       onClick={() => {
-                        setslybus(true);
+                        // setslybus(true);
                         AddTypesofquestion();
                       }}
                     >
                       Add
                     </Button>
-                 
-                {slybus ? (
-                  <>
-                    {" "}
                     <div className="row">
                       <div className="col-md-12">
                         <Table
@@ -897,8 +814,10 @@ const AdminSyllabusCopy = () => {
                               <th>S No.</th>
                               <th>Chapter No.</th>
                               <th>Chapter Name</th>
+                              <th>Subject Part</th>
                               <th>Description</th>
-                              <th>Marks</th>
+                              <th>Exam-Name</th>
+                              <th>Marks</th>                              
                               <th>Action</th>
                             </tr>
                           </thead>
@@ -907,8 +826,9 @@ const AdminSyllabusCopy = () => {
                               return (
                                 <tr>
                                   <td>{i + 1}</td>
-                                  <td>{val?.lesson}</td>
-                                  <td>{val?.chepterName}</td>
+                                  <td>{val?.chapterno}</td>
+                                  <td>{val?.chapter}</td>
+                                  <td>{val?.subjectpart}</td>
                                   <td>
                                     {val?.description ? (
                                       parse(val?.description)
@@ -916,6 +836,7 @@ const AdminSyllabusCopy = () => {
                                       <></>
                                     )}
                                   </td>
+                                  <td>{val?.chepterName}</td>
                                   <td>{val?.mask}</td>
                                   <td>
                                     {" "}
@@ -931,11 +852,7 @@ const AdminSyllabusCopy = () => {
                           </tbody>
                         </Table>
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
+                    </div>  
               </div>
             
           </Modal.Body>

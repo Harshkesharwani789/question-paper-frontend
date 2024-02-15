@@ -119,8 +119,8 @@ function AdminBlueprint() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -172,18 +172,6 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
-  // get method add class
-  const [getclassname, setgetclassName] = useState([]);
-  const getallclassname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-      if (res.status == 200) {
-        setgetclassName(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   // get method for subclass
   const [getaddsubclass, setgetaddsubclass] = useState([]);
   const getaddsubclasss = async () => {
@@ -198,6 +186,8 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
+
+  console.log("getaddsubclass",getaddsubclass);
   //get method for medium
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
@@ -346,7 +336,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const deletedWeightageofthecontent = (index) => {
@@ -639,7 +629,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const deletedAddblueprint = (index) => {
@@ -770,7 +760,6 @@ function AdminBlueprint() {
   };
   useEffect(() => {
     getallboardname();
-    getallclassname();
     getaddsubclasss();
     getAddMedium();
     getalltypesofquess();
@@ -927,15 +916,12 @@ function AdminBlueprint() {
                                   onChange={(e) => {
                                     setclassName(e.target.value);
                                   }}
-                                >
-                                  <option>Select the Class</option>
-                                  {getclassname?.map((val, i) => {
-                                    return (
-                                      <option value={val?.className} key={i}>
-                                        {val?.className}
-                                      </option>
-                                    );
-                                  })}
+                                >                                  
+                                  <option value="">Select Class</option>
+                                  <option value="Lower Primary">Lower Primary</option>
+                                  <option value="Primary">Primary </option>
+                                  <option value="Upper Primary">Upper Primary</option>
+                                  <option value="Secondary">Secondary</option>
                                 </Form.Select>
                               </div>
                             </div>
@@ -952,7 +938,7 @@ function AdminBlueprint() {
                                   }}
                                 >
                                   <option>Select the Sub-Class</option>
-                                  {getaddsubclass?.map((val, i) => {
+                                  {getaddsubclass?.filter((ele)=>ele.className == className )?.map((val, i) => {
                                     return (
                                       <option value={val?.subclassName} key={i}>
                                         {val?.subclassName}
@@ -1655,7 +1641,7 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
-                                        // onChange={(e)=>{setTotalMask(e.target.value)}}
+                                      // onChange={(e)=>{setTotalMask(e.target.value)}}
                                       />
                                     </div>
                                     <div className="col-md-4">
@@ -2170,7 +2156,7 @@ function AdminBlueprint() {
                                                         a +
                                                         Number(
                                                           ele?.BluePrintmarksperquestion *
-                                                            ele?.Blueprintnoofquestion
+                                                          ele?.Blueprintnoofquestion
                                                         ),
                                                       0
                                                     )}

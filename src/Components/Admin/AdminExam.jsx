@@ -76,6 +76,7 @@ const AdminExam = () => {
       console.log(error);
     }
   };
+  console.log("NameExam",NameExam);
   //edit
   const [updateNameExam, setupdateNameExam] = useState("");
   const EditNameExam = async () => {
