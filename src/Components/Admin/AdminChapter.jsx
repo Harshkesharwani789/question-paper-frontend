@@ -249,6 +249,8 @@ const AdminChapter = () => {
       console.log(error);
     }
   };
+
+  console.log("chapters",chapters);
   const [searchTermH, setSearchTermH] = useState("");
   const searchedProductH = chapters.filter((item) => {
     if (searchTermH.value === "") {
@@ -334,21 +336,7 @@ const AdminChapter = () => {
                         {val}
                       </option>
                     );
-                  })}
-                  {/* <option value="LKG">LKG</option>
-                  <option value="UKG">UKG</option>
-                  <option value="Class I">Class I</option>
-                  <option value="Class II">Class II</option>
-                  <option value="Class III">Class III</option>
-                  <option value="Class IV">Class IV</option>
-                  <option value="Class V">Class V</option>
-                  <option value="Class VI">Class VI</option>
-                  <option value="Class VII">Class VII</option>
-                  <option value="Class VIII">Class VIII</option>
-                  <option value="Class IX">Class IX</option>
-                  <option value="Class X">Class X</option>
-                  <option value="Class XI">Class XI</option>
-                  <option value="Class XII">Class XII</option> */}
+                  })}                 
                 </Form.Select>
               </div>
               <div className="col-md-4">
@@ -372,7 +360,8 @@ const AdminChapter = () => {
                 </Form.Select>
               </div>
               <div className="col-md-4">
-                <button
+                {Sub_classname ? (<>
+                  <button              
                   className="admin-add-btn mt-4"
                   style={{ float: "right" }}
                   onClick={() => {
@@ -381,6 +370,14 @@ const AdminChapter = () => {
                 >
                   Add Chapters
                 </button>
+                </>):(<>
+                  <button              
+                  className="admin-add-btn mt-4"
+                  style={{ float: "right",cursor:" no-drop",filter:"blur(2px)" }}                 
+                >
+                  Add Chapters
+                </button></>)}
+                
               </div>
             </div>
           </div>
