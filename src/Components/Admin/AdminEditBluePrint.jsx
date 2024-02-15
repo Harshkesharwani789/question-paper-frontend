@@ -654,14 +654,19 @@ const token = sessionStorage.getItem("token");
                                     setclassName(e.target.value);
                                   }}
                                 >
-                                  <option>Select the Class</option>
-                                  {getclassname?.map((val, i) => {
+                                  {/* <option>Select the Class</option> */}
+                                  {/* {getclassname?.map((val, i) => {
                                     return (
                                       <option value={val?.className} key={i}>
                                         {val?.className}
                                       </option>
                                     );
-                                  })}
+                                  })} */}
+                                    <option value="">Select Class</option>
+                                  <option value="Lower Primary">Lower Primary</option>
+                                  <option value="Primary">Primary </option>
+                                  <option value="Upper Primary">Upper Primary</option>
+                                  <option value="Secondary">Secondary</option>
                                 </Form.Select>
                               </div>
                             </div>
@@ -679,7 +684,7 @@ const token = sessionStorage.getItem("token");
                                   }}
                                 >
                                   <option>Select the Sub-Class</option>
-                                  {getaddsubclass?.map((val, i) => {
+                                  {getaddsubclass?.filter((ele)=>ele.className == className )?.map((val, i) => {
                                     return (
                                       <option value={val?.subclassName} key={i}>
                                         {val?.subclassName}
