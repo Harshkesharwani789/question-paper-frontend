@@ -29,44 +29,44 @@ import SituationAnalysis_add from "./SituationAnalysis/SituationAnalysis_add";
 import AddClassification from "./Classification_QandA/AddClassification";
 import Add from "./ClassLKG/Onesentence/Add";
 
-const componentMap = {
-    "Objective Questions":<Objective_add/>,
-    "Multiple Choice Questions": <Mcq_add />,
-    "Fill in the Blanks Questions":<Fillintheblanks_add/>,
-    "Match the Following Questions":<AddMatches/>,
-    "Recorrect the Answers Questions":<RecorrectionaddAnswer/>,
-    "Odd and out words Questions":<OddandOut_add/>,
-    "Classifications of Questions":<AddClassification/>,
-    "One Sentence Answer Question":<Add/>,
-    "RelationShip Words Questions":<AddRelationshipWord/>,
-    "Grammer Questions":<AddGrammerQuestion/>,
-    "One Word Question":<AddOneWordQuestion/>,
-    "Two  Sentence Answer Questions":<TwoSentenceaddAnswer/>,
-    "Two and three Sentence Answer Questions":<ThreeSentenceaddAnswer/>,
-    "Three and Four Sentence Answer Questions":<FourSentenceaddAnswer/>,
-    "Five Sentence Answer Questions":<FiveSentenceaddAnswer/>,
-    "Five and Six Sentence Answer Questions":<QandA_5to6_addQandA/>,
-    "Six Sentence Answer Questions":<QandA_add6Sentences/>,
-    "Seven Sentence Answer Questions":<QandA_add7Sentences/>,
-    "Eight Sentence Answer Questions":<QandA_add8Sentences/>,
-    "Ten Sentence Answer Questions":<QandA_add10Sentences/>,
-    "Expanding and Explanations Answer Questions":<ExpandExplain_add/>,
-    "Answer the Questions and Draw the Figure Questions":<AddDrawFigure/>,
-    "Graph Questions":<AddGraphQuestion/>,
-    "Complete the Poem":<AddPoem/>,
-    "Situation UnderStatnding answer Questions":<SituationAnalysis_add/>,
-    "Poet,Time, Place, Writer answer questions":<AddPoetTimePlaceAnsQn/>,
-    "Letter Writting":<LetterWriting_add/>,
-    "Map Reading":<Map_add/>,
-
-
-    
-}
 
 const AdminQuestprops = (props) => {
-    console.log("prop",props);
-    const { Types_Question } = props;
-    console.log("hkh",Types_Question);
+    // console.log("prop",props);
+    const { Types_Question,selectedLanguage,selectdetails } = props;
+    // console.log("hkh",Types_Question,selectedLanguage);
+
+
+    const componentMap = {
+        "Objective Questions":<Objective_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Multiple Choice Questions": <Mcq_add  data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Fill in the Blanks Questions":<Fillintheblanks_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Match the Following Questions":<AddMatches data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Recorrect the Answers Questions":<RecorrectionaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Odd and out words Questions":<OddandOut_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Classifications of Questions":<AddClassification data={selectedLanguage} selectdetails={selectdetails}/>,
+        "One Sentence Answer Question":<Add data={selectedLanguage}/>,
+        "RelationShip Words Questions":<AddRelationshipWord data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Grammer Questions":<AddGrammerQuestion data={selectedLanguage} selectdetails={selectdetails}/>,
+        "One Word Question":<AddOneWordQuestion data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Two  Sentence Answer Questions":<TwoSentenceaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Two and three Sentence Answer Questions":<ThreeSentenceaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Three and Four Sentence Answer Questions":<FourSentenceaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Five Sentence Answer Questions":<FiveSentenceaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Five and Six Sentence Answer Questions":<QandA_5to6_addQandA data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Six Sentence Answer Questions":<QandA_add6Sentences data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Seven Sentence Answer Questions":<QandA_add7Sentences data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Eight Sentence Answer Questions":<QandA_add8Sentences data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Ten Sentence Answer Questions":<QandA_add10Sentences data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Expanding and Explanations Answer Questions":<ExpandExplain_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Answer the Questions and Draw the Figure Questions":<AddDrawFigure data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Graph Questions":<AddGraphQuestion data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Complete the Poem":<AddPoem data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Situation UnderStatnding answer Questions":<SituationAnalysis_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Poet,Time, Place, Writer answer questions":<AddPoetTimePlaceAnsQn data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Letter Writting":<LetterWriting_add data={selectedLanguage} selectdetails={selectdetails}/>,
+        "Map Reading":<Map_add data={selectedLanguage} selectdetails={selectdetails}/>,
+    }
+
     const componentToRender = componentMap[Types_Question]
 
     return (
