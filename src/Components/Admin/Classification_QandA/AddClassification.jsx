@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+import { debounce } from "lodash";
+let googleTransliterate = require("google-input-tool");
 
 const AddClassification = () => {
   const [show, setShow] = useState();
@@ -132,6 +134,46 @@ const AddClassification = () => {
     setorAnswer(data);
   };
 
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState(questiondata?.selectedLanguage);
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
   return (
     <div>
       <div className="">
@@ -142,12 +184,16 @@ const AddClassification = () => {
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
                   className="vi_0"
-                  onChange={(e) => setAnswer_Time(e.target.value)}
+                  onChange={(e) => {
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setAnswer_Time(e.target.value);
+                    } else onChangeHandler(e.target.value, setAnswer_Time);
+                  }}
                 >
                   <option value="">Select</option>
-                  <option value="1/2 Mnt">1/2 Mnt</option>
-                  <option value="1/4 Mnt">1/4 Mnt</option>
-                  <option value="1 Mnt">1 Mnt</option>
+                  <option value="1/2 minutes">1/2 minutes</option>
+                  <option value="1/4 minutes">1/4 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
                   <option value="1.30 minutes">1.30 minutes</option>
                   <option value="1 minutes">1 minutes</option>
                   <option value="2 minutes">2 minutes</option>
@@ -160,6 +206,7 @@ const AddClassification = () => {
                   <option value="9 minutes"> 9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
               </div>
             </div>
             <div className="col-md-6">
@@ -167,7 +214,11 @@ const AddClassification = () => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setMarks(e.target.value)}
+                  onChange={(e) => {
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setMarks(e.target.value);
+                    } else onChangeHandler(e.target.value, setMarks);
+                  }}
                 >
                   <option value="">Select the Marks</option>
                   <option value={"1/2"}>1/2</option>
@@ -183,12 +234,26 @@ const AddClassification = () => {
                   <option value={8}>8</option>
                   <option value={10}>10</option>{" "}
                 </Form.Select>
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
+                {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <textarea
+                  name=""
+                  id=""
+                  className="vi_0"
+                  placeholder="Write your text"
+                  onChange={(event) =>
+                    onChangeHandler(event.target.value, setQuestion)
+                  }
+                ></textarea>
+              )}
                 <CKEditor editor={ClassicEditor} className="vi_0"     data={Question}
                   onChange={handleChange}/>
               </div>
@@ -819,7 +884,21 @@ const AddClassification = () => {
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>
+              <label htmlFor="">Answer</label>
+              {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <textarea
+                  name=""
+                  id=""
+                  className="vi_0"
+                  placeholder="Write your text"
+                  onChange={(event) =>
+                    onChangeHandler(event.target.value, setAnswer)
+                  }
+                ></textarea>
+              )}
+               
                 <CKEditor editor={ClassicEditor} className="vi_0"      data={Answer}
                   onChange={handleChange1}/>
               </div>
@@ -858,6 +937,19 @@ const AddClassification = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
+                {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <textarea
+                  name=""
+                  id=""
+                  className="vi_0"
+                  placeholder="Write your text"
+                  onChange={(event) =>
+                    onChangeHandler(event.target.value, setorQuestion)
+                  }
+                ></textarea>
+              )}
                 <CKEditor editor={ClassicEditor} className="vi_0"  data={orQuestion}
                   onChange={handleChange2} />
               </div>
@@ -866,6 +958,20 @@ const AddClassification = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
+
+                {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <textarea
+                  name=""
+                  id=""
+                  className="vi_0"
+                  placeholder="Write your text"
+                  onChange={(event) =>
+                    onChangeHandler(event.target.value, setorAnswer)
+                  }
+                ></textarea>
+              )}
                 <CKEditor editor={ClassicEditor} className="vi_0"    data={orAnswer}
                   onChange={handleChange3}  />
               </div>

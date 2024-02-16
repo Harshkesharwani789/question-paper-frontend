@@ -6,11 +6,92 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { debounce } from "lodash";
+
 import AdminQuestprops from "./AdminQuestprops";
+
+let googleTransliterate = require("google-input-tool");
 
 const AdminQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+
+  //Translate
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
+
+  // const onChangeHandler = debounce(async (value, setData) => {
+  //   setInputValue(value);
+
+  //   if (!value) {
+  //     setTranslatedValue("");
+  //     setData("");
+  //     return "";
+  //   }
+
+  //   let am = value.split(" ");
+  //   let arr = [];
+
+  //   for (let index = 0; index < am.length; index++) {
+  //     try {
+  //       const response = await googleTransliterate(
+  //         new XMLHttpRequest(),
+  //         am[index],
+  //         selectedLanguage
+  //       );
+  //       arr.push(response[0][0]);
+  //     } catch (error) {
+  //       console.error("Translation error:", error);
+  //       arr.push(am[index]);
+  //     }
+  //   }
+
+  //   setTranslatedValue(arr.join(" "));
+  //   return setData(arr.join(" "));
+  // }, 300); // Debounce delay in milliseconds
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
 
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("default");
@@ -105,70 +186,14 @@ const AdminQuestionDetails = () => {
     Objectives: Objectives,
     Types_Question: Types_Question,
     Instruction: Instruction,
+    selectedLanguage: selectedLanguage,
   };
 
   useEffect(() => {
-    if (selectdetails.Instruction) {
+    if (Types_Question && selectedLanguage) {
       sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
     }
-  }, [selectdetails.Instruction]);
-
-  // const addquestions = async () => {
-  //   try {
-  //     const config = {
-  //       url: "/admin/AddQuestionPaper",
-  //       method: "post",
-  //       baseURL: "http://localhost:8000/api",
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       data: {
-  //         Board: Board,
-  //         Medium: Medium,
-  //         Class: Class,
-  //         Sub_Class: Sub_Class,
-  //         Subject: Subjects,
-  //         Chapter_Name: Chapter_Name,
-  //         Difficulty_level: Difficulty_level,
-  //         Types_Question: Types_Question,
-  //         Lesson: Lesson,
-  //         Section: Section,
-  //         Question: Question,
-  //         Option_1: Option_1,
-  //         Option_2: Option_2,
-  //         Option_3: Option_3,
-  //         Option_4: Option_4,
-  //         Name_of_examination: Name_of_examination,
-  //         Objectives: Objectives,
-  //         Instruction: Instruction,
-  //         Image: Image,
-  //         Marks: Marks,
-  //         Answer_Time: Answer_Time,
-  //         Answer: Answer,
-  //         authId: admin?._id,
-  //       },
-  //     };
-  //     let res = await axios(config);
-  //     if (res.status === 200) {
-  //       swal({
-  //         title: "yeah!",
-  //         text: res.data.success,
-  //         icon: "success",
-  //         button: "Ok!",
-  //       });
-  //       return navigate("/adminquestions");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     swal({
-  //       title: "Oops!",
-  //       text: error.response.data.error,
-  //       icon: "success",
-  //       button: "Ok!",
-  //     });
-  //   }
-  // };
+  }, [selectdetails.Instruction, selectedLanguage,Types_Question]);
 
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
@@ -306,7 +331,7 @@ const AdminQuestionDetails = () => {
   console.log(weightage);
   console.log(NameExam);
   console.log(getobjectives);
-  console.log("chapters",chapters);
+  console.log("chapters", chapters);
 
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
@@ -315,6 +340,29 @@ const AdminQuestionDetails = () => {
 
   return (
     <div>
+      <div className="row">
+        <div className="col-md-10"></div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{borderRadius:"20px",backgroundColor:"#e2cbd0"}}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
+        </div>
+      </div>
       <div className="box_1">
         <div className="container">
           <div className="row">
@@ -326,9 +374,12 @@ const AdminQuestionDetails = () => {
                   className="vi_0"
                   placeholder="Enter Section"
                   onChange={(e) => {
-                    setSection(e.target.value);
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setSection(e.target.value);
+                    } else onChangeHandler(e.target.value, setSection);
                   }}
                 />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Section}</p>}
               </div>
             </div>
             <div className="col-md-4">
@@ -454,13 +505,15 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setChapter_Name(e.target.value)}
                 >
                   <option>Select the Chapter Name</option>
-                  {chapters?.filter((ele)=>ele?.subjectName ==Subjects)?.map((item, i) => {
-                    return (
-                      <option value={item?.chapterName} key={i}>
-                        {item?.chapterName}
-                      </option>
-                    );
-                  })}
+                  {chapters
+                    ?.filter((ele) => ele?.subjectName == Subjects)
+                    ?.map((item, i) => {
+                      return (
+                        <option value={item?.chapterName} key={i}>
+                          {item?.chapterName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -524,7 +577,16 @@ const AdminQuestionDetails = () => {
               </div>{" "}
               <Form.Select
                 aria-label="Default select example"
+                // value={Types_Question}
                 onChange={(e) => {
+                  if(!Section||!Board||!Medium||!Sub_Class||!Class||!Subjects||!Lesson||!Chapter_Name||!Difficulty_level||!Name_of_examination||!Objectives){
+                    return  swal({
+                      title: "Oops!",
+                      text: "Please fill the form",
+                      icon: "warning",
+                      button: "Ok!",
+                    });
+                  }else
                   setTypes_Question(e.target.value);
                 }}
               >
@@ -604,15 +666,25 @@ const AdminQuestionDetails = () => {
                 </option>
                 <option value="Letter Writting">Letter Writting</option>
                 <option value="Map Reading">Map Reading</option>
-                {/* <option value=""></option>
-                <option value=""></option>
-                <option value=""></option> */}
               </Form.Select>
             </div>
           </div>
           <div className="col-md-12">
             <div className="do-sear">
               <label htmlFor="">Instructions</label>
+              {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <textarea
+                  name=""
+                  id=""
+                  className="vi_0"
+                  placeholder="Write your text"
+                  onChange={(event) =>
+                    onChangeHandler(event.target.value, setInstruction)
+                  }
+                ></textarea>
+              )}
               <CKEditor
                 editor={ClassicEditor}
                 className="vi_0"

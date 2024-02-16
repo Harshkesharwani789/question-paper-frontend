@@ -85,6 +85,7 @@ const AdminSubject = () => {
     }
   };
 
+
   //update
   const [updateSubject, setpdateSubject] = useState("");
   const UpdateSubject = async () => {
@@ -196,29 +197,8 @@ const AdminSubject = () => {
   // const visitedPage = pageNumber * productPerPage;
   // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
   // const pageCount = Math.ceil(subject.length / productPerPage);
-  const [currenpage, setCurrentpage] = useState(1);
-  const recordsperpage = 6;
-  const lastIndex = currenpage * recordsperpage;
-  const firstIndex = lastIndex - recordsperpage;
-  const records = subject.slice(firstIndex, lastIndex);
-  const npages = Math.ceil(subject.length / recordsperpage);
-  const numbers = [...Array(npages + 1).keys()].slice(1);
 
-  function changePage(id) {
-    setCurrentpage(id);
-  }
 
-  function prevpage() {
-    if (currenpage !== firstIndex) {
-      setCurrentpage(currenpage - 1);
-    }
-  }
-
-  function nextpage() {
-    if (currenpage !== lastIndex) {
-      setCurrentpage(currenpage + 1);
-    }
-  }
   useEffect(() => {
     getSubject();
   }, []);
@@ -264,10 +244,10 @@ const AdminSubject = () => {
             </thead>
 
             <tbody>
-              {records?.map((item, i) => {
+              {subject?.map((item, i) => {
                 return (
                   <tr>
-                    <td>{i + 1 + firstIndex}</td>
+                    <td>{i +1}</td>
 
                     <td>{item?.subjectName}</td>
 
@@ -303,74 +283,7 @@ const AdminSubject = () => {
             </tbody>
           </Table>
         </div>
-
-        {/* <Pagination style={{ float: "right" }}>
-          <Pagination.First onClick={() => setPageNumber(0)} />
-          <Pagination.Prev
-            onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
-          />
-          {Array.from({ length: pageCount }, (_, index) => (
-            <Pagination.Item
-              key={index}
-              active={index === pageNumber}
-              onClick={() => setPageNumber(index)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() =>
-              setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-            }
-          />
-          <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
-
-        <div>
-          <nav>
-            <ul className="pagination">
-              <li className="not-allow">
-                <span>
-                  <li className="next-prev">
-                    <a
-                      onClick={() => {
-                        prevpage();
-                      }}
-                    >
-                      &lt;
-                    </a>{" "}
-                  </li>
-                </span>
-              </li>
-              {numbers?.map((n, i) => {
-                return (
-                  <li className="active-next" key={i}>
-                    <a
-                      href="#"
-                      className="inactive"
-                      onClick={() => changePage(n)}
-                    >
-                      {n}
-                    </a>
-                  </li>
-                );
-              })}
-
-              <li className="not-allow">
-                <span>
-                  <li
-                    className="next-prev"
-                    onClick={() => {
-                      nextpage();
-                    }}
-                  >
-                    &gt;{" "}
-                  </li>
-                </span>
-              </li>
-            </ul>
-          </nav>
-        </div>
+       
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
