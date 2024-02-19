@@ -356,7 +356,6 @@ const AdminQuestionDetails = () => {
             <option value="kn-t-i0-und">Kannada</option>
             <option value="ta-t-i0-und">Tamil</option>
             <option value="pa-t-i0-und">Punjabi</option>
-
             <option value="mr-t-i0-und">Marathi</option>
             <option value="ur-t-i0-und">Urdu</option>
             <option value="sa-t-i0-und">Sanskrit</option>

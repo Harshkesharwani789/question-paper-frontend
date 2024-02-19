@@ -7,7 +7,6 @@ import { IoEye } from "react-icons/io5";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
-
 const AdminClass = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -20,7 +19,6 @@ const AdminClass = () => {
   const [show4, setShow4] = useState();
   const [show5, setShow5] = useState();
 
-  const [show6, setShow6] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -40,8 +38,10 @@ const AdminClass = () => {
   const handleClose5 = () => setShow5(false);
   const handleShow5 = () => setShow5(true);
 
-  const handleClose6 = () => setShow6(false);
-  const handleShow6 = () => setShow6(true);
+
+
+
+
   // post method add class
   const [className, setclassName] = useState("");
   const classNamee = async () => {
@@ -428,6 +428,8 @@ const AdminClass = () => {
   }
   return (
     <div>
+     
+
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -441,150 +443,7 @@ const AdminClass = () => {
           />
         </div>
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="ad-b col-md-12">
-            {/* <Button
-              className=" btn"
-              style={{ backgroundColor: "navy", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
-              onClick={() => {
-                setClass(true);
-                setSubclass(false);
-              }}
-            >
-              Class
-            </Button>
-            &nbsp; &nbsp; */}
-            {/* <Button
-              className="btn"
-              style={{ backgroundColor: "#2cb9e7", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
-              onClick={() => {
-                setClass(false);
-                setSubclass(true);
-              }}
-            >
-              Subclass
-            </Button> */}
-          </div>
-        </div>
-      </div>
-      {/* {Class ? (
-        <>
-          <div className="customerhead p-2">
-            <div className="d-flex justify-content-between align-items-center">
-              <h2 className="header-c ">Class</h2>
-              <button
-                className=" btn"
-                style={{ backgroundColor: "#138808", color: "white" }}
-                onClick={handleShow}
-              >
-                Add Class
-              </button>
-            </div>
-
-            <div className="mb-3">
-              <Table
-                responsive
-                bordered
-                style={{ width: "-webkit-fill-available" }}
-              >
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>
-                      <div>Class</div>
-                    </th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {records?.map((val, i) => {
-                    return (
-                      <tr key={i}>
-                    <td>{i + 1 + firstIndex} </td>
-                        <td>{val?.className}</td>
-
-                        <td>
-                          {" "}
-                          <div style={{ display: "flex", gap: "20px" }}>
-                            <div>
-                              <BiSolidEdit
-                                className="text-success"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow1();
-                                  seteditclassname(val?._id);
-                                  setclassName(val?.className);
-                                }}
-                              />{" "}
-                            </div>
-                            <div>
-                              <AiFillDelete
-                                className="text-danger"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow2(val?._id);
-                                  setdeleteclassname(val?._id);
-                                }}
-                              />{" "}
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
-            </div>
-
-            <div>
-          <nav>
-            <ul className="pagination">
-              <li className="not-allow">
-                <span>
-                  <li className="next-prev">
-                    <a
-                      onClick={() => {
-                        prevpage();
-                      }}
-                    >
-                      &lt;
-                    </a>{" "}
-                  </li>
-                </span>
-              </li>
-              {numbers?.map((n, i) => {
-                return (
-                  <li className="active-next" key={i}>
-                    <a
-                      href="#"
-                      className="inactive"
-                      onClick={() => changePage(n)}
-                    >
-                       {n}
-                    </a>
-                  </li>
-                );
-              })}
-             
-              <li className="not-allow">
-                <span>
-                  <li className="next-prev"  onClick={() => {
-                    nextpage();
-                  }}>&gt; </li>
-                </span>
-              </li>
-            </ul>
-          </nav>
-        </div>
-            
-          </div>
-        </>
-      ) : (
-        <>
-          {Subclass ? (
-            <> */}
+  
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subclass </h2>
@@ -733,55 +592,8 @@ const AdminClass = () => {
           </nav>
         </div>
       </div>
-      {/* </>
-          ) : (
-            <></>
-          )}
-        </>
-      )} */}
-      {/* Add Accomodation modal */}
-      <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
-        <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-          <Modal.Title style={{ color: "white" }}>Add Class</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="do-sear mt-2">
-            <label>Class</label>
-            <input
-              type="text"
-              className="vi_0"
-              placeholder="Enter Class Name "
-              onChange={(e) => {
-                setclassName(e.target.value);
-              }}
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <div className="d-flex">
-            {/* <Button
-              className="mx-2"
-              variant="primary"
-              onClick={() => {
-                classNamee();
-              }}
-            > */}
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button
-              className="mx-2 modal-add-btn"
-              variant=""
-              onClick={() => {
-                classNamee();
-              }}
-            >
-              Add
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal>
-
+    
+  
       {/* Edit Indian modal */}
       <Modal
         show={show1}
