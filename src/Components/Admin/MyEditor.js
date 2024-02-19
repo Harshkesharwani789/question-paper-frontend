@@ -148,7 +148,7 @@ const MathEditor = ({ data }) => {
           id=""
           className="vi_0"
           value={data?.trans}
-          placeholder="Please complete your sentance then click translate button"
+          placeholder="Please complete your sentance then click on the translate button"
           onChange={(event) => data?.settran(event.target.value)}
         ></textarea>
       )}
