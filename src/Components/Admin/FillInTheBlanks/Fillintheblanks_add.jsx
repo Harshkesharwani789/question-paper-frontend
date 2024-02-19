@@ -8,11 +8,54 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
-
-const Fillintheblanks_add = () => {
+import MathEditor from "../MyEditor";
+import { debounce } from "lodash";
+let googleTransliterate = require("google-input-tool");
+const Fillintheblanks_add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
+  // const selectdetails = JSON.parse(sessionStorage.getItem("selectdetails"));
+
+  const [translatedValue, setTranslatedValue] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectdetails?.selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
   const [show, setShow] = useState(false);
 
@@ -27,7 +70,7 @@ const Fillintheblanks_add = () => {
   };
 
   //post
-
+  const [AnswerT, setAnswerT] = useState("");
   const [input1, setinput1] = useState("");
   const [input2, setinput2] = useState("");
   const [input3, setinput3] = useState("");
@@ -47,19 +90,19 @@ const Fillintheblanks_add = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Board: questiondata?.Board,
-          Chapter_Name: questiondata?.Chapter_Name,
-          Difficulty_level: questiondata?.Difficulty_level,
-          Lesson: questiondata?.Lesson,
-          Medium: questiondata?.Medium,
-          Name_of_examination: questiondata?.Name_of_examination,
-          Objectives: questiondata?.Objectives,
-          Section: questiondata?.Section,
-          Sub_Class: questiondata?.Sub_Class,
-          Subject: questiondata?.Subjects,
-          Types_Question: questiondata?.Types_Question,
-          Class: questiondata?.Class,
-          Instruction: questiondata?.Instruction,
+          Board: selectdetails?.Board,
+          Chapter_Name: selectdetails?.Chapter_Name,
+          Difficulty_level: selectdetails?.Difficulty_level,
+          Lesson: selectdetails?.Lesson,
+          Medium: selectdetails?.Medium,
+          Name_of_examination: selectdetails?.Name_of_examination,
+          Objectives: selectdetails?.Objectives,
+          Section: selectdetails?.Section,
+          Sub_Class: selectdetails?.Sub_Class,
+          Subject: selectdetails?.Subjects,
+          Types_Question: selectdetails?.Types_Question,
+          Class: selectdetails?.Class,
+          Instruction: selectdetails?.Instruction,
 
           input1: input1,
           input2: input2,
@@ -116,21 +159,45 @@ const Fillintheblanks_add = () => {
             {Dash === "1" ? (
               <>
                 <div className="col-md-9 d-flex align-items-end ">
+                  <div>
                   <input
                     className="vi_0"
                     type="text"
                     placeholder="enter text"
-                    onChange={(e) => setinput1(e.target.value)}
+                  
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setinput1(e.target.value)
+                        : onChangeHandler(e.target.value, setinput1)
+                    }
                   />
-
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{input1}</p>
+                  )}
+                  </div>
+                 
                   <span>___________</span>
 
+                  <div>
                   <input
                     className="vi_0"
                     type="text"
                     placeholder="enter text"
-                    onChange={(e) => setinput2(e.target.value)}
+                 
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setinput2(e.target.value)
+                        : onChangeHandler(e.target.value, setinput2)
+                    }
                   />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{input2}</p>
+                  )}
+                  </div>
                 </div>
               </>
             ) : (
@@ -139,166 +206,151 @@ const Fillintheblanks_add = () => {
             {Dash === "2" ? (
               <>
                 <div className="col-md-9 d-flex align-items-end ">
+                <div>
                   <input
                     className="vi_0"
                     type="text"
                     placeholder="enter text"
-                    onChange={(e) => setinput1(e.target.value)}
+                  
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setinput1(e.target.value)
+                        : onChangeHandler(e.target.value, setinput1)
+                    }
                   />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{input1}</p>
+                  )}
+                  </div>
 
                   <span>___________</span>
 
+                  <div>
                   <input
                     className="vi_0"
                     type="text"
                     placeholder="enter text"
-                    onChange={(e) => setinput2(e.target.value)}
+                 
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setinput2(e.target.value)
+                        : onChangeHandler(e.target.value, setinput2)
+                    }
                   />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{input2}</p>
+                  )}
+                  </div>
                   <span>___________</span>
+                  <div>
                   <input
                     className="vi_0"
                     type="text"
                     placeholder="enter text"
-                    onChange={(e) => setinput3(e.target.value)}
+                 
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setinput3(e.target.value)
+                        : onChangeHandler(e.target.value, setinput3)
+                    }
                   />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{input3}</p>
+                  )}
+                  </div>
                 </div>
               </>
             ) : (
               <></>
             )}
 
-            {/* <textarea
-                                    name=""
-                                    id=""
-                                    cols="30"
-                                    rows="5"
-                                    className="vi_0"
-                                ></textarea> */}
-            {/* <CKEditor
-                            editor={ClassicEditor}
-                            className="vi_0"
-                            data={Question}
-                            onChange={handleChange}
-                        /> */}
-
-            {/* <div className="col-md-6">
-    <div className="do-sear mt-2">
-      <label htmlFor="">Option 1</label>
-      <CKEditor
-        editor={ClassicEditor}
-        className="vi_0"
-        data={Option_1}
-        onChange={handleChange3}
-      />
-    </div>
-  </div>
-  <div className="col-md-6">
-    <div className="do-sear mt-2">
-      <label htmlFor="">Option 2</label>
-      <CKEditor
-        editor={ClassicEditor}
-        className="vi_0"
-        data={Option_2}
-        onChange={handleChange4}
-      />
-    </div>
-  </div>
-  <div className="col-md-6">
-    <div className="do-sear mt-2">
-      <label htmlFor="">Option 3</label>
-      <CKEditor
-        editor={ClassicEditor}
-        className="vi_0"
-        data={Option_3}
-        onChange={handleChange5}
-      />
-    </div>
-  </div>
-  <div className="col-md-6">
-    <div className="do-sear mt-2">
-      <label htmlFor="">Option 4</label>
-      <CKEditor
-        editor={ClassicEditor}
-        className="vi_0"
-        data={Option_4}
-        onChange={handleChange6}
-      />
-    </div>
-  </div> */}
-
-            {/* <div className="col-md-6">
-                    <div className="do-sear">
-                        <label htmlFor="">Image</label>
-                        <input
-                            type="file"
-                            className="vi_0"
-                            onChange={(e) => setImage(e.target.files[0])}
-                        />
-                    </div>                  
-                </div> */}
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <Form.Select
-                  className="vi_0"
-                  onChange={(e) => setMarks(e.target.value)}
+                  aria-label="Default select example"
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setMarks(e.target.value)
+                      : onChangeHandler(e.target.value, setMarks)
+                  }
                 >
-                  <option value="">Select Marks</option>
-                  <option value="1/2">1/2</option>
-                  <option value="1/4">1/4</option>
-                  <option value="1/3">1/3</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="10">10</option>
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Marks}</p>
+                )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear">
-                <label htmlFor="">Answer Time</label>
+                <label htmlFor=""> Answer Timing</label>
                 <Form.Select
-                  className="vi_0"
-                  onChange={(e) => setAnswer_Time(e.target.value)}
+                  aria-label="Default select example"
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setAnswer_Time(e.target.value)
+                      : onChangeHandler(e.target.value, setAnswer_Time)
+                  }
                 >
-                  <option value="1/2 Mnt">1/2 Mnt</option>
-                  <option value="1/4 Mnt">1/4 Mnt</option>
-                  <option value="1 Mnt">1 Mnt</option>
-                  <option value="1.30 minutes">1.30 minutes</option>
+                  <option>Select the Time</option>
+                  <option value="1/2 minutes">1/2 minutes</option>
+                  <option value="1/4 minutes">1/4 minutes</option>
                   <option value="1 minutes">1 minutes</option>
+                  <option value="1.30 minutes">1.30 minutes</option>
                   <option value="2 minutes">2 minutes</option>
-                  <option value="3 minute">3 minutes</option>
+                  <option value="3 minutes">3 minutes</option>
                   <option value="4 minutes">4 minutes</option>
-                  <option value="5 minutes"> 5 minutes</option>
+                  <option value="5 minutes">5 minutes</option>
                   <option value="6 minutes">6 minutes</option>
-                  <option value="7 minutes"> 7 minutes</option>
-                  <option value="8 minutes"> 8 minutes</option>
-                  <option value="9 minutes"> 9 minutes</option>
+                  <option value="7 minutes">7 minutes</option>
+                  <option value="8 minutes">8 minutes</option>
+                  <option value="9 minutes">9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Answer_Time}</p>
+                )}
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Answer</label>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={Answer}
-                    onChange={handleChange1}
+                  <MathEditor
+                    data={{
+                      A: Answer,
+                      B: setAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: AnswerT,
+                      settran: setAnswerT,
+                    }}
                   />
                 </div>
               </div>
             </div>
-            {/* <div className="yoihjij my-4">
-    <button style={{ float: "right" }}>Add</button>
-  </div> */}
           </div>
         </div>
 

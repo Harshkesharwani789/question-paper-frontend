@@ -21,10 +21,55 @@ import axios from "axios";
 import swal from "sweetalert";
 import "../../../Admin/Admin.css";
 
-const AddMatches = () => {
+import { debounce } from "lodash";
+let googleTransliterate = require("google-input-tool");
+
+const AddMatches = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
+  // const selectdetails = JSON.parse(sessionStorage.getItem("selectdetails"));
+
+  const [translatedValue, setTranslatedValue] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectdetails?.selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -93,19 +138,19 @@ const AddMatches = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Board: questiondata?.Board,
-          Chapter_Name: questiondata?.Chapter_Name,
-          Difficulty_level: questiondata?.Difficulty_level,
-          Lesson: questiondata?.Lesson,
-          Medium: questiondata?.Medium,
-          Name_of_examination: questiondata?.Name_of_examination,
-          Objectives: questiondata?.Objectives,
-          Section: questiondata?.Section,
-          Sub_Class: questiondata?.Sub_Class,
-          Subject: questiondata?.Subjects,
-          Types_Question: questiondata?.Types_Question,
-          Class: questiondata?.Class,
-          Instruction: questiondata?.Instruction,
+          Board: selectdetails?.Board,
+          Chapter_Name: selectdetails?.Chapter_Name,
+          Difficulty_level: selectdetails?.Difficulty_level,
+          Lesson: selectdetails?.Lesson,
+          Medium: selectdetails?.Medium,
+          Name_of_examination: selectdetails?.Name_of_examination,
+          Objectives: selectdetails?.Objectives,
+          Section: selectdetails?.Section,
+          Sub_Class: selectdetails?.Sub_Class,
+          Subject: selectdetails?.Subjects,
+          Types_Question: selectdetails?.Types_Question,
+          Class: selectdetails?.Class,
+          Instruction: selectdetails?.Instruction,
           Part_A1: Part_A1,
           Part_A2: Part_A2,
           Part_A3: Part_A3,
@@ -146,7 +191,7 @@ const AddMatches = () => {
           Part_C5_A: Part_C5_A,
           Part_C6_A: Part_C6_A,
           authId: admin?._id,
-      
+
           Marks: Marks,
           Answer_Time: Answer_Time,
           ImageQ: ImageQ,
@@ -177,9 +222,7 @@ const AddMatches = () => {
     <div>
       <div className="">
         <div className="container">
-          
           <div className="row mt-2">
-           
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label
@@ -212,50 +255,93 @@ const AddMatches = () => {
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A1(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A1(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A1)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A1}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A2(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A2(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A2)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A2}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A3(e.target.value);
-                        }}
+                     
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A3(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A3)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A3}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A4(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A4(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A4)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A4}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A5(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A5(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A5)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A5}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A6(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_A6(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_A6)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A6}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -271,58 +357,107 @@ const AddMatches = () => {
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B1(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B1(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B1)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B1}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B2(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B2(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B2)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B2}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B3(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B3(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B3)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B3}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B4(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B4(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B4)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B4}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B5(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B5(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B5)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B5}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B6(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B6(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B6)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B6}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B7(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_B7(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_B7)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B7}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -338,58 +473,107 @@ const AddMatches = () => {
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C1(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C1(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C1)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C1}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C2(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C2(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C2)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C2}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C3(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C3(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C3)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C3}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C4(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C4(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C4)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C4}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C5(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C5(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C5)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C5}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C6(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C6(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C6)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C6}</p>
+                      )}
                       <input
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C7(e.target.value);
-                        }}
+                        onChange={(e) =>
+                          selectdetails?.selectedLanguage == "en-t-i0-und"
+                            ? setPart_C7(e.target.value)
+                            : onChangeHandler(e.target.value, setPart_C7)
+                        }
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C7}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -410,50 +594,92 @@ const AddMatches = () => {
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A1_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A1_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A1_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A1_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A2_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A2_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A2_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A2_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A3_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A3_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A3_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A3_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A4_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A4_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A4_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A4_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A5_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A5_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A5_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A5_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Question"
-                      onChange={(e) => {
-                        setPart_A6_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_A6_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_A6_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_A6_A}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -466,50 +692,92 @@ const AddMatches = () => {
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B1_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B1_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B1_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B1_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B2_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B2_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B2_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B2_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B3_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B3_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B3_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B3_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B4_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B4_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B4_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B4_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B5_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B5_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B5_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B5_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_B6_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_B6_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_B6_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_B6_A}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -522,50 +790,92 @@ const AddMatches = () => {
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C1_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C1_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C1_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C1_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C2_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C2_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C2_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C2_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C3_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C3_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C3_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C3_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C4_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C4_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C4_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C4_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C5_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C5_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C5_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C5_A}</p>
+                    )}
                     <input
                       type="text"
                       className="vi_0 mb-2"
                       placeholder="Enter Your Answer"
-                      onChange={(e) => {
-                        setPart_C6_A(e.target.value);
-                      }}
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setPart_C6_A(e.target.value)
+                          : onChangeHandler(e.target.value, setPart_C6_A)
+                      }
                     />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Part_C6_A}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -574,23 +884,25 @@ const AddMatches = () => {
               <div className="do-sear mt-2">
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
-                  className="vi_0"
-                  onChange={(e) => setAnswer_Time(e.target.value)}
+                  aria-label="Default select example"
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value):onChangeHandler(e.target.value,setAnswer_Time)}
                 >
-                  <option value="1/2 Mnt">1/2 Mnt</option>
-                  <option value="1/4 Mnt">1/4 Mnt</option>
-                  <option value="1 Mnt">1 Mnt</option>
+                  <option>Select the Time</option>
+                  <option value="1/2 minutes">1/2 minutes</option>
+                  <option value="1/4 minutes">1/4 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
                   <option value="1.30 minutes">1.30 minutes</option>
                   <option value="2 minutes">2 minutes</option>
                   <option value="3 minutes">3 minutes</option>
                   <option value="4 minutes">4 minutes</option>
-                  <option value="5 minutes"> 5 minutes</option>
+                  <option value="5 minutes">5 minutes</option>
                   <option value="6 minutes">6 minutes</option>
-                  <option value="7 minutes"> 7 minutes</option>
-                  <option value="8 minutes"> 8 minutes</option>
-                  <option value="9 minutes"> 9 minutes</option>
+                  <option value="7 minutes">7 minutes</option>
+                  <option value="8 minutes">8 minutes</option>
+                  <option value="9 minutes">9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
               </div>
             </div>
             <div className="col-md-6">
@@ -598,22 +910,23 @@ const AddMatches = () => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setMarks(e.target.value)}
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value):onChangeHandler(e.target.value,setMarks)}
                 >
                   <option>Select the Marks</option>
-                  <option value={"1/2"}>1/2</option>
-                  <option value={"1/4"}>1/4</option>
-                  <option value={"1/3"}>1/3</option>
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                  <option value={7}>7</option>
-                  <option value={8}>8</option>
-                  <option value={10}>10</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
               </div>
             </div>
           </div>
@@ -752,7 +1065,12 @@ const AddMatches = () => {
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">
                 <div className="yoihjij text-center my-2 p-2 ">
-                  <Button className="modal-add-btn" onClick={()=>{AddQuestion()}}  >
+                  <Button
+                    className="modal-add-btn"
+                    onClick={() => {
+                      AddQuestion();
+                    }}
+                  >
                     Submit
                   </Button>
                 </div>
