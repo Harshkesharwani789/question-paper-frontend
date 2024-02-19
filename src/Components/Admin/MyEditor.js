@@ -126,9 +126,10 @@ const MathEditor = ({ data }) => {
           ))}
         </div>
         <div>
-          <button onClick={startListening}>Start Voice Input</button>
+          {/* <button onClick={startListening}>Start Voice Input</button>
           <button onClick={stopListening}>Stop Voice Input</button>
-        </div>
+        */}
+         </div>
         <div>
           {data.selectedLanguage == "en-t-i0-und" ? (
             <></>
@@ -147,7 +148,7 @@ const MathEditor = ({ data }) => {
           id=""
           className="vi_0"
           value={data?.trans}
-          placeholder="Write your text"
+          placeholder="Please complete your sentance then click translate button"
           onChange={(event) => data?.settran(event.target.value)}
         ></textarea>
       )}

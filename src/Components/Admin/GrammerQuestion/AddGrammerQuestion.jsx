@@ -20,7 +20,7 @@ const TableCell = ({ value, onChange }) => {
   );
 };
 
-function AddGrammerQuestion() {
+function AddGrammerQuestion({selectdetails}) {
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
