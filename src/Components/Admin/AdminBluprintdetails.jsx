@@ -105,6 +105,7 @@ const AdminBlueprintdetails = () => {
   useEffect(() => {
     getallblueprint();
   }, []);
+  console.log("blueprint", blueprint);
 
   const [deleteId, setdeleteId] = useState("");
 
@@ -170,6 +171,28 @@ const AdminBlueprintdetails = () => {
       setCurrentpage(currenpage + 1);
     }
   }
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+  useEffect(() => {
+    getaddsubclasss();
+  }, []);
+  const [Classname, setClassname] = useState("");
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -186,17 +209,62 @@ const AdminBlueprintdetails = () => {
         </div>
       </div>
       <div className="customerhead p-2 mt-4">
-        <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Blue Print Details</h2>
-          <button
-            className="admin-add-btn"
-            onClick={() => {
-              navigate("/adminblueprint");
-            }}
-          >
-            Add Blue Print
-          </button>
+        <h2 className="header-c ">Blue Print Details</h2>
+        <div className="container">
+          <div className="row mb-4">
+            <div className="col-md-4">
+              <label htmlFor="">Select Class</label>
+              <Form.Select
+                aria-label="Default select example"
+                // onChange={(e) => {
+                //   // setClasstype(e.target.value);
+                //   setClassname(e.target.value);
+                // }}
+              >
+                <option value="">Select Class</option>
+                {uniqueClassNamesArray?.map((val, i) => {
+                  return (
+                    <option value={val} key={i}>
+                      {val}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Select Sub Class</label>
+              <Form.Select
+                aria-label="Default select example"
+                // onChange={(e) => {
+                //   setSub_classname(e.target.value);
+                // }}
+              >
+                <option value="">Select Sub Class</option>
+                {getaddsubclass
+                  ?.filter((ele) => ele.className === blueprint.className)
+                  ?.map((val, i) => {
+                    return (
+                      <option value={val?.subclassName} key={i}>
+                        {val?.subclassName}
+                      </option>
+                    );
+                  })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <button
+                className="admin-add-btn mt-4"
+                style={{ float: "right" }}
+                onClick={() => {
+                  navigate("/adminblueprint");
+                }}
+              >
+                Add Blue Print
+              </button>
+            </div>
+          </div>
         </div>
+
         <div className="row">
           {/* <div className="col-lg-2 " style={{ width: "fit-content" }}>
             <label>Select :</label>
