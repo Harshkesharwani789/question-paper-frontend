@@ -172,7 +172,9 @@ const [QuestionT,setQuestionT]=useState("");
                  <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                    setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
                 />
                   {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_2}</p>}
               </div>

@@ -15,6 +15,7 @@ import { FaEye } from "react-icons/fa";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
 
   const [slybus, setslybus] = useState(false);
 
@@ -60,20 +61,20 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-    //Get Chapter 
-    const [chapters, setchapters] = useState([]);
-    const getChapter = async () => {
-      try {
-        let res = await axios.get(
-          "http://localhost:8000/api/admin/getAllChapter"
-        );
-        if (res.status == 200) {
-          setchapters(res.data.success);
-        }
-      } catch (error) {
-        console.log(error);
+  //Get Chapter
+  const [chapters, setchapters] = useState([]);
+  const getChapter = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllChapter"
+      );
+      if (res.status == 200) {
+        setchapters(res.data.success);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Get Exam Name
   const [NameExam, setNameExam] = useState([]);
@@ -91,10 +92,10 @@ const AdminSyllabusCopy = () => {
   };
 
   useEffect(() => {
-    getallweightagecontent()
-    getChapter()
-    getNameExamination()
-  }, [])
+    getallweightagecontent();
+    getChapter();
+    getNameExamination();
+  }, []);
   console.log("weightage", weightage);
   //Post
   const [chapterName, setChapterName] = useState("");
@@ -106,48 +107,49 @@ const AdminSyllabusCopy = () => {
   const [subclass, setsubclass] = useState("");
   const [medium, setmedium] = useState("");
   const [subjectt, setsubjectt] = useState("");
-  const [SelectChapter, setSelectChapter] = useState("")
-  const [selectsubjectpart, setSelectsubjectpart] = useState("")
-  const [Examinationname, setExaminationname] = useState("")
+  const [SelectChapter, setSelectChapter] = useState("");
+  const [selectsubjectpart, setSelectsubjectpart] = useState("");
+  const [Examinationname, setExaminationname] = useState("");
   // Array of object 1
   const [Arr, setArr] = useState([]);
   const AddTypesofquestion = () => {
     try {
-      if (!chapterNumber) {       
-        return alert("write chapter name")
+      if (!chapterNumber) {
+        return alert("write chapter name");
       }
 
-      const existingElement = Arr.find(ele => 
-        ele.chapterno === chapterNumber || 
-        ele.chapter === SelectChapter ||
-        ele.subjectpart === selectsubjectpart ||
-        ele.description === description || 
-        ele.mask === marks || 
-        ele.chepterName === Examinationname
+      const existingElement = Arr.find(
+        (ele) =>
+          ele.chapterno === chapterNumber ||
+          ele.chapter === SelectChapter ||
+          ele.subjectpart === selectsubjectpart ||
+          ele.description === description ||
+          ele.mask === marks ||
+          ele.chepterName === Examinationname
       );
 
-  // if (existingElement) {
-  //     return alert("already exist")
-  //   }
-    const newObj = {
-      chapterno: chapterNumber,
-      chapter: SelectChapter,
-      subjectpart: selectsubjectpart,
-      description: description,
-      mask: marks,
-      examname: Examinationname,        
-    };
-    setArr([...Arr, newObj]);
-    swal({
-      title: "Yeah!",
-      text: "Added Successfully...",
-      icon: "success",
-      button: "OK!",
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
+      // if (existingElement) {
+      //     return alert("already exist")
+      //   }
+      const newObj = {
+        chapterno: chapterNumber,
+        chapter: SelectChapter,
+        subjectpart: selectsubjectpart,
+        description: description,
+        mask: marks,
+        examname: Examinationname,
+      };
+      setArr([...Arr, newObj]);
+      swal({
+        title: "Yeah!",
+        text: "Added Successfully...",
+        icon: "success",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const deleteQuestionType = (index) => {
     try {
@@ -188,7 +190,7 @@ const AdminSyllabusCopy = () => {
           medium: medium,
           Class: classs,
           SubClass: subclass,
-          subject: subjectt,  
+          subject: subjectt,
           authId: admin?._id,
           SyllabusDetails: Arr,
         },
@@ -214,7 +216,6 @@ const AdminSyllabusCopy = () => {
       });
     }
   };
-
 
   // get method add class
   const [getclassname, setgetclassName] = useState([]);
@@ -242,7 +243,6 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
-
 
   //get method for medium
   const [Medium, setMedium] = useState([]);
@@ -280,7 +280,7 @@ const AdminSyllabusCopy = () => {
       if (res.status == 200)
         if (res.status == 200) {
           handleClose1();
-       
+
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -299,41 +299,38 @@ const AdminSyllabusCopy = () => {
     }
   };
   //delete
-  const [chapter, setChapter] = useState("");
-  const DeleteSyllabus = async () => {
+  const [Syllabus, setSyllabus] = useState("");
+
+  const deleteslybus = async () => {
     try {
-      const config = {
-        url: "/admin/deleteSyllabus/" + chapter + "/" + admin?._id,
-        method: "delete",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        handleClose2();
-    
-        return swal({
-          title: "Yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-      }
-    } catch (error) {
-      console.log(error);
+      let res = await axios.delete(
+        `http://localhost:8000/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if(res.status==200)
+      handleClose2()
+      getSyllabus();
       return swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "error",
+        title: "Yeah!",
+        text: res.data.success,
+        icon: "success",
         button: "Ok!",
       });
+    } catch (error) {
+    console.log(error);
+    return swal({
+      title: "Yeah!",
+      text: error.response.data.error,
+      icon: "success",
+      button: "Ok!",
+    });
     }
   };
-
-
   //Get All Syllabus
   const [Slybuss, setSlybuss] = useState([]);
   const getSyllabus = async () => {
@@ -349,7 +346,7 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
-  console.log("Slybuss",Slybuss);
+  console.log("Slybuss", Slybuss);
 
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
@@ -389,13 +386,14 @@ const AdminSyllabusCopy = () => {
   }, []);
   console.log("getaddsubclass", getaddsubclass);
 
-  const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
-
 
   //  Add Chapter Name
 
-  const [AddChapter, setAddChapter] = useState([])
+  const [AddChapter, setAddChapter] = useState([]);
   return (
     <div>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -408,17 +406,13 @@ const AdminSyllabusCopy = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
-           
           />
         </div>
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Syllabus
           </button>
         </div>
@@ -450,7 +444,7 @@ const AdminSyllabusCopy = () => {
                 <th>
                   <div>View</div>
                 </th>
-              
+
                 <th>Action</th>
               </tr>
             </thead>
@@ -467,12 +461,17 @@ const AdminSyllabusCopy = () => {
                     <td>{item?.medium}</td>
                     <td>{item?.subject}</td>
                     <td>
-                      <Link
-                        to="#"
+                      {/* <Link
+                        to="//"
                         style={{ textDecoration: "none", color: "white" }}
-                      >
-                        <FaEye color="blue" />
-                      </Link>
+                      > */}
+                      <FaEye
+                        color="blue"
+                        onClick={() => {
+                          navigate(`/adminslybuscopyview/${item?._id}`);
+                        }}
+                      />
+                      {/* </Link> */}
                     </td>
                     <td>
                       {" "}
@@ -493,8 +492,8 @@ const AdminSyllabusCopy = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setChapter(item?._id);
-                              handleShow2(item?._id);
+                              setSyllabus(item?._id);
+                              handleShow2();
                             }}
                           />{" "}
                         </div>
@@ -565,118 +564,120 @@ const AdminSyllabusCopy = () => {
           <Modal.Body>
             <div className="row">
               <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>Year</label>
-                <input
-                  value={year}
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Year"
-                  onChange={(e) => {
-                    setyear(e.target.value);
-                  }}
-                />
-              </div>
-              </div>
-              <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Medium <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setmedium(e.target.value);
-                  }}
-                >
-                  <option>Select the Medium</option>
-                  {Medium?.map((val, i) => {
-                    return (
-                      <option value={val?.mediumName} key={i}>
-                        {val?.mediumName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+                <div className="do-sear mt-2">
+                  <label>Year</label>
+                  <input
+                    value={year}
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Year"
+                    onChange={(e) => {
+                      setyear(e.target.value);
+                    }}
+                  />
+                </div>
               </div>
               <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Class <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setclasss(e.target.value);
-                  }}
-                >
-                  <option>Select the Class</option>
-                  {uniqueClassNamesArray?.map((val, i) => {
-                    return (
-                      <option value={val} key={i}>
-                        {val}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-              </div>
-              <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Sub-Class <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setsubclass(e.target.value);
-                  }}
-                >
-                  <option>Select the Sub-Class</option>
-                  {getaddsubclass?.filter((ele) => ele.className === classs)?.map((val, i) => {
-                    return (
-                      <option value={val?.subclassName} key={i}>
-                        {val?.subclassName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Medium <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setmedium(e.target.value);
+                    }}
+                  >
+                    <option>Select the Medium</option>
+                    {Medium?.map((val, i) => {
+                      return (
+                        <option value={val?.mediumName} key={i}>
+                          {val?.mediumName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
               </div>
               <div className="col-sm-4">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Subjects <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setsubjectt(e.target.value)}
-                >
-                  <option>Select the Subjects</option>              
-                  {subject?.map((item,i)=>{
-                    return(
-                      <>
-                      <option value={item?.subjectName}>{item?.subjectName}</option>
-                      </>
-                    )
-                  })}
-                </Form.Select>
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setclasss(e.target.value);
+                    }}
+                  >
+                    <option>Select the Class</option>
+                    {uniqueClassNamesArray?.map((val, i) => {
+                      return (
+                        <option value={val} key={i}>
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
               </div>
-              </div> 
-                             
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Sub-Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setsubclass(e.target.value);
+                    }}
+                  >
+                    <option>Select the Sub-Class</option>
+                    {getaddsubclass
+                      ?.filter((ele) => ele.className === classs)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={val?.subclassName} key={i}>
+                            {val?.subclassName}
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Subjects <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setsubjectt(e.target.value)}
+                  >
+                    <option>Select the Subjects</option>
+                    {subject?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.subjectName}>
+                            {item?.subjectName}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
             </div>
- 
-           
-              <div
-                style={{
-                  border: "2px solid #dee2e6",
-                  padding: "10px",
-                  marginTop: "10px",
-                }}
-              >
-                <div className="row">
-                  <div className="col-sm-4">
+
+            <div
+              style={{
+                border: "2px solid #dee2e6",
+                padding: "10px",
+                marginTop: "10px",
+              }}
+            >
+              <div className="row">
+                <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Chapter Number</label>
                     <input
@@ -685,12 +686,10 @@ const AdminSyllabusCopy = () => {
                       placeholder="Enter Chapter Number"
                       onChange={(e) => setChapterNumber(e.target.value)}
                     />
-
-
                   </div>
-                  </div>
-                 
-                  <div className="col-sm-4">
+                </div>
+
+                <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Chapter Name</label>
                     <Form.Select
@@ -700,18 +699,20 @@ const AdminSyllabusCopy = () => {
                       }}
                     >
                       <option>Select the Chapter</option>
-                      {chapters?.filter((ele) => ele.SubjectPart === selectsubjectpart)?.map((val, i) => {
-                        return (
-                          <option value={val?.chapterName} key={i}>
-                            {val?.chapterName}
-                          </option>
-                        );
-                      })}
+                      {chapters
+                        ?.filter((ele) => ele.SubjectPart === selectsubjectpart)
+                        ?.map((val, i) => {
+                          return (
+                            <option value={val?.chapterName} key={i}>
+                              {val?.chapterName}
+                            </option>
+                          );
+                        })}
                     </Form.Select>
                   </div>
-                  </div>
+                </div>
 
-                  <div className="col-sm-4">
+                <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Subject Part</label>
                     <Form.Select
@@ -721,140 +722,140 @@ const AdminSyllabusCopy = () => {
                       }}
                     >
                       <option>Select the Subject Part</option>
-                      {weightage?.filter((ele) => ele.Subject === subjectt)?.map((val, i) => {
+                      {weightage
+                        ?.filter((ele) => ele.Subject === subjectt)
+                        ?.map((val, i) => {
+                          return (
+                            <option value={val?.Content} key={i}>
+                              {val?.Content}
+                            </option>
+                          );
+                        })}
+                    </Form.Select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="do-sear mt-2">
+                  <label>Description</label>
+                  <CKEditor
+                    editor={ClassicEditor}
+                    className="vi_0"
+                    data={description}
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setDescription(data);
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-sm-6">
+                  <div className="do-sear mt-2">
+                    <label>Marks</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Marks"
+                      onChange={(e) => setMarks(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="do-sear mt-2">
+                    <label> Name Of the Examination</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setExaminationname(e.target.value);
+                      }}
+                    >
+                      <option>Select examination</option>
+                      {NameExam?.map((val, i) => {
                         return (
-                          <option value={val?.Content} key={i}>
-                            {val?.Content}
+                          <option value={val?.NameExamination} key={i}>
+                            {val?.NameExamination}
                           </option>
                         );
                       })}
                     </Form.Select>
                   </div>
-                  </div>  
-                
                 </div>
-
-                <div className="row">
-                  <div className="do-sear mt-2">
-                    <label>Description</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={description}
-                      onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setDescription(data);
-                      }}
-                    />
-                  </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                    <div className="do-sear mt-2">
-                      <label>Marks</label>
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter Marks"
-                        onChange={(e) => setMarks(e.target.value)}
-                      />
-                    </div>
-                    </div>
-                    <div className="col-sm-6">
-                    <div className="do-sear mt-2">
-                      <label> Name Of the Examination</label>                
-                      <Form.Select
-                        aria-label="Default select example"
-                        onChange={(e) => {
-                          setExaminationname(e.target.value);
-                        }}
-                      >
-                        <option>Select examination</option>
-                        {NameExam?.map((val, i) => {
-                          return (
-                            <option value={val?.NameExamination} key={i}>
-                              {val?.NameExamination}
-                            </option>
-                          );
-                        })}
-                      </Form.Select>
-                    </div>
-                    </div>                   
-                  </div>
-
-               
-                    <Button
-                      variant=""
-                      style={{ 
-                        float: "right", 
-                        marginTop: "15px", 
-                        backgroundColor: "green", 
-                        color: "white", 
-                        borderRadius: "5px" }}
-                      onClick={() => {
-                        // setslybus(true);
-                        AddTypesofquestion();
-                      }}
-                    >
-                      Add
-                    </Button>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <Table
-                          responsive
-                          bordered
-                          style={{
-                            width: "-webkit-fill-available",
-                            textAlign: "center",
-                          }}
-                        >
-                          <thead>
-                            <tr>
-                              <th>S No.</th>
-                              <th>Chapter No.</th>
-                              <th>Chapter Name</th>
-                              <th>Subject Part</th>
-                              <th>Description</th>
-                              <th>Exam-Name</th>
-                              <th>Marks</th>                              
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {Arr?.map((val, i) => {
-                              return (
-                                <tr>
-                                  <td>{i + 1}</td>
-                                  <td>{val?.chapterno}</td>
-                                  <td>{val?.chapter}</td>
-                                  <td>{val?.subjectpart}</td>
-                                  <td>
-                                    {val?.description ? (
-                                      parse(val?.description)
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </td>
-                                  <td>{val?.chepterName}</td>
-                                  <td>{val?.mask}</td>
-                                  <td>
-                                    {" "}
-                                    <AiFillDelete
-                                      color="red"
-                                      cursor="pointer"
-                                      onClick={() => deleteQuestionType(i)}
-                                    />
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </div>
-                    </div>  
               </div>
-            
+
+              <Button
+                variant=""
+                style={{
+                  float: "right",
+                  marginTop: "15px",
+                  backgroundColor: "green",
+                  color: "white",
+                  borderRadius: "5px",
+                }}
+                onClick={() => {
+                  // setslybus(true);
+                  AddTypesofquestion();
+                }}
+              >
+                Add
+              </Button>
+              <div className="row">
+                <div className="col-md-12">
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                        <th>Chapter No.</th>
+                        <th>Chapter Name</th>
+                        <th>Subject Part</th>
+                        <th>Description</th>
+                        <th>Exam-Name</th>
+                        <th>Marks</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr?.map((val, i) => {
+                        return (
+                          <tr>
+                            <td>{i + 1}</td>
+                            <td>{val?.chapterno}</td>
+                            <td>{val?.chapter}</td>
+                            <td>{val?.subjectpart}</td>
+                            <td>
+                              {val?.description ? (
+                                parse(val?.description)
+                              ) : (
+                                <></>
+                              )}
+                            </td>
+                            <td>{val?.chepterName}</td>
+                            <td>{val?.mask}</td>
+                            <td>
+                              {" "}
+                              <AiFillDelete
+                                color="red"
+                                cursor="pointer"
+                                onClick={() => deleteQuestionType(i)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -886,7 +887,10 @@ const AdminSyllabusCopy = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -973,10 +977,18 @@ const AdminSyllabusCopy = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={DeleteSyllabus}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={deleteslybus}
+            >
               Delete
             </Button>
           </Modal.Footer>
