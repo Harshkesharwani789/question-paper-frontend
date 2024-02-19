@@ -6,10 +6,11 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { debounce } from "lodash";
+
 
 import AdminQuestprops from "./AdminQuestprops";
-
+import MathEditor from "./MyEditor";
+import { debounce } from "lodash";
 let googleTransliterate = require("google-input-tool");
 
 const AdminQuestionDetails = () => {
@@ -58,76 +59,11 @@ const AdminQuestionDetails = () => {
     }
   }, 300); // Debounce delay in milliseconds
 
-
-  // const onChangeHandler = debounce(async (value, setData) => {
-  //   setInputValue(value);
-
-  //   if (!value) {
-  //     setTranslatedValue("");
-  //     setData("");
-  //     return "";
-  //   }
-
-  //   let am = value.split(" ");
-  //   let arr = [];
-
-  //   for (let index = 0; index < am.length; index++) {
-  //     try {
-  //       const response = await googleTransliterate(
-  //         new XMLHttpRequest(),
-  //         am[index],
-  //         selectedLanguage
-  //       );
-  //       arr.push(response[0][0]);
-  //     } catch (error) {
-  //       console.error("Translation error:", error);
-  //       arr.push(am[index]);
-  //     }
-  //   }
-
-  //   setTranslatedValue(arr.join(" "));
-  //   return setData(arr.join(" "));
-  // }, 300); // Debounce delay in milliseconds
-
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
 
-  const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState("default");
 
-  const handleChange = (e, editor) => {
-    const data = editor.getData();
-    setQuestion(data);
-  };
-  const handleChange1 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
-  const handleChange2 = (e, editor) => {
-    const data = editor.getData();
-    setInstruction(data);
-  };
-  const handleChange3 = (e, editor) => {
-    const data = editor.getData();
-    setOption_1(data);
-  };
-  const handleChange4 = (e, editor) => {
-    const data = editor.getData();
-    setOption_2(data);
-  };
-  const handleChange5 = (e, editor) => {
-    const data = editor.getData();
-    setOption_3(data);
-  };
-  const handleChange6 = (e, editor) => {
-    const data = editor.getData();
-    setOption_4(data);
-  };
-  const handleChange7 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
   // get method for objectives
   const [getobjectives, setgetobjectives] = useState([]);
 
@@ -337,7 +273,7 @@ const AdminQuestionDetails = () => {
     getaddsubclass.map((item) => item.className)
   );
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
-
+  const [trans, settran] = useState("");
   return (
     <div>
       <div className="row">
@@ -356,7 +292,6 @@ const AdminQuestionDetails = () => {
             <option value="kn-t-i0-und">Kannada</option>
             <option value="ta-t-i0-und">Tamil</option>
             <option value="pa-t-i0-und">Punjabi</option>
-
             <option value="mr-t-i0-und">Marathi</option>
             <option value="ur-t-i0-und">Urdu</option>
             <option value="sa-t-i0-und">Sanskrit</option>
@@ -577,16 +512,8 @@ const AdminQuestionDetails = () => {
               </div>{" "}
               <Form.Select
                 aria-label="Default select example"
-                // value={Types_Question}
+                value={Types_Question}
                 onChange={(e) => {
-                  if(!Section||!Board||!Medium||!Sub_Class||!Class||!Subjects||!Lesson||!Chapter_Name||!Difficulty_level||!Name_of_examination||!Objectives){
-                    return  swal({
-                      title: "Oops!",
-                      text: "Please fill the form",
-                      icon: "warning",
-                      button: "Ok!",
-                    });
-                  }else
                   setTypes_Question(e.target.value);
                 }}
               >
@@ -629,9 +556,7 @@ const AdminQuestionDetails = () => {
                 <option value="Three and Four Sentence Answer Questions">
                   Three and Four Sentence Answer Questions
                 </option>
-                {/* <option value="Five Sentence Answer Questions">
-                  Five Sentence Answer Questions
-                </option> */}
+              
                 <option value="Five and Six Sentence Answer Questions">
                   Five and Six Sentence Answer Questions
                 </option>
@@ -672,133 +597,19 @@ const AdminQuestionDetails = () => {
           <div className="col-md-12">
             <div className="do-sear">
               <label htmlFor="">Instructions</label>
-              {selectedLanguage == "en-t-i0-und" ? (
-                <></>
-              ) : (
-                <textarea
-                  name=""
-                  id=""
-                  className="vi_0"
-                  placeholder="Write your text"
-                  onChange={(event) =>
-                    onChangeHandler(event.target.value, setInstruction)
-                  }
-                ></textarea>
-              )}
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                data={Instruction}
-                onChange={handleChange2}
-              />
+             
+              <MathEditor data={{A:Instruction,B:setInstruction,selectedLanguage,trans:trans,settran:settran}}/>
+              
             </div>
           </div>
           <div className="col-md-12 mt-3">
-            <AdminQuestprops Types_Question={Types_Question} />
+            <AdminQuestprops Types_Question={Types_Question} data={selectedLanguage} selectdetails={selectdetails} />
           </div>
-          {/* <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-                
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
-              </div>
-            </div> */}
-          {/* <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 1</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_1}
-                  onChange={handleChange3}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 2</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_2}
-                  onChange={handleChange4}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 3</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_3}
-                  onChange={handleChange5}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option 4</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Option_4}
-                  onChange={handleChange6}
-                />
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="do-sear">
-                <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  className="vi_0"
-                  onChange={(e) => setImage(e.target.files[0])}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <input
-                  type="number"
-                  className="vi_0"
-                  placeholder="Enter The Marks"
-                  onChange={(e) => setMarks(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={Answer}
-                    onChange={handleChange7}
-                  />
-                </div>
-              </div>
-            </div> */}
+        
+       
         </div>
 
-        {/* <div className="yoihjij text-center my-2 p-2 ">
-        <Button
-          onClick={() => {
-            addquestions();
-          }}
-          className="modal-add-btn"
-        >
-          Add
-        </Button>
-      </div> */}
+        
       </div>
     </div>
   );

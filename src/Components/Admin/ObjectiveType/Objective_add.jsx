@@ -8,12 +8,15 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+import MathEditor from "../MyEditor";
+import { debounce } from "lodash";
+let googleTransliterate = require("google-input-tool");
 
-const Objective_add = () => {
+const Objective_add = ({selectdetails}) => { 
+
+
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-
 
   const navigate = useNavigate();
 
@@ -21,21 +24,54 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleChange = (e, editor) => {
-    const data = editor.getData();
-    setQuestion(data);
-  };
-  const handleChange1 = (e, editor) => {
-    const data = editor.getData();
-    setAnswer(data);
-  };
-  
-  //post
+ 
+  const [translatedValue, setTranslatedValue] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
 
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectdetails?.selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
+  //post
+const [QuestionT,setQuestionT]=useState("");
   const [Question, setQuestion] = useState("");
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
-
+  const [AnswerT, setAnswerT] = useState("");
   const [Answer, setAnswer] = useState("");
   const [ImageQ, setImageQ] = useState("");
   const [Image_Ans, setImage_Ans] = useState("");
@@ -56,19 +92,19 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
           Authorization: `Bearer ${token}`,
         },
         data: {
-          Board: questiondata?.Board,
-          Chapter_Name: questiondata?.Chapter_Name,
-          Difficulty_level: questiondata?.Difficulty_level,
-          Lesson: questiondata?.Lesson,
-          Medium: questiondata?.Medium,
-          Name_of_examination: questiondata?.Name_of_examination,
-          Objectives: questiondata?.Objectives,
-          Section: questiondata?.Section,
-          Sub_Class: questiondata?.Sub_Class,
-          Subject: questiondata?.Subjects,
-          Types_Question: questiondata?.Types_Question,
-          Class: questiondata?.Class,
-          Instruction: questiondata?.Instruction,
+          Board: selectdetails?.Board,
+          Chapter_Name: selectdetails?.Chapter_Name,
+          Difficulty_level: selectdetails?.Difficulty_level,
+          Lesson: selectdetails?.Lesson,
+          Medium: selectdetails?.Medium,
+          Name_of_examination: selectdetails?.Name_of_examination,
+          Objectives: selectdetails?.Objectives,
+          Section: selectdetails?.Section,
+          Sub_Class: selectdetails?.Sub_Class,
+          Subject: selectdetails?.Subjects,
+          Types_Question: selectdetails?.Types_Question,
+          Class: selectdetails?.Class,
+          Instruction: selectdetails?.Instruction,
 
           Question: Question,
           Option_1: Option_1,
@@ -115,13 +151,7 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 1 </label>
-
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Question}
-                  onChange={handleChange}
-                />
+                <MathEditor data={{A:Question,B:setQuestion,selectedLanguage:selectdetails?.selectedLanguage,trans:QuestionT,settran:setQuestionT}}/>
               </div>
             </div>
             <div className="col-md-6">
@@ -130,37 +160,29 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
                 <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) => setOption_1(e.target.value)}
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_1(e.target.value):onChangeHandler(e.target.value,setOption_1)}
                 />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_1}</p>}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-                <input
+              
+                 <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) => setOption_2(e.target.value)}
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
                 />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_2}</p>}
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 1</label>
-                {/* <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="5"
-                className="vi_0"
-              ></textarea> */}
-                <CKEditor
-                  editor={ClassicEditor}
-                  className="vi_0"
-                  data={Answer}
-                  onChange={handleChange1}
-                />
+                <MathEditor data={{A:Answer,B:setAnswer,selectedLanguage:selectdetails?.selectedLanguage,trans:AnswerT,settran:setAnswerT}}/>
+               
               </div>
             </div>
             <div className="mt-4">
@@ -218,9 +240,7 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => {
-                    setMarks(e.target.value);
-                  }}
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value):onChangeHandler(e.target.value,setMarks)}
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -236,6 +256,7 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
                   <option>8</option>
                   <option>10</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
               </div>
             </div>
             <div className="col-md-6">
@@ -243,25 +264,24 @@ const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => {
-                    setAnswer_Time(e.target.value);
-                  }}
+                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value):onChangeHandler(e.target.value,setAnswer_Time)}
                 >
                   <option>Select the Time</option>
-                  <option>1/2 Mnt</option>
-                  <option>1/4 Mnt</option>
-                  <option>1 mnt</option>
-                  <option>1.30 minutes</option>
-                  <option>2 minutes</option>
-                  <option>3 minutes</option>
-                  <option>4 minutes</option>
-                  <option>5 minutes</option>
-                  <option>6 minutes</option>
-                  <option>7 minutes</option>
-                  <option>8 minutes</option>
-                  <option>9 minutes</option>
-                  <option>10 minutes</option>
+                  <option value="1/2 minutes">1/2 minutes</option>
+                  <option value="1/4 minutes">1/4 minutes</option>
+                  <option value="1 minutes">1 minutes</option>
+                  <option value="1.30 minutes">1.30 minutes</option>
+                  <option value="2 minutes">2 minutes</option>
+                  <option value="3 minutes">3 minutes</option>
+                  <option value="4 minutes">4 minutes</option>
+                  <option value="5 minutes">5 minutes</option>
+                  <option value="6 minutes">6 minutes</option>
+                  <option value="7 minutes">7 minutes</option>
+                  <option value="8 minutes">8 minutes</option>
+                  <option value="9 minutes">9 minutes</option>
+                  <option value="10 minutes">10 minutes</option>
                 </Form.Select>
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
               </div>
             </div>
            

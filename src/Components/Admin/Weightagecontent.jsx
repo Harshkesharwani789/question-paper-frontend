@@ -7,7 +7,7 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
-
+import { debounce } from "lodash";
 const Weightagecontent = () => {
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -42,6 +42,52 @@ const Weightagecontent = () => {
 
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+
+    // Language Translater
+    let googleTransliterate = require("google-input-tool");
+    const [translatedValue, setTranslatedValue] = useState("");
+    const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+    
+    const handleLanguageChange = (event) => {
+      setSelectedLanguage(event.target.value);
+    };
+    const onChangeHandler = debounce(async (value, setData) => {
+      if (!value) {
+        setTranslatedValue("");
+        setData("");
+        return "";
+      }
+      let am = value.split(/\s+/); // Split by any whitespace characters
+      let arr = [];
+      let promises = [];
+  
+      for (let index = 0; index < am.length; index++) {
+        promises.push(
+          new Promise(async (resolve, reject) => {
+            try {
+              const response = await googleTransliterate(
+                new XMLHttpRequest(),
+                am[index],
+                selectedLanguage
+              );
+              resolve(response[0][0]);
+            } catch (error) {
+              console.error("Translation error:", error);
+              resolve(am[index]);
+            }
+          })
+        );
+      }
+  
+      try {
+        const translations = await Promise.all(promises);
+        setTranslatedValue(translations.join(" "));
+        setData(translations.join(" "));
+        return translations;
+      } catch (error) {
+        console.error("Promise.all error:", error);
+      }
+    }, 300); // Debounce delay in milliseconds
 
   // Post method Integration
   const [Subject, setSubject] = useState("");
@@ -225,6 +271,28 @@ const Weightagecontent = () => {
   console.log("weightage", weightage);
   return (
     <>
+     <div className="row">
+        <div className="col-md-10"></div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
+        </div>
+      </div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -406,9 +474,12 @@ const Weightagecontent = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    setContent(e.target.value);
+                    if(selectedLanguage == "en-t-i0-unb"){
+                      setContent(e.target.value);
+                    }else onChangeHandler(e.target.value,setContent)                   
                   }}
                 />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Content}</p>}
               </div>
             </div>
           </Modal.Body>
@@ -468,10 +539,12 @@ const Weightagecontent = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    setContent(e.target.value);
+                    if(selectedLanguage == "en-t-i0-unb"){
+                      setContent(e.target.value);
+                    }else onChangeHandler(e.target.value,setContent)                   
                   }}
-                  value={Content}
                 />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Content}</p>}
               </div>
             </div>
           </Modal.Body>
