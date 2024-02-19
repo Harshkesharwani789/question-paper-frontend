@@ -7,8 +7,9 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+import MathEditor from "../MyEditor";
 
-const QandA_add6Sentences = () => {
+const QandA_add6Sentences = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -37,8 +38,13 @@ const QandA_add6Sentences = () => {
   };
   //post
 
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("")
+
   const [Question, setQuestion] = useState("");
-  const [Answer, setAnswer] = useState([]);
+  const [Answer, setAnswer] = useState("");
   const [orQuestion, setorQuestion] = useState("");
   const [orAnswer, setorAnswer] = useState("");
   const [Marks, setMarks] = useState("");
@@ -124,24 +130,43 @@ const QandA_add6Sentences = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
                 />
               </div>
             </div>
 
-         
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Answer}
                   onChange={handleChange1}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -798,11 +823,21 @@ const QandA_add6Sentences = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={orQuestion}
                   onChange={handleChange2}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: orQuestion,
+                    B: setorQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orQuestionT,
+                    settran: setorQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -810,11 +845,21 @@ const QandA_add6Sentences = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={orAnswer}
                   onChange={handleChange3}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: orAnswer,
+                    B: setorAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orAnswerT,
+                    settran: setorAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -848,7 +893,7 @@ const QandA_add6Sentences = () => {
                   className="vi_0"
                   onChange={(e) => setAnswer_Time(e.target.value)}
                 >
-                      <option value="">Select</option>
+                  <option value="">Select</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
@@ -882,7 +927,7 @@ const QandA_add6Sentences = () => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
-              
+
               handleShow();
             }}
             className="modal-add-btn"
