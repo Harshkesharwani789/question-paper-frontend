@@ -6,6 +6,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 
+const ViewTableCell=({ value, onChange})=>{
+  return (  <td>
+    {value}
+  </td>)
+}
+
 const AdminQuestionDetailsview = () => {
   const { question_Id } = useParams();
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -592,6 +598,7 @@ const AdminQuestionDetailsview = () => {
                 <div className="col-md-12">
                   <div className="do-sear ">
                     <label htmlFor="">Question</label> <br />
+                    
                     <div className="d-flex">
                       <p className="vi_0">
                         {parse(`<div>${question_details?.Question}</div>`)}
