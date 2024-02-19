@@ -172,6 +172,7 @@ import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 import Science10th from "./Components/10th_QP_Pattern/Science10th";
 import AdminObjectives from "./Components/Admin/AdminObjectives";
 import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
+import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
 
 
 function App() {
@@ -857,6 +858,18 @@ function App() {
                 children={
                   <>
                     <AdminSyllabusCopy />
+                  </>
+                }
+              />
+            }
+          />
+          <Route
+            path="/adminslybuscopyview/:Slybus_id"
+            element={
+              <Main
+                children={
+                  <>
+                    <Adminslybuscopyview />
                   </>
                 }
               />
