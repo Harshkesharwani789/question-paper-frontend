@@ -245,8 +245,20 @@ function AddGrammerQuestion({ selectdetails }) {
         <div className="container">
           <div className="row mt-2">
             <div className="col-md-12">
+            <label htmlFor="">Question</label>
+            <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
+                />
+            </div>
+            <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
+                <label htmlFor="">Answer</label>               
                 <div>
                   <div className="my-2">
                     <button
@@ -318,15 +330,7 @@ function AddGrammerQuestion({ selectdetails }) {
                     </tbody>
                   </Table>
                 </div>
-                <MathEditor
-                  data={{
-                    A: Question,
-                    B: setQuestion,
-                    selectedLanguage: selectdetails?.selectedLanguage,
-                    trans: QuestionT,
-                    settran: setQuestionT,
-                  }}
-                />
+               
               </div>
             </div>
 
@@ -629,7 +633,7 @@ function AddGrammerQuestion({ selectdetails }) {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <div>
+                {/* <div>
                   <Table
                     responsive
                     bordered
@@ -654,8 +658,14 @@ function AddGrammerQuestion({ selectdetails }) {
                       ))}
                     </tbody>
                   </Table>
-                </div>
-                <MathEditor data={{ A: Answer, B: setAnswer, selectedLanguage: selectdetails?.selectedLanguage, trans: AnswerT, settran: setAnswerT }} />
+                </div> */}
+                <MathEditor 
+                data={{ 
+                  A: Answer, 
+                  B: setAnswer, 
+                  selectedLanguage: selectdetails?.selectedLanguage, 
+                  trans: AnswerT, 
+                  settran: setAnswerT }} />
               </div>
             </div>
 
@@ -1040,8 +1050,8 @@ function AddGrammerQuestion({ selectdetails }) {
               )}
             </div>
             <p className="vi_0">{parse(`<div>${Question}</div>`)}</p>
-            <label htmlFor="">Answer</label>
-            <div>
+            {/* <label htmlFor="">Answer</label> */}
+            {/* <div>
               <Table
                 responsive
                 bordered
@@ -1063,7 +1073,7 @@ function AddGrammerQuestion({ selectdetails }) {
                   ))}
                 </tbody>
               </Table>
-            </div>
+            </div> */}
             <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
           </div>
           <div className="row">
