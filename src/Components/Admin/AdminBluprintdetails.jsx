@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Button,
   Form,
@@ -149,7 +149,7 @@ const AdminBlueprintdetails = () => {
   // const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   // const pageCount = Math.ceil(data.length / productPerPage);
   const [currenpage, setCurrentpage] = useState(1);
-  const recordsperpage = 6;
+  const recordsperpage = 10;
   const lastIndex = currenpage * recordsperpage;
   const firstIndex = lastIndex - recordsperpage;
   const records = blueprint.slice(firstIndex, lastIndex);
@@ -193,6 +193,7 @@ const AdminBlueprintdetails = () => {
   }, []);
   const [Classname, setClassname] = useState("");
 
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -205,7 +206,9 @@ const AdminBlueprintdetails = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
+           
           />
+         
         </div>
       </div>
       <div className="customerhead p-2 mt-4">
