@@ -21,14 +21,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const FiveSentenceaddAnswer = () => {
-    const [show, setShow] = useState();
+const FiveSentenceaddAnswer = ({selectdetails}) => {
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-          // Line
+  const navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // Line
+
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("")
+
   const [twoline, setTwoline] = useState(false);
   const [threeline, setThreeline] = useState(false);
   const [fourline, setFourline] = useState(false);
@@ -41,16 +47,16 @@ const FiveSentenceaddAnswer = () => {
 
   return (
     <div>
-         <div className="">
-         <div className="container">
-        
+      <div className="">
+        <div className="container">
+
           <div className="row mt-2">
-           
+
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Questionsss</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                <label htmlFor="">Questions</label>
+                {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
 
@@ -720,9 +726,9 @@ const FiveSentenceaddAnswer = () => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
+                // onChange={(e) => {
+                //   setTypes_Question(e.target.value);
+                // }}
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -745,9 +751,9 @@ const FiveSentenceaddAnswer = () => {
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
                   aria-label="Default select example"
-                  // onChange={(e) => {
-                  //   setTypes_Question(e.target.value);
-                  // }}
+                // onChange={(e) => {
+                //   setTypes_Question(e.target.value);
+                // }}
                 >
                   <option>Select the Time</option>
                   <option>1/2 Mnt</option>

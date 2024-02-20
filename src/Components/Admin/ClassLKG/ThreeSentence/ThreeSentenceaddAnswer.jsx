@@ -20,7 +20,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import  parse  from "html-react-parser";
-const ThreeSentenceaddAnswer = () => {
+import MathEditor from "../../MyEditor";
+const ThreeSentenceaddAnswer = ({selectdetails}) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -41,6 +42,11 @@ const ThreeSentenceaddAnswer = () => {
   const [eightline, setEightline] = useState(false);
   const [nineline, setNineline] = useState(false);
   const [tenline, setTenline] = useState(false);
+
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("")
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -131,11 +137,20 @@ const ThreeSentenceaddAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor 
+                {/* <CKEditor 
                 editor={ClassicEditor} 
                 className="vi_0" 
                 data={Question}
                 onChange={handleChange}
+                /> */}
+                  <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -766,11 +781,20 @@ const ThreeSentenceaddAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor 
+                {/* <CKEditor 
                 editor={ClassicEditor} 
                 className="vi_0" 
                 data={Answer}
                   onChange={handleChange1}
+                /> */}
+                 <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -806,11 +830,20 @@ const ThreeSentenceaddAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor 
+                {/* <CKEditor 
                 editor={ClassicEditor} 
                 className="vi_0" 
                  data={orQuestion}
                   onChange={handleChange2}
+                /> */}
+                  <MathEditor
+                  data={{
+                    A: orQuestion,
+                    B: setorQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orQuestionT,
+                    settran: setorQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -818,11 +851,21 @@ const ThreeSentenceaddAnswer = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor 
+                {/* <CKEditor 
                 editor={ClassicEditor} 
                 className="vi_0"
                 data={orAnswer}
                 onChange={handleChange3}
+                /> */}
+                
+                 <MathEditor
+                  data={{
+                    A: orAnswer,
+                    B: setorAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orAnswerT,
+                    settran: setorAnswerT,
+                  }}
                 />
               </div>
             </div>

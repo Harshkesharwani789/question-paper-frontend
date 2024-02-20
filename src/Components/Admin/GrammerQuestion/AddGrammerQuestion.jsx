@@ -11,7 +11,7 @@ import { debounce } from "lodash";
 import MathEditor from "../MyEditor";
 import parse from "html-react-parser";
 let googleTransliterate = require("google-input-tool");
-const TableCell = ({ value, onChange,selectdetails}) => {
+const TableCell = ({ value, onChange, selectdetails }) => {
   const [translatedValue, setTranslatedValue] = useState("");
   // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
   const onChangeHandler = debounce(async (value, setData) => {
@@ -51,23 +51,23 @@ const TableCell = ({ value, onChange,selectdetails}) => {
     } catch (error) {
       console.error("Promise.all error:", error);
     }
-  }, 300); 
+  }, 300);
   return (
     <td>
       <input
         type="text"
-       placeholder={value}
+        placeholder={value}
         // value={selectdetails?.selectedLanguage=="en-t-i0-und" ? value={value}:<></>}
-        onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? onChange(e.target.value):onChangeHandler(e.target.value,onChange)}
-        // onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? onChange(e.target.value) : onChangeHandler(e.target.value, onChange)}
+      // onChange={(e) => onChange(e.target.value)}
       />
-      {selectdetails?.selectedLanguage=="en-t-i0-und" ? <></>:<p>{value}</p>}
+      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{value}</p>}
     </td>
   );
 };
 
-const ViewTableCell=({ value, onChange})=>{
-  return (  <td>
+const ViewTableCell = ({ value, onChange }) => {
+  return (<td>
     {value}
   </td>)
 }
@@ -82,7 +82,7 @@ function AddGrammerQuestion({ selectdetails }) {
   const [AtableData, setATableData] = useState([]);
 
 
-    const [translatedValue, setTranslatedValue] = useState("");
+  const [translatedValue, setTranslatedValue] = useState("");
   // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
   const onChangeHandler = debounce(async (value, setData) => {
     if (!value) {
@@ -121,7 +121,7 @@ function AddGrammerQuestion({ selectdetails }) {
     } catch (error) {
       console.error("Promise.all error:", error);
     }
-  }, 300); 
+  }, 300);
 
   const addRow = () => {
     const newRow = Array(tableData[0]?.length || 0).fill("New Data");
@@ -179,8 +179,8 @@ function AddGrammerQuestion({ selectdetails }) {
 
   const navigate = useNavigate();
 
- 
-// Debounce delay in milliseconds
+
+  // Debounce delay in milliseconds
   const [AnswerT, setAnswerT] = useState("");
   const [QuestionT, setQuestionT] = useState("");
   const [Line, setLine] = useState("2");
@@ -218,8 +218,8 @@ function AddGrammerQuestion({ selectdetails }) {
           NumberOfLine: Line,
           Marks: Marks,
           Answer_Time: Answer_Time,
-          GrammerArrQ:tableData,
-          GrammerArrAns:AtableData,
+          GrammerArrQ: tableData,
+          GrammerArrAns: AtableData,
           Answer: Answer,
           authId: admin?._id,
         },
@@ -238,7 +238,7 @@ function AddGrammerQuestion({ selectdetails }) {
       console.log(error);
     }
   };
-// console.log("questin table",tableData);
+  // console.log("questin table",tableData);
   return (
     <div>
       <div className="">
@@ -303,7 +303,7 @@ function AddGrammerQuestion({ selectdetails }) {
                         <tr key={rowIndex}>
                           {row.map((cell, cellIndex) => (
                             <TableCell
-                            selectdetails={selectdetails}
+                              selectdetails={selectdetails}
                               key={cellIndex}
                               className="vi_0"
                               value={cell}
@@ -329,7 +329,7 @@ function AddGrammerQuestion({ selectdetails }) {
                 />
               </div>
             </div>
-          
+
             <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select Number of Line</label>
@@ -625,7 +625,7 @@ function AddGrammerQuestion({ selectdetails }) {
                 <></>
               )}
             </div>
-         
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
@@ -640,7 +640,7 @@ function AddGrammerQuestion({ selectdetails }) {
                         <tr key={rowIndex}>
                           {row.map((cell, cellIndex) => (
                             <TableCell
-                            selectdetails={selectdetails}
+                              selectdetails={selectdetails}
                               key={cellIndex}
                               className="vi_0"
                               value={cell}
@@ -655,16 +655,16 @@ function AddGrammerQuestion({ selectdetails }) {
                     </tbody>
                   </Table>
                 </div>
-                <MathEditor data={{A:Answer,B:setAnswer,selectedLanguage:selectdetails?.selectedLanguage,trans:AnswerT,settran:setAnswerT}}/>
+                <MathEditor data={{ A: Answer, B: setAnswer, selectedLanguage: selectdetails?.selectedLanguage, trans: AnswerT, settran: setAnswerT }} />
               </div>
             </div>
-          
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value):onChangeHandler(e.target.value,setMarks)}
+                  onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value) : onChangeHandler(e.target.value, setMarks)}
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -688,7 +688,7 @@ function AddGrammerQuestion({ selectdetails }) {
                 <label htmlFor="">Answer Time</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value):onChangeHandler(e.target.value,setAnswer_Time)}
+                  onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value) : onChangeHandler(e.target.value, setAnswer_Time)}
                 >
                   <option>Select the Time</option>
                   <option value="1/2 minutes">1/2 minutes</option>
@@ -708,7 +708,7 @@ function AddGrammerQuestion({ selectdetails }) {
                 {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
               </div>
             </div>
-           
+
           </div>
         </div>
 
@@ -742,29 +742,29 @@ function AddGrammerQuestion({ selectdetails }) {
           <div>
             <label htmlFor="">Question</label>
             <div>
-                  <Table
-                    responsive
-                    bordered
-                    style={{ width: "-webkit-fill-available" }}
-                  >
-                    <tbody>
-                      {tableData?.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
-                          {row.map((cell, cellIndex) => (
-                            <ViewTableCell
-                            selectdetails={selectdetails}
-                              key={cellIndex}
-                              className="vi_0"
-                              value={cell}
-                            
-                            />
-                          ))}
-                        </tr>
+              <Table
+                responsive
+                bordered
+                style={{ width: "-webkit-fill-available" }}
+              >
+                <tbody>
+                  {tableData?.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => (
+                        <ViewTableCell
+                          selectdetails={selectdetails}
+                          key={cellIndex}
+                          className="vi_0"
+                          value={cell}
+
+                        />
                       ))}
-                    </tbody>
-                  </Table>
-                </div>
-                <div className="col-12">
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+            <div className="col-12">
               {Line === "2" ? (
                 <>
                   <div className="col-md-12">
@@ -1039,42 +1039,42 @@ function AddGrammerQuestion({ selectdetails }) {
                 <></>
               )}
             </div>
-                <p className="vi_0">{parse(`<div>${Question}</div>`)}</p>
+            <p className="vi_0">{parse(`<div>${Question}</div>`)}</p>
             <label htmlFor="">Answer</label>
             <div>
-                  <Table
-                    responsive
-                    bordered
-                    style={{ width: "-webkit-fill-available" }}
-                  >
-                    <tbody>
-                      {AtableData?.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
-                          {row.map((cell, cellIndex) => (
-                            <ViewTableCell
-                            selectdetails={selectdetails}
-                              key={cellIndex}
-                              className="vi_0"
-                              value={cell}
-                            
-                            />
-                          ))}
-                        </tr>
+              <Table
+                responsive
+                bordered
+                style={{ width: "-webkit-fill-available" }}
+              >
+                <tbody>
+                  {AtableData?.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => (
+                        <ViewTableCell
+                          selectdetails={selectdetails}
+                          key={cellIndex}
+                          className="vi_0"
+                          value={cell}
+
+                        />
                       ))}
-                    </tbody>
-                  </Table>
-                </div>
-                <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+            <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
           </div>
           <div className="row">
             <div className="col-md-6">
-            <label htmlFor="">Marks</label>
-            <p className="vi_0">{Marks}</p>
+              <label htmlFor="">Marks</label>
+              <p className="vi_0">{Marks}</p>
             </div>
             <div className="col-md-6">
-            <label htmlFor="">Answer_Time</label>
-            <p className="vi_0">{Answer_Time}</p>
-              </div>
+              <label htmlFor="">Answer_Time</label>
+              <p className="vi_0">{Answer_Time}</p>
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>

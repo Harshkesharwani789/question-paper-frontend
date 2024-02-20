@@ -6,7 +6,7 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
-import { Form, Modal, Table } from "react-bootstrap";
+import {  Form, Modal, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
@@ -2463,7 +2463,7 @@ function AdminBlueprint() {
                           Step {activeStep + 1} already completed
                         </Typography>
                       ) : (
-                        <Button varient="" onClick={handleComplete}>
+                        <Button varient="" onClick={handleComplete} style={{backgroundColor:"navy"}}>
                           {completedSteps() === totalSteps() - 1
                             ? "Submit"
                             : "Complete Step"}
