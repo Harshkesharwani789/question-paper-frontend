@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import MathEditor from "./MyEditor";
 let googleTransliterate = require("google-input-tool");
 
 const steps = [
@@ -60,7 +61,7 @@ function AdminBlueprint() {
     ],
   };
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
-    
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
@@ -103,7 +104,7 @@ function AdminBlueprint() {
     } catch (error) {
       console.error("Promise.all error:", error);
     }
-  }, 300); 
+  }, 300);
 
   // Array of object 3
   const [Arr3, setArr3] = useState([]);
@@ -167,8 +168,8 @@ function AdminBlueprint() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
-        steps.findIndex((step, i) => !(i in completed))
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -235,7 +236,7 @@ function AdminBlueprint() {
     }
   };
 
-  console.log("getaddsubclass",getaddsubclass);
+  console.log("getaddsubclass", getaddsubclass);
   //get method for medium
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
@@ -277,6 +278,7 @@ function AdminBlueprint() {
   const [SubClassName, setSubClassName] = useState("");
   const [subjects, setsubjects] = useState("");
   const [Instructions, setInstructions] = useState("");
+  const [InstructionsT, setInstructionsT] = useState("");
   const [Remembering, setRemembering] = useState("");
   const [NQRemembering, setNQRemembering] = useState("");
   const [MaskRemembering, setMaskRemembering] = useState("");
@@ -384,7 +386,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const deletedWeightageofthecontent = (index) => {
@@ -677,7 +679,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const deletedAddblueprint = (index) => {
@@ -901,11 +903,20 @@ function AdminBlueprint() {
                                   type="text"
                                   className="vi_0"
                                   placeholder="Enter BluePrint Name"
-                                  value={blName}
-                                  onChange={(e) => {
-                                    setblName(e.target.value);
-                                  }}
+                                  onChange={(e) =>
+                                    selectedLanguage == "en-t-i0-und"
+                                      ? setblName(e.target.value)
+                                      : onChangeHandler(
+                                          e.target.value,
+                                          setblName
+                                        )
+                                  }
                                 />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{blName}</p>
+                                )}
                               </div>
                             </div>
                             <div className="col-md-6">
@@ -986,11 +997,15 @@ function AdminBlueprint() {
                                   onChange={(e) => {
                                     setclassName(e.target.value);
                                   }}
-                                >                                  
+                                >
                                   <option value="">Select Class</option>
-                                  <option value="Lower Primary">Lower Primary</option>
+                                  <option value="Lower Primary">
+                                    Lower Primary
+                                  </option>
                                   <option value="Primary">Primary </option>
-                                  <option value="Upper Primary">Upper Primary</option>
+                                  <option value="Upper Primary">
+                                    Upper Primary
+                                  </option>
                                   <option value="Secondary">Secondary</option>
                                 </Form.Select>
                               </div>
@@ -1008,30 +1023,27 @@ function AdminBlueprint() {
                                   }}
                                 >
                                   <option>Select the Sub-Class</option>
-                                  {getaddsubclass?.filter((ele)=>ele.className == className )?.map((val, i) => {
-                                    return (
-                                      <option value={val?.subclassName} key={i}>
-                                        {val?.subclassName}
-                                      </option>
-                                    );
-                                  })}
+                                  {getaddsubclass
+                                    ?.filter(
+                                      (ele) => ele.className == className
+                                    )
+                                    ?.map((val, i) => {
+                                      return (
+                                        <option
+                                          value={val?.subclassName}
+                                          key={i}
+                                        >
+                                          {val?.subclassName}
+                                        </option>
+                                      );
+                                    })}
                                 </Form.Select>
                               </div>
                             </div>
-                            {/* <div className="col-md-6">
-                              <div className="do-sear">
-                                <label htmlFor="">Add Chapter Name</label>
-                              </div>
-                            </div> */}
+
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <label htmlFor="">Objectives</label>
-                                {/* <p className="fs-5 mt-2">
-                                  <MdPlayArrow
-                                    style={{ marginRight: "15px" }}
-                                  />
-                                  Remembering
-                                </p> */}
                               </div>
 
                               <div className="row mt-2">
@@ -1042,7 +1054,9 @@ function AdminBlueprint() {
                                 </div>
                                 <div className="col-md-3">
                                   <div className="do-sear">
-                                    <label htmlFor="">Percentage of Questions </label>
+                                    <label htmlFor="">
+                                      Percentage of Questions{" "}
+                                    </label>
                                   </div>
                                 </div>
                                 <div className="col-md-3">
@@ -1081,10 +1095,21 @@ function AdminBlueprint() {
                                       id=""
                                       placeholder="Enter the Percentage"
                                       className="vi_0"
-                                      onChange={(e) => {
-                                        setNoofQues(e.target.value);
-                                      }}
+                                      onChange={(e)=>setNoofQues(e.target.value)}
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setNoofQues(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setNoofQues
+                                      //       )
+                                      // }
                                     />
+                                    {/* {selectedLanguage == "en-t-i0-und" ? (
+                                      <></>
+                                    ) : (
+                                      <p>{NoofQues}</p>
+                                    )} */}
                                   </div>
                                 </div>
                                 <div className="col-md-3">
@@ -1095,10 +1120,21 @@ function AdminBlueprint() {
                                       id=""
                                       placeholder="Enter the marks"
                                       className="vi_0"
-                                      onChange={(e) => {
-                                        setobjMarks(e.target.value);
-                                      }}
+                                      onChange={(e)=>setobjMarks(e.target.value)}
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setobjMarks(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setobjMarks
+                                      //       )
+                                      // }
                                     />
+                                    {/* {selectedLanguage == "en-t-i0-und" ? (
+                                      <></>
+                                    ) : (
+                                      <p>{objMarks}</p>
+                                    )} */}
                                   </div>
                                 </div>
                                 <div className="col-md-3">
@@ -1141,8 +1177,8 @@ function AdminBlueprint() {
                                         return (
                                           <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td>{item?.Objective}%</td>
-                                            <td>{item?.NoofQues}</td>
+                                            <td>{item?.Objective}</td>
+                                            <td>{item?.NoofQues}%</td>
                                             <td>{item?.Marks}</td>
                                             <td>
                                               <AiFillDelete
@@ -1281,16 +1317,8 @@ function AdminBlueprint() {
                                 <label htmlFor="" className="mb-2">
                                   General Instructions
                                 </label>
-                                <CKEditor
-                                  config={editorConfiguration}
-                                  editor={ClassicEditor}
-                                  className="vi_0"
-                                  data={Instructions}
-                                  onChange={(event, editor) => {
-                                    const data = editor.getData();
-                                    setInstructions(data);
-                                  }}
-                                />
+
+                                <MathEditor data={{A:Instructions,B:setInstructions,selectedLanguage:selectedLanguage,trans:InstructionsT,settran:setInstructionsT}}/>
                               </div>
                             </div>
                           </div>
@@ -1352,10 +1380,21 @@ function AdminBlueprint() {
                                       id=""
                                       placeholder="Enter the Weightage"
                                       className="vi_0"
-                                      onChange={(e) => {
-                                        setMarks(e.target.value);
-                                      }}
+                                     onChange={(e)=>setMarks(e.target.value)}
+                                  //  onChange={(e) =>
+                                  //       selectedLanguage == "en-t-i0-und"
+                                  //         ? setMarks(e.target.value)
+                                  //         : onChangeHandler(
+                                  //             e.target.value,
+                                  //             setMarks
+                                  //           )
+                                  //     }
                                     />
+                                    {/* {selectedLanguage == "en-t-i0-und" ? (
+                                      <></>
+                                    ) : (
+                                      <p>{Marks}</p>
+                                    )} */}
                                   </div>
                                 </div>
                                 <div className="col-md-4">
@@ -1369,6 +1408,7 @@ function AdminBlueprint() {
                                         AddWeightageofthecontent();
                                       }}
                                     >
+                                      
                                       Add
                                     </Button>
                                   </div>
@@ -1587,30 +1627,63 @@ function AdminBlueprint() {
                                         type="text"
                                         className="vi_0"
                                         placeholder="Enter the head of question instracustion"
-                                        onChange={(e) => {
-                                          setQAInstruction(e.target.value);
-                                        }}
+                                       
+                                        onChange={(e) =>
+                                          selectedLanguage == "en-t-i0-und"
+                                            ? setQAInstruction(e.target.value)
+                                            : onChangeHandler(
+                                                e.target.value,
+                                                setQAInstruction
+                                              )
+                                        }
                                       />
+                                      {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{QAInstruction}</p>
+                                      )}
                                     </div>
                                     <div className="col-md-2">
                                       <input
                                         type="text"
                                         className="vi_0"
                                         placeholder="Enter Total No. of Questions"
-                                        onChange={(e) => {
-                                          setNQA(e.target.value);
-                                        }}
+                                        onChange={(e)=>setNQA(e.target.value)}
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setNQA(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setNQA
+                                        //       )
+                                        // }
                                       />
+                                      {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{NQA}</p>
+                                      )} */}
                                     </div>
                                     <div className="col-md-2">
                                       <input
                                         type="number"
                                         className="vi_0"
                                         placeholder="Enter the mask per question"
-                                        onChange={(e) => {
-                                          setMask(e.target.value);
-                                        }}
+                                      onChange={(e)=>setMask(e.target.value)}
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setMask(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setMask
+                                        //       )
+                                        // }
                                       />
+                                      {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{Mask}</p>
+                                      )} */}
                                     </div>
                                   </div>
                                   <div style={{ float: "right" }}>
@@ -1694,12 +1767,23 @@ function AdminBlueprint() {
                                       <input
                                         type="text"
                                         className="vi_0"
-                                        value={DurationOfExam}
+                                        // value={DurationOfExam}
                                         placeholder="Enter Duration of Exam"
-                                        onChange={(e) => {
-                                          setDurationOfExam(e.target.value);
-                                        }}
+                                 
+                                        onChange={(e) =>
+                                          selectedLanguage == "en-t-i0-und"
+                                            ? setDurationOfExam(e.target.value)
+                                            : onChangeHandler(
+                                                e.target.value,
+                                                setDurationOfExam
+                                              )
+                                        }
                                       />
+                                      {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{DurationOfExam}</p>
+                                      )}
                                     </div>
                                     <div className="col-md-4">
                                       <label htmlFor="">Total Question</label>
@@ -1711,7 +1795,7 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
-                                      // onChange={(e)=>{setTotalMask(e.target.value)}}
+                                        // onChange={(e)=>{setTotalMask(e.target.value)}}
                                       />
                                     </div>
                                     <div className="col-md-4">
@@ -1762,12 +1846,23 @@ function AdminBlueprint() {
                                           <input
                                             type="text"
                                             className="vi_0 mt-2"
-                                            value={Easy}
+                                            // value={Easy}
                                             placeholder="Enter No. of Questions"
-                                            onChange={(e) => {
-                                              setEasy(e.target.value);
-                                            }}
+                                          onChange={(e)=>setEasy(e.target.value)}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? setEasy(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setEasy
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{Easy}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4">
                                           <label htmlFor="">Marks</label>
@@ -1775,9 +1870,21 @@ function AdminBlueprint() {
                                             type="number"
                                             className="vi_0 mt-2"
                                             placeholder="Enter the Marks"
-                                            value={EasyMask}
-                                            onChange={handleChangeeasy}
+                                          onChange={handleChangeeasy}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? handleChangeeasy(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeeasy
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{EasyMask}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4 mt-2">
                                           <p className="fs-5">
@@ -1791,21 +1898,45 @@ function AdminBlueprint() {
                                           <input
                                             type="text"
                                             className="vi_0"
-                                            value={Average}
+                                            // value={Average}
                                             placeholder="Enter No. of Questions"
-                                            onChange={(e) => {
-                                              setAverage(e.target.value);
-                                            }}
+                                     
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?setAverage(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setAverage
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{Average}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4">
                                           <input
                                             type="number"
                                             className="vi_0"
-                                            value={AverageMask}
+                                            // value={AverageMask}
                                             placeholder="Enter the Marks"
-                                            onChange={handleChangeaverage}
+                                        onChange={handleChangeaverage}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?handleChangeaverage(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeaverage
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{AverageMask}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4 mt-2">
                                           <p className="fs-5">
@@ -1819,21 +1950,45 @@ function AdminBlueprint() {
                                           <input
                                             type="text"
                                             className="vi_0"
-                                            value={Difficult}
+                                            // value={Difficult}
                                             placeholder="Enter No. of Questions"
-                                            onChange={(e) => {
-                                              setDifficult(e.target.value);
-                                            }}
+                                        onChange={(e)=>setDifficult(e.target.value)}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setDifficult(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setDifficult
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{Difficult}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4">
                                           <input
                                             type="number"
                                             className="vi_0"
-                                            value={DifficultMask}
+                                            // value={DifficultMask}
                                             placeholder="Enter the Marks"
                                             onChange={handleChangedifficult}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  handleChangedifficult(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangedifficult
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{DifficultMask}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4"></div>
                                         <div className="col-md-4 mt-2">
@@ -2112,7 +2267,20 @@ function AdminBlueprint() {
                                               );
                                             }}
                                             placeholder="Enter No.of Questions"
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBlueprintnoofquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBlueprintnoofquestion
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{Blueprintnoofquestion}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4">
                                           <label htmlFor="">
@@ -2128,7 +2296,20 @@ function AdminBlueprint() {
                                               );
                                             }}
                                             placeholder="Marks Per Question"
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBluePrintmarksperquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBluePrintmarksperquestion
+                                            //       )
+                                            // }
                                           />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{BluePrintmarksperquestion}</p>
+                                          )} */}
                                         </div>
                                         <div className="col-md-4">
                                           <button
@@ -2226,7 +2407,7 @@ function AdminBlueprint() {
                                                         a +
                                                         Number(
                                                           ele?.BluePrintmarksperquestion *
-                                                          ele?.Blueprintnoofquestion
+                                                            ele?.Blueprintnoofquestion
                                                         ),
                                                       0
                                                     )}
