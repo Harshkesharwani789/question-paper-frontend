@@ -6,12 +6,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 
-const ViewTableCell=({ value, onChange})=>{
-  return (  <td>
+const ViewTableCell = ({ value, onChange }) => {
+  return (<td>
     {value}
   </td>)
 }
-
 const AdminQuestionDetailsview = () => {
   const { question_Id } = useParams();
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -137,17 +136,17 @@ const AdminQuestionDetailsview = () => {
             </div>
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Match the Following Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "RelationShip Words Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-              question_details?.Types_Question ==="Fill in the Blanks Questions" ? (
+              question_details?.Types_Question === "Fill in the Blanks Questions" ? (
               <> </>
             ) : (
               <>
@@ -163,28 +162,81 @@ const AdminQuestionDetailsview = () => {
                 </div>
               </>
             )}
+
+            {/* GarmmerQuestion */}
+            {question_details?.Types_Question === "Grammer Questions" ? (<>
+              <div className="row" >
+
+<p>Question : </p>
+
+                <Table
+                  responsive
+                  bordered
+                  style={{ width: "-webkit-fill-available" }}
+                >
+                  <tbody>
+                    {question_details?.GrammerArrQ?.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, cellIndex) => (
+                          <ViewTableCell
+
+                            key={cellIndex}
+                            className="vi_0"
+                            value={cell}
+
+                          />
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <p>Answer : </p>
+                <Table
+                  responsive
+                  bordered
+                  style={{ width: "-webkit-fill-available" }}
+                >
+                  <tbody>
+                    {question_details?.GrammerArrAns?.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, cellIndex) => (
+                          <ViewTableCell
+
+                            key={cellIndex}
+                            className="vi_0"
+                            value={cell}
+
+                          />
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
+            </>) : (<></>)}
+
             {/* Fill In the Blanks */}
             {question_details?.Types_Question ===
-            "Fill in the Blanks Questions" ? (
+              "Fill in the Blanks Questions" ? (
               <>
                 {question_details?.NumberOfLine == "2" ? (
                   <>
                     <div className="col-md-9 d-flex align-items-end">
                       <div className="do-sear ">
                         <label htmlFor="">Fill in the blanks</label> <br />
-                       <div className="d-flex gap-1">
-                       <p className="vi_0">
-                          {parse(`<div>${question_details?.input1}</div>`)}
-                        </p>
-                        <span className="mt-3">___________</span>
-                        <p className="vi_0">
-                          {parse(`<div>${question_details?.input2}</div>`)}
-                        </p>
-                        <span className="mt-3">___________</span>
-                        <p className="vi_0">
-                          {parse(`<div>${question_details?.input3}</div>`)}
-                        </p>
-                       </div>
+                        <div className="d-flex gap-1">
+                          <p className="vi_0">
+                            {parse(`<div>${question_details?.input1}</div>`)}
+                          </p>
+                          <span className="mt-3">___________</span>
+                          <p className="vi_0">
+                            {parse(`<div>${question_details?.input2}</div>`)}
+                          </p>
+                          <span className="mt-3">___________</span>
+                          <p className="vi_0">
+                            {parse(`<div>${question_details?.input3}</div>`)}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </>
@@ -196,15 +248,15 @@ const AdminQuestionDetailsview = () => {
                     <div className="col-md-9 d-flex align-items-end">
                       <div className="do-sear ">
                         <label htmlFor="">Fill in the blanks</label> <br />
-                       <div className="d-flex gap-1">
-                       <p className="vi_0">
-                          {parse(`<div>${question_details?.input1}</div>`)}
-                        </p>
-                        <span className="mt-3">___________</span>
-                        <p className="vi_0">
-                          {parse(`<div>${question_details?.input2}</div>`)}
-                        </p>
-                       </div>
+                        <div className="d-flex gap-1">
+                          <p className="vi_0">
+                            {parse(`<div>${question_details?.input1}</div>`)}
+                          </p>
+                          <span className="mt-3">___________</span>
+                          <p className="vi_0">
+                            {parse(`<div>${question_details?.input2}</div>`)}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </>
@@ -218,7 +270,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Letter Writing */}
             {question_details?.Types_Question === "Letter Writting" ||
-            question_details?.Types_Question === "Map Reading" ? (
+              question_details?.Types_Question === "Map Reading" ? (
               <>
                 <div className="col-8">
                   {question_details?.NumberOfLine === "1" ? (
@@ -553,25 +605,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* Expand and Explain*/}
             {question_details?.Types_Question ===
-            "Expanding and Explanations Answer Questions" ? (
+              "Expanding and Explanations Answer Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -598,7 +650,7 @@ const AdminQuestionDetailsview = () => {
                 <div className="col-md-12">
                   <div className="do-sear ">
                     <label htmlFor="">Question</label> <br />
-                    
+
                     <div className="d-flex">
                       <p className="vi_0">
                         {parse(`<div>${question_details?.Question}</div>`)}
@@ -906,21 +958,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -945,21 +997,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1012,23 +1064,23 @@ const AdminQuestionDetailsview = () => {
 
             {/* One word */}
             {question_details?.Types_Question === "One Word Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "One Sentence Answer Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Two  Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Two and three Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Three and Four Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Five and Six Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Six Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Seven Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Eight Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Ten Sentence Answer Questions" ? (
               <>
                 <div className="col-md-12">
@@ -1330,21 +1382,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1369,21 +1421,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1436,25 +1488,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* RelationShip Words Questions */}
             {question_details?.Types_Question ===
-            "RelationShip Words Questions" ? (
+              "RelationShip Words Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1570,7 +1622,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Classificatio of question */}
             {question_details?.Types_Question ===
-            "Classifications of Questions" ? (
+              "Classifications of Questions" ? (
               <>
                 <div className="col-md-12">
                   <div className="do-sear">
@@ -1868,21 +1920,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1907,21 +1959,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1968,25 +2020,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* Recorrect the following */}
             {question_details?.Types_Question ===
-            "Recorrect the Answers Questions" ? (
+              "Recorrect the Answers Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2011,21 +2063,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2353,21 +2405,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2393,21 +2445,21 @@ const AdminQuestionDetailsview = () => {
 
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2454,7 +2506,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Multiple choice questions */}
             {question_details?.Types_Question ===
-            "Multiple Choice Questions" ? (
+              "Multiple Choice Questions" ? (
               <>
                 <div className="col-md-6">
                   <div className="do-sear">
@@ -2518,23 +2570,23 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2655,25 +2707,25 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2703,7 +2755,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Match the following */}
             {question_details?.Types_Question ===
-            "Match the Following Questions" ? (
+              "Match the Following Questions" ? (
               <>
                 <div className="col-12">
                   <label htmlFor=""> Questions</label>
@@ -2818,7 +2870,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Objective Type */}
             {question_details?.Types_Question ===
-            "Match the Following Questions" ? (
+              "Match the Following Questions" ? (
               <></>
             ) : (
               <>
@@ -2921,7 +2973,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Odd and Out */}
             {question_details?.Types_Question ===
-            "Odd and out words Questions" ? (
+              "Odd and out words Questions" ? (
               <>
                 <div className="col-md-6">
                   <div className="do-sear">
@@ -2964,16 +3016,16 @@ const AdminQuestionDetailsview = () => {
                   </div>
                 </div>
                 {question_details?.Types_Question === "Objective Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Classifications of Questions" ||
-                question_details?.Types_Question === "One Word Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question === "One Word Question" ||
+                  question_details?.Types_Question ===
                   "Expanding and Explanations Answer Questions" ||
-                question_details?.Types_Question === "Map Reading" ? (
+                  question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
@@ -2996,16 +3048,16 @@ const AdminQuestionDetailsview = () => {
                   </>
                 )}
                 {question_details?.Types_Question === "Objective Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Classifications of Questions" ||
-                question_details?.Types_Question === "One Word Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question === "One Word Question" ||
+                  question_details?.Types_Question ===
                   "Expanding and Explanations Answer Questions" ||
-                question_details?.Types_Question === "Map Reading" ? (
+                  question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
@@ -3073,23 +3125,23 @@ const AdminQuestionDetailsview = () => {
                 )}
 
                 {question_details?.Types_Question === "Objective Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                question_details?.Types_Question ===
+                  question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -3120,7 +3172,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Poet,Time,Place ,Writer */}
             {question_details?.Types_Question ===
-            "Poet,Time, Place, Writer answer questions" ? (
+              "Poet,Time, Place, Writer answer questions" ? (
               <>
                 <div className="col-md-4">
                   <div className="do-sear mt-2">
@@ -3425,16 +3477,16 @@ const AdminQuestionDetailsview = () => {
             {/* Situation And Understanding Question And Answer */}
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-            question_details?.Types_Question === "Objective Questions" ||
-            question_details?.Types_Question === "Multiple Choice Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "Objective Questions" ||
+              question_details?.Types_Question === "Multiple Choice Questions" ||
+              question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Classifications of Questions" ||
-            question_details?.Types_Question === "One Word Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "One Word Question" ||
+              question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-            question_details?.Types_Question === "Map Reading" ? (
+              question_details?.Types_Question === "Map Reading" ? (
               <></>
             ) : (
               <>
@@ -3459,16 +3511,16 @@ const AdminQuestionDetailsview = () => {
 
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-            question_details?.Types_Question === "Objective Questions" ||
-            question_details?.Types_Question === "Multiple Choice Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "Objective Questions" ||
+              question_details?.Types_Question === "Multiple Choice Questions" ||
+              question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Classifications of Questions" ||
-            question_details?.Types_Question === "One Word Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "One Word Question" ||
+              question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-            question_details?.Types_Question === "Map Reading" ? (
+              question_details?.Types_Question === "Map Reading" ? (
               <></>
             ) : (
               <>
@@ -3616,7 +3668,7 @@ const AdminQuestionDetailsview = () => {
             {/* Answer The Question And Draw The Figure */}
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-            question_details?.Types_Question === "Objective Questions" ? (
+              question_details?.Types_Question === "Objective Questions" ? (
               <></>
             ) : (
               <>
@@ -3653,38 +3705,38 @@ const AdminQuestionDetailsview = () => {
             </div>
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-            question_details?.Types_Question === "Objective Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "Objective Questions" ||
+              question_details?.Types_Question ===
               "Match the Following Questions" ||
-            question_details?.Types_Question === "Multiple Choice Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "Multiple Choice Questions" ||
+              question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Classifications of Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "RelationShip Words Questions" ||
-            question_details?.Types_Question === "One Word Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "One Word Question" ||
+              question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-            question_details?.Types_Question === "Letter Writting" ||
-            question_details?.Types_Question === "Map Reading" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question === "Letter Writting" ||
+              question_details?.Types_Question === "Map Reading" ||
+              question_details?.Types_Question ===
               "One Sentence Answer Question" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Two  Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Two and three Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Three and Four Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Five and Six Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Six Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Seven Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Eight Sentence Answer Questions" ||
-            question_details?.Types_Question ===
+              question_details?.Types_Question ===
               "Ten Sentence Answer Questions" ? (
               <></>
             ) : (
