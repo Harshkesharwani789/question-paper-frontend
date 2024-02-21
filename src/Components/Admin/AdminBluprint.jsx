@@ -28,38 +28,6 @@ const steps = [
 ];
 
 function AdminBlueprint() {
-  const editorConfiguration = {
-    toolbar: [
-      "heading",
-      "|",
-      "bold",
-      "italic",
-      "underline",
-      "strikethrough",
-      "|",
-      "bulletedList",
-      "numberedList",
-      "blockQuote",
-      "|",
-      "link",
-      "imageUpload",
-      "mediaEmbed",
-      "|",
-      "alignment",
-      "fontFamily",
-      "fontSize",
-      "fontColor",
-      "fontBackgroundColor",
-      "|",
-      "indent",
-      "outdent",
-      "|",
-      "undo",
-      "redo",
-      "|",
-      "insertMath", // Include the new button in the toolbar
-    ],
-  };
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
 
   const handleLanguageChange = (event) => {
@@ -270,6 +238,7 @@ function AdminBlueprint() {
       console.error("Error fetching objectives:", error);
     }
   };
+  const [price,setprice]=useState("");
   const [objectiveadd, setobjectiveadd] = useState(false);
   const [blName, setblName] = useState("");
   const [board, setboard] = useState("");
@@ -315,8 +284,7 @@ function AdminBlueprint() {
   const [Blueprintobjective, setblueprintobjective] = useState("");
   const [Blueprintnoofquestion, setBlueprintnoofquestion] = useState("");
   const [BluePrintQuestiontype, setBluePrintQuestiontype] = useState("");
-  const [BluePrintmarksperquestion, setBluePrintmarksperquestion] =
-    useState("");
+  const [BluePrintmarksperquestion, setBluePrintmarksperquestion] = useState("");
   // Add for dificulty level
 
   const handleChangeeasy = (e) => {
@@ -771,6 +739,7 @@ function AdminBlueprint() {
           objectives: Arr3,
           Objective: Arr3,
           AllChapter: Arr5,
+          price:price,
         },
       };
       let res = await axios(config);
@@ -2417,6 +2386,30 @@ function AdminBlueprint() {
                                               </tbody>
                                             </Table>
                                           </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                        <label htmlFor="">
+                                            Total Price
+                                          </label>
+
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            onChange={(e) => {
+                                              setprice(
+                                                e.target.value
+                                              );
+                                            }}
+                                            placeholder="total price blue print with quetion paper"
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBluePrintmarksperquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBluePrintmarksperquestion
+                                            //       )
+                                            // }
+                                          />
                                         </div>
                                       </div>
                                     </div>

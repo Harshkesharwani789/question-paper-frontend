@@ -418,17 +418,17 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "M C" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "M C" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "M C" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -448,18 +448,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "V.S.A" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "V.S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "V.S.A" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                 
                                 </td>
                                 <td>
                                   {
@@ -478,17 +478,17 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "S.A" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "S.A" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -508,18 +508,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 1" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 1" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 1" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -539,18 +539,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 2" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 2" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 2" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -570,18 +570,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 3" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 3" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 3" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                               </>
                             );
@@ -614,6 +614,12 @@ var TotalMask=0
                     <tr>
                       <td></td>
                       <td>Total</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
