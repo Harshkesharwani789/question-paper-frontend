@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import parse from "html-react-parser"
+import jsPDF from "jspdf";
+import html2canvas from 'html2canvas';
 const Social_QP = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
@@ -41,7 +43,7 @@ const Social_QP = () => {
     }
   };
   useEffect(() => {
-    if (state._id && token) {
+    if (state?._id && token) {
       getAllQuestions();
     }
   }, [state, token]);
@@ -57,11 +59,47 @@ const Social_QP = () => {
       </div>
     </div>
   ];
+console.log("userssssssss",user);
+
+const generatePDF = async () => {
+  const input = document.getElementById('pdf-content');
+  const scale = 3; // Adjust the scale as needed
+  
+  const canvas = await html2canvas(input, { scale: scale });
+  const imgData = canvas.toDataURL('image/jpeg');
+  const pdf = new jsPDF();
+  
+  pdf.addImage(imgData, 'JPEG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+  pdf.save('example.pdf');
+};
+
+  const sendmailpdf = async()=>{
+    try {
+      const config = {
+        url:"/",
+        method:"post",
+        baseURL:"http://localhost:8000/api",
+        headers:{"content-type":"application/json"},
+        data:{
+          teacherid:user?._id,
+          teacherEmail:user?.Email
+        }
+      }
+      let res = await axios (config);
+      if(res.state===200){
+        alert(res.data.success)
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  }
+
   return (
-    <div>
+ 
       <div>
+        <button onClick={generatePDF}>download</button>
         <div className="page-starts">
-          <div className="question-paper-display">
+          <div  id="pdf-content" className="question-paper-display">
             <div className="englishqp-page-body">
               <div>
                 <h2>{state?.Subject}</h2>
@@ -527,7 +565,7 @@ const Social_QP = () => {
           </div>
         </div>       
       </div>
-    </div>
+ 
   );
 };
 
