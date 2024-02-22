@@ -21,10 +21,10 @@ import moment from "moment";
 import swal from "sweetalert";
 
 const Profile = () => {
-  const user=JSON.parse(sessionStorage.getItem("user"));
-  const token=sessionStorage.getItem("token")
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const [profile, setprofile] = useState(true);
   const [QuestionPaper, setQuestionPaper] = useState(false);
   const [Reject, setReject] = useState(false);
@@ -35,29 +35,30 @@ const Profile = () => {
   const [show, setShow] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  
+
   const [AllQuestionGen, setAllQuestionGen] = useState([]);
 
   const getAllQuestion = async () => {
     const res = await axios.get(
-      `http://localhost:8000/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,{ headers: {
-        Authorization: `Bearer ${token}`,
-      }}
+      `http://localhost:8000/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     if (res.status === 200) {
       setAllQuestionGen(res.data.success);
     }
   };
 
-  useEffect(()=>{
-    if(token){
-          getAllQuestion();
+  useEffect(() => {
+    if (token) {
+      getAllQuestion();
     }
+  }, [token]);
 
-  },[token])
-  
-  console.log("AllQuestionGen",AllQuestionGen);
+  console.log("AllQuestionGen", AllQuestionGen);
   return (
     <div>
       <div className="container pt-4">
@@ -65,7 +66,11 @@ const Profile = () => {
           <div className="col-md-12">
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff" , padding:"3px 4px"}}
+              style={{
+                backgroundColor: "rgb(8, 52, 148)",
+                color: "#fff",
+                padding: "3px 4px",
+              }}
               onClick={() => {
                 setprofile(true);
                 setQuestionPaper(false);
@@ -77,7 +82,11 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff"  , padding:"3px 6px"}}
+              style={{
+                backgroundColor: "rgb(8, 52, 148)",
+                color: "#fff",
+                padding: "3px 6px",
+              }}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(true);
@@ -89,7 +98,11 @@ const Profile = () => {
             &nbsp;
             <button
               className=" btn"
-              style={{ backgroundColor: "rgb(8, 52, 148)", color: "#fff"  , padding:"3px 4px"}}
+              style={{
+                backgroundColor: "rgb(8, 52, 148)",
+                color: "#fff",
+                padding: "3px 4px",
+              }}
               onClick={() => {
                 setprofile(false);
                 setQuestionPaper(false);
@@ -100,12 +113,18 @@ const Profile = () => {
             </button>
             <button
               className=" btn"
-              style={{ backgroundColor:"green", color: "#fff"  , padding:"3px 4px",float:"right",borderRadius:"10px"}}
+              style={{
+                backgroundColor: "green",
+                color: "#fff",
+                padding: "3px 4px",
+                float: "right",
+                borderRadius: "10px",
+              }}
               onClick={() => {
-              navigate("/examboard")
+                navigate("/examboard");
               }}
             >
-              Quick   Generate Question Paper
+              Quick Generate Question Paper
             </button>
             &nbsp;
           </div>
@@ -127,7 +146,9 @@ const Profile = () => {
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <IoPersonSharp /> &nbsp; Name
                       </label>
-                      <p>{user?.FirstName} {user?.LastName}</p>
+                      <p>
+                        {user?.FirstName} {user?.LastName}
+                      </p>
                       <hr />
                     </div>
                     <div className="col-md-6 ps-5">
@@ -148,7 +169,7 @@ const Profile = () => {
                     </div>
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
-                        <FaWhatsappSquare  /> &nbsp; Whats App Number
+                        <FaWhatsappSquare /> &nbsp; Whats App Number
                       </label>
                       <p>{user?.whatsAppNumber}</p>
                       <hr />
@@ -176,10 +197,8 @@ const Profile = () => {
                     </div> */}
                   </div>
                   <div className="row"></div>
-                 
-                  <div className="row">
-                   
-                  </div>
+
+                  <div className="row"></div>
                 </div>
               </>
             ) : (
@@ -228,23 +247,48 @@ const Profile = () => {
                         </thead>
 
                         <tbody>
-                          {AllQuestionGen?.map((item,i)=>{
-                            return ( <tr>
-                            <td>{i+1}</td>
-                            <td>{moment(item?.Test_Date).format("DD/MM/YYYY")}</td>
-                            <td>{item?.Institute_Name}</td>
-                            <td>{item?.Class}/{item?.Sub_Class}</td>
-                            <td>{item?.Board}</td>
-                            <td>{item?.Subject}</td>
-                            <td>{item?.Medium}</td>
-                            <td>{item?.Exam_Name}</td>
-                            <td>{moment(item?.createdAt).format("DD/MM/YYYY")}</td>
-                            <tb>Completed</tb>
-                            <td>
-                              {" "}
-                              <div>
-                                <div>
-                                  <AiFillDelete
+                          {AllQuestionGen?.map((item, i) => {
+                            return (
+                              <tr>
+                                <td>{i + 1}</td>
+                                <td>
+                                  {moment(item?.Test_Date).format("DD/MM/YYYY")}
+                                </td>
+                                <td>{item?.Institute_Name}</td>
+                                <td>
+                                  {item?.Class}/{item?.Sub_Class}
+                                </td>
+                                <td>{item?.Board}</td>
+                                <td>{item?.Subject}</td>
+                                <td>{item?.Medium}</td>
+                                <td>{item?.Exam_Name}</td>
+                                <td>
+                                  {moment(item?.createdAt).format("DD/MM/YYYY")}
+                                </td>
+                                <tb>
+                                  {item?.status == "Not Complete Staps" ? (
+                                    <span style={{ color: "red" }}>
+                                      {item?.status}
+                                    </span>
+                                  ) : (
+                                    <span>
+                                      {item?.status == "Completed" ? (
+                                        <span style={{ color: "green" }}>
+                                          {item?.status}
+                                        </span>
+                                      ) : (
+                                        <span style={{ color: "blue" }}>
+                                          {item?.status}
+                                        </span>
+                                      )}
+                                    </span>
+                                  )}
+                                </tb>
+                                <td>
+                                  {" "}
+                                  <div>
+                                    <div>
+                                      {/* <AiFillDelete
                                     className="text-danger"
                                     style={{
                                       cursor: "pointer",
@@ -253,26 +297,57 @@ const Profile = () => {
                                     onClick={() => {
                                       handleShow2();
                                     }}
-                                  />{" "}
-                                  <FaRegEye
-                                    className="text-primary"
-                                    style={{
-                                      cursor: "pointer",
-                                      fontSize: "20px",
-                                    }}
-                                    onClick={()=>swal({
-                                      title: "Oops!",
-                                      text: "Comming Soon",
-                                      icon: "warning",
-                                      dangerMode: true,
-                                    })}
-                                  />
-                                </div>
-                              </div>
-                            </td>
-                          </tr>)
+                                  />{" "} */}
+                                      {item?.status == "Completed" ? (
+                                        <FaRegEye
+                                          className="text-primary"
+                                          style={{
+                                            cursor: "pointer",
+                                            fontSize: "20px",
+                                          }}
+                                          onClick={() =>
+                                            swal({
+                                              title: "Oops!",
+                                              text: "Comming Soon",
+                                              icon: "warning",
+                                              dangerMode: true,
+                                            })
+                                          }
+                                        />
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          class="btn btn-success"
+                                          onClick={() => {
+                                            if (item?.status == "Up_Comming") {
+                                              return navigate("/loginpage5", {
+                                                state: item,
+                                              });
+                                            } else if (
+                                              item?.status == "Saved Draft"
+                                            ) {
+                                              return navigate("/blueprint", {
+                                                state: item,
+                                              });
+                                            } else if (
+                                              item?.status ==
+                                              "Not Complete Staps"
+                                            ) {
+                                              return navigate("/loginpage3", {
+                                                state: item,
+                                              });
+                                            }
+                                          }}
+                                        >
+                                          Continue
+                                        </button>
+                                      )}
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
                           })}
-                         
                         </tbody>
                       </Table>
                     </div>
