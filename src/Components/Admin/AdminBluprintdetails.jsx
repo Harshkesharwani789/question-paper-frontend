@@ -75,7 +75,7 @@ const AdminBlueprintdetails = () => {
     }
   };
   // get method   for blue print
-  console.log(admin);
+
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
@@ -105,7 +105,7 @@ const AdminBlueprintdetails = () => {
   useEffect(() => {
     getallblueprint();
   }, []);
-  console.log("blueprint", blueprint);
+  console.log("blueprint check now", blueprint);
 
   const [deleteId, setdeleteId] = useState("");
 
@@ -193,6 +193,32 @@ const AdminBlueprintdetails = () => {
   }, []);
   const [Classname, setClassname] = useState("");
 
+  const makeApprovedAndHold=async(id, isBlock)=>{
+    try {
+      const config={
+        url: "/admin/makeBlockAndUnblockBLUEPRINTs",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: { "content-type": "application/json", Authorization: `Bearer ${token}` },
+        data:{
+          id, isBlock,
+          authId:admin?._id
+        }
+      }
+      let res=await axios(config);
+      if(res.status==200){
+        swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          dangerMode: true,
+        });
+        getallblueprint();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -339,7 +365,14 @@ const AdminBlueprintdetails = () => {
                   <div>Subject</div>
                 </th>
                 <th>
+                  {" "}
+                  <div>Price</div>
+                </th>
+                <th>
                   <div>View</div>
+                </th>
+                <th>
+                  <div>Status</div>
                 </th>
                 <th>
                   {" "}
@@ -358,6 +391,7 @@ const AdminBlueprintdetails = () => {
                     <td>{val?.className}</td>
                     <td>{val?.SubClassName}</td>
                     <td>{val?.subjects}</td>
+                    <td>{val?.price?.toFixed(2)}</td>
                     <td>
                       <Link
                         to={`/adminblueprintdetailsview/${val?._id}`}
@@ -366,6 +400,7 @@ const AdminBlueprintdetails = () => {
                         <FaEye color="blue" />
                       </Link>
                     </td>
+                    <td>{val.isBlock==true ? <span style={{color:"green"}}>Approved</span>:<span style={{color:"red"}}>Holded</span>}</td>
                     <td>
                       <div style={{ display: "flex", gap: "20px" }}>
                         <div>
@@ -387,6 +422,9 @@ const AdminBlueprintdetails = () => {
                               handleShow2();
                             }}
                           />{" "}
+                        </div>
+                        <div>
+                          {val?.isBlock==false ? (<button type="button" class="btn btn-success" onClick={()=>makeApprovedAndHold(val?._id,true)}>Approved</button>):(<button type="button" class="btn btn-danger" onClick={()=>makeApprovedAndHold(val?._id,false)}>Hold</button>)}
                         </div>
                       </div>
                     </td>
