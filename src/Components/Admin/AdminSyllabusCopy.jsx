@@ -32,9 +32,11 @@ const AdminSyllabusCopy = () => {
   const handleShow2 = () => setShow2(true);
 
   const [show3, setShow3] = useState();
+  const [selectedassesment,setselectedassesment] = useState("")
   const handleClose3 = () => setShow3(false);
-  const handleShow3 = () => setShow3(true);
+  const handleShow3 = (name) =>{ setShow3(true);setselectedassesment(name)}
 
+  console.log("selectedassesment",selectedassesment);
   //Get All Subject
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
@@ -135,7 +137,7 @@ const AdminSyllabusCopy = () => {
         from:from,
         to:to
       };
-      setArr([...Arr, newObj]);
+      setArr([...Arr, [newObj]]);
       swal({
         title: "Yeah!",
         text: "Added Successfully...",
@@ -147,22 +149,28 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-
+const [Arr2, setArr2] = useState([])
   const Addchaptertype = (i) => {
     try {
-      const existingObj = Arr[i];
-   Arr.find(
-        (ele) =>
-        ele.chapterno === chapterNumber ||
-        ele.subjectpart === selectsubjectpart ||
-        ele.Months === Months
-      );
-      const newObj = {
-        chapterno: chapterNumber,
-        Months:Months,
-        subjectpart: selectsubjectpart,
-      };
-      setArr([...Arr, [newObj]]);
+    
+        // Arr2?.find(
+        //   (ele) =>
+        //   ele.chapterno === chapterNumber ||
+        //   ele.subjectpart === selectsubjectpart ||
+        //   ele.Months === Months 
+        // );
+        const newObj2 = {
+          chapterno: chapterNumber,
+          Months:Months,
+          subjectpart: selectsubjectpart,
+          selectedassesment :selectedassesment 
+        };
+        setArr2(newObj2);
+        const newArr = [...Arr];
+        setArr([...Arr2, newArr[i]]);
+        
+      
+    
       swal({
         title: "Yeah!",
         text: "Added Successfully...",
@@ -417,6 +425,7 @@ console.log("Arr",Arr);
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
 
   //  Add Chapter Name
+  console.log("Arr2",Arr2);
 
   const [AddChapter, setAddChapter] = useState([]);
   return (
@@ -863,12 +872,13 @@ console.log("Arr",Arr);
                             <td>{val?.Assessment}</td>
                             <td>{val?.from}</td>
                             <td>{val?.to}</td>
+                           
                             <td>{val?.chapterno}</td>                        
                             <td>{val?.Months}</td>                        
                             <td>{val?.subjectpart}</td>                        
                             <td>
                               <Button
-                              onClick={()=>handleShow3(i)}
+                              onClick={()=>handleShow3(val.Assessment)}
                               >Add</Button>
                               {" "}
                               <AiFillDelete
