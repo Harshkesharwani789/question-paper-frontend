@@ -384,7 +384,7 @@ const AdminSyllabusCopy = () => {
     getaddsubclasss();
     getSubject();
   }, []);
-  console.log("getaddsubclass", getaddsubclass);
+  // console.log("getaddsubclass", getaddsubclass);
 
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
