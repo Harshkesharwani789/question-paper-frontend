@@ -7,7 +7,8 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser"
-const SituationAnalysis_add = () => {
+import MathEditor from "../MyEditor";
+const SituationAnalysis_add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -31,7 +32,7 @@ const SituationAnalysis_add = () => {
   const [formFields, setFormFields] = useState([
     { SubQue: "" }, // Example initial form field
   ]);
-  
+
   const [subQuestions, setSubQuestions] = useState([]);
   const handleChange1 = (index, data) => {
     const updatedSubQuestions = [...subQuestions];
@@ -39,7 +40,7 @@ const SituationAnalysis_add = () => {
     setSubQuestions(updatedSubQuestions);
 
   };
-
+console.log("subQuestions",subQuestions);
   const addFields = () => {
     setFormFields([...formFields, { SubQue: "" }]);
   };
@@ -56,14 +57,16 @@ const SituationAnalysis_add = () => {
 
   //post
 
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
+  const [SubQuestionT, setSubQuestionT] = useState("")
 
- 
   const [Question, setQuestion] = useState("");
   const [Image1, setImage1] = useState("");
   const [Image2, setImage2] = useState("");
   const [Answer, setAnswer] = useState("");
   const [Marks, setMarks] = useState("");
- 
+
   const [Answer_Time, setAnswer_Time] = useState("");
 
   const addquestions = async () => {
@@ -93,15 +96,15 @@ const SituationAnalysis_add = () => {
 
 
           Question: Question,
-          Image_1:Image1,
-          Image_2:Image2,
-          PassiveQuesion:subQuestions,
+          Image_1: Image1,
+          Image_2: Image2,
+          PassiveQuesion: subQuestions,
           Answer: Answer,
-        
-         
+
+
           Marks: Marks,
           Answer_Time: Answer_Time,
-         
+
           authId: admin?._id,
         },
       };
@@ -129,11 +132,20 @@ const SituationAnalysis_add = () => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question </label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -143,7 +155,7 @@ const SituationAnalysis_add = () => {
                 <input
                   type="file"
                   className="vi_0"
-                 onChange={(e)=>setImage1(e.target.files[0])}
+                  onChange={(e) => setImage1(e.target.files[0])}
                 />
               </div>
             </div>
@@ -153,7 +165,7 @@ const SituationAnalysis_add = () => {
                 <input
                   type="file"
                   className="vi_0"
-                  onChange={(e)=>setImage2(e.target.files[0])}
+                  onChange={(e) => setImage2(e.target.files[0])}
                 />
               </div>
             </div>
@@ -174,12 +186,24 @@ const SituationAnalysis_add = () => {
                   {formFields?.map((form, index) => {
                     return (
                       <div className="d-flex gap-2 mb-1">
-                        <CKEditor
+                        {/* <CKEditor
                           style={{ width: "100%" }}
                           editor={ClassicEditor}
                           className="vi_0"
                           data={form.SubQue}                      
                           onChange={(e, editor) => handleChange1(index, editor.getData())}
+                        /> */}
+                        
+
+                        <MathEditor
+                          style={{ width: "100%" }}
+                          data={{
+                            A: form.SubQue,
+                            B: (data) => handleChange1(index, data),
+                            selectedLanguage: selectdetails?.selectedLanguage,
+                            trans: SubQuestionT,
+                            settran: setSubQuestionT,
+                          }}
                         />
                         <div style={{ padding: "1rem" }}>
                           <button
@@ -196,24 +220,24 @@ const SituationAnalysis_add = () => {
                   })}
                 </div>
               </div>
-
-              <div className="text-center">
-                <button
-                  className="btn btn-success"
-                
-                >
-                  Submit
-                </button>
-              </div>
             </Form>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Answer}
                   onChange={handleChange2}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -224,9 +248,9 @@ const SituationAnalysis_add = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
-                onChange={(e) => {
-                  setMarks(e.target.value);
-                }}
+                  onChange={(e) => {
+                    setMarks(e.target.value);
+                  }}
                 >
                   <option>Select the Marks</option>
                   <option value="1/2">1/2</option>
@@ -250,9 +274,9 @@ const SituationAnalysis_add = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
-                onChange={(e) => {
-                  setAnswer_Time(e.target.value);
-                }}
+                  onChange={(e) => {
+                    setAnswer_Time(e.target.value);
+                  }}
                 >
                   <option>Select the Time</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
@@ -270,7 +294,7 @@ const SituationAnalysis_add = () => {
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
               </div>
-            </div>       
+            </div>
           </div>
         </div>
 
@@ -287,7 +311,7 @@ const SituationAnalysis_add = () => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
-            
+
               handleShow();
             }}
             className="modal-add-btn"
@@ -317,54 +341,54 @@ const SituationAnalysis_add = () => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1 </label>
                 <img
-                            className="w-100 "
-                             src={Image1 && URL.createObjectURL(Image1)}                             
-                            alt="fig."
-                            />
+                  className="w-100 "
+                  src={Image1 && URL.createObjectURL(Image1)}
+                  alt="fig."
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2 </label>
                 <img
-                            className="w-100 "
-                             src={Image2 && URL.createObjectURL(Image2)}                             
-                            alt="fig."
-                            />
+                  className="w-100 "
+                  src={Image2 && URL.createObjectURL(Image2)}
+                  alt="fig."
+                />
               </div>
             </div>
 
             <div className="col-md-12">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Sub Questions</label>
-                  {subQuestions?.map((form, index) => {
-                    return (
-                      <div className="d-flex gap-2 mb-1">
-                        <p
-                          style={{ width: "100%" }}
-                        
-                          className="vi_0"
-                          
-                        >{parse(`<div>${form?.question}</div>`)} </p>
-                        
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <div className="do-sear mt-2">
+                <label htmlFor="">Sub Questions</label>
+                {subQuestions?.map((form, index) => {
+                  return (
+                    <div className="d-flex gap-2 mb-1">
+                      <p
+                        style={{ width: "100%" }}
 
-           
+                        className="vi_0"
+
+                      >{parse(`<div>${form?.question}</div>`)} </p>
+
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+
           </div>
           <div className="col-md-12">
             <div className="do-sear mt-2">
               <label htmlFor="">Answer</label>
               <p className="vi_0">
-              <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
+                <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
               </p>
             </div>
           </div>
-          
-        
+
+
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
@@ -372,7 +396,7 @@ const SituationAnalysis_add = () => {
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-              
+
                 handleClose();
               }}
             >
@@ -383,7 +407,7 @@ const SituationAnalysis_add = () => {
               variant=""
               onClick={() => {
                 addquestions()
-              
+
               }}
             >
               Submit

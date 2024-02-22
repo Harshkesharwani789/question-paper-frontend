@@ -31,6 +31,10 @@ const AdminSyllabusCopy = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [show3, setShow3] = useState();
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
+
   //Get All Subject
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
@@ -108,36 +112,28 @@ const AdminSyllabusCopy = () => {
   const [medium, setmedium] = useState("");
   const [subjectt, setsubjectt] = useState("");
   const [SelectChapter, setSelectChapter] = useState("");
+  const [Months, setMonths] = useState("");
+  const [Assessment, setAssessment] = useState("");
+  const [from, setfrom] = useState("")
+  const [to, setto] = useState("")
   const [selectsubjectpart, setSelectsubjectpart] = useState("");
   const [Examinationname, setExaminationname] = useState("");
   // Array of object 1
   const [Arr, setArr] = useState([]);
-  const AddTypesofquestion = () => {
+  const AddTypesofassessment = () => {
     try {
-      if (!chapterNumber) {
-        return alert("write chapter name");
-      }
-
-      const existingElement = Arr.find(
+      Arr.find(
         (ele) =>
-          ele.chapterno === chapterNumber ||
-          ele.chapter === SelectChapter ||
-          ele.subjectpart === selectsubjectpart ||
-          ele.description === description ||
-          ele.mask === marks ||
-          ele.chepterName === Examinationname
+       
+          ele.Assessment === Assessment ||
+          ele.from === from ||
+          ele.to === to
       );
-
-      // if (existingElement) {
-      //     return alert("already exist")
-      //   }
       const newObj = {
-        chapterno: chapterNumber,
-        chapter: SelectChapter,
-        subjectpart: selectsubjectpart,
-        description: description,
-        mask: marks,
-        examname: Examinationname,
+  
+        Assessment:Assessment,
+        from:from,
+        to:to
       };
       setArr([...Arr, newObj]);
       swal({
@@ -150,6 +146,35 @@ const AdminSyllabusCopy = () => {
       console.error(error);
     }
   };
+
+
+  const Addchaptertype = (i) => {
+    try {
+      const existingObj = Arr[i];
+   Arr.find(
+        (ele) =>
+        ele.chapterno === chapterNumber ||
+        ele.subjectpart === selectsubjectpart ||
+        ele.Months === Months
+      );
+      const newObj = {
+        chapterno: chapterNumber,
+        Months:Months,
+        subjectpart: selectsubjectpart,
+      };
+      setArr([...Arr, [newObj]]);
+      swal({
+        title: "Yeah!",
+        text: "Added Successfully...",
+        icon: "success",
+        button: "OK!",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+console.log("Arr",Arr);
 
   const deleteQuestionType = (index) => {
     try {
@@ -312,8 +337,8 @@ const AdminSyllabusCopy = () => {
           },
         }
       );
-      if(res.status==200)
-      handleClose2()
+      if (res.status == 200)
+        handleClose2()
       getSyllabus();
       return swal({
         title: "Yeah!",
@@ -322,13 +347,13 @@ const AdminSyllabusCopy = () => {
         button: "Ok!",
       });
     } catch (error) {
-    console.log(error);
-    return swal({
-      title: "Yeah!",
-      text: error.response.data.error,
-      icon: "success",
-      button: "Ok!",
-    });
+      console.log(error);
+      return swal({
+        title: "Yeah!",
+        text: error.response.data.error,
+        icon: "success",
+        button: "Ok!",
+      });
     }
   };
   //Get All Syllabus
@@ -577,6 +602,7 @@ const AdminSyllabusCopy = () => {
                   />
                 </div>
               </div>
+            
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>
@@ -667,6 +693,7 @@ const AdminSyllabusCopy = () => {
                   </Form.Select>
                 </div>
               </div>
+
             </div>
 
             <div
@@ -674,22 +701,63 @@ const AdminSyllabusCopy = () => {
                 border: "2px solid #dee2e6",
                 padding: "10px",
                 marginTop: "10px",
+                // backgroundColor: "#e9caa0"
               }}
             >
-              <div className="row">
-                <div className="col-sm-4">
-                  <div className="do-sear mt-2">
-                    <label>Chapter Number</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Chapter Number"
-                      onChange={(e) => setChapterNumber(e.target.value)}
-                    />
-                  </div>
+              <div className="row p-3" style={{backgroundColor: "#e9caa0"}}>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Assessment:</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Assessment"
+                  onChange={(e) => setAssessment(e.target.value)}
+                  />
                 </div>
-
-                <div className="col-sm-4">
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>From:</label>
+                  <input
+                    type="date"
+                    className="vi_0"                   
+                  onChange={(e) => setfrom(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>To:</label>
+                  <input
+                    type="date"
+                    className="vi_0"
+                    placeholder="Enter Assessment"
+                   onChange={(e) => setto(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <Button
+                  variant=""
+                  style={{
+                    marginTop: "15px",
+                    backgroundColor: "green",
+                    color: "white",
+                    borderRadius: "5px",
+                  }}
+                  onClick={() => {
+                    // setslybus(true);
+                    AddTypesofassessment();
+                  }}
+                >
+                  Add
+                </Button>
+              </div>
+              </div>
+             
+              
+                {/* <div className="col-sm-4">
                   <div className="do-sear mt-2">
                     <label>Chapter Name</label>
                     <Form.Select
@@ -710,33 +778,12 @@ const AdminSyllabusCopy = () => {
                         })}
                     </Form.Select>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="col-sm-4">
-                  <div className="do-sear mt-2">
-                    <label>Subject Part</label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setSelectsubjectpart(e.target.value);
-                      }}
-                    >
-                      <option>Select the Subject Part</option>
-                      {weightage
-                        ?.filter((ele) => ele.Subject === subjectt)
-                        ?.map((val, i) => {
-                          return (
-                            <option value={val?.Content} key={i}>
-                              {val?.Content}
-                            </option>
-                          );
-                        })}
-                    </Form.Select>
-                  </div>
-                </div>
-              </div>
 
-              <div className="row">
+              
+
+              {/* <div className="row">
                 <div className="do-sear mt-2">
                   <label>Description</label>
                   <CKEditor
@@ -749,9 +796,9 @@ const AdminSyllabusCopy = () => {
                     }}
                   />
                 </div>
-              </div>
+              </div> */}
 
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-sm-6">
                   <div className="do-sear mt-2">
                     <label>Marks</label>
@@ -783,25 +830,10 @@ const AdminSyllabusCopy = () => {
                     </Form.Select>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <Button
-                variant=""
-                style={{
-                  float: "right",
-                  marginTop: "15px",
-                  backgroundColor: "green",
-                  color: "white",
-                  borderRadius: "5px",
-                }}
-                onClick={() => {
-                  // setslybus(true);
-                  AddTypesofquestion();
-                }}
-              >
-                Add
-              </Button>
-              <div className="row">
+             
+              <div className="row mt-2">
                 <div className="col-md-12">
                   <Table
                     responsive
@@ -814,12 +846,12 @@ const AdminSyllabusCopy = () => {
                     <thead>
                       <tr>
                         <th>S No.</th>
-                        <th>Chapter No.</th>
-                        <th>Chapter Name</th>
-                        <th>Subject Part</th>
-                        <th>Description</th>
-                        <th>Exam-Name</th>
-                        <th>Marks</th>
+                        <th>Assessment</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Unit No.</th>
+                        <th>Month</th>
+                        <th>Unit Name</th>                       
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -828,19 +860,16 @@ const AdminSyllabusCopy = () => {
                         return (
                           <tr>
                             <td>{i + 1}</td>
-                            <td>{val?.chapterno}</td>
-                            <td>{val?.chapter}</td>
-                            <td>{val?.subjectpart}</td>
+                            <td>{val?.Assessment}</td>
+                            <td>{val?.from}</td>
+                            <td>{val?.to}</td>
+                            <td>{val?.chapterno}</td>                        
+                            <td>{val?.Months}</td>                        
+                            <td>{val?.subjectpart}</td>                        
                             <td>
-                              {val?.description ? (
-                                parse(val?.description)
-                              ) : (
-                                <></>
-                              )}
-                            </td>
-                            <td>{val?.chepterName}</td>
-                            <td>{val?.mask}</td>
-                            <td>
+                              <Button
+                              onClick={()=>handleShow3(i)}
+                              >Add</Button>
                               {" "}
                               <AiFillDelete
                                 color="red"
@@ -878,6 +907,101 @@ const AdminSyllabusCopy = () => {
             </div>
           </Modal.Footer>
         </Modal>
+
+        <Modal
+          show={show3}
+          onHide={handleClose3}
+          backdrop="static"
+          keyboard={false}
+          style={{ zIndex: "99999" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title > Add Units Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{backgroundColor:"#dda559"}}>
+        <div >
+        <div className="">
+                  <div className="do-sear mt-2">
+                    <label>Unit Number</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Unit Number"
+                      onChange={(e) => setChapterNumber(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="">
+                  <div className="do-sear mt-2">
+                    <label>Month</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setMonths(e.target.value);
+                      }}
+                    >
+                      <option>Select the months</option>
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+
+
+                    </Form.Select>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="do-sear mt-2">
+                    <label>Subject Part</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => {
+                        setSelectsubjectpart(e.target.value);
+                      }}
+                    >
+                      <option>Select the Subject Part</option>
+                      {weightage
+                        ?.filter((ele) => ele.Subject === subjectt)
+                        ?.map((val, i) => {
+                          return (
+                            <option value={val?.Content} key={i}>
+                              {val?.Content}
+                            </option>
+                          );
+                        })}
+                    </Form.Select>
+                  </div>
+                </div>
+        </div>
+              
+           
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose3}
+            >
+              Close
+            </Button>
+            <Button
+              variant=""
+              className="modal-add-btn"
+             onClick={Addchaptertype}
+            >
+              Add
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
 
         {/* Edit Package modal */}
         <Modal
