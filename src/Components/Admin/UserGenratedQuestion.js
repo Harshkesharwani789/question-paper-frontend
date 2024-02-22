@@ -189,6 +189,9 @@ const UserGenratedQuestion = () => {
                 <th>
                   <div>Medium</div>
                 </th>
+                <th>
+                  <div>Status</div>
+                </th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -208,7 +211,25 @@ const UserGenratedQuestion = () => {
                       <td>{item?.Board}</td>
                       <td>{item?.Class}</td>
                       <td>{item?.Medium}</td>
-
+                      <tb>
+                                  {item?.status == "Not Complete Staps" ? (
+                                    <span style={{ color: "red" }}>
+                                      {item?.status}
+                                    </span>
+                                  ) : (
+                                    <span>
+                                      {item?.status == "Completed" ? (
+                                        <span style={{ color: "green" }}>
+                                          {item?.status}
+                                        </span>
+                                      ) : (
+                                        <span style={{ color: "blue" }}>
+                                          {item?.status}
+                                        </span>
+                                      )}
+                                    </span>
+                                  )}
+                                </tb>
                       <td>
                         {" "}
                         <div style={{ display: "flex", gap: "5px" }}>
