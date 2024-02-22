@@ -80,12 +80,11 @@ const Adminslybuscopyview = () => {
               <thead>
                 <tr>
                   <th>SL. No.</th>
-                  <th>Chapter Number</th>
-                  <th>Subject Part</th>
-                  <th>Chapter Name</th>
-                  <th>Description</th>
-                  <th>Marks</th>
-                  <th>Slybus For</th>
+                  <th>Month</th>
+                  <th>Period</th>
+                  <th>No.of Unit</th>
+                  <th>Unit Name</th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -98,8 +97,8 @@ const Adminslybuscopyview = () => {
                       <td>{val?.chapter}</td>
                       <td>{parse(`<div>${val?.description}</div>`)}</td>
 
-                      <td>{val?.mask}</td>
-                      <td>{val?.examname}</td>
+                      {/* <td>{val?.mask}</td>
+                      <td>{val?.examname}</td> */}
                     </tr>
                   );
                 })}

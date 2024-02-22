@@ -352,7 +352,7 @@ const ExamBoard = () => {
                             variant=""
                             style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
-                              setBefore(true);
+                             tellus()
                             }}
                           >
                             Submit

@@ -25,6 +25,7 @@ const SignUp = () => {
   const [Mobile, setMobile] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+const [whatsAppNumber,setWhatsAppNumber]=useState("");
 
   const TeacherRegister = async () => {
     try {
@@ -43,6 +44,7 @@ const SignUp = () => {
           Email: Email,
           Password: Password,
           authId: user?.id,
+          whatsAppNumber:whatsAppNumber
         },
       };
       let res = await axios(config);
@@ -128,6 +130,18 @@ const SignUp = () => {
                         type="number"
                         placeholder="Enter Your Number"
                         onChange={(e) => setMobile(e.target.value)}
+                      />
+                    </Form.Group>
+                  </div>
+                </Row>
+                <Row>
+                  <div className="col-12">
+                    <Form.Group className="mb-2" controlId="formGroupEmail">
+                      <Form.Label>Whats App Number</Form.Label>
+                      <Form.Control
+                        type="number"
+                        placeholder="Enter Your Whats App Number"
+                        onChange={(e) => setWhatsAppNumber(e.target.value)}
                       />
                     </Form.Group>
                   </div>

@@ -5,6 +5,7 @@ import {
   FaHome,
   FaPhoneAlt,
   FaRegEye,
+  FaWhatsappSquare,
 } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { LuLanguages } from "react-icons/lu";
@@ -17,9 +18,11 @@ import { AiFillDelete } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import swal from "sweetalert";
 
 const Profile = () => {
   const user=JSON.parse(sessionStorage.getItem("user"));
+  const token=sessionStorage.getItem("token")
 
   const navigate= useNavigate();
   const [profile, setprofile] = useState(true);
@@ -34,21 +37,27 @@ const Profile = () => {
   const handleShow = () => setShow(true);
   
   
-  // const [item, setItem] = useState({});
+  const [AllQuestionGen, setAllQuestionGen] = useState([]);
 
-  // const getSpecificUser = async () => {
-  //   const res = await axios.get(
-  //     `http://localhost:8000/api/user/getUserById/${id}`
-  //   );
-  //   if (res.status === 200) {
-  //     setItem(res.data.success);
-  //   }
-  // };
+  const getAllQuestion = async () => {
+    const res = await axios.get(
+      `http://localhost:8000/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,{ headers: {
+        Authorization: `Bearer ${token}`,
+      }}
+    );
+    if (res.status === 200) {
+      setAllQuestionGen(res.data.success);
+    }
+  };
 
-  // useEffect(()=>{
-  //   getSpecificUser();
-  // },[])
+  useEffect(()=>{
+    if(token){
+          getAllQuestion();
+    }
+
+  },[token])
   
+  console.log("AllQuestionGen",AllQuestionGen);
   return (
     <div>
       <div className="container pt-4">
@@ -88,6 +97,15 @@ const Profile = () => {
               }}
             >
               Payment History
+            </button>
+            <button
+              className=" btn"
+              style={{ backgroundColor:"green", color: "#fff"  , padding:"3px 4px",float:"right",borderRadius:"10px"}}
+              onClick={() => {
+              navigate("/examboard")
+              }}
+            >
+              Quick   Generate Question Paper
             </button>
             &nbsp;
           </div>
@@ -130,6 +148,13 @@ const Profile = () => {
                     </div>
                     <div className="col-md-6 ps-5">
                       <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
+                        <FaWhatsappSquare  /> &nbsp; Whats App Number
+                      </label>
+                      <p>{user?.whatsAppNumber}</p>
+                      <hr />
+                    </div>
+                    <div className="col-md-6 ps-5">
+                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
                         <CiCalendarDate /> &nbsp; Registration Date
                       </label>
                       <p>{moment(user?.createdAt)?.format("DD/MM/YYYY")}</p>
@@ -151,22 +176,7 @@ const Profile = () => {
                     </div> */}
                   </div>
                   <div className="row"></div>
-                  {/* <div className="row">
-                    <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
-                        <FaHome /> &nbsp; State
-                      </label>
-                      <p>Karnataka</p>
-                      <hr />
-                    </div>
-                    <div className="col-md-6 ps-5">
-                      <label htmlFor="" style={{ color: "rgb(8, 52, 148)" }}>
-                        <FaHome /> &nbsp; City
-                      </label>
-                      <p>Bengalore</p>
-                      <hr />
-                    </div>
-                  </div> */}
+                 
                   <div className="row">
                    
                   </div>
@@ -186,13 +196,28 @@ const Profile = () => {
                           <tr>
                             <th>S.No</th>
                             <th>
-                              <div>Genaration Date </div>
+                              <div>Exam Date </div>
                             </th>
                             <th>
                               <div>Name</div>
                             </th>
                             <th>
+                              <div>Class/Sub_Class</div>
+                            </th>
+                            <th>
+                              <div>Board</div>
+                            </th>
+                            <th>
                               <div>Subject</div>
+                            </th>
+                            <th>
+                              <div>Medium</div>
+                            </th>
+                            <th>
+                              <div>Exam Name</div>
+                            </th>
+                            <th>
+                              <div>Genaration Date </div>
                             </th>
                             <th>
                               <div>Status</div>
@@ -203,13 +228,18 @@ const Profile = () => {
                         </thead>
 
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>30/02/2023</td>
-                            <td>Amandeep Singh</td>
-                            <td>Maths</td>
-                            <td>Save as a draft / Generated</td>
-
+                          {AllQuestionGen?.map((item,i)=>{
+                            return ( <tr>
+                            <td>{i+1}</td>
+                            <td>{moment(item?.Test_Date).format("DD/MM/YYYY")}</td>
+                            <td>{item?.Institute_Name}</td>
+                            <td>{item?.Class}/{item?.Sub_Class}</td>
+                            <td>{item?.Board}</td>
+                            <td>{item?.Subject}</td>
+                            <td>{item?.Medium}</td>
+                            <td>{item?.Exam_Name}</td>
+                            <td>{moment(item?.createdAt).format("DD/MM/YYYY")}</td>
+                            <tb>Completed</tb>
                             <td>
                               {" "}
                               <div>
@@ -230,12 +260,19 @@ const Profile = () => {
                                       cursor: "pointer",
                                       fontSize: "20px",
                                     }}
-                                    onClick={()=>{navigate('/questionpaper')}}
+                                    onClick={()=>swal({
+                                      title: "Oops!",
+                                      text: "Comming Soon",
+                                      icon: "warning",
+                                      dangerMode: true,
+                                    })}
                                   />
                                 </div>
                               </div>
                             </td>
-                          </tr>
+                          </tr>)
+                          })}
+                         
                         </tbody>
                       </Table>
                     </div>
