@@ -8,12 +8,13 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser"
+import MathEditor from "../MyEditor";
 
-function AddDrawFigure() {
+function AddDrawFigure({ selectdetails }) {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
     const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-   
+
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -30,6 +31,10 @@ function AddDrawFigure() {
         setAnswer(data);
     };
     //post
+
+    const [QuestionT, setQuestionT] = useState("");
+    const [AnswerT, setAnswerT] = useState("");
+
     const [Question, setQuestion] = useState("");
     const [Image, setImage] = useState("");
     const [Marks, setMarks] = useState("");
@@ -60,7 +65,7 @@ function AddDrawFigure() {
                     Types_Question: questiondata?.Types_Question,
                     Class: questiondata?.Class,
                     Instruction: questiondata?.Instruction,
-                    
+
                     Question: Question,
                     Marks: Marks,
                     Answer_Time: Answer_Time,
@@ -101,11 +106,20 @@ function AddDrawFigure() {
                         <div className="col-md-12">
                             <div className="do-sear mt-2">
                                 <label htmlFor="">Question</label>
-                                <CKEditor
+                                {/* <CKEditor
                                     editor={ClassicEditor}
                                     className="vi_0"
                                     data={Question}
                                     onChange={handleChange}
+                                /> */}
+                                <MathEditor
+                                    data={{
+                                        A: Question,
+                                        B: setQuestion,
+                                        selectedLanguage: selectdetails?.selectedLanguage,
+                                        trans: QuestionT,
+                                        settran: setQuestionT,
+                                    }}
                                 />
                             </div>
                         </div>
@@ -135,8 +149,8 @@ function AddDrawFigure() {
                         <div className="col-md-6">
                             <div className="do-sear">
                                 <label htmlFor="">Answer Time</label>
-                                <Form.Select className="vi_0" 
-                                onChange={(e)=>setAnswer_Time(e.target.value)}>
+                                <Form.Select className="vi_0"
+                                    onChange={(e) => setAnswer_Time(e.target.value)}>
                                     <option value="1/2 Mnt">1/2 Mnt</option>
                                     <option value="1/4 Mnt">1/4 Mnt</option>
                                     <option value="1 Mnt">1 Mnt</option>
@@ -168,15 +182,24 @@ function AddDrawFigure() {
                             <div className="do-sear mt-2">
                                 <div className="do-sear mt-2">
                                     <label htmlFor="">Answer</label>
-                                    <CKEditor
+                                    {/* <CKEditor
                                         editor={ClassicEditor}
                                         className="vi_0"
                                         data={Answer}
                                         onChange={handleChange7}
+                                    /> */}
+                                    <MathEditor
+                                        data={{
+                                            A: Answer,
+                                            B: setAnswer,
+                                            selectedLanguage: selectdetails?.selectedLanguage,
+                                            trans: AnswerT,
+                                            settran: setAnswerT,
+                                        }}
                                     />
                                 </div>
                             </div>
-                        </div>                     
+                        </div>
                     </div>
                 </div>
 
@@ -213,9 +236,9 @@ function AddDrawFigure() {
                         <p className="vi_0">{parse(`<div>${Question}</div>`)}</p>
                         <div>
                             <img
-                            className="w-100 "
-                             src={Image && URL.createObjectURL(Image)}                             
-                            alt="fig."
+                                className="w-100 "
+                                src={Image && URL.createObjectURL(Image)}
+                                alt="fig."
                             />
                         </div>
                         <label htmlFor="">Answer</label>

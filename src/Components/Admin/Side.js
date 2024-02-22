@@ -165,7 +165,7 @@ const Side = () => {
                   <span>
                     <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Board </span>
+                  <span className="ms-2">Board Add </span>
                 </li>
               </Link>
               <Link to="/adminclass" onClick={handleNavCollapse}>
@@ -205,7 +205,7 @@ const Side = () => {
                   <span>
                     <LuBookMarked style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Class</span>
+                  <span className="ms-2">Class Add</span>
                 </li>
               </Link>
 
@@ -246,7 +246,7 @@ const Side = () => {
                   <span>
                     <LuFileQuestion style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Medium</span>
+                  <span className="ms-2">Medium Add</span>
                 </li>
               </Link>
               <Link to="/adminexam" onClick={handleNavCollapse}>
@@ -277,7 +277,7 @@ const Side = () => {
                   <span>
                     <IoPeopleOutline style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Name Of Examination</span>
+                  <span className="ms-2">Name Of Examination Add</span>
                 </li>
               </Link>
               <Link to="/adminsubject" onClick={handleNavCollapse}>
@@ -308,7 +308,7 @@ const Side = () => {
                   <span>
                     <MdSubject style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Subject</span>
+                  <span className="ms-2">Subject Add</span>
                 </li>
               </Link>
               <Link to="/weightageofthecontent" onClick={handleNavCollapse}>
@@ -339,7 +339,7 @@ const Side = () => {
                   <span>
                     <PiExamFill style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Subject Part</span>
+                  <span className="ms-2">Subject Part Add</span>
                 </li>
               </Link>
               <Link to="/adminchapter" onClick={handleNavCollapse}>
@@ -370,7 +370,7 @@ const Side = () => {
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Chapters</span>
+                  <span className="ms-2">Chapters Add</span>
                 </li>
               </Link>
               <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
@@ -401,7 +401,7 @@ const Side = () => {
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Syllabus</span>
+                  <span className="ms-2">Syllabus Add</span>
                 </li>
               </Link>
               <Link to="/adminobjectives" onClick={handleNavCollapse}>
@@ -432,7 +432,7 @@ const Side = () => {
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Objectives</span>
+                  <span className="ms-2">Objectives Add</span>
                 </li>
               </Link>
               <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
@@ -463,7 +463,7 @@ const Side = () => {
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Blue Print</span>
+                  <span className="ms-2">Blue Print Add</span>
                 </li>
               </Link>
               {/* <Link to="#">
@@ -686,7 +686,7 @@ const Side = () => {
                   <span>
                     <FaShop style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Questions</span>
+                  <span className="ms-2">Questions Add</span>
                 </li>
               </Link>
               <Link to="/adminuserlist" onClick={handleNavCollapse}>
