@@ -173,6 +173,7 @@ import Science10th from "./Components/10th_QP_Pattern/Science10th";
 import AdminObjectives from "./Components/Admin/AdminObjectives";
 import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
 import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
+import ContactUs from "./Components/Admin/ContactUs";
 
 
 function App() {
@@ -198,6 +199,11 @@ function App() {
                 <LoginPage3 />
               </>
             }
+          />
+          <Route
+          path="/contactus"
+          element={<ContactUs/>}
+          
           />
           
           <Route

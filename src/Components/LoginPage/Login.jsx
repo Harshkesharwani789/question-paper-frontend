@@ -8,7 +8,7 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import axios from "axios";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate("");
@@ -225,8 +225,15 @@ const Login = () => {
                   </Row>
                 </div>
                 <br />
+                <div className="d-flex">
+                <p>Any Query.. </p> &nbsp;&nbsp;
+                
+                <Link to="/contactus">click here</Link>
+                </div>
+                
               </div>
             </div>
+         
           </div>
         </div>
 

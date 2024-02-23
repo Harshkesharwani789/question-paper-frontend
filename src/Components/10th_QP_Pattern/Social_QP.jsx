@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import "../10th_QP_Pattern/English_QP.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -67,37 +67,54 @@ const generatePDF = async () => {
   
   const canvas = await html2canvas(input, { scale: scale });
   const imgData = canvas.toDataURL('image/jpeg');
+
   const pdf = new jsPDF();
-  
   pdf.addImage(imgData, 'JPEG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-  pdf.save('example.pdf');
+  
+  return pdf.output('blob'); // Return the PDF data as a Blob
 };
 
-  const sendmailpdf = async()=>{
-    try {
-      const config = {
-        url:"/",
-        method:"post",
-        baseURL:"http://localhost:8000/api",
-        headers:{"content-type":"application/json"},
-        data:{
-          teacherid:user?._id,
-          teacherEmail:user?.Email
-        }
-      }
-      let res = await axios (config);
-      if(res.state===200){
-        alert(res.data.success)
-      }
-    } catch (error) {
-      console.error("Error occurred:", error);
+const sendmailpdf = async () => {
+  try {
+    const pdfBlob = await generatePDF(); // Generate PDF
+    console.log("PDF Blob:", pdfBlob); // Log PDF Blob
+    const pdfString = pdfBlob.toString('base64');
+    const requestData = {
+      teacherId: user?._id || '',
+      teacherEmail: user?.Email || '',
+      pdf: pdfString // Sending PDF blob directly as base64 encoded string
+    };
+    
+    const config = {
+      url: "/teacher/sendmail",
+      method: "post",
+      baseURL: "http://localhost:8000/api",
+      headers: { 'Content-Type': 'application/json' }, // Set Content-Type to application/json
+      data: requestData
+    };
+
+    console.log("Request Config:", config); // Log Request Config
+    let res = await axios(config);
+   
+    if (res.status === 200) {
+      alert(res.data.message);
     }
+  } catch (error) {
+    console.error("Error occurred:", error);
   }
+};
+
+  // useEffect(() => {
+  //  if(user?._id){
+  //   sendmailpdf()
+  //  }
+  // }, [])
+  
 
   return (
  
       <div>
-        <button onClick={generatePDF}>download</button>
+        <Button onClick={()=>sendmailpdf()}>download</Button>
         <div className="page-starts">
           <div  id="pdf-content" className="question-paper-display">
             <div className="englishqp-page-body">
