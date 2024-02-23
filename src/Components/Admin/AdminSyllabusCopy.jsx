@@ -11,7 +11,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-
+import { debounce } from "lodash";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -32,11 +32,61 @@ const AdminSyllabusCopy = () => {
   const handleShow2 = () => setShow2(true);
 
   const [show3, setShow3] = useState();
-  const [selectedassesment,setselectedassesment] = useState("")
+  const [selectedassesment, setselectedassesment] = useState("");
   const handleClose3 = () => setShow3(false);
-  const handleShow3 = (name) =>{ setShow3(true);setselectedassesment(name)}
+  const handleShow3 = (name) => {
+    setShow3(true);
+    setselectedassesment(name);
+  };
 
-  console.log("selectedassesment",selectedassesment);
+  console.log("selectedassesment", selectedassesment);
+
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
   //Get All Subject
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
@@ -102,7 +152,7 @@ const AdminSyllabusCopy = () => {
     getChapter();
     getNameExamination();
   }, []);
-  console.log("weightage", weightage);
+
   //Post
   const [chapterName, setChapterName] = useState("");
   const [description, setDescription] = useState("");
@@ -116,8 +166,8 @@ const AdminSyllabusCopy = () => {
   const [SelectChapter, setSelectChapter] = useState("");
   const [Months, setMonths] = useState("");
   const [Assessment, setAssessment] = useState("");
-  const [from, setfrom] = useState("")
-  const [to, setto] = useState("")
+  const [from, setfrom] = useState("");
+  const [to, setto] = useState("");
   const [selectsubjectpart, setSelectsubjectpart] = useState("");
   const [Examinationname, setExaminationname] = useState("");
   // Array of object 1
@@ -126,18 +176,15 @@ const AdminSyllabusCopy = () => {
     try {
       Arr.find(
         (ele) =>
-       
-          ele.Assessment === Assessment ||
-          ele.from === from ||
-          ele.to === to
+          ele.Assessment === Assessment || ele.from === from || ele.to === to
       );
       const newObj = {
-  
-        Assessment:Assessment,
-        from:from,
-        to:to
+        Assessment: Assessment,
+        from: from,
+        to: to,
+        Examinationname:Examinationname
       };
-      setArr([...Arr, [newObj]]);
+      setArr([...Arr, newObj]);
       swal({
         title: "Yeah!",
         text: "Added Successfully...",
@@ -149,40 +196,57 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-const [Arr2, setArr2] = useState([])
+
+  console.log("Arr====data==>",Arr);
+const [period,setperiod]=useState("");
+  const [Arr2, setArr2] = useState([]);
   const Addchaptertype = (i) => {
     try {
+   
+      const newObj2 = {
+        chapterno: chapterNumber,
+        Months: Months,
+        ChapterName: selectsubjectpart,
+        period:period,
+      };
+  setArr2([...Arr2,newObj2])
     
-        // Arr2?.find(
-        //   (ele) =>
-        //   ele.chapterno === chapterNumber ||
-        //   ele.subjectpart === selectsubjectpart ||
-        //   ele.Months === Months 
-        // );
-        const newObj2 = {
-          chapterno: chapterNumber,
-          Months:Months,
-          subjectpart: selectsubjectpart,
-          selectedassesment :selectedassesment 
-        };
-        setArr2(newObj2);
-        const newArr = [...Arr];
-        setArr([...Arr2, newArr[i]]);
-        
-      
-    
-      swal({
-        title: "Yeah!",
-        text: "Added Successfully...",
-        icon: "success",
-        button: "OK!",
-      });
     } catch (error) {
       console.error(error);
     }
   };
 
-console.log("Arr",Arr);
+  const deleteArrr2=(index)=>{
+    try {
+      const deletedQuestion = Arr2[index];
+
+      // Create a new array excluding the element at the specified index
+      const updatedArr = Arr2.filter((_, i) => i !== index);
+
+      setArr2(updatedArr);
+ 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const sumbitToArr=()=>{
+ const am=   Arr?.map((ele)=>{
+      if(ele?.Assessment==selectedassesment){
+        return {...ele,unitArr:Arr2}
+      }
+      return ele
+    })
+    setArr(am)
+    setShow3(false)
+    return swal({
+      title: "Yeah!",
+      text: "Added Successfully...",
+      icon: "success",
+      button: "OK!",
+    });
+  }
+  console.log("Arr", Arr);
 
   const deleteQuestionType = (index) => {
     try {
@@ -204,8 +268,11 @@ console.log("Arr",Arr);
       console.error(error);
     }
   };
-
+const [Title,setTitle]=useState("")
   const addSyllabus = async () => {
+    if (!Title) {
+      return alert("Please Enter the titele");
+    }
     if (!year) {
       return alert("Please Enter the year");
     }
@@ -226,12 +293,14 @@ console.log("Arr",Arr);
           subject: subjectt,
           authId: admin?._id,
           SyllabusDetails: Arr,
+          Title:Title,
+          Examinationname:Examinationname
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-
+getSyllabus()
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -302,10 +371,16 @@ console.log("Arr",Arr);
           Authorization: `Bearer ${token}`,
         },
         data: {
-          chapterNumber: chapterNumber,
-          chapterName: chapterName,
-          description: description,
+          year: year,
+          medium: medium,
+          Class: classs,
+          SubClass: subclass,
+          subject: subjectt,
           authId: admin?._id,
+          SyllabusDetails: Arr,
+          Title:Title,
+          Examinationname:Examinationname,
+        
           id: updatechapter,
         },
       };
@@ -345,8 +420,7 @@ console.log("Arr",Arr);
           },
         }
       );
-      if (res.status == 200)
-        handleClose2()
+      if (res.status == 200) handleClose2();
       getSyllabus();
       return swal({
         title: "Yeah!",
@@ -379,7 +453,7 @@ console.log("Arr",Arr);
       console.log(error);
     }
   };
-  console.log("Slybuss", Slybuss);
+
 
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
@@ -410,6 +484,9 @@ console.log("Arr",Arr);
       setCurrentpage(currenpage + 1);
     }
   }
+
+
+
   useEffect(() => {
     getSyllabus();
     getallclassname();
@@ -425,24 +502,53 @@ console.log("Arr",Arr);
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
 
   //  Add Chapter Name
-  console.log("Arr2",Arr2);
+  console.log("Arr2", Arr2);
 
   const [AddChapter, setAddChapter] = useState([]);
+
+  // onChange={(e) => {
+  //   if(selectedLanguage == "en-t-i0-und"){
+  //     setboardName(e.target.value);
+  //   }else onChangeHandler(e.target.value, setboardName);
+  // }}
+  // {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
   return (
     <div>
-      <div className="col-lg-4 d-flex justify-content-center">
-        <div class="input-group ">
-          <span class="input-group-text" id="basic-addon1">
-            <BsSearch />
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-          />
+      <div className="row d-flex justify-content-between">
+        <div className="col-lg-4 d-flex justify-content-center">
+          <div class="input-group ">
+            <span class="input-group-text" id="basic-addon1">
+              <BsSearch />
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              aria-describedby="basic-addon1"
+            />
+          </div>
+        </div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
         </div>
       </div>
+
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
@@ -597,6 +703,24 @@ console.log("Arr",Arr);
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Title</label>
+                  <input
+                   
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- Annoual Programe of  work for the Year"
+                    onChange={(e) => {
+                      // setyear(e.target.value);
+                      if(selectedLanguage == "en-t-i0-und"){
+                            setTitle(e.target.value);
+                          }else onChangeHandler(e.target.value, setTitle);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
+                </div>
+              </div>
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>Year</label>
@@ -604,36 +728,15 @@ console.log("Arr",Arr);
                     value={year}
                     type="text"
                     className="vi_0"
-                    placeholder="Enter Year"
+                    placeholder="Eg:- 2023-2024"
                     onChange={(e) => {
                       setyear(e.target.value);
                     }}
                   />
                 </div>
               </div>
+
             
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Medium <span style={{ color: "red" }}>*</span>
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      setmedium(e.target.value);
-                    }}
-                  >
-                    <option>Select the Medium</option>
-                    {Medium?.map((val, i) => {
-                      return (
-                        <option value={val?.mediumName} key={i}>
-                          {val?.mediumName}
-                        </option>
-                      );
-                    })}
-                  </Form.Select>
-                </div>
-              </div>
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>
@@ -702,7 +805,28 @@ console.log("Arr",Arr);
                   </Form.Select>
                 </div>
               </div>
-
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Medium <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setmedium(e.target.value);
+                    }}
+                  >
+                    <option>Select the Medium</option>
+                    {Medium?.map((val, i) => {
+                      return (
+                        <option value={val?.mediumName} key={i}>
+                          {val?.mediumName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
             </div>
 
             <div
@@ -713,135 +837,92 @@ console.log("Arr",Arr);
                 // backgroundColor: "#e9caa0"
               }}
             >
-              <div className="row p-3" style={{backgroundColor: "#e9caa0"}}>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>Assessment:</label>
-                  <input
-                    type="text"
-                    className="vi_0"
-                    placeholder="Enter Assessment"
-                  onChange={(e) => setAssessment(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>From:</label>
-                  <input
-                    type="date"
-                    className="vi_0"                   
-                  onChange={(e) => setfrom(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>To:</label>
-                  <input
-                    type="date"
-                    className="vi_0"
-                    placeholder="Enter Assessment"
-                   onChange={(e) => setto(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <Button
-                  variant=""
-                  style={{
-                    marginTop: "15px",
-                    backgroundColor: "green",
-                    color: "white",
-                    borderRadius: "5px",
-                  }}
-                  onClick={() => {
-                    // setslybus(true);
-                    AddTypesofassessment();
-                  }}
-                >
-                  Add
-                </Button>
-              </div>
-              </div>
-             
-              
-                {/* <div className="col-sm-4">
+              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+                <div className="col-sm-4">
                   <div className="do-sear mt-2">
-                    <label>Chapter Name</label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setSelectChapter(e.target.value);
-                      }}
-                    >
-                      <option>Select the Chapter</option>
-                      {chapters
-                        ?.filter((ele) => ele.SubjectPart === selectsubjectpart)
-                        ?.map((val, i) => {
-                          return (
-                            <option value={val?.chapterName} key={i}>
-                              {val?.chapterName}
-                            </option>
-                          );
-                        })}
-                    </Form.Select>
-                  </div>
-                </div> */}
-
-
-              
-
-              {/* <div className="row">
-                <div className="do-sear mt-2">
-                  <label>Description</label>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={description}
-                    onChange={(event, editor) => {
-                      const data = editor.getData();
-                      setDescription(data);
-                    }}
-                  />
-                </div>
-              </div> */}
-
-              {/* <div className="row">
-                <div className="col-sm-6">
-                  <div className="do-sear mt-2">
-                    <label>Marks</label>
+                    <label>Assessment:</label>
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder="Enter Marks"
-                      onChange={(e) => setMarks(e.target.value)}
+                      placeholder="Enter Assessment Name"
+                      onChange={(e) => {
+                        if(selectedLanguage == "en-t-i0-und"){
+                          setAssessment(e.target.value);
+                        }else onChangeHandler(e.target.value, setAssessment);
+                  
+                      }}
+
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-2">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Exam Name 
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setExaminationname(e.target.value)}
+                  >
+                    <option>Select the Exame Name</option>
+                    {NameExam?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.NameExamination}>
+                            {item?.NameExamination}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>From:</label>
+                    <input
+                      type="date"
+                      className="vi_0"
+                      onChange={(e) => setfrom(e.target.value)}
                     />
                   </div>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-3">
                   <div className="do-sear mt-2">
-                    <label> Name Of the Examination</label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setExaminationname(e.target.value);
-                      }}
-                    >
-                      <option>Select examination</option>
-                      {NameExam?.map((val, i) => {
-                        return (
-                          <option value={val?.NameExamination} key={i}>
-                            {val?.NameExamination}
-                          </option>
-                        );
-                      })}
-                    </Form.Select>
+                    <label>To:</label>
+                    <input
+                      type="date"
+                      className="vi_0"
+                      placeholder="Enter Assessment"
+                      onChange={(e) => setto(e.target.value)}
+                    />
                   </div>
                 </div>
-              </div> */}
-
+          
              
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    variant=""
+                    style={{
+                      marginTop: "15px",
+                      backgroundColor: "green",
+                      color: "white",
+                      borderRadius: "5px",
+                    }}
+                    onClick={() => {
+                      // setslybus(true);
+                      AddTypesofassessment();
+                    }}
+                  >
+                    Add
+                  </Button>
+                </div>
+            
+             
+              </div>
+
+
               <div className="row mt-2">
                 <div className="col-md-12">
                   <Table
@@ -858,29 +939,43 @@ console.log("Arr",Arr);
                         <th>Assessment</th>
                         <th>From</th>
                         <th>To</th>
-                        <th>Unit No.</th>
+
                         <th>Month</th>
-                        <th>Unit Name</th>                       
+                        <th>Period</th>
+                        <th>Unit No.</th>
+                        <th>Unit Name</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {Arr?.map((val, i) => {
+                      {Arr?.map((item, i) => {
                         return (
-                          <tr>
+                          <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{val?.Assessment}</td>
-                            <td>{val?.from}</td>
-                            <td>{val?.to}</td>
-                           
-                            <td>{val?.chapterno}</td>                        
-                            <td>{val?.Months}</td>                        
-                            <td>{val?.subjectpart}</td>                        
+                            <td>{item?.Assessment}({item?.Examinationname})</td>
+                            <td>{item?.from}</td>
+                            <td>{item?.to}</td>
+
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.Months}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.period}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.chapterno}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.ChapterName}</p>
+                            })}</td>
                             <td>
                               <Button
-                              onClick={()=>handleShow3(val.Assessment)}
-                              >Add</Button>
-                              {" "}
+                                onClick={() =>{ 
+                                  setArr2(item?.unitArr? item?.unitArr:[])
+                                  handleShow3(item?.Assessment)}}
+                              >
+                                Add
+                              </Button>{" "}
                               <AiFillDelete
                                 color="red"
                                 cursor="pointer"
@@ -926,75 +1021,134 @@ console.log("Arr",Arr);
           style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
-            <Modal.Title > Add Units Details</Modal.Title>
+            <Modal.Title> Add Units Details</Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{backgroundColor:"#dda559"}}>
-        <div >
-        <div className="">
-                  <div className="do-sear mt-2">
-                    <label>Unit Number</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Unit Number"
-                      onChange={(e) => setChapterNumber(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="">
-                  <div className="do-sear mt-2">
-                    <label>Month</label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
+          <Modal.Body style={{ backgroundColor: "#dda559" }}>
+            <div  className="row">
+            <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Month</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter month name"
+                    onChange={(e) => {
+                      if(selectedLanguage == "en-t-i0-und"){
                         setMonths(e.target.value);
-                      }}
-                    >
-                      <option>Select the months</option>
-                      <option value="January">January</option>
-                      <option value="February">February</option>
-                      <option value="March">March</option>
-                      <option value="April">April</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="August">August</option>
-                      <option value="September">September</option>
-                      <option value="October">October</option>
-                      <option value="November">November</option>
-                      <option value="December">December</option>
-
-
-                    </Form.Select>
-                  </div>
+                      }else onChangeHandler(e.target.value, setMonths);
+                    }}
+                  />
+                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Months}</p>}
                 </div>
-                <div className="">
-                  <div className="do-sear mt-2">
-                    <label>Subject Part</label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setSelectsubjectpart(e.target.value);
-                      }}
-                    >
-                      <option>Select the Subject Part</option>
-                      {weightage
-                        ?.filter((ele) => ele.Subject === subjectt)
-                        ?.map((val, i) => {
-                          return (
-                            <option value={val?.Content} key={i}>
-                              {val?.Content}
-                            </option>
-                          );
-                        })}
-                    </Form.Select>
-                  </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Period</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter period Number"
+                    onChange={(e) => setChapterNumber(e.target.value)}
+                  />
                 </div>
-        </div>
-              
-           
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Unit Number</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Unit Number"
+                    onChange={(e) => setChapterNumber(e.target.value)}
+                  />
+                </div>
+              </div>
+            
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Unit Name</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setSelectsubjectpart(e.target.value);
+                    }}
+                  >
+                    <option>Select the Subject Part</option>
+                    {chapters
+                      ?.filter((ele) => ele.subjectName === subjectt)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={`${val?.chapterName} (${val?.SubjectPart})`} key={i}>
+                            {val?.chapterName} ({val?.SubjectPart})
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div  >
+                 <Button
+              variant=""
+              style={{float:"right",width:"50px",marginTop:"5px"}}
+              className="modal-add-btn"
+              onClick={Addchaptertype}
+            >
+              Add
+            </Button>
+              </div>
+             
+            </div>
+      
+          
+            <div className="row mt-2">
+                <div className="col-md-12">
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                       
+                        <th>Month</th>
+                        <th>Period</th>
+                        <th>Unit No.</th>
+                        <th>Unit Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr2?.map((item, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+      
+                            <td>{item?.Months}</td>
+                            <td>{item?.period}</td>
+                            <td>{item?.chapterno}</td>
+
+                            <td>{item?.ChapterName}</td>
+                            <td>
+                            
+                              <AiFillDelete
+                                color="red"
+                                cursor="pointer"
+                                onClick={() => deleteArrr2(i)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer  style={{ backgroundColor: "#dda559" }}>
             <Button
               variant=""
               className="modal-close-btn"
@@ -1005,13 +1159,12 @@ console.log("Arr",Arr);
             <Button
               variant=""
               className="modal-add-btn"
-             onClick={Addchaptertype}
+              onClick={sumbitToArr}
             >
-              Add
+              Sumbit
             </Button>
           </Modal.Footer>
         </Modal>
-
 
         {/* Edit Package modal */}
         <Modal
@@ -1118,11 +1271,7 @@ console.log("Arr",Arr);
             >
               Close
             </Button>
-            <Button
-              variant=""
-              className="modal-add-btn"
-              onClick={deleteslybus}
-            >
+            <Button variant="" className="modal-add-btn" onClick={deleteslybus}>
               Delete
             </Button>
           </Modal.Footer>

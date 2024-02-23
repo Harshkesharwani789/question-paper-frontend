@@ -45,27 +45,12 @@ const Adminslybuscopyview = () => {
                         </div>
                     </div> */}
 
-          <div className="class-details" style={{ borderTop: "unset" }}>
-            {/* <div className="class-data">
-              <b>Class : {addslybus?.SubClass}</b>
-            </div>
-            <div className="class-data">
-              <b>Subject: {addslybus?.subject}</b>
-            </div> */}
-            {/* <div>
-              <div className="class-data">
-                <b>Marks: 40</b>
-              </div>
-              <div className="class-data">
-                <b>Time: 2 Hours</b>
-              </div>
-            </div> */}
-          </div>
+         
           <div>
             <h3 style={{ textAlign: "center", paddingTop: "10px" }}>
-              {addslybus?.subject} Syllabus {addslybus?.year}
+              {addslybus?.Title}  {addslybus?.year}
             </h3>
-            <h5 style={{ textAlign: "center" }}>{addslybus?.SubClass}</h5>
+            <h5 style={{ textAlign: "center" }}>{addslybus?.SubClass} - {addslybus?.subject} </h5>
             <h5 style={{ textAlign: "center" }}></h5>
           </div>
           <div>
@@ -84,22 +69,41 @@ const Adminslybuscopyview = () => {
                   <th>Period</th>
                   <th>No.of Unit</th>
                   <th>Unit Name</th>
-                
                 </tr>
               </thead>
               <tbody>
-                {addslybus?.SyllabusDetails?.map((val, i) => {
+                {addslybus?.SyllabusDetails?.map((item, i) => {
                   return (
-                    <tr>
-                      <td>{i + 1}</td>
-                      <td>{val?.chapterno}</td>
-                      <td>{val?.subjectpart}</td>
-                      <td>{val?.chapter}</td>
-                      <td>{parse(`<div>${val?.description}</div>`)}</td>
-
-                      {/* <td>{val?.mask}</td>
-                      <td>{val?.examname}</td> */}
-                    </tr>
+                    <>
+                      <tr>
+                        <td>{i + 1}</td>
+                        <td>
+                          {item?.unitArr?.map((ele) => {
+                            return <p>{ele?.Months}</p>;
+                          })}
+                        </td>
+                        <td>
+                          {item?.unitArr?.map((ele) => {
+                            return <p>{ele?.period}</p>;
+                          })}
+                        </td>
+                        <td>
+                          {item?.unitArr?.map((ele) => {
+                            return <p>{ele?.chapterno}</p>;
+                          })}
+                        </td>
+                        <td>
+                          {item?.unitArr?.map((ele) => {
+                            return <p>{ele?.ChapterName}</p>;
+                          })}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5">
+                          <table class="table mb-0">{item?.Assessment}({item?.Examinationname}) {item?.from} to {item?.to}</table>
+                        </td>
+                      </tr>
+                    </>
                   );
                 })}
 
