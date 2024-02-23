@@ -272,7 +272,7 @@ function AdminBlueprint() {
   const [Difficult, setDifficult] = useState("");
   const [DifficultMask, setDifficultMask] = useState("");
   const [TotalDifficultMask, setTotalDifficultMask] = useState("");
-  const [label, setlabel] = useState("");
+  const [labels, setlabels] = useState("");
   const [Marks, setMarks] = useState("");
   const [TypesofQuestions, setTypesofQuestions] = useState(false);
   const [data, setData] = useState([]);
@@ -309,7 +309,7 @@ function AdminBlueprint() {
   const [Arr1, setArr1] = useState([]);
   const AddWeightageofthecontent = () => {
     try {
-      if (!label) {
+      if (!labels) {
         swal({
           title: "Oops!",
           text: "Please Select Label",
@@ -329,7 +329,7 @@ function AdminBlueprint() {
       }
       let content = 1;
       Arr1.forEach((ele) => {
-        if (ele?.label === label && ele?.Marks === Marks) {
+        if (ele?.label === labels && ele?.Marks === Marks) {
           content = 0;
           swal({
             title: "Oops!",
@@ -341,7 +341,7 @@ function AdminBlueprint() {
       });
       if (content) {
         const obj = {
-          label: label,
+          label: labels,
           Marks: Marks,
         };
         Arr1.push(obj);
@@ -681,6 +681,8 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
+  console.log("chapters",chapters);
+  console.log("label",labels);
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
@@ -1321,7 +1323,7 @@ function AdminBlueprint() {
                                     <Form.Select
                                       aria-label="Default select example"
                                       onChange={(e) => {
-                                        setlabel(e.target.value);
+                                        setlabels(e.target.value);
                                       }}
                                     >
                                       <option value="">
@@ -2140,7 +2142,7 @@ function AdminBlueprint() {
                                             <option value="">
                                               Selete the Chapter
                                             </option>
-                                            {chapters?.map((val, i) => {
+                                            {chapters?.filter((ele)=>ele.SubjectPart === labels)?.map((val, i) => {
                                               return (
                                                 <option
                                                   value={val?.chapterName}
