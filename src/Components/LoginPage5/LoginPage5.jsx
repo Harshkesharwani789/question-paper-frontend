@@ -335,18 +335,18 @@ const LoginPage5 = () => {
                           <input
                             type="radio"
                             name="fav_language"
-                            checked={Individual == "Multiple"}
-                            onClick={() => setIndividual("Multiple")}
+                            checked={Individual == "No.of Student"}
+                            onClick={() => setIndividual("No.of Student")}
                           />{" "}
                           &nbsp;
                           <Button
                             variant="success"
                             style={{ backgroundColor: "green" }}
-                            onClick={() => setIndividual("Multiple")}
+                            onClick={() => setIndividual("No.of Student")}
                           >
-                            Multiple
+                            No.of Student
                           </Button>
-                          {Individual == "Multiple" ? (
+                          {Individual == "No.of Student" ? (
                             <div style={{ float: "right", width: "100px" }}>
                               <input
                                 type="number"

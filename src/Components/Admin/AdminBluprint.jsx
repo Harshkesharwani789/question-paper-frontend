@@ -790,8 +790,7 @@ function AdminBlueprint() {
     getChapter();
   }, []);
 
-  console.log("Arr3===>", Arr3);
-  console.log("view==>", view);
+ 
   return (
     <>
       <div className="row">
@@ -993,7 +992,7 @@ function AdminBlueprint() {
                                     setSubClassName(e.target.value);
                                   }}
                                 >
-                                  <option>Select the Sub-Class</option>
+                                  <option value={""} >Select the Sub-Class</option>
                                   {getaddsubclass
                                     ?.filter(
                                       (ele) => ele.className == className

@@ -6,7 +6,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import parse from "html-react-parser";
 
+import MathInput from "react-math-keyboard";
 const steps = [
   "Blueprint Details",
   "Marks Details",
@@ -21,7 +23,7 @@ function AdminBlueprintdetailsview() {
   const token = sessionStorage.getItem("token");
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
-
+  const [latex, setLatex] = useState('')
   const totalSteps = () => {
     return steps.length;
   };
@@ -157,6 +159,11 @@ var TotalMask=0
     <>
       <div className="box_1">
         <div className="Stepper-info " style={{ padding: "20px" }}>
+        {/* <div>
+     
+      <MathInput setValue={setLatex} />
+      <p>{latex}</p>
+    </div> */}
           {/* blue print 1  */}
           <div className="blueprint-content-display">
             <div className="blueprint-titles">
@@ -665,11 +672,14 @@ var TotalMask=0
                
                 </Table>
 
-
               </div>
+              <span>Note:-</span>{parse(`<span>${blueprint?.Instructions}</span>`)}
             </div>
           </div>
+          
+
         </div>
+       
       </div>
     </>
   );
