@@ -483,7 +483,7 @@ const Mcq_add = ({selectdetails}) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Image Question</label>
               <div>
-                <img src={ImageQ && URL.createObjectURL(ImageQ)} alt="" />
+                <img style={{width:"200px", height:"140px"}} src={ImageQ && URL.createObjectURL(ImageQ)} alt="" />
               </div>
             </div>
           </div>
@@ -492,7 +492,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1 </label>
                 <div>
-                  <img src={Image_1 && URL.createObjectURL(Image_1)} alt="" />
+                  <img style={{width:"200px", height:"140px"}}  src={Image_1 && URL.createObjectURL(Image_1)} alt="" />
                 </div>
               </div>
             </div>
@@ -500,7 +500,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2 </label>
                 <div>
-                  <img src={Image_2 && URL.createObjectURL(Image_2)} alt="" />
+                  <img  style={{width:"200px", height:"140px"}} src={Image_2 && URL.createObjectURL(Image_2)} alt="" />
                 </div>
               </div>
             </div>
@@ -508,7 +508,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3 </label>
                 <div>
-                  <img src={Image_3 && URL.createObjectURL(Image_3)} alt="" />
+                  <img style={{width:"200px", height:"140px"}}  src={Image_3 && URL.createObjectURL(Image_3)} alt="" />
                 </div>
               </div>
             </div>
@@ -516,7 +516,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4 </label>
                 <div>
-                  <img src={Image_4 && URL.createObjectURL(Image_4)} alt="" />
+                  <img style={{width:"200px", height:"140px"}}  src={Image_4 && URL.createObjectURL(Image_4)} alt="" />
                 </div>
               </div>
             </div>
@@ -524,7 +524,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 5 </label>
                 <div>
-                  <img src={Image_5 && URL.createObjectURL(Image_5)} alt="" />
+                  <img  style={{width:"200px", height:"140px"}} src={Image_5 && URL.createObjectURL(Image_5)} alt="" />
                 </div>
               </div>
             </div>
@@ -532,7 +532,7 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 6 </label>
                 <div>
-                  <img src={Image_6 && URL.createObjectURL(Image_6)} alt="" />
+                  <img  style={{width:"200px", height:"140px"}} src={Image_6 && URL.createObjectURL(Image_6)} alt="" />
                 </div>
               </div>
             </div>
@@ -541,7 +541,7 @@ const Mcq_add = ({selectdetails}) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Image Answer</label>
               <div>
-                <img src={Image_Ans && URL.createObjectURL(Image_Ans)} alt="" />
+                <img  style={{width:"200px", height:"140px"}} src={Image_Ans && URL.createObjectURL(Image_Ans)} alt="" />
               </div>
             </div>
           </div>
