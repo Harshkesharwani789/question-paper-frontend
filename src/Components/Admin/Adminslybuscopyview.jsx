@@ -22,7 +22,7 @@ const Adminslybuscopyview = () => {
   useEffect(() => {
     Adminslybusbyid();
   }, []);
-  console.log("addslybus", addslybus);
+
   return (
     <div>
       {/* first sem first page starts here  */}

@@ -44,7 +44,7 @@ const AdminQuestprops = (props) => {
         "Recorrect the Answers Questions":<RecorrectionaddAnswer data={selectedLanguage} selectdetails={selectdetails}/>,
         "Odd and out words Questions":<OddandOut_add data={selectedLanguage} selectdetails={selectdetails}/>,
         "Classifications of Questions":<AddClassification data={selectedLanguage} selectdetails={selectdetails}/>,
-        "One Sentence Answer Question":<Add data={selectedLanguage}/>,
+        "One Sentence Answer Question":<Add data={selectedLanguage} selectdetails={selectdetails}/>,
         "RelationShip Words Questions":<AddRelationshipWord data={selectedLanguage} selectdetails={selectdetails}/>,
         "Grammer Questions":<AddGrammerQuestion data={selectedLanguage} selectdetails={selectdetails}/>,
         "One Word Question":<AddOneWordQuestion data={selectedLanguage} selectdetails={selectdetails}/>,

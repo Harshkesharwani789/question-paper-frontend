@@ -15,6 +15,7 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import "../BluePrint/BluePrint.css";
 import axios from "axios";
 import swal from "sweetalert";
+import parse from "html-react-parser";
 
 const BluePrint = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const BluePrint = () => {
     getallblueprint();
   }, []);
 
-  const upcomingStaus = async (status,val) => {
+  const upcomingStaus = async (status, val) => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
@@ -58,64 +59,58 @@ const BluePrint = () => {
         data: {
           id: state?._id,
           authId: user?._id,
-
+          bluePrintId: val?._id,
           status: status,
         },
       };
 
       let res = await axios(config);
-      if(res.status==200){
-         if(status=="Saved Draft"){
-          setTimeout(()=>{
-            return navigate("/profile")
-          },1000)
-      return  swal({ 
-          title: "Yeah!",
-          text: "Successfully Saved Draft",
-          icon: "success",
-          button: "OK!",
-        });
-
-      }else{
-        if (
-          val?.SubClassName?.toLowerCase() ==
-            "class 10" &&
-          val?.subjects?.toLowerCase() == "maths"
-        ) {
-          return navigate("/10th_QP_maths", {
-            state: { ...state, bluePrint: val },
+      if (res.status == 200) {
+        if (status == "Saved Draft") {
+          setTimeout(() => {
+            return navigate("/profile");
+          }, 1000);
+          return swal({
+            title: "Yeah!",
+            text: "Successfully Saved Draft",
+            icon: "success",
+            button: "OK!",
           });
-        } else if (
-          val?.SubClassName?.toLowerCase() ==
-            "class 10" &&
-          val?.subjects?.toLowerCase() == "science"
-        ) {
-          return navigate("/science10th", {
-            state: { ...state, bluePrint: val },
-          });
-        } else if (
-          val?.SubClassName?.toLowerCase() ==
-            "class 10" &&
-          val?.subjects?.toLowerCase() == "social science"
-        ) {
-          return navigate("/socialqp", {
-            state: { ...state, bluePrint: val },
-          });
-        } else if (
-          val?.SubClassName?.toLowerCase() ==
-            "class 10" &&
-          val?.subjects?.toLowerCase() == "english"
-        ) {
-          return navigate("/englishqp", {
-            state: { ...state, bluePrint: val },
-          });
-        } else
-          return navigate("/questionpaper", {
-            state: { ...state, bluePrint: val },
-          });
+        } else {
+          if (
+            val?.SubClassName?.toLowerCase() == "class 10" &&
+            val?.subjects?.toLowerCase() == "maths"
+          ) {
+            return navigate("/10th_QP_maths", {
+              state: { ...state, bluePrint: val },
+            });
+          } else if (
+            val?.SubClassName?.toLowerCase() == "class 10" &&
+            val?.subjects?.toLowerCase() == "science"
+          ) {
+            return navigate("/science10th", {
+              state: { ...state, bluePrint: val },
+            });
+          } else if (
+            val?.SubClassName?.toLowerCase() == "class 10" &&
+            val?.subjects?.toLowerCase() == "social science"
+          ) {
+            return navigate("/socialqp", {
+              state: { ...state, bluePrint: val },
+            });
+          } else if (
+            val?.SubClassName?.toLowerCase() == "class 10" &&
+            val?.subjects?.toLowerCase() == "english"
+          ) {
+            return navigate("/englishqp", {
+              state: { ...state, bluePrint: val },
+            });
+          } else
+            return navigate("/questionpaper", {
+              state: { ...state, bluePrint: val },
+            });
+        }
       }
-      }
-     
     } catch (error) {
       console.log(error);
       swal({
@@ -838,6 +833,8 @@ const BluePrint = () => {
                                 </tbody>
                               </Table>
                             </div>
+                            <span>Note:-</span>
+                            {parse(`<span>${val?.Instructions}</span>`)}
                           </div>
                         </div>
                         <div
@@ -851,7 +848,7 @@ const BluePrint = () => {
                             variant=""
                             style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
-                            upcomingStaus("Saved Draft",val)
+                              upcomingStaus("Saved Draft", val);
                             }}
                           >
                             Save Draft
@@ -868,7 +865,7 @@ const BluePrint = () => {
                             variant=""
                             style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
-                              upcomingStaus("Completed",val)
+                              upcomingStaus("Completed", val);
                             }}
                           >
                             Generate Question Paper
