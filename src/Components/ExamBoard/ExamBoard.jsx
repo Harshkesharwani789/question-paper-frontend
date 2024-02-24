@@ -359,7 +359,7 @@ const ExamBoard = () => {
                           >
                             <option value={""} >Select User Type </option>
                           <option value={"Teacher"}>Teacher</option>
-                          <option value={"Studet"}>Studet</option>
+                          <option value={"Student"}>Student</option>
                           </Form.Select>
                         </div>
                       </Row>

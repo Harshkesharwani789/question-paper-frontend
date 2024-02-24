@@ -184,7 +184,8 @@ const LoginPage5 = () => {
                     <div style={{ textAlign: "center" }}>
                       <h5>-: School Details :-</h5>
                     </div>
-                    <Row>
+                    {state?.userType =="Teacher" ? (<>
+                      <Row>
                       <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
@@ -216,10 +217,12 @@ const LoginPage5 = () => {
                         </Form.Label>
 
                         <div>
-                          <h6>{state?.Institute_Name}</h6>
+                          <h6>{state?.Institute_Name} {state?.SchoolAddress}</h6>
                         </div>
                       </div>
                     </Row>
+                    </>):<></>}
+                   
                     <Row>
                       <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
@@ -282,7 +285,7 @@ const LoginPage5 = () => {
                           className="fs-6 fw-bold mt-2 "
                           style={{ letterSpacing: "0.5px" }}
                         >
-                          Test_Date :
+                          Exam Date :
                         </Form.Label>
 
                         <div>
@@ -290,7 +293,20 @@ const LoginPage5 = () => {
                         </div>
                       </div>
                     </Row>
+                    <Row>
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Exam Time :
+                        </Form.Label>
 
+                        <div>
+                          <h6>{state?.ExamTime}</h6>
+                        </div>
+                      </div>
+                    </Row>
                     <Row>
                       <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
                         <Form.Label
@@ -305,7 +321,7 @@ const LoginPage5 = () => {
                         </div>
                       </div>
                     </Row>
-                    <Row>
+                    {state?.userType=="Teacher" ? (  <Row>
                       <div style={{ textAlign: "left", padding: "0px 12px" }}>
                         <div className="col-8 mb-4">
                           <input
@@ -361,7 +377,8 @@ const LoginPage5 = () => {
                           )}
                         </div>
                       </div>
-                    </Row>
+                    </Row>):(<></>)}
+                  
                     {bluePData.length == 0 ? (
                       <></>
                     ) : (

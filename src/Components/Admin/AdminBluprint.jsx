@@ -157,26 +157,9 @@ function AdminBlueprint() {
     handleNext();
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
-
   const navigate = useNavigate();
   //getmethod for types of questions
-  const [getalltypesofques, setgetalltypesofques] = useState([]);
-  const getalltypesofquess = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
-      );
-      if (res.status == 200) {
-        setgetalltypesofques(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   // get method for board
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
@@ -204,8 +187,7 @@ function AdminBlueprint() {
     }
   };
 
-  console.log("getaddsubclass", getaddsubclass);
-  //get method for medium
+ 
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
@@ -681,8 +663,7 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
-  console.log("chapters",chapters);
-  console.log("label",labels);
+
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
@@ -783,7 +764,7 @@ function AdminBlueprint() {
     getallboardname();
     getaddsubclasss();
     getAddMedium();
-    getalltypesofquess();
+
     getallweightagecontent();
     getSubject();
     getObjectives();
@@ -1870,7 +1851,9 @@ function AdminBlueprint() {
                                             className="vi_0"
                                             // value={Average}
                                             placeholder="Enter No. of Questions"
-                                     
+                                            onChange={(e) =>
+                                              setAverage(e.target.value)
+                                            }
                                             // onChange={(e) =>
                                             //   selectedLanguage == "en-t-i0-und"
                                             //     ?setAverage(e.target.value)

@@ -215,7 +215,7 @@ const Profile = () => {
                           <tr>
                             <th>S.No</th>
                             <th>
-                              <div>Exam Date </div>
+                              <div>Exam Date/Time </div>
                             </th>
                             <th>
                               <div>Name</div>
@@ -252,7 +252,7 @@ const Profile = () => {
                               <tr>
                                 <td>{i + 1}</td>
                                 <td>
-                                  {moment(item?.Test_Date).format("DD/MM/YYYY")}
+                                  {moment(item?.Test_Date).format("DD/MM/YYYY")} {item?.ExamTime}
                                 </td>
                                 <td>{item?.Institute_Name}</td>
                                 <td>

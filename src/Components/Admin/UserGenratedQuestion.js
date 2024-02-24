@@ -58,7 +58,7 @@ const UserGenratedQuestion = () => {
           },
         }
       );
- 
+
       if (res.status === 200) {
         handleClose2();
         getAllGenQuestionPaper();
@@ -178,7 +178,7 @@ const UserGenratedQuestion = () => {
                   <div>Name</div>
                 </th>
                 <th>
-                    <div>Institute Name</div>
+                  <div>Institute Name</div>
                 </th>
                 <th>
                   <div>Board</div>
@@ -189,6 +189,7 @@ const UserGenratedQuestion = () => {
                 <th>
                   <div>Medium</div>
                 </th>
+                <th>Exam Date/Time</th>
                 <th>
                   <div>Status</div>
                 </th>
@@ -207,43 +208,68 @@ const UserGenratedQuestion = () => {
                       <td>
                         {item?.teacherId?.FirstName} {item?.teacherId?.LastName}
                       </td>
-                      <td >{item?.School_Logo ? (<a href={`http://localhost:8000/Teacher/${item?.School_Logo}`} target="_blank"><img src={`http://localhost:8000/Teacher/${item?.School_Logo}`} style={{width:"40px",height:"40px",borderRadius:"50%",float:"left"}}/></a>):("")} {item?.Institute_Name}</td>
+                      <td>
+                        {item?.School_Logo ? (
+                          <a
+                            href={`http://localhost:8000/Teacher/${item?.School_Logo}`}
+                            target="_blank"
+                          >
+                            <img
+                              src={`http://localhost:8000/Teacher/${item?.School_Logo}`}
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                borderRadius: "50%",
+                                float: "left",
+                              }}
+                            />
+                          </a>
+                        ) : (
+                          ""
+                        )}{" "}
+                        {item?.Institute_Name}
+                      </td>
                       <td>{item?.Board}</td>
                       <td>{item?.Class}</td>
                       <td>{item?.Medium}</td>
+                      <td>
+                        {moment(item?.Test_Date).format("DD/MM/YYYY")}{" "}
+                        {item?.ExamTime}
+                      </td>
                       <tb>
-                                  {item?.status == "Not Complete Staps" ? (
-                                    <span style={{ color: "red" }}>
-                                      {item?.status}
-                                    </span>
-                                  ) : (
-                                    <span>
-                                      {item?.status == "Completed" ? (
-                                        <span style={{ color: "green" }}>
-                                          {item?.status}
-                                        </span>
-                                      ) : (
-                                        <span style={{ color: "blue" }}>
-                                          {item?.status}
-                                        </span>
-                                      )}
-                                    </span>
-                                  )}
-                                </tb>
+                        {item?.status == "Not Complete Staps" ? (
+                          <span style={{ color: "red" }}>{item?.status}</span>
+                        ) : (
+                          <span>
+                            {item?.status == "Completed" ? (
+                              <span style={{ color: "green" }}>
+                                {item?.status}
+                              </span>
+                            ) : (
+                              <span style={{ color: "blue" }}>
+                                {item?.status}
+                              </span>
+                            )}
+                          </span>
+                        )}
+                      </tb>
                       <td>
                         {" "}
                         <div style={{ display: "flex", gap: "5px" }}>
-                        <div>
-                            <FaRegEye  
-                           
-                              style={{ cursor: "pointer", fontSize: "15px",color:"green" }}
+                          <div>
+                            <FaRegEye
+                              style={{
+                                cursor: "pointer",
+                                fontSize: "15px",
+                                color: "green",
+                              }}
                               onClick={() => {
                                 return swal({
-                                    title: "Opps!",
-                                    text: "Comming Soon...",
-                                    icon: "warning",
-                                    button: "OK!",
-                                  })
+                                  title: "Opps!",
+                                  text: "Comming Soon...",
+                                  icon: "warning",
+                                  button: "OK!",
+                                });
                               }}
                             />{" "}
                           </div>
@@ -333,9 +359,7 @@ const UserGenratedQuestion = () => {
             </ul>
           </nav>
         </div>
-     
 
-      
         <Modal
           show={show2}
           onHide={handleClose2}
