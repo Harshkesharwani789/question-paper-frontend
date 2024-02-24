@@ -174,6 +174,7 @@ import AdminObjectives from "./Components/Admin/AdminObjectives";
 import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
 import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
 import ContactUs from "./Components/Admin/ContactUs";
+import QuestionAnalysis from "./Components/BluePrint/QuestionAnalysis";
 
 
 function App() {
@@ -200,6 +201,16 @@ function App() {
               </>
             }
           />
+             <Route
+            path="/question_analysis"
+            element={
+              <>
+                <Navbarr />
+                <QuestionAnalysis />
+              </>
+            }
+          />
+          
           <Route
           path="/contactus"
           element={<ContactUs/>}
