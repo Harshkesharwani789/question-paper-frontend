@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Container,
-  Form,
-  InputGroup,
-  Modal,
-  Row,
-  Table,
-} from "react-bootstrap";
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { Button,Table} from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../BluePrint/BluePrint.css";
@@ -35,7 +26,7 @@ const BluePrint = () => {
         }
       );
 
-      if (res.status == 200) {
+      if (res.status === 200) {
         setblueprint(res.data.success);
       }
     } catch (error) {

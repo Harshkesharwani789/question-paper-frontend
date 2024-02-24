@@ -337,75 +337,75 @@ const Maths_Pattern = () => {
                                   </>) : (<></>)}
 
                                   <div>
-                                      {item?.ImageQ ? (<>
-                                        <b>Question Image:</b>
-                                        <div>
+                                    {item?.ImageQ ? (<>
+                                      <b>Question Image:</b>
+                                      <div>
 
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.ImageQ}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </div>
-                                      </>) : (
-                                        <></>
-                                      )}<br />
-                                      <b>Options :</b>
-                                      <div className="d-flex mb-1">
-                                        {item?.Image_1 ? (<>
-                                          <span>a)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_1}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
-                                        {item?.Image_2 ? (<>
-                                          <span>b)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_2}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
                                       </div>
-                                      <div className="d-flex mb-1">
-                                        {item?.Image_3 ? (<>
-                                          <span>c)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_3}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
-                                        {item?.Image_4 ? (<>
-                                          <span>d)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_4}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
-                                      </div>
-                                      <div className="d-flex mb-1">
-                                        {item?.Image_5 ? (<>
-                                          <span>e)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_5}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
-                                        {item?.Image_6 ? (<>
-                                          <span>f)</span>
-                                          <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_6}`}
-                                            className="mcq-img"
-                                            alt=""
-                                          />
-                                        </>) : (<></>)}
-                                      </div>
+                                    </>) : (
+                                      <></>
+                                    )}<br />
+                                    <b>Options :</b>
+                                    <div className="d-flex mb-1">
+                                      {item?.Image_1 ? (<>
+                                        <span>a)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
+                                      {item?.Image_2 ? (<>
+                                        <span>b)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
                                     </div>
+                                    <div className="d-flex mb-1">
+                                      {item?.Image_3 ? (<>
+                                        <span>c)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_3}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
+                                      {item?.Image_4 ? (<>
+                                        <span>d)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_4}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div className="d-flex mb-1">
+                                      {item?.Image_5 ? (<>
+                                        <span>e)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_5}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
+                                      {item?.Image_6 ? (<>
+                                        <span>f)</span>
+                                        <img
+                                          src={`http://localhost:8000/Questions/${item?.Image_6}`}
+                                          className="mcq-img"
+                                          alt=""
+                                        />
+                                      </>) : (<></>)}
+                                    </div>
+                                  </div>
 
                                 </div>
                               ) : (

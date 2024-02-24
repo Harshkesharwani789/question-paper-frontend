@@ -238,12 +238,12 @@ const OddandOut_add = ({ selectdetails }) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
 
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Answer}
                   onChange={handleChange7}
-                />
+                /> */}
                 <MathEditor
                   data={{
                     A: Answer,
