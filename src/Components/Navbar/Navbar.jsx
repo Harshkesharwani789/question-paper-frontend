@@ -6,7 +6,7 @@ import "../Navbar/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { FaRegUserCircle } from "react-icons/fa";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbarr = () => {
   const Navigate = useNavigate("");
@@ -34,6 +34,27 @@ const Navbarr = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+            <div 
+                 className="d-flex align-items-center" 
+                 style={{fontSize:"27px",color:"white"}}>
+                 <Link style={{color:"white",textDecoration:"none"}} to="/offerquestionpaper"><span>Buy</span></Link> 
+                </div> &nbsp;&nbsp;
+                <div class="vertical-line"></div>&nbsp;&nbsp;
+        
+                 <div 
+                 className="d-flex align-items-center" 
+                 style={{fontSize:"27px",color:"white"}}>
+                 <Link style={{color:"white",textDecoration:"none"}} to="/tutorial"><span>Tutorial</span></Link> 
+                </div> &nbsp;&nbsp;
+                <div class="vertical-line"></div>&nbsp;&nbsp;
+              {user ? (
+                 <div 
+                 className="d-flex align-items-center" 
+                 style={{fontSize:"27px",color:"white"}}>
+                 <Link style={{color:"white",textDecoration:"none"}} to="/questionandanswerview"><span>Assessment</span></Link> 
+                </div>
+              ):("")}
+             
               <div class="dropdown">
                 <span class="dropbtn">
                   <CgProfile color="#fff" />{" "}
@@ -53,6 +74,7 @@ const Navbarr = () => {
                   </a>
                 </div>
               </div>
+
             </Nav>
           </Navbar.Collapse>
         </Container>

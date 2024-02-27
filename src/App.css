@@ -36,6 +36,8 @@
     transform: rotate(360deg);
   }
 } */
+
+
 .swal-footer {
   text-align: center !important;
 }
@@ -194,3 +196,48 @@ button {
   }
 }
 
+.questionpdfview a{
+  font-size: 25px;
+  text-decoration: none;
+  word-spacing: 3px;
+
+}
+.vertical-line {
+  border-left: 4px solid white;
+  height: 31px;
+  /* display: flex; */
+  /* text-align: end; */
+  /* margin-bottom: -12px; */
+  margin-top: 3px;
+}
+.table_data td{
+  border: 1px solid #dddddd;
+  font-size: 20px;
+}
+.offerbox{
+  background-color: aliceblue;
+ 
+ border-radius: 10px;
+}
+.uiline ul{
+  gap: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.uiline span{
+  font-size: 25px;
+  font-family: math;
+}
+.buybtn{
+  padding: 12px;
+  border-radius: 10px !important;
+  width: 69px;
+}
+.spantg{
+  background-color: #9ae5cc;
+  padding: 8px;
+  border-radius: 23px;
+  height: 35px;
+
+}
