@@ -1412,6 +1412,54 @@ const QuestionPaper = ({ text }) => {
           </div>
         </div>
 
+        {/*------ QuestionAnalysis---- */}
+        <div className="container">
+          <div className='mt-4' >
+            <h3 className='text-center'>
+              {state?.Sub_Class} {state?.Subject}
+            </h3>
+            <h4>QUESTION ANALYSIS</h4>
+          </div>
+          <Table striped>
+            <thead>
+              <tr>
+                <th>Qn. No.</th>
+                <th>Objective</th>
+                <th>Specification</th>
+                <th>Content Unit</th>
+                <th>Type Of QN.</th>
+                <th>Marks</th>
+                <th>Diffeculty Level</th>
+                <th>Time Required to Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Questions?.map((item,i)=>{
+                return(
+                  <tr>
+                  <td>{i+1}</td>
+                  <td>{item?.Objectives}</td>
+                  <td>{item?.Lesson}</td>
+                  <td>{item?.Types_Question}</td>
+                  <td>{state?.bluePrint?.AllChapter
+                  ?.filter((ele)=>ele.Blueprintobjective === item?.Objectives )
+                  ?.map((bluePrintQuestionType)=>bluePrintQuestionType?.BluePrintQuestiontype)}</td>
+                  <td>{item?.Marks}</td>
+                  <td>{item?.Difficulty_level?.slice(0,1)}</td>
+                  <td>{item?.Answer_Time}</td>
+                </tr>
+                )
+              })}
+             
+              
+
+            </tbody>
+          </Table>
+          <div className='d-flex mt-2'>
+            <b>Note<span style={{ color: "red" }}>*</span></b>
+            <p>V.S.A(Very short answer),S.A( short answer ) A(Average) ,E(Easy),M(medium)</p>
+          </div>
+        </div>
 
         {/* -------Answer-------- */}
 
@@ -1857,6 +1905,27 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                     <div>{ele1?.Mask}</div></div>
                                 </>) : (<></>)}
+                                {item?.Types_Question === "Letter Writting" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Situation UnderStatnding answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+
                               </div>
                             )
                           }
@@ -1870,6 +1939,11 @@ const QuestionPaper = ({ text }) => {
             </div>
           </>) : (<></>)}
         </div>
+
+
+
+
+
       </div>
     </div>
   );
