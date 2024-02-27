@@ -17,6 +17,7 @@ import { AiFillDelete } from "react-icons/ai";
 import swal from "sweetalert";
 import { debounce } from "lodash";
 import MathEditor from "./MyEditor";
+import { FaEdit } from "react-icons/fa";
 let googleTransliterate = require("google-input-tool");
 
 const steps = [
@@ -157,26 +158,9 @@ function AdminBlueprint() {
     handleNext();
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
-
   const navigate = useNavigate();
   //getmethod for types of questions
-  const [getalltypesofques, setgetalltypesofques] = useState([]);
-  const getalltypesofquess = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
-      );
-      if (res.status == 200) {
-        setgetalltypesofques(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   // get method for board
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
@@ -204,8 +188,7 @@ function AdminBlueprint() {
     }
   };
 
-  console.log("getaddsubclass", getaddsubclass);
-  //get method for medium
+ 
   const [Medium, setMedium] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
@@ -267,14 +250,17 @@ function AdminBlueprint() {
 
   const [Easy, setEasy] = useState("");
   const [EasyMask, setEasyMask] = useState("");
+  const [EasyParcentage, setEasyParcentage] = useState("");
   const [Average, setAverage] = useState("");
   const [AverageMask, setAverageMask] = useState("");
+  const [AverageParcentage, setAverageParcentage] = useState("");
   const [Difficult, setDifficult] = useState("");
   const [DifficultMask, setDifficultMask] = useState("");
+  const [DifficultParcentage, setDifficultParcentage] = useState("");
   const [TotalDifficultMask, setTotalDifficultMask] = useState("");
   const [labels, setlabels] = useState("");
   const [Marks, setMarks] = useState("");
-  const [TypesofQuestions, setTypesofQuestions] = useState(false);
+  const [totalQuestion, settotalQuestion] = useState(false);
   const [data, setData] = useState([]);
   const [TotalMask, setTotalMask] = useState("");
   const [Objective, setObjective] = useState("");
@@ -525,6 +511,7 @@ function AdminBlueprint() {
           Objective: Objective,
           NoofQues: NoofQues,
           Marks: objMarks,
+          NoofQuestion:totalQuestion
         };
 
         setArr3([...Arr3, obj]); // Corrected this line to update the state correctly
@@ -540,6 +527,26 @@ function AdminBlueprint() {
       console.error(error);
     }
   };
+  const [EdOb,setEdOb]=useState("");
+
+const editObjectiveType=()=>{
+  try {
+    let am=Arr3?.map((item,i)=>{
+      if(i==EdOb){
+        return {
+           ...item,
+           Objective: Objective,
+           NoofQues: NoofQues,
+           Marks: objMarks,
+           NoofQuestion:totalQuestion
+        }
+      }
+      return item
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   const deleteobjectivess = (index) => {
     try {
@@ -681,9 +688,22 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
-  console.log("chapters",chapters);
-  console.log("label",labels);
+  const [NameExam, setNameExam] = useState([]);
+  const getNameExamination = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllNameExamination"
+      );
+      if (res.status == 200) {
+        setNameExam(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //   get method for weightage
+  const [ExameName,setExamName]=useState("");
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
     try {
@@ -742,6 +762,10 @@ function AdminBlueprint() {
           Objective: Arr3,
           AllChapter: Arr5,
           price:price,
+          ExameName:ExameName,
+          EasyParcentage:EasyParcentage,
+          AverageParcentage:AverageParcentage,
+          DifficultParcentage:DifficultParcentage
         },
       };
       let res = await axios(config);
@@ -783,12 +807,43 @@ function AdminBlueprint() {
     getallboardname();
     getaddsubclasss();
     getAddMedium();
-    getalltypesofquess();
+    getNameExamination()
     getallweightagecontent();
     getSubject();
     getObjectives();
     getChapter();
   }, []);
+
+  const [EditType,setEditType]=useState(false);
+  const handleShowE=()=>setEditType(true);
+
+  const [QAtypeEdit,setQATypeE]=useState("");
+  const [QAInstructionE,setQAInstructionE]=useState("");
+  const [NQAE,setNQAE]=useState("");
+  const [MaskEdit,setMaskE]=useState("");
+  const [ed,seted]=useState("")
+const editData=()=>{
+  try {
+
+  let am=Arr?.map((item,i)=>{
+    if(i==ed){
+      return {
+        ...item,
+        QAType:QAtypeEdit,
+        QAInstruction:QAInstructionE,
+        NQA:NQAE,
+        Mask:MaskEdit
+      }
+    }
+    return item
+  })
+   setArr(am)
+   setEditType(false);
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
  
   return (
@@ -956,7 +1011,7 @@ function AdminBlueprint() {
                                 </Form.Select>
                               </div>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                               <div className="do-sear mt-2">
                                 <label>
                                   Select Class{" "}
@@ -980,7 +1035,7 @@ function AdminBlueprint() {
                                 </Form.Select>
                               </div>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-4">
                               <div className="do-sear mt-2">
                                 <label>
                                   Select Sub-Class{" "}
@@ -1010,7 +1065,28 @@ function AdminBlueprint() {
                                 </Form.Select>
                               </div>
                             </div>
-
+                            <div className="col-md-4">
+                              <div className="do-sear mt-2">
+                              <label>
+                    Select Exam Name 
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setExamName(e.target.value)}
+                  >
+                    <option>Select the Exame Name</option>
+                    {NameExam?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.NameExamination}>
+                            {item?.NameExamination}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                              </div>
+                            </div>
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <label htmlFor="">Objectives</label>
@@ -1026,6 +1102,13 @@ function AdminBlueprint() {
                                   <div className="do-sear">
                                     <label htmlFor="">
                                       Percentage of Questions{" "}
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear">
+                                    <label htmlFor="">
+                                      Number of Questions{" "}
                                     </label>
                                   </div>
                                 </div>
@@ -1088,6 +1171,31 @@ function AdminBlueprint() {
                                       type="number"
                                       name=""
                                       id=""
+                                      placeholder="Enter the Number Of Questions"
+                                      className="vi_0"
+                                      onChange={(e)=>settotalQuestion(e.target.value)}
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setobjMarks(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setobjMarks
+                                      //       )
+                                      // }
+                                    />
+                                    {/* {selectedLanguage == "en-t-i0-und" ? (
+                                      <></>
+                                    ) : (
+                                      <p>{objMarks}</p>
+                                    )} */}
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear mt-2">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
                                       placeholder="Enter the marks"
                                       className="vi_0"
                                       onChange={(e)=>setobjMarks(e.target.value)}
@@ -1107,6 +1215,7 @@ function AdminBlueprint() {
                                     )} */}
                                   </div>
                                 </div>
+                            
                                 <div className="col-md-3">
                                   <div className="do-sear mt-2">
                                     <Button
@@ -1138,6 +1247,7 @@ function AdminBlueprint() {
                                         <th>S No.</th>
                                         <th>Objectives</th>
                                         <th>Percentage of Question</th>
+                                        <th>Number of Question</th>
                                         <th>No of Marks </th>
                                         <th>Action</th>
                                       </tr>
@@ -1149,6 +1259,7 @@ function AdminBlueprint() {
                                             <td>{i + 1}</td>
                                             <td>{item?.Objective}</td>
                                             <td>{item?.NoofQues}%</td>
+                                            <td>{item?.NoofQuestion}</td>
                                             <td>{item?.Marks}</td>
                                             <td>
                                               <AiFillDelete
@@ -1426,32 +1537,7 @@ function AdminBlueprint() {
                                   </Table>
                                 </div>
                               </div>
-                              {/* <div className="row ">
-                                {weightage
-                                  ?.filter((ele) => subjects == ele?.Subject)
-                                  .map((val, i) => {
-                                    return (
-                                      <div className="col-md-4" key={i}>
-                                        <div className="do-sear mt-2">
-                                          <label>
-                                            {val?.Content} Weightage{" "}
-                                            <span style={{ color: "red" }}>
-                                              *
-                                            </span>
-                                          </label>
-                                          <input
-                                            type="text"
-                                            placeholder={`Please Enter ${val?.Content} Marks`}
-                                            className="vi_0"
-                                            onChange={(e) => {
-                                              setProseWeightage(e.target.value);
-                                            }}
-                                          />
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                              </div> */}
+                             
                             </div>
                           </Typography>
                         </>
@@ -1541,9 +1627,7 @@ function AdminBlueprint() {
                                           Three and Four Sentence Answer
                                           Questions
                                         </option>
-                                        {/* <option value="Five Sentence Answer Questions">
-                  Five Sentence Answer Questions
-                </option> */}
+                                      
                                         <option value="Five and Six Sentence Answer Questions">
                                           Five and Six Sentence Answer Questions
                                         </option>
@@ -1695,7 +1779,20 @@ function AdminBlueprint() {
                                                 <td>{val?.QAInstruction}</td>
                                                 <td>{val?.NQA}</td>
                                                 <td>{val?.Mask}</td>
-                                                <td>
+                                                <td  style={{display:"flex"}}>
+                                                <FaEdit 
+                                                    color="blue"
+                                                    cursor="pointer"
+                                                    onClick={() =>{
+                                                      seted(i)
+                                                      setQATypeE(val?.QAType)
+                                                      setQAInstructionE(val?.QAInstruction)
+                                                      setNQAE(val?.NQA)
+                                                      setMaskE(val?.Mask)
+                                                      handleShowE();
+                                                    }
+                                                    }
+                                                  />
                                                   {" "}
                                                   <AiFillDelete
                                                     color="red"
@@ -1798,7 +1895,7 @@ function AdminBlueprint() {
                                       style={{ padding: "5px" }}
                                     >
                                       <div className="row mt-3">
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <label htmlFor="">
                                             Dificulty Level
                                           </label>
@@ -1809,7 +1906,7 @@ function AdminBlueprint() {
                                             Easy
                                           </p>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <label htmlFor="">
                                             No. of Questions
                                           </label>
@@ -1834,7 +1931,7 @@ function AdminBlueprint() {
                                             <p>{Easy}</p>
                                           )} */}
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <label htmlFor="">Marks</label>
                                           <input
                                             type="number"
@@ -1856,7 +1953,29 @@ function AdminBlueprint() {
                                             <p>{EasyMask}</p>
                                           )} */}
                                         </div>
-                                        <div className="col-md-4 mt-2">
+                                        <div className="col-md-3">
+                                          <label htmlFor="">Parcentage</label>
+                                          <input
+                                            type="number"
+                                            className="vi_0 mt-2"
+                                            placeholder="Enter the Parcentage"
+                                          onChange={(e)=>setEasyParcentage(e.target.value)}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? handleChangeeasy(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeeasy
+                                            //       )
+                                            // }
+                                          />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{EasyMask}</p>
+                                          )} */}
+                                        </div>
+                                        <div className="col-md-3 mt-2">
                                           <p className="fs-5">
                                             <MdPlayArrow
                                               style={{ marginRight: "15px" }}
@@ -1864,13 +1983,15 @@ function AdminBlueprint() {
                                             Average
                                           </p>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <input
                                             type="text"
                                             className="vi_0"
                                             // value={Average}
                                             placeholder="Enter No. of Questions"
-                                     
+                                            onChange={(e) =>
+                                              setAverage(e.target.value)
+                                            }
                                             // onChange={(e) =>
                                             //   selectedLanguage == "en-t-i0-und"
                                             //     ?setAverage(e.target.value)
@@ -1886,7 +2007,7 @@ function AdminBlueprint() {
                                             <p>{Average}</p>
                                           )} */}
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <input
                                             type="number"
                                             className="vi_0"
@@ -1908,7 +2029,29 @@ function AdminBlueprint() {
                                             <p>{AverageMask}</p>
                                           )} */}
                                         </div>
-                                        <div className="col-md-4 mt-2">
+                                        <div className="col-md-3">
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            // value={AverageMask}
+                                            placeholder="Enter the Parcentage"
+                                        onChange={(e)=>setAverageParcentage(e.target.value)}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?handleChangeaverage(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeaverage
+                                            //       )
+                                            // }
+                                          />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{AverageMask}</p>
+                                          )} */}
+                                        </div>
+                                        <div className="col-md-3 mt-2">
                                           <p className="fs-5">
                                             <MdPlayArrow
                                               style={{ marginRight: "15px" }}
@@ -1916,7 +2059,7 @@ function AdminBlueprint() {
                                             Difficult
                                           </p>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <input
                                             type="text"
                                             className="vi_0"
@@ -1938,13 +2081,35 @@ function AdminBlueprint() {
                                             <p>{Difficult}</p>
                                           )} */}
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-3">
                                           <input
                                             type="number"
                                             className="vi_0"
                                             // value={DifficultMask}
                                             placeholder="Enter the Marks"
                                             onChange={handleChangedifficult}
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  handleChangedifficult(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangedifficult
+                                            //       )
+                                            // }
+                                          />
+                                          {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{DifficultMask}</p>
+                                          )} */}
+                                        </div>
+                                        <div className="col-md-3">
+                                          <input
+                                            type="number"
+                                            className="vi_0"
+                                            // value={DifficultMask}
+                                            placeholder="Enter the Parcentage"
+                                            onChange={(e)=>setDifficultParcentage(e.target.value)}
                                             // onChange={(e) =>
                                             //   selectedLanguage == "en-t-i0-und"
                                             //     ?  handleChangedifficult(e)
@@ -2545,6 +2710,196 @@ function AdminBlueprint() {
             )}
           </div>
         </Modal.Body>
+      </Modal>
+      {/* Edit The data of question Instruction */}
+
+      <Modal show={EditType} onHide={()=>setEditType(false)} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>
+            Edit Question Type{" "}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+        <div className="row">
+                                    <div className="col-md-6">
+                                      <Form.Select
+                                        className="vi_0"
+                                        value={QAtypeEdit}
+                                        aria-label="Default select example"
+                                        onChange={(e) => {
+                                          setQATypeE(e.target.value);
+                                        }}
+                                      >
+                                        <option value="default">
+                                          Types of the Question
+                                        </option>
+                                        <option value="Objective Questions">
+                                          Objective Questions
+                                        </option>
+                                        <option value="Multiple Choice Questions">
+                                          Multiple Choice Questions
+                                        </option>
+                                        <option value="Fill in the Blanks Questions">
+                                          Fill in the Blanks
+                                        </option>
+                                        <option value="Match the Following Questions">
+                                          Match the Following
+                                        </option>
+                                        <option value="Recorrect the Answers Questions">
+                                          Recorrect the Answers
+                                        </option>
+                                        <option value="Classifications of Questions">
+                                          Classifications of Questions
+                                        </option>
+                                        <option value="Odd and out words Questions">
+                                          Odd and out words Questions
+                                        </option>
+                                        <option value="RelationShip Words Questions">
+                                          RelationShip Words Questions
+                                        </option>
+                                        <option value="Grammer Questions">
+                                          Grammer Questions
+                                        </option>
+                                        <option value="One Word Question">
+                                          One Word Question
+                                        </option>
+                                        <option value="One Sentence Answer Question">
+                                          One Sentence Answer Question
+                                        </option>
+                                        <option value="Two  Sentence Answer Questions">
+                                          Two Sentence Answer Questions
+                                        </option>
+                                        <option value="Two and three Sentence Answer Questions">
+                                          Two and three Sentence Answer
+                                          Questions
+                                        </option>
+                                        <option value="Three and Four Sentence Answer Questions">
+                                          Three and Four Sentence Answer
+                                          Questions
+                                        </option>
+                                      
+                                        <option value="Five and Six Sentence Answer Questions">
+                                          Five and Six Sentence Answer Questions
+                                        </option>
+                                        <option value="Six Sentence Answer Questions">
+                                          Six Sentence Answer Questions
+                                        </option>
+                                        <option value="Seven Sentence Answer Questions">
+                                          Seven Sentence Answer Questions
+                                        </option>
+                                        <option value="Eight Sentence Answer Questions">
+                                          Eight Sentence Answer Questions
+                                        </option>
+                                        <option value="Ten Sentence Answer Questions">
+                                          Ten Sentence Answer Questions
+                                        </option>
+                                        <option value="Expanding and Explanations Answer Questions">
+                                          {" "}
+                                          Expanding and Explanations Answer
+                                          Questions
+                                        </option>
+                                        <option value="Answer the Questions and Draw the Figure Questions">
+                                          Answer the Questions and Draw the
+                                          Figure Questions{" "}
+                                        </option>
+                                        <option value="Graph Questions">
+                                          Graph Questions
+                                        </option>
+                                        <option value="Complete the Poem">
+                                          Complete the Poem
+                                        </option>
+                                        <option value="Situation UnderStatnding answer Questions">
+                                          {" "}
+                                          Situation UnderStatnding answer
+                                          Questions
+                                        </option>
+                                        <option value="Poet,Time, Place, Writer answer questions">
+                                          {" "}
+                                          Poet,Time, Place, Writer answer
+                                          questions
+                                        </option>
+                                        <option value="Letter Writting">
+                                          Letter Writting
+                                        </option>
+                                        <option value="Map Reading">
+                                          Map Reading
+                                        </option>
+                                      </Form.Select>
+                                    </div>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        placeholder="Enter the head of question instracustion"
+                                       
+                                        onChange={(e) =>
+                                          selectedLanguage == "en-t-i0-und"
+                                            ? setQAInstructionE(e.target.value)
+                                            : onChangeHandler(
+                                                e.target.value,
+                                                setQAInstructionE
+                                              )
+                                        }
+                                      />
+                                      {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{QAInstructionE}</p>
+                                      )}
+                                    </div>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="text"
+                                        className="vi_0"
+                                        value={NQAE}
+                                        placeholder="Enter Total No. of Questions"
+                                        onChange={(e)=>setNQAE(e.target.value)}
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setNQA(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setNQA
+                                        //       )
+                                        // }
+                                      />
+                                      {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{NQA}</p>
+                                      )} */}
+                                    </div>
+                                    <div className="col-md-6">
+                                      <input
+                                        type="number"
+                                        value={MaskEdit}
+                                        className="vi_0"
+                                        placeholder="Enter the mask per question"
+                                      onChange={(e)=>setMaskE(e.target.value)}
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setMask(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setMask
+                                        //       )
+                                        // }
+                                      />
+                                      {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{Mask}</p>
+                                      )} */}
+                                    </div>
+                                  </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" style={{
+            backgroundColor:"green",
+            color: "white"
+          }} onClick={editData}>Update</Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

@@ -178,6 +178,7 @@ import QuestionAnalysis from "./Components/BluePrint/QuestionAnalysis";
 import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
 import Tutorial from "./Components/Home/Tutorial";
 import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
+import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 
 
 function App() {
@@ -913,6 +914,20 @@ function App() {
               />
             }
           />
+
+            <Route
+            path="/admin_upload_pdf"
+            element={
+              <Main
+                children={
+                  <>
+                    <UploadPdfQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
           <Route
             path="/adminslybuscopyview/:Slybus_id"
             element={

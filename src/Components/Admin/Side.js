@@ -10,7 +10,7 @@ import {
   LuPackageX,
   LuUserCog,
 } from "react-icons/lu";
-import { FaQuestion, FaWeightHanging } from "react-icons/fa";
+import { FaQuestion, FaUpload, FaWeightHanging } from "react-icons/fa";
 import { IoMdContact } from "react-icons/io";
 import { FaShop, FaRegIdCard, FaCircleUser } from "react-icons/fa6";
 import { GiFlatPlatform, GiNewspaper } from "react-icons/gi";
@@ -687,6 +687,47 @@ const Side = () => {
                     <FaShop style={{ fontSize: "20px" }} />
                   </span>
                   <span className="ms-2">Questions Add</span>
+                </li>
+              </Link>
+              <Link to="/admin_upload_pdf" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(true);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setsyllabusCopy(false);
+                    setAccountHistory(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <FaUpload  style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Upload Questions</span>
                 </li>
               </Link>
               <Link to="/adminuserlist" onClick={handleNavCollapse}>

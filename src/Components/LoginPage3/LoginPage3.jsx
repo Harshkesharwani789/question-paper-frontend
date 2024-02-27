@@ -19,7 +19,7 @@ const LoginPage3 = () => {
   const [Subject, setSubject] = useState("");
   const [Test_Date, setTest_Date] = useState("");
   const [Size_ofthe_Question, setSize_ofthe_Question] = useState("A4");
-  // const [addgenerate, setaddgenerate] = useState("");
+  const [ExamTime, setExamTime] = useState("");
   const generate = async () => {
     // alert("Callling")
     try {
@@ -39,21 +39,24 @@ const LoginPage3 = () => {
           Size_ofthe_Question: Size_ofthe_Question,
           id: state?._id,
           authId: user?._id,
-          teacherId:user?._id,
-          teacheName:user?.FirstName
+          teacherId: user?._id,
+          teacheName: user?.FirstName,
+          ExamTime: ExamTime,
+          SchoolAddress:SchoolAddress
         },
       };
 
       let res = await axios(config);
 
-      if (res.status == 200){
-      swal({
-        title: "Yeah!",
-        text: "view blue print !!!",
-        icon: "success",
-        button: "OK!",
-      });
-      navigate("/loginpage5", { state:res.data.success });}
+      if (res.status == 200) {
+        swal({
+          title: "Yeah!",
+          text: "view blue print !!!",
+          icon: "success",
+          button: "OK!",
+        });
+        navigate("/loginpage5", { state: res.data.success });
+      }
     } catch (error) {
       console.log(error);
       swal({
@@ -64,7 +67,6 @@ const LoginPage3 = () => {
       });
     }
   };
-
 
   const [subject, setsubject] = useState([]);
   const getSubject = async () => {
@@ -95,7 +97,7 @@ const LoginPage3 = () => {
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
-                        Welcome  {user?.FirstName} {user?.LastName} !{" "}
+                        Welcome {user?.FirstName} {user?.LastName} !{" "}
                       </p>{" "}
                       <span className="fs-4" style={{ textAlign: "center" }}>
                         Start Generating Your Paper
@@ -107,7 +109,7 @@ const LoginPage3 = () => {
               <div className="col-md-6 yoihjij ">
                 <Form className="pe-2 pt-3">
                   <Form.Group controlId="formFile" className="mb-2">
-                    <Form.Label
+                    {state?.userType=="Teacher" ? (<>  <Form.Label
                       className="fs-6 fw-bold"
                       style={{ letterSpacing: "0.5px" }}
                     >
@@ -119,8 +121,7 @@ const LoginPage3 = () => {
                         setSchool_Logo(e.target.files[0]);
                       }}
                     />
-
-                    <Form.Label
+                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
                     >
@@ -147,6 +148,10 @@ const LoginPage3 = () => {
                         setSchoolAddress(e.target.value);
                       }}
                     />
+                    </>):(<></>)}
+                  
+
+                   
 
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
@@ -169,38 +174,39 @@ const LoginPage3 = () => {
                         );
                       })}
                     </Form.Select>
-                    {/* <FormLabel
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      Test Paper Name
-                    </FormLabel> */}
-                    {/* <Form.Control
-                      type="text"
-                      placeholder="Enter the Test Paper Name"
-                    /> */}
-                    {/* <Form.Select aria-label="Default select example">
-                      <option>Select Test Paper Name</option>
-                      <option value="1">FA-1</option>
-                      <option value="2">FA-2</option>
-                      <option value="3">FA-3</option>
-                      <option value="3">FA-4</option>
-                      <option value="3">FA-5</option>
-                      <option value="3">FA-6</option>
-                    </Form.Select> */}
-                    <FormLabel
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      Test Date
-                    </FormLabel>
-                    <Form.Control
-                      type="date"
-                      placeholder="Enter the Test Paper Name"
-                      onChange={(e) => {
-                        setTest_Date(e.target.value);
-                      }}
-                    />
+                    <div className="row">
+                      <div className="col-md-6">
+                        <FormLabel
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Exam Date
+                        </FormLabel>
+                        <Form.Control
+                          type="date"
+                          placeholder="Enter the Test Paper Name"
+                          onChange={(e) => {
+                            setTest_Date(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <FormLabel
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Exam Time
+                        </FormLabel>
+                        <Form.Control
+                          type="time"
+                          placeholder="Enter the Test Paper Name"
+                          onChange={(e) => {
+                            setExamTime(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+
                     <FormLabel
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
@@ -218,7 +224,7 @@ const LoginPage3 = () => {
                       }}
                     />
                   </Form.Group>
-                  <a  style={{ textDecoration: "none" }}>
+                  <a style={{ textDecoration: "none" }}>
                     <Button
                       style={{
                         margin: "auto",
@@ -227,7 +233,7 @@ const LoginPage3 = () => {
                         background: "green",
                         // margin: "20px auto",
                       }}
-                      onClick={() =>generate()}
+                      onClick={() => generate()}
                     >
                       Save
                     </Button>

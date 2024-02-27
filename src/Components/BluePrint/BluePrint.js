@@ -197,14 +197,15 @@ const BluePrint = () => {
                             <div className="container">
                               <div className="row">
                                 <div className="col-md-2">
-                                  <img
+                                  {state?.School_Logo ? (   <img
                                     src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
                                     alt=""
                                     style={{
                                       width: "100px",
                                       height: "-webkit-fill-available",
                                     }}
-                                  />
+                                  />):(<></>)}
+                               
                                 </div>
                                 <div className="col-md-10">
                                   <div className="title-1 text-center">
@@ -212,7 +213,7 @@ const BluePrint = () => {
                                   </div>
                                   <div className="title-2">
                                     <h5>
-                                      KSQAAC, Malleshwaram, Bengaluru-560003
+                                      {state?.SchoolAddress}
                                     </h5>
                                   </div>
                                   <div className="title-3">
