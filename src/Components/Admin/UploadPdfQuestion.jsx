@@ -12,8 +12,7 @@ import parse from "html-react-parser";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { debounce } from "lodash";
-import moment from "moment";
-const AdminSyllabusCopy = () => {
+const UploadPdfQuestion = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
@@ -198,9 +197,8 @@ const AdminSyllabusCopy = () => {
   };
 
 
-  // console.log("Arr====data==>",Arr);
+  console.log("Arr====data==>",Arr);
 const [period,setperiod]=useState("");
-const [realMonth,setrealMonth]=useState("")
   const [Arr2, setArr2] = useState([]);
   const Addchaptertype = (i) => {
     try {
@@ -208,7 +206,6 @@ const [realMonth,setrealMonth]=useState("")
       const newObj2 = {
         chapterno: chapterNumber,
         Months: Months,
-        realMonth:realMonth,
         ChapterName: selectsubjectpart,
         period:period,
       };
@@ -232,16 +229,15 @@ const [realMonth,setrealMonth]=useState("")
       console.error(error);
     }
   }
-const [typ,settype]=useState("")
+
   const sumbitToArr=()=>{
  const am=   Arr?.map((ele)=>{
-      if(ele?.Examinationname==selectedassesment&& ele?.Assessment==typ){
+      if(ele?.Assessment==selectedassesment){
         return {...ele,unitArr:Arr2}
       }
       return ele
     })
     setArr(am)
-    setArr2([])
     setShow3(false)
     return swal({
       title: "Yeah!",
@@ -384,6 +380,7 @@ getSyllabus()
           SyllabusDetails: Arr,
           Title:Title,
           Examinationname:Examinationname,
+        
           id: updatechapter,
         },
       };
@@ -554,9 +551,9 @@ getSyllabus()
 
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Syllabus</h2>
+          <h2 className="header-c ">Upload Question Paper</h2>
           <button className="admin-add-btn" onClick={handleShow}>
-            Add Syllabus
+            Add 
           </button>
         </div>
 
@@ -572,9 +569,7 @@ getSyllabus()
                 <th>
                   <div>Year</div>
                 </th>
-                <th><div>
-                  Exam Name
-                  </div></th>
+                <th><div>Exam Name</div></th>
                 <th>
                   <div>Class</div>
                 </th>
@@ -608,10 +603,7 @@ getSyllabus()
                     <td>{item?.medium}</td>
                     <td>{item?.subject}</td>
                     <td>
-                      {/* <Link
-                        to="//"
-                        style={{ textDecoration: "none", color: "white" }}
-                      > */}
+                  
                       <FaEye
                         color="blue"
                         onClick={() => {
@@ -630,13 +622,7 @@ getSyllabus()
                             onClick={() => {
                               handleShow1(item);
                               setpdatesetchapter(item?._id);
-                            setTitle(item?.Title);
-                            setyear(item?.year);
-                            setclasss(item?.Class);
-                              setsubclass(item?.SubClass)
-                              setsubjectt(item?.subject)
-                              setmedium(item?.medium);
-                              setArr(item?.SyllabusDetails)
+                              setChapterName(item?.chapterName);
                             }}
                           />{" "}
                         </div>
@@ -984,9 +970,8 @@ getSyllabus()
                             <td>
                               <Button
                                 onClick={() =>{ 
-                                  settype(item?.Assessment)
                                   setArr2(item?.unitArr? item?.unitArr:[])
-                                  handleShow3(item?.Examinationname)}}
+                                  handleShow3(item?.Assessment)}}
                               >
                                 Add
                               </Button>{" "}
@@ -1042,7 +1027,7 @@ getSyllabus()
             <div className="col-md-6">
                 <div className="do-sear mt-2">
                   <label>Month</label>
-                  {/* <input
+                  <input
                     type="text"
                     className="vi_0"
                     placeholder="Enter month name"
@@ -1051,14 +1036,7 @@ getSyllabus()
                         setMonths(e.target.value);
                       }else onChangeHandler(e.target.value, setMonths);
                     }}
-                  /> */}
-                  <input type="month"   className="vi_0"  onChange={(e) => {
-                    setrealMonth(e.target.value)
-                    // console.log("months ",moment(e.target.value).format("MMMM"));
-                      if(selectedLanguage == "en-t-i0-und"){
-                        setMonths(moment(e.target.value).format("MMMM  -YYYY"));
-                      }else onChangeHandler(moment(e.target.value).format("MMMM -YYYY"), setMonths);
-                    }}/>
+                  />
                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Months}</p>}
                 </div>
               </div>
@@ -1069,14 +1047,8 @@ getSyllabus()
                     type="text"
                     className="vi_0"
                     placeholder="Enter period Number"
-                    onChange={(e) => {
-                      if(selectedLanguage == "en-t-i0-und"){
-                        setperiod(e.target.value);
-                      }else onChangeHandler(e.target.value, setperiod);
-                    }}
-                    // onChange={(e) => setperiod(e.target.value)}
+                    onChange={(e) => setChapterNumber(e.target.value)}
                   />
-                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{period}</p>}
                 </div>
               </div>
               <div className="col-md-6">
@@ -1086,15 +1058,8 @@ getSyllabus()
                     type="text"
                     className="vi_0"
                     placeholder="Enter Unit Number"
-                    // onChange={(e) => setChapterNumber(e.target.value)}
-                    onChange={(e) => {
-                      if(selectedLanguage == "en-t-i0-und"){
-                        setChapterNumber(e.target.value);
-                      }else onChangeHandler(e.target.value, setChapterNumber);
-                    }}
-                    // onChange={(e) => setperiod(e.target.value)}
+                    onChange={(e) => setChapterNumber(e.target.value)}
                   />
-                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterNumber}</p>}
                 </div>
               </div>
             
@@ -1207,7 +1172,6 @@ getSyllabus()
           backdrop="static"
           keyboard={false}
           style={{ zIndex: "99999" }}
-          size="xl"
         >
           <Modal.Header
             closeButton
@@ -1217,296 +1181,45 @@ getSyllabus()
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>Title</label>
-                  <input
-                   
-                    type="text"
-                    className="vi_0"
-                    placeholder="Eg:- Annoual Programe of  work for the Year"
-                    onChange={(e) => {
-                      // setyear(e.target.value);
-                      if(selectedLanguage == "en-t-i0-und"){
-                            setTitle(e.target.value);
-                          }else onChangeHandler(e.target.value, setTitle);
-                    }}
-                  />
-                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>Year</label>
-                  <input
-                    value={year}
-                    type="text"
-                    className="vi_0"
-                    placeholder="Eg:- 2023-2024"
-                    onChange={(e) => {
-                      setyear(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-
-            
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Class <span style={{ color: "red" }}>*</span>
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    value={classs}
-                    onChange={(e) => {
-                      setclasss(e.target.value);
-                    }}
-                  >
-                    <option>Select the Class</option>
-                    {uniqueClassNamesArray?.map((val, i) => {
-                      return (
-                        <option value={val} key={i}>
-                          {val}
-                        </option>
-                      );
-                    })}
-                  </Form.Select>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Sub-Class <span style={{ color: "red" }}>*</span>
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    value={subclass}
-                    onChange={(e) => {
-                      setsubclass(e.target.value);
-                    }}
-                  >
-                    <option>Select the Sub-Class</option>
-                    {getaddsubclass
-                      ?.filter((ele) => ele.className === classs)
-                      ?.map((val, i) => {
-                        return (
-                          <option value={val?.subclassName} key={i}>
-                            {val?.subclassName}
-                          </option>
-                        );
-                      })}
-                  </Form.Select>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Subjects <span style={{ color: "red" }}>*</span>
-                  </label>
-                  <Form.Select
-                  value={subjectt}
-                    aria-label="Default select example"
-                    onChange={(e) => setsubjectt(e.target.value)}
-                  >
-                    <option value={""}>Select the Subjects</option>
-                    {subject?.map((item, i) => {
-                      return (
-                        <>
-                          <option value={item?.subjectName}>
-                            {item?.subjectName}
-                          </option>
-                        </>
-                      );
-                    })}
-                  </Form.Select>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Medium <span style={{ color: "red" }}>*</span>
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    value={medium}
-                    onChange={(e) => {
-                      setmedium(e.target.value);
-                    }}
-                  >
-                    <option>Select the Medium</option>
-                    {Medium?.map((val, i) => {
-                      return (
-                        <option value={val?.mediumName} key={i}>
-                          {val?.mediumName}
-                        </option>
-                      );
-                    })}
-                  </Form.Select>
-                </div>
+              <div className="do-sear mt-2">
+                <label>Chapter Number</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Number"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
               </div>
             </div>
 
-            <div
-              style={{
-                border: "2px solid #dee2e6",
-                padding: "10px",
-                marginTop: "10px",
-                // backgroundColor: "#e9caa0"
-              }}
-            >
-              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
-                <div className="col-sm-4">
-                  <div className="do-sear mt-2">
-                    <label>Assessment:</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Assessment Name"
-                      onChange={(e) => {
-                        if(selectedLanguage == "en-t-i0-und"){
-                          setAssessment(e.target.value);
-                        }else onChangeHandler(e.target.value, setAssessment);
-                  
-                      }}
-
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
-                  </div>
-                </div>
-                <div className="col-sm-2">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Exam Name 
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => setExaminationname(e.target.value)}
-                  >
-                    <option>Select the Exame Name</option>
-                    {NameExam?.map((item, i) => {
-                      return (
-                        <>
-                          <option value={item?.NameExamination}>
-                            {item?.NameExamination}
-                          </option>
-                        </>
-                      );
-                    })}
-                  </Form.Select>
-                </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Chapter Name</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Chapter Name"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
               </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>From:</label>
-                    <input
-                      type="date"
-                      className="vi_0"
-                      onChange={(e) => setfrom(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>To:</label>
-                    <input
-                      type="date"
-                      className="vi_0"
-                      placeholder="Enter Assessment"
-                      onChange={(e) => setto(e.target.value)}
-                    />
-                  </div>
-                </div>
-          
-             
-                <div style={{ textAlign: "center" }}>
-                  <Button
-                    variant=""
-                    style={{
-                      marginTop: "15px",
-                      backgroundColor: "green",
-                      color: "white",
-                      borderRadius: "5px",
-                    }}
-                    onClick={() => {
-                      // setslybus(true);
-                      AddTypesofassessment();
-                    }}
-                  >
-                    Add
-                  </Button>
-                </div>
-            
-             
+            </div>
+
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Description</label>
+                <CKEditor editor={ClassicEditor} className="vi_0" />
               </div>
+            </div>
 
-
-              <div className="row mt-2">
-                <div className="col-md-12">
-                  <Table
-                    responsive
-                    bordered
-                    style={{
-                      width: "-webkit-fill-available",
-                      textAlign: "center",
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>S No.</th>
-                        <th>Assessment</th>
-                        <th>From</th>
-                        <th>To</th>
-
-                        <th>Month</th>
-                        <th>Period</th>
-                        <th>Unit No.</th>
-                        <th>Unit Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Arr?.map((item, i) => {
-                        return (
-                          <tr key={i}>
-                            <td>{i + 1}</td>
-                            <td>{item?.Assessment}({item?.Examinationname})</td>
-                            <td>{item?.from}</td>
-                            <td>{item?.to}</td>
-
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.Months}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.period}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.chapterno}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.ChapterName}</p>
-                            })}</td>
-                            <td>
-                              <Button
-                                onClick={() =>{ 
-                                  settype(item?.Assessment)
-                                  setArr2(item?.unitArr? item?.unitArr:[])
-                                  handleShow3(item?.Examinationname)}}
-                              >
-                                Add
-                              </Button>{" "}
-                              <AiFillDelete
-                                color="red"
-                                cursor="pointer"
-                                onClick={() => deleteQuestionType(i)}
-                              />
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </div>
+            <div className="row">
+              <div className="do-sear mt-2">
+                <label>Marks</label>
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder="Enter Marks"
+                  onChange={(e) => setChapterName(e.target.value)}
+                />
               </div>
             </div>
           </Modal.Body>
@@ -1567,4 +1280,4 @@ getSyllabus()
   );
 };
 
-export default AdminSyllabusCopy;
+export default UploadPdfQuestion;

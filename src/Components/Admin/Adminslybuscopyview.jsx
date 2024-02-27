@@ -1,14 +1,48 @@
-import React, { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
+import React, { useEffect, useState ,useRef} from "react";
+// import Table from "react-bootstrap/Table";
 import "../SyllabusCopy/SyllabusCopy.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
-
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import { CiSaveDown2 } from "react-icons/ci";
+import { LuPrinter } from "react-icons/lu";
+import { IoMdShare } from "react-icons/io";
+import { Row, Table } from "react-bootstrap";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { MdOutlineEmail } from "react-icons/md";
 const Adminslybuscopyview = () => {
   const { Slybus_id } = useParams();
 
   const [addslybus, setaddslybus] = useState([]);
+
+  const createPDF = async () => {
+    const pdf = new jsPDF("portrait", "pt", "a4");
+    const data = await html2canvas(document.querySelector("#pdf"), {
+      useCORS: true,
+    });
+    const img = data.toDataURL("image/png");
+
+    const imgProperties = pdf.getImageProperties(img);
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("Syllabus.pdf");
+  };
+
+  
+  const [show, setShow] = useState("");
+  const aTagRef = useRef(null);
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+
   const Adminslybusbyid = async () => {
     try {
       let res = await axios.get(
@@ -26,6 +60,43 @@ const Adminslybuscopyview = () => {
   return (
     <div>
       {/* first sem first page starts here  */}
+      <div className="top-header">
+        <div className="top-nav-display">
+          <CiSaveDown2
+            style={{ width: "22px", height: "40px" }}
+            onClick={createPDF}
+          />
+          <LuPrinter
+            style={{ width: "22px", height: "40px" }}
+            ref={aTagRef}
+            onClick={handlePrint}
+          />
+          <IoMdShare
+            style={{ width: "22px", height: "40px" }}
+            onClick={() => {
+              setShow(true);
+            }}
+          />
+        </div>
+        {show ? (
+          <>
+            <div className="share-button">
+              <div>
+                <a href={"https://www.whatsapp.com/"}>
+                  <IoLogoWhatsapp style={{ width: "25px", height: "35px" }} />
+                </a>
+              </div>
+              <di>
+                <a href={"https://www.gmail.com/"}>
+                  <MdOutlineEmail style={{ width: "25px", height: "35px" }} />
+                </a>
+              </di>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+      </div>
       <div className="question-paper-display">
         <div className="details-display">
           {/* <div className="top-titles-container">
@@ -48,7 +119,7 @@ const Adminslybuscopyview = () => {
          
           <div>
             <h3 style={{ textAlign: "center", paddingTop: "10px" }}>
-              {addslybus?.Title}  {addslybus?.year}
+            {addslybus?.year} {addslybus?.Title} 
             </h3>
             <h5 style={{ textAlign: "center" }}>{addslybus?.SubClass} - {addslybus?.subject} </h5>
             <h5 style={{ textAlign: "center" }}></h5>
@@ -72,32 +143,39 @@ const Adminslybuscopyview = () => {
                 </tr>
               </thead>
               <tbody>
-                {addslybus?.SyllabusDetails?.map((item, i) => {
+                {addslybus?.SyllabusDetails?.sort((a, b) => {
+    // Convert the strings to numbers and then compare them
+    return parseInt(a?.unitArr[0]?.realMonth?.split("-").join("")) - parseInt(b?.unitArr[0]?.realMonth?.split("-").join(""));
+}).map((item, i) => {
+if(item?.Examinationname=="Sa-01" ||item?.Examinationname=="Sa-02"){
+ i=i-1
+}
                   return (
-                    <>
-                      <tr>
-                        <td>{i + 1}</td>
-                        <td>
-                          {item?.unitArr?.map((ele) => {
-                            return <p>{ele?.Months}</p>;
-                          })}
-                        </td>
-                        <td>
-                          {item?.unitArr?.map((ele) => {
-                            return <p>{ele?.period}</p>;
-                          })}
-                        </td>
-                        <td>
-                          {item?.unitArr?.map((ele) => {
-                            return <p>{ele?.chapterno}</p>;
-                          })}
-                        </td>
-                        <td>
-                          {item?.unitArr?.map((ele) => {
-                            return <p>{ele?.ChapterName}</p>;
-                          })}
-                        </td>
-                      </tr>
+                    <>   {item?.Examinationname=="Sa-01" ||item?.Examinationname=="Sa-02" ? (<></>):(  <tr>
+                      <td>{ i + 1}</td>
+                   
+                      <td>
+                        {item?.unitArr?.map((ele) => {
+                          return <p>{ele?.Months}</p>;
+                        })}
+                      </td>
+                      <td>
+                        {item?.unitArr?.map((ele) => {
+                          return <p>{ele?.period}</p>;
+                        })}
+                      </td>
+                      <td>
+                        {item?.unitArr?.map((ele) => {
+                          return <p>{ele?.chapterno}</p>;
+                        })}
+                      </td>
+                      <td>
+                        {item?.unitArr?.map((ele) => {
+                          return <p>{ele?.ChapterName}</p>;
+                        })}
+                      </td>
+                    </tr>)}
+                    
                       <tr>
                         <td colspan="5">
                           <table class="table mb-0">{item?.Assessment}({item?.Examinationname}) {item?.from} to {item?.to}</table>

@@ -175,6 +175,7 @@ import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
 import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
 import ContactUs from "./Components/Admin/ContactUs";
 import QuestionAnalysis from "./Components/BluePrint/QuestionAnalysis";
+import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 
 
 function App() {
@@ -880,6 +881,20 @@ function App() {
               />
             }
           />
+
+            <Route
+            path="/admin_upload_pdf"
+            element={
+              <Main
+                children={
+                  <>
+                    <UploadPdfQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
           <Route
             path="/adminslybuscopyview/:Slybus_id"
             element={
