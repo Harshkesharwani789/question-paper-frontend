@@ -213,7 +213,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>16</td>
                   <td></td>
-                  <td>26</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -221,7 +221,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>17</td>
                   <td></td>
-                  <td>27</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -229,7 +229,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>18</td>
                   <td></td>
-                  <td>28</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>

@@ -621,42 +621,159 @@ var TotalMask=0
                     <tr>
                       <td></td>
                       <td>Total</td>
+                      {blueprint?.objectives?.map((ele) => {
+                        return (
+                          <>
+                                <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "M C" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "V.S.A" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "S.A" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 1" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 2" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 3" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                          </>
+                        );
+                      })}
+                    
+                    
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{blueprint?.AllChapter?.reduce(
+                      (a, ele) =>
+                        a +
+                        Number(
+                          ele?.Blueprintnoofquestion 
+                        ),
+                      0
+                    )}</td>
                       <td>{blueprint?.AllChapter?.reduce(
                       (a, ele) =>
                         a +

@@ -441,7 +441,7 @@ const AdminQuestionDetails = () => {
                 >
                   <option>Select the Chapter Name</option>
                   {chapters
-                    ?.filter((ele) => ele?.subjectName == Subjects)
+                    ?.filter((ele) => ele?.subjectName == Subjects&&ele?.SubjectPart==Lesson)
                     ?.map((item, i) => {
                       return (
                         <option value={item?.chapterName} key={i}>

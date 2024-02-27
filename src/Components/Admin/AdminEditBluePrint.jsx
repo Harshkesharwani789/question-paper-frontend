@@ -18,6 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import { debounce } from "lodash";
 import MathEditor from "./MyEditor";
+import { FaEdit } from "react-icons/fa";
 let googleTransliterate = require("google-input-tool");
 
 const steps = [
@@ -559,6 +560,30 @@ const AdminEditBluePrint = () => {
       });
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const [ChaBl, setChaBl] = useState(false);
+const [id,setid]=useState("");
+  const blueEdit = () => {
+    try {
+      let am = Arr5.map((item, i) => {
+        if (i == id) {
+          return {
+            ...item,
+            Blueprintobjective: Blueprintobjective,
+            Blueprintchapter: Blueprintchapter,
+            Blueprintnoofquestion: Blueprintnoofquestion,
+            BluePrintQuestiontype: BluePrintQuestiontype,
+            BluePrintmarksperquestion: BluePrintmarksperquestion,
+          };
+        }
+        return item;
+      });
+      setArr5(am);
+      setChaBl(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -2210,10 +2235,7 @@ const AdminEditBluePrint = () => {
                                               Selete the Chapter
                                             </option>
                                             {chapters
-                                              ?.filter(
-                                                (ele) =>
-                                                  ele.SubjectPart === labels
-                                              )
+                                              
                                               ?.map((val, i) => {
                                                 return (
                                                   <option
@@ -2411,8 +2433,30 @@ const AdminEditBluePrint = () => {
                                                           val?.BluePrintmarksperquestion
                                                         }
                                                       </td>
-                                                      <td>
-                                                        {" "}
+                                                      <td style={{display:"flex",gap:"5px"}}>
+                                                      <FaEdit
+                                                          color="blue"
+                                                          cursor="pointer"
+                                                          onClick={() => {
+                                                            setid(i);
+                                                            setBlueprintchapter(
+                                                              val?.Blueprintchapter
+                                                            );
+                                                            setblueprintobjective(
+                                                              val?.Blueprintobjective
+                                                            );
+                                                            setBluePrintQuestiontype(
+                                                              val?.BluePrintQuestiontype
+                                                            );
+                                                            setBlueprintnoofquestion(
+                                                              val?.Blueprintnoofquestion
+                                                            );
+                                                            setBluePrintmarksperquestion(
+                                                              val?.BluePrintmarksperquestion
+                                                            );
+                                                            setChaBl(true);
+                                                          }}
+                                                        />{" "}
                                                         <AiFillDelete
                                                           color="red"
                                                           cursor="pointer"
@@ -2618,6 +2662,149 @@ const AdminEditBluePrint = () => {
             )}
           </div>
         </Modal.Body>
+      </Modal>
+
+
+         {/* Edit The data of question content */}
+
+         <Modal show={ChaBl} onHide={() => setChaBl(false)} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>
+            Edit chapter and marks{" "}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-4">
+              <label htmlFor="">Select Chapters</label>
+              <Form.Select
+                value={Blueprintchapter}
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setBlueprintchapter(e.target.value);
+                }}
+              >
+                <option value="">Selete the Chapter</option>
+                {chapters?.map((val, i) => {
+                  return (
+                    <option value={val?.chapterName}>{val?.chapterName}</option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Objectives</label>
+              <Form.Select
+                aria-label="Default select example"
+                // value={Blueprintobjective}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    let am = JSON.parse(e.target.value);
+                    setblueprintobjective(am?.Objective);
+                    setview(am);
+                  }
+                }}
+              >
+                <option value="">Selete Objectives</option>
+                {Arr3?.map((item, i) => {
+                  return (
+                    <option value={JSON.stringify(item)} key={i}>
+                      {item?.Objective}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Question Type</label>
+              <Form.Select
+                value={BluePrintQuestiontype}
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setBluePrintQuestiontype(e.target.value);
+                }}
+              >
+                <option value="">Select Question Types</option>
+                <option value="M C">M.C (Multiple Choice)</option>
+                <option value="V.S.A">V.S.A (Very Short Answer)</option>
+                <option value="S.A">S.A (Short Answer)</option>
+                <option value="L.A 1">L.A (Long Answer 1)</option>
+                <option value="L.A 2">L.A (Long Answer 2)</option>
+                <option value="L.A 3">L.A (Long Answer 3)</option>
+                {/* {view?.AllQType?.map((ele) => (
+                                              <option value={ele?.QTyp}>
+                                                {ele?.QTyp}
+                                              </option>
+                                            ))} */}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">No. of Questions</label>
+
+              <input
+                type="number"
+                className="vi_0"
+                value={Blueprintnoofquestion}
+                onChange={(e) => {
+                  setBlueprintnoofquestion(e.target.value);
+                }}
+                placeholder="Enter No.of Questions"
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBlueprintnoofquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBlueprintnoofquestion
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{Blueprintnoofquestion}</p>
+                                          )} */}
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Marks Per Question</label>
+
+              <input
+                type="number"
+                className="vi_0"
+                value={BluePrintmarksperquestion}
+                onChange={(e) => {
+                  setBluePrintmarksperquestion(e.target.value);
+                }}
+                placeholder="Marks Per Question"
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBluePrintmarksperquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBluePrintmarksperquestion
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{BluePrintmarksperquestion}</p>
+                                          )} */}
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="success"
+            style={{
+              backgroundColor: "green",
+              color: "white",
+            }}
+            onClick={blueEdit}
+          >
+            Update
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
