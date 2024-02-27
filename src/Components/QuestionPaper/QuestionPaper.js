@@ -1442,8 +1442,7 @@ const QuestionPaper = ({ text }) => {
                   <td>{item?.Lesson}</td>
                   <td>{item?.Types_Question}</td>
                   <td>{state?.bluePrint?.AllChapter
-                  ?.filter((ele)=>ele.Blueprintobjective === item?.Objectives )
-                  ?.map((bluePrintQuestionType)=>bluePrintQuestionType?.BluePrintQuestiontype)}</td>
+                  ?.filter((ele)=>ele.Blueprintobjective === item?.Objectives )[0]?.BluePrintQuestiontype}</td>
                   <td>{item?.Marks}</td>
                   <td>{item?.Difficulty_level?.slice(0,1)}</td>
                   <td>{item?.Answer_Time}</td>
