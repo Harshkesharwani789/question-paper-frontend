@@ -175,6 +175,9 @@ import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
 import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
 import ContactUs from "./Components/Admin/ContactUs";
 import QuestionAnalysis from "./Components/BluePrint/QuestionAnalysis";
+import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
+import Tutorial from "./Components/Home/Tutorial";
+import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 
 
 function App() {
@@ -210,6 +213,36 @@ function App() {
               </>
             }
           />
+          <Route
+            path="/questionandanswerview"
+            element={
+              <>
+                <Navbarr />
+                <QuestionAndAnswerView />
+              </>
+            }
+          />
+          <Route
+            path="/tutorial"
+            element={
+              <>
+                <Navbarr />
+                <Tutorial />
+              </>
+            }
+          />
+           <Route
+            path="/offerquestionpaper"
+            element={
+              <>
+                <Navbarr />
+                <OfferQuestionPaper />
+              </>
+            }
+          />
+          
+
+
           
           <Route
           path="/contactus"

@@ -166,9 +166,7 @@ const AdminQuestionDetailsview = () => {
             {/* GarmmerQuestion */}
             {question_details?.Types_Question === "Grammer Questions" ? (<>
               <div className="row" >
-
-<p>Question : </p>
-
+                <p>Question : </p>
                 <Table
                   responsive
                   bordered
