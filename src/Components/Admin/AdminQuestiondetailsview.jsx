@@ -115,7 +115,7 @@ const AdminQuestionDetailsview = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
-                <p className="vi_0">{question_details?.Name_of_examination}</p>
+                <p className="vi_0">{question_details?.Name_of_examination?.map((item)=><span>{item?.NameExamination} {" "}</span>)}</p>
               </div>
             </div>
             <div className="col-md-6">

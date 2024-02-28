@@ -6,7 +6,13 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
 
 import AdminQuestprops from "./AdminQuestprops";
 import MathEditor from "./MyEditor";
@@ -63,7 +69,6 @@ const AdminQuestionDetails = () => {
     setSelectedLanguage(event.target.value);
   };
 
-
   // get method for objectives
   const [getobjectives, setgetobjectives] = useState([]);
 
@@ -95,7 +100,7 @@ const AdminQuestionDetails = () => {
   const [Difficulty_level, setDifficulty_level] = useState("");
   const [Types_Question, setTypes_Question] = useState("");
   const [Section, setSection] = useState("");
-  const [Name_of_examination, setName_of_examination] = useState("");
+  const [Name_of_examination, setName_of_examination] = useState([]);
   const [Question, setQuestion] = useState("");
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
@@ -107,6 +112,20 @@ const AdminQuestionDetails = () => {
   const [Answer, setAnswer] = useState("");
   const [Instruction, setInstruction] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
+
+  const addExamaData = (name) => {
+    try {
+      setName_of_examination([...Name_of_examination, { Name: name }]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteExamData = (name) => {
+    setName_of_examination(
+      Name_of_examination?.filter((ele) => ele?.Name != name)
+    );
+  };
 
   const selectdetails = {
     Section: Section,
@@ -129,7 +148,7 @@ const AdminQuestionDetails = () => {
     if (Types_Question && selectedLanguage) {
       sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
     }
-  }, [selectdetails.Instruction, selectedLanguage,Types_Question]);
+  }, [selectdetails.Instruction, selectedLanguage, Types_Question]);
 
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
@@ -274,6 +293,26 @@ const AdminQuestionDetails = () => {
   );
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
   const [trans, settran] = useState("");
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+
+  const handleSelectChange = (event) => {
+      const {
+          target: { value },
+      } = event;
+      setName_of_examination(value);
+  };
+
+  console.log("Name Of Exame",Name_of_examination);
   return (
     <div>
       <div className="row">
@@ -284,7 +323,7 @@ const AdminQuestionDetails = () => {
             value={selectedLanguage}
             onChange={handleLanguageChange}
             className="vi_0"
-            style={{borderRadius:"20px",backgroundColor:"#e2cbd0"}}
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
           >
             <option value="en-t-i0-und">English</option>
             <option value="ne-t-i0-und">Nepali</option>
@@ -441,7 +480,11 @@ const AdminQuestionDetails = () => {
                 >
                   <option>Select the Chapter Name</option>
                   {chapters
-                    ?.filter((ele) => ele?.subjectName == Subjects&&ele?.SubjectPart==Lesson)
+                    ?.filter(
+                      (ele) =>
+                        ele?.subjectName == Subjects &&
+                        ele?.SubjectPart == Lesson
+                    )
                     ?.map((item, i) => {
                       return (
                         <option value={item?.chapterName} key={i}>
@@ -469,8 +512,47 @@ const AdminQuestionDetails = () => {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="do-sear mt-2">
+              <label className="fw-bold">Name Of Examnation :</label>
+              <FormControl sx={{ m: 1, width: 245, height: 43 }}>
+                <InputLabel id="demo-multiple-checkbox-label">
+                  Name Of Exam
+                </InputLabel>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={Name_of_examination}
+                  onChange={handleSelectChange}
+                  input={<OutlinedInput label="Amenities" />}
+                  renderValue={(selected) =>
+                    selected.map((amenity) => amenity.NameExamination).join(", ")
+                  }
+                >
+                  {NameExam?.map((amenity) => (
+                    <MenuItem key={amenity._id} value={amenity}>
+                      <Checkbox
+                        checked={Name_of_examination.some(
+                          (selected) => selected._id === amenity._id
+                        )}
+                      />
+                      <ListItemText primary={amenity.NameExamination} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              {/* <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
+                {NameExam?.map((item, i) => {
+                    return (<div>
+                      <input type="check"  value={item?.NameExamination} key={i}/>
+                      <label>
+                           {item?.NameExamination}
+                      </label>
+                     
+                    
+                    </div>);
+                  })}
                 <Form.Select
                   aria-label="Default select example"
                   onChange={(e) => {
@@ -486,7 +568,7 @@ const AdminQuestionDetails = () => {
                     );
                   })}
                 </Form.Select>
-              </div>
+              </div> */}
             </div>
             <div className="col-md-4">
               <div className="do-sear mt-2">
@@ -556,7 +638,7 @@ const AdminQuestionDetails = () => {
                 <option value="Three and Four Sentence Answer Questions">
                   Three and Four Sentence Answer Questions
                 </option>
-              
+
                 <option value="Five and Six Sentence Answer Questions">
                   Five and Six Sentence Answer Questions
                 </option>
@@ -597,19 +679,26 @@ const AdminQuestionDetails = () => {
           <div className="col-md-12">
             <div className="do-sear">
               <label htmlFor="">Instructions</label>
-             
-              <MathEditor data={{A:Instruction,B:setInstruction,selectedLanguage,trans:trans,settran:settran}}/>
-              
+
+              <MathEditor
+                data={{
+                  A: Instruction,
+                  B: setInstruction,
+                  selectedLanguage,
+                  trans: trans,
+                  settran: settran,
+                }}
+              />
             </div>
           </div>
           <div className="col-md-12 mt-3">
-            <AdminQuestprops Types_Question={Types_Question} data={selectedLanguage} selectdetails={selectdetails} />
+            <AdminQuestprops
+              Types_Question={Types_Question}
+              data={selectedLanguage}
+              selectdetails={selectdetails}
+            />
           </div>
-        
-       
         </div>
-
-        
       </div>
     </div>
   );
