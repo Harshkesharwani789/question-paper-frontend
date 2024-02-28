@@ -64,9 +64,9 @@
   color: white !important;
 }
 
-tr {
+/* tr {
   text-align: center;
-}
+} */
 
 .header .navbar-brand {
   display: flex;

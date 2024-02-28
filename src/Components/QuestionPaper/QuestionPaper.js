@@ -1924,6 +1924,25 @@ const QuestionPaper = ({ text }) => {
                                     </div>
                                     <div>{ele1?.Mask}</div></div>
                                 </>) : (<></>)}
+                                {item?.Types_Question === "Fill in the Blanks Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex mt-2">
+                                      <b>{i + 1}).</b>
+                                      <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Complete the Poem" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex mt-2">
+                                      <b>{i + 1}).</b>
+                                      <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+
+                                </>) : (<></>)}
 
                               </div>
                             )

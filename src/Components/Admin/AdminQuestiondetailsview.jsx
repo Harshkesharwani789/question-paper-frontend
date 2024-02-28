@@ -1060,6 +1060,10 @@ const AdminQuestionDetailsview = () => {
               <></>
             )}
 
+
+
+            
+
             {/* One word */}
             {question_details?.Types_Question === "One Word Question" ||
               question_details?.Types_Question ===
