@@ -4,7 +4,7 @@ import { IoCheckmark } from "react-icons/io5";
 import Table from "react-bootstrap/Table";
 
 const Frontpage = ({data}) => {
-  console.log("Data-===>",data);
+
   return (
     <div>
       {/* new  */}
