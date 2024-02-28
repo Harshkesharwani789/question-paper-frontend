@@ -100,6 +100,7 @@ const QuestionPaper = ({ text }) => {
     </div>
   ];
   const [ViewAnswer, setViewAnswer] = useState(false)
+  
   return (
     <div>
       <div className="top-header">
@@ -890,7 +891,6 @@ const QuestionPaper = ({ text }) => {
                               {item.NumberOfLine === "4" ? (
                                 <>
                                   <div className="">
-                                    <label htmlFor=""> Write Poem </label>
                                     <div className="d-flex align-items-end">
                                       <p className="vi_0">{item?.PoemSt}</p>
                                       <div className="ans-line mb-3 mt-2"></div>
@@ -909,7 +909,7 @@ const QuestionPaper = ({ text }) => {
                               {item.NumberOfLine === "5" ? (
                                 <>
                                   <div className="">
-                                    <label htmlFor=""> Write Poem </label>
+
                                     <div className="d-flex align-items-end">
                                       <p className="vi_0">{item?.PoemSt}</p>
                                       <div className="ans-line mb-3 mt-2"></div>
@@ -929,7 +929,7 @@ const QuestionPaper = ({ text }) => {
                               {item.NumberOfLin === "6" ? (
                                 <>
                                   <div className="">
-                                    <label htmlFor=""> Write Poem </label>
+
                                     <div className="d-flex align-items-end">
                                       <p className="vi_0">{item?.PoemSt}</p>
                                       <div className="ans-line mb-3 mt-2"></div>
@@ -950,7 +950,7 @@ const QuestionPaper = ({ text }) => {
                               {item.NumberOfLin === "7" ? (
                                 <>
                                   <div className="">
-                                    <label htmlFor=""> Write Poem </label>
+
                                     <div className="d-flex align-items-end">
                                       <p className="vi_0">{item?.PoemSt}</p>
                                       <div className="ans-line mb-3 mt-2"></div>
@@ -975,102 +975,102 @@ const QuestionPaper = ({ text }) => {
                           )}
                           {item?.orQuestion ? (<>
                             <h5>(OR)</h5>
+
+
+                            <div style={{ display: "flex", gap: "12px" }} key={i}>
+
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+
+                            {item?.orNumberOfLine ? (
+                              <>
+                                {item?.orNumberOfLine === "4" ? (
+                                  <>
+                                    <div className="">
+
+                                      <div className="d-flex align-items-end">
+                                        <p className="vi_0">{item?.OrPoemSat}</p>
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                      </div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="d-flex align-items-end">
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                        <p className="vi_0">{item?.OrPoemEnd}</p>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <> </>
+                                )}
+                                {item.NumberOfLine === "5" ? (
+                                  <>
+                                    <div className="">
+
+                                      <div className="d-flex align-items-end">
+                                        <p className="vi_0">{item?.OrPoemSat}</p>
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                      </div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="d-flex align-items-end">
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                        <p className="vi_0">{item?.OrPoemEnd}</p>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <> </>
+                                )}
+                                {item.NumberOfLin === "6" ? (
+                                  <>
+                                    <div className="">
+
+                                      <div className="d-flex align-items-end">
+                                        <p className="vi_0">{item?.OrPoemSat}</p>
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                      </div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="d-flex align-items-end">
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                        <p className="vi_0">{item?.OrPoemEnd}</p>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <> </>
+                                )}
+                                {item.NumberOfLin === "7" ? (
+                                  <>
+                                    <div className="">
+
+                                      <div className="d-flex align-items-end">
+                                        <p className="vi_0">{item?.OrPoemSat}</p>
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                      </div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <div className="d-flex align-items-end">
+                                        <div className="ans-line mb-3 mt-2"></div>
+                                        <p className="vi_0">{item?.OrPoemEnd}</p>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <> </>
+                                )}
+                              </>
+                            ) : (
+                              <></>
+                            )}
                           </>) : (<></>)}
-
-                          <div style={{ display: "flex", gap: "12px" }} key={i}>
-
-                            <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
-                          </div>
-
-                          {item?.orNumberOfLine ? (
-                            <>
-                              {item?.orNumberOfLine === "4" ? (
-                                <>
-                                  <div className="">
-                                    <label htmlFor=""> Write Poem </label>
-                                    <div className="d-flex align-items-end">
-                                      <p className="vi_0">{item?.OrPoemSat}</p>
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                    </div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="d-flex align-items-end">
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                      <p className="vi_0">{item?.OrPoemEnd}</p>
-                                    </div>
-                                  </div>
-                                </>
-                              ) : (
-                                <> </>
-                              )}
-                              {item.NumberOfLine === "5" ? (
-                                <>
-                                  <div className="">
-                                    <label htmlFor=""> Write Poem </label>
-                                    <div className="d-flex align-items-end">
-                                      <p className="vi_0">{item?.OrPoemSat}</p>
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                    </div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="d-flex align-items-end">
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                      <p className="vi_0">{item?.OrPoemEnd}</p>
-                                    </div>
-                                  </div>
-                                </>
-                              ) : (
-                                <> </>
-                              )}
-                              {item.NumberOfLin === "6" ? (
-                                <>
-                                  <div className="">
-                                    <label htmlFor=""> Write Poem </label>
-                                    <div className="d-flex align-items-end">
-                                      <p className="vi_0">{item?.OrPoemSat}</p>
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                    </div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="d-flex align-items-end">
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                      <p className="vi_0">{item?.OrPoemEnd}</p>
-                                    </div>
-                                  </div>
-                                </>
-                              ) : (
-                                <> </>
-                              )}
-                              {item.NumberOfLin === "7" ? (
-                                <>
-                                  <div className="">
-                                    <label htmlFor=""> Write Poem </label>
-                                    <div className="d-flex align-items-end">
-                                      <p className="vi_0">{item?.OrPoemSat}</p>
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                    </div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="ans-line mb-3 mt-2"></div>
-                                    <div className="d-flex align-items-end">
-                                      <div className="ans-line mb-3 mt-2"></div>
-                                      <p className="vi_0">{item?.OrPoemEnd}</p>
-                                    </div>
-                                  </div>
-                                </>
-                              ) : (
-                                <> </>
-                              )}
-                            </>
-                          ) : (
-                            <></>
-                          )}
-
 
                         </>) : (<></>)}
                         {item?.Types_Question === "Letter Writting" ? (<>
@@ -1434,23 +1434,36 @@ const QuestionPaper = ({ text }) => {
               </tr>
             </thead>
             <tbody>
-              {Questions?.map((item,i)=>{
-                return(
-                  <tr>
-                  <td>{i+1}</td>
-                  <td>{item?.Objectives}</td>
-                  <td>{item?.Lesson}</td>
-                  <td>{item?.Types_Question}</td>
-                  <td>{state?.bluePrint?.AllChapter
-                  ?.filter((ele)=>ele.Blueprintobjective === item?.Objectives )[0]?.BluePrintQuestiontype}</td>
-                  <td>{item?.Marks}</td>
-                  <td>{item?.Difficulty_level?.slice(0,1)}</td>
-                  <td>{item?.Answer_Time}</td>
-                </tr>
-                )
+              {state?.bluePrint?.TypesofQuestions?.map((ele2) => {
+                
+                return (<>
+                  {Questions
+                    ?.filter((ele) => ele.Types_Question === ele2?.QAType)
+                    ?.map((item, i) => {
+                   
+                      if (i < Number(ele2?.NQA)) {
+                        
+                       
+                        return (
+                          <tr>
+                            <td> {i+1}</td>
+                            <td>{item?.Objectives}</td>
+                            <td>{item?.Lesson}</td>
+                            <td>{item?.Types_Question}</td>
+                            <td>{state?.bluePrint?.AllChapter
+                              ?.filter((ele) => ele.Blueprintobjective === item?.Objectives)[0]?.BluePrintQuestiontype}</td>
+                            <td>{item?.Marks}</td>
+                            <td>{item?.Difficulty_level?.slice(0, 1)}</td>
+                            <td>{item?.Answer_Time}</td>
+                          </tr>
+                        )
+                      }
+                    })}
+                </>)
               })}
-             
-              
+
+
+
 
             </tbody>
           </Table>
