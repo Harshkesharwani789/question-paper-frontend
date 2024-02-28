@@ -1,6 +1,6 @@
-.App {
+/* .App {
   overflow-x: hidden;
-}
+} */
 /*
 .App-logo {
   height: 40vmin;
@@ -36,6 +36,8 @@
     transform: rotate(360deg);
   }
 } */
+
+
 .swal-footer {
   text-align: center !important;
 }
@@ -154,3 +156,88 @@ button {
   width: 100% !important;
 }
 /* ck editor in passage */
+
+.text-container {
+  text-align: center;
+  padding: 12px;
+  /* background-color: #fff; */
+  border-radius: 10px;
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); */
+}
+
+.beautiful-text {
+  font-size: 24px;
+  color: #333;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.beautiful-text::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff6b6b, #f9c2ff);
+  z-index: -1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: gradient-animation 5s ease infinite;
+  border-radius: 10px;
+}
+
+@keyframes gradient-animation {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.questionpdfview a{
+  font-size: 25px;
+  text-decoration: none;
+  word-spacing: 3px;
+
+}
+.vertical-line {
+  border-left: 4px solid white;
+  height: 31px;
+  /* display: flex; */
+  /* text-align: end; */
+  /* margin-bottom: -12px; */
+  margin-top: 3px;
+}
+.table_data td{
+  border: 1px solid #dddddd;
+  font-size: 20px;
+}
+.offerbox{
+  background-color: aliceblue;
+ 
+ border-radius: 10px;
+}
+.uiline ul{
+  gap: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.uiline span{
+  font-size: 25px;
+  font-family: math;
+}
+.buybtn{
+  padding: 12px;
+  border-radius: 10px !important;
+  width: 69px;
+}
+.spantg{
+  background-color: #9ae5cc;
+  padding: 8px;
+  border-radius: 23px;
+  height: 35px;
+
+}

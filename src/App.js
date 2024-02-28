@@ -172,6 +172,13 @@ import LoginPage5 from "./Components/LoginPage5/LoginPage5";
 import Science10th from "./Components/10th_QP_Pattern/Science10th";
 import AdminObjectives from "./Components/Admin/AdminObjectives";
 import UserGenratedQuestion from "./Components/Admin/UserGenratedQuestion";
+import Adminslybuscopyview from "./Components/Admin/Adminslybuscopyview";
+import ContactUs from "./Components/Admin/ContactUs";
+import QuestionAnalysis from "./Components/BluePrint/QuestionAnalysis";
+import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
+import Tutorial from "./Components/Home/Tutorial";
+import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
+import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 
 
 function App() {
@@ -197,6 +204,51 @@ function App() {
                 <LoginPage3 />
               </>
             }
+          />
+             <Route
+            path="/question_analysis"
+            element={
+              <>
+                <Navbarr />
+                <QuestionAnalysis />
+              </>
+            }
+          />
+          <Route
+            path="/questionandanswerview"
+            element={
+              <>
+                <Navbarr />
+                <QuestionAndAnswerView />
+              </>
+            }
+          />
+          <Route
+            path="/tutorial"
+            element={
+              <>
+                <Navbarr />
+                <Tutorial />
+              </>
+            }
+          />
+           <Route
+            path="/offerquestionpaper"
+            element={
+              <>
+                <Navbarr />
+                <OfferQuestionPaper />
+              </>
+            }
+          />
+          
+
+
+          
+          <Route
+          path="/contactus"
+          element={<ContactUs/>}
+          
           />
           
           <Route
@@ -857,6 +909,32 @@ function App() {
                 children={
                   <>
                     <AdminSyllabusCopy />
+                  </>
+                }
+              />
+            }
+          />
+
+            <Route
+            path="/admin_upload_pdf"
+            element={
+              <Main
+                children={
+                  <>
+                    <UploadPdfQuestion />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/adminslybuscopyview/:Slybus_id"
+            element={
+              <Main
+                children={
+                  <>
+                    <Adminslybuscopyview />
                   </>
                 }
               />

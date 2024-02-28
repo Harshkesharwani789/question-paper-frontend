@@ -11,16 +11,18 @@ const Frontpage = ({data}) => {
       <div className="question-paper-display">
         <div className="details-display ">
           <div className="top-titles-container">
-            <div className="top-logo">
+            <div className="top-logo" style={{marginTop:"4%"}}>
             <div>
-            <img src={`http://localhost:8000/Teacher/${data?.School_Logo}`} alt="" style={{ width: "100px" }} />
+              {data?.School_Logo ? (<img src={`http://localhost:8000/Teacher/${data?.School_Logo}`} alt="" style={{ width: "100px" }} />):(<></>)}
+       
             </div>
             <div className="title-1">
               <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
             </div>
             </div>
             <div className="title-2">
-              <h5>{data?.Institute_Name},{data?.Address}</h5>
+              {data?.Institute_Name ? (  <h5>{data?.Institute_Name},{data?.SchoolAddress}</h5>):(<></>)}
+            
             </div>
             <div className="title-3">
               <h4>{data?.Exam_Name} {" "}{data?.Exam_Lavel}</h4>
@@ -29,7 +31,7 @@ const Frontpage = ({data}) => {
 
           <div className="class-details">
             <div className="class-data">
-              <b>Class : {data?.Class}</b>
+              <b>Class : {data?.Sub_Class}</b>
             </div>
             <div className="class-data">
               <b>Subject: {data?.Subject}</b>
@@ -211,7 +213,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>16</td>
                   <td></td>
-                  <td>26</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -219,7 +221,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>17</td>
                   <td></td>
-                  <td>27</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -227,7 +229,7 @@ const Frontpage = ({data}) => {
                   <td></td>
                   <td>18</td>
                   <td></td>
-                  <td>28</td>
+                  <td>-</td>
                   <td></td>
                 </tr>
                 <tr>

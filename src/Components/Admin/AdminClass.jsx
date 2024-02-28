@@ -7,7 +7,7 @@ import { IoEye } from "react-icons/io5";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { debounce } from "lodash";
 const AdminClass = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -20,7 +20,6 @@ const AdminClass = () => {
   const [show4, setShow4] = useState();
   const [show5, setShow5] = useState();
 
-  const [show6, setShow6] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -40,8 +39,55 @@ const AdminClass = () => {
   const handleClose5 = () => setShow5(false);
   const handleShow5 = () => setShow5(true);
 
-  const handleClose6 = () => setShow6(false);
-  const handleShow6 = () => setShow6(true);
+
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
+
+
   // post method add class
   const [className, setclassName] = useState("");
   const classNamee = async () => {
@@ -428,163 +474,36 @@ const AdminClass = () => {
   }
   return (
     <div>
-      <div className="col-lg-4 d-flex justify-content-center">
-        <div class="input-group ">
-          <span class="input-group-text" id="basic-addon1">
-            <BsSearch />
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-          />
+
+
+      <div className="d-flex justify-content-between align-items-center">
+       
+          <Form.Group className="mb-3" >
+            <Form.Label>Search</Form.Label>
+            <Form.Control type="text" placeholder="Search..." />
+          </Form.Group>
+        
+        <div className="">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
         </div>
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="ad-b col-md-12">
-            {/* <Button
-              className=" btn"
-              style={{ backgroundColor: "navy", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
-              onClick={() => {
-                setClass(true);
-                setSubclass(false);
-              }}
-            >
-              Class
-            </Button>
-            &nbsp; &nbsp; */}
-            {/* <Button
-              className="btn"
-              style={{ backgroundColor: "#2cb9e7", color: "white", padding:"4px 10px", borderRadius:"4px" , border:"none"}}
-              onClick={() => {
-                setClass(false);
-                setSubclass(true);
-              }}
-            >
-              Subclass
-            </Button> */}
-          </div>
-        </div>
-      </div>
-      {/* {Class ? (
-        <>
-          <div className="customerhead p-2">
-            <div className="d-flex justify-content-between align-items-center">
-              <h2 className="header-c ">Class</h2>
-              <button
-                className=" btn"
-                style={{ backgroundColor: "#138808", color: "white" }}
-                onClick={handleShow}
-              >
-                Add Class
-              </button>
-            </div>
 
-            <div className="mb-3">
-              <Table
-                responsive
-                bordered
-                style={{ width: "-webkit-fill-available" }}
-              >
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>
-                      <div>Class</div>
-                    </th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {records?.map((val, i) => {
-                    return (
-                      <tr key={i}>
-                    <td>{i + 1 + firstIndex} </td>
-                        <td>{val?.className}</td>
-
-                        <td>
-                          {" "}
-                          <div style={{ display: "flex", gap: "20px" }}>
-                            <div>
-                              <BiSolidEdit
-                                className="text-success"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow1();
-                                  seteditclassname(val?._id);
-                                  setclassName(val?.className);
-                                }}
-                              />{" "}
-                            </div>
-                            <div>
-                              <AiFillDelete
-                                className="text-danger"
-                                style={{ cursor: "pointer", fontSize: "20px" }}
-                                onClick={() => {
-                                  handleShow2(val?._id);
-                                  setdeleteclassname(val?._id);
-                                }}
-                              />{" "}
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
-            </div>
-
-            <div>
-          <nav>
-            <ul className="pagination">
-              <li className="not-allow">
-                <span>
-                  <li className="next-prev">
-                    <a
-                      onClick={() => {
-                        prevpage();
-                      }}
-                    >
-                      &lt;
-                    </a>{" "}
-                  </li>
-                </span>
-              </li>
-              {numbers?.map((n, i) => {
-                return (
-                  <li className="active-next" key={i}>
-                    <a
-                      href="#"
-                      className="inactive"
-                      onClick={() => changePage(n)}
-                    >
-                       {n}
-                    </a>
-                  </li>
-                );
-              })}
-             
-              <li className="not-allow">
-                <span>
-                  <li className="next-prev"  onClick={() => {
-                    nextpage();
-                  }}>&gt; </li>
-                </span>
-              </li>
-            </ul>
-          </nav>
-        </div>
-            
-          </div>
-        </>
-      ) : (
-        <>
-          {Subclass ? (
-            <> */}
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subclass </h2>
@@ -733,54 +652,7 @@ const AdminClass = () => {
           </nav>
         </div>
       </div>
-      {/* </>
-          ) : (
-            <></>
-          )}
-        </>
-      )} */}
-      {/* Add Accomodation modal */}
-      <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
-        <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-          <Modal.Title style={{ color: "white" }}>Add Class</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="do-sear mt-2">
-            <label>Class</label>
-            <input
-              type="text"
-              className="vi_0"
-              placeholder="Enter Class Name "
-              onChange={(e) => {
-                setclassName(e.target.value);
-              }}
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <div className="d-flex">
-            {/* <Button
-              className="mx-2"
-              variant="primary"
-              onClick={() => {
-                classNamee();
-              }}
-            > */}
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button
-              className="mx-2 modal-add-btn"
-              variant=""
-              onClick={() => {
-                classNamee();
-              }}
-            >
-              Add
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal>
+
 
       {/* Edit Indian modal */}
       <Modal

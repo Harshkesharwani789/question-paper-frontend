@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-// import "../Admin/Admin.css";
 import "../../Admin/Admin.css";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
-function AddPoem() {
+import MathEditor from "../MyEditor";
+function AddPoem({ selectdetails }) {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -29,12 +27,22 @@ function AddPoem() {
     setAnswer(data);
   };
   //post
+
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("")
+
+  const [orAnswer, setorAnswer] = useState("");
+  const [orQuestion, setorQuestion] = useState("");
   const [Question, setQuestion] = useState("");
   const [Marks, setMarks] = useState("");
   const [Answer, setAnswer] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
   const [PoemSat, setPoemSat] = useState("");
   const [PoemEnd, setPoemEnd] = useState("");
+  const [OrPoemSat, setOrPoemSat] = useState("");
+  const [OrPoemEnd, setOrPoemEnd] = useState("");
   const addquestions = async () => {
     try {
       const config = {
@@ -61,9 +69,13 @@ function AddPoem() {
           Instruction: questiondata?.Instruction,
 
           Question: Question,
+          orAnswer: orAnswer,
           NumberOfLine: Dash,
+          orNumberOfLine: OrDash,
           PoemSt: PoemSat,
           PoemEnd: PoemEnd,
+          OrPoemSat: OrPoemSat,
+          OrPoemEnd: OrPoemEnd,
           Answer: Answer,
           Marks: Marks,
           Answer_Time: Answer_Time,
@@ -92,22 +104,33 @@ function AddPoem() {
     }
   };
 
-  // For Dash
 
+  // For Dash
   const [Dash, setDash] = useState("4");
+  const [OrDash, setOrDash] = useState("4");
   return (
     <div>
+   
       <div className="">
         <div className="container">
           <div className="row mt-2">
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -250,6 +273,196 @@ function AddPoem() {
             ) : (
               <> </>
             )}
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Answer</label>
+                  <MathEditor
+                    data={{
+                      A: Answer,
+                      B: setAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: AnswerT,
+                      settran: setAnswerT,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="d-flex justify-content-center mt-2"><h5>(OR)</h5></div>
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question</label>
+                <MathEditor
+                  data={{
+                    A: orQuestion,
+                    B: setorQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orQuestionT,
+                    settran: setorQuestionT,
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col-md-5">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Poem Line </label>
+                <Form.Select
+                  className="vi_0"
+                  onChange={(e) => setOrDash(e.target.value)}
+                >
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                </Form.Select>
+              </div>
+            </div>
+
+            {OrDash === "4" ? (
+              <>
+                <div className="col-md-7">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemSat(e.target.value)}
+                    />
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemEnd(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "5" ? (
+              <>
+                <div className="col-md-7">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemSat(e.target.value)}
+                    />
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemEnd(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "6" ? (
+              <>
+                <div className="col-md-7">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemSat(e.target.value)}
+                    />
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemEnd(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "7" ? (
+              <>
+                <div className="col-md-7">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemSat(e.target.value)}
+                    />
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) => setOrPoemEnd(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Answer</label>
+                  <MathEditor
+                    data={{
+                      A: orAnswer,
+                      B: setorAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: orAnswerT,
+                      settran: setorAnswerT,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor=""> Marks</label>
@@ -273,6 +486,7 @@ function AddPoem() {
                 </Form.Select>
               </div>
             </div>
+
             <div className="col-md-6">
               <div className="do-sear">
                 <label htmlFor="">Answer Time</label>
@@ -297,19 +511,8 @@ function AddPoem() {
                 </Form.Select>
               </div>
             </div>
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    className="vi_0"
-                    data={Answer}
-                    onChange={handleChange7}
-                  />
-                </div>
-              </div>
-            </div>
+
+
           </div>
         </div>
 
@@ -436,6 +639,101 @@ function AddPoem() {
               <label htmlFor="">Answer</label>
               <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
             </div>
+
+            <div className="d-flex justify-content-center">
+              <h5>(OR)</h5>
+            </div>
+            <div className="col-sm-12">
+              <label htmlFor="">OR-Question</label>
+              <p className="vi_0">{parse(`<div>${orQuestion}</div>`)}</p>
+            </div>
+
+            <div className="col-sm-4">
+              <label htmlFor="">Poem Line</label>
+              <p className="vi_0">{OrDash}</p>
+            </div>
+            {OrDash === "4" ? (
+              <>
+                <div className="col-md-8">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <p className="vi_0">{OrPoemSat}</p>
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <p className="vi_0">{OrPoemEnd}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "5" ? (
+              <>
+                <div className="col-md-8">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <p className="vi_0">{OrPoemSat}</p>
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <p className="vi_0">{OrPoemEnd}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "6" ? (
+              <>
+                <div className="col-md-8">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <p className="vi_0">{OrPoemSat}</p>
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <p className="vi_0">{OrPoemEnd}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
+            {OrDash === "7" ? (
+              <>
+                <div className="col-md-8">
+                  <label htmlFor=""> Write Poem </label>
+                  <div className="d-flex align-items-end">
+                    <p className="vi_0"> {OrPoemSat}</p>
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="ans-line mb-3 mt-2"></div>
+                  <div className="d-flex align-items-end">
+                    <div className="ans-line mb-3 mt-2"></div>
+                    <p className="vi_0"> {OrPoemEnd}</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <> </>
+            )}
           </div>
         </Modal.Body>
         <Modal.Footer>

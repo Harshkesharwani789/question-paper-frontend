@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Button,
   Form,
@@ -75,7 +75,7 @@ const AdminBlueprintdetails = () => {
     }
   };
   // get method   for blue print
-  console.log(admin);
+
 
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
@@ -105,6 +105,7 @@ const AdminBlueprintdetails = () => {
   useEffect(() => {
     getallblueprint();
   }, []);
+  console.log("blueprint check now", blueprint);
 
   const [deleteId, setdeleteId] = useState("");
 
@@ -148,7 +149,7 @@ const AdminBlueprintdetails = () => {
   // const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   // const pageCount = Math.ceil(data.length / productPerPage);
   const [currenpage, setCurrentpage] = useState(1);
-  const recordsperpage = 6;
+  const recordsperpage = 10;
   const lastIndex = currenpage * recordsperpage;
   const firstIndex = lastIndex - recordsperpage;
   const records = blueprint.slice(firstIndex, lastIndex);
@@ -170,6 +171,55 @@ const AdminBlueprintdetails = () => {
       setCurrentpage(currenpage + 1);
     }
   }
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSubClass"
+      );
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+  useEffect(() => {
+    getaddsubclasss();
+  }, []);
+  const [Classname, setClassname] = useState("");
+
+  const makeApprovedAndHold=async(id, isBlock)=>{
+    try {
+      const config={
+        url: "/admin/makeBlockAndUnblockBLUEPRINTs",
+        baseURL: "http://localhost:8000/api",
+        method: "put",
+        headers: { "content-type": "application/json", Authorization: `Bearer ${token}` },
+        data:{
+          id, isBlock,
+          authId:admin?._id
+        }
+      }
+      let res=await axios(config);
+      if(res.status==200){
+        swal({
+          title: "Success!",
+          text: res.data.success,
+          icon: "success",
+          dangerMode: true,
+        });
+        getallblueprint();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -182,21 +232,68 @@ const AdminBlueprintdetails = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
+           
           />
+         
         </div>
       </div>
       <div className="customerhead p-2 mt-4">
-        <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Blue Print Details</h2>
-          <button
-            className="admin-add-btn"
-            onClick={() => {
-              navigate("/adminblueprint");
-            }}
-          >
-            Add Blue Print
-          </button>
+        <h2 className="header-c ">Blue Print Details</h2>
+        <div className="container">
+          <div className="row mb-4">
+            <div className="col-md-4">
+              <label htmlFor="">Select Class</label>
+              <Form.Select
+                aria-label="Default select example"
+                // onChange={(e) => {
+                //   // setClasstype(e.target.value);
+                //   setClassname(e.target.value);
+                // }}
+              >
+                <option value="">Select Class</option>
+                {uniqueClassNamesArray?.map((val, i) => {
+                  return (
+                    <option value={val} key={i}>
+                      {val}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Select Sub Class</label>
+              <Form.Select
+                aria-label="Default select example"
+                // onChange={(e) => {
+                //   setSub_classname(e.target.value);
+                // }}
+              >
+                <option value="">Select Sub Class</option>
+                {getaddsubclass
+                  ?.filter((ele) => ele.className === blueprint.className)
+                  ?.map((val, i) => {
+                    return (
+                      <option value={val?.subclassName} key={i}>
+                        {val?.subclassName}
+                      </option>
+                    );
+                  })}
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <button
+                className="admin-add-btn mt-4"
+                style={{ float: "right" }}
+                onClick={() => {
+                  navigate("/adminblueprint");
+                }}
+              >
+                Add Blue Print
+              </button>
+            </div>
+          </div>
         </div>
+
         <div className="row">
           {/* <div className="col-lg-2 " style={{ width: "fit-content" }}>
             <label>Select :</label>
@@ -268,7 +365,14 @@ const AdminBlueprintdetails = () => {
                   <div>Subject</div>
                 </th>
                 <th>
+                  {" "}
+                  <div>Price</div>
+                </th>
+                <th>
                   <div>View</div>
+                </th>
+                <th>
+                  <div>Status</div>
                 </th>
                 <th>
                   {" "}
@@ -287,6 +391,7 @@ const AdminBlueprintdetails = () => {
                     <td>{val?.className}</td>
                     <td>{val?.SubClassName}</td>
                     <td>{val?.subjects}</td>
+                    <td>{val?.price?.toFixed(2)}</td>
                     <td>
                       <Link
                         to={`/adminblueprintdetailsview/${val?._id}`}
@@ -295,6 +400,7 @@ const AdminBlueprintdetails = () => {
                         <FaEye color="blue" />
                       </Link>
                     </td>
+                    <td>{val.isBlock==true ? <span style={{color:"green"}}>Approved</span>:<span style={{color:"red"}}>Holded</span>}</td>
                     <td>
                       <div style={{ display: "flex", gap: "20px" }}>
                         <div>
@@ -316,6 +422,9 @@ const AdminBlueprintdetails = () => {
                               handleShow2();
                             }}
                           />{" "}
+                        </div>
+                        <div>
+                          {val?.isBlock==false ? (<button type="button" class="btn btn-success" onClick={()=>makeApprovedAndHold(val?._id,true)}>Approved</button>):(<button type="button" class="btn btn-danger" onClick={()=>makeApprovedAndHold(val?._id,false)}>Hold</button>)}
                         </div>
                       </div>
                     </td>

@@ -6,7 +6,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Admin/Admin.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import parse from "html-react-parser";
 
+import MathInput from "react-math-keyboard";
 const steps = [
   "Blueprint Details",
   "Marks Details",
@@ -21,7 +23,7 @@ function AdminBlueprintdetailsview() {
   const token = sessionStorage.getItem("token");
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
-
+  const [latex, setLatex] = useState('')
   const totalSteps = () => {
     return steps.length;
   };
@@ -111,7 +113,7 @@ function AdminBlueprintdetailsview() {
     }
   });
 
-  console.log("uniqueObjectsArray", uniqueObjectsArray);
+  // console.log("uniqueObjectsArray", uniqueObjectsArray);
 
   function bluePrintTotalQues(chapterName,Qtype) {
     let obj = { TotalQ: "", totalMas: 0 };
@@ -157,6 +159,11 @@ var TotalMask=0
     <>
       <div className="box_1">
         <div className="Stepper-info " style={{ padding: "20px" }}>
+        {/* <div>
+     
+      <MathInput setValue={setLatex} />
+      <p>{latex}</p>
+    </div> */}
           {/* blue print 1  */}
           <div className="blueprint-content-display">
             <div className="blueprint-titles">
@@ -223,23 +230,7 @@ var TotalMask=0
                         );
                       })}
 
-                      {/* <tr>
-                        <td>Poetry</td>
-                        <td>{blueprint?.PoetryWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>Non-details</td>
-                        <td>{blueprint?.NonDetailedWeightage}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Grammer 20 + <br></br> Vocabulary
-                        </td>
-                        <td>
-                          <span style={{ borderBottom: "1px solid" }}>33</span>{" "}
-                          <br></br>100
-                        </td>
-                      </tr> */}
+                    
                     </tbody>
                   </Table>
                 </div>
@@ -434,17 +425,17 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "M C" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "M C" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "M C" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -464,18 +455,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "V.S.A" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "V.S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "V.S.A" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                 
                                 </td>
                                 <td>
                                   {
@@ -494,17 +485,17 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "S.A" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "S.A" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -524,18 +515,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 1" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 1" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 1" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -555,18 +546,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 2" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 2" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 2" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                                 <td>
                                   {
@@ -586,18 +577,18 @@ var TotalMask=0
                                       item?.BluePrintQuestiontype == "L.A 3" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
-                                    ? "*"
+                                    ? `*(${
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                            ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                            "L.A 3" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                    })`
                                     : ""}
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 3" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.BluePrintmarksperquestion
-                                  }
+                                  
                                 </td>
                               </>
                             );
@@ -630,36 +621,159 @@ var TotalMask=0
                     <tr>
                       <td></td>
                       <td>Total</td>
+                      {blueprint?.objectives?.map((ele) => {
+                        return (
+                          <>
+                                <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "M C" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "M C" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "V.S.A" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "S.A" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 1" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 2" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                                      <td>{AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3"
+                      
+                                    ) ? <span>{AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3" 
+                                      
+                                    )?.reduce((a,am)=>a+Number(am?.Blueprintnoofquestion),0)} ({
+                                      AllChapterData?.filter(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele?.Objective &&
+                                          item?.BluePrintQuestiontype == "L.A 3" 
+                                        
+                                      )?.reduce((a,am)=>a+Number(am?.BluePrintmarksperquestion*am?.Blueprintnoofquestion),0)
+                                    })</span> : ""}   
+                                      </td>
+                          </>
+                        );
+                      })}
+                    
+                    
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{blueprint?.AllChapter?.reduce(
+                      (a, ele) =>
+                        a +
+                        Number(
+                          ele?.Blueprintnoofquestion 
+                        ),
+                      0
+                    )}</td>
                       <td>{blueprint?.AllChapter?.reduce(
                       (a, ele) =>
                         a +
@@ -675,11 +789,14 @@ var TotalMask=0
                
                 </Table>
 
-
               </div>
+              <span>Note:-</span>{parse(`<span>${blueprint?.Instructions}</span>`)}
             </div>
           </div>
+          
+
         </div>
+       
       </div>
     </>
   );

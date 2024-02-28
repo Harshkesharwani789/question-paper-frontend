@@ -11,13 +11,15 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-
+import { debounce } from "lodash";
+import moment from "moment";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
-  
+  const navigate = useNavigate();
+
   const [slybus, setslybus] = useState(false);
-  
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -30,6 +32,128 @@ const AdminSyllabusCopy = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [show3, setShow3] = useState();
+  const [selectedassesment, setselectedassesment] = useState("");
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = (name) => {
+    setShow3(true);
+    setselectedassesment(name);
+  };
+
+  console.log("selectedassesment", selectedassesment);
+
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
+
+  //Get All Subject
+  const [subject, setsubject] = useState([]);
+  const getSubject = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllSujects"
+      );
+      if (res.status == 200) {
+        setsubject(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Get All Subject Part
+  const [weightage, setweightage] = useState([]);
+  const getallweightagecontent = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getallcontent"
+      );
+      if (res.status === 200) {
+        setweightage(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //Get Chapter
+  const [chapters, setchapters] = useState([]);
+  const getChapter = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllChapter"
+      );
+      if (res.status == 200) {
+        setchapters(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Get Exam Name
+  const [NameExam, setNameExam] = useState([]);
+  const getNameExamination = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllNameExamination"
+      );
+      if (res.status == 200) {
+        setNameExam(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getallweightagecontent();
+    getChapter();
+    getNameExamination();
+  }, []);
+
   //Post
   const [chapterName, setChapterName] = useState("");
   const [description, setDescription] = useState("");
@@ -40,92 +164,93 @@ const AdminSyllabusCopy = () => {
   const [subclass, setsubclass] = useState("");
   const [medium, setmedium] = useState("");
   const [subjectt, setsubjectt] = useState("");
+  const [SelectChapter, setSelectChapter] = useState("");
+  const [Months, setMonths] = useState("");
+  const [Assessment, setAssessment] = useState("");
+  const [from, setfrom] = useState("");
+  const [to, setto] = useState("");
+  const [selectsubjectpart, setSelectsubjectpart] = useState("");
+  const [Examinationname, setExaminationname] = useState("");
   // Array of object 1
   const [Arr, setArr] = useState([]);
-
-  const AddTypesofquestion = () => {
+  const AddTypesofassessment = () => {
     try {
-      if (!year) {
-        swal({
-          title: "Oops!",
-          text: "Please Select Question Type",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if QAType is not provided
-      }
-
-      if (!classs) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter No. of Questions",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if NQA is not provided
-      }
-
-      if (!subclass) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter Marks",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if Mask is not provided
-      }
-      if (!medium) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter medium",
-          icon: "error",
-          button: "Try Again!",
-        });
-      }
-      if (!subjectt) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter subjectt",
-          icon: "error",
-          button: "Try Again!",
-        });
-      }
-      let Slybus = 1;
-      // Arr.forEach((ele) => {
-      //   if (ele?.QAType === QAType) {
-      //     Question = 0;
-      //     swal({
-      //       title: "Oops!",
-      //       text: "Already Exists...",
-      //       icon: "error",
-      //       button: "Try Again!",
-      //     });
-      //   }
-      // });
-
-      if (Slybus) {
-        const obj = {
-          lesson: chapterNumber,
-          chepterName: chapterName,
-          description: description,
-          mask: marks,
-        };
-
-        Arr.push(obj);
-        setArr([...Arr]); // Ensure you create a new array reference to trigger a re-render
-        console.log("Arr", Arr);
-
-        swal({
-          title: "Yeah!",
-          text: "Added Successfully...",
-          icon: "success",
-          button: "OK!",
-        });
-      }
+      Arr.find(
+        (ele) =>
+          ele.Assessment === Assessment || ele.from === from || ele.to === to
+      );
+      const newObj = {
+        Assessment: Assessment,
+        from: from,
+        to: to,
+        Examinationname:Examinationname
+      };
+      setArr([...Arr, newObj]);
+      swal({
+        title: "Yeah!",
+        text: "Added Successfully...",
+        icon: "success",
+        button: "OK!",
+      });
     } catch (error) {
       console.error(error);
     }
   };
+
+
+  // console.log("Arr====data==>",Arr);
+const [period,setperiod]=useState("");
+const [realMonth,setrealMonth]=useState("")
+  const [Arr2, setArr2] = useState([]);
+  const Addchaptertype = (i) => {
+    try {
+   
+      const newObj2 = {
+        chapterno: chapterNumber,
+        Months: Months,
+        realMonth:realMonth,
+        ChapterName: selectsubjectpart,
+        period:period,
+      };
+  setArr2([...Arr2,newObj2])
+    
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteArrr2=(index)=>{
+    try {
+      const deletedQuestion = Arr2[index];
+
+      // Create a new array excluding the element at the specified index
+      const updatedArr = Arr2.filter((_, i) => i !== index);
+
+      setArr2(updatedArr);
+ 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+const [typ,settype]=useState("")
+  const sumbitToArr=()=>{
+ const am=   Arr?.map((ele)=>{
+      if(ele?.Examinationname==selectedassesment&& ele?.Assessment==typ){
+        return {...ele,unitArr:Arr2}
+      }
+      return ele
+    })
+    setArr(am)
+    setArr2([])
+    setShow3(false)
+    return swal({
+      title: "Yeah!",
+      text: "Added Successfully...",
+      icon: "success",
+      button: "OK!",
+    });
+  }
+  console.log("Arr", Arr);
 
   const deleteQuestionType = (index) => {
     try {
@@ -147,33 +272,14 @@ const AdminSyllabusCopy = () => {
       console.error(error);
     }
   };
-
+const [Title,setTitle]=useState("")
   const addSyllabus = async () => {
-    if(!year){
-      return alert( "Please Enter the year");
+    if (!Title) {
+      return alert("Please Enter the titele");
     }
-
-    if (!chapterName)
-      return swal({
-        title: "Oops!",
-        text: "Please Enter the chapter name",
-        icon: "error",
-        button: "Ok!",
-      });
-    if (!marks)
-      return swal({
-        title: "Oops!",
-        text: "Please Enter the marks",
-        icon: "error",
-        button: "Ok!",
-      });
-    if (!description)
-      return swal({
-        title: "Oops!",
-        text: "Please enter description",
-        icon: "error",
-        button: "Ok!",
-      });
+    if (!year) {
+      return alert("Please Enter the year");
+    }
     try {
       const config = {
         url: "/admin/addSyllabus",
@@ -184,23 +290,21 @@ const AdminSyllabusCopy = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          chapterNumber: chapterNumber,
-          chapterName: chapterName,
-          description: description,
-          marks: marks,
-          authId: admin?._id,
           year: year,
+          medium: medium,
           Class: classs,
           SubClass: subclass,
-          medium: medium,
           subject: subjectt,
+          authId: admin?._id,
           SyllabusDetails: Arr,
+          Title:Title,
+          Examinationname:Examinationname
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-        getAllSyllabus();
+getSyllabus()
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -219,22 +323,6 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-  //get
-  const [chapters, setchapters] = useState([]);
-  const [nochangedata, setnochangedata] = useState([]);
-  const getAllSyllabus = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSyllabus"
-      );
-      if (res.status == 200) {
-        setchapters(res.data.success);
-        setnochangedata(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   // get method add class
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
@@ -262,7 +350,6 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-
   //get method for medium
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
@@ -288,10 +375,15 @@ const AdminSyllabusCopy = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          chapterNumber: chapterNumber,
-          chapterName: chapterName,
-          description: description,
+          year: year,
+          medium: medium,
+          Class: classs,
+          SubClass: subclass,
+          subject: subjectt,
           authId: admin?._id,
+          SyllabusDetails: Arr,
+          Title:Title,
+          Examinationname:Examinationname,
           id: updatechapter,
         },
       };
@@ -299,7 +391,7 @@ const AdminSyllabusCopy = () => {
       if (res.status == 200)
         if (res.status == 200) {
           handleClose1();
-          getAllSyllabus();
+
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -318,55 +410,38 @@ const AdminSyllabusCopy = () => {
     }
   };
   //delete
-  const [chapter, setChapter] = useState("");
-  const DeleteSyllabus = async () => {
+  const [Syllabus, setSyllabus] = useState("");
+
+  const deleteslybus = async () => {
     try {
-      const config = {
-        url: "/admin/deleteSyllabus/" + chapter + "/" + admin?._id,
-        method: "delete",
-        baseURL: "http://localhost:8000/api",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      let res = await axios(config);
-      if (res.status == 200) {
-        handleClose2();
-        getAllSyllabus();
-        return swal({
-          title: "Yeah!",
-          text: res.data.success,
-          icon: "success",
-          button: "Ok!",
-        });
-      }
+      let res = await axios.delete(
+        `http://localhost:8000/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status == 200) handleClose2();
+      getSyllabus();
+      return swal({
+        title: "Yeah!",
+        text: res.data.success,
+        icon: "success",
+        button: "Ok!",
+      });
     } catch (error) {
       console.log(error);
       return swal({
-        title: "Oops!",
+        title: "Yeah!",
         text: error.response.data.error,
-        icon: "error",
+        icon: "success",
         button: "Ok!",
       });
     }
   };
-
-  //get method for subject
-  const [subjectss, setsubjectss] = useState([]);
-  const getSubject = async () => {
-    try {
-      let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
-      );
-      if (res.status == 200) {
-        setsubjectss(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //   get method of subject
+  //Get All Syllabus
   const [Slybuss, setSlybuss] = useState([]);
   const getSyllabus = async () => {
     try {
@@ -381,36 +456,8 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
-  //   Row Filter
-  const [itempage, setItempage] = useState(5);
 
-  //   DateRange Filter
-  const [searchH, setSearchH] = useState("");
-  const handleFilterH = (e) => {
-    if (e.target.value != "") {
-      setSearchH(e.target.value);
-      const filterTableH = nochangedata.filter((o) =>
-        Object.keys(o).some((k) =>
-          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
-        )
-      );
-      setchapters([...filterTableH]);
-    } else {
-      setSearchH(e.target.value);
-      setchapters([...nochangedata]);
-    }
-  };
-  const [searchTermH, setSearchTermH] = useState("");
-  const searchedProductH = chapters.filter((item) => {
-    if (searchTermH.value === "") {
-      return item;
-    }
-    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
-      return item;
-    } else {
-      return console.log("not found");
-    }
-  });
+
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
   // const productPerPage = 5;
@@ -440,6 +487,9 @@ const AdminSyllabusCopy = () => {
       setCurrentpage(currenpage + 1);
     }
   }
+
+
+
   useEffect(() => {
     getSyllabus();
     getallclassname();
@@ -447,33 +497,65 @@ const AdminSyllabusCopy = () => {
     getaddsubclasss();
     getSubject();
   }, []);
-console.log("getaddsubclass",getaddsubclass);
+  // console.log("getaddsubclass", getaddsubclass);
 
-const uniqueClassNamesSet = new Set(getaddsubclass.map(item => item.className));
-const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
-return (
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+
+  //  Add Chapter Name
+  console.log("Arr2", Arr2);
+
+  const [AddChapter, setAddChapter] = useState([]);
+
+  // onChange={(e) => {
+  //   if(selectedLanguage == "en-t-i0-und"){
+  //     setboardName(e.target.value);
+  //   }else onChangeHandler(e.target.value, setboardName);
+  // }}
+  // {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
+  return (
     <div>
-      <div className="col-lg-4 d-flex justify-content-center">
-        <div class="input-group ">
-          <span class="input-group-text" id="basic-addon1">
-            <BsSearch />
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-            onChange={handleFilterH}
-          />
+      <div className="row d-flex justify-content-between">
+        <div className="col-lg-4 d-flex justify-content-center">
+          <div class="input-group ">
+            <span class="input-group-text" id="basic-addon1">
+              <BsSearch />
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              aria-describedby="basic-addon1"
+            />
+          </div>
+        </div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
         </div>
       </div>
+
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Syllabus
           </button>
         </div>
@@ -490,6 +572,9 @@ return (
                 <th>
                   <div>Year</div>
                 </th>
+                <th><div>
+                  Exam Name
+                  </div></th>
                 <th>
                   <div>Class</div>
                 </th>
@@ -505,9 +590,7 @@ return (
                 <th>
                   <div>View</div>
                 </th>
-                <th>
-                  <div>View</div>
-                </th>
+
                 <th>Action</th>
               </tr>
             </thead>
@@ -519,17 +602,23 @@ return (
                     <td>{i + 1}</td>
 
                     <td>{item?.year}</td>
+                    <td>{item?.Examinationname}</td>
                     <td>{item?.Class}</td>
                     <td>{item?.SubClass}</td>
                     <td>{item?.medium}</td>
                     <td>{item?.subject}</td>
                     <td>
-                      <Link
-                        to="/"
+                      {/* <Link
+                        to="//"
                         style={{ textDecoration: "none", color: "white" }}
-                      >
-                        <FaEye color="blue" />
-                      </Link>
+                      > */}
+                      <FaEye
+                        color="blue"
+                        onClick={() => {
+                          navigate(`/adminslybuscopyview/${item?._id}`);
+                        }}
+                      />
+                      {/* </Link> */}
                     </td>
                     <td>
                       {" "}
@@ -541,7 +630,13 @@ return (
                             onClick={() => {
                               handleShow1(item);
                               setpdatesetchapter(item?._id);
-                              setChapterName(item?.chapterName);
+                            setTitle(item?.Title);
+                            setyear(item?.year);
+                            setclasss(item?.Class);
+                              setsubclass(item?.SubClass)
+                              setsubjectt(item?.subject)
+                              setmedium(item?.medium);
+                              setArr(item?.SyllabusDetails)
                             }}
                           />{" "}
                         </div>
@@ -550,8 +645,8 @@ return (
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setChapter(item?._id);
-                              handleShow2(item?._id);
+                              setSyllabus(item?._id);
+                              handleShow2();
                             }}
                           />{" "}
                         </div>
@@ -563,29 +658,7 @@ return (
             </tbody>
           </Table>
         </div>
-
-        {/* <Pagination style={{ float: "right" }}>
-          <Pagination.First onClick={() => setPageNumber(0)} />
-          <Pagination.Prev
-            onClick={() => setPageNumber((prev) => Math.max(prev - 1, 0))}
-          />
-          {Array.from({ length: pageCount }, (_, index) => (
-            <Pagination.Item
-              key={index}
-              active={index === pageNumber}
-              onClick={() => setPageNumber(index)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() =>
-              setPageNumber((prev) => Math.min(prev + 1, pageCount - 1))
-            }
-          />
-          <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
-        </Pagination> */}
-         <div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -636,240 +709,299 @@ return (
           show={show}
           onHide={handleClose}
           style={{ zIndex: "99999" }}
-          size="lg"
+          size="xl"
         >
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="do-sear mt-2">
-                <label>Year</label>
-                <input
-                value={year}
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Year"
-                  onChange={(e) => {
-                    setyear(e.target.value);
-                  }}
-                />
+            <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Title</label>
+                  <input
+                   
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- Annoual Programe of  work for the Year"
+                    onChange={(e) => {
+                      // setyear(e.target.value);
+                      if(selectedLanguage == "en-t-i0-und"){
+                            setTitle(e.target.value);
+                          }else onChangeHandler(e.target.value, setTitle);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Year</label>
+                  <input
+                    value={year}
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- 2023-2024"
+                    onChange={(e) => {
+                      setyear(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+
+            
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setclasss(e.target.value);
+                    }}
+                  >
+                    <option>Select the Class</option>
+                    {uniqueClassNamesArray?.map((val, i) => {
+                      return (
+                        <option value={val} key={i}>
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Sub-Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setsubclass(e.target.value);
+                    }}
+                  >
+                    <option>Select the Sub-Class</option>
+                    {getaddsubclass
+                      ?.filter((ele) => ele.className === classs)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={val?.subclassName} key={i}>
+                            {val?.subclassName}
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Subjects <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setsubjectt(e.target.value)}
+                  >
+                    <option>Select the Subjects</option>
+                    {subject?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.subjectName}>
+                            {item?.subjectName}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Medium <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setmedium(e.target.value);
+                    }}
+                  >
+                    <option>Select the Medium</option>
+                    {Medium?.map((val, i) => {
+                      return (
+                        <option value={val?.mediumName} key={i}>
+                          {val?.mediumName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
               </div>
             </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Class <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setclasss(e.target.value);
-                  }}
-                >
-                  <option>Select the Class</option>                 
-                  {uniqueClassNamesArray?.map((val, i) => {
-                    return (
-                      <option value={val} key={i}>
-                        {val}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Subjects <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setsubjectt(e.target.value)}
-                >
-                  <option>Select the Subjects</option>
-                  {subjectss?.map((val, i) => {
-                    return (
-                      <option value={val?.subjectName} key={i}>
-                        {val?.subjectName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Sub-Class <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setsubclass(e.target.value);
-                  }}
-                >
-                  <option>Select the Sub-Class</option>
-                  {getaddsubclass?.filter((ele)=>ele.className === classs )?.map((val, i) => {
-                    return (
-                      <option value={val?.subclassName} key={i}>
-                        {val?.subclassName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>
-                  Select Medium <span style={{ color: "red" }}>*</span>
-                </label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => {
-                    setmedium(e.target.value);
-                  }}
-                >
-                  <option>Select the Medium</option>
-                  {Medium?.map((val, i) => {
-                    return (
-                      <option value={val?.mediumName} key={i}>
-                        {val?.mediumName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div>
-              <div
-                style={{
-                  border: "2px solid #dee2e6",
-                  padding: "10px",
-                  marginTop: "10px",
-                }}
-              >
-                <div className="row">
+
+            <div
+              style={{
+                border: "2px solid #dee2e6",
+                padding: "10px",
+                marginTop: "10px",
+                // backgroundColor: "#e9caa0"
+              }}
+            >
+              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+                <div className="col-sm-4">
                   <div className="do-sear mt-2">
-                    <label>Chapter Number</label>
+                    <label>Assessment:</label>
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder="Enter Chapter Number"
-                      onChange={(e) => setChapterNumber(e.target.value)}
+                      placeholder="Enter Assessment Name"
+                      onChange={(e) => {
+                        if(selectedLanguage == "en-t-i0-und"){
+                          setAssessment(e.target.value);
+                        }else onChangeHandler(e.target.value, setAssessment);
+                  
+                      }}
+
                     />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
                   </div>
                 </div>
-
-                <div className="row">
+                <div className="col-sm-2">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Exam Name 
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setExaminationname(e.target.value)}
+                  >
+                    <option>Select the Exame Name</option>
+                    {NameExam?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.NameExamination}>
+                            {item?.NameExamination}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+                <div className="col-sm-3">
                   <div className="do-sear mt-2">
-                    <label>Chapter Name</label>
+                    <label>From:</label>
                     <input
-                      type="text"
+                      type="date"
                       className="vi_0"
-                      placeholder="Enter Chapter Name"
-                      onChange={(e) => setChapterName(e.target.value)}
+                      onChange={(e) => setfrom(e.target.value)}
                     />
                   </div>
                 </div>
-
-                <div className="row">
+                <div className="col-sm-3">
                   <div className="do-sear mt-2">
-                    <label>Description</label>
-                    <CKEditor
-                      editor={ClassicEditor}
+                    <label>To:</label>
+                    <input
+                      type="date"
                       className="vi_0"
-                      data={description}
-                      onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setDescription(data);
-                      }}
+                      placeholder="Enter Assessment"
+                      onChange={(e) => setto(e.target.value)}
                     />
                   </div>
-                  <div className="row">
-                    <div className="do-sear mt-2">
-                      <label>Marks</label>
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter Marks"
-                        onChange={(e) => setMarks(e.target.value)}
-                      />
-                    </div>
-                  </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <Button
-                      variant=""
-                      style={{ float: "right", marginTop: "15px" , backgroundColor:"navy", color:"white", borderRadius:"5px"}}
-                      onClick={() => {
-                        setslybus(true);
-                        AddTypesofquestion();
-                      }}
-                    >
-                      Add
-                    </Button>
-                  </div>
+          
+             
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    variant=""
+                    style={{
+                      marginTop: "15px",
+                      backgroundColor: "green",
+                      color: "white",
+                      borderRadius: "5px",
+                    }}
+                    onClick={() => {
+                      // setslybus(true);
+                      AddTypesofassessment();
+                    }}
+                  >
+                    Add
+                  </Button>
                 </div>
-                {slybus ? (
-                  <>
-                    {" "}
-                    <div className="row">
-                      <div className="col-md-12">
-                        <Table
-                          responsive
-                          bordered
-                          style={{
-                            width: "-webkit-fill-available",
-                            textAlign: "center",
-                          }}
-                        >
-                          <thead>
-                            <tr>
-                              <th>S No.</th>
-                              <th>Chapter No.</th>
-                              <th>Chapter Name</th>
-                              <th>Description</th>
-                              <th>Marks</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {Arr?.map((val, i) => {
-                              return (
-                                <tr>
-                                  <td>{i + 1}</td>
-                                  <td>{val?.lesson}</td>
-                                  <td>{val?.chepterName}</td>
-                                  <td>
-                                    {val?.description ? (
-                                      parse(val?.description)
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </td>
-                                  <td>{val?.mask}</td>
-                                  <td>
-                                    {" "}
-                                    <AiFillDelete
-                                      color="red"
-                                      cursor="pointer"
-                                      onClick={() => deleteQuestionType(i)}
-                                    />
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
+            
+             
+              </div>
+
+
+              <div className="row mt-2">
+                <div className="col-md-12">
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                        <th>Assessment</th>
+                        <th>From</th>
+                        <th>To</th>
+
+                        <th>Month</th>
+                        <th>Period</th>
+                        <th>Unit No.</th>
+                        <th>Unit Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr?.map((item, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{item?.Assessment}({item?.Examinationname})</td>
+                            <td>{item?.from}</td>
+                            <td>{item?.to}</td>
+
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.Months}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.period}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.chapterno}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.ChapterName}</p>
+                            })}</td>
+                            <td>
+                              <Button
+                                onClick={() =>{ 
+                                  settype(item?.Assessment)
+                                  setArr2(item?.unitArr? item?.unitArr:[])
+                                  handleShow3(item?.Examinationname)}}
+                              >
+                                Add
+                              </Button>{" "}
+                              <AiFillDelete
+                                color="red"
+                                cursor="pointer"
+                                onClick={() => deleteQuestionType(i)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
               </div>
             </div>
           </Modal.Body>
@@ -889,9 +1021,182 @@ return (
                   addSyllabus();
                 }}
               >
-               Submit
+                Submit
               </Button>
             </div>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={show3}
+          onHide={handleClose3}
+          backdrop="static"
+          keyboard={false}
+          style={{ zIndex: "99999" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title> Add Units Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ backgroundColor: "#dda559" }}>
+            <div  className="row">
+            <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Month</label>
+                  {/* <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter month name"
+                    onChange={(e) => {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setMonths(e.target.value);
+                      }else onChangeHandler(e.target.value, setMonths);
+                    }}
+                  /> */}
+                  <input type="month"   className="vi_0"  onChange={(e) => {
+                    setrealMonth(e.target.value)
+                    // console.log("months ",moment(e.target.value).format("MMMM"));
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setMonths(moment(e.target.value).format("MMMM  -YYYY"));
+                      }else onChangeHandler(moment(e.target.value).format("MMMM -YYYY"), setMonths);
+                    }}/>
+                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Months}</p>}
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Period</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter period Number"
+                    onChange={(e) => {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setperiod(e.target.value);
+                      }else onChangeHandler(e.target.value, setperiod);
+                    }}
+                    // onChange={(e) => setperiod(e.target.value)}
+                  />
+                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{period}</p>}
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Unit Number</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Unit Number"
+                    // onChange={(e) => setChapterNumber(e.target.value)}
+                    onChange={(e) => {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setChapterNumber(e.target.value);
+                      }else onChangeHandler(e.target.value, setChapterNumber);
+                    }}
+                    // onChange={(e) => setperiod(e.target.value)}
+                  />
+                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterNumber}</p>}
+                </div>
+              </div>
+            
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Unit Name</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setSelectsubjectpart(e.target.value);
+                    }}
+                  >
+                    <option>Select the Subject Part</option>
+                    {chapters
+                      ?.filter((ele) => ele.subjectName === subjectt)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={`${val?.chapterName} (${val?.SubjectPart})`} key={i}>
+                            {val?.chapterName} ({val?.SubjectPart})
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div  >
+                 <Button
+              variant=""
+              style={{float:"right",width:"50px",marginTop:"5px"}}
+              className="modal-add-btn"
+              onClick={Addchaptertype}
+            >
+              Add
+            </Button>
+              </div>
+             
+            </div>
+      
+          
+            <div className="row mt-2">
+                <div className="col-md-12">
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                       
+                        <th>Month</th>
+                        <th>Period</th>
+                        <th>Unit No.</th>
+                        <th>Unit Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr2?.map((item, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+      
+                            <td>{item?.Months}</td>
+                            <td>{item?.period}</td>
+                            <td>{item?.chapterno}</td>
+
+                            <td>{item?.ChapterName}</td>
+                            <td>
+                            
+                              <AiFillDelete
+                                color="red"
+                                cursor="pointer"
+                                onClick={() => deleteArrr2(i)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+          </Modal.Body>
+          <Modal.Footer  style={{ backgroundColor: "#dda559" }}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose3}
+            >
+              Close
+            </Button>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={sumbitToArr}
+            >
+              Sumbit
+            </Button>
           </Modal.Footer>
         </Modal>
 
@@ -902,51 +1207,306 @@ return (
           backdrop="static"
           keyboard={false}
           style={{ zIndex: "99999" }}
+          size="xl"
         >
-          <Modal.Header closeButton  style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Number</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Number"
-                  onChange={(e) => setChapterName(e.target.value)}
-                />
+            <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Title</label>
+                  <input
+                   
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- Annoual Programe of  work for the Year"
+                    onChange={(e) => {
+                      // setyear(e.target.value);
+                      if(selectedLanguage == "en-t-i0-und"){
+                            setTitle(e.target.value);
+                          }else onChangeHandler(e.target.value, setTitle);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Year</label>
+                  <input
+                    value={year}
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- 2023-2024"
+                    onChange={(e) => {
+                      setyear(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+
+            
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={classs}
+                    onChange={(e) => {
+                      setclasss(e.target.value);
+                    }}
+                  >
+                    <option>Select the Class</option>
+                    {uniqueClassNamesArray?.map((val, i) => {
+                      return (
+                        <option value={val} key={i}>
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Sub-Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={subclass}
+                    onChange={(e) => {
+                      setsubclass(e.target.value);
+                    }}
+                  >
+                    <option>Select the Sub-Class</option>
+                    {getaddsubclass
+                      ?.filter((ele) => ele.className === classs)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={val?.subclassName} key={i}>
+                            {val?.subclassName}
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Subjects <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                  value={subjectt}
+                    aria-label="Default select example"
+                    onChange={(e) => setsubjectt(e.target.value)}
+                  >
+                    <option value={""}>Select the Subjects</option>
+                    {subject?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.subjectName}>
+                            {item?.subjectName}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Medium <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={medium}
+                    onChange={(e) => {
+                      setmedium(e.target.value);
+                    }}
+                  >
+                    <option>Select the Medium</option>
+                    {Medium?.map((val, i) => {
+                      return (
+                        <option value={val?.mediumName} key={i}>
+                          {val?.mediumName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
               </div>
             </div>
 
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Name</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Name"
-                  onChange={(e) => setChapterName(e.target.value)}
-                />
-              </div>
-            </div>
+            <div
+              style={{
+                border: "2px solid #dee2e6",
+                padding: "10px",
+                marginTop: "10px",
+                // backgroundColor: "#e9caa0"
+              }}
+            >
+              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+                <div className="col-sm-4">
+                  <div className="do-sear mt-2">
+                    <label>Assessment:</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Assessment Name"
+                      onChange={(e) => {
+                        if(selectedLanguage == "en-t-i0-und"){
+                          setAssessment(e.target.value);
+                        }else onChangeHandler(e.target.value, setAssessment);
+                  
+                      }}
 
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Description</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-2">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Exam Name 
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setExaminationname(e.target.value)}
+                  >
+                    <option>Select the Exame Name</option>
+                    {NameExam?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.NameExamination}>
+                            {item?.NameExamination}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
               </div>
-            </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>From:</label>
+                    <input
+                      type="date"
+                      className="vi_0"
+                      onChange={(e) => setfrom(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>To:</label>
+                    <input
+                      type="date"
+                      className="vi_0"
+                      placeholder="Enter Assessment"
+                      onChange={(e) => setto(e.target.value)}
+                    />
+                  </div>
+                </div>
+          
+             
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    variant=""
+                    style={{
+                      marginTop: "15px",
+                      backgroundColor: "green",
+                      color: "white",
+                      borderRadius: "5px",
+                    }}
+                    onClick={() => {
+                      // setslybus(true);
+                      AddTypesofassessment();
+                    }}
+                  >
+                    Add
+                  </Button>
+                </div>
+            
+             
+              </div>
 
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Marks</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Marks"
-                  onChange={(e) => setChapterName(e.target.value)}
-                />
+
+              <div className="row mt-2">
+                <div className="col-md-12">
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      width: "-webkit-fill-available",
+                      textAlign: "center",
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>S No.</th>
+                        <th>Assessment</th>
+                        <th>From</th>
+                        <th>To</th>
+
+                        <th>Month</th>
+                        <th>Period</th>
+                        <th>Unit No.</th>
+                        <th>Unit Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Arr?.map((item, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{item?.Assessment}({item?.Examinationname})</td>
+                            <td>{item?.from}</td>
+                            <td>{item?.to}</td>
+
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.Months}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.period}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.chapterno}</p>
+                            })}</td>
+                            <td>{item?.unitArr?.map((ele)=>{
+                              return <p>{ele?.ChapterName}</p>
+                            })}</td>
+                            <td>
+                              <Button
+                                onClick={() =>{ 
+                                  settype(item?.Assessment)
+                                  setArr2(item?.unitArr? item?.unitArr:[])
+                                  handleShow3(item?.Examinationname)}}
+                              >
+                                Add
+                              </Button>{" "}
+                              <AiFillDelete
+                                color="red"
+                                cursor="pointer"
+                                onClick={() => deleteQuestionType(i)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
               </div>
             </div>
           </Modal.Body>
@@ -990,10 +1550,14 @@ return (
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={DeleteSyllabus}>
+            <Button variant="" className="modal-add-btn" onClick={deleteslybus}>
               Delete
             </Button>
           </Modal.Footer>

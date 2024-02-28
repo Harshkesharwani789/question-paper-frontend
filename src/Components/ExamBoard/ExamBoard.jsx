@@ -21,7 +21,7 @@ const ExamBoard = () => {
   const handleShow1 = () => setShow1(true);
 
   const [before, setBefore] = useState(false);
-  const [after, setAfter] = useState("");
+  const [userType, setuserType] = useState("");
 
   const [Board, setBoard] = useState("");
   const [Mediumm, setMediumm] = useState("");
@@ -48,6 +48,7 @@ const ExamBoard = () => {
           Exam_Name: Exam_Name,
           Exam_Lavel: Exam_Lavel,
           authId: user?._id,
+          userType:userType,
         },
       };
       let res = await axios(config);
@@ -248,6 +249,52 @@ const ExamBoard = () => {
                           <Form.Select
                             aria-label="Default select example"
                             onChange={(e) => {
+                              setClasss(e.target.value);
+                            }}
+                          >
+                            <option value="">Select Class</option>
+                                  <option value="Lower Primary">
+                                    Lower Primary
+                                  </option>
+                                  <option value="Primary">Primary </option>
+                                  <option value="Upper Primary">
+                                    Upper Primary
+                                  </option>
+                                  <option value="Secondary">Secondary</option>
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              setSub_Classs(e.target.value);
+                            }}
+                          >
+                            <option value={""} >Select Sub Class</option>
+                            {getaddsubclass
+                                    ?.filter(
+                                      (ele) => ele.className == Classs
+                                    )
+                                    ?.map((val, i) => {
+                                      return (
+                                        <option
+                                          value={val?.subclassName}
+                                          key={i}
+                                        >
+                                          {val?.subclassName}
+                                        </option>
+                                      );
+                                    })}
+                          </Form.Select>
+                        </div>
+                      </Row>
+                      <Row>
+                        <div className="col-10 mb-4">
+                          <Form.Select
+                            aria-label="Default select example"
+                            onChange={(e) => {
                               setExam_Name(e.target.value);
                             }}
                           >
@@ -301,41 +348,18 @@ const ExamBoard = () => {
                           </Form.Select>
                         </div>
                       </Row>
+                     
                       <Row>
                         <div className="col-10 mb-4">
                           <Form.Select
                             aria-label="Default select example"
                             onChange={(e) => {
-                              setClasss(e.target.value);
+                              setuserType(e.target.value);
                             }}
                           >
-                            <option>Select Class</option>
-                            {getclassname?.map((item, i) => {
-                              return (
-                                <option value={item?.className} key={i}>
-                                  {item?.className}
-                                </option>
-                              );
-                            })}
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setSub_Classs(e.target.value);
-                            }}
-                          >
-                            <option>Select Sub Class</option>
-                            {getaddsubclass?.map((item, i) => {
-                              return (
-                                <option value={item?.subclassName} key={i}>
-                                  {item?.subclassName}
-                                </option>
-                              );
-                            })}
+                            <option value={""} >Select User Type </option>
+                          <option value={"Teacher"}>Teacher</option>
+                          <option value={"Student"}>Student</option>
                           </Form.Select>
                         </div>
                       </Row>
@@ -352,7 +376,7 @@ const ExamBoard = () => {
                             variant=""
                             style={{ backgroundColor: "green", color: "white" }}
                             onClick={() => {
-                              setBefore(true);
+                             tellus()
                             }}
                           >
                             Submit

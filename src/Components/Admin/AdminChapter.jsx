@@ -6,7 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { debounce } from "lodash";
 const AdminChapter = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -24,6 +24,52 @@ const AdminChapter = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   const [classtype, setClasstype] = useState({});
+
+
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
   //Post
   const [chapterName, setChapterName] = useState("");
@@ -249,6 +295,8 @@ const AdminChapter = () => {
       console.log(error);
     }
   };
+
+  console.log("chapters",chapters);
   const [searchTermH, setSearchTermH] = useState("");
   const searchedProductH = chapters.filter((item) => {
     if (searchTermH.value === "") {
@@ -261,34 +309,29 @@ const AdminChapter = () => {
     }
   });
   // Pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const productPerPage = 5;
-  // const visitedPage = pageNumber * productPerPage;
-  // const displayPage = chapters.slice(visitedPage, visitedPage + productPerPage);
-  // const pageCount = Math.ceil(chapters.length / productPerPage);
-  const [currenpage, setCurrentpage] = useState(1);
-  const recordsperpage = 6;
-  const lastIndex = currenpage * recordsperpage;
-  const firstIndex = lastIndex - recordsperpage;
-  const records = chapters.slice(firstIndex, lastIndex);
-  const npages = Math.ceil(chapters.length / recordsperpage);
-  const numbers = [...Array(npages + 1).keys()].slice(1);
+  // const [currenpage, setCurrentpage] = useState(1);
+  // const recordsperpage = 6;
+  // const lastIndex = currenpage * recordsperpage;
+  // const firstIndex = lastIndex - recordsperpage;
+  // const records = chapters.slice(firstIndex, lastIndex);
+  // const npages = Math.ceil(chapters.length / recordsperpage);
+  // const numbers = [...Array(npages + 1).keys()].slice(1);
 
-  function changePage(id) {
-    setCurrentpage(id);
-  }
+  // function changePage(id) {
+  //   setCurrentpage(id);
+  // }
 
-  function prevpage() {
-    if (currenpage !== firstIndex) {
-      setCurrentpage(currenpage - 1);
-    }
-  }
+  // function prevpage() {
+  //   if (currenpage !== firstIndex) {
+  //     setCurrentpage(currenpage - 1);
+  //   }
+  // }
 
-  function nextpage() {
-    if (currenpage !== lastIndex) {
-      setCurrentpage(currenpage + 1);
-    }
-  }
+  // function nextpage() {
+  //   if (currenpage !== lastIndex) {
+  //     setCurrentpage(currenpage + 1);
+  //   }
+  // }
 
   useEffect(() => {
     getChapter();
@@ -296,13 +339,14 @@ const AdminChapter = () => {
     getallweightagecontent();
     getaddsubclasss();
   }, []);
-  console.log("weightage", weightage);
+  console.log("Sub_classname", Sub_classname);
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
   );
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
   return (
     <div>
+      <div className="row d-flex justify-content-between">
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -317,6 +361,28 @@ const AdminChapter = () => {
           />
         </div>
       </div>
+      <div className="col-lg-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
+        </div>
+      </div>
+      
+     
       <div className="customerhead p-2">
         <h2 className="header-c ">Chapters</h2>
         <div>
@@ -339,21 +405,7 @@ const AdminChapter = () => {
                         {val}
                       </option>
                     );
-                  })}
-                  {/* <option value="LKG">LKG</option>
-                  <option value="UKG">UKG</option>
-                  <option value="Class I">Class I</option>
-                  <option value="Class II">Class II</option>
-                  <option value="Class III">Class III</option>
-                  <option value="Class IV">Class IV</option>
-                  <option value="Class V">Class V</option>
-                  <option value="Class VI">Class VI</option>
-                  <option value="Class VII">Class VII</option>
-                  <option value="Class VIII">Class VIII</option>
-                  <option value="Class IX">Class IX</option>
-                  <option value="Class X">Class X</option>
-                  <option value="Class XI">Class XI</option>
-                  <option value="Class XII">Class XII</option> */}
+                  })}                 
                 </Form.Select>
               </div>
               <div className="col-md-4">
@@ -377,7 +429,8 @@ const AdminChapter = () => {
                 </Form.Select>
               </div>
               <div className="col-md-4">
-                <button
+                {Sub_classname ? (<>
+                  <button              
                   className="admin-add-btn mt-4"
                   style={{ float: "right" }}
                   onClick={() => {
@@ -386,6 +439,14 @@ const AdminChapter = () => {
                 >
                   Add Chapters
                 </button>
+                </>):(<>
+                  <button              
+                  className="admin-add-btn mt-4"
+                  style={{ float: "right",cursor:" no-drop",filter:"blur(2px)" }}                 
+                >
+                  Add Chapters
+                </button></>)}
+                
               </div>
             </div>
           </div>
@@ -414,45 +475,47 @@ const AdminChapter = () => {
             </thead>
 
             <tbody>
-              {records?.map((item, i) => {
-                return (
-                  <tr>
-                    <td>{i + 1}</td>
+              {chapters
+                ?.filter((val) => val?.Sub_classname == Sub_classname)
+                ?.map((item, i) => {
+                  return (
+                    <tr>
+                      <td>{i + 1}</td>
 
-                    <td>{item?.subjectName}</td>
-                    <td>{item?.SubjectPart}</td>
-                    <td>{item?.chapterName}</td>
+                      <td>{item?.subjectName}</td>
+                      <td>{item?.SubjectPart}</td>
+                      <td>{item?.chapterName}</td>
 
-                    <td>
-                      {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
-                        <div>
-                          <BiSolidEdit
-                            className="text-success"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              handleShow1(item);
-                              setpdatesetchapter(item?._id);
-                              setChapterName(item?.chapterName);
-                              setSubjectName(item?.subjectName);
-                            }}
-                          />{" "}
+                      <td>
+                        {" "}
+                        <div style={{ display: "flex", gap: "20px" }}>
+                          <div>
+                            <BiSolidEdit
+                              className="text-success"
+                              style={{ cursor: "pointer", fontSize: "20px" }}
+                              onClick={() => {
+                                handleShow1(item);
+                                setpdatesetchapter(item?._id);
+                                setChapterName(item?.chapterName);
+                                setSubjectName(item?.subjectName);
+                              }}
+                            />{" "}
+                          </div>
+                          <div>
+                            <AiFillDelete
+                              className="text-danger"
+                              style={{ cursor: "pointer", fontSize: "20px" }}
+                              onClick={() => {
+                                setChapter(item?._id);
+                                handleShow2(item?._id);
+                              }}
+                            />{" "}
+                          </div>
                         </div>
-                        <div>
-                          <AiFillDelete
-                            className="text-danger"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setChapter(item?._id);
-                              handleShow2(item?._id);
-                            }}
-                          />{" "}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </Table>
         </div>
@@ -478,7 +541,7 @@ const AdminChapter = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-        <div>
+        {/* <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -522,7 +585,7 @@ const AdminChapter = () => {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
 
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
@@ -618,8 +681,14 @@ const AdminChapter = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Chapter Name"
-                  onChange={(e) => setChapterName(e.target.value)}
+                  // onChange={(e) => setChapterName(e.target.value)}
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-unb"){
+                      setChapterName(e.target.value);
+                    }else onChangeHandler(e.target.value,setChapterName)                   
+                  }}
                 />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterName}</p>}
               </div>
             </div>
           </Modal.Body>
@@ -686,9 +755,13 @@ const AdminChapter = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter Chapter Name"
-                  value={chapterName}
-                  onChange={(e) => setChapterName(e.target.value)}
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-unb"){
+                      setChapterName(e.target.value);
+                    }else onChangeHandler(e.target.value,setChapterName)                   
+                  }}
                 />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterName}</p>}
               </div>
             </div>
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
+  Dropdown,
+  DropdownButton,
   Form,
   InputGroup,
   Modal,
@@ -26,7 +28,7 @@ const AdminQuestions = () => {
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
- 
+
   const [show3, setShow3] = useState();
   const navigate = useNavigate();
 
@@ -45,8 +47,13 @@ const AdminQuestions = () => {
 
   const [formdata, setformdata] = useState();
   //get
+  const [ForSelectData, setForSelectData] = useState([])
+  const [TypeofQuestionFilter, setTypeofQuestionFilter] = useState([])
+  const [SunjectFilter, setSunjectFilter] = useState([])
+  const [MediumFilter, setMediumFilter] = useState([])
+  const [BoardFilter, setBoardFilter] = useState([])
+  const [ClassFilter, setClassFilter] = useState([])
   const [Questions, setQuestions] = useState([]);
-
   const getAllQuestions = async () => {
     try {
       let res = await axios.get(
@@ -59,18 +66,17 @@ const AdminQuestions = () => {
       );
       if (res.status == 200) {
         setQuestions(res.data.success);
+        setClassFilter(res.data.success);
+        setBoardFilter(res.data.success);
+        setForSelectData(res.data.success);
+        setMediumFilter(res.data.success);
+        setSunjectFilter(res.data.success);
+        setTypeofQuestionFilter(res.data.success);
       }
     } catch (error) {
       console.log(error);
-      return swal({
-        title: "Oops!",
-        text: error.response.data.error,
-        icon: "error",
-        button: "Ok!",
-      });
     }
   };
-  // get
 
 
   //Delete
@@ -99,13 +105,6 @@ const AdminQuestions = () => {
       }
     } catch (error) {
       console.log(error);
-      // handleClose2();
-      // return swal({
-      //   title: "Oops!",
-      //   text: error.response.data.error,
-      //   icon: "error",
-      //   button: "Ok!",
-      // });
     }
   };
 
@@ -134,6 +133,7 @@ const AdminQuestions = () => {
   const visitedPage = pageNumber * productPerPage;
   const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(data.length / productPerPage);
+
   // Search filter
   const [search, setSearch] = useState("");
   const handleFilter = (e) => {
@@ -151,36 +151,185 @@ const AdminQuestions = () => {
     }
   };
 
+  // Filter 
+  const [SelectClass, setSelectClass] = useState("");
+  const [Selectboard, setSelectboard] = useState("");
+  const [SelectMedium, setSelectMedium] = useState("");
+  const [SelectSubject, setSelectSubject] = useState("");
+  const [SelectTypeQuestion, setSelectTypeQuestion] = useState("")
+
+  useEffect(() => {
+    if (SelectClass) {
+      const allclass = ClassFilter.filter((ele) =>
+        ele.Sub_Class === SelectClass)
+      setQuestions(allclass)
+    }
+
+    if (Selectboard && SelectClass) {
+      const allclassboard = BoardFilter?.filter((ele) =>
+        ele.Board === Selectboard &&
+        ele.Sub_Class === SelectClass)
+      setQuestions(allclassboard)
+    }
+
+    if (Selectboard && SelectClass && SelectMedium) {
+      const allmedium = MediumFilter?.filter((ele) =>
+        ele.Board === Selectboard &&
+        ele.Sub_Class === SelectClass &&
+        ele.Medium === SelectMedium
+      )
+      setQuestions(allmedium)
+    }
+
+    if (Selectboard && SelectClass && SelectMedium && SelectSubject) {
+      const allsubject = SunjectFilter?.filter((ele) =>
+        ele.Board === Selectboard &&
+        ele.Sub_Class === SelectClass &&
+        ele.Medium === SelectMedium &&
+        ele.Subject === SelectSubject         
+      )
+      setQuestions(allsubject)
+    }
+
+    if (Selectboard && SelectClass && SelectMedium && SelectSubject && SelectTypeQuestion) {
+      const alltypeofquestion = TypeofQuestionFilter?.filter((ele) =>
+        ele.Board === Selectboard &&
+        ele.Sub_Class === SelectClass &&
+        ele.Medium === SelectMedium &&
+        ele.Subject === SelectSubject &&
+        ele.Types_Question === SelectTypeQuestion
+      )
+      setQuestions(alltypeofquestion)
+    }
+
+  }, [SelectSubject,SelectTypeQuestion,TypeofQuestionFilter, SunjectFilter, SelectClass, BoardFilter, Selectboard, MediumFilter, SelectMedium, ClassFilter])
+
+
   useEffect(() => {
     getAllQuestions();
   }, []);
-  console.log(Questions);
+  console.log("question=>", Questions);
   return (
     <>
-      <div className="col-lg-4 d-flex justify-content-center">
-        <div class="input-group ">
-          <span class="input-group-text" id="basic-addon1">
-            <BsSearch />
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-          />
+      <div className="row">
+        <div className="col-lg-4 d-flex justify-content-center">
+          <div class="input-group ">
+            <span class="input-group-text" id="basic-addon1">
+              <BsSearch />
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              aria-describedby="basic-addon1"
+            />
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div class="text-container ">
+            <p className="beautiful-text">Questions List </p>
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <div className="text-center">
+            <button
+              className="admin-add-btn "
+              onClick={() => {
+                navigate("/adminquestiondetails");
+              }}
+            >
+              Add Questions
+            </button>
+          </div>
         </div>
       </div>
+
+      <div className="d-flex mt-3 justify-content-between">
+        <div className="">
+          <label> Class: </label>
+          <Form.Select
+            onChange={(e) => setSelectClass(e.target.value)}
+            className="beautiful-select">
+            <option value="">Select Class</option>
+            {Array.from(new Set(ForSelectData?.map(item => item?.Sub_Class)))?.map(subClass => (
+              <option key={subClass} value={subClass}>
+                {subClass}
+              </option>
+            ))}
+
+          </Form.Select>
+        </div>
+        <div className="">
+          <label> Board </label>
+          <Form.Select
+            onChange={(e) => setSelectboard(e.target.value)}
+            className="beautiful-select">
+            <option value=""> select Board</option>
+            {Array.from(new Set(ForSelectData?.filter((ele) => ele?.Sub_Class === SelectClass)?.map(item => item?.Board)))?.map(Board => (
+              <option key={Board} value={Board}>
+                {Board}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+        <div className="">
+          <label> Medium </label>
+          <Form.Select
+            onChange={(e) => setSelectMedium(e.target.value)}
+            className="beautiful-select">
+            <option value="">Select Medium</option>
+            {Array.from(new Set(ForSelectData?.filter((ele) => ele.Board === Selectboard && ele.Sub_Class === SelectClass)?.map(item => item?.Medium)))?.map(Medium => (
+              <option key={Medium} value={Medium}>
+                {Medium}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+        <div className="">
+          <label> Subject </label>
+          <Form.Select
+            onChange={(e) => setSelectSubject(e.target.value)}
+            className="beautiful-select">
+            <option value="">Select Subject</option>
+            {Array.from(new Set(ForSelectData?.filter((ele) =>
+              ele.Board === Selectboard &&
+              ele.Sub_Class === SelectClass &&
+              ele.Medium === SelectMedium
+            )?.map(item => item?.Subject)))?.map(Subject => (
+              <option key={Subject} value={Subject}>
+                {Subject}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+        <div className="">
+          <label> Type Of Question </label>
+          <Form.Select 
+          onChange={(e)=>setSelectTypeQuestion(e.target.value)}
+          className="beautiful-select">
+            <option value="" >Open this select menu</option>
+            {ForSelectData?.filter((ele) =>
+              ele.Board === Selectboard &&
+              ele.Sub_Class === SelectClass &&
+              ele.Medium === SelectMedium &&
+              ele.Subject === SelectSubject
+            )?.map((item, i) => {
+              return (
+                <option key={item} value={item?.Types_Question}>
+                 {i+1} {item?.Types_Question}
+                </option>
+              )
+            })}
+          </Form.Select>
+        </div>
+
+      </div>
+
+
+
       <div className="customerhead p-2 mt-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">Add Questions</h2>
-          <button
-            className="admin-add-btn"
-            onClick={() => {
-              navigate("/adminquestiondetails");
-            }}
-          >
-            Add Questions
-          </button>
+
         </div>
 
         <div className="">
@@ -207,7 +356,7 @@ const AdminQuestions = () => {
                 <th>Action</th>
               </tr>
             </thead>
-
+            {/* ?.filter((ele)=>ele.Sub_Class === SelectClass ) */}
             <tbody>
               {Questions?.map((val, i) => {
                 return (
@@ -237,7 +386,7 @@ const AdminQuestions = () => {
                           <BiSolidEdit
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {                            
+                            onClick={() => {
                               navigate(`/admineditquestiondetails/${val?._id}`);
                             }}
                           />
@@ -246,7 +395,7 @@ const AdminQuestions = () => {
                           <AiFillDelete
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {                            
+                            onClick={() => {
                               setDeleteA(val?._id);
                               handleShow2();
                             }}
@@ -300,11 +449,11 @@ const AdminQuestions = () => {
               <CKEditor
                 editor={ClassicEditor}
                 className="vi_0"
-                // data={lodingdetails}
-                // onChange={(event, editor) => {
-                //   const data = editor.getData();
-                //   setlodingdetails(data);
-                // }}
+              // data={lodingdetails}
+              // onChange={(event, editor) => {
+              //   const data = editor.getData();
+              //   setlodingdetails(data);
+              // }}
               />
             </div>
           </Modal.Body>
@@ -338,11 +487,11 @@ const AdminQuestions = () => {
               <CKEditor
                 editor={ClassicEditor}
                 className="vi_0"
-                // data={lodingdetails}
-                // onChange={(event, editor) => {
-                //   const data = editor.getData();
-                //   setlodingdetails(data);
-                // }}
+              // data={lodingdetails}
+              // onChange={(event, editor) => {
+              //   const data = editor.getData();
+              //   setlodingdetails(data);
+              // }}
               />
             </div>
           </Modal.Body>

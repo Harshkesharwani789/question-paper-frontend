@@ -6,7 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { debounce } from "lodash";
 const AdminExam = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -22,6 +22,53 @@ const AdminExam = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
+    // Language Translater
+    let googleTransliterate = require("google-input-tool");
+    const [translatedValue, setTranslatedValue] = useState("");
+    const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+    
+    const handleLanguageChange = (event) => {
+      setSelectedLanguage(event.target.value);
+    };
+    const onChangeHandler = debounce(async (value, setData) => {
+      if (!value) {
+        setTranslatedValue("");
+        setData("");
+        return "";
+      }
+      let am = value.split(/\s+/); // Split by any whitespace characters
+      let arr = [];
+      let promises = [];
+  
+      for (let index = 0; index < am.length; index++) {
+        promises.push(
+          new Promise(async (resolve, reject) => {
+            try {
+              const response = await googleTransliterate(
+                new XMLHttpRequest(),
+                am[index],
+                selectedLanguage
+              );
+              resolve(response[0][0]);
+            } catch (error) {
+              console.error("Translation error:", error);
+              resolve(am[index]);
+            }
+          })
+        );
+      }
+  
+      try {
+        const translations = await Promise.all(promises);
+        setTranslatedValue(translations.join(" "));
+        setData(translations.join(" "));
+        return translations;
+      } catch (error) {
+        console.error("Promise.all error:", error);
+      }
+    }, 300); // Debounce delay in milliseconds
+    
 
   //Post
   const [NameExamination, setNameExamination] = useState("");
@@ -43,6 +90,7 @@ const AdminExam = () => {
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
+        getNameExamination();
         return swal({
           title: "Yeah!",
           text: res.data.error,
@@ -58,6 +106,7 @@ const AdminExam = () => {
         icon: "error",
         dangerMode: true,
       });
+
     }
   };
   //get
@@ -76,6 +125,7 @@ const AdminExam = () => {
       console.log(error);
     }
   };
+  console.log("NameExam",NameExam);
   //edit
   const [updateNameExam, setupdateNameExam] = useState("");
   const EditNameExam = async () => {
@@ -218,6 +268,28 @@ const AdminExam = () => {
   }
   return (
     <>
+     <div className="row">
+        <div className="col-md-10"></div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
+        </div>
+      </div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -366,34 +438,23 @@ const AdminExam = () => {
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Add Exam</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Add Exam s</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
                 <input type="text" placeholder="Enter Name" className="vi_0" 
-                onChange={(e)=>setNameExamination(e.target.value)}/>
+                onChange={(e)=>
+                  {
+                    if(selectedLanguage == "em-t-i0-und"){
+                      setNameExamination(e.target.value)
+                    } else onChangeHandler(e.target.value,setNameExamination)
+                  }                     
+                }/>
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{NameExamination}</p>}
               </div>
             </div>
-
-            {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
-
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2">
-        <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -427,29 +488,19 @@ const AdminExam = () => {
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
-                <input type="text" placeholder="Enter Name" className="vi_0" 
-                value={NameExamination}
-                onChange={(e)=>setNameExamination(e.target.value)}/>
+                <input type="text" className="vi_0" 
+                // value={NameExamination}
+                onChange={(e)=>
+                  {
+                    if(selectedLanguage == "em-t-i0-und"){
+                      setNameExamination(e.target.value)
+                    } else onChangeHandler(e.target.value,setNameExamination)
+                  }                     
+                }/>
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{NameExamination}</p>}
               </div>
             </div>
 
-            {/* <div className="do-sear mt-2">
-        <label>Title 2</label>
-        <input type="text" placeholder="Enter Title 2" className="vi_0" />
-      </div> */}
-
-            {/* <div className="do-sear mt-2">
-          <label>Description</label>
-          <CKEditor
-            editor={ClassicEditor}
-            // data={AbDescription}
-            onChange={handleChange}
-          />
-        </div> */}
-            {/* <div className="do-sear mt-2"> */}
-            {/* <label>URL</label>
-        <input type="text" placeholder="Enter URL" className="vi_0" />
-      </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose1}>
@@ -463,6 +514,7 @@ const AdminExam = () => {
             </Button>
           </Modal.Footer>
         </Modal>
+
         <Modal
           show={show2}
           onHide={handleClose2}

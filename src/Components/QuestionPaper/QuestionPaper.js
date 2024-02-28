@@ -4,22 +4,13 @@ import "../QuestionPaper/QuestionPaper.css";
 import { CiSaveDown2 } from "react-icons/ci";
 import { LuPrinter } from "react-icons/lu";
 import { IoMdShare } from "react-icons/io";
-import {
-  Button,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-  Modal,
-} from "react-bootstrap";
+import { Button, Row, Table } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import parse from "html-react-parser";
-import { Col } from "react-bootstrap";
-import { IoCheckmark } from "react-icons/io5";
 import Frontpage from "../fontpage/Frontpage";
 import axios from "axios";
 import swal from "sweetalert";
@@ -30,20 +21,24 @@ const QuestionPaper = ({ text }) => {
   const { state } = useLocation();
   console.log("state", state);
   //get
+  const ViewTableCell = ({ value, onChange }) => {
+    return (<td>
+      {value}
+    </td>)
+  }
   const [Questions, setQuestions] = useState([]);
-
   const getAllQuestions = async () => {
     try {
       const config = {
-        url: "/admin/getQuestionByClasswise/"+user?._id,
+        url: "/admin/getQuestionByClasswise/" + user?._id,
         baseURL: "http://localhost:8000/api",
         method: "put",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: { 
-          Board:state.Board,Medium:state.Medium,Class:state.Class,Sub_Class:state.Sub_Class,Subject:state.Subject
+        data: {
+          Board: state.Board, Medium: state.Medium, Class: state.Class, Sub_Class: state.Sub_Class, Subject: state.Subject
         },
       };
       let res = await axios(config)
@@ -60,6 +55,8 @@ const QuestionPaper = ({ text }) => {
       });
     }
   };
+
+  console.log("Questions", Questions);
   const navigate = useNavigate();
 
   const [show, setShow] = useState("");
@@ -86,12 +83,23 @@ const QuestionPaper = ({ text }) => {
     pdf.save("Question_Paper.pdf");
   };
   useEffect(() => {
-    if(state._id&&token){
-        getAllQuestions();
+    if (state._id && token) {
+      getAllQuestions();
     }
-  }, [state,token]);
- var count=(1)
- var count2=0
+  }, [state, token]);
+  var count = (1)
+  var count2 = 0
+  const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+  const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+  const lines = [
+    <div className="col-md-12">
+      <div className="do-sear mt-2">
+        <p type="text" className="lined-input"></p>
+      </div>
+    </div>
+  ];
+  const [ViewAnswer, setViewAnswer] = useState(false)
   return (
     <div>
       <div className="top-header">
@@ -133,289 +141,1827 @@ const QuestionPaper = ({ text }) => {
       </div>
 
       <Frontpage data={state} />
-      <div className="question-paper-display-container" id="pdf">
 
+      <div className="question-paper-display-container" id="pdf">
         <div className="question-paper-display">
           <div className="second-page-body">
-            <h3 style={{ textAlign: "center" }}>Section A</h3>
-           
-            {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
-              if(ele?.QAType=="Multiple Choice Questions"){
-
-                 return (<>
-                  <div className="question-body-main">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>Q 1</b>
-                  <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
-                </div>
-              </div>
-              <div style={{ display: "flex", marginTop: "10px" }}>
-                <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
-              </div>
-            </div>
-            <br />
-              {Questions?.filter((ele)=>ele?.Types_Question=="Multiple Choice Questions")?.map((item, i) => {
-
-                if(i<Number(ele?.NQA)){
-                  count=(i+1);
-                
-                   return (
-                <div className="question-body mt-2">
+            {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
+              return (<>
+                {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
+                <br />
+                <div className="question-body-main">
                   <div>
-                    <div style={{ display: "flex", gap: "12px" }} key={i}>
-                      <b>{i + 1}</b>
-                      <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <b> {RomanAA[a]}</b>
+
+                      <b style={{ textAlign: "left" }}>{ele1?.QAInstruction}</b>
                     </div>
-                    {item?.Image ? (
-                      <div>
-                        <img
-                          src={`http://localhost:8000/Questions/${item?.Image}`}
-                          className="mcq-img"
-                          alt=""
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-
-                    <Row>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_1 ? (
-                          <>
-                            {" "}
-                            a) &nbsp;
-                            {item?.Option_1 ? parse(item?.Option_1) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_2 ? (
-                          <>
-                            b) &nbsp;
-                            {item?.Option_2 ? parse(item?.Option_2) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </Row>
-
-                    <Row>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_3 ? (
-                          <>
-                            {" "}
-                            c) &nbsp;{" "}
-                            {item?.Option_3 ? parse(item?.Option_3) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      <div className="col-6 mb-3 d-flex">
-                        {item?.Option_4 ? (
-                          <>
-                            {" "}
-                            d) &nbsp;
-                            {item?.Option_4 ? parse(item?.Option_4) : ""}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </Row>
-
-                    <Row>
-                      <div className="ans-section">
-                        <div className="ans">Answer: </div>
-                        <div className="ans-box"></div>
-                        <div className="ans-line"></div>
-                      </div>
-                    </Row>
+                  </div>
+                  <div style={{ display: "flex", marginTop: "10px" }}>
+                    <b>{ele1?.NQA}*{ele1?.Mask}={ele1?.NQA * ele1?.Mask}</b>
                   </div>
                 </div>
-              );
-                }
-             
-            })}
+                <br />
+                {Questions?.filter((ele) => ele?.Types_Question === ele1?.QAType)?.map((item, i) => {
+
+                  if (i < Number(ele1?.NQA)) {
+                    count = (i + 1);
+                    return (<>
+                      <div className="question-body mt-2">
+                        {item?.Types_Question === "Multiple Choice Questions" ? (<div>
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+                            <b>{i + 1}</b>
+                            <b> {item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          {item?.Image ? (
+                            <div>
+                              <img
+                                src={`http://localhost:8000/Questions/${item?.Image}`}
+                                className="mcq-img"
+                                alt=""
+                              />
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+
+                          <Row>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_1 ? (
+                                <>
+                                  {" "}
+                                  a) &nbsp;
+                                  {item?.Option_1 ? parse(item?.Option_1) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_2 ? (
+                                <>
+                                  b) &nbsp;
+                                  {item?.Option_2 ? parse(item?.Option_2) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </Row>
+
+                          <Row>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_3 ? (
+                                <>
+                                  {" "}
+                                  c) &nbsp;{" "}
+                                  {item?.Option_3 ? parse(item?.Option_3) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_4 ? (
+                                <>
+                                  {" "}
+                                  d) &nbsp;
+                                  {item?.Option_4 ? parse(item?.Option_4) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </Row>
+
+                          <Row>
+                            <div className="ans-section">
+                              <div className="ans">Answer: </div>
+                              <div className="ans-box"></div>
+                              <div className="ans-line"></div>
+                            </div>
+                          </Row>
+                        </div>) : (<></>)}
+                        {item?.Types_Question === "Fill in the Blanks Questions" ? (<>
+
+                          {item?.NumberOfLine == "2" ? (
+                            <>
+                              <div className="d-flex">
+                                <b>{i + 1}).</b>
+                                <p> {parse(`<div>${item?.input1}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input2}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input3}</div>`)}</p>
+                              </div>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {item?.NumberOfLine == "1" ? (
+                            <>
+                              <b>{i + 1}).</b>
+                              <div className="d-flex">
+                                <p> {parse(`<div>${item?.input1}</div>`)}</p>
+                                <div className="ques-line"></div>
+                                <p> {parse(`<div>${item?.input2}</div>`)}</p>
+
+                              </div>
+
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Recorrect the Answers Questions" ? (<>
+                          <div>
+                            <div className="d-flex">
+                              <b>{i + 1}).</b>  {item?.Question ? parse(item?.Question) : ""}
+                            </div>
+                            <div>
+
+                              {item?.NumberOfLine && (
+                                <>
+                                  {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                    <React.Fragment key={index}>
+                                      {lines.map((line, idx) => (
+                                        <React.Fragment key={idx}>{line}</React.Fragment>
+                                      ))}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "RelationShip Words Questions" ? (<>
+
+                          <div className="row">
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <b>{i + 1}). </b>
+                                <p >{item?.RealetionA}</p>
+                                <p >:</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <p >{item?.RealetionB}</p>
+                                <p >::</p>
+                              </div>
+                            </div>
+
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2 d-flex">
+                                <p>{item?.RealetionC}</p>
+                                <p >:</p>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="do-sear mt-2">
+                                <p
+                                  className=""
+                                  style={{
+                                    borderBottom: "1px solid",
+                                    marginTop: "45px",
+                                    marginBottom: "0px",
+                                  }}
+                                ></p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="row">
+                              <div className="col-md-3">
+                                <div className="do-sear mt-2 d-flex">
+                                  <label htmlFor=""> i)</label>
+                                  <p>{item?.Option_1}</p>
+                                </div>
+                              </div>
+                              <div className="col-md-3">
+                                <div className="do-sear mt-2 d-flex">
+                                  <label htmlFor=""> ii)</label>
+                                  <p>{item?.Option_2}</p>
+                                </div>
+                              </div>
+
+                              <div className="col-md-3">
+                                <div className="do-sear mt-2 d-flex">
+                                  <label htmlFor="">iii)</label>
+                                  <p>{item?.Option_3}</p>
+                                </div>
+                              </div>
+                              <div className="col-md-3">
+                                <div className="do-sear mt-2 d-flex">
+                                  <label htmlFor=""> iv)</label>
+                                  <p>{item?.Option_4}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "One Word Question" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Two  Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Two and three Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Three and Four Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Five and Six Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Six Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Seven Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Eight Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Ten Sentence Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "One Sentence Answer Question" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          {item?.orQuestion ? (<>
+                            <div className="d-flex mt-2">
+                              <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                            </div>
+                            <div className="d-flex mb-1">
+                              {item?.Image_1 ? (<>
+                                <span>a)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                              {item?.Image_2 ? (<>
+                                <span>b)</span>
+                                <img
+                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                  className="mcq-img"
+                                  alt=""
+                                />
+                              </>) : (<></>)}
+                            </div>
+                          </>) : (<></>)}
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Map Reading" ? (<>
+                          <div className="d-flex justify-content-between">
+                            <div className="d-flex mt-2">
+                              <b>{i + 1}).</b>
+                              <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                            </div>
+                            <div>{ele1?.Mask}</div>
+                          </div>
+
+
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Objective Questions" ? (<>
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+                            <b>{i + 1}</b>
+                            <b>{item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          <Row>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_1 ? (
+                                <>
+                                  {" "}
+                                  a) &nbsp;
+                                  {item?.Option_1 ? parse(item?.Option_1) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                            <div className="col-6 mb-3 d-flex">
+                              {item?.Option_2 ? (
+                                <>
+                                  b) &nbsp;
+                                  {item?.Option_2 ? parse(item?.Option_2) : ""}
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </Row>
+                          <Row>
+                            <div className="ans-section">
+                              <div className="ans">Answer: </div>
+                              <div className="ans-box"></div>
+                              <div className="ans-line"></div>
+                            </div>
+                          </Row>
+                          {item?.ImageQ ? (<>
+                            <h4>(OR)</h4>
+                            <div>
+                              {item?.ImageQ ? (<>
+                                <b>Question Image:</b>
+                                <div>
+
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </div>
+                              </>) : (
+                                <></>
+                              )}<br />
+                              <b>Options :</b>
+                              <div className="d-flex mb-1">
+                                {item?.Image_1 ? (<>
+                                  <span>a)</span>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+                                {item?.Image_2 ? (<>
+                                  <span>b)</span>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+                              </div>
+                            </div>
+                          </>) : (<></>)}
+
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Complete the Poem" ? (<>
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+                            <b>{i + 1}</b>
+                            <b>{item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          {item?.PoemSt ? (
+                            <>
+                              {item.NumberOfLine === "4" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.PoemSt}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.PoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLine === "5" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.PoemSt}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.PoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLin === "6" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.PoemSt}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.PoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLin === "7" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.PoemSt}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.PoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {item?.orQuestion ? (<>
+                            <h5>(OR)</h5>
+                          </>) : (<></>)}
+
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+
+                            <b>{item?.orQuestion ? parse(item?.orQuestion) : ""}</b>
+                          </div>
+
+                          {item?.orNumberOfLine ? (
+                            <>
+                              {item?.orNumberOfLine === "4" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.OrPoemSat}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.OrPoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLine === "5" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.OrPoemSat}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.OrPoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLin === "6" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.OrPoemSat}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.OrPoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                              {item.NumberOfLin === "7" ? (
+                                <>
+                                  <div className="">
+                                    <label htmlFor=""> Write Poem </label>
+                                    <div className="d-flex align-items-end">
+                                      <p className="vi_0">{item?.OrPoemSat}</p>
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                    </div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="ans-line mb-3 mt-2"></div>
+                                    <div className="d-flex align-items-end">
+                                      <div className="ans-line mb-3 mt-2"></div>
+                                      <p className="vi_0">{item?.OrPoemEnd}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <> </>
+                              )}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+
+
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Letter Writting" ? (<>
+                          <div style={{ display: "flex", gap: "12px" }} key={i}>
+                            <b>{i + 1}</b>
+                            <b>{item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Situation UnderStatnding answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <b>{item?.Question ? parse(item?.Question) : ""}</b>
+                          </div>
+                          <div className="d-flex mb-1">
+                            {item?.Image_1 ? (<>
+                              <span>a)</span>
+                              <img
+                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                className="mcq-img"
+                                alt=""
+                              />
+                            </>) : (<></>)}
+                            {item?.Image_2 ? (<>
+                              <span>b)</span>
+                              <img
+                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                className="mcq-img"
+                                alt=""
+                              />
+                            </>) : (<></>)}
+                          </div>
+
+                          <div>
+                            {item?.PassiveQuesion?.map((item1, index) => {
+                              return (
+                                <div>
+                                  <p>{item1?.question ? parse(item1?.question) : ""}</p>
+                                  {lines}
+                                  {lines}
+                                </div>
+                              )
+                            })}
+                          </div>
+
+
+
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Match the Following Questions" ? (<>
+                          <div className="question-body mb-2">
+                            <b>{i + 1}.)</b>
+                            <Table bordered>
+                              <thead>
+                                <tr>
+                                  <th colspan="2">PART-A</th>
+                                  <th colspan="2">PART-B</th>
+                                  {item?.Part_C1 ?
+                                    (<th colspan="2">PART-C</th>) : ("")}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th>1</th>
+                                  <th>{item?.Part_A1}</th>
+                                  <th>a</th>
+                                  <th>{item?.Part_B1}</th>
+                                  {item?.Part_C1 ? (<>
+                                    <th>i</th>
+                                    <th>{item?.Part_C1}</th>
+                                  </>) : ("")}
+                                </tr>
+                                <tr>
+                                  <th>2</th>
+                                  <th>{item?.Part_A2}</th>
+                                  <th>b</th>
+                                  <th>{item?.Part_B2}</th>
+                                  {item?.Part_C2 ? (<>
+                                    <th>i</th>
+                                    <th>{item?.Part_C2}</th>
+                                  </>) : ("")}
+                                </tr>
+                                <tr>
+                                  <th>3</th>
+                                  <th>{item?.Part_A3}</th>
+                                  <th>c</th>
+                                  <th>{item?.Part_B3}</th>
+                                  {item?.Part_C3 ? (<>
+                                    <th>iii</th>
+                                    <th>{item?.Part_C3}</th>
+                                  </>) : ("")}
+                                </tr>
+                                <tr>
+                                  <th>4</th>
+                                  <th>{item?.Part_A4}</th>
+                                  <th>d</th>
+                                  <th>{item?.Part_B4}</th>
+                                  {item?.Part_C4 ? (<>
+                                    <th>iv</th>
+                                    <th>{item?.Part_C4}</th>
+                                  </>) : ("")}
+                                </tr>
+                                <tr>
+                                  <th>5</th>
+                                  <th>{item?.Part_A5}</th>
+                                  <th>e</th>
+                                  <th>{item?.Part_B5}</th>
+                                  {item?.Part_C5 ? (<>
+                                    <th>v</th>
+                                    <th>{item?.Part_C5}</th>
+                                  </>) : ("")}
+                                </tr>
+
+                                <tr>
+                                  {item?.Part_A6 ? (<>
+                                    <th>6</th>
+                                    <th>{item?.Part_A6}</th>
+                                  </>) : (<>
+                                    <th></th>
+                                    <th></th>
+                                  </>)}
+                                  {item?.Part_B6 ? (<>
+                                    <th>f</th>
+                                    <th>{item?.Part_B6}</th>
+                                  </>) : (<>
+                                    <th></th>
+                                    <th></th>
+                                  </>)}
+                                  {item?.Part_C5 ? (<>
+                                    <th>vi</th>
+                                    <th>{item?.Part_C5}</th>
+                                  </>) : ("")}
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Classifications of Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+
+                          {item?.orQuestion ? (<>
+                            <div>
+                              <h5 style={{ textAlign: "center" }}>(OR)</h5>
+
+                              <div>
+                                {item?.Image_1 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+                                {item?.Image_2 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+
+                              </div>
+                            </div>
+
+                          </>) : (<></>)
+
+
+                          }
+                          <div>
+
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Odd and out words Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                          </div>
+                          <div className="d-flex justify-content-around">
+
+                            {item?.Option_1 ? parse(item?.Option_1) : ""}
+                            {item?.Option_2 ? parse(item?.Option_2) : ""}
+
+                          </div>
+                          <div className="d-flex justify-content-around">
+                            {item?.Option_3 ? parse(item?.Option_3) : ""}
+                            {item?.Option_4 ? parse(item?.Option_4) : ""}
+                          </div>
+
+                          {item?.Image_1 ? (<>
+                            <div>
+                              <h5 style={{ textAlign: "center" }}>(OR)</h5>
+
+                              <div>
+                                {item?.Image_1 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+                                {item?.Image_2 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+
+                              </div>
+                              <div>
+                                {item?.Image_3 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_3}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+                                {item?.Image_4 ? (<>
+                                  <img
+                                    src={`http://localhost:8000/Questions/${item?.Image_4}`}
+                                    className="mcq-img"
+                                    alt=""
+                                  />
+                                </>) : (<></>)}
+
+                              </div>
+                            </div>
+
+                          </>) : (<></>)
+
+
+                          }
+                          <div>
+
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Poet,Time, Place, Writer answer questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Graph Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div style={{ height: "200px", width: "200px" }}>
+
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Expanding and Explanations Answer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div>
+                            {item?.Image_1 ? (<>
+                              <span>a)</span>
+                              <img
+                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                className="mcq-img"
+                                alt=""
+                              />
+                            </>) : (<></>)}
+                          </div>
+                          <div>
+                            {item?.NumberOfLine && (
+                              <>
+                                {Array.from({ length: item?.NumberOfLine }, (_, index) => (
+                                  <React.Fragment key={index}>
+                                    {lines.map((line, idx) => (
+                                      <React.Fragment key={idx}>{line}</React.Fragment>
+                                    ))}
+                                  </React.Fragment>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </>) : (<></>)}
+                        {item?.Types_Question === "Grammer Questions" ? (<>
+                          <div className="d-flex mt-2">
+                            <b>{i + 1}).</b>
+                            <p>{item?.Question ? parse(item?.Question) : ""}</p>
+                          </div>
+                          <div style={{ height: "200px", width: "200px" }}>
+
+                          </div>
+                        </>) : (<></>)}
+                      </div>
+                    </>);
+                  }
+                })}
               </>)
-              }
-             
             })}
-            
           </div>
           <br />
           <div className="page-footer">
-            <div>8th Std. English QP</div>
-            <div>1</div>
-          </div>
-        </div>
-        <div className="question-paper-display">
-          <div className="second-page-body">
-          <h3 style={{ textAlign: "center" }}>Section B</h3>
-          {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
-              if(ele?.QAType=="Subjective Questions"){
+            <div>{state?.Sub_Class},{state?.Subject}</div>
 
-                 return (<>
-                  <div className="question-body-main">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>Q 2</b>
-                  <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
-                </div>
-              </div>
-              <div style={{ display: "flex", marginTop: "10px" }}>
-                <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
-              </div>
-            </div>
-            <br />
-              {Questions?.filter((ele)=>ele?.Types_Question=="Subjective Questions")?.map((item, i) => {
-
-                if(i<Number(ele?.NQA)){
-                  count2=count+(i+1)
-                   return (
-                    <div className="question-body">
-                    <div>
-                      <div style={{ display: "flex", gap: "12px" }}>
-                        <b>{count+(i+1)})</b>
-                        <b>{item?.Question ? parse(item?.Question) : ""}</b>
-                      </div>
-                      {item?.Image ? (
-                      <div>
-                        <img
-                          src={`http://localhost:8000/Questions/${item?.Image}`}
-                          className="mcq-img"
-                          alt=""
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                      <Row>
-                        <div className="ans-section-lg">
-                          <div className="ans-line"></div>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="ans-section-lg">
-                          <div className="ans-line"></div>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="ans-section-lg">
-                          <div className="ans-line"></div>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="ans-section-lg">
-                          <div className="ans-line"></div>
-                        </div>
-                      </Row>
-                    </div>
-                  </div>);
-                }
-             
-            })}
-              </>)
-              }
-             
-            })}
-           
-           
-         
-          </div>
-          <div className="page-footer">
-            <div>8th Std. English QP</div>
-            <div>5</div>
           </div>
         </div>
 
-        {/* sixth page starts here  */}
-
-        <div className="question-paper-display">
-         
-          <div className="second-page-body">
-            <h3 style={{ textAlign: "center" }}>Section -D</h3>
-            {state?.bluePrint?.TypesofQuestions?.map((ele,a)=>{
-              if(ele?.QAType=="Literarry Type"){
-
-                 return (<>
-                  <div className="question-body-main">
-              <div>
-                <div style={{ display: "flex", gap: "12px" }}>
-                  <b>Q 3</b>
-                  <b style={{ textAlign: "left" }}>{ele?.QAType}</b>
-                </div>
-              </div>
-              <div style={{ display: "flex", marginTop: "10px" }}>
-                <b>{ele?.NQA}*{ele?.Mask}={ele?.NQA*ele?.Mask}</b>
-              </div>
-            </div>
-            <br />
-              {Questions?.filter((ele)=>ele?.Types_Question=="Literarry Type")?.map((item, i) => {
-
-                if(i<Number(ele?.NQA)){
+        {/*------ QuestionAnalysis---- */}
+        <div className="container">
+          <div className='mt-4' >
+            <h3 className='text-center'>
+              {state?.Sub_Class} {state?.Subject}
+            </h3>
+            <h4>QUESTION ANALYSIS</h4>
+          </div>
+          <Table striped>
+            <thead>
+              <tr>
+                <th>Qn. No.</th>
+                <th>Objective</th>
+                <th>Specification</th>
+                <th>Content Unit</th>
+                <th>Type Of QN.</th>
+                <th>Marks</th>
+                <th>Diffeculty Level</th>
+                <th>Time Required to Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Questions?.map((item,i)=>{
+                return(
+                  <tr>
+                  <td>{i+1}</td>
+                  <td>{item?.Objectives}</td>
+                  <td>{item?.Lesson}</td>
+                  <td>{item?.Types_Question}</td>
+                  <td>{state?.bluePrint?.AllChapter
+                  ?.filter((ele)=>ele.Blueprintobjective === item?.Objectives )[0]?.BluePrintQuestiontype}</td>
+                  <td>{item?.Marks}</td>
+                  <td>{item?.Difficulty_level?.slice(0,1)}</td>
+                  <td>{item?.Answer_Time}</td>
+                </tr>
+                )
+              })}
+             
               
-               
-                   return (
-                <div className="question-body mt-2">
-                  <div>
-                    <div style={{ display: "flex", gap: "12px" }} key={i}>
-                      <b>{count2+(i + 1)}</b>
-                      <b> {item?.Question ? parse(item?.Question) : ""}</b>
-                    </div>
-                    {item?.Image ? (
-                      <div>
-                        <img
-                          src={`http://localhost:8000/Questions/${item?.Image}`}
-                          className="mcq-img"
-                          alt=""
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
- <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-                <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row>
-                {/* <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row> */}
-                {/* <Row>
-                  <div className="ans-section-lg">
-                    <div className="ans-line"></div>
-                  </div>
-                </Row> */}
-                  
-                  </div>
-                </div>
-              );
-                }
-             
-            })}
-              </>)
-              }
-             
-            })}
-        
-          </div>
-          <div className="page-footer">
-            <div>8th Std. English QP</div>
-            <div>6</div>
+
+            </tbody>
+          </Table>
+          <div className='d-flex mt-2'>
+            <b>Note<span style={{ color: "red" }}>*</span></b>
+            <p>V.S.A(Very short answer),S.A( short answer ) A(Average) ,E(Easy),M(medium)</p>
           </div>
         </div>
+
+        {/* -------Answer-------- */}
+
+        <div style={{ textAlign: "center" }}>
+          <Button onClick={() => setViewAnswer(!ViewAnswer)}>View Answer</Button>
+          {ViewAnswer === true ? (<>
+            <div id="pdf-content" className="question-paper-display">
+              <div className="englishqp-page-body">
+                <div>
+                  <h2>{state?.Subject} (Answer Sheet)</h2>
+                  <h4>
+                    <b>{state?.bluePrint?.blName}</b>
+                  </h4>
+                </div>
+
+                <div style={{ fontWeight: "bold" }}>
+                  <div className="time-and-marks">
+                    <div>Time :{state?.bluePrint?.DurationOfExam}</div>
+                    <div>Max.Marks : {state?.bluePrint?.TotalDifficultMask}</div>
+                  </div>
+                  <b>
+                    <div className="ans-line mb-3 mt-2"></div>
+                  </b>
+                </div>
+                <main style={{ flex: "1" }}>
+                  {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
+                    return (
+                      <>
+                        <div className="question-body-main">
+                          <div>
+                            <div style={{ display: "flex", gap: "12px" }}>
+                              <b>{RomanAA[a]}</b>
+                              <b style={{ textAlign: "left" }}>
+                                {" "}
+                                {ele1?.QAInstruction}
+                              </b>
+                            </div>
+                          </div>
+                          <div style={{ display: "flex" }}>
+                            <b>{ele1?.NQA}*{ele1?.Mask}={ele1?.NQA * ele1?.Mask}</b>
+                          </div>
+                        </div>
+                        <br />
+                        {Questions?.filter((ele) => ele?.Types_Question === ele1?.QAType)?.map((item, i) => {
+
+                          if (i < Number(ele1?.NQA)) {
+                            return (
+                              <div className="question-body mb-1">
+                                {item?.Types_Question === "Objective Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div style={{ display: "flex", gap: "12px" }} key={i}>
+                                        <b>{i + 1}</b>
+                                        <p>{item?.Answer ? parse(item?.Answer) : ""}</p>
+                                      </div>
+                                      {item?.Image_Ans ? (<>
+                                        <h4>(OR)</h4>
+                                        <div>
+                                          {item?.Image_Ans ? (<>
+                                            <b>Answer Image:</b>
+                                            <div>
+
+                                              <img
+                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                style={{ width: "174px", height: "98px", border: "groove" }}
+                                                alt="answer img"
+                                              />
+                                            </div>
+                                          </>) : (
+                                            <></>
+                                          )}<br />
+
+
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Multiple Choice Questions" ? (
+
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div style={{ display: "flex", gap: "12px" }} key={i}>
+                                        <b>{i + 1}</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.Image_Ans ? (<>
+                                        <h4>(OR)</h4>
+                                        <div>
+                                          {item?.Image_Ans ? (<>
+                                            <b>Answer Image:</b>
+                                            <div>
+
+                                              <img
+                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                style={{ width: "174px", height: "98px", border: "groove" }}
+                                                alt="answer img"
+                                              />
+                                            </div>
+                                          </>) : (
+                                            <></>
+                                          )}<br />
+
+
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+
+                                ) : ("")}
+                                {item?.Types_Question === "One Word Question" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "One Sentence Answer Question" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Two  Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Two and three Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Three and Four Sentence Answer Questions" ? (<>
+
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Five and Six Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Six Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Seven Sentence Answer Questions" ? (<>
+
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Eight Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Ten Sentence Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Map Reading" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex mt-2">
+                                      <b>{i + 1}).</b>
+                                      <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+
+
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Classifications of Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div className="d-flex mt-2">
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Odd and out words Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      {item?.Image_Ans ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.Image_Ans ? (<>
+                                        <div>
+                                          {item?.Image_Ans ? (<>
+                                            <b>Answer Image:</b>
+                                            <div>
+
+                                              <img
+                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                style={{ width: "174px", height: "98px", border: "groove" }}
+                                                alt="answer img"
+                                              />
+                                            </div>
+                                          </>) : (
+                                            <></>
+                                          )}<br />
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Grammer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      <div className="row">
+                                        <Table
+                                          responsive
+                                          bordered
+                                          style={{ width: "-webkit-fill-available" }}
+                                        >
+                                          <tbody>
+                                            {item?.GrammerArrQ?.map((row, rowIndex) => (
+                                              <tr key={rowIndex}>
+                                                {row.map((cell, cellIndex) => (
+                                                  <ViewTableCell
+
+                                                    key={cellIndex}
+                                                    className="vi_0"
+                                                    value={cell}
+
+                                                  />
+                                                ))}
+                                              </tr>
+                                            ))}
+                                          </tbody>
+                                        </Table>
+                                      </div>
+
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Expanding and Explanations Answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+
+                                      {item?.orAnswer ? (<>
+                                        <h5>(OR)</h5>
+                                      </>) : (<></>)}
+                                      {item?.orAnswer ? (<>
+                                        <div>
+                                          <b>{item?.orAnswer ? parse(item?.orAnswer) : ""}</b>
+                                          <br />
+                                        </div>
+                                      </>) : (<></>)}
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Graph Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                      <div>
+                                        {item?.Image_Ans ? (<>
+                                          <div>
+                                            <img
+                                              src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                              style={{ width: "174px", height: "98px", border: "groove" }}
+                                              alt="answer img"
+                                            />
+                                          </div>
+                                        </>) : (
+                                          <></>
+                                        )}<br />
+                                      </div>
+
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Poet,Time, Place, Writer answer questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Letter Writting" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Situation UnderStatnding answer Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{i + 1}).</b>
+                                        <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div></div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Fill in the Blanks Questions" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex mt-2">
+                                      <b>{i + 1}).</b>
+                                      <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+                                </>) : (<></>)}
+                                {item?.Types_Question === "Complete the Poem" ? (<>
+                                  <div className="d-flex justify-content-between">
+                                    <div className="d-flex mt-2">
+                                      <b>{i + 1}).</b>
+                                      <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+
+                                </>) : (<></>)}
+
+                              </div>
+                            )
+                          }
+                        })}
+                      </>)
+                  })}
+
+                  <br />
+                </main>
+              </div>
+            </div>
+          </>) : (<></>)}
+        </div>
+
+
+
+
+
       </div>
     </div>
   );

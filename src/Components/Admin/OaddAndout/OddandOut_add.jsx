@@ -7,8 +7,9 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+import MathEditor from "../MyEditor";
 
-const OddandOut_add = () => {
+const OddandOut_add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -48,8 +49,16 @@ const OddandOut_add = () => {
     setAnswer(data);
   };
   //post
+  // const [QuestionT, setQuestionT] = useState("");
 
   const [Question, setQuestion] = useState("");
+
+  const [Option1T, setOption1T] = useState("");
+  const [Option2T, setOption2T] = useState("");
+  const [Option3T, setOption3T] = useState("");
+  const [Option4T, setOption4T] = useState("");
+  const [AnswerT, setAnswerT] = useState("")
+
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
   const [Option_3, setOption_3] = useState("");
@@ -59,14 +68,14 @@ const OddandOut_add = () => {
   const [Image_2, setImage_2] = useState("");
   const [Image_3, setImage_3] = useState("");
   const [Image_4, setImage_4] = useState("");
-const [Image_Ans,setImage_Ans]=useState("");
+  const [Image_Ans, setImage_Ans] = useState("");
 
   const [Marks, setMarks] = useState("");
   const [Answer, setAnswer] = useState("");
- 
+
   const [Answer_Time, setAnswer_Time] = useState("");
 
-  
+
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
 
   const addquestions = async () => {
@@ -94,13 +103,13 @@ const [Image_Ans,setImage_Ans]=useState("");
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
 
-          Question: Question,
+          // Question: Question,
           Option_1: Option_1,
           Option_2: Option_2,
           Option_3: Option_3,
           Option_4: Option_4,
-       
-          Image_Ans:Image_Ans,
+
+          Image_Ans: Image_Ans,
           Image_1: Image_1,
           Image_2: Image_2,
           Image_3: Image_3,
@@ -136,66 +145,113 @@ const [Image_Ans,setImage_Ans]=useState("");
     <div>
       <div className="">
         <div className="container">
-       
+
           <div className="row mt-2">
-           
+
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
-               
-                <CKEditor
+
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Option_1}
                   onChange={handleChange3}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Option_1,
+                    B: setOption_1,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option1T,
+                    settran: setOption1T,
+                  }}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-               
-                <CKEditor
+
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Option_2}
                   onChange={handleChange4}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Option_2,
+                    B: setOption_2,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option2T,
+                    settran: setOption2T,
+                  }}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3</label>
-               
-                <CKEditor
+
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Option_3}
                   onChange={handleChange5}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: Option_3,
+                    B: setOption_3,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option3T,
+                    settran: setOption3T,
+                  }}
                 />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                
-                <CKEditor
+
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Option_4}
                   onChange={handleChange6}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: Option_4,
+                    B: setOption_4,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option4T,
+                    settran: setOption4T,
+                  }}
                 />
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-               
-                <CKEditor
+
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Answer}
                   onChange={handleChange7}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -211,7 +267,7 @@ const [Image_Ans,setImage_Ans]=useState("");
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload1">Image 1</label>
-                <input type="file" className="vi_0"  id="upload1" accept="images/*" onChange={(e)=>setImage_1(e.target.files[0])} />
+                <input type="file" className="vi_0" id="upload1" accept="images/*" onChange={(e) => setImage_1(e.target.files[0])} />
               </div>
             </div>
             <div className="col-md-6">
@@ -290,7 +346,7 @@ const [Image_Ans,setImage_Ans]=useState("");
                   className="vi_0"
                   onChange={(e) => setAnswer_Time(e.target.value)}
                 >
-                     <option value="">Select</option>
+                  <option value="">Select</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
@@ -326,15 +382,15 @@ const [Image_Ans,setImage_Ans]=useState("");
         </div>
 
         <div className="yoihjij text-center my-2 p-2 ">
-        <button
-                    style={{backgroundColor:"orange"}}
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                        className="modal-add-btn"
-                    >
-                        Back
-                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button
+            style={{ backgroundColor: "orange" }}
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="modal-add-btn"
+          >
+            Back
+          </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();
@@ -392,90 +448,90 @@ const [Image_Ans,setImage_Ans]=useState("");
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1</label>
                 {Image_1 ? (
-                      <img
-                        className=""
-                        src={Image_1 && URL.createObjectURL(Image_1)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                  <img
+                    className=""
+                    src={Image_1 && URL.createObjectURL(Image_1)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2</label>
                 {Image_2 ? (
-                      <img
-                        className=""
-                        src={Image_2 && URL.createObjectURL(Image_2)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                  <img
+                    className=""
+                    src={Image_2 && URL.createObjectURL(Image_2)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 3</label>
                 {Image_3 ? (
-                      <img
-                        className=""
-                        src={Image_3 && URL.createObjectURL(Image_3)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                  <img
+                    className=""
+                    src={Image_3 && URL.createObjectURL(Image_3)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 4</label>
                 {Image_4 ? (
-                      <img
-                        className=""
-                        src={Image_4 && URL.createObjectURL(Image_4)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                  <img
+                    className=""
+                    src={Image_4 && URL.createObjectURL(Image_4)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image Answer</label>
                 {Image_Ans ? (
-                      <img
-                        className=""
-                        src={Image_Ans && URL.createObjectURL(Image_Ans)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                  <img
+                    className=""
+                    src={Image_Ans && URL.createObjectURL(Image_Ans)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
@@ -496,7 +552,7 @@ const [Image_Ans,setImage_Ans]=useState("");
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-              addquestions()
+                addquestions()
               }}
             >
               Submit

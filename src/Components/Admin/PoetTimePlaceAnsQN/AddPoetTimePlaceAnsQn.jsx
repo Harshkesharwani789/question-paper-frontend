@@ -8,8 +8,9 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser"
+import MathEditor from "../MyEditor";
 
-function AddPoetTimePlaceAnsQn() {
+function AddPoetTimePlaceAnsQn({ selectdetails }) {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -32,6 +33,8 @@ function AddPoetTimePlaceAnsQn() {
 
 
   //post
+  const [QuestionT, setQuestionT] = useState("");
+  const [AnswerT, setAnswerT] = useState("");
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
   const [Marks, setMarks] = useState("");
@@ -96,11 +99,20 @@ function AddPoetTimePlaceAnsQn() {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Question}
                   onChange={handleChange}
+                /> */}
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -529,11 +541,21 @@ function AddPoetTimePlaceAnsQn() {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
-                <CKEditor
+                {/* <CKEditor
                   editor={ClassicEditor}
                   className="vi_0"
                   data={Answer}
                   onChange={handleChange1}
+                /> */}
+
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -949,7 +971,7 @@ function AddPoetTimePlaceAnsQn() {
             <div className="col-sm-12">
               <label htmlFor="">Answer</label>
               <p className="vi_0">
-              {parse(`<div>${Answer}</div>`)}
+                {parse(`<div>${Answer}</div>`)}
               </p>
             </div>
           </div>

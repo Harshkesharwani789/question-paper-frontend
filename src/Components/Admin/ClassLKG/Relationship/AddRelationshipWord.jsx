@@ -5,10 +5,12 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+let googleTransliterate = require("google-input-tool");
 
-const AddRelationshipWord = () => {
+const AddRelationshipWord = ({selectdetails}) => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -20,6 +22,48 @@ const AddRelationshipWord = () => {
 
   
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
+
+
+  const [translatedValue, setTranslatedValue] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectdetails?.selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
 
   const [RealetionA, setRealetionA] = useState("");
@@ -123,39 +167,53 @@ const AddRelationshipWord = () => {
 
                 <div className="row">
                   <div className="col-md-3">
-                    <div className="do-sear mt-2 d-flex">
+                    <div className="do-sear mt-2 d-flex justify-content-space-evenly">
+                      <div>
                       <input
                         type="text"
                         className="vi_0"
                         placeholder="Enter The question"
-                        value={RealetionA}
-                        onChange={(e)=>setRealetionA(e.target.value)}
+                        // value={RealetionA}
+                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                        setRealetionA(e.target.value):onChangeHandler(e.target.value,setRealetionA)}
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionA}</p>}
+                      </div>
                       <p className="m-2">:</p>
                     </div>
                   </div>
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
+                      <div>
                       <input
                         type="text"
                         className="vi_0"
                         placeholder="Enter The question"
-                        value={RealetionB}
-                        onChange={(e)=>setRealetionB(e.target.value)}
+                        // value={RealetionB}
+                        // onChange={(e)=>setRealetionB(e.target.value)}
+                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                        setRealetionB(e.target.value):onChangeHandler(e.target.value,setRealetionB)}
                       />
+              {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionB}</p>}
+                      </div>                     
+                    
                       <p className="m-2 ">::</p>
                     </div>
                   </div>
 
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
+                    <div>
                       <input
                         type="text"
                         className="vi_0"
                         placeholder="Enter The question"
-                        value={RealetionC}
-                        onChange={(e)=>setRealetionC(e.target.value)}
+                        // value={RealetionC}
+                        // onChange={(e)=>setRealetionC(e.target.value)}
+                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                        setRealetionC(e.target.value):onChangeHandler(e.target.value,setRealetionC)}
                       />
+                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionC}</p>}</div>
                       <p className="m-2">:</p>
                     </div>
                   </div>
@@ -182,9 +240,12 @@ const AddRelationshipWord = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter The question"
-                  value={Option_1}
-                  onChange={(e)=>setOption_1(e.target.value)}
+                  // value={Option_1}
+                  // onChange={(e)=>setOption_1(e.target.value)}
+                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                  setOption_1(e.target.value):onChangeHandler(e.target.value,setOption_1)}
                 />
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_1}</p>}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -195,9 +256,12 @@ const AddRelationshipWord = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter The question"
-                  value={Option_2}
-                  onChange={(e)=>setOption_2(e.target.value)}
+                  // value={Option_2}
+                  // onChange={(e)=>setOption_2(e.target.value)}
+                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                  setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
                 />
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_2}</p>}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -209,9 +273,12 @@ const AddRelationshipWord = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter The question"
-                  value={Option_3}
-                  onChange={(e)=>setOption_3(e.target.value)}
+                  // value={Option_3}
+                  // onChange={(e)=>setOption_3(e.target.value)}
+                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                  setOption_3(e.target.value):onChangeHandler(e.target.value,setOption_3)}
                 />
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_3}</p>}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -222,9 +289,12 @@ const AddRelationshipWord = () => {
                   type="text"
                   className="vi_0"
                   placeholder="Enter The question"
-                  value={Option_4}
-                  onChange={(e)=>setOption_4(e.target.value)}
+                  // value={Option_4}
+                  // onChange={(e)=>setOption_4(e.target.value)}
+                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                  setOption_4(e.target.value):onChangeHandler(e.target.value,setOption_4)}
                 />
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_4}</p>}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -238,9 +308,12 @@ const AddRelationshipWord = () => {
                     type="text"
                     className="vi_0"
                     placeholder="Enter The question"
-                    value={Answer}
-                    onChange={(e)=>setAnswer(e.target.value)}
-                  />
+                    // value={Answer}
+                    // onChange={(e)=>setAnswer(e.target.value)}
+                    onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
+                    setAnswer(e.target.value):onChangeHandler(e.target.value,setAnswer)}
+                />
+                 {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer}</p>}
                 </div>
               </div>
             </div>

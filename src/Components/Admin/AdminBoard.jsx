@@ -7,8 +7,10 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
-
+import { debounce } from "lodash";
 const AdminBoard = () => {
+
+  const ThemeContext = React.createContext();
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -20,8 +22,7 @@ const AdminBoard = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-  //   Row Filter
-  const [itempage, setItempage] = useState(5);
+
 
   //   DateRange Filter
   const [data, setData] = useState([]);
@@ -42,6 +43,52 @@ const AdminBoard = () => {
 
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
   // Post method Integration
   const [boardName, setboardName] = useState("");
@@ -103,7 +150,6 @@ const AdminBoard = () => {
   };
   // edit method
   const [updateboardname, setupdateboardname] = useState("");
-
   const updateallboardname = async () => {
     try {
       const config = {
@@ -117,7 +163,7 @@ const AdminBoard = () => {
         data: {
           boardName: boardName,
           authId: admin?._id,
-          id: updateboardname,
+          id: updateboardname?._id,
         },
       };
       const res = await axios(config);
@@ -165,7 +211,7 @@ const AdminBoard = () => {
           button: "OK!",
         });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   useEffect(() => {
     getallboardname();
@@ -211,6 +257,8 @@ const AdminBoard = () => {
 
   return (
     <>
+
+
       {/* <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -224,9 +272,32 @@ const AdminBoard = () => {
           />
         </div>
       </div> */}
+      <div className="row">
+        <div className="col-md-10"></div>
+        <div className="col-md-2">
+          <label htmlFor="">Select Langauge</label>
+          <select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="vi_0"
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+          >
+            <option value="en-t-i0-und">English</option>
+            <option value="ne-t-i0-und">Nepali</option>
+            <option value="hi-t-i0-und">Hindi</option>
+            <option value="kn-t-i0-und">Kannada</option>
+            <option value="ta-t-i0-und">Tamil</option>
+            <option value="pa-t-i0-und">Punjabi</option>
+            <option value="mr-t-i0-und">Marathi</option>
+            <option value="ur-t-i0-und">Urdu</option>
+            <option value="sa-t-i0-und">Sanskrit</option>
+          </select>
+        </div>
+      </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Board</h2>
+
           <button
             className=" btn"
             style={{ backgroundColor: "#138808", color: "white" }}
@@ -270,7 +341,7 @@ const AdminBoard = () => {
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
                               handleShow1();
-                              setupdateboardname(val?._id);
+                              setupdateboardname(val);
                               setboardName(val?.boardName);
                             }}
                           />{" "}
@@ -340,15 +411,15 @@ const AdminBoard = () => {
                       className="inactive"
                       onClick={() => changePage(n)}
                     >
-                       {n}
+                      {n}
                     </a>
                   </li>
                 );
               })}
-             
+
               <li className="not-allow">
                 <span>
-                  <li className="next-prev"  onClick={() => {
+                  <li className="next-prev" onClick={() => {
                     nextpage();
                   }}>&gt; </li>
                 </span>
@@ -362,7 +433,7 @@ const AdminBoard = () => {
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Add Board</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body>        
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Name of the Board</label>
@@ -371,29 +442,14 @@ const AdminBoard = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    setboardName(e.target.value);
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setboardName(e.target.value);
+                    }else onChangeHandler(e.target.value, setboardName);                    
                   }}
                 />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
               </div>
             </div>
-
-            {/* <div className="do-sear mt-2">
-          <label>Title 2</label>
-          <input type="text" placeholder="Enter Title 2" className="vi_0" />
-        </div> */}
-
-            {/* <div className="do-sear mt-2">
-            <label>Description</label>
-            <CKEditor
-              editor={ClassicEditor}
-              // data={AbDescription}
-              onChange={handleChange}
-            />
-          </div> */}
-            {/* <div className="do-sear mt-2">
-          <label>URL</label>
-          <input type="text" placeholder="Enter URL" className="vi_0" />
-        </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -434,33 +490,18 @@ const AdminBoard = () => {
                 <label>Name of the Board</label>
                 <input
                   type="text"
-                  placeholder="Enter Board"
+                  placeholder={updateboardname?.boardName}
                   className="vi_0"
-                  value={boardName}
+                
                   onChange={(e) => {
-                    setboardName(e.target.value);
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setboardName(e.target.value);
+                    }else onChangeHandler(e.target.value , setboardName)                    
                   }}
                 />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
               </div>
             </div>
-
-            {/* <div className="do-sear mt-2">
-          <label>Title 2</label>
-          <input type="text" placeholder="Enter Title 2" className="vi_0" />
-        </div> */}
-
-            {/* <div className="do-sear mt-2">
-            <label>Description</label>
-            <CKEditor
-              editor={ClassicEditor}
-              // data={AbDescription}
-              onChange={handleChange}
-            />
-          </div> */}
-            {/* <div className="do-sear mt-2"> */}
-            {/* <label>URL</label>
-          <input type="text" placeholder="Enter URL" className="vi_0" />
-        </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose1}>
