@@ -60,11 +60,7 @@ const QuestionPaper = ({ text }) => {
   const navigate = useNavigate();
 
   const [show, setShow] = useState("");
-  const aTagRef = useRef(null);
 
-  const handlePrint = () => {
-    window.print();
-  };
 
   const createPDF = async () => {
     const pdf = new jsPDF("portrait", "pt", "a4");
@@ -88,7 +84,8 @@ const QuestionPaper = ({ text }) => {
     }
   }, [state, token]);
   let count = 1 
-  let count2 = 0
+  let count2 = 1
+  let count3 = 1
   const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
   const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
@@ -100,9 +97,23 @@ const QuestionPaper = ({ text }) => {
     </div>
   ];
   const [ViewAnswer, setViewAnswer] = useState(false)
-  const [viewData,setViewData]=useState({
-    count0:1
-  });
+
+
+  // ///////
+  const aTagRef = useRef(null);
+  const handlePrint = () => {
+    const printableContent =
+      document.getElementById("printable-content").innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    // Replace the content of the body with the content of the printable section
+    document.body.innerHTML = printableContent;
+    // Print the content
+    window.print();
+    // Restore the original content
+    document.body.innerHTML = originalContent;
+  };
+
 
   return (
     <div>
@@ -143,11 +154,24 @@ const QuestionPaper = ({ text }) => {
           <></>
         )}
       </div>
+      <div className=" d-flex justify-content-end">
+        <div className="col-sm-2" >        
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+     
 <div id="pdf">
-   <Frontpage data={state} />
+ 
 
       <div className="question-paper-display-container" >
-        <div className="question-paper-display">
+      <LuPrinter
+          style={{ width: "22px", height: "40px" }}
+          ref={aTagRef}
+          onClick={handlePrint}
+        />
+         <div id="printable-content">
+         <Frontpage data={state} />
+         <div className="question-paper-display">
           <div className="second-page-body">
             {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
              
@@ -175,7 +199,7 @@ const QuestionPaper = ({ text }) => {
                       <div className="question-body mt-2">
                         {item?.Types_Question === "Multiple Choice Questions" ? (<div>
                           <div style={{ display: "flex", gap: "12px" }} key={i}>
-                            <b>{i + 1}</b>
+                            <b>{count3++}</b>
                             <b> {item?.Question ? parse(item?.Question) : ""}</b>
                           </div>
                           {item?.Image ? (
@@ -265,14 +289,15 @@ const QuestionPaper = ({ text }) => {
                           )}
                           {item?.NumberOfLine == "1" ? (
                             <>
+                           <div className="d-flex gap-1 align-items-center">
                               <b>{count++ }).</b>
-                              <div className="d-flex">
+                              <div className="d-flex align-items-center" style={{width:'-webkit-fill-available'}}>
                                 <p> {parse(`<div>${item?.input1}</div>`)}</p>
                                 <div className="ques-line"></div>
                                 <p> {parse(`<div>${item?.input2}</div>`)}</p>
 
                               </div>
-
+                              </div>
                             </>
                           ) : (
                             <></>
@@ -813,7 +838,7 @@ const QuestionPaper = ({ text }) => {
                         </>) : (<></>)}
                         {item?.Types_Question === "Objective Questions" ? (<>
                           <div style={{ display: "flex", gap: "12px" }} key={i}>
-                            <b>{i + 1}</b>
+                            <b>{count3++}</b>
                             <b>{item?.Question ? parse(item?.Question) : ""}</b>
                           </div>
                           <Row>
@@ -1175,7 +1200,7 @@ const QuestionPaper = ({ text }) => {
                         </>) : (<></>)}
                         {item?.Types_Question === "Letter Writting" ? (<>
                           <div style={{ display: "flex", gap: "12px" }} key={i}>
-                            <b>{i + 1}</b>
+                            <b>{count3++}</b>
                             <b>{item?.Question ? parse(item?.Question) : ""}</b>
                           </div>
                           <div>
@@ -1514,6 +1539,9 @@ const QuestionPaper = ({ text }) => {
 
           </div>
         </div>
+</div>
+
+        
 
         {/*------ QuestionAnalysis---- */}
         <div className="container">
@@ -1523,7 +1551,7 @@ const QuestionPaper = ({ text }) => {
             </h3>
             <h4>QUESTION ANALYSIS</h4>
           </div>
-          <Table striped>
+          <Table striped bordered style={{fontFamily:'math'}}>
             <thead>
               <tr>
                 <th>Qn. No.</th>
@@ -1549,7 +1577,7 @@ const QuestionPaper = ({ text }) => {
                        
                         return (
                           <tr>
-                            <td> {i+1}</td>
+                            <td> {count2++}</td>
                             <td>{item?.Objectives}</td>
                             <td>{item?.Lesson}</td>
                             <td>{item?.Types_Question}</td>
@@ -1627,7 +1655,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div style={{ display: "flex", gap: "12px" }} key={i}>
-                                        <b>{i + 1}</b>
+                                        <b>{count3++}</b>
                                         <p>{item?.Answer ? parse(item?.Answer) : ""}</p>
                                       </div>
                                       {item?.Image_Ans ? (<>
@@ -1659,7 +1687,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div style={{ display: "flex", gap: "12px" }} key={i}>
-                                        <b>{i + 1}</b>
+                                        <b>{count3++}</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.Image_Ans ? (<>
@@ -1691,7 +1719,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1709,7 +1737,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1727,7 +1755,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1745,7 +1773,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1764,7 +1792,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1783,7 +1811,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1801,7 +1829,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1820,7 +1848,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1839,7 +1867,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1858,7 +1886,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1876,7 +1904,7 @@ const QuestionPaper = ({ text }) => {
                                 {item?.Types_Question === "Map Reading" ? (<>
                                   <div className="d-flex justify-content-between">
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count3++}).</b>
                                       <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                     </div>
                                     <div>{ele1?.Mask}</div>
@@ -1888,7 +1916,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.orAnswer ? (<>
@@ -1906,7 +1934,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       {item?.Image_Ans ? (<>
@@ -1936,7 +1964,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       <div className="row">
@@ -1970,7 +1998,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
 
@@ -1990,7 +2018,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                       <div>
@@ -2014,7 +2042,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                     </div>
@@ -2024,7 +2052,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                     </div>
@@ -2034,7 +2062,7 @@ const QuestionPaper = ({ text }) => {
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
-                                        <b>{count++}).</b>
+                                        <b>{count3++}).</b>
                                         <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                       </div>
                                     </div>
@@ -2043,7 +2071,7 @@ const QuestionPaper = ({ text }) => {
                                 {item?.Types_Question === "Fill in the Blanks Questions" ? (<>
                                   <div className="d-flex justify-content-between">
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count3++}).</b>
                                       <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                     </div>
                                     <div>{ele1?.Mask}</div>
@@ -2052,7 +2080,7 @@ const QuestionPaper = ({ text }) => {
                                 {item?.Types_Question === "Complete the Poem" ? (<>
                                   <div className="d-flex justify-content-between">
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count3++}).</b>
                                       <b>{item?.Answer ? parse(item?.Answer) : ""}</b>
                                     </div>
                                     <div>{ele1?.Mask}</div>
