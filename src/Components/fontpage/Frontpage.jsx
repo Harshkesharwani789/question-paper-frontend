@@ -18,6 +18,7 @@ const Frontpage = ({data}) => {
             </div>
             <div className="title-1">
               <h4>KARNATAKA SCHOOL EXAMINATION AND ASSESSMENT BOARD</h4>
+              <h4>{data?.Board}</h4>
             </div>
             </div>
             <div className="title-2">
@@ -41,7 +42,7 @@ const Frontpage = ({data}) => {
                 <b>Marks: {data?.bluePrint?.TotalDifficultMask}</b>
               </div>
               <div className="class-data">
-                <b>Time: {parseInt(data?.bluePrint?.DurationOfExam)} Hours</b>
+                <b>Time: {data?.bluePrint?.DurationOfExam} </b>
               </div>
             </div>
           </div>
