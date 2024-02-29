@@ -1823,7 +1823,7 @@ question_details?.Types_Question === "RelationShip Words Questions"
                 </div>
 
                 <div className="col-md-12">
-              <div className="do-sear mt-2">
+               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
                 <CKEditor
                   editor={ClassicEditor}
@@ -1831,16 +1831,16 @@ question_details?.Types_Question === "RelationShip Words Questions"
                   data={Answer}
                   onChange={handleChange1}
                 />
-              </div>
-            </div>
+               </div>
+               </div>
 
-            <div>
-              <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
+               <div>
+               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
-              </h6>
-            </div>
+               </h6>
+                 </div>
 
-            <div className="col-md-6">
+                 <div className="col-md-6">
                 <div className="do-sear">
                   <label htmlFor="upload1">Question Image</label>
                   <div className="d-flex">
@@ -1872,8 +1872,8 @@ question_details?.Types_Question === "RelationShip Words Questions"
                   </div>
 
                 </div>
-              </div>
-              <div className="col-md-6">
+                  </div>
+                 <div className="col-md-6">
                 <div className="do-sear">
                   <label htmlFor="upload2">Question Image</label>
                   <div className="d-flex">
@@ -1905,10 +1905,10 @@ question_details?.Types_Question === "RelationShip Words Questions"
                   </div>
 
                 </div>
-              </div>
+               </div>
 
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
+                   <div className="col-md-12">
+               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
                 <CKEditor
                   editor={ClassicEditor}
@@ -1916,10 +1916,10 @@ question_details?.Types_Question === "RelationShip Words Questions"
                   data={orQuestion}
                   onChange={handleChange4}
                 />
-              </div>
-            </div>
+               </div>
+                </div>
 
-            <div className="col-md-12">
+                <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
                 <CKEditor
@@ -1929,7 +1929,7 @@ question_details?.Types_Question === "RelationShip Words Questions"
                   onChange={handleChange5}
                 />
               </div>
-            </div>
+                </div>
 
               </>) : (<></>)}
 
@@ -6423,6 +6423,7 @@ question_details?.Types_Question === "RelationShip Words Questions"
 
                 </div>
               </div>
+              
             </>):(<></>)}
 
           

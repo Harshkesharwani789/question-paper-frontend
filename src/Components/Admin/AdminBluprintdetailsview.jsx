@@ -200,7 +200,7 @@ function AdminBlueprintdetailsview() {
           <div className="row">
                 <div className="col-md-12 text-end">
                <div className="justify-content-end d-flex gap-3">
-               <FiPrinter onClick={createPDF}/>
+               <FiPrinter onClick={createPDF} style={{cursor:"pointer",color:"blue"}} />
                 <div id="google_translate_element"></div>
                </div>
                 
@@ -257,8 +257,8 @@ function AdminBlueprintdetailsview() {
                             <td>
                               <b>Total</b>
                             </td>
-                            <td></td>
-                            <td></td>
+                            <td> </td>
+                            <td> </td>
                             <td>
                               {blueprint?.TypesofQuestions?.reduce(
                                 (a, i) => a + Number(i?.NQA),
@@ -430,66 +430,61 @@ function AdminBlueprintdetailsview() {
                 <Table
                   responsive
                   bordered
-                  style={{ border: "1px solid", width: "109rem" }}
-                  size="sm"
+                  style={{ border: "1px solid", width: "73.8rem" }}
                 >
                   <thead>
                     <tr>
-                      <th>S No.</th>
-                      <th style={{ width: "200px" }}>Content</th>
+                      <th style={{fontSize:"12px",width:"32px"}}>S No.</th>
+                      <th style={{ width: "125px",fontSize:"12px" }}>Content</th>
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
-                            <th colSpan={3}>{ele?.Objective}</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th colSpan={6} style={{fontSize:"12px"}}>{ele?.Objective}</th>
+                           
                           </>
                         );
                       })}
 
-                      <th colSpan={3}>Total Questions</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th colSpan={2}>Total Marks</th>
+                      <th colSpan={6} style={{fontSize:"12px"}}>Total Questions</th>
+                    
+                      <th colSpan={1} style={{fontSize:"12px"}}>Total Marks</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th></th>
 
-                      <th style={{ width: "200px" }}></th>
+                      <th style={{ width: "125px",fontSize:"12px" }}></th>
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
-                            <th>MC</th>
-                            <th>VSA</th>
-                            <th>SA</th>
-                            <th>LA 1</th>
-                            <th>LA 2</th>
-                            <th>LA 3</th>
+                            <th style={{fontSize:"12px"}}>MC</th>
+                            <th style={{fontSize:"12px"}}>VSA</th>
+                            <th style={{fontSize:"12px"}}>SA</th>
+                            <th style={{fontSize:"12px"}}>LA 1</th>
+                            <th style={{fontSize:"12px"}}>LA 2</th>
+                            <th style={{fontSize:"12px"}}>LA 3</th>
                           </>
                         );
                       })}
 
-                      <th>MC</th>
-                      <th>VSA</th>
-                      <th>SA</th>
-                      <th>LA 1</th>
-                      <th>LA 2</th>
-                      <th>LA 3</th>
-                      <th></th>
+                      <th style={{fontSize:"12px"}}>MC</th>
+                      <th style={{fontSize:"12px"}}>VSA</th>
+                      <th style={{fontSize:"12px"}}>SA</th>
+                      <th style={{fontSize:"12px"}}>LA 1</th>
+                      <th style={{fontSize:"12px"}}>LA 2</th>
+                      <th style={{fontSize:"12px"}}>LA 3</th>
+                      <th style={{fontSize:"12px"}}></th>
                     </tr>
                     {uniqueObjectsArray?.map((ele, i) => {
                       return (
                         <tr>
-                          <td>{i + 1}</td>
-                          <td style={{ width: "200px" }}>{ele?.name}</td>
+                          <td style={{fontSize:"12px"}}>{i + 1}</td>
+                          <td style={{ width: "125px",fontSize:"12px" }}>{ele?.name}</td>
                           {blueprint?.objectives?.map((ele1) => {
                             return (
                               <>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -518,7 +513,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                     : ""}
                                 </td>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -548,7 +543,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                     : ""}
                                 </td>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -577,7 +572,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                     : ""}
                                 </td>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -607,7 +602,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                     : ""}
                                 </td>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -637,7 +632,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                     : ""}
                                 </td>
-                                <td>
+                                <td style={{fontSize:"12px"}}>
                                   {
                                     AllChapterData?.find(
                                       (item) =>
@@ -671,36 +666,36 @@ function AdminBlueprintdetailsview() {
                             );
                           })}
 
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "M C")?.TotalQ}
                           </td>
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
                           </td>
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "S.A")?.TotalQ}
                           </td>
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "L.A 1")?.TotalQ}
                           </td>
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "L.A 2")?.TotalQ}
                           </td>
-                          <td>
+                          <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "L.A 3")?.TotalQ}
                           </td>
 
-                          <td>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
+                          <td style={{fontSize:"12px"}}>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
                         </tr>
                       );
                     })}
                     <tr>
                       <td></td>
-                      <td>Total</td>
+                      <td style={{fontSize:"12px",width:"46px"}}>Total</td>
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -738,7 +733,7 @@ function AdminBlueprintdetailsview() {
                                 ""
                               )}
                             </td>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -776,7 +771,7 @@ function AdminBlueprintdetailsview() {
                                 ""
                               )}
                             </td>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -814,7 +809,7 @@ function AdminBlueprintdetailsview() {
                                 ""
                               )}
                             </td>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -852,7 +847,7 @@ function AdminBlueprintdetailsview() {
                                 ""
                               )}
                             </td>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -890,7 +885,7 @@ function AdminBlueprintdetailsview() {
                                 ""
                               )}
                             </td>
-                            <td>
+                            <td style={{fontSize:"12px"}}>
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
@@ -937,13 +932,13 @@ function AdminBlueprintdetailsview() {
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>
+                      <td style={{fontSize:"12px"}}>
                         {blueprint?.AllChapter?.reduce(
                           (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                           0
                         )}
                       </td>
-                      <td>
+                      <td style={{fontSize:"12px"}}>
                         {blueprint?.AllChapter?.reduce(
                           (a, ele) =>
                             a +
