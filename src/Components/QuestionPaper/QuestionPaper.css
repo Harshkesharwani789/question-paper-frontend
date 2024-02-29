@@ -298,3 +298,28 @@ h6 {
     margin: 14px 10px;
   }
 }
+
+/* CSS styles for print layout */
+@media print {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #printable-content {
+    /* Set fixed height per page */
+    height: calc(100vh - 50px); /* Subtracting footer height */
+    overflow: hidden; /* Hide overflow content */
+  }
+
+  /* Define styles for footer */
+  .footer {
+    height: 50px;
+  }
+
+  /* Page break after each printable content */
+  #printable-content {
+    page-break-after: always;
+  }
+}
