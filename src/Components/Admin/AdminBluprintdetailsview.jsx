@@ -162,6 +162,11 @@ function AdminBlueprintdetailsview() {
     </div> */}
           {/* blue print 1  */}
           <div className="blueprint-content-display">
+          <div className="row">
+                <div className="col-md-12 text-end">
+                <div id="google_translate_element"></div>
+                </div>
+              </div>
             <div className="blueprint-titles">
               <h3>{blueprint?.blName}</h3>
               <h4> BLUE PRINT</h4>
@@ -169,68 +174,70 @@ function AdminBlueprintdetailsview() {
             <div className="container">
               <div className="row">
                 <div className="col-md-7">
-                   {/* table 3  */}
-            <div className="weightage-objectives">
-              <div className="main-title">
-                <b>1.</b>
-                <b>Weightage to type of Questions</b>
-              </div>
-              <div className="objectives-table">
-                <Table bordered hover size="md" style={{ border: "1px solid" }}>
-                <thead>
+                  {/* table 3  */}
+                  <div className="weightage-objectives">
+                    <div className="main-title">
+                      <b>1.</b>
+                      <b>Weightage to type of Questions</b>
+                    </div>
+                    <div className="objectives-table">
+                      <Table
+                        bordered
+                        hover
+                        size="md"
+                        style={{ border: "1px solid" }}
+                      >
+                        <thead>
                           <tr>
                             <th>sl.no</th>
                             <th>Content</th>
                             <th>Instruction</th>
                             <th>Questions</th>
                             <th>Marks</th>
-                           
-                            
                           </tr>
                         </thead>
-                  <tbody>
-                    {blueprint?.TypesofQuestions?.map((val, i) => {
-                      return (
-                        <tr key={i}>
-                          <td>{i+1}</td>
-                          <td>{val?.QAType}</td>
-                          <td>{val?.QAInstruction}</td>
-                          <td>
-                            {val?.NQA}x{val?.Mask}
-                          </td>
-                          <td>{val?.NQA * val?.Mask}</td>
-                          {/* <td>{val?.NQA}</td>
+                        <tbody>
+                          {blueprint?.TypesofQuestions?.map((val, i) => {
+                            return (
+                              <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{val?.QAType}</td>
+                                <td>{val?.QAInstruction}</td>
+                                <td>
+                                  {val?.NQA}x{val?.Mask}
+                                </td>
+                                <td>{val?.NQA * val?.Mask}</td>
+                                {/* <td>{val?.NQA}</td>
                           <td>{val?.Mask}</td> */}
-                        </tr>
-                      );
-                    })}
+                              </tr>
+                            );
+                          })}
 
-                    <tr>
-                      <td>
-                        <b>Total</b>
-                        
-                      </td>
-                      <td></td>
-                        <td></td>
-                      <td>
-                        {blueprint?.TypesofQuestions?.reduce(
-                          (a, i) => a + Number(i?.NQA),
-                          0
-                        )}
-                      </td>
-                      <td>
-                        <b>
-                          {blueprint?.TypesofQuestions?.reduce(
-                            (a, i) => a + Number(i?.Mask * i?.NQA),
-                            0
-                          )}
-                        </b>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-            </div>
+                          <tr>
+                            <td>
+                              <b>Total</b>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                              {blueprint?.TypesofQuestions?.reduce(
+                                (a, i) => a + Number(i?.NQA),
+                                0
+                              )}
+                            </td>
+                            <td>
+                              <b>
+                                {blueprint?.TypesofQuestions?.reduce(
+                                  (a, i) => a + Number(i?.Mask * i?.NQA),
+                                  0
+                                )}
+                              </b>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-5">
                   {/* table 1 */}
@@ -253,8 +260,6 @@ function AdminBlueprintdetailsview() {
                             <th>Questions</th>
                             <th>Marks</th>
                             <th>Percentage</th>
-                           
-                            
                           </tr>
                         </thead>
                         <tbody>
@@ -262,12 +267,18 @@ function AdminBlueprintdetailsview() {
                             return (
                               <tr key={i}>
                                 <td>{i + 1}</td>
-                                <td style={{fontSize:"12px"}}>{ele?.Objective}</td>
-                                <td style={{fontSize:"12px"}}>{ele?.NoofQuestion}</td>
-                                <td style={{fontSize:"12px"}}>{ele?.Marks}</td>
-                                <td style={{fontSize:"12px"}}>{ele?.NoofQues}%</td>
-                               
-                                
+                                <td style={{ fontSize: "12px" }}>
+                                  {ele?.Objective}
+                                </td>
+                                <td style={{ fontSize: "12px" }}>
+                                  {ele?.NoofQuestion}
+                                </td>
+                                <td style={{ fontSize: "12px" }}>
+                                  {ele?.Marks}
+                                </td>
+                                <td style={{ fontSize: "12px" }}>
+                                  {ele?.NoofQues}%
+                                </td>
                               </tr>
                             );
                           })}
@@ -275,7 +286,6 @@ function AdminBlueprintdetailsview() {
                       </Table>
                     </div>
                   </div>
-                  
 
                   {/* table 2 */}
                   <div className="weightage-objectives">
@@ -351,6 +361,8 @@ function AdminBlueprintdetailsview() {
               className="blueprint2-container"
               style={{ padding: "20px 8px" }}
             >
+             
+
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div>
                   <b>Time : {blueprint?.DurationOfExam}</b>
@@ -378,7 +390,7 @@ function AdminBlueprintdetailsview() {
                 <Table
                   responsive
                   bordered
-                  style={{ border: "1px solid" }}
+                  style={{ border: "1px solid", width: "109rem" }}
                   size="sm"
                 >
                   <thead>
@@ -411,22 +423,22 @@ function AdminBlueprintdetailsview() {
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
-                            <th>M.C</th>
-                            <th>V.S.A</th>
-                            <th>S.A</th>
-                            <th>L.A.1</th>
-                            <th>L.A.2</th>
-                            <th>L.A.3</th>
+                            <th>MC</th>
+                            <th>VSA</th>
+                            <th>SA</th>
+                            <th>LA 1</th>
+                            <th>LA 2</th>
+                            <th>LA 3</th>
                           </>
                         );
                       })}
 
-                      <th>M.C</th>
-                      <th>V.S.A</th>
-                      <th>S.A</th>
-                      <th>L.A.1</th>
-                      <th>L.A.2</th>
-                      <th>L.A.3</th>
+                      <th>MC</th>
+                      <th>VSA</th>
+                      <th>SA</th>
+                      <th>LA 1</th>
+                      <th>LA 2</th>
+                      <th>LA 3</th>
                       <th></th>
                     </tr>
                     {uniqueObjectsArray?.map((ele, i) => {
