@@ -4,7 +4,7 @@ import "../QuestionPaper/QuestionPaper.css";
 import { CiSaveDown2 } from "react-icons/ci";
 import { LuPrinter } from "react-icons/lu";
 import { IoMdShare } from "react-icons/io";
-import { Button, Row, Table } from "react-bootstrap";
+import { Button, Form, Row, Table } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -100,7 +100,7 @@ const QuestionPaper = ({ text }) => {
     </div>
   ];
   const [ViewAnswer, setViewAnswer] = useState(false)
-  
+
   return (
     <div>
       <div className="top-header">
@@ -140,11 +140,17 @@ const QuestionPaper = ({ text }) => {
           <></>
         )}
       </div>
-
+      <div className=" d-flex justify-content-end">
+        <div className="col-sm-2" >        
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+    
       <Frontpage data={state} />
 
       <div className="question-paper-display-container" id="pdf">
         <div className="question-paper-display">
+
           <div className="second-page-body">
             {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
               return (<>
@@ -1435,18 +1441,16 @@ const QuestionPaper = ({ text }) => {
             </thead>
             <tbody>
               {state?.bluePrint?.TypesofQuestions?.map((ele2) => {
-                
+
                 return (<>
                   {Questions
                     ?.filter((ele) => ele.Types_Question === ele2?.QAType)
                     ?.map((item, i) => {
-                   
                       if (i < Number(ele2?.NQA)) {
-                        
-                       
+
                         return (
                           <tr>
-                            <td> {i+1}</td>
+                            <td> {i + 1}</td>
                             <td>{item?.Objectives}</td>
                             <td>{item?.Lesson}</td>
                             <td>{item?.Types_Question}</td>
