@@ -9,12 +9,17 @@ import axios from "axios";
 import parse from "html-react-parser";
 
 import MathInput from "react-math-keyboard";
+import { FiPrinter } from "react-icons/fi";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 const steps = [
   "Blueprint Details",
   "Marks Details",
   "Weightage to the Content",
   " Weightage of the Difficulty Level",
 ];
+
 
 function AdminBlueprintdetailsview() {
   const { blueprint_ID } = useParams();
@@ -151,9 +156,39 @@ function AdminBlueprintdetailsview() {
     }
     return obj;
   };
+
+  // to print the pdf ----->
+  const createPDF = async () => {
+    // setRotate(360);
+
+    // dynamic image is also adding in the PDF
+    const pdf = new jsPDF("portrait", "pt", "a4");
+    const data = await html2canvas(document.querySelector("#pdf"), {
+      useCORS: true,
+    });
+    console.log("hhhh", data);
+    const img = data.toDataURL("image/png");
+    console.log("ddkd1", img);
+    const imgProperties = pdf.getImageProperties(img);
+    console.log("ddkd2", imgProperties);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    console.log("ddkd3", pdfWidth);
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    console.log("ddkd4", pdfHeight);
+    pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+    // const input = document.getElementById("pdf");
+    // const options = { scrollY: -window.scrollY, useCORS: true };
+    // const canvas = await html2canvas(input, options);
+    // const imgData = canvas.toDataURL("image/png");
+    // const pdf = new jsPDF("p", "pt", [canvas.width, canvas.height]);
+    // pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+
+    pdf.save("Blueprint.pdf");
+  };
   return (
     <>
-      <div className="box_1">
+      <div className="box_1" id="pdf">
         <div className="Stepper-info " style={{ padding: "20px" }}>
           {/* <div>
      
@@ -164,7 +199,12 @@ function AdminBlueprintdetailsview() {
           <div className="blueprint-content-display">
           <div className="row">
                 <div className="col-md-12 text-end">
+               <div className="justify-content-end d-flex gap-3">
+               <FiPrinter onClick={createPDF}/>
                 <div id="google_translate_element"></div>
+               </div>
+                
+              
                 </div>
               </div>
             <div className="blueprint-titles">
@@ -924,6 +964,8 @@ function AdminBlueprintdetailsview() {
           </div>
         </div>
       </div>
+
+     
     </>
   );
 }

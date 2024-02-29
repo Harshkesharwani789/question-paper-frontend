@@ -313,6 +313,18 @@ const AdminQuestionDetails = () => {
   };
 
   console.log("Name Of Exame",Name_of_examination);
+
+   // Line
+   const [twoline, setTwoline] = useState(false);
+   const [threeline, setThreeline] = useState(false);
+   const [fourline, setFourline] = useState(false);
+   const [fiveline, setFiveline] = useState(false);
+   const [sixline, setSixline] = useState(false);
+   const [sevenline, setSevenline] = useState(false);
+   const [eightline, setEightline] = useState(true);
+   const [nineline, setNineline] = useState(false);
+   const [tenline, setTenline] = useState(false);
+ 
   return (
     <div>
       <div className="row">
