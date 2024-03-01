@@ -210,6 +210,7 @@ function AddGrammerQuestion({ selectdetails }) {
           Section: selectdetails?.Section,
           Sub_Class: selectdetails?.Sub_Class,
           Subject: selectdetails?.Subjects,
+          Questiontype:selectdetails?.QuestionTYpe,
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,

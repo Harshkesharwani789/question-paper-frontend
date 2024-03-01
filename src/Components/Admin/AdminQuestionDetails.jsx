@@ -131,6 +131,7 @@ const AdminQuestionDetails = () => {
     Difficulty_level: Difficulty_level,
     Name_of_examination: Name_of_examination,
     Objectives: Objectives,
+    Questiontype:QuestionTYpe,
     Types_Question: Types_Question,
     Instruction: Instruction,
     selectedLanguage: selectedLanguage,
@@ -303,125 +304,6 @@ const AdminQuestionDetails = () => {
   };
 
 
-
-  const questionTypes = [
-    {
-      type: "MCQ",
-      subtype: "Objective Questions"
-    },
-    {
-      type: "MCQ",
-      subtype: "Multiple Choice Questions",
-    },
-    {
-      type: "SA",
-      subtype: "Fill in the Blanks Questions",
-    },
-    {
-      type: "VSA",
-      subtype: "Match the Following Questions",
-    },
-    {
-      type: "VSA",
-      subtype: "Recorrect the Answers Questions",
-    },
-    {
-      type: "VSA",
-      subtype: "Classifications of Questions",
-    },
-    {
-      type: "VSA",
-      subtype: "Odd and out words Questions",
-    },
-    {
-      type: "VSA",
-      subtype: "RelationShip Words Questions",
-    },
-    {
-      type: "LA1",
-      subtype: "Grammer Questions",
-    },
-    {
-      type: "LA1",
-      subtype: "One Word Question",
-    },
-    {
-      type: "LA1",
-      subtype: "One Sentence Answer Question",
-    },
-    {
-      type: "LA1",
-      subtype: "Two Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Two and three Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Three and Four Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Five and Six Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Six Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Seven Sentence Answer Questions",
-    },
-    {
-      type: "LA2",
-      subtype: "Eight Sentence Answer Questions",
-    },
-    {
-      type: "LA3",
-      subtype: "Ten Sentence Answer Questions",
-    },
-    {
-      type: "LA3",
-      subtype: "Expanding and Explanations Answer Questions",
-    },
-
-    {
-      type: "LA3",
-      subtype: "Answer the Questions and Draw the Figure Questions",
-    },
-
-    {
-      type: "LA3",
-      subtype: "Graph Questions",
-    },
-
-    {
-      type: "LA3",
-      subtype: "Complete the Poem",
-    },
-
-    {
-      type: "LA3",
-      subtype: "Situation UnderStatnding answer Questions",
-    },
-
-    {
-      type: "VSA",
-      subtype: "Poet,Time, Place, Writer answer questions",
-    },
-
-    {
-      type: "LA3",
-      subtype: "Letter Writting",
-    },
-    {
-      type: "VSA",
-      subtype: "Map Reading"
-    },
-  ];
-
-
   //get
   const [QuestionType, setQuestionType] = useState([]);
   const getallQuestiontype = async () => {
@@ -516,13 +398,17 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setMedium(e.target.value)}
                 >
                   <option>Select the Medium</option>
-                  {Mediumm?.map((item, i) => {
+                  {/* {Mediumm?.map((item, i) => {
                     return (
                       <option value={item?.mediumName} key={i}>
                         {item?.mediumName}
                       </option>
                     );
-                  })}
+                  })} */}
+                  {[...new Set(QuestionType?.map(item => item.QFormatMedium))].map((QFormatMedium, index) => (
+                    <option key={index} value={QFormatMedium}>{QFormatMedium}</option>
+                  ))}
+
                 </Form.Select>
               </div>
             </div>
@@ -729,7 +615,7 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setQuestionTYpe(e.target.value)}
                 >
                   <option>Select Question Type</option>
-                  {[...new Set(QuestionType?.map(item => item.typeOfquestion))].map((type, index) => (
+                  {[...new Set(QuestionType?.filter((ele)=>ele.QFormatMedium === Medium)?.map(item => item.typeOfquestion))].map((type, index) => (
                     <option key={index} value={type}>{type}</option>
                   ))}
                 </Form.Select>
@@ -744,9 +630,17 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setTypes_Question(e.target.value)}
                 >
                   <option>Select Question Type</option>
-                  {QuestionType?.filter((ele) => ele.typeOfquestion === QuestionTYpe)?.map((item2) => {
+                  {QuestionType?.filter((ele) => ele.typeOfquestion === QuestionTYpe && ele.QFormatMedium === Medium )?.map((item2) => {
                     return (
-                      <option value={item2?.Qformat}>{item2?.Qformat}</option>
+                      <option value={item2?.Qformat}>
+                        {item2?.translatelang ? (<>
+                          {item2?.translatelang}
+                        </>):(<>
+                          {item2?.Qformat}
+                        </>)}
+                        
+                        
+                        </option>
                     )
                   })}
                 </Form.Select>

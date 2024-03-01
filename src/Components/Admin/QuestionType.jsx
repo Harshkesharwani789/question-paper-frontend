@@ -70,9 +70,24 @@ function QuestionType() {
         }
     }, 300); // Debounce delay in milliseconds
 
+    //get method for medium
+    const [Medium, setMedium] = useState([]);
+    const getAddMedium = async () => {
+        try {
+            let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+            if (res.status === 200) {
+                setMedium(res.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     //Post
     const [typeOfquestion, settypeOfquestion] = useState("");
     const [Qformat, setQformat] = useState("")
+    const [QFormatMedium, setQFormatMedium] = useState("")
+    const [Translater, setTranslater] = useState("")
     const AddQuestionTYpe = async () => {
         try {
             const config = {
@@ -84,8 +99,10 @@ function QuestionType() {
                     Authorization: `Bearer ${token}`,
                 },
                 data: {
+                    QFormatMedium: QFormatMedium,
                     typeOfquestion: typeOfquestion,
                     Qformat: Qformat,
+                    translatelang: Translater,
                     authId: admin?._id,
                 },
             };
@@ -210,10 +227,10 @@ function QuestionType() {
 
     useEffect(() => {
         getallQuestiontype();
+        getAddMedium()
     }, []);
 
     const questionTypes = [
-        "Select the Types of the Question",
         "Objective Questions",
         "Multiple Choice Questions",
         "Fill in the Blanks Questions",
@@ -276,7 +293,7 @@ function QuestionType() {
                         class="form-control"
                         placeholder="Search..."
                         aria-describedby="basic-addon1"
-                       
+
                     />
                 </div>
             </div>
@@ -298,6 +315,9 @@ function QuestionType() {
                             <tr>
                                 <th>S.No</th>
                                 <th>
+                                    <div>Medium</div>
+                                </th>
+                                <th>
                                     <div>Type Of Question</div>
                                 </th>
                                 <th>
@@ -312,9 +332,18 @@ function QuestionType() {
                                 return (
                                     <tr>
                                         <td>{i + 1}</td>
+                                        <td>{item?.QFormatMedium}</td>
 
                                         <td>{item?.typeOfquestion}</td>
-                                        <td>{item?.Qformat}</td>
+                                        <td>
+                                            {item?.translatelang ? (<>
+                                                {item?.translatelang}
+                                            </>):(<>
+                                                {item?.Qformat}
+                                            
+                                            </>)}
+                                            
+                                            </td>
 
                                         <td>
                                             {" "}
@@ -326,7 +355,7 @@ function QuestionType() {
                                                         onClick={() => {
                                                             handleShow1();
                                                             setQuestionTypeId(item);
-                                                            
+
                                                         }}
                                                     />{" "}
                                                 </div>
@@ -356,6 +385,24 @@ function QuestionType() {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
+
+                            <div className="do-sear mt-2">
+                                <label> Medium</label>
+                                <Form.Select
+                                    className="vi_0"
+                                    onChange={(e) => setQFormatMedium(e.target.value)}
+                                >
+                                    <option>Select medium</option>
+                                    {Medium?.map((item) => {
+
+                                        return (
+                                            <option value={item?.mediumName}>{item?.mediumName}</option>
+                                        )
+                                    })}
+                                </Form.Select>
+                            </div>
+
+
                             <div className="do-sear mt-2">
                                 <label>Type Of Question</label>
                                 <input
@@ -376,12 +423,29 @@ function QuestionType() {
                                     className="vi_0"
                                     onChange={(e) => setQformat(e.target.value)}
                                 >
+                                    <option >Select Format</option>
                                     {questionTypes?.map((item) => {
+
                                         return (
-                                            <option>{item}</option>
+                                            <option value={item}>{item}</option>
                                         )
                                     })}
                                 </Form.Select>
+                                {selectedLanguage === "en-t-i0-und" ? (<>
+
+                                </>) : (<>
+                                    <Form.Control
+                                        type="text"
+                                        className="vi_0 mt-1"
+                                        onChange={(e) => {
+                                            if (selectedLanguage == "en-t-i0-und") {
+                                                setTranslater(e.target.value)
+                                            } else onChangeHandler(e.target.value, setTranslater)
+                                        }}
+                                    />
+                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Translater}</p>}
+                                </>)}
+
                             </div>
 
                         </div>
@@ -424,13 +488,30 @@ function QuestionType() {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
+
                             <div className="do-sear mt-2">
-                                <label>Subject</label>
+                                <label> Medium</label>
+                                <Form.Select
+                                    className="vi_0"
+                                    onChange={(e) => setQFormatMedium(e.target.value)}
+                                >
+                                    <option>Select medium</option>
+                                    {Medium?.map((item) => {
+
+                                        return (
+                                            <option value={item?.mediumName}>{item?.mediumName}</option>
+                                        )
+                                    })}
+                                </Form.Select>
+                            </div>
+
+
+                            <div className="do-sear mt-2">
+                                <label>Type Of Question</label>
                                 <input
                                     type="text"
-                                    // placeholder="Enter Subject"
+                                    placeholder="Enter Type Of Question"
                                     className="vi_0"
-                                    // value={subjectName}
                                     onChange={(e) => {
                                         if (selectedLanguage == "en-t-i0-und") {
                                             settypeOfquestion(e.target.value)
@@ -445,13 +526,31 @@ function QuestionType() {
                                     className="vi_0"
                                     onChange={(e) => setQformat(e.target.value)}
                                 >
+                                    <option >Select Format</option>
                                     {questionTypes?.map((item) => {
+
                                         return (
-                                            <option>{item}</option>
+                                            <option value={item}>{item}</option>
                                         )
                                     })}
                                 </Form.Select>
+                                {selectedLanguage === "en-t-i0-und" ? (<>
+
+                                </>) : (<>
+                                    <Form.Control
+                                        type="text"
+                                        className="vi_0 mt-1"
+                                        onChange={(e) => {
+                                            if (selectedLanguage == "en-t-i0-und") {
+                                                setTranslater(e.target.value)
+                                            } else onChangeHandler(e.target.value, setTranslater)
+                                        }}
+                                    />
+                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Translater}</p>}
+                                </>)}
+
                             </div>
+
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
