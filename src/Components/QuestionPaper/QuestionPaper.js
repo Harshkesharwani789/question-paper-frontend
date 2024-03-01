@@ -1775,7 +1775,7 @@ const QuestionPaper = ({ text }) => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </b>
-                                    </div>
+                                    </div>                                
                                     <div className="d-flex mb-1">
                                       {item?.Image_1 ? (
                                         <>
@@ -1802,9 +1802,27 @@ const QuestionPaper = ({ text }) => {
                                         <></>
                                       )}
                                     </div>
-
                                     <div>
-                                      {item?.PassiveQuesion?.map(
+                                      {item?.NumberOfLine && (
+                                        <>
+                                          {Array.from(
+                                            { length: item?.NumberOfLine },
+                                            (_, index) => (
+                                              <React.Fragment key={index}>
+                                                {lines.map((line, idx) => (
+                                                  <React.Fragment key={idx}>
+                                                    {line}
+                                                  </React.Fragment>
+                                                ))}
+                                              </React.Fragment>
+                                            )
+                                          )}
+                                        </>
+                                      )}
+                                    </div>
+                                    <div>
+                                      {item?.PassiveQuesion?.[0] ? (<>
+                                        {item?.PassiveQuesion?.map(
                                         (item1, index) => {
                                           return (
                                             <div>
@@ -1819,6 +1837,8 @@ const QuestionPaper = ({ text }) => {
                                           );
                                         }
                                       )}
+                                      </>):(<></>)}
+                                    
                                     </div>
                                   </>
                                 ) : (
