@@ -177,6 +177,7 @@ import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
 import Tutorial from "./Components/Home/Tutorial";
 import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
+import QuestionType from "./Components/Admin/QuestionType";
 
 function App() {
   return (
@@ -315,9 +316,9 @@ function App() {
             element={
               <>
                 <Navbarr />
-            
-                  <QuestionPaper />
-           
+
+                <QuestionPaper />
+
               </>
             }
           />
@@ -1793,7 +1794,22 @@ function App() {
               />
             }
           />
+          {/* Question TYpe */}
 
+          
+
+          <Route
+            path="/questiontype"
+            element={
+              <Main
+                children={
+                  <>
+                    <QuestionType />
+                  </>
+                }
+              />
+            }
+          />
           {/* Poet,Time , Place , Write the answer the question */}
 
           <Route
