@@ -114,7 +114,7 @@ const UploadPdfQuestion = () => {
           });
         }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
       return swal({
         title: "Oops!",
         text: error.response.data.error,
@@ -138,7 +138,7 @@ const UploadPdfQuestion = () => {
         }
       );
       if (res.status == 200) handleClose2();
-      getSyllabus();
+      setQuestionAnsPdf();
       return swal({
         title: "Yeah!",
         text: res.data.success,
@@ -146,7 +146,7 @@ const UploadPdfQuestion = () => {
         button: "Ok!",
       });
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
       return swal({
         title: "Yeah!",
         text: error.response.data.error,
@@ -156,18 +156,18 @@ const UploadPdfQuestion = () => {
     }
   };
   //Get All Syllabus
-  const [Slybuss, setSlybuss] = useState([]);
-  const getSyllabus = async () => {
+  const [QuestionAnsPdf, setQuestionAnsPdf] = useState([]);
+  const getallquestionPdf = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllSyllabus/${admin?._id}`,
+        `http://localhost:8000/api/admin/getAllpdf/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status == 200) {
-        setSlybuss(res.data.success);
+        setQuestionAnsPdf(res.data.success);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
     }
   };
 
@@ -180,7 +180,7 @@ const UploadPdfQuestion = () => {
         setMedium(res.data.success);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
     }
   };
 
@@ -195,7 +195,7 @@ const UploadPdfQuestion = () => {
         setsubject(res.data.success);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
     }
   };
 
@@ -210,7 +210,7 @@ const UploadPdfQuestion = () => {
         setgetaddsubclass(res.data.success);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching medium:", error);
     }
   };
 
@@ -258,12 +258,12 @@ const UploadPdfQuestion = () => {
         },
         data: formData,
       };
-  
+  console.log(config);
       const res = await axios(config);
   
       if (res.status === 200) {
         handleClose();
-        getSyllabus();
+        setQuestionAnsPdf();
         swal({
           title: "Yeah!",
           text: res.data.success,
@@ -273,7 +273,7 @@ const UploadPdfQuestion = () => {
       }
     } catch (error) {
       handleClose();
-      console.log(error);
+      console.log("Error fetching medium:", error);
       swal({
         title: "Oops!",
         text: error.response.data.error,
@@ -286,12 +286,17 @@ const UploadPdfQuestion = () => {
 
 
   useEffect(() => {
-    getSyllabus();
+    getallquestionPdf();
     getAddMedium();
     getaddsubclasss();
     getSubject();
   }, []);
-
+//   onChange={(e) => {
+//     if(selectedLanguage == "en-t-i0-und"){
+//       setboardName(e.target.value);
+//     }else onChangeHandler(e.target.value, setboardName);                    
+//   }}
+// />
   return (
     <div>
       <div className="row d-flex justify-content-between">
@@ -346,8 +351,8 @@ const UploadPdfQuestion = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th><div>Title</div></th>
                 <th><div>Year</div></th>
-                <th><div>Exam Name</div></th>
                 <th> <div>Class</div></th>
                 <th><div>Sub-Class</div></th>
                 <th><div>Medium</div></th>
@@ -358,12 +363,12 @@ const UploadPdfQuestion = () => {
             </thead>
 
             <tbody>
-              {Slybuss?.map((item, i) => {
+              {QuestionAnsPdf?.map((item, i) => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
+                    <td>{item?.Title}</td>
                     <td>{item?.year}</td>
-                    <td>{item?.Examinationname}</td>
                     <td>{item?.Class}</td>
                     <td>{item?.SubClass}</td>
                     <td>{item?.medium}</td>
@@ -417,7 +422,7 @@ const UploadPdfQuestion = () => {
           show={show}
           onHide={handleClose}
           style={{ zIndex: "99999" }}
-          size="xl"
+          size="lg"
         >
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Upload Question Paper and Answer</Modal.Title>
@@ -444,14 +449,18 @@ const UploadPdfQuestion = () => {
                 <div className="do-sear mt-2">
                   <label>Year</label>
                   <input
-                    value={year}
+                   
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- 2023-2024"
                     onChange={(e) => {
-                      setyear(e.target.value);
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setyear(e.target.value);
+                      }else onChangeHandler(e.target.value,setyear);
+                      
                     }}
                   />
+                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
                 </div>
               </div>
               <div className="col-sm-4">
@@ -552,7 +561,7 @@ const UploadPdfQuestion = () => {
                     className="vi_0"
                     accept="application/pdf"
                     onChange={(e) => {
-                      setQuestionpdf(e.target.value);
+                      setQuestionpdf(e.target.files[0]);
                     }}
                   />
                 </div>
@@ -565,7 +574,7 @@ const UploadPdfQuestion = () => {
                     className="vi_0"
                     accept="application/pdf"
                     onChange={(e) => {
-                      setAnswerpdf(e.target.value);
+                      setAnswerpdf(e.target.files[0]);
                     }}
                   />
                 </div>

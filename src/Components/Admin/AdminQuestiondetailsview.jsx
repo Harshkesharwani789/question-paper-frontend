@@ -115,7 +115,7 @@ const AdminQuestionDetailsview = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
-                <p className="vi_0">{question_details?.Name_of_examination?.map((item)=><span>{item?.NameExamination} {" "}</span>)}</p>
+                <p className="vi_0">{question_details?.Name_of_examination?.map((item) => <span>{item?.NameExamination} {" "}</span>)}</p>
               </div>
             </div>
             <div className="col-md-6">
@@ -1062,7 +1062,7 @@ const AdminQuestionDetailsview = () => {
 
 
 
-            
+
 
             {/* One word */}
             {question_details?.Types_Question === "One Word Question" ||
@@ -3477,93 +3477,344 @@ const AdminQuestionDetailsview = () => {
             )}
 
             {/* Situation And Understanding Question And Answer */}
-            {question_details?.Types_Question ===
-              "Odd and out words Questions" ||
-              question_details?.Types_Question === "Objective Questions" ||
-              question_details?.Types_Question === "Multiple Choice Questions" ||
-              question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ||
-              question_details?.Types_Question ===
-              "Classifications of Questions" ||
-              question_details?.Types_Question === "One Word Question" ||
-              question_details?.Types_Question ===
-              "Expanding and Explanations Answer Questions" ||
-              question_details?.Types_Question === "Map Reading" ? (
-              <></>
-            ) : (
-              <>
-                {question_details?.Image_1 ? (
+            {question_details?.Types_Question === "Situation UnderStatnding answer Questions" ? (<>
+              <div className="col-12">
+                {question_details?.NumberOfLine === "1" ? (
                   <>
-                    <div className="col-md-6">
-                      <div className="do-sear">
-                        <label htmlFor="">Question Image 1</label> <br />
-                        <img
-                          className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
-                          alt=""
-                        />
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
                       </div>
                     </div>
                   </>
                 ) : (
                   <></>
                 )}
-              </>
-            )}
-
-            {question_details?.Types_Question ===
-              "Odd and out words Questions" ||
-              question_details?.Types_Question === "Objective Questions" ||
-              question_details?.Types_Question === "Multiple Choice Questions" ||
-              question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ||
-              question_details?.Types_Question ===
-              "Classifications of Questions" ||
-              question_details?.Types_Question === "One Word Question" ||
-              question_details?.Types_Question ===
-              "Expanding and Explanations Answer Questions" ||
-              question_details?.Types_Question === "Map Reading" ? (
-              <></>
-            ) : (
-              <>
-                {question_details?.Image_2 ? (
+                {question_details?.NumberOfLine === "2" ? (
                   <>
-                    <div className="col-md-6">
-                      <div className="do-sear">
-                        <label htmlFor="">Question Image 2</label> <br />
-                        <img
-                          className="img-fluid h-50"
-                          src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
-                          alt=""
-                        />
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
                       </div>
                     </div>
                   </>
                 ) : (
                   <></>
                 )}
-              </>
-            )}
-
-            {question_details?.PassiveQuesion?.length ? (
-              <>
-                <div className="col-md-12">
-                  <div className="do-sear">
-                    <label htmlFor=""> Sub Questions</label> <br />
-                    {question_details?.PassiveQuesion?.map((item, i) => {
-                      return (
-                        <p className="vi_0">
-                          {parse(`<div>${item?.question}</div>`)}
-                        </p>
-                      );
-                    })}
+                {question_details?.NumberOfLine === "3" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "4" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "5" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "6" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "7" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "8" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {question_details?.NumberOfLine === "9" ? (
+                  <>
+                    <div className="col-md-12">
+                      <div className="do-sear mt-4">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>{" "}
+                    <div className="col-md-12">
+                      <div className="do-sear mt-2">
+                        <p type="text" className="lined-input"></p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+              {question_details?.Image_1 ? (
+                <>
+                  <div className="col-md-6">
+                    <div className="do-sear">
+                      <label htmlFor="">Question Image 1</label> <br />
+                      <img
+                        className="img-fluid h-50"
+                        src={`http://localhost:8000/Questions/${question_details?.Image_1}`}
+                        alt=""
+                      />
+                    </div>
                   </div>
-                </div>
-                
-              </>
-            ) : (
-              <></>
-            )}
+                </>
+              ) : (
+                <></>
+              )}
+              {question_details?.Image_2 ? (
+                <>
+                  <div className="col-md-6">
+                    <div className="do-sear">
+                      <label htmlFor="">Question Image 2</label> <br />
+                      <img
+                        className="img-fluid h-50"
+                        src={`http://localhost:8000/Questions/${question_details?.Image_2}`}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+              {question_details?.PassiveQuesion?.length ? (
+                <>
+                  <div className="col-md-12">
+                    <div className="do-sear">
+                      <label htmlFor=""> Sub Questions</label> <br />
+                      {question_details?.PassiveQuesion?.map((item, i) => {
+                        return (
+                          <p className="vi_0">
+                            {parse(`<div>${item?.question}</div>`)}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </>) : (<></>)}
 
             {/* Complete The Poem */}
             {question_details?.Types_Question === "Complete the Poem" ? (
@@ -3574,99 +3825,100 @@ const AdminQuestionDetailsview = () => {
                     <p className="vi_0">{question_details?.NumberOfLine}</p>
                   </div>
                 </div>
+                {question_details?.PoemSt ? (
+                  <>
+                    {question_details.NumberOfLine === "4" ? (
+                      <>
+                        <div className="col-md-8">
+                          <label htmlFor=""> Write Poem </label>
+                          <div className="d-flex align-items-end">
+                            <p className="vi_0">{question_details?.PoemSt}</p>
+                            <div className="ans-line mb-3 mt-2"></div>
+                          </div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="d-flex align-items-end">
+                            <div className="ans-line mb-3 mt-2"></div>
+                            <p className="vi_0">{question_details?.PoemEnd}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <> </>
+                    )}
+                    {question_details.NumberOfLine === "5" ? (
+                      <>
+                        <div className="col-md-8">
+                          <label htmlFor=""> Write Poem </label>
+                          <div className="d-flex align-items-end">
+                            <p className="vi_0">{question_details?.PoemSt}</p>
+                            <div className="ans-line mb-3 mt-2"></div>
+                          </div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="d-flex align-items-end">
+                            <div className="ans-line mb-3 mt-2"></div>
+                            <p className="vi_0">{question_details?.PoemEnd}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <> </>
+                    )}
+                    {question_details.NumberOfLin === "6" ? (
+                      <>
+                        <div className="col-md-8">
+                          <label htmlFor=""> Write Poem </label>
+                          <div className="d-flex align-items-end">
+                            <p className="vi_0">{question_details?.PoemSt}</p>
+                            <div className="ans-line mb-3 mt-2"></div>
+                          </div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="d-flex align-items-end">
+                            <div className="ans-line mb-3 mt-2"></div>
+                            <p className="vi_0">{question_details?.PoemEnd}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <> </>
+                    )}
+                    {question_details.NumberOfLin === "7" ? (
+                      <>
+                        <div className="col-md-8">
+                          <label htmlFor=""> Write Poem </label>
+                          <div className="d-flex align-items-end">
+                            <p className="vi_0">{question_details?.PoemSt}</p>
+                            <div className="ans-line mb-3 mt-2"></div>
+                          </div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="ans-line mb-3 mt-2"></div>
+                          <div className="d-flex align-items-end">
+                            <div className="ans-line mb-3 mt-2"></div>
+                            <p className="vi_0">{question_details?.PoemEnd}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <> </>
+                    )}
+                  </>
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <></>
             )}
 
-            {question_details?.PoemSt ? (
-              <>
-                {question_details.NumberOfLine === "4" ? (
-                  <>
-                    <div className="col-md-8">
-                      <label htmlFor=""> Write Poem </label>
-                      <div className="d-flex align-items-end">
-                        <p className="vi_0">{question_details?.PoemSt}</p>
-                        <div className="ans-line mb-3 mt-2"></div>
-                      </div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="d-flex align-items-end">
-                        <div className="ans-line mb-3 mt-2"></div>
-                        <p className="vi_0">{question_details?.PoemEnd}</p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <> </>
-                )}
-                {question_details.NumberOfLine === "5" ? (
-                  <>
-                    <div className="col-md-8">
-                      <label htmlFor=""> Write Poem </label>
-                      <div className="d-flex align-items-end">
-                        <p className="vi_0">{question_details?.PoemSt}</p>
-                        <div className="ans-line mb-3 mt-2"></div>
-                      </div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="d-flex align-items-end">
-                        <div className="ans-line mb-3 mt-2"></div>
-                        <p className="vi_0">{question_details?.PoemEnd}</p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <> </>
-                )}
-                {question_details.NumberOfLin === "6" ? (
-                  <>
-                    <div className="col-md-8">
-                      <label htmlFor=""> Write Poem </label>
-                      <div className="d-flex align-items-end">
-                        <p className="vi_0">{question_details?.PoemSt}</p>
-                        <div className="ans-line mb-3 mt-2"></div>
-                      </div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="d-flex align-items-end">
-                        <div className="ans-line mb-3 mt-2"></div>
-                        <p className="vi_0">{question_details?.PoemEnd}</p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <> </>
-                )}
-                {question_details.NumberOfLin === "7" ? (
-                  <>
-                    <div className="col-md-8">
-                      <label htmlFor=""> Write Poem </label>
-                      <div className="d-flex align-items-end">
-                        <p className="vi_0">{question_details?.PoemSt}</p>
-                        <div className="ans-line mb-3 mt-2"></div>
-                      </div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="ans-line mb-3 mt-2"></div>
-                      <div className="d-flex align-items-end">
-                        <div className="ans-line mb-3 mt-2"></div>
-                        <p className="vi_0">{question_details?.PoemEnd}</p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <> </>
-                )}
-              </>
-            ) : (
-              <></>
-            )}
+
 
             {/* Answer The Question And Draw The Figure */}
             {question_details?.Types_Question ===
