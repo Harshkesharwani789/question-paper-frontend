@@ -359,13 +359,6 @@ const AdminEditQuestionDetails = () => {
 
   }, [question_details]);
 
-  const addExamaData = (name) => {
-    try {
-      setName_of_examination([...Name_of_examination, { Name: name }]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const deleteExamData = (name) => {
     setName_of_examination(
@@ -526,6 +519,8 @@ const AdminEditQuestionDetails = () => {
           Difficulty_level: Difficulty_level,
           Name_of_examination: Name_of_examination,
           Objectives: Objectives,
+          Types_Question:Types_Question,
+          Questiontype:QuestionTYpe,
           Instruction: Instruction,
 
 
@@ -651,6 +646,31 @@ const AdminEditQuestionDetails = () => {
   const [eightline, setEightline] = useState(false);
   const [nineline, setNineline] = useState(false);
   const [tenline, setTenline] = useState(false);
+
+
+  const [QuestionTYpe, setQuestionTYpe] = useState("");
+  const [QuestionType, setQuestionType] = useState([]);
+  const getallQuestiontype = async () => {
+      try {
+          let res = await axios.get(
+              "http://localhost:8000/api/admin/getquestiontype/" + admin?._id,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`
+                  }
+              }
+          );
+          if (res.status == 200) {
+              setQuestionType(res.data.success);
+          }
+      } catch (error) {
+          console.log(error);
+      }
+  };
+  useEffect(() => {
+    getallQuestiontype()
+  }, [])
+  
   return (
     <div>
       <div className="box_1">
@@ -705,13 +725,16 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => setMedium(e.target.value)}
                 >
                   <option>Select the Medium</option>
-                  {Mediumm?.map((item, i) => {
+                  {/* {Mediumm?.map((item, i) => {
                     return (
                       <option value={item?.mediumName} key={i}>
                         {item?.mediumName}
                       </option>
                     );
-                  })}
+                  })} */}
+                    {[...new Set(QuestionType?.map(item => item.QFormatMedium))]?.map((QFormatMedium, index) => (
+                    <option key={index} value={QFormatMedium}>{QFormatMedium}</option>
+                  ))}
                 </Form.Select>
               </div>
             </div>
@@ -839,7 +862,6 @@ const AdminEditQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
-
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
@@ -886,6 +908,40 @@ const AdminEditQuestionDetails = () => {
                   <option value="Appreciation">Appreciation</option>
                   <option value="Understanding">Understanding</option>
 
+                </Form.Select>
+              </div>
+
+            
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select Question Type</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setQuestionTYpe(e.target.value)}
+                >
+                  <option>Select Question Type</option>
+                  {[...new Set(QuestionType?.filter((ele)=>ele.QFormatMedium === Medium)?.map(item => item.typeOfquestion))]?.map((type, index) => (
+                    <option key={index} value={type}>{type}</option>
+                  ))}
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select the Types of the Question</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setTypes_Question(e.target.value)}
+                >
+                  <option>Select Question Type</option>
+                  {QuestionType?.filter((ele) => ele.typeOfquestion === QuestionTYpe && ele.QFormatMedium === Medium )?.map((item2) => {
+                    return (
+                      <option value={item2?.Qformat}>{item2?.Qformat}</option>
+                    )
+                  })}
                 </Form.Select>
               </div>
             </div>

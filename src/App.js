@@ -178,6 +178,7 @@ import Tutorial from "./Components/Home/Tutorial";
 import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
+import QuestionType from "./Components/Admin/QuestionType";
 
 function App() {
   return (

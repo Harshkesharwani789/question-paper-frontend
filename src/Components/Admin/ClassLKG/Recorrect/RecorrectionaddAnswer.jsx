@@ -81,6 +81,7 @@ const [orAnswerT, setorAnswerT] = useState("")
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
+           Questiontype:selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
