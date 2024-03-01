@@ -305,6 +305,7 @@ const BluePrint = () => {
                                 </div>
                                 <div className="objectives-table">
                                   <Table
+                                  responsive
                                     bordered
                                     hover
                                     size="md"
@@ -370,6 +371,7 @@ const BluePrint = () => {
                                 </div>
                                 <div className="objectives-table">
                                   <Table
+                                  responsive
                                     bordered
                                     hover
                                     style={{ border: "1px solid" }}

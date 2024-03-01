@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 // import Table from "react-bootstrap/Table";
 import "../SyllabusCopy/SyllabusCopy.css";
 import axios from "axios";
@@ -12,7 +12,56 @@ import { IoMdShare } from "react-icons/io";
 import { Row, Table } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
+import { debounce } from "lodash";
+
 const Adminslybuscopyview = () => {
+
+   //Translate
+   let googleTransliterate = require("google-input-tool");
+   const [translatedValue, setTranslatedValue] = useState("");
+   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+   const handleLanguageChange = (event) => {
+     setSelectedLanguage(event.target.value);
+   };
+   const onChangeHandler = debounce(async (value, setData) => {
+     if (!value) {
+       setTranslatedValue("");
+       setData("");
+       return "";
+     }
+ 
+     let am = value.split(/\s+/); // Split by any whitespace characters
+     let arr = [];
+     let promises = [];
+ 
+     for (let index = 0; index < am.length; index++) {
+       promises.push(
+         new Promise(async (resolve, reject) => {
+           try {
+             const response = await googleTransliterate(
+               new XMLHttpRequest(),
+               am[index],
+               selectedLanguage
+             );
+             resolve(response[0][0]);
+           } catch (error) {
+             console.error("Translation error:", error);
+             resolve(am[index]);
+           }
+         })
+       );
+     }
+ 
+     try {
+       const translations = await Promise.all(promises);
+       setTranslatedValue(translations.join(" "));
+       setData(translations.join(" "));
+       return translations;
+     } catch (error) {
+       console.error("Promise.all error:", error);
+     }
+   }, 300); // Debounce delay in milliseconds
+
   const { Slybus_id } = useParams();
 
   const [addslybus, setaddslybus] = useState([]);
@@ -34,14 +83,12 @@ const Adminslybuscopyview = () => {
     pdf.save("Syllabus.pdf");
   };
 
-  
   const [show, setShow] = useState("");
   const aTagRef = useRef(null);
 
   const handlePrint = () => {
     window.print();
   };
-
 
   const Adminslybusbyid = async () => {
     try {
@@ -116,12 +163,13 @@ const Adminslybuscopyview = () => {
                         </div>
                     </div> */}
 
-         
           <div>
             <h3 style={{ textAlign: "center", paddingTop: "10px" }}>
-            {addslybus?.year} {addslybus?.Title} 
+              {addslybus?.year} {addslybus?.Title}
             </h3>
-            <h5 style={{ textAlign: "center" }}>{addslybus?.SubClass} - {addslybus?.subject} </h5>
+            <h5 style={{ textAlign: "center" }}>
+              {addslybus?.SubClass} - {addslybus?.subject}{" "}
+            </h5>
             <h5 style={{ textAlign: "center" }}></h5>
           </div>
           <div>
@@ -144,41 +192,56 @@ const Adminslybuscopyview = () => {
               </thead>
               <tbody>
                 {addslybus?.SyllabusDetails?.sort((a, b) => {
-    // Convert the strings to numbers and then compare them
-    return parseInt(a?.unitArr[0]?.realMonth?.split("-").join("")) - parseInt(b?.unitArr[0]?.realMonth?.split("-").join(""));
-}).map((item, i) => {
-if(item?.Examinationname=="Sa-01" ||item?.Examinationname=="Sa-02"){
- i=i-1
-}
+                  // Convert the strings to numbers and then compare them
                   return (
-                    <>   {item?.Examinationname=="Sa-01" ||item?.Examinationname=="Sa-02" ? (<></>):(  <tr>
-                      <td>{ i + 1}</td>
-                   
-                      <td>
-                        {item?.unitArr?.map((ele) => {
-                          return <p>{ele?.Months}</p>;
-                        })}
-                      </td>
-                      <td>
-                        {item?.unitArr?.map((ele) => {
-                          return <p>{ele?.period}</p>;
-                        })}
-                      </td>
-                      <td>
-                        {item?.unitArr?.map((ele) => {
-                          return <p>{ele?.chapterno}</p>;
-                        })}
-                      </td>
-                      <td>
-                        {item?.unitArr?.map((ele) => {
-                          return <p>{ele?.ChapterName}</p>;
-                        })}
-                      </td>
-                    </tr>)}
-                    
+                    parseInt(a?.unitArr[0]?.realMonth?.split("-").join("")) -
+                    parseInt(b?.unitArr[0]?.realMonth?.split("-").join(""))
+                  );
+                }).map((item, i) => {
+                  if (
+                    item?.Examinationname == "Sa-01" ||
+                    item?.Examinationname == "Sa-02"
+                  ) {
+                    i = i - 1;
+                  }
+                  return (
+                    <>
+                      {" "}
+                      {item?.Examinationname == "Sa-01" ||
+                      item?.Examinationname == "Sa-02" ? (
+                        <></>
+                      ) : (
+                        <tr>
+                          <td>{i + 1}</td>
+
+                          <td>
+                            {item?.unitArr?.map((ele) => {
+                              return <p>{ele?.Months}</p>;
+                            })}
+                          </td>
+                          <td>
+                            {item?.unitArr?.map((ele) => {
+                              return <p>{ele?.period}</p>;
+                            })}
+                          </td>
+                          <td>
+                            {item?.unitArr?.map((ele) => {
+                              return <p>{ele?.chapterno}</p>;
+                            })}
+                          </td>
+                          <td>
+                            {item?.unitArr?.map((ele) => {
+                              return <p>{ele?.ChapterName}</p>;
+                            })}
+                          </td>
+                        </tr>
+                      )}
                       <tr>
                         <td colspan="5">
-                          <table class="table mb-0">{item?.Assessment}({item?.Examinationname}) {item?.from} to {item?.to}</table>
+                          <table class="table mb-0">
+                            {item?.Assessment}({item?.Examinationname}){" "}
+                            {item?.from} to {item?.to}
+                          </table>
                         </td>
                       </tr>
                     </>

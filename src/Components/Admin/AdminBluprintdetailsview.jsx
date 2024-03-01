@@ -253,8 +253,9 @@ function AdminBlueprintdetailsview() {
                       <b>1.</b>
                       <b>Chapter wise Marks Distribution</b>
                     </div>
-                    <div className="objectives-table">
+                    <div className="objectives-table ">
                       <Table
+                      responsive
                         bordered
                         hover
                         size="md"
@@ -414,6 +415,7 @@ function AdminBlueprintdetailsview() {
                     </div>
                     <div className="objectives-table">
                       <Table
+                      responsive
                         bordered
                         hover
                         size="md"
