@@ -316,9 +316,9 @@ function App() {
             element={
               <>
                 <Navbarr />
-            
-                  <QuestionPaper />
-           
+
+                <QuestionPaper />
+
               </>
             }
           />
@@ -1794,7 +1794,22 @@ function App() {
               />
             }
           />
+          {/* Question TYpe */}
 
+          
+
+          <Route
+            path="/questiontype"
+            element={
+              <Main
+                children={
+                  <>
+                    <QuestionType />
+                  </>
+                }
+              />
+            }
+          />
           {/* Poet,Time , Place , Write the answer the question */}
 
           <Route

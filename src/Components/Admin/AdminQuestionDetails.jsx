@@ -101,17 +101,9 @@ const AdminQuestionDetails = () => {
   const [Types_Question, setTypes_Question] = useState("");
   const [Section, setSection] = useState("");
   const [Name_of_examination, setName_of_examination] = useState([]);
-  const [Question, setQuestion] = useState("");
-  const [Option_1, setOption_1] = useState("");
-  const [Option_2, setOption_2] = useState("");
-  const [Option_3, setOption_3] = useState("");
-  const [Option_4, setOption_4] = useState("");
   const [Objectives, setObjectives] = useState("");
-  const [Image, setImage] = useState("");
-  const [Marks, setMarks] = useState("");
-  const [Answer, setAnswer] = useState("");
+  const [QuestionTYpe, setQuestionTYpe] = useState("");
   const [Instruction, setInstruction] = useState("");
-  const [Answer_Time, setAnswer_Time] = useState("");
 
   const addExamaData = (name) => {
     try {
@@ -142,6 +134,7 @@ const AdminQuestionDetails = () => {
     Types_Question: Types_Question,
     Instruction: Instruction,
     selectedLanguage: selectedLanguage,
+    QuestionTYpe: QuestionTYpe
   };
 
   useEffect(() => {
@@ -303,25 +296,156 @@ const AdminQuestionDetails = () => {
 
 
   const handleSelectChange = (event) => {
-      const {
-          target: { value },
-      } = event;
-      setName_of_examination(value);
+    const {
+      target: { value },
+    } = event;
+    setName_of_examination(value);
   };
 
-  console.log("Name Of Exame",Name_of_examination);
 
-   // Line
-   const [twoline, setTwoline] = useState(false);
-   const [threeline, setThreeline] = useState(false);
-   const [fourline, setFourline] = useState(false);
-   const [fiveline, setFiveline] = useState(false);
-   const [sixline, setSixline] = useState(false);
-   const [sevenline, setSevenline] = useState(false);
-   const [eightline, setEightline] = useState(true);
-   const [nineline, setNineline] = useState(false);
-   const [tenline, setTenline] = useState(false);
- 
+
+  const questionTypes = [
+    {
+      type: "MCQ",
+      subtype: "Objective Questions"
+    },
+    {
+      type: "MCQ",
+      subtype: "Multiple Choice Questions",
+    },
+    {
+      type: "SA",
+      subtype: "Fill in the Blanks Questions",
+    },
+    {
+      type: "VSA",
+      subtype: "Match the Following Questions",
+    },
+    {
+      type: "VSA",
+      subtype: "Recorrect the Answers Questions",
+    },
+    {
+      type: "VSA",
+      subtype: "Classifications of Questions",
+    },
+    {
+      type: "VSA",
+      subtype: "Odd and out words Questions",
+    },
+    {
+      type: "VSA",
+      subtype: "RelationShip Words Questions",
+    },
+    {
+      type: "LA1",
+      subtype: "Grammer Questions",
+    },
+    {
+      type: "LA1",
+      subtype: "One Word Question",
+    },
+    {
+      type: "LA1",
+      subtype: "One Sentence Answer Question",
+    },
+    {
+      type: "LA1",
+      subtype: "Two Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Two and three Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Three and Four Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Five and Six Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Six Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Seven Sentence Answer Questions",
+    },
+    {
+      type: "LA2",
+      subtype: "Eight Sentence Answer Questions",
+    },
+    {
+      type: "LA3",
+      subtype: "Ten Sentence Answer Questions",
+    },
+    {
+      type: "LA3",
+      subtype: "Expanding and Explanations Answer Questions",
+    },
+
+    {
+      type: "LA3",
+      subtype: "Answer the Questions and Draw the Figure Questions",
+    },
+
+    {
+      type: "LA3",
+      subtype: "Graph Questions",
+    },
+
+    {
+      type: "LA3",
+      subtype: "Complete the Poem",
+    },
+
+    {
+      type: "LA3",
+      subtype: "Situation UnderStatnding answer Questions",
+    },
+
+    {
+      type: "VSA",
+      subtype: "Poet,Time, Place, Writer answer questions",
+    },
+
+    {
+      type: "LA3",
+      subtype: "Letter Writting",
+    },
+    {
+      type: "VSA",
+      subtype: "Map Reading"
+    },
+  ];
+
+
+  //get
+  const [QuestionType, setQuestionType] = useState([]);
+  const getallQuestiontype = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getquestiontype/" + admin?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      if (res.status == 200) {
+        setQuestionType(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getallQuestiontype()
+  }, [])
+
   return (
     <div>
       <div className="row">
@@ -599,6 +723,39 @@ const AdminQuestionDetails = () => {
             </div>
             <div className="col-md-4">
               <div className="do-sear mt-2">
+                <label htmlFor="">Select Question Type</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setQuestionTYpe(e.target.value)}
+                >
+                  <option>Select Question Type</option>
+                  {[...new Set(QuestionType?.map(item => item.typeOfquestion))].map((type, index) => (
+                    <option key={index} value={type}>{type}</option>
+                  ))}
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select the Types of the Question</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setTypes_Question(e.target.value)}
+                >
+                  <option>Select Question Type</option>
+                  {QuestionType?.filter((ele) => ele.typeOfquestion === QuestionTYpe)?.map((item2) => {
+                    return (
+                      <option value={item2?.Qformat}>{item2?.Qformat}</option>
+                    )
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+
+
+            {/* <div className="col-md-4">
+              <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>
               </div>{" "}
               <Form.Select
@@ -683,12 +840,11 @@ const AdminQuestionDetails = () => {
                 <option value="Letter Writting">Letter Writting</option>
                 <option value="Map Reading">Map Reading</option>
               </Form.Select>
-            </div>
+            </div> */}
           </div>
           <div className="col-md-12">
             <div className="do-sear">
               <label htmlFor="">Instructions</label>
-
               <MathEditor
                 data={{
                   A: Instruction,
