@@ -177,6 +177,7 @@ import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
 import Tutorial from "./Components/Home/Tutorial";
 import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
+import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
 
 function App() {
@@ -328,7 +329,7 @@ function App() {
             element={
               <>
                 <Navbarr />
-                <AnswerSheet />
+                <AnswerQuestion />
               </>
             }
           />

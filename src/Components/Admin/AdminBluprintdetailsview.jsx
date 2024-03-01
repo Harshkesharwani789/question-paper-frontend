@@ -253,8 +253,9 @@ function AdminBlueprintdetailsview() {
                       <b>1.</b>
                       <b>Chapter wise Marks Distribution</b>
                     </div>
-                    <div className="objectives-table">
+                    <div className="objectives-table ">
                       <Table
+                      responsive
                         bordered
                         hover
                         size="md"
@@ -414,6 +415,7 @@ function AdminBlueprintdetailsview() {
                     </div>
                     <div className="objectives-table">
                       <Table
+                      responsive
                         bordered
                         hover
                         size="md"
@@ -895,40 +897,7 @@ function AdminBlueprintdetailsview() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* <tr>
-                      <th></th>
-
-                      <th style={{ width: "125px",fontSize:"12px" }}></th>
-                      {blueprint?.objectives?.map((ele) => {
-                        return (
-                          <>
-                      
-                            <th style={{fontSize:"12px"}}>M.C</th>
-                            <th colSpan={2}>S.A
-                            <th style={{fontSize:"12px"}}>VSA</th>
-                            <th style={{fontSize:"12px"}}>SA</th>
-                            </th>
-                            <th colSpan={3}>L.A
-                            <th style={{fontSize:"12px"}}>LA 1</th>
-                            <th style={{fontSize:"12px"}}>LA 2</th>
-                            <th style={{fontSize:"12px"}}>LA 3</th>
-                            </th>
-                          </>
-                        );
-                      })}
-
-                      <th style={{fontSize:"12px"}}>M.C</th>
-                      <th colSpan={2}>S.A
-                      <th style={{fontSize:"12px"}}>VSA</th>
-                      <th style={{fontSize:"12px"}}>SA</th>
-                      </th>
-                      <th colSpan={3}>L.A
-                      <th style={{fontSize:"12px"}}>LA 1</th>
-                      <th style={{fontSize:"12px"}}>LA 2</th>
-                      <th style={{fontSize:"12px"}}>LA 3</th>
-                      </th>
-                      <th style={{fontSize:"12px"}}></th>
-                    </tr> */}
+                    
                     <tr style={{borderBottom:"2px solid black"}}>
                       <th></th>
                       <th></th>
