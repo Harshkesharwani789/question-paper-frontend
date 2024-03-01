@@ -155,6 +155,12 @@ const AdminSyllabusCopy = () => {
   }, []);
 
   //Post
+  const [head, sethead] = useState("");
+  const [head1, sethead1] = useState("");
+  const [head2, sethead2] = useState("");
+  const [head3, sethead3] = useState("");
+  const [head4, sethead4] = useState("");
+
   const [chapterName, setChapterName] = useState("");
   const [description, setDescription] = useState("");
   const [chapterNumber, setChapterNumber] = useState("");
@@ -290,6 +296,11 @@ const [Title,setTitle]=useState("")
           Authorization: `Bearer ${token}`,
         },
         data: {
+          head: head,
+          head1: head1,
+          head2:head2,
+          head3:head3,
+          head4:head4,
           year: year,
           medium: medium,
           Class: classs,
@@ -715,6 +726,91 @@ getSyllabus()
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Sl.No</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Sl.No Name"
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Month</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Month Name"
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead1(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead1);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Period</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Month Name"
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead2(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead2);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Unit No</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter unit no Name"
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead3(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead3);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Unit Name</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder="Enter Unit Name"
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead4(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead4);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
+                  </div>
+                </div>
+          
+            
+             
+              </div>
             <div className="row">
             <div className="col-sm-4">
                 <div className="do-sear mt-2">
@@ -1216,6 +1312,103 @@ getSyllabus()
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div
+              style={{
+                border: "2px solid #dee2e6",
+                padding: "10px",
+                marginTop: "10px",
+                // backgroundColor: "#e9caa0"
+              }}
+            >
+              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Sl.No</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder={head}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Month</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder={head1}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead1(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead1);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Period</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder={head2}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead2(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead2);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Unit No</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder={head3}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead3(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead3);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="do-sear mt-2">
+                    <label>Unit Name</label>
+                    <input
+                      type="text"
+                      className="vi_0"
+                      placeholder={head4}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          sethead4(e.target.value);
+                        } else onChangeHandler(e.target.value, sethead4);
+                      }}
+                    />
+                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
+                  </div>
+                </div>
+          
+            
+             
+              </div>
+
+
+              
+            </div>
             <div className="row">
             <div className="col-sm-4">
                 <div className="do-sear mt-2">
