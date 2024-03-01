@@ -9,7 +9,13 @@ import swal from "sweetalert";
 import AdminQuestprops from "./AdminQuestprops";
 import AdminQuestioneditprops from "./AdminQuestioneditprops";
 import { CiEdit } from "react-icons/ci";
-
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
 const AdminEditQuestionDetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -156,7 +162,7 @@ const AdminEditQuestionDetails = () => {
   const [Chapter_Name, setChapter_Name] = useState("");
   const [Lesson, setLesson] = useState("");
   const [Difficulty_level, setDifficulty_level] = useState("");
-  const [Name_of_examination, setName_of_examination] = useState("");
+  const [Name_of_examination, setName_of_examination] = useState([]);
   const [Question, setQuestion] = useState("");
   const [ImageAns, setImageAns] = useState("");
   const [ImageQues, setImageQues] = useState("");
@@ -266,7 +272,7 @@ const AdminEditQuestionDetails = () => {
       setLesson(question_details.Lesson || '')
       setChapter_Name(question_details.Chapter_Name || '')
       setDifficulty_level(question_details.Difficulty_level || '')
-      setName_of_examination(question_details.Name_of_examination || '')
+      setName_of_examination(question_details.Name_of_examination || [])
       setObjectives(question_details.Objectives || '')
       setInstruction(question_details.Instruction || '')
       setQuestion(question_details.Question || '')
@@ -353,8 +359,26 @@ const AdminEditQuestionDetails = () => {
 
   }, [question_details]);
 
-  console.log("question_details.Answer",question_details.Answer);
+  const addExamaData = (name) => {
+    try {
+      setName_of_examination([...Name_of_examination, { Name: name }]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const deleteExamData = (name) => {
+    setName_of_examination(
+      Name_of_examination?.filter((ele) => ele?.Name != name)
+    );
+  };
+
+  const handleSelectChange = (event) => {
+    const {
+        target: { value },
+    } = event;
+    setName_of_examination(value);
+};
   //   get method for weightage
   const [weightage, setweightage] = useState([]);
   const getallweightagecontent = async () => {
@@ -819,23 +843,33 @@ const AdminEditQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  className="vi_0"
+                <FormControl sx={{ m: 1, width: 245, height: 43 }}>
+                <InputLabel id="demo-multiple-checkbox-label">
+                  Name Of Exam
+                </InputLabel>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
                   value={Name_of_examination}
-                  onChange={(e) => {
-                    setName_of_examination(e.target.value);
-                  }}
+                  onChange={handleSelectChange}
+                  input={<OutlinedInput label="Amenities" />}
+                  renderValue={(selected) =>
+                    selected.map((amenity) => amenity.NameExamination).join(", ")
+                  }
                 >
-                  <option>Select the Name Of the Examination</option>
-                  {NameExam?.map((item, i) => {
-                    return (
-                      <option value={item?.NameExamination} key={i}>
-                        {item?.NameExamination}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
+                  {NameExam?.map((amenity) => (
+                    <MenuItem key={amenity._id} value={amenity}>
+                      <Checkbox
+                        checked={Name_of_examination.some(
+                          (selected) => selected._id === amenity._id
+                        )}
+                      />
+                      <ListItemText primary={amenity.NameExamination} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               </div>
             </div>
             <div className="col-md-6">

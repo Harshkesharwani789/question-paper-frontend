@@ -283,10 +283,7 @@ const AdminQuestionDetails = () => {
     getNameExamination();
     getObjectives();
   }, []);
-  console.log(weightage);
-  console.log(NameExam);
-  console.log(getobjectives);
-  console.log("chapters", chapters);
+
 
   const uniqueClassNamesSet = new Set(
     getaddsubclass.map((item) => item.className)
