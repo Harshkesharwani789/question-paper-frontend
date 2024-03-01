@@ -25,9 +25,17 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+<<<<<<< HEAD
     <!-- <script type="text/javascript">
+=======
+     <script type="text/javascript">
+>>>>>>> b67e9b0c47f0d69e7b29aedd16de74ca1f015d19
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          // includedLanguages: 'en,kn,hi,ne,ur,ta,pa,mr,sa',
+          // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        }, 'google_translate_element');
       }
       </script>
       
@@ -69,23 +77,5 @@
     <script>
       var Alert = ReactBootstrap.Alert;
     </script>
-
-
-   <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          {
-            pageLanguage: "en",
-            includedLanguages: "en,kn,hi,ne,ur,ta,pa,mr,sa",
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-          },
-          "google_translate_element"
-        );
-      }
-    </script>
-    <script
-      type="text/javascript"
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
   </body>
 </html>
