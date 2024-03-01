@@ -466,6 +466,37 @@ const Side = () => {
                   <span className="ms-2">Blue Print Add</span>
                 </li>
               </Link>
+              <Link to="/questiontype" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">QuestionType Add</span>
+                </li>
+              </Link>
               {/* <Link to="#">
                 <li
                   className="a-ele"
