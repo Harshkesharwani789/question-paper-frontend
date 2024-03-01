@@ -409,7 +409,7 @@ function AdminBlueprintdetailsview() {
                   {/* table 1 */}
                   <div className="weightage-objectives">
                     <div className="main-title">
-                      <b>1.</b>
+                      <b>2.</b>
                       <b>Objective Type Marks Distribution</b>
                     </div>
                     <div className="objectives-table">

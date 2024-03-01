@@ -133,6 +133,7 @@ const LoginPage5 = () => {
           className: state?.Class,
           SubClassName: state?.Sub_Class,
           subjects: state?.Subject,
+          ExameName:state?.Exam_Name
         },
       };
 
