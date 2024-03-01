@@ -3776,6 +3776,7 @@ const AdminQuestionDetailsview = () => {
                       />
                     </div>
                   </div>
+<<<<<<< HEAD
                 </>
               ) : (
                 <></>
@@ -3815,6 +3816,14 @@ const AdminQuestionDetailsview = () => {
                 <></>
               )}
             </>) : (<></>)}
+=======
+                </div>
+                
+              </>
+            ) : (
+              <></>
+            )}
+>>>>>>> 019d25ad2edae43d292562c289f0de06a05f4385
 
             {/* Complete The Poem */}
             {question_details?.Types_Question === "Complete the Poem" ? (
