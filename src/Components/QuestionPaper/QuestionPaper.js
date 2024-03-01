@@ -4,7 +4,7 @@ import "../QuestionPaper/QuestionPaper.css";
 import { CiSaveDown2 } from "react-icons/ci";
 import { LuPrinter } from "react-icons/lu";
 import { IoMdShare } from "react-icons/io";
-import { Button, Row, Table } from "react-bootstrap";
+import { Button, Form, Row, Table } from "react-bootstrap";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,6 +14,8 @@ import parse from "html-react-parser";
 import Frontpage from "../fontpage/Frontpage";
 import axios from "axios";
 import swal from "sweetalert";
+// import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
+// import { PDFViewer } from "@react-pdf/renderer";
 
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -61,23 +63,34 @@ const QuestionPaper = ({ text }) => {
   const navigate = useNavigate();
 
   const [show, setShow] = useState("");
-
   const createPDF = async () => {
     const pdf = new jsPDF("portrait", "pt", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
     const data = await html2canvas(document.querySelector("#pdf"), {
       useCORS: true,
     });
+
     const img = data.toDataURL("image/png");
-
     const imgProperties = pdf.getImageProperties(img);
+    const imgWidth = pdfWidth;
+    const imgHeight = (imgProperties.height * imgWidth) / imgProperties.width;
 
-    const pdfWidth = pdf.internal.pageSize.getWidth();
+    let position = 0;
+    let remainingHeight = pdfHeight;
+    // Adjust according to your requirement
 
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    while (position < imgHeight) {
+      pdf.addPage();
+      pdf.addImage(img, "PNG", 0, -position, imgWidth, imgHeight);
+      position += pdfHeight;
+      remainingHeight -= pdfHeight;
+    }
 
-    pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("Question_Paper.pdf");
   };
+
   useEffect(() => {
     if (state._id && token) {
       getAllQuestions();
@@ -90,8 +103,8 @@ const QuestionPaper = ({ text }) => {
   const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 
   const lines = [
-    <div className="col-md-12">
-      <div className="do-sear mt-2">
+    <div className="col-md-12 ">
+      <div className="do-sear mt-4">
         <p type="text" className="lined-input"></p>
       </div>
     </div>,
@@ -147,6 +160,18 @@ const QuestionPaper = ({ text }) => {
     document.body.innerHTML = originalContent;
   };
 
+  // Create styles
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1,
+    },
+  });
   return (
     <div>
       <div className="top-header">
@@ -186,11 +211,11 @@ const QuestionPaper = ({ text }) => {
           <></>
         )}
       </div>
-      <div className=" d-flex justify-content-end">
+      {/* <div className=" d-flex justify-content-end">
         <div className="col-sm-2">
           <div id="google_translate_element"></div>
         </div>
-      </div>
+      </div> */}
 
       <div id="pdf">
         <div className="question-paper-display-container">
@@ -199,15 +224,15 @@ const QuestionPaper = ({ text }) => {
             ref={aTagRef}
             onClick={handlePrint}
           />
-          <div style={{size:"A4"}} id="printable-content" class="print-area">
+          <div style={{ size: "A4" }} id="printable-content" class="print-area">
             <Frontpage data={state} />
-            <div className="question-paper-display">
+            <div className="question-paper-display ">
               <div className="second-page-body">
                 {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
                   return (
                     <>
                       {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
-                      <br />
+                      
                       <div className="question-body-main">
                         <div>
                           <div style={{ display: "flex", gap: "12px" }}>
@@ -217,21 +242,22 @@ const QuestionPaper = ({ text }) => {
                               {ele1?.QAInstruction}
                             </b>
                           </div>
+
                         </div>
                         <div style={{ display: "flex", marginTop: "10px" }}>
                           <b>
-                            {ele1?.NQA}*{ele1?.Mask}={ele1?.NQA * ele1?.Mask}
+                            {ele1?.NQA}x{ele1?.Mask}={ele1?.NQA * ele1?.Mask}
                           </b>
                         </div>
                       </div>
-                      <br />
+                      
                       {Questions?.filter(
                         (ele) => ele?.Types_Question === ele1?.QAType
                       )?.map((item, i) => {
                         if (i < Number(ele1?.NQA)) {
                           return (
                             <>
-                              <div className="question-body mt-2">
+                              <div className="question-body">
                                 {item?.Types_Question ===
                                 "Multiple Choice Questions" ? (
                                   <div>
@@ -361,17 +387,8 @@ const QuestionPaper = ({ text }) => {
                                     )}
                                     {item?.NumberOfLine == "1" ? (
                                       <>
-                                        {/* <div className="d-flex gap-1 align-items-center">
-                              <b>{count++ }).</b>
-                              <div className="d-flex align-items-center" style={{width:'-webkit-fill-available'}}>
-                                <p> {parse(`<div>${item?.input1}</div>`)}</p>
-                                <div className="ques-line"></div>
-                                <p> {parse(`<div>${item?.input2}</div>`)}</p>
-
-                              </div>
-                              </div> */}
                                         <div className="d-flex">
-                                          <b>{count++}).</b>
+                                          <b>{count++}.</b>
                                           <p>
                                             {" "}
                                             {parse(
@@ -379,12 +396,19 @@ const QuestionPaper = ({ text }) => {
                                             )}
                                           </p>
                                           <div className="ques-line"></div>
-                                          <p>
-                                            {" "}
-                                            {parse(
-                                              `<div>${item?.input2}</div>`
-                                            )}
-                                          </p>
+                                          {item?.input2 ? (
+                                            <>
+                                              <p>
+                                                {" "}
+                                                {parse(
+                                                  `<div>${item?.input2}</div>`
+                                                )}
+                                              </p>
+                                            </>
+                                          ) : (
+                                            <></>
+                                          )}
+
                                           <div className="ques-line"></div>
                                           <p>
                                             {" "}
@@ -434,6 +458,7 @@ const QuestionPaper = ({ text }) => {
                                 ) : (
                                   <></>
                                 )}
+
                                 {item?.Types_Question ===
                                 "RelationShip Words Questions" ? (
                                   <>
@@ -509,13 +534,16 @@ const QuestionPaper = ({ text }) => {
                                 "One Word Question" ? (
                                   <>
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <p>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
+                                      
                                     </div>
+                                    <br/>
+                                                <p>ಉತ್ತರ</p> 
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -533,11 +561,13 @@ const QuestionPaper = ({ text }) => {
                                           )}
                                         </>
                                       )}
+                                      <br />
                                     </div>
                                   </>
                                 ) : (
                                   <></>
                                 )}
+
                                 {item?.Types_Question ===
                                 "Two  Sentence Answer Questions" ? (
                                   <>
@@ -622,13 +652,16 @@ const QuestionPaper = ({ text }) => {
                                 "Two and three Sentence Answer Questions" ? (
                                   <>
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <p>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
+                                     
                                     </div>
+                                    <br />
+                                      <p>ಉತ್ತರ:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -702,13 +735,16 @@ const QuestionPaper = ({ text }) => {
                                 "Three and Four Sentence Answer Questions" ? (
                                   <>
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <p>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
+                                      
                                     </div>
+                                    <br />
+                                      <p>ಉತ್ತರ:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -1135,13 +1171,16 @@ const QuestionPaper = ({ text }) => {
                                 "One Sentence Answer Question" ? (
                                   <>
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <p>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
+                                      
                                     </div>
+                                    <br/>
+                                      <p>ಉತ್ತರ:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -1385,7 +1424,7 @@ const QuestionPaper = ({ text }) => {
                                       style={{ display: "flex", gap: "12px" }}
                                       key={i}
                                     >
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <b>
                                         {item?.Question
                                           ? parse(item?.Question)
@@ -1397,19 +1436,28 @@ const QuestionPaper = ({ text }) => {
                                         {item.NumberOfLine == "4" ? (
                                           <>
                                             <div className="">
-                                              <div className="d-flex align-items-end">
-                                                <p className="vi_0">
-                                                  {item?.PoemSt}
-                                                </p>
-                                                <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="d-flex align-items-baseline mb-4">
+                                                <span>{item?.PoemSt}</span>
+
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
                                               </div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="ans-line mb-4"></div>
+                                              <div className="ans-line mb-4 "></div>
                                               <div className="d-flex align-items-end">
-                                                <div className="ans-line mb-3 mt-2"></div>
-                                                <p className="vi_0">
-                                                  {item?.PoemEnd}
-                                                </p>
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
+                                                <span>{item?.PoemEnd}</span>
                                               </div>
                                             </div>
                                           </>
@@ -1419,20 +1467,29 @@ const QuestionPaper = ({ text }) => {
                                         {item.NumberOfLine == "5" ? (
                                           <>
                                             <div className="">
-                                              <div className="d-flex align-items-end">
-                                                <p className="vi_0">
-                                                  {item?.PoemSt}
-                                                </p>
-                                                <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="d-flex align-items-baseline mb-4">
+                                                <span>{item?.PoemSt}</span>
+
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
                                               </div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="ans-line mb-4"></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
                                               <div className="d-flex align-items-end">
-                                                <div className="ans-line mb-3 mt-2"></div>
-                                                <p className="vi_0">
-                                                  {item?.PoemEnd}
-                                                </p>
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
+                                                <span>{item?.PoemEnd}</span>
                                               </div>
                                             </div>
                                           </>
@@ -1442,21 +1499,30 @@ const QuestionPaper = ({ text }) => {
                                         {item.NumberOfLin == "6" ? (
                                           <>
                                             <div className="">
-                                              <div className="d-flex align-items-end">
-                                                <p className="vi_0">
-                                                  {item?.PoemSt}
-                                                </p>
-                                                <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="d-flex align-items-baseline mb-4">
+                                                <span>{item?.PoemSt}</span>
+
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
                                               </div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="ans-line mb-4"></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
                                               <div className="d-flex align-items-end">
-                                                <div className="ans-line mb-3 mt-2"></div>
-                                                <p className="vi_0">
-                                                  {item?.PoemEnd}
-                                                </p>
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
+                                                <span>{item?.PoemEnd}</span>
                                               </div>
                                             </div>
                                           </>
@@ -1466,22 +1532,31 @@ const QuestionPaper = ({ text }) => {
                                         {item.NumberOfLin == "7" ? (
                                           <>
                                             <div className="">
-                                              <div className="d-flex align-items-end">
-                                                <p className="vi_0">
-                                                  {item?.PoemSt}
-                                                </p>
-                                                <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="d-flex align-items-baseline mb-4">
+                                                <span>{item?.PoemSt}</span>
+
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
                                               </div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
-                                              <div className="ans-line mb-3 mt-2"></div>
+                                              <div className="ans-line mb-4"></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4 "></div>
                                               <div className="d-flex align-items-end">
-                                                <div className="ans-line mb-3 mt-2"></div>
-                                                <p className="vi_0">
-                                                  {item?.PoemEnd}
-                                                </p>
+                                                <div
+                                                  className="mb-3 mt-2"
+                                                  style={{
+                                                    borderBottom: "1px solid",
+                                                    width: "80%",
+                                                  }}
+                                                ></div>
+                                                <span>{item?.PoemEnd}</span>
                                               </div>
                                             </div>
                                           </>
@@ -1730,6 +1805,7 @@ const QuestionPaper = ({ text }) => {
                                 ) : (
                                   <></>
                                 )}
+                                <br />
                                 {item?.Types_Question === "Letter Writting" ? (
                                   <>
                                     <div
@@ -1769,13 +1845,16 @@ const QuestionPaper = ({ text }) => {
                                 "Situation UnderStatnding answer Questions" ? (
                                   <>
                                     <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                      <b>{count++}.</b>
                                       <b>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </b>
+                                    
                                     </div>
+                                    <br/>
+                          <p>ಉತ್ತರ:</p>
                                     <div className="d-flex mb-1">
                                       {item?.Image_1 ? (
                                         <>
@@ -1802,9 +1881,29 @@ const QuestionPaper = ({ text }) => {
                                         <></>
                                       )}
                                     </div>
+                                    <div>
+                                      {item?.NumberOfLine && (
+                                        <>
+                                          {Array.from(
+                                            { length: item?.NumberOfLine },
+                                            (_, index) => (
+                                              <React.Fragment key={index}>
+                                                {lines.map((line, idx) => (
+                                                  <React.Fragment key={idx}>
+                                                    {line}
+                                                  </React.Fragment>
+                                                ))}
+                                              </React.Fragment>
+                                            )
+                                          )}
+                                        </>
+                                      )}
+                                    </div>
+                                    <br/>
 
                                     <div>
-                                      {item?.PassiveQuesion?.map(
+                                      {item?.PassiveQuesion?.length ? (<>
+                                        {item?.PassiveQuesion?.map(
                                         (item1, index) => {
                                           return (
                                             <div>
@@ -1819,6 +1918,8 @@ const QuestionPaper = ({ text }) => {
                                           );
                                         }
                                       )}
+                                      </>):(<></>)}
+                                      
                                     </div>
                                   </>
                                 ) : (
@@ -1955,15 +2056,18 @@ const QuestionPaper = ({ text }) => {
                                 {item?.Types_Question ===
                                 "Classifications of Questions" ? (
                                   <>
-                                    <div className="d-flex mt-2">
-                                      <b>{count++}).</b>
+                                    <div className="d-flex ">
+                                      <b>{count++}.</b>
                                       <p>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
+                                     
                                     </div>
-                                    <div>
+                                    <br/>
+                                      <p>ಉತ್ತರ:</p>
+                                    <div className="mb-2">
                                       {item?.NumberOfLine && (
                                         <>
                                           {Array.from(
@@ -2242,11 +2346,12 @@ const QuestionPaper = ({ text }) => {
                 })}
               </div>
               <br />
-              <div className="page-footer">
-                <div>
-                  {state?.Sub_Class},{state?.Subject}
+              {/* <div className="page-footer"> */}
+                <div className="d-flex justify-content-between">
+                 <p>{state?.Sub_Class},{state?.Subject}</p> 
+                  <p>P.T.O</p> 
                 </div>
-              </div>
+              {/* </div> */}
             </div>
           </div>
           {/*------ QuestionAnalysis---- */}
@@ -2266,14 +2371,14 @@ const QuestionPaper = ({ text }) => {
               <Table striped bordered style={{ fontFamily: "math" }}>
                 <thead>
                   <tr>
-                    <th>Qn. No.</th>
-                    <th>Objective</th>
-                    <th>Specification</th>
-                    <th>Content Unit</th>
-                    <th>Type Of QN.</th>
-                    <th>Marks</th>
-                    <th>Diffeculty Level</th>
-                    <th>Time Required to Answer</th>
+                    <th>ಕ್ರ .ಸಂ.</th>
+                    <th>ವಸ್ತುನಿಷ್ಠ</th>
+                    <th>ನಿರ್ದಿಷ್ಟತೆ</th>
+                    <th>ವಿಷಯ</th>
+                    <th>ಪ್ರಶ್ನಾವಾರು ವಿಶ್ಲೇಷಣೆ.</th>
+                    <th>ಅಂಕಗಳು</th>
+                    <th>ಕಠಿಣತೆಯ ಮಟ್ಟ</th>
+                    <th>ಸಮಯ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -2322,12 +2427,13 @@ const QuestionPaper = ({ text }) => {
               </div>
             </div>
           </div>
+
           {/* -------Answer-------- */}
           <LuPrinter
             style={{ width: "22px", height: "40px" }}
             ref={aTagRef}
             onClick={handlePrint2}
-          />  
+          />
           <div id="printable-content2" class="print-area">
             <div style={{ textAlign: "center" }}>
               <Button onClick={() => setViewAnswer(!ViewAnswer)}>
@@ -2338,10 +2444,10 @@ const QuestionPaper = ({ text }) => {
                   <div id="pdf-content" className="question-paper-display">
                     <div className="englishqp-page-body">
                       <div>
-                        <h2>{state?.Subject} (Answer Sheet)</h2>
-                        <h4>
+                        <h2>{state?.Subject}</h2>
+                        {/* <h4>
                           <b>{state?.bluePrint?.blName}</b>
-                        </h4>
+                        </h4> */}
                       </div>
 
                       <div style={{ fontWeight: "bold" }}>
@@ -2371,18 +2477,18 @@ const QuestionPaper = ({ text }) => {
                                 </div>
                                 <div style={{ display: "flex" }}>
                                   <b>
-                                    {ele1?.NQA}*{ele1?.Mask}=
+                                    {ele1?.NQA}x{ele1?.Mask}=
                                     {ele1?.NQA * ele1?.Mask}
                                   </b>
                                 </div>
                               </div>
-                              <br />
+                              
                               {Questions?.filter(
                                 (ele) => ele?.Types_Question === ele1?.QAType
                               )?.map((item, i) => {
                                 if (i < Number(ele1?.NQA)) {
                                   return (
-                                    <div className="question-body mb-1">
+                                    <div className="question-body">
                                       {item?.Types_Question ===
                                       "Objective Questions" ? (
                                         <>
@@ -2424,7 +2530,7 @@ const QuestionPaper = ({ text }) => {
                                                     ) : (
                                                       <></>
                                                     )}
-                                                    <br />
+                                                    
                                                   </div>
                                                 </>
                                               ) : (
@@ -2477,7 +2583,7 @@ const QuestionPaper = ({ text }) => {
                                                   ) : (
                                                     <></>
                                                   )}
-                                                  <br />
+                                                
                                                 </div>
                                               </>
                                             ) : (
@@ -2494,13 +2600,14 @@ const QuestionPaper = ({ text }) => {
                                         <>
                                           <div className="d-flex justify-content-between">
                                             <div>
-                                              <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                              <div className="d-flex ">
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
                                                     : ""}
                                                 </b>
+                                                
                                               </div>
                                               {item?.orAnswer ? (
                                                 <>
@@ -2529,13 +2636,14 @@ const QuestionPaper = ({ text }) => {
                                       ) : (
                                         <></>
                                       )}
+                                     
                                       {item?.Types_Question ===
                                       "One Sentence Answer Question" ? (
                                         <>
                                           <div className="d-flex justify-content-between">
                                             <div>
                                               <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
@@ -2615,7 +2723,7 @@ const QuestionPaper = ({ text }) => {
                                           <div className="d-flex justify-content-between">
                                             <div>
                                               <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
@@ -2655,7 +2763,7 @@ const QuestionPaper = ({ text }) => {
                                           <div className="d-flex justify-content-between">
                                             <div>
                                               <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
@@ -2912,8 +3020,8 @@ const QuestionPaper = ({ text }) => {
                                         <>
                                           <div className="d-flex justify-content-between">
                                             <div>
-                                              <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                              <div className="d-flex ">
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
@@ -3180,7 +3288,7 @@ const QuestionPaper = ({ text }) => {
                                           <div className="d-flex justify-content-between">
                                             <div>
                                               <div className="d-flex mt-2">
-                                                <b>{count3++}).</b>
+                                                <b>{count3++}.</b>
                                                 <b>
                                                   {item?.Answer
                                                     ? parse(item?.Answer)
@@ -3198,8 +3306,8 @@ const QuestionPaper = ({ text }) => {
                                       "Fill in the Blanks Questions" ? (
                                         <>
                                           <div className="d-flex justify-content-between">
-                                            <div className="d-flex mt-2">
-                                              <b>{count3++}).</b>
+                                            <div className="d-flex ">
+                                              <b>{count3++}.</b>
                                               <b>
                                                 {item?.Answer
                                                   ? parse(item?.Answer)
@@ -3216,7 +3324,7 @@ const QuestionPaper = ({ text }) => {
                                       "Complete the Poem" ? (
                                         <>
                                           <div className="d-flex justify-content-between">
-                                            <div className="d-flex mt-2">
+                                            <div className="d-flex ">
                                               <b>{count3++}</b>
                                               <b>
                                                 {item?.Answer

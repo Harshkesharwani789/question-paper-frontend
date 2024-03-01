@@ -160,8 +160,6 @@ import SituationAnalysis_add from "./Components/Admin/SituationAnalysis/Situatio
 import SituationAnalysis_edit from "./Components/Admin/SituationAnalysis/SituationAnalysis_edit";
 import Objective_add from "./Components/Admin/ObjectiveType/Objective_add";
 
-
-
 import Classification from "./Components/Admin/Classification_QandA/Classification";
 import AddClassification from "./Components/Admin/Classification_QandA/AddClassification";
 import EditClassification from "./Components/Admin/Classification_QandA/EditClassification";
@@ -179,7 +177,6 @@ import QuestionAndAnswerView from "./Components/Home/QuestionAndAnswerView";
 import Tutorial from "./Components/Home/Tutorial";
 import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
-
 
 function App() {
   return (
@@ -205,7 +202,7 @@ function App() {
               </>
             }
           />
-             <Route
+          <Route
             path="/question_analysis"
             element={
               <>
@@ -232,7 +229,7 @@ function App() {
               </>
             }
           />
-           <Route
+          <Route
             path="/offerquestionpaper"
             element={
               <>
@@ -241,16 +238,9 @@ function App() {
               </>
             }
           />
-          
 
+          <Route path="/contactus" element={<ContactUs />} />
 
-          
-          <Route
-          path="/contactus"
-          element={<ContactUs/>}
-          
-          />
-          
           <Route
             path="/profile"
             element={
@@ -288,7 +278,7 @@ function App() {
               </>
             }
           />
-              <Route
+          <Route
             path="/loginpage5"
             exact
             element={
@@ -325,7 +315,9 @@ function App() {
             element={
               <>
                 <Navbarr />
-                <QuestionPaper />
+            
+                  <QuestionPaper />
+           
               </>
             }
           />
@@ -372,7 +364,7 @@ function App() {
               </>
             }
           />
-            <Route
+          <Route
             path="/science10th"
             exact
             element={
@@ -440,7 +432,7 @@ function App() {
               </>
             }
           />
-        
+
           <Route
             path="/dashboard"
             element={
@@ -915,7 +907,7 @@ function App() {
             }
           />
 
-            <Route
+          <Route
             path="/admin_upload_pdf"
             element={
               <Main
@@ -1504,7 +1496,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminpassageadd"
             element={
               <Main
@@ -1516,7 +1508,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminpassageedit"
             element={
               <Main
@@ -1555,7 +1547,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminobjectives"
             element={
               <Main
@@ -1906,8 +1898,8 @@ function App() {
               />
             }
           />
-           {/* Map */}
-           <Route
+          {/* Map */}
+          <Route
             path="/adminmap"
             element={
               <Main
@@ -1919,7 +1911,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmapadd"
             element={
               <Main
@@ -1931,7 +1923,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmapedit"
             element={
               <Main
@@ -1943,7 +1935,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminmapview"
             element={
               <Main
@@ -1955,8 +1947,8 @@ function App() {
               />
             }
           />
-            {/* Letter Writing */}
-            <Route
+          {/* Letter Writing */}
+          <Route
             path="/adminletteradd"
             element={
               <Main
@@ -1968,7 +1960,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/adminletteredit"
             element={
               <Main
@@ -1980,8 +1972,8 @@ function App() {
               />
             }
           />
-           {/* Situation Analysis*/}
-           <Route
+          {/* Situation Analysis*/}
+          <Route
             path="/adminsituationanalysisadd"
             element={
               <Main
@@ -2040,7 +2032,7 @@ function App() {
               </>
             }
           />
-           {/* <Route
+          {/* <Route
             path="/fake"
             element={
               <>
@@ -2049,8 +2041,6 @@ function App() {
             }
           /> */}
         </Routes>
-
-
       </BrowserRouter>
     </div>
   );

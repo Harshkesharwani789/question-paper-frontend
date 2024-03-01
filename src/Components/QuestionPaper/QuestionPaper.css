@@ -11,6 +11,12 @@
   height: 2rem;
   margin: 7px 20px;
 }
+.A4-size{
+  height: 1122px !important;
+}
+.over_Flow{
+  overflow: hidden !important;
+}
 
 .share-button {
   border: 1px solid lightgray;

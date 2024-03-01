@@ -12,7 +12,7 @@
 
 .top-logo {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .square {
   height: 40px;
@@ -36,7 +36,7 @@
   padding: 20px 0 0 0px;
 }
 .title-1 h4 {
-  font-size: 22px;
+  font-size: 19px;
   text-align: center;
 }
 
