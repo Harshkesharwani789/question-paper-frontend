@@ -742,7 +742,7 @@ const AdminClass = () => {
         <Modal.Body>
           <div className="do-sear mt-2">
             <label>Class</label>
-            <Form.Select
+            {/* <Form.Select
               aria-label="Default select example"
               onChange={(e) => {
                 setclasssname(e.target.value);
@@ -753,11 +753,22 @@ const AdminClass = () => {
               <option value="Primary">Primary </option>
               <option value="Upper Primary">Upper Primary</option>
               <option value="Secondary">Secondary</option>
-            </Form.Select>
+            </Form.Select> */}
+            <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setclasssname(e.target.value)
+                    }else onChangeHandler(e.target.value,setclasssname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
           </div>
           <div className="do-sear mt-2">
             <label>Sub-Class</label>
-            <Form.Select
+            {/* <Form.Select
               aria-label="Default select example"
               onChange={(e) => {
                 setsubclasssname(e.target.value);
@@ -778,7 +789,19 @@ const AdminClass = () => {
               <option value="Class 10">Class 10</option>
               <option value="Class 11">Class 11</option>
               <option value="Class 12">Class 12</option>
-            </Form.Select>
+            </Form.Select> */}
+            <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setsubclasssname(e.target.value)
+                    }else onChangeHandler(e.target.value,setsubclasssname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>}
+
           </div>
         </Modal.Body>
         <Modal.Footer>

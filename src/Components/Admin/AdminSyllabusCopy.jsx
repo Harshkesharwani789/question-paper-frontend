@@ -1320,18 +1320,19 @@ getSyllabus()
                 // backgroundColor: "#e9caa0"
               }}
             >
-              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+             <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
                 <div className="col-sm-3">
                   <div className="do-sear mt-2">
                     <label>Sl.No</label>
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder={head}
+                      placeholder="Enter Sl.No Name"
+                      value={head}
                       onChange={(e) => {
                         if (selectedLanguage == "en-t-i0-und") {
                           sethead(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead);
+                        } else onChangeHandler(e.target.value);
                       }}
                     />
                        {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
@@ -1343,7 +1344,7 @@ getSyllabus()
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder={head1}
+                      placeholder="Enter Month Name"
                       onChange={(e) => {
                         if (selectedLanguage == "en-t-i0-und") {
                           sethead1(e.target.value);
@@ -1359,7 +1360,7 @@ getSyllabus()
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder={head2}
+                      placeholder="Enter Month Name"
                       onChange={(e) => {
                         if (selectedLanguage == "en-t-i0-und") {
                           sethead2(e.target.value);
@@ -1375,7 +1376,7 @@ getSyllabus()
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder={head3}
+                      placeholder="Enter unit no Name"
                       onChange={(e) => {
                         if (selectedLanguage == "en-t-i0-und") {
                           sethead3(e.target.value);
@@ -1391,7 +1392,7 @@ getSyllabus()
                     <input
                       type="text"
                       className="vi_0"
-                      placeholder={head4}
+                      placeholder="Enter Unit Name"
                       onChange={(e) => {
                         if (selectedLanguage == "en-t-i0-und") {
                           sethead4(e.target.value);

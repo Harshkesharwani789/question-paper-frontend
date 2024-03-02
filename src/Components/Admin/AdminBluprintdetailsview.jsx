@@ -244,8 +244,8 @@ function AdminBlueprintdetailsview() {
       
             <div className="blueprint-titles">
               {/* <h3>{blueprint?.blName}</h3> */}
-              <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h3>
-              <h4> BLUE PRINT</h4>
+              <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆ ಕನ್ನಡ ನೇಲಿ ನಕ್ಷೆ</h3>
+              <h4>ನೆಲಿ ನಕ್ಷೆ</h4>
             </div>
             <div className="container">
               <div className="row">
@@ -585,7 +585,7 @@ function AdminBlueprintdetailsview() {
                               return ( */}
                                 <tr >
                                   <td>1</td>
-                                  <td>M.C</td>
+                                  <td>O.T</td>
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
@@ -906,31 +906,31 @@ function AdminBlueprintdetailsview() {
                       <th></th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      O T
                       </th>
                       <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
                       <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
 
                        <th style={{fontSize:"12px"}}>
-                        M C
+                      O T
                       </th>
                       <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
                       <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      O T
                       </th>
                       <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
                       <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      O T
                       </th>
                       <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
                       <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      O T
                       </th>
                       <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
                       <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
