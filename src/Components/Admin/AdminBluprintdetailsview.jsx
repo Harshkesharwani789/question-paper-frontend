@@ -217,6 +217,8 @@ function AdminBlueprintdetailsview() {
     pdf.save("Blueprint.pdf");
   };
   console.log("BluePrintAAAA==>",blueprint);
+
+  
   return (
     <>
 
@@ -241,7 +243,8 @@ function AdminBlueprintdetailsview() {
           
       
             <div className="blueprint-titles">
-              <h3>{blueprint?.blName}</h3>
+              {/* <h3>{blueprint?.blName}</h3> */}
+              <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h3>
               <h4> BLUE PRINT</h4>
             </div>
             <div className="container">
