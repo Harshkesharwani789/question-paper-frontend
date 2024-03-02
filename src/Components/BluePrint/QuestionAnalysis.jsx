@@ -89,8 +89,8 @@ return "L.A"
 
 const obj={}
 
-
-
+//&& ele?.Marks==(ele2?.NQA*ele2?.Mask)/ele2?.NQA 
+ console.log("Questions",Questions)
 
 
 
@@ -132,7 +132,7 @@ const obj={}
                 return (
                   <>
                     {Questions?.filter(
-                      (ele) => ele.Types_Question === ele2?.QAType&& ele?.Marks==(ele2?.NQA*ele2?.Mask)/ele2?.NQA 
+                      (ele) => ele.Types_Question === ele2?.QAType
                     )?.map((item, i) => {
                       if (i < Number(ele2?.NQA)) {
                         return (
