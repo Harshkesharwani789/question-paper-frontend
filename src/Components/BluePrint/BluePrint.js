@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../BluePrint/BluePrint.css";
@@ -12,6 +12,7 @@ import html2canvas from "html2canvas";
 import { FiPrinter } from "react-icons/fi";
 
 const BluePrint = () => {
+  // const { blueprint_ID } = useParams();
   const navigate = useNavigate();
   const { state } = useLocation();
   console.log("State==>", state);
@@ -36,8 +37,26 @@ const BluePrint = () => {
       console.log(error);
     }
   };
+
+  const [AllChapterData1, setAllChapterData1] = useState([]);
+  const [blueprint1, setblueprint1] = useState([]);
+  const getallblueprint1 = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getblueprintsbyid"
+      );
+
+      if (res.status == 200) {
+        setblueprint1(res.data.success);
+        setAllChapterData1(res.data.success?.AllChapter);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallblueprint();
+    getallblueprint1();
   }, []);
 
   const upcomingStaus = async (status, val) => {
@@ -132,7 +151,21 @@ const BluePrint = () => {
     return uniqueObjectsArray;
   }
 
-  // console.log("uniqueObjectsArray", uniqueObjectsArray);
+  const uniqueObjectsArray = [];
+  const uniqueNames = new Set(); // Using a Set to keep track of unique names
+
+  AllChapterData1?.forEach((ele, i) => {
+    const chapterName = ele?.Blueprintchapter;
+    if (!uniqueNames.has(chapterName)) {
+      uniqueNames.add(chapterName);
+      uniqueObjectsArray.push({
+        index: i + 1,
+        name: chapterName,
+      });
+    }
+  });
+
+  console.log("uniqueObjectsArray", niqueDataName);
 
   function bluePrintTotalQues(AllChapterData, chapterName, Qtype) {
     let obj = { TotalQ: "", totalMas: 0 };
@@ -229,6 +262,7 @@ const BluePrint = () => {
 
     pdf.save("Blueprint.pdf");
   };
+  console.log("blueprint1",blueprint1)
 
   return (
     <div>
@@ -329,6 +363,7 @@ const BluePrint = () => {
                             <div className="row">
                               <div className="col-md-7">
                                 {/* table 3  */}
+                                
                                 <div className="weightage-objectives mt-4">
                                   <div className="main-title">
                                     <b>1.</b>
@@ -351,12 +386,12 @@ const BluePrint = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {val?.TypesofQuestions?.map(
+                                        {niqueDataName(val?.AllChapter)?.map(
                                           (item, i) => {
                                             return (
                                               <tr>
                                                 <td>{i + 1}</td>
-                                                <td>{item?.QAType}</td>
+                                                <td>{item?.name}</td>
                                                 <td>{item?.QAInstruction}</td>
                                                 <td>
                                                   {item?.NQA}x {item?.Mask}
@@ -368,6 +403,7 @@ const BluePrint = () => {
                                             );
                                           }
                                         )}
+                                       
 
                                         <tr>
                                           <td>
@@ -394,7 +430,7 @@ const BluePrint = () => {
                                       </tbody>
                                     </Table>
                                   </div>
-                                </div>
+                                </div> 
                               </div>
                               <div className="col-md-5">
                                 {/* table 1 */}
@@ -461,6 +497,19 @@ const BluePrint = () => {
                                               );
                                             }
                                           )}
+                                           <tr>
+                                          <td>1</td>
+                                          <td>M.C</td>
+                                          <td>{val?.Weightageofthecontent?.filter(
+                                    (item) =>
+                                    
+                                      item?.Weightageofthecontent == "M C"
+                                  )?.reduce(
+                                    (a, am) =>
+                                      a + Number(am?.Weightageofthecontent),
+                                    0
+                                  )}</td>
+                                        </tr>
                                         </tbody>
                                       </Table>
                                     </div>
