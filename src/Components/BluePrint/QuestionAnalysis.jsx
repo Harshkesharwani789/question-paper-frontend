@@ -108,9 +108,13 @@ const obj={}
       </div>
             <Container className='mt-4' style={{border:"5px solid black", borderRadius:"15px"}} id="printable-content">
                 <div className='mt-4' >
+                  <h3 className="text-center">ಶ್ರೀ ಮಾತಾ ಶಾರದ ಪಬ್ಲಿಕ್ ಶಾಲೆ. ಗದಗ ಜಿಲ್ಲೆ ಗದಗ,ಗದಗ</h3>
                 <h3 className="text-center">
-              {state?.Sub_Class} {state?.Subject}
+                  
+              {state?.Sub_Class} {state?.Subject} 
+
             </h3>
+            <h3 className="text-center">೭ ನೇ ತರಗತಿ ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ </h3>
 
                     <h4>ಪ್ರಶ್ನೆ ವಿಶ್ಲೇಷಣೆ</h4>
                 </div>
