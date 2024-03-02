@@ -119,6 +119,7 @@ const obj={}
               <tr>
                 <th>ಕ್ರ .ಸಂ.</th>
                 <th>ವಸ್ತುನಿಷ್ಠ</th>
+                <th>ಪಾಠ</th>
                 <th>ನಿರ್ದಿಷ್ಟತೆ</th>
                 <th>ವಿಷಯ</th>
                 <th>ಪ್ರಶ್ನಾವಾರು ವಿಶ್ಲೇಷಣೆ.</th>
@@ -139,6 +140,7 @@ const obj={}
                           <tr>
                             <td> {count2++}</td>
                             <td>{item?.Objectives}</td>
+                            <td>{item?.name}</td>
                             <td>{item?.Lesson}</td>
                             <td>{item?.Types_Question}</td>
                             <td>

@@ -2469,8 +2469,8 @@ function AdminBlueprint() {
                                             <option value="">
                                               Select Question Types
                                             </option>
-                                            <option value="M C">
-                                              M.C (Multiple Choice)
+                                            <option value="O T">
+                                              O.T (Objective Choice)
                                             </option>
                                             <option value="V.S.A">
                                               V.S.A (Very Short Answer)
@@ -2791,7 +2791,7 @@ function AdminBlueprint() {
                     onChange={(e) => addOuestionType(e.target.value)}
                   >
                     <option value="">Select Question Types</option>
-                    <option value="M C">M.C (Multiple Choice)</option>
+                    <option value="O T">O T (Objective Type)</option>
                     <option value="V.S.A">V.S.A (Very Short Answer)</option>
                     <option value="S.A">S.A (Short Answer)</option>
                     <option value="L.A 1">L.A (Long Answer 1)</option>
@@ -3302,7 +3302,7 @@ function AdminBlueprint() {
                 }}
               >
                 <option value="">Select Question Types</option>
-                <option value="M C">M.C (Multiple Choice)</option>
+                <option value="O T">O T (Objective Type)</option>
                 <option value="V.S.A">V.S.A (Very Short Answer)</option>
                 <option value="S.A">S.A (Short Answer)</option>
                 <option value="L.A 1">L.A (Long Answer 1)</option>
