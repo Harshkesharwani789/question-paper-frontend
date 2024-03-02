@@ -76,13 +76,13 @@ function QuestionAnalysis() {
 
 function check(am){
     
-    if(am=="Objective Questions"||am=="One Word Question"||am=="Multiple Choice Questions"||am=="Fill in the Blanks Questions"||am=="Recorrect the Answers Questions"||am=="Match the Following Questions"||am=="Recorrect the Answers Questions"||am=="Odd and out words Questions"||am=="RelationShip Words Questions"||am=="Classifications of Questions"||am=="Grammer Questions"){
+    if(am=="Objective Questions"||am=="One Word Question"||am=="Multiple Choice Questions"||am=="Fill in the Blanks Questions"||am=="Recorrect the Answers Questions"||am=="Match the Following Questions"||am=="Recorrect the Answers Questions"||am=="Odd and out words Questions"||am=="RelationShip Words Questions"||am=="Grammer Questions"){
         return "O.T"
     }
-    if(am=="One Sentence Answer Question"||am=="Two  Sentence Answer Questions"||am=="Situation UnderStatnding answer Questions"||am=="Complete the Poem"||am=="Poet,Time, Place, Writer answer questions"){
+    if(am=="One Sentence Answer Question"||am=="Two  Sentence Answer Questions"||am=="Situation UnderStatnding answer Questions"||am=="Complete the Poem"||am=="Poet,Time, Place, Writer answer questions"||am=="Classifications of Questions"||am=="Two and three Sentence Answer Questions"){
         return "S.A"
     }
-    if(am=="Two and three Sentence Answer Questions"||am=="Three and Four Sentence Answer Questions"||am=="Five and Six Sentence Answer Questions"||am=="Six Sentence Answer Questions"||am=="Seven Sentence Answer Questions"||am=="Eight Sentence Answer Questions"||am=="Ten Sentence Answer Questions"||am=="Expanding and Explanations Answer Questions"||am=="Answer the Questions and Draw the Figure Questions"||am=="Graph Questions"||am=="Letter Writting"||am=="Map Reading"){
+    if(am=="Three and Four Sentence Answer Questions"||am=="Five and Six Sentence Answer Questions"||am=="Six Sentence Answer Questions"||am=="Seven Sentence Answer Questions"||am=="Eight Sentence Answer Questions"||am=="Ten Sentence Answer Questions"||am=="Expanding and Explanations Answer Questions"||am=="Answer the Questions and Draw the Figure Questions"||am=="Graph Questions"||am=="Letter Writting"||am=="Map Reading"){
 return "L.A"
     }
 }
