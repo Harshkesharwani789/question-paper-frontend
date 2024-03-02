@@ -277,7 +277,7 @@ return false
                       </div>
                       
                       {Questions?.filter(
-                       async (ele) => ele?.Types_Question == ele1?.QAType && ele?.Marks==(ele1?.NQA*ele1?.Mask)/ele1?.NQA&&await checkNumber(ele?.Objectives)
+                        (ele) => ele?.Types_Question == ele1?.QAType && ele?.Marks==(ele1?.NQA*ele1?.Mask)/ele1?.NQA
                       )?.map((item, i) => {
                         if (i < Number(ele1?.NQA)) {
                           return (
