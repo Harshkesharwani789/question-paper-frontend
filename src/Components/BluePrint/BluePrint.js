@@ -543,7 +543,7 @@ const BluePrint = () => {
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(am?.Blueprintnoofquestion),
@@ -553,14 +553,14 @@ const BluePrint = () => {
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(   am?.BluePrintmarksperquestion *
                                         am?.Blueprintnoofquestion),
                                     0
                                   )}</td>
-                                 <td>{(val?.AllChapter?.filter((item)=>  item?.BluePrintQuestiontype == "M C")?.reduce(
+                                 <td>{(val?.AllChapter?.filter((item)=>  item?.BluePrintQuestiontype == "O T")?.reduce(
                           (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
                           0
                         )/(val?.AllChapter?.reduce(
@@ -807,7 +807,7 @@ const BluePrint = () => {
                                                         item?.Blueprintobjective ==
                                                           ele1?.Objective &&
                                                         item?.BluePrintQuestiontype ==
-                                                          "M C" &&
+                                                          "O T" &&
                                                         item?.Blueprintchapter ==
                                                           ele?.name
                                                     )?.Blueprintnoofquestion
@@ -817,7 +817,7 @@ const BluePrint = () => {
                                                       item?.Blueprintobjective ==
                                                         ele1?.Objective &&
                                                       item?.BluePrintQuestiontype ==
-                                                        "M C" &&
+                                                        "O T" &&
                                                       item?.Blueprintchapter ==
                                                         ele?.name
                                                   )
@@ -827,7 +827,7 @@ const BluePrint = () => {
                                                             item?.Blueprintobjective ==
                                                               ele1?.Objective &&
                                                             item?.BluePrintQuestiontype ==
-                                                              "M C" &&
+                                                              "O T" &&
                                                             item?.Blueprintchapter ==
                                                               ele?.name
                                                         )
@@ -1019,7 +1019,7 @@ const BluePrint = () => {
                                               bluePrintTotalQues(
                                                 val?.AllChapter,
                                                 ele?.name,
-                                                "M C"
+                                                "O T"
                                               )?.TotalQ
                                             }
                                           </td>
@@ -1211,7 +1211,7 @@ const BluePrint = () => {
                                       <th></th>
                                       <th></th>
 
-                                      <th style={{ fontSize: "12px" }}>M C</th>
+                                      <th style={{ fontSize: "12px" }}>O T</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
@@ -1225,7 +1225,7 @@ const BluePrint = () => {
                                         L A
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>M C</th>
+                                      <th style={{ fontSize: "12px" }}>O T</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
@@ -1239,7 +1239,7 @@ const BluePrint = () => {
                                         L A
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>M C</th>
+                                      <th style={{ fontSize: "12px" }}>O T</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
@@ -1253,7 +1253,7 @@ const BluePrint = () => {
                                         L A
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>M C</th>
+                                      <th style={{ fontSize: "12px" }}>O T</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
@@ -1267,7 +1267,7 @@ const BluePrint = () => {
                                         L A
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>M C</th>
+                                      <th style={{ fontSize: "12px" }}>O T</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
@@ -1351,7 +1351,7 @@ const BluePrint = () => {
                                                           item?.Blueprintobjective ==
                                                             ele1?.Objective &&
                                                           item?.BluePrintQuestiontype ==
-                                                            "M C" &&
+                                                            "O T" &&
                                                           item?.Blueprintchapter ==
                                                             ele?.name
                                                       )?.Blueprintnoofquestion
@@ -1361,7 +1361,7 @@ const BluePrint = () => {
                                                         item?.Blueprintobjective ==
                                                           ele1?.Objective &&
                                                         item?.BluePrintQuestiontype ==
-                                                          "M C" &&
+                                                          "O T" &&
                                                         item?.Blueprintchapter ==
                                                           ele?.name
                                                     )
@@ -1371,7 +1371,7 @@ const BluePrint = () => {
                                                               item?.Blueprintobjective ==
                                                                 ele1?.Objective &&
                                                               item?.BluePrintQuestiontype ==
-                                                                "M C" &&
+                                                                "O T" &&
                                                               item?.Blueprintchapter ==
                                                                 ele?.name
                                                           )
@@ -1573,7 +1573,7 @@ const BluePrint = () => {
                                                 bluePrintTotalQues(
                                                   val?.AllChapter,
                                                   ele?.name,
-                                                  "M C"
+                                                  "O T"
                                                 )?.TotalQ
                                               }
                                             </td>

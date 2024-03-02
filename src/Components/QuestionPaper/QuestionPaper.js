@@ -44,7 +44,9 @@ const QuestionPaper = ({ text }) => {
           Sub_Class: state.Sub_Class,
           Subject: state.Subject,
           ExamName:state?.Exam_Name,
-          AllChapter:state?.bluePrint?.AllChapter
+          AllChapter:state?.bluePrint?.AllChapter,
+          QusetionType:state?.bluePrint?.TypesofQuestions,
+          Weightageofthecontent:state?.bluePrint?.Weightageofthecontent
         },
       };
       let res = await axios(config);
@@ -116,23 +118,8 @@ const QuestionPaper = ({ text }) => {
   // ///////
   const aTagRef = useRef(null);
   const aTagRef1 = useRef(null);
-const obj={}
-function checkNumber(data){
 
-let am=state?.bluePrint?.AllChapter?.filter((ele)=> ele?.Blueprintobjective == data)?.reduce(
-  (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-  0
-)
-if (obj[`${data}`]){
-  obj[`${data}`]=1
-}else if(obj[`${data}`]>am){
-  return false
-}else if (obj[`${data}`]){
-  obj[`${data}`]=obj[`${data}`]+1
-  return true 
-}
-return false
-}
+  console.log("AllQuestion",Questions);
 
 
   const updaethequestion = async (am) => {
@@ -277,7 +264,7 @@ return false
                       </div>
                       
                       {Questions?.filter(
-                       async (ele) => ele?.Types_Question == ele1?.QAType && ele?.Marks==(ele1?.NQA*ele1?.Mask)/ele1?.NQA&&await checkNumber(ele?.Objectives)
+                        (ele) => ele?.Types_Question == ele1?.QAType 
                       )?.map((item, i) => {
                         if (i < Number(ele1?.NQA)) {
                           return (

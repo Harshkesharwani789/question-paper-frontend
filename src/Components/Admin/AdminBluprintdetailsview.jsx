@@ -589,7 +589,7 @@ function AdminBlueprintdetailsview() {
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(am?.Blueprintnoofquestion),
@@ -599,14 +599,14 @@ function AdminBlueprintdetailsview() {
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(   am?.BluePrintmarksperquestion *
                                         am?.Blueprintnoofquestion),
                                     0
                                   )}</td>
-                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "M C")?.reduce(
+                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "O T")?.reduce(
                           (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
                           0
                         )/(blueprint?.AllChapter?.reduce(
@@ -985,7 +985,7 @@ function AdminBlueprintdetailsview() {
                                       (item) =>
                                         item?.Blueprintobjective ==
                                           ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "M C" &&
+                                        item?.BluePrintQuestiontype == "O T" &&
                                         item?.Blueprintchapter == ele?.name
                                     )?.Blueprintnoofquestion
                                   }
@@ -993,7 +993,7 @@ function AdminBlueprintdetailsview() {
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C" &&
+                                      item?.BluePrintQuestiontype == "O T" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
                                     ? `*(${
@@ -1002,7 +1002,7 @@ function AdminBlueprintdetailsview() {
                                             item?.Blueprintobjective ==
                                               ele1?.Objective &&
                                             item?.BluePrintQuestiontype ==
-                                              "M C" &&
+                                              "O T" &&
                                             item?.Blueprintchapter == ele?.name
                                         )?.BluePrintmarksperquestion
                                       })`
@@ -1162,7 +1162,7 @@ function AdminBlueprintdetailsview() {
                           })}
 
                           <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "M C")?.TotalQ}
+                            {bluePrintTotalQues(ele?.name, "O T")?.TotalQ}
                           </td>
                           <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
@@ -1194,14 +1194,14 @@ function AdminBlueprintdetailsview() {
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "M C"
+                                  item?.BluePrintQuestiontype == "O T"
                               ) ? (
                                 <span>
                                   {AllChapterData?.filter(
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(am?.Blueprintnoofquestion),
@@ -1212,7 +1212,7 @@ function AdminBlueprintdetailsview() {
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a +
