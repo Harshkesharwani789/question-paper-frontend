@@ -296,7 +296,8 @@ const BluePrint = () => {
                                       <h5>{state?.SchoolAddress}</h5>
                                     </div>
                                     <div className="title-3">
-                                      <h4>{val?.blName}</h4>
+                                      {/* <h4>{val?.blName}</h4> */}
+                                      <h4>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h4>
                                     </div>
                                   </div>
                                 </div>

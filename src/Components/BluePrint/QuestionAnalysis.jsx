@@ -87,6 +87,21 @@ return "L.A"
     }
 }
 
+const obj={}
+
+function checkNumber(data){
+
+let am=state?.bluePrint?.AllChapter?.filter((ele)=> ele?.Blueprintobjective == data)?.reduce(
+  (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+  0
+)
+
+}
+
+
+
+
+
     return (
 
         <div>
@@ -125,7 +140,7 @@ return "L.A"
                 return (
                   <>
                     {Questions?.filter(
-                      (ele) => ele.Types_Question === ele2?.QAType
+                      async(ele) => ele.Types_Question === ele2?.QAType&& ele?.Marks==(ele2?.NQA*ele2?.Mask)/ele2?.NQA 
                     )?.map((item, i) => {
                       if (i < Number(ele2?.NQA)) {
                         return (
