@@ -95,6 +95,21 @@ let am=state?.bluePrint?.AllChapter?.filter((ele)=> ele?.Blueprintobjective == d
   (a, ele) => a + Number(ele?.Blueprintnoofquestion),
   0
 )
+console.log("amamam",am,data,obj);
+  if(obj[data]>=am){
+    console.log("flase");
+ return false
+
+}else if(obj[data]){
+ 
+  obj[data]++
+  console.log("A", obj[data]);
+  return true
+}else {
+  obj[data]=1
+  console.log("B", obj[data]);
+  return true 
+}
 
 }
 
@@ -140,7 +155,7 @@ let am=state?.bluePrint?.AllChapter?.filter((ele)=> ele?.Blueprintobjective == d
                 return (
                   <>
                     {Questions?.filter(
-                      async(ele) => ele.Types_Question === ele2?.QAType&& ele?.Marks==(ele2?.NQA*ele2?.Mask)/ele2?.NQA 
+                      async(ele) => ele.Types_Question === ele2?.QAType&& ele?.Marks==(ele2?.NQA*ele2?.Mask)/ele2?.NQA &&checkNumber(ele?.Objectives)
                     )?.map((item, i) => {
                       if (i < Number(ele2?.NQA)) {
                         return (
