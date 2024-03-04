@@ -303,7 +303,7 @@ const BluePrint = () => {
                   ?.map((val, i) => {
                     return (
                       <div className="blueprint-content-display" key={i}>
-                        <div  className="p-3">
+                        <div  className="p-3" id="pdf">
                           <div className="blueprint-titles">
                             <div className="top-titles-container">
                               <div className="container">
@@ -324,16 +324,16 @@ const BluePrint = () => {
                                   </div>
                                   <div className="col-md-10">
                                     <div className="title-1 text-center">
-                                      {/* <h4>{state?.Institute_Name}</h4> */}
-                                      <h4>ಸಾಂತಾ ಪಾಲ್ ಶಾಲೇ</h4>
+                                      <h4>{state?.Institute_Name}</h4>
+                                      {/* <h4>ಸಾಂತಾ ಪಾಲ್ ಶಾಲೇ</h4> */}
                                     </div>
                                     <div className="title-2">
-                                      {/* <h5>{state?.SchoolAddress}</h5> */}
-                                      <h5>ಬೆಂಗಳೂರು</h5>
+                                      <h5>{state?.SchoolAddress}</h5>
+                                      {/* <h5>ಬೆಂಗಳೂರು</h5> */}
                                     </div>
                                     <div className="title-3">
-                                      {/* <h4>{val?.blName}</h4> */}
-                                      <h4>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h4>
+                                      <h4>{val?.blName}</h4>
+                                      {/* <h4>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h4> */}
                                     </div>
                                   </div>
                                 </div>
@@ -344,7 +344,7 @@ const BluePrint = () => {
                               <div className="row">
                                 <div className="class-details">
                                   <div className="class-data">
-                                    <b>ತರಗತಿ : {val?.SubClassName}</b>
+                                    <b>ತರಗತಿ : 7</b>
                                   </div>
                                   <div className="class-data">
                                     <b>ವಿಷಯ: {val?.subjects}</b>
@@ -361,8 +361,8 @@ const BluePrint = () => {
                               </div>
                             </div>
                           </div>
-
-                          <div className="container" id="pdf">
+                                        {/* First BluePrint */}
+                          <div className="container" >
                             <div className="row">
                               <div className="col-md-7">
                                 {/* table 3  */}
@@ -370,7 +370,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives mt-4">
                                   <div className="main-title">
                                     <b>1.</b>
-                                    <b>Weightage to type of Questions</b>
+                                    <b>ಘಟಕವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                                   </div>
                                   <div className="objectives-table">
                                     <Table
@@ -382,11 +382,11 @@ const BluePrint = () => {
                                     >
                                       <thead>
                                       <tr>
-                            <th>sl.no</th>
-                            <th>Chapters</th>
-                            <th>Questions</th>
-                            <th>Marks</th>
-                            <th>Percentage</th>
+                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ಪಾಠಗಳು</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                           </tr>
                                       </thead>
                                       <tbody>
@@ -426,7 +426,7 @@ const BluePrint = () => {
 
                                         <tr>
                                           <td>
-                                            <b>Total</b>
+                                            <b>ಒಟ್ಟು</b>
                                           </td>
                                           <td> </td>
                                         
@@ -457,7 +457,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives mt-4">
                                   <div className="main-title">
                                     <b>2.</b>
-                                    <b>Objective Type Marks Distribution</b>
+                                    <b>ಉದ್ದೇಶವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                                   </div>
                                   <div className="objectives-table">
                                     <Table
@@ -467,13 +467,13 @@ const BluePrint = () => {
                                       style={{ border: "1px solid" }}
                                     >
                                       <thead>
-                                        <tr>
-                                        <th>sl.no</th>
-                            <th>Objective type</th>
-                            <th>Questions</th>
-                            <th>Marks</th>
-                            <th>Percentage</th>
-                                        </tr>
+                                      <tr>
+                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ನಿರ್ದಿಷ್ಟಗಳು</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
+                          </tr>
                                       </thead>
                                       <tbody>
                                         {val?.objectives?.map((item, i) => {
@@ -516,7 +516,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives">
                                   <div className="main-title">
                                     <b>3.</b>
-                                    <b>Questions marks Distribution</b>
+                                    <b>ಪ್ರಶ್ನಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                                   </div>
                                   <div className="text-center">
                                     <div className="objectives-table">
@@ -528,12 +528,12 @@ const BluePrint = () => {
                           style={{ border: "1px solid" }}
                         >
                           <thead>
-                            <tr>
-                              <th>Sl.no</th>
-                              <th>Question Type</th>
-                              <th>Questions</th>
-                              <th>Marks</th>
-                              <th>Percentage</th>
+                          <tr>
+                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                              <th>ಪ್ರಶ್ನೆಗಳ ವಿಧ</th>
+                              <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -541,7 +541,7 @@ const BluePrint = () => {
                               return ( */}
                                 <tr >
                                   <td>1</td>
-                                  <td>O.T</td>
+                                  <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -577,7 +577,7 @@ const BluePrint = () => {
                                 </tr>
                                 <tr >
                                   <td>2</td>
-                                  <td>S.A</td>
+                                  <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -613,7 +613,7 @@ const BluePrint = () => {
                                 </tr>
                                 <tr >
                                   <td>3</td>
-                                  <td>L.A</td>
+                                  <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -659,7 +659,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives">
                                   <div className="main-title">
                                     <b>4.</b>
-                                    <b>Difficult Level marks distribution</b>
+                                    <b>ಕಠಿಣತಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                                   </div>
                                   <div className="objectives-table">
                                   <Table
@@ -670,32 +670,32 @@ const BluePrint = () => {
                         style={{ border: "1px solid" }}
                       >
                         <thead>
-                          <tr>
-                            <th>Sl.no</th>
-                            <th>level</th>
-                            <th>questions</th>
-                            <th>marks</th>
-                            <th>percentage</th>
+                        <tr>
+                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ಕಠಿಣತೆಯ ಮಟ್ಟ</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>Easy</td>
+                            <td>ಸರಳ</td>
                             <td>{val?.Easy}</td>
                             <td>{val?.EasyMask}</td>
                             <td>{val?.EasyParcentage}%</td>
                           </tr>
                           <tr>
                             <td>2</td>
-                            <td>Average</td>
+                            <td>ಸಾಧಾರಣ</td>
                             <td>{val?.Average}</td>
                             <td>{val?.AverageMask}</td>
                             <td>{val?.AverageParcentage}%</td>
                           </tr>
                           <tr>
                             <td>3</td>
-                            <td>Difficult</td>
+                            <td>ಕಠಿಣ</td>
                             <td>{val?.Difficult}</td>
                             <td>{val?.DifficultMask}</td>
                             <td>{val?.DifficultParcentage}%</td>
@@ -707,7 +707,7 @@ const BluePrint = () => {
                               </div>
                             </div>
                           </div>
-
+{/* Seconed bluePrint */}
                           <div style={{ fontFamily: "sans-serif" }} id="pdf1">
                             <div
                               className="blueprint2-container"
@@ -720,14 +720,14 @@ const BluePrint = () => {
                                 }}
                               >
                                 <div>
-                                  <b>Time : {val?.DurationOfExam}</b>
+                                  <b>ಸಮಯ : {val?.DurationOfExam}</b>
                                 </div>
                                 <div>
-                                  <b>BLUE PRINT</b>
+                                <b>ನೆಲಿ ನಕ್ಷೆ</b>
                                 </div>
                                 <div>
                                   <b>
-                                    Marks :-
+                                  ಅಂಕ :-
                                     {val?.AllChapter?.reduce(
                                       (a, ele) =>
                                         a +
@@ -1142,7 +1142,7 @@ const BluePrint = () => {
                                   <thead>
                                     <tr>
                                       <th style={{ fontSize: "12px" }}>
-                                        S No.
+                                      ಕ್ರ.ಸಂ
                                       </th>
                                       <th
                                         style={{
@@ -1150,7 +1150,7 @@ const BluePrint = () => {
                                           width: "125px",
                                         }}
                                       >
-                                        Content
+                                       ಉದ್ದೇಶಿತ ಘಟಕಗಳು
                                       </th>
                                       {val?.objectives?.map((ele) => {
                                         return (
@@ -1169,14 +1169,14 @@ const BluePrint = () => {
                                         colSpan={6}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        Total Questions
+                                        ಒಟ್ಟು ಪ್ರಶ್ನೆ
                                       </th>
 
                                       <th
                                         colSpan={1}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        Total Marks
+                                       ಒಟ್ಟು ಅಂಕ
                                       </th>
                                     </tr>
                                   </thead>
@@ -1214,74 +1214,74 @@ const BluePrint = () => {
                                       <th></th>
                                       <th></th>
 
-                                      <th style={{ fontSize: "12px" }}>O T</th>
+                                      <th style={{ fontSize: "12px" }}>ವ</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        S A
+                                        ಕಿ.
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        L A
+                                       ದೀ
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>O T</th>
+                                      <th style={{ fontSize: "12px" }}> ವ</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        S A
+                                        ಕಿ.
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        L A
+                                       ದೀ
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>O T</th>
+                                      <th style={{ fontSize: "12px" }}>ವ</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        S A
+                                       ಕಿ.
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        L A
+                                       ದೀ
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>O T</th>
+                                      <th style={{ fontSize: "12px" }}>ವ</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        S A
+                                       ಕಿ.
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        L A
+                                       ದೀ
                                       </th>
 
-                                      <th style={{ fontSize: "12px" }}>O T</th>
+                                      <th style={{ fontSize: "12px" }}>ವ</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        S A
+                                       ಕಿ.
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        L A
+                                        ದೀ
                                       </th>
                                     </tr>
                                     <tr>
