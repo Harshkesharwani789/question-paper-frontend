@@ -97,11 +97,17 @@ function AnswerQuestion() {
                   <div id="pdf-content" className="question-paper-display">
                     <div className="englishqp-page-body">
                       <div>
+                        <h6>ಶ್ರೀ ಮಾತಾ ಶಾರದ ಪಬ್ಲಿಕ್ ಶಾಲೆ. ಗದಗ ಜಿಲ್ಲೆ ಗದಗ,ಗದಗ
+                        <br /><br />Class 7 ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ
+೭ ನೇ ತರಗತಿ ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ<br />
+
+ಉತ್ತರ ಸೂಚಿ ವಿಶ್ಲೇಷಣೆ</h6>
                         <h2>{state?.Subject}</h2>
                         {/* <h4>
                           <b>{state?.bluePrint?.blName}</b>
                         </h4> */}
                       </div>
+                      
 
                       <div style={{ fontWeight: "bold" }}>
                         <div className="time-and-marks">

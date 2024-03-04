@@ -44,7 +44,9 @@ const QuestionPaper = ({ text }) => {
           Sub_Class: state.Sub_Class,
           Subject: state.Subject,
           ExamName:state?.Exam_Name,
-          AllChapter:state?.bluePrint?.AllChapter
+          AllChapter:state?.bluePrint?.AllChapter,
+          QusetionType:state?.bluePrint?.TypesofQuestions,
+          Weightageofthecontent:state?.bluePrint?.Weightageofthecontent
         },
       };
       let res = await axios(config);
@@ -117,7 +119,7 @@ const QuestionPaper = ({ text }) => {
   const aTagRef = useRef(null);
   const aTagRef1 = useRef(null);
 
-
+  console.log("AllQuestion",Questions);
 
 
   const updaethequestion = async (am) => {
@@ -262,7 +264,7 @@ const QuestionPaper = ({ text }) => {
                       </div>
                       
                       {Questions?.filter(
-                        (ele) => ele?.Types_Question === ele1?.QAType
+                        (ele) => ele?.Types_Question == ele1?.QAType 
                       )?.map((item, i) => {
                         if (i < Number(ele1?.NQA)) {
                           return (
@@ -1431,23 +1433,28 @@ const QuestionPaper = ({ text }) => {
                                 "Complete the Poem" ? (
                                   <>
                                     <div
-                                      style={{ display: "flex", gap: "12px" }}
+                                      // style={{  }}
                                       key={i}
                                     >
-                                      <b>{count++}.</b>
-                                      <b>
+                                      {/* <span>{count++}.</span>
+                                      {item?.Question ? ( 
+                                       
+                                           parse(item?.Question)
+                                         
+                      ):(<></>)} */}
+                                      {/* <b>
                                         {item?.Question
                                           ? parse(item?.Question)
                                           : ""}
-                                      </b>
-                                    </div>
+                                      </b> */}
+                                   
                                     {item?.PoemSt ? (
                                       <>
                                         {item.NumberOfLine == "4" ? (
                                           <>
                                             <div className="">
-                                              <div className="d-flex align-items-baseline mb-4">
-                                                <span>{item?.PoemSt}</span>
+                                              <div className="d-flex align-items-baseline mb-2">
+                                                <span> <b>{count++}.</b> {item?.PoemSt}</span>
 
                                                 <div
                                                   className="mb-3 mt-2"
@@ -1699,7 +1706,7 @@ const QuestionPaper = ({ text }) => {
                                     ) : (
                                       <></>
                                     )}
-
+ </div>
                                     <div
                                       style={{ display: "flex", gap: "12px" }}
                                       key={i}
@@ -2359,7 +2366,7 @@ const QuestionPaper = ({ text }) => {
               {/* <div className="page-footer"> */}
                 <div className="d-flex justify-content-between">
                  <p>{state?.Sub_Class},{state?.Subject}</p> 
-                  <p>P.T.O</p> 
+                  {/* <p>P.T.O</p>  */}
                 </div>
               {/* </div> */}
             </div>

@@ -102,7 +102,25 @@ const AdminEditQuestionDetails = () => {
   useEffect(() => {
     getquestionbyid();
   }, []);
+// get method for objectives
+const [getobjectives, setgetobjectives] = useState([]);
 
+const getObjectives = async () => {
+  try {
+    const res = await axios.get(
+      `http://localhost:8000/api/admin/getobjective`
+    );
+
+    if (res.status === 200) {
+      setgetobjectives(res.data.success);
+    } else {
+      // Handle non-200 status codes here if needed
+      console.error(`Request failed with status code ${res.status}`);
+    }
+  } catch (error) {
+    console.error("Error fetching objectives:", error);
+  }
+};
   console.log("question_details", question_details);
 
   const navigate = useNavigate();
@@ -632,6 +650,7 @@ const AdminEditQuestionDetails = () => {
     getallweightagecontent();
     getChapter();
     getNameExamination();
+    getObjectives()
 
   }, []);
 
@@ -900,14 +919,17 @@ const AdminEditQuestionDetails = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
-                  value={Objectives}
+                  // value={Objectives}
                   onChange={(e) => setObjectives(e.target.value)}
                 >
-                  <option>Select Objectives</option>
-                  <option value="Knowledge">Knowledge</option>
-                  <option value="Appreciation">Appreciation</option>
-                  <option value="Understanding">Understanding</option>
-
+                 <option>Select Objectives</option>
+                  {getobjectives?.map((val, i) => {
+                    return (
+                      <option value={val?.Objectivesname}>
+                        {val?.Objectivesname}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
 

@@ -24,8 +24,8 @@ const Frontpage = ({ data }) => {
                 )}
               </div>
               <div className="col-sm-8">
-                <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4>
-                {/* <h4>{data?.Board}</h4>  title-1 */}
+                {/* <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4> */}
+                {/* <h4>{data?.Board}</h4>  */}
                 {data?.Institute_Name ? (
                 <h5>
                   {data?.Institute_Name},{data?.SchoolAddress}
@@ -33,7 +33,7 @@ const Frontpage = ({ data }) => {
               ) : (
                 <></>
               )}
-               <h6>ಎರಡನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ - 2023-24</h6>
+               <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
               </div>
             </div>
             <div className="title-2">

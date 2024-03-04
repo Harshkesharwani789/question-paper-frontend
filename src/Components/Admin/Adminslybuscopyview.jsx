@@ -330,7 +330,7 @@ const handleSave4 = () => {
               style={{ border: "1px solid" }}
             >
               <thead>
-                {/* <tr>
+                <tr>
                   <th>
                     {editable ? (
                       <input
@@ -469,11 +469,15 @@ const handleSave4 = () => {
                     )}
                     {editable4 && <button onClick={handleSave4}>Save</button>}
                     </th>
-                </tr> */}
+                </tr>
                 <tr>
                   <th>
-                    
+                    {addslybus?.head}
                   </th>
+                  <th>{addslybus?.head1}</th>
+                  <th>{addslybus?.head2}</th>
+                  <th>{addslybus?.head3}</th>
+                  <th>{addslybus?.head4}</th>
                 </tr>
               </thead>
               <tbody>

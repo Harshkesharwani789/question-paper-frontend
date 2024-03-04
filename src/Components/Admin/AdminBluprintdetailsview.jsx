@@ -217,6 +217,8 @@ function AdminBlueprintdetailsview() {
     pdf.save("Blueprint.pdf");
   };
   console.log("BluePrintAAAA==>",blueprint);
+
+  
   return (
     <>
 
@@ -242,7 +244,8 @@ function AdminBlueprintdetailsview() {
       
             <div className="blueprint-titles">
               <h3>{blueprint?.blName}</h3>
-              <h4> BLUE PRINT</h4>
+              {/* <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆ ಕನ್ನಡ ನೇಲಿ ನಕ್ಷೆ</h3> */}
+              <h4>ನೆಲಿ ನಕ್ಷೆ</h4>
             </div>
             <div className="container">
               <div className="row">
@@ -251,7 +254,7 @@ function AdminBlueprintdetailsview() {
                   <div className="weightage-objectives">
                     <div className="main-title">
                       <b>1.</b>
-                      <b>Chapter wise Marks Distribution</b>
+                      <b>ಘಟಕವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                     </div>
                     <div className="objectives-table ">
                       <Table
@@ -263,11 +266,11 @@ function AdminBlueprintdetailsview() {
                       >
                         <thead>
                           <tr>
-                            <th>sl.no</th>
-                            <th>Chapters</th>
-                            <th>Questions</th>
-                            <th>Marks</th>
-                            <th>Percentage</th>
+                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ಪಾಠಗಳು</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -306,7 +309,7 @@ function AdminBlueprintdetailsview() {
 
                           <tr>
                             <td>
-                              <b>Total</b>
+                              <b>ಒಟ್ಟು</b>
                             </td>
                             <td></td>
                             <td><b>
@@ -411,7 +414,7 @@ function AdminBlueprintdetailsview() {
                   <div className="weightage-objectives">
                     <div className="main-title">
                       <b>2.</b>
-                      <b>Objective Type Marks Distribution</b>
+                      <b>ಉದ್ದೇಶವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                     </div>
                     <div className="objectives-table">
                       <Table
@@ -423,11 +426,11 @@ function AdminBlueprintdetailsview() {
                       >
                         <thead>
                           <tr>
-                            <th>sl.no</th>
-                            <th>Objective type</th>
-                            <th>Questions</th>
-                            <th>Marks</th>
-                            <th>Percentage</th>
+                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ನಿರ್ದಿಷ್ಟಗಳು</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -466,7 +469,7 @@ function AdminBlueprintdetailsview() {
                               <tr>
                               <td></td>
                             <td>
-                              <b>Total</b>
+                              <b>ಒಟ್ಟು</b>
                             </td>
                            
                             <td><b>
@@ -557,7 +560,7 @@ function AdminBlueprintdetailsview() {
                   <div className="weightage-objectives">
                     <div className="main-title">
                       <b>3.</b>
-                      <b>Questions marks Distribution</b>
+                      <b>ಪ್ರಶ್ನಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                     </div>
                     <div className="text-center">
                       <div className="objectives-table">
@@ -570,11 +573,11 @@ function AdminBlueprintdetailsview() {
                         >
                           <thead>
                             <tr>
-                              <th>Sl.no</th>
-                              <th>Question Type</th>
-                              <th>Questions</th>
-                              <th>Marks</th>
-                              <th>Percentage</th>
+                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                              <th>ಪ್ರಶ್ನೆಗಳ ವಿಧ</th>
+                              <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -582,11 +585,11 @@ function AdminBlueprintdetailsview() {
                               return ( */}
                                 <tr >
                                   <td>1</td>
-                                  <td>M.C</td>
+                                  <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(am?.Blueprintnoofquestion),
@@ -596,14 +599,14 @@ function AdminBlueprintdetailsview() {
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(   am?.BluePrintmarksperquestion *
                                         am?.Blueprintnoofquestion),
                                     0
                                   )}</td>
-                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "M C")?.reduce(
+                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "O T")?.reduce(
                           (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
                           0
                         )/(blueprint?.AllChapter?.reduce(
@@ -618,7 +621,7 @@ function AdminBlueprintdetailsview() {
                                 </tr>
                                 <tr >
                                   <td>2</td>
-                                  <td>S.A</td>
+                                  <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
@@ -654,7 +657,7 @@ function AdminBlueprintdetailsview() {
                                 </tr>
                                 <tr >
                                   <td>3</td>
-                                  <td>L.A</td>
+                                  <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
                                   <td>{AllChapterData?.filter(
                                     (item) =>
                                     
@@ -756,7 +759,7 @@ function AdminBlueprintdetailsview() {
                   <div className="weightage-objectives">
                     <div className="main-title">
                       <b>4.</b>
-                      <b>Difficult Level marks distribution</b>
+                      <b>ಕಠಿಣತಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
                     </div>
                     <div className="objectives-table">
                       <Table
@@ -767,31 +770,31 @@ function AdminBlueprintdetailsview() {
                       >
                         <thead>
                           <tr>
-                            <th>Sl.no</th>
-                            <th>level</th>
-                            <th>questions</th>
-                            <th>marks</th>
-                            <th>percentage</th>
+                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
+                            <th>ಕಠಿಣತೆಯ ಮಟ್ಟ</th>
+                            <th>ಪ್ರಶ್ನೆಗಳು</th>
+                            <th>ಅಂಕಗಳು</th>
+                            <th>ಶೇಕಡಾವಾರು</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>Easy</td>
+                            <td>ಸರಳ </td>
                             <td>{blueprint?.Easy}</td>
                             <td>{blueprint?.EasyMask}</td>
                             <td>{blueprint?.EasyParcentage}%</td>
                           </tr>
                           <tr>
                             <td>2</td>
-                            <td>Average</td>
+                            <td>ಸಾಧಾರಣ </td>
                             <td>{blueprint?.Average}</td>
                             <td>{blueprint?.AverageMask}</td>
                             <td>{blueprint?.AverageParcentage}%</td>
                           </tr>
                           <tr>
                             <td>3</td>
-                            <td>Difficult</td>
+                            <td>ಕಠಿಣ</td>
                             <td>{blueprint?.Difficult}</td>
                             <td>{blueprint?.DifficultMask}</td>
                             <td>{blueprint?.DifficultParcentage}%</td>
@@ -851,14 +854,14 @@ function AdminBlueprintdetailsview() {
 
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div>
-                  <b>Time : {blueprint?.DurationOfExam}</b>
+                  <b>ಸಮಯ : {blueprint?.DurationOfExam}</b>
                 </div>
                 <div>
-                  <b>BLUE PRINT</b>
+                  <b>ನೆಲಿ ನಕ್ಷೆ</b>
                 </div>
                 <div>
                   <b>
-                    Marks :-
+                  ಅಂಕ :-
                     {blueprint?.AllChapter?.reduce(
                       (a, ele) =>
                         a +
@@ -880,8 +883,8 @@ function AdminBlueprintdetailsview() {
                 >
                   <thead>
                     <tr>
-                      <th style={{fontSize:"12px",width:"32px"}}>S No.</th>
-                      <th style={{ width: "125px",fontSize:"12px" }}>Content</th>
+                      <th style={{fontSize:"12px",width:"32px"}}>ಕ್ರ.ಸಂ</th>
+                      <th style={{ width: "125px",fontSize:"12px" }}>ಉದ್ದೇಶಿತ ಘಟಕಗಳು</th>
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
@@ -891,9 +894,9 @@ function AdminBlueprintdetailsview() {
                         );
                       })}
 
-                      <th colSpan={6} style={{fontSize:"12px"}}>Total Questions</th>
+                      <th colSpan={6} style={{fontSize:"12px"}}>ಒಟ್ಟು ಪ್ರಶ್ನೆ</th>
                     
-                      <th colSpan={1} style={{fontSize:"12px"}}>Total Marks</th>
+                      <th colSpan={1} style={{fontSize:"12px"}}>ಒಟ್ಟು ಅಂಕ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -903,34 +906,34 @@ function AdminBlueprintdetailsview() {
                       <th></th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      ವ
                       </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
+                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
+                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
 
                        <th style={{fontSize:"12px"}}>
-                        M C
+                      ವ
                       </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
+                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
+                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      ವ
                       </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
+                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
+                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      ವ
                       </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
+                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
+                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
 
                       <th style={{fontSize:"12px"}}>
-                        M C
+                      ವ
                       </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>S A</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>L A</th>
+                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
+                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
 
                       
 
@@ -982,7 +985,7 @@ function AdminBlueprintdetailsview() {
                                       (item) =>
                                         item?.Blueprintobjective ==
                                           ele1?.Objective &&
-                                        item?.BluePrintQuestiontype == "M C" &&
+                                        item?.BluePrintQuestiontype == "O T" &&
                                         item?.Blueprintchapter == ele?.name
                                     )?.Blueprintnoofquestion
                                   }
@@ -990,7 +993,7 @@ function AdminBlueprintdetailsview() {
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C" &&
+                                      item?.BluePrintQuestiontype == "O T" &&
                                       item?.Blueprintchapter == ele?.name
                                   )
                                     ? `*(${
@@ -999,7 +1002,7 @@ function AdminBlueprintdetailsview() {
                                             item?.Blueprintobjective ==
                                               ele1?.Objective &&
                                             item?.BluePrintQuestiontype ==
-                                              "M C" &&
+                                              "O T" &&
                                             item?.Blueprintchapter == ele?.name
                                         )?.BluePrintmarksperquestion
                                       })`
@@ -1159,7 +1162,7 @@ function AdminBlueprintdetailsview() {
                           })}
 
                           <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "M C")?.TotalQ}
+                            {bluePrintTotalQues(ele?.name, "O T")?.TotalQ}
                           </td>
                           <td style={{fontSize:"12px"}}>
                             {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
@@ -1183,7 +1186,7 @@ function AdminBlueprintdetailsview() {
                     })}
                     <tr>
                       <td></td>
-                      <td style={{fontSize:"12px",width:"46px"}}>Total</td>
+                      <td style={{fontSize:"12px",width:"46px"}}>ಒಟ್ಟು</td>
                       {blueprint?.objectives?.map((ele) => {
                         return (
                           <>
@@ -1191,14 +1194,14 @@ function AdminBlueprintdetailsview() {
                               {AllChapterData?.some(
                                 (item) =>
                                   item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "M C"
+                                  item?.BluePrintQuestiontype == "O T"
                               ) ? (
                                 <span>
                                   {AllChapterData?.filter(
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a + Number(am?.Blueprintnoofquestion),
@@ -1209,7 +1212,7 @@ function AdminBlueprintdetailsview() {
                                     (item) =>
                                       item?.Blueprintobjective ==
                                         ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "M C"
+                                      item?.BluePrintQuestiontype == "O T"
                                   )?.reduce(
                                     (a, am) =>
                                       a +
