@@ -136,6 +136,20 @@ const AdminBoard = () => {
       });
     }
   };
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
+  const [nochangedata, setnochangedata] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // get method
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
