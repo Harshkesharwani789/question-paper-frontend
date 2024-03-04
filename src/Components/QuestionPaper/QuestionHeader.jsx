@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { debounce } from "lodash";
 import { AiFillDelete } from 'react-icons/ai';
@@ -7,6 +7,7 @@ import { Button, Form, Modal, Table } from 'react-bootstrap';
 import "../Admin/Admin.css";
 import { FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 function QuestionHeader() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
@@ -62,7 +63,7 @@ function QuestionHeader() {
     }, 300); // Debounce delay in milliseconds
 
     const [Class, setClass] = useState("")
-    const [Sunject, setSunject] = useState("")
+    const [Subject, setSubject] = useState("")
     const [Marks, setMarks] = useState("")
     const [Time, setTime] = useState("")
     const [StudentInfo, setStudentInfo] = useState("")
@@ -82,14 +83,121 @@ function QuestionHeader() {
     const [Unaided, setUnaided] = useState("")
     const [markinfo, setmarkinfo] = useState("")
     const [SignatuteInvigilator, setSignatuteInvigilator] = useState("")
-    const [Evaluator , setEvaluator ] = useState("");
+    const [Evaluator, setEvaluator] = useState("");
     const [QuestionNo1, setQuestionNo1] = useState("");
     const [ObtainedNo1, setObtainedNo1] = useState("");
     const [QuestionNo2, setQuestionNo2] = useState("");
     const [ObtainedNo2, setObtainedNo2] = useState("");
     const [QuestionNo3, setQuestionNo3] = useState("");
     const [ObtainedNo3, setObtainedNo3] = useState("");
-    const [TotalMarks1, setTotalMarks1] = useState("")
+    const [TotalMarks1, setTotalMarks1] = useState("");
+    const [TotalMarks2, setTotalMarks2] = useState("");
+    const [TotalMarks3, setTotalMarks3] = useState("");
+    const [GrandTotal, setGrandTotal] = useState("");
+    const [TotalObtainMarks, setTotalObtainMarks] = useState("");
+    const [EvaluatorSign, setEvaluatorSign] = useState("");
+    const [QFormatMedium, setQFormatMedium] = useState("")
+
+    const AddQuestionHeader = async () => {
+        try {
+            const config = {
+                url: "/admin/addquestionheader",
+                method: "post",
+                baseURL: "http://localhost:8000/api",
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                data: {
+                    classs: Class,
+                    subject: Subject,
+                    marks: Marks,
+                    time: Time,
+                    studentinfo: StudentInfo,
+                    examdate: ExamDate,
+                    totalquestion: TotalQuestion,
+                    nameofstudent: NameofStudent,
+                    satsno: SatsNo,
+                    signature: Signature,
+                    roominvigilator: roomInvigilator,
+                    idsccode: Idsccode,
+                    schoolname: SchoolName,
+                    cluster: Cluster,
+                    block: Block,
+                    distric: Distric,
+                    govt: Govt,
+                    aided: Aided,
+                    unaided: Unaided,
+                    markinfo: markinfo,
+                    signatureinvigilator: SignatuteInvigilator,
+                    evaluator: Evaluator,
+                    questionno1: QuestionNo1,
+                    obtainedno1: ObtainedNo1,
+                    questionno2: QuestionNo2,
+                    obtainedno2: ObtainedNo2,
+                    questionno3: QuestionNo3,
+                    obtainedno3: ObtainedNo3,
+                    totalmarks1: TotalMarks1,
+                    totalmarks2: TotalMarks2,
+                    totalmarks3: TotalMarks3,
+                    grandtotal: GrandTotal,
+                    totalobtainedmarks: TotalObtainMarks,
+                    evaluatorsign: EvaluatorSign,
+                    medium: QFormatMedium,
+                    authId: admin?._id,
+
+                }
+            }
+            let res = await axios(config)
+            if (res.status === 200) {
+                alert(res.data.success)
+                handleClose()
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    // Get All Question Header
+
+    const [QuestionHeader, setQuestionHeader] = useState([]);
+    const getallQuestionHeader = async () => {
+        try {
+            let res = await axios.get(
+                "http://localhost:8000/api/admin/getquestiontheader/" + admin?._id,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            if (res.status === 200) {
+                setQuestionHeader(res.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    console.log("QuestionHeader", QuestionHeader);
+
+    //get method for medium
+    const [Medium, setMedium] = useState([]);
+    const getAddMedium = async () => {
+        try {
+            let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+            if (res.status === 200) {
+                setMedium(res.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getallQuestionHeader();
+        getAddMedium();
+    }, [])
+
     return (
         <>
             <div className='d-flex justify-content-between align-items-center' >
@@ -130,9 +238,9 @@ function QuestionHeader() {
 
             <div className='customerhead p-2'>
                 <div className="d-flex justify-content-between align-items-center">
-                    <h2 className="header-c ">Question Type</h2>
+                    <h2 className="header-c ">Question Header List :</h2>
                     <button className="admin-add-btn" onClick={handleShow}>
-                        Add Type
+                        Add Header
                     </button>
                 </div>
                 <div className="mb-3">
@@ -142,78 +250,31 @@ function QuestionHeader() {
                         style={{ width: "-webkit-fill-available", }}
                     >
                         <thead style={{ backgroundColor: "navy", color: "white" }}>
+
                             <tr>
                                 <th>S.No</th>
-                                <th>
-                                    <div>Medium</div>
-                                </th>
-                                <th>
-                                    <div>Type Of Question</div>
-                                </th>
-                                <th>
-                                    <div>Question Header</div>
-                                </th>
+                                <th>Medium</th>
+                                <th> Question Header For View </th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr style={{ textAlign: "center" }}>
-                                <td>1</td>
-                                <td>English</td>
-                                <td>ENglish</td>
-                                <td
-                                    style={{ fontSize: "20px", color: "green", cursor: "pointer" }}
-                                    onClick={() => navigate("/viewheader")}
-                                ><FaEye /></td>
-                                <td><AiFillDelete /></td>
-                            </tr>
-                            {/* {QuestionType?.map((item, i) => {
+                            {QuestionHeader?.map((item, i) => {
                                 return (
-                                    <tr>
+                                    <tr style={{ textAlign: "center" }}>
                                         <td>{i + 1}</td>
-                                        <td>{item?.QFormatMedium}</td>
-
-                                        <td>{item?.typeOfquestion}</td>
-                                        <td>
-                                            {item?.translatelang ? (<>
-                                                {item?.translatelang}
-                                            </>):(<>
-                                                {item?.Qformat}
-                                            
-                                            </>)}
-                                            
-                                            </td>
-
-                                        <td>
-                                            {" "}
-                                            <div style={{ display: "flex", gap: "20px" }}>
-                                                <div>
-                                                    <BiSolidEdit
-                                                        className="text-success"
-                                                        style={{ cursor: "pointer", fontSize: "20px" }}
-                                                        // onClick={() => {
-                                                        //     handleShow1();
-                                                        //     setQuestionTypeId(item);
-
-                                                        // }}
-                                                    />{" "}
-                                                </div>
-                                                <div>
-                                                    <AiFillDelete
-                                                        className="text-danger"
-                                                        style={{ cursor: "pointer", fontSize: "20px" }}
-                                                        // onClick={() => {
-                                                        //     setQuestionTypeId(item);
-                                                        //     handleShow2();
-                                                        // }}
-                                                    />{" "}
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <td>{item?.medium}</td>
+                                       
+                                        <td
+                                            style={{ fontSize: "20px", color: "green", cursor: "pointer" }}
+                                            onClick={() => navigate("/viewheader",{ state: { item: item } })}
+                                        ><FaEye /></td>
+                                        <td><AiFillDelete /></td>
                                     </tr>
-                                );
-                            })} */}
+                                )
+                            })}
+
                         </tbody>
                     </Table>
                 </div>
@@ -236,84 +297,165 @@ function QuestionHeader() {
                                                     style={{ width: "80px", marginTop: "24px" }}
                                                 />
                                             </div>
-                                            <div className="col-sm-8">
-                                                <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4>
-                                                {/* <h4>{data?.Board}</h4>  title-1 */}
-                                                {/* {data?.Institute_Name ? (
-              <h5>
-                {data?.Institute_Name},{data?.SchoolAddress}
-              </h5>
-            ) : (
-              <></>
-            )} */}
-                                                <h6>ಎರಡನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ - 2023-24</h6>
+                                            <div className="col-sm-6">
+                                            <h4 className="mb-2"> (School Name Will Come )</h4>
+                                            <h6>Exam Type - year (will come)</h6>
                                             </div>
-                                        </div>
-                                        <div className="title-2">
-                                            {/* {data?.Institute_Name ? (
-              <h5>
-                {data?.Institute_Name},{data?.SchoolAddress}
-              </h5>
-            ) : (
-              <></>
-            )} */}
-                                        </div>
-                                        <div className="title-3">
-                                            {/* <h4>{data?.Exam_Name} {" "}{data?.Exam_Lavel}</h4> */}
-                                            {/* <h6>ಎರಡನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ - 2023-24</h6> */}
+                                            <div className='col-sm-4'>
+                                                <div className="do-sear mt-2">
+                                                    <label> Medium</label>
+                                                    <Form.Select
+                                                        className="vi_0"
+                                                        onChange={(e) => setQFormatMedium(e.target.value)}
+                                                    >
+                                                        <option>Select medium</option>
+                                                        {Medium?.map((item) => {
+
+                                                            return (
+                                                                <option value={item?.mediumName}>{item?.mediumName}</option>
+                                                            )
+                                                        })}
+                                                    </Form.Select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="class-details mb-2">
                                         <div className="class-data ">
-                                            <b className='d-flex'> <Form.Control type="text" placeholder="Class" /><span>:</span>  </b>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Class"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setClass(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setClass)
+                                                    }}
+                                                /><span>:</span>  </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Class}</p>}
                                         </div>
                                         <div className="class-data">
-                                            <b className='d-flex'> <Form.Control type="text" placeholder="Subject" /><span>:</span>  </b>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Subject"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setSubject(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setSubject)
+                                                    }}
+                                                /><span>:</span>  </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Subject}</p>}
                                         </div>
                                         <div className='mb-2'>
                                             <div className="class-data ">
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Marks" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Marks"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setMarks(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setMarks)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Marks}</p>}
                                             </div>
                                             <div className="class-data">
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Time" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Time"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setTime(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setTime)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Time}</p>}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="student-details-container">
                                         <div className="d-flex justify-content-between">
-                                            {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
-              Information to be filled by the Student
-            </h5> */}
-                                            {/* <h6 style={{ textAlign: "center", padding: "5px 0px" }}>
-            ವಿದ್ಯಾರ್ಥಿಯಿಂದ ಭರ್ತಿ ಮಾಡಬೇಕಾದ ಮಾಹಿತಿ
-            </h6> */}
-                                            <div style={{width:"60%"}}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder=" Information to be filled by the Student" />  </b>
+                                            <div style={{ width: "60%" }}>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder=" Information to be filled by the Student"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setStudentInfo(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setStudentInfo)
+                                                        }}
+                                                    />  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{StudentInfo}</p>}
 
                                             </div>
                                             <div>
                                                 <span style={{ fontSize: "16px" }}>
-                                                    <b className='d-flex'> <Form.Control type="text" placeholder="Exam Date" /><span>:</span>  </b>
+                                                    <b className='d-flex'>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder="Exam Date"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setExamDate(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setExamDate)
+                                                            }}
+                                                        /><span>:</span>  </b>
+                                                    {selectedLanguage === "en-t-i0-und" ? <></> : <p>{ExamDate}</p>}
                                                 </span>{" "}
                                                 <br />
                                                 <span>
-                                                    <b className='d-flex'> <Form.Control type="text" placeholder=" Total Question" /><span>:</span>  </b>
+                                                    <b className='d-flex'>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder=" Total Question"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setTotalQuestion(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setTotalQuestion)
+                                                            }}
+                                                        /><span>:</span>  </b>
+                                                    {selectedLanguage === "en-t-i0-und" ? <></> : <p>{TotalQuestion}</p>}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="student-details">
-                                            {/* <p style={{ margin: "0px" }}>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು:</p> */}
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder=" Name of the Student" /><span>:</span>  </b></p>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder=" Name of the Student"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setNameofStudent(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setNameofStudent)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{NameofStudent}</p>}
+
+                                            </p>
                                             <div className="line"></div>
                                         </div>
 
                                         <div className="student-number-row">
                                             <div style={{ margin: " auto 0" }}>
-                                                <p> <b className='d-flex'> <Form.Control type="text" placeholder=" Student SATS No" /><span>:</span>  </b></p>
-                                                {/* <p>ವಿದ್ಯಾರ್ಥಿ SATS ನಂ:</p> */}
+                                                <p> <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder=" Student SATS No"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setSatsNo(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setSatsNo)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                    {selectedLanguage === "en-t-i0-und" ? <></> : <p>{SatsNo}</p>}
+                                                </p>
                                             </div>
                                             <div className="d-flex">
                                                 <div className="number-box"></div>
@@ -328,9 +470,19 @@ function QuestionHeader() {
                                             </div>
                                             <div className="ss">
                                                 <p>
-                                                    <b className='d-flex'> <Form.Control type="text" placeholder=" Signature of the Student" /><span>:</span>  </b>
+                                                    <b className='d-flex'>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder=" Signature of the Student"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setSignature(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setSignature)
+                                                            }}
+                                                        /><span>:</span>  </b>
+                                                    {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Signature}</p>}
                                                 </p>
-                                                {/* <p>ವಿದ್ಯಾರ್ಥಿಯ ಸಹಿ:</p> */}
+
                                                 <div className="line"></div>
                                             </div>
                                         </div>
@@ -339,18 +491,36 @@ function QuestionHeader() {
                                     <div className="student-details-container">
                                         <h5 style={{ textAlign: "center" }}>
 
-                                            <b className='d-flex'> <Form.Control type="text" placeholder=" Information to be filled by the Room Invigilator" /><span>:</span>  </b>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder=" Information to be filled by the Room Invigilator"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setroomInvigilator(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setroomInvigilator)
+                                                    }}
+                                                /><span>:</span>  </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{roomInvigilator}</p>}
                                         </h5>
-                                        {/* <h6 style={{ textAlign: "center" }}>
-          ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಮೂಲಕ ಭರ್ತಿ ಮಾಡಬೇಕಾದ ಮಾಹಿತಿ
-          </h6> */}
+
 
                                         <div className="school-number-row">
                                             <div style={{ margin: " auto 0" }}>
                                                 <p>
-                                                    <b className='d-flex'> <Form.Control type="text" placeholder=" School IDSE Code" /><span>:</span>  </b>
+                                                    <b className='d-flex'>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder=" School IDSE Code"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setIdsccode(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setIdsccode)
+                                                            }}
+                                                        /><span>:</span>  </b>
+                                                    {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Idsccode}</p>}
                                                 </p>
-                                                {/* <p>ಶಾಲೆಯ IDSE ಕೋಡ್:</p> */}
+
                                             </div>
                                             <div className="d-flex">
                                                 <div className="number-box"></div>
@@ -368,9 +538,18 @@ function QuestionHeader() {
                                         </div>
                                         <div className="student-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder=" School Name" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder=" School Name"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setSchoolName(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setSchoolName)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{SchoolName}</p>}
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p> */}
                                             <div className="line-2"></div>
                                         </div>
                                     </div>
@@ -378,82 +557,172 @@ function QuestionHeader() {
                                     <div className="third-row">
                                         <div className="student-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Cluster" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Cluster"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setCluster(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setCluster)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Cluster}</p>}
 
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ಕ್ಲಸ್ಟರ್:</p> */}
+
                                             <div className="line-3"></div>
                                         </div>
                                         <div className="student-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Block" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Block"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setBlock(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setBlock)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Block}</p>}
 
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ನಿರ್ಬಂಧಿಸಿ:</p> */}
                                             <div className="line-3"></div>
                                         </div>
                                         <div className="student-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="District" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="District"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setDistric(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setDistric)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Distric}</p>}
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ಜಿಲ್ಲೆ:</p> */}
+
                                             <div className="line-3"></div>
                                         </div>
                                     </div>
 
                                     <div className="fourth-row">
-                                        <div className="school-details">
-                                            {/* <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p> */}
+                                        {/* <div className="school-details">
+                                           
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="School Name" /><span>:</span>  </b>
+                                                <b className='d-flex'> 
+                                                <Form.Control 
+                                                type="text" 
+                                                placeholder="School Name"
+                                                onChange={(e) => {
+                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                        setGovt(e.target.value)
+                                                    } else onChangeHandler(e.target.value, setGovt)
+                                                }}
+                                            /><span>:</span>  </b>
+                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Govt}</p>}
                                             </p>
-                                        </div>
+                                        </div> */}
                                         <div className="school-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Govt." /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Govt."
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setGovt(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setGovt)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Govt}</p>}
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ಸರಕಾರ</p> */}
+
                                             <div className="number-box-1"></div>
                                         </div>
                                         <div className="school-details">
-                                            {/* <p style={{ margin: "0px" }}>ನೆರವು ನೀಡಿದೆ</p> */}
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Aided" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control type="text"
+                                                        placeholder="Aided"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setAided(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setAided)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Aided}</p>}
 
                                             </p>
                                             <div className="number-box-1"></div>
                                         </div>
                                         <div className="school-details">
                                             <p style={{ margin: "0px" }}>
-                                                <b className='d-flex'> <Form.Control type="text" placeholder="Un-aided" /><span>:</span>  </b>
+                                                <b className='d-flex'>
+                                                    <Form.Control type="text"
+                                                        placeholder="Un-aided"
+                                                        onChange={(e) => {
+                                                            if (selectedLanguage === "en-t-i0-und") {
+                                                                setUnaided(e.target.value)
+                                                            } else onChangeHandler(e.target.value, setUnaided)
+                                                        }}
+                                                    /><span>:</span>  </b>
+                                                {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Unaided}</p>}
                                             </p>
-                                            {/* <p style={{ margin: "0px" }}>ಅನುದಾನರಹಿತ</p> */}
+
                                             <div className="number-box-1"></div>
                                         </div>
                                     </div>
 
-                                    <div>  <b className='d-flex'> <Form.Control type="text" placeholder="Put ✓ mark for applicable information" /><span>:</span>  </b></div>
-                                    {/* <div>(ಅನ್ವಯವಾಗುವ ಮಾಹಿತಿಗಾಗಿ "✓" ಗುರುತು ಹಾಕಿ)</div> */}
+                                    <div>  <b className='d-flex'>
+                                        <Form.Control type="text"
+                                            placeholder="Put ✓ mark for applicable information"
+                                            onChange={(e) => {
+                                                if (selectedLanguage === "en-t-i0-und") {
+                                                    setmarkinfo(e.target.value)
+                                                } else onChangeHandler(e.target.value, setmarkinfo)
+                                            }}
+                                        /><span>:</span>  </b>
+                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{markinfo}</p>}
+
+                                    </div>
                                     <div className="student-details" style={{ padding: "10px 0" }}>
                                         <p style={{ margin: "0px" }}>
-                                            <b className='d-flex'> <Form.Control type="text" placeholder="Signature of the Room Invigilator" /><span>:</span>  </b>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Signature of the Room Invigilator"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setSignatuteInvigilator(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setSignatuteInvigilator)
+                                                    }}
+                                                /><span>:</span>  </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{SignatuteInvigilator}</p>}
 
                                         </p>
-                                        {/* <p style={{ margin: "0px" }}>ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಸಹಿ: </p> */}
                                         <div className="line-4"></div>
                                     </div>
 
                                     <div>
-                                        {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
 
-            Information to be filled by the Evaluator at the time of
-            evaluation
-          </h5> */}
-                                        <b className='d-flex'> <Form.Control type="text" placeholder=" Information to be filled by the Evaluator at the time of
-            evaluation" />  </b><br />
-                                        {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
-          ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
-          </h5> */}
+                                        <b className='d-flex'>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder=" Information to be filled by the Evaluator at the time of evaluation"
+                                                onChange={(e) => {
+                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                        setEvaluator(e.target.value)
+                                                    } else onChangeHandler(e.target.value, setEvaluator)
+                                                }}
+                                            /> </b>
+                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Evaluator}</p>}
+
+                                        <br />
+
 
 
                                         <Table
@@ -465,21 +734,77 @@ function QuestionHeader() {
                                             <thead>
                                                 <tr>
                                                     <th>
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder=" Question Number" />  </b>
+                                                        <b className='d-flex'>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder=" Question Number"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setQuestionNo1(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setQuestionNo1)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{QuestionNo1}</p>}
                                                     </th>
-                                                    {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
+
                                                     <th>
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder="Obtained marks" />  </b>
+                                                        <b className='d-flex'>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Obtained marks"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setObtainedNo1(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setObtainedNo1)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{ObtainedNo1}</p>}
                                                     </th>
-                                                    {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
-                                                    <th><b className='d-flex'> <Form.Control type="text" placeholder=" Question Number" />  </b></th>
-                                                    {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
-                                                    <th> <b className='d-flex'> <Form.Control type="text" placeholder="Obtained marks" />  </b></th>
-                                                    {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
-                                                    <th><b className='d-flex'> <Form.Control type="text" placeholder=" Question Number" />  </b></th>
-                                                    {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
-                                                    {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
-                                                    <th> <b className='d-flex'> <Form.Control type="text" placeholder="Obtained marks" />  </b></th>
+
+                                                    <th><b className='d-flex'>
+                                                        <Form.Control type="text"
+                                                            placeholder=" Question Number"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setQuestionNo2(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setQuestionNo2)
+                                                            }}
+                                                        /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{QuestionNo2}</p>}
+                                                    </th>
+                                                    <th> <b className='d-flex'>
+                                                        <Form.Control type="text"
+                                                            placeholder="Obtained marks"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setObtainedNo2(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setObtainedNo2)
+                                                            }}
+                                                        /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{ObtainedNo2}</p>}
+                                                    </th>
+                                                    <th><b className='d-flex'>
+                                                        <Form.Control type="text"
+                                                            placeholder=" Question Number"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setQuestionNo3(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setQuestionNo3)
+                                                            }}
+                                                        /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{QuestionNo3}</p>}
+                                                    </th>
+                                                    <th> <b className='d-flex'>
+                                                        <Form.Control type="text"
+                                                            placeholder="Obtained marks"
+                                                            onChange={(e) => {
+                                                                if (selectedLanguage === "en-t-i0-und") {
+                                                                    setObtainedNo3(e.target.value)
+                                                                } else onChangeHandler(e.target.value, setObtainedNo3)
+                                                            }}
+                                                        /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{ObtainedNo3}</p>}
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -565,21 +890,43 @@ function QuestionHeader() {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        {/* <b>Total marks</b> */}
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder="Total marks" />  </b>
-                                                        {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                                                        <b className='d-flex'>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Total marks"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setTotalMarks1(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setTotalMarks1)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{TotalMarks1}</p>}
                                                     </td>
                                                     <td></td>
                                                     <td>
-                                                        {/* <b>Total marks</b> */}
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder="Total marks" />  </b>
-                                                        {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                                                        <b className='d-flex'>
+                                                            <Form.Control type="text"
+                                                                placeholder="Total marks"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setTotalMarks2(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setTotalMarks2)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{TotalMarks2}</p>}
                                                     </td>
                                                     <td></td>
                                                     <td>
-                                                        {/* <b>Total marks</b> */}
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder="Total marks" />  </b>
-                                                        {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                                                        <b className='d-flex'>
+                                                            <Form.Control type="text"
+                                                                placeholder="Total marks"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setTotalMarks3(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setTotalMarks3)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{TotalMarks3}</p>}
                                                     </td>
                                                     <td></td>
                                                 </tr>
@@ -589,9 +936,17 @@ function QuestionHeader() {
                                                     <td></td>
                                                     <td></td>
                                                     <td>
-                                                        {/* <b>Grade Total</b> */}
-                                                        <b className='d-flex'> <Form.Control type="text" placeholder="Grade Total" />  </b>
-                                                        {/* <b>ಗ್ರೇಡ್ ಒಟ್ಟು</b> */}
+                                                        <b className='d-flex'>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Grade Total"
+                                                                onChange={(e) => {
+                                                                    if (selectedLanguage === "en-t-i0-und") {
+                                                                        setGrandTotal(e.target.value)
+                                                                    } else onChangeHandler(e.target.value, setGrandTotal)
+                                                                }}
+                                                            /> </b>
+                                                        {selectedLanguage === "en-t-i0-und" ? <></> : <p>{GrandTotal}</p>}
                                                     </td>
                                                     <td></td>
                                                 </tr>
@@ -599,20 +954,40 @@ function QuestionHeader() {
                                         </Table>
                                     </div>
                                     <div className="student-details">
-                                        <p style={{ margin: "0px",width:"53%"}}>
-                                            <b className='d-flex'> <Form.Control type="text" placeholder="Total marks obtained (in words)" /><span>:</span>  </b>
+                                        <p style={{ margin: "0px", width: "53%" }}>
+                                            <b className='d-flex'>
+                                                <Form.Control type="text"
+                                                    placeholder="Total marks obtained (in words)"
 
-                                            {/* Total marks obtained (in words):  */}
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setTotalObtainMarks(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setTotalObtainMarks)
+                                                    }}
+                                                /> <span>:</span></b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{TotalObtainMarks}</p>}
+
+
                                         </p>
-                                        {/* <p style={{ margin: "0px" }}>ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು (ಪದಗಳಲ್ಲಿ): </p> */}
+
                                         <div className="line-5"></div>
-                                    </div><br/>
+                                    </div><br />
                                     <div className="student-details">
-                                        <p style={{ margin: "0px",width:"53%" }}>
-                                            <b className='d-flex'> <Form.Control type="text" placeholder="Signature of the Evaluator" /><span>:</span>  </b>
+                                        <p style={{ margin: "0px", width: "53%" }}>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Signature of the Evaluator"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setEvaluatorSign(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setEvaluatorSign)
+                                                    }}
+                                                /> <span>:</span></b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{EvaluatorSign}</p>}
 
                                         </p>
-                                        {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
+
                                         <div className="line-6"></div>
                                     </div>
                                     <div></div>
@@ -624,7 +999,7 @@ function QuestionHeader() {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClose}>
+                        <Button variant="primary" onClick={AddQuestionHeader}>
                             Submit
                         </Button>
                     </Modal.Footer>
