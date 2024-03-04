@@ -38,7 +38,7 @@ const AdminSubject = () => {
     }
 
     let am = value.split(/\s+/); // Split by any whitespace characters
-    let arr = [];
+
     let promises = [];
 
     for (let index = 0; index < am.length; index++) {

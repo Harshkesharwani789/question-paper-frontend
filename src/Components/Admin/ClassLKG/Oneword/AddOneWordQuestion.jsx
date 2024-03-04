@@ -43,7 +43,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
   const [Marks, setMarks] = useState("");
   const [Image_1, setImage_1] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
-  const [NumberOfLine, setNumberOfLine] = useState(4);
+  const [NumberOfLine, setNumberOfLine] = useState(1);
   const [Image_2, setImage_2] = useState("");
 
   const addquestions = async () => {

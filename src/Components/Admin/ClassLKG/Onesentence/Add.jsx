@@ -64,7 +64,7 @@ const Add = ({selectdetails}) => {
   const [Image_1, setImage_1] = useState("");
   const [orImageQ, setorImageQ] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
-  const [NumberOfLine, setNumberOfLine] = useState(8);
+  const [NumberOfLine, setNumberOfLine] = useState(7);
   const addquestions = async () => {
     try {
       const config = {
