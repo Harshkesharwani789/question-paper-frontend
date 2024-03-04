@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../fontpage/Frontpage.css";
-import { IoCheckmark } from "react-icons/io5";
+
 import Table from "react-bootstrap/Table";
-import swal from "sweetalert";
-import axios from "axios";
 const Frontpage = ({ data }) => {
   console.log("data", data?.bluePrint?.TypesofQuestions);
 

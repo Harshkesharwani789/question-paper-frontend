@@ -134,6 +134,20 @@ const AdminClass = () => {
       });
     }
   };
+   //get method for medium
+   const [Medium, setMedium] = useState([]);
+  //  const [nochangedata, setnochangedata] = useState([]);
+   const getAddMedium = async () => {
+     try {
+       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+       if (res.status == 200) {
+         setMedium(res.data.success);
+        //  setnochangedata(res.data.success);
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
   // get method add class
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
@@ -218,10 +232,19 @@ const AdminClass = () => {
     }
   };
   // post method for sub classname
+  const [mediumName,setmediumName] = useState("");
   const [classsname, setclasssname] = useState("");
   const [subclasssname, setsubclasssname] = useState("");
   const subclassnamee = async () => {
     try {
+      if (!mediumName) {
+        swal({
+          title: "Opps!",
+          text: "Please select Classname",
+          icon: "error",
+          button: "Try Again!",
+        });
+      }
       if (!classsname) {
         swal({
           title: "Opps!",
@@ -247,6 +270,7 @@ const AdminClass = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           className: classsname,
           subclassName: subclasssname,
           authId: admin?._id,
@@ -300,6 +324,7 @@ const AdminClass = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           className: classsname,
           subclassName: subclasssname,
           authId: admin?._id,
@@ -363,6 +388,7 @@ const AdminClass = () => {
   };
   useEffect(() => {
     getaddsubclasss();
+    getAddMedium();
   }, []);
   console.log(getaddsubclass);
 
@@ -525,6 +551,7 @@ const AdminClass = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
                 <th>
                   <div>Class</div>
                 </th>
@@ -541,6 +568,7 @@ const AdminClass = () => {
                 return (
                   <tr key={i}>
                     <td>{i + 1 + firstIndexs} </td>
+                    <td>{val?.mediumName}</td>
                     <td>{val?.className}</td>
                     <td>{val?.subclassName}</td>
 
@@ -734,12 +762,36 @@ const AdminClass = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Add Transport modal */}
+      {/* Add board modal */}
       <Modal show={show3} onHide={handleClose3} style={{ zIndex: "99999" }}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>Add Class </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+                {/* <input
+                  type="text"
+                  placeholder="Enter Medium"
+                  className="vi_0"
+                  onChange={(e) =>
+                    {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setmediumName(e.target.value)
+                      }else onChangeHandler(e.target.value,setmediumName )
+                    }                  
+                  }
+                />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
+              </div>
           <div className="do-sear mt-2">
             <label>Class</label>
             {/* <Form.Select
@@ -834,7 +886,82 @@ const AdminClass = () => {
           <Modal.Title style={{ color: "white" }}>Edit Subclass</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+              </div>
+              
+              <div className="do-sear mt-2">
+            <label>Class</label>
+            {/* <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
+                setclasssname(e.target.value);
+              }}
+            >
+              <option value="">Select Class</option>
+              <option value="Lower Primary">Lower Primary</option>
+              <option value="Primary">Primary </option>
+              <option value="Upper Primary">Upper Primary</option>
+              <option value="Secondary">Secondary</option>
+            </Form.Select> */}
+            <input
+                  type="text"
+                  placeholder={classsname}
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setclasssname(e.target.value)
+                    }else onChangeHandler(e.target.value,setclasssname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
+          </div>
           <div className="do-sear mt-2">
+            <label>Sub-Class</label>
+            {/* <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
+                setsubclasssname(e.target.value);
+              }}
+            >
+              <option value="">Select Sub-Class</option>
+              <option value="LKG">LKG</option>
+              <option value="UKG">UKG</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+              <option value="Class 9">Class 9</option>
+              <option value="Class 10">Class 10</option>
+              <option value="Class 11">Class 11</option>
+              <option value="Class 12">Class 12</option>
+            </Form.Select> */}
+            <input
+                  type="text"
+                  placeholder={subclasssname}
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setsubclasssname(e.target.value)
+                    }else onChangeHandler(e.target.value,setsubclasssname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>}
+
+          </div>
+          {/* <div className="do-sear mt-2">
             <label>Class</label>
             <Form.Select
               aria-label="Default select example"
@@ -863,7 +990,8 @@ const AdminClass = () => {
                 setsubclasssname(e.target.value);
               }}
             />
-          </div>
+          </div> */}
+          
         </Modal.Body>
         <Modal.Footer>
           <Button className="mx-2" variant="secondary" onClick={handleClose4}>

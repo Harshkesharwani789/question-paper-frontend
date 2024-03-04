@@ -68,6 +68,11 @@
   text-align: center;
 } */
 
+/* .table-bordered>:not(caption)>*>* {
+  background: navy !important;
+  color: #fff !important;
+} */
+
 .header .navbar-brand {
   display: flex;
   align-items: center;

@@ -70,8 +70,16 @@ const AdminSubject = () => {
   }, 300); // Debounce delay in milliseconds
 
   //Post
+  const [mediumName, setmediumName] = useState("");
   const [subjectName, setsubjectName] = useState("");
   const AddSubject = async () => {
+    if (!mediumName)
+      return swal({
+        title: "Oops!",
+        text: "Please Select the medium",
+        icon: "error",
+        button: "Ok!",
+      });
     if (!subjectName)
       return swal({
         title: "Oops!",
@@ -89,6 +97,7 @@ const AdminSubject = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName: mediumName,
           subjectName: subjectName,
           authId: admin?._id,
         },
@@ -114,6 +123,20 @@ const AdminSubject = () => {
       });
     }
   };
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
+  // const [nochangedata, setnochangedata] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        // setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //get
   const [subject, setsubject] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
@@ -131,7 +154,6 @@ const AdminSubject = () => {
     }
   };
 
-
   //update
   const [updateSubject, setpdateSubject] = useState("");
   const UpdateSubject = async () => {
@@ -145,6 +167,7 @@ const AdminSubject = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName: mediumName,
           subjectName: subjectName,
           authId: admin?._id,
           id: updateSubject,
@@ -244,14 +267,14 @@ const AdminSubject = () => {
   // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
   // const pageCount = Math.ceil(subject.length / productPerPage);
 
-
   useEffect(() => {
     getSubject();
+    getAddMedium();
   }, []);
 
   return (
     <>
-       <div className="row">
+      <div className="row">
         <div className="col-md-10"></div>
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
@@ -259,7 +282,7 @@ const AdminSubject = () => {
             value={selectedLanguage}
             onChange={handleLanguageChange}
             className="vi_0"
-            style={{borderRadius:"20px",backgroundColor:"#e2cbd0"}}
+            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
           >
             <option value="en-t-i0-und">English</option>
             <option value="ne-t-i0-und">Nepali</option>
@@ -304,6 +327,7 @@ const AdminSubject = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
                 <th>
                   <div>Subject</div>
                 </th>
@@ -315,8 +339,8 @@ const AdminSubject = () => {
               {subject?.map((item, i) => {
                 return (
                   <tr>
-                    <td>{i +1}</td>
-
+                    <td>{i + 1}</td>
+                    <td>{item?.mediumName}</td>
                     <td>{item?.subjectName}</td>
 
                     <td>
@@ -351,7 +375,7 @@ const AdminSubject = () => {
             </tbody>
           </Table>
         </div>
-       
+
         {/* Add Package modal */}
         <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
@@ -360,18 +384,39 @@ const AdminSubject = () => {
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
+                  })}
+                </select>
+                
+              </div>
+              <div className="do-sear mt-2">
                 <label>Subject</label>
                 <input
                   type="text"
                   placeholder="Enter Subject"
                   className="vi_0"
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
-                      setsubjectName(e.target.value)
-                    }else onChangeHandler(e.target.value,setsubjectName)                    
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setsubjectName(e.target.value);
+                    } else onChangeHandler(e.target.value, setsubjectName);
                   }}
                 />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subjectName}</p>}
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{subjectName}</p>
+                )}
               </div>
             </div>
           </Modal.Body>
@@ -414,6 +459,35 @@ const AdminSubject = () => {
           <Modal.Body>
             <div className="row">
               <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
+                  })}
+                </select>
+                {/* <input
+                  type="text"
+                  placeholder="Enter Medium"
+                  className="vi_0"
+                  onChange={(e) =>
+                    {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setmediumName(e.target.value)
+                      }else onChangeHandler(e.target.value,setmediumName )
+                    }                  
+                  }
+                />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
+              </div>
+              <div className="do-sear mt-2">
                 <label>Subject</label>
                 <input
                   type="text"
@@ -421,12 +495,16 @@ const AdminSubject = () => {
                   className="vi_0"
                   // value={subjectName}
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
-                      setsubjectName(e.target.value)
-                    }else onChangeHandler(e.target.value,setsubjectName)                    
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setsubjectName(e.target.value);
+                    } else onChangeHandler(e.target.value, setsubjectName);
                   }}
                 />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subjectName}</p>}
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{subjectName}</p>
+                )}
               </div>
             </div>
           </Modal.Body>
