@@ -82,7 +82,14 @@ function QuestionHeader() {
     const [Unaided, setUnaided] = useState("")
     const [markinfo, setmarkinfo] = useState("")
     const [SignatuteInvigilator, setSignatuteInvigilator] = useState("")
-    // const [first, setfirst] = useState(second)
+    const [Evaluator , setEvaluator ] = useState("");
+    const [QuestionNo1, setQuestionNo1] = useState("");
+    const [ObtainedNo1, setObtainedNo1] = useState("");
+    const [QuestionNo2, setQuestionNo2] = useState("");
+    const [ObtainedNo2, setObtainedNo2] = useState("");
+    const [QuestionNo3, setQuestionNo3] = useState("");
+    const [ObtainedNo3, setObtainedNo3] = useState("");
+    const [TotalMarks1, setTotalMarks1] = useState("")
     return (
         <>
             <div className='d-flex justify-content-between align-items-center' >
