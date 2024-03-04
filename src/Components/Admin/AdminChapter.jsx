@@ -70,8 +70,50 @@ const AdminChapter = () => {
       console.error("Promise.all error:", error);
     }
   }, 300); // Debounce delay in milliseconds
-
+//get method for medium
+const [Medium, setMedium] = useState([]);
+//  const [nochangedata, setnochangedata] = useState([]);
+ const getAddMedium = async () => {
+   try {
+     let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+     if (res.status == 200) {
+       setMedium(res.data.success);
+      //  setnochangedata(res.data.success);
+     }
+   } catch (error) {
+     console.log(error);
+   }
+ };
+ // get method for class and subclass
+ const [getaddsubcla, setgetaddsubcla] = useState([]);
+ const getaddsubclas = async () => {
+   try {
+     const res = await axios.get(
+       "http://localhost:8000/api/admin/getAllSubClass"
+     );
+     if (res.status == 200) {
+       setgetaddsubcla(res.data.success);
+     }
+   } catch (error) {
+     console.log(error);
+   }
+ };
+ // get method for subclass
+//  const [getaddsubclass, setgetaddsubclass] = useState([]);
+//  const getaddsubclasss = async () => {
+//    try {
+//      const res = await axios.get(
+//        "http://localhost:8000/api/admin/getAllSubClass"
+//      );
+//      if (res.status == 200) {
+//        setgetaddsubclass(res.data.success);
+//      }
+//    } catch (error) {
+//      console.log(error);
+//    }
+//  };
   //Post
+  const [mediumName,setmediumName] = useState("");
   const [chapterName, setChapterName] = useState("");
   const [subjectName, setSubjectName] = useState("");
   const [SubjectPart, setSubjectPart] = useState("");
@@ -79,6 +121,13 @@ const AdminChapter = () => {
   const [Sub_classname, setSub_classname] = useState("");
 
   const AddChapter = async () => {
+    if (!mediumName)
+      return swal({
+        title: "Oops!",
+        text: "Please Enter the chapter name",
+        icon: "error",
+        button: "Ok!",
+      });
     if (!chapterName)
       return swal({
         title: "Oops!",
@@ -110,6 +159,7 @@ const AdminChapter = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           chapterName: chapterName,
           subjectName: subjectName,
           SubjectPart: SubjectPart,
@@ -182,6 +232,7 @@ const AdminChapter = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           chapterName: chapterName,
           subjectName: subjectName,
           SubjectPart: SubjectPart,
@@ -334,6 +385,8 @@ const AdminChapter = () => {
   // }
 
   useEffect(() => {
+    getAddMedium();
+    getaddsubclas();
     getChapter();
     getSubject();
     getallweightagecontent();
@@ -461,6 +514,9 @@ const AdminChapter = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
+                <th>Class</th>
+                <th>Sub-class</th>
                 <th>
                   <div>Subject</div>
                 </th>
@@ -481,7 +537,9 @@ const AdminChapter = () => {
                   return (
                     <tr>
                       <td>{i + 1}</td>
-
+                      <td>{item?.mediumName}</td>
+                      <td>{item?.Classname}</td>
+                      <td>{item?.Sub_classname}</td>
                       <td>{item?.subjectName}</td>
                       <td>{item?.SubjectPart}</td>
                       <td>{item?.chapterName}</td>
@@ -496,6 +554,8 @@ const AdminChapter = () => {
                               onClick={() => {
                                 handleShow1(item);
                                 setpdatesetchapter(item?._id);
+                                setClassname(item?.Classname);
+                                setSub_classname(item?.Sub_classname);
                                 setChapterName(item?.chapterName);
                                 setSubjectName(item?.subjectName);
                               }}
@@ -635,6 +695,64 @@ const AdminChapter = () => {
                 </div>
               </div>
             </div> */}
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+              
+              </div>
+          <div className="do-sear mt-2">
+            <label>Class</label>
+            <select className="vi_0" onChange={(e)=>setClassname(e.target.value)}>
+                  <option value="">--Select Class--</option>
+                  {getaddsubcla?.map((item)=>{
+                    return(
+                      <option value={item?.className}>{item?.className}</option>
+                    )
+                  })}
+                </select>
+              
+            {/* <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setClassname(e.target.value)
+                    }else onChangeHandler(e.target.value,setClassname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Classname}</p>} */}
+          </div>
+          <div className="do-sear mt-2">
+            <label>Sub-Class</label>
+            <select className="vi_0" onChange={(e)=>setSub_classname(e.target.value)}>
+                  <option value="">--Select Class--</option>
+                  {getaddsubcla?.map((item)=>{
+                    return(
+                      <option value={item?.subclassName}>{item?.subclassName}</option>
+                    )
+                  })}
+                </select>
+            {/* <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setSub_classname(e.target.value)
+                    }else onChangeHandler(e.target.value,setSub_classname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Sub_classname}</p>} */}
+
+          </div>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Subject</label>
