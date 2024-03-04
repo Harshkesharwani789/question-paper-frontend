@@ -11,9 +11,9 @@
     margin: 0 !important;
 }
 
-.table-bordered>:not(caption)>*>* {
+/* .table-bordered>:not(caption)>*>* {
     padding: 2px !important;
-}
+} */
 
 @media screen and (max-width: 799px) {
     .details-container {
