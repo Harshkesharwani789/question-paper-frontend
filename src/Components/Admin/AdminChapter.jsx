@@ -711,7 +711,7 @@ const [Medium, setMedium] = useState([]);
             <label>Class</label>
             <select className="vi_0" onChange={(e)=>setClassname(e.target.value)}>
                   <option value="">--Select Class--</option>
-                  {getaddsubcla?.map((item)=>{
+                  {getaddsubcla?.filter((ele)=>ele.mediumName==mediumName).map((item)=>{
                     return(
                       <option value={item?.className}>{item?.className}</option>
                     )
@@ -734,7 +734,7 @@ const [Medium, setMedium] = useState([]);
             <label>Sub-Class</label>
             <select className="vi_0" onChange={(e)=>setSub_classname(e.target.value)}>
                   <option value="">--Select Class--</option>
-                  {getaddsubcla?.map((item)=>{
+                  {getaddsubcla?.filter((item)=>item.mediumName == mediumName).map((item)=>{
                     return(
                       <option value={item?.subclassName}>{item?.subclassName}</option>
                     )
@@ -761,7 +761,7 @@ const [Medium, setMedium] = useState([]);
                   onChange={(e) => setSubjectName(e.target.value)}
                 >
                   <option>Select Subject</option>
-                  {subject?.map((val, i) => {
+                  {subject?.filter((wow)=>wow.mediumName == mediumName).map((val, i) => {
                     return (
                       <option value={val?.subjectName} key={i}>
                         {val?.subjectName}

@@ -495,7 +495,7 @@ const Weightagecontent = () => {
                   }}
                 >
                   <option value="">Select Subject</option>
-                  {subject?.map((val, i) => {
+                  {subject?.filter((ele)=>ele.mediumName == mediumName).map((val, i) => {
                     return (
                       <option value={val?.subjectName} key={i}>
                         {val?.subjectName}
