@@ -90,6 +90,7 @@ const Weightagecontent = () => {
     }, 300); // Debounce delay in milliseconds
 
   // Post method Integration
+  const [mediumName,setmediumName] = useState("");
   const [Subject, setSubject] = useState("");
   const [Content, setContent] = useState("");
 
@@ -104,6 +105,7 @@ const Weightagecontent = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           Subject: Subject,
           Content: Content,
           authId: admin?._id,
@@ -127,6 +129,20 @@ const Weightagecontent = () => {
         icon: "error",
         button: "Try Again!",
       });
+    }
+  };
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
+  // const [nochangedata, setnochangedata] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        // setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   //   get method for subjects
@@ -171,6 +187,7 @@ const Weightagecontent = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           Subject: Subject,
           Content: Content,
           authId: admin?._id,
@@ -266,6 +283,7 @@ const Weightagecontent = () => {
   useEffect(() => {
     getSubject();
     getallweightagecontent();
+    getAddMedium();
   }, []);
   console.log(subject);
   console.log("weightage", weightage);
@@ -323,6 +341,7 @@ const Weightagecontent = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
                 <th>Subject</th>
                 <th>
                   <div>Subject Part</div>
@@ -336,6 +355,7 @@ const Weightagecontent = () => {
                 return (
                   <tr key={i}>
                     <td>{i + 1}</td>
+                    <td>{val?.mediumName}</td>
                     <td>{val?.Subject}</td>
                     <td>
                       <p>{val?.Content}</p>
@@ -449,6 +469,23 @@ const Weightagecontent = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
+                  })}
+                </select>
+                
+              </div>
               <div className="do-sear">
                 <label htmlFor="">Subject</label>
                 <Form.Select
@@ -458,7 +495,7 @@ const Weightagecontent = () => {
                   }}
                 >
                   <option value="">Select Subject</option>
-                  {subject?.map((val, i) => {
+                  {subject?.filter((ele)=>ele.mediumName == mediumName).map((val, i) => {
                     return (
                       <option value={val?.subjectName} key={i}>
                         {val?.subjectName}
@@ -514,6 +551,23 @@ const Weightagecontent = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
+                  })}
+                </select>
+                
+              </div>
               <div className="do-sear">
                 <label htmlFor="">Subject</label>
                 <Form.Select

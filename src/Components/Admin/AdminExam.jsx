@@ -71,6 +71,7 @@ const AdminExam = () => {
     
 
   //Post
+  const [mediumName,setmediumName] = useState("");
   const [NameExamination, setNameExamination] = useState("");
   const AddNameExamination = async () => {
     try {
@@ -83,6 +84,7 @@ const AdminExam = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           NameExamination: NameExamination,
           authId: admin?._id,
         },
@@ -109,6 +111,20 @@ const AdminExam = () => {
 
     }
   };
+   //get method for medium
+   const [Medium, setMedium] = useState([]);
+  //  const [nochangedata, setnochangedata] = useState([]);
+   const getAddMedium = async () => {
+     try {
+       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+       if (res.status == 200) {
+         setMedium(res.data.success);
+         setnochangedata(res.data.success);
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
   //get
   const [NameExam, setNameExam] = useState([]);
   const [nochangedata,setnochangedata] = useState([]);
@@ -139,6 +155,7 @@ const AdminExam = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           NameExamination: NameExamination,
           authId: admin?._id,
           id: updateNameExam,
@@ -237,6 +254,7 @@ const AdminExam = () => {
   const pageCount = Math.ceil(NameExam.length / productPerPage);
   useEffect(() => {
     getNameExamination();
+    getAddMedium();
   }, []);
 
 // newpagination 
@@ -325,6 +343,7 @@ const AdminExam = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
                 <th>
                   <div>Name Of Examination</div>
                 </th>
@@ -337,7 +356,7 @@ const AdminExam = () => {
                 return (
                   <tr>
                     <td>{i + 1 + visitedPage}</td>
-
+                    <td>{item?.mediumName}</td>
                     <td>{item?.NameExamination}</td>
 
                     <td>
@@ -442,6 +461,17 @@ const AdminExam = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+              </div>
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
                 <input type="text" placeholder="Enter Name" className="vi_0" 
@@ -486,9 +516,21 @@ const AdminExam = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+              </div>
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
                 <input type="text" className="vi_0" 
+                placeholder={NameExamination}
                 // value={NameExamination}
                 onChange={(e)=>
                   {

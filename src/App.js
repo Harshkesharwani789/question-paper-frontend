@@ -1814,7 +1814,7 @@ function App() {
           />
           {/* Question TYpe */}
 
-
+          
 
           <Route
             path="/questiontype"
@@ -1827,30 +1827,6 @@ function App() {
                 }
               />
             }
-          />
-
-          <Route
-            path="/questionheader"
-            element={
-              <Main children={
-                <>
-                  <QuestionHeader />
-                </>
-              }
-              />
-          }
-
-          />
-           <Route
-            path="/viewheader"
-            element={
-              <Main children={
-                <>
-                  <ViewHeader />
-                </>
-              }
-              />
-          }
           />
           {/* Poet,Time , Place , Write the answer the question */}
 

@@ -118,7 +118,8 @@ const obj={}
 
                     <h4>ಪ್ರಶ್ನೆ ವಿಶ್ಲೇಷಣೆ</h4>
                 </div>
-                <Table striped bordered style={{ fontFamily: "math" }}>
+                <div  className="text-center">
+                   <Table  bordered style={{ fontFamily: "math",border: "1px solid" }}>
             <thead>
               <tr>
                 <th>ಕ್ರ .ಸಂ.</th>
@@ -144,11 +145,12 @@ const obj={}
                           <tr>
                             <td> {count2++}</td>
                             <td>{item?.Objectives}</td>
-                            <td>{item?.name}</td>
+                            <td>{item?.Chapter_Name}</td>
                             <td>{item?.Lesson}</td>
                             <td>{item?.Types_Question}</td>
                             <td>
                              {check(ele2?.QAType)}
+                             {/* {item?.Questiontype} */}
                             </td>
                             <td>{(ele2?.NQA*ele2?.Mask)/ele2?.NQA}</td>
                             <td>{item?.Difficulty_level?.slice(0, 1)}</td>
@@ -162,6 +164,8 @@ const obj={}
               })}
             </tbody>
           </Table>
+                </div>
+               
                 <div className='d-flex mt-2'>
                     <b>Note<span style={{ color: "red" }}>*</span></b>
                     <p>O.T(Objective Type),V.S.A(Very short answer),S.A( short answer ) A(Average) ,E(Easy),M(medium)</p>

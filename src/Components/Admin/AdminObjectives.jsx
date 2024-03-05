@@ -93,7 +93,7 @@ const AdminObjectives = () => {
 
   // post method
   const [Objectivesname, setObjectivesname] = useState("");
-
+  const [mediumName,setmediumName] = useState("");
   const objectivesnamee = async () => {
     try {
       const config = {
@@ -105,6 +105,7 @@ const AdminObjectives = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           Objectivesname: Objectivesname,
           authId: admin?._id,
         },
@@ -126,7 +127,20 @@ const AdminObjectives = () => {
       console.log(error);
     }
   };
-
+//get method for medium
+const [Medium, setMedium] = useState([]);
+// const [nochangedata, setnochangedata] = useState([]);
+const getAddMedium = async () => {
+  try {
+    let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+    if (res.status == 200) {
+      setMedium(res.data.success);
+      // setnochangedata(res.data.success);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
   const [getobjectives, setgetobjectives] = useState([]);
 
   const getObjectives = async () => {
@@ -167,6 +181,7 @@ const AdminObjectives = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
+          mediumName:mediumName,
           Objectivesname: Objectivesname,
           id: update,
           authId: admin?._id,
@@ -255,6 +270,7 @@ const AdminObjectives = () => {
   
   useEffect(() => {
     getObjectives();
+    getAddMedium();
   }, []);
   console.log(getobjectives);
   // Pagination
@@ -340,6 +356,7 @@ const AdminObjectives = () => {
             <thead>
               <tr>
                 <th>S.No</th>
+                <th>Medium</th>
                 <th>
                   <div>Objectives</div>
                 </th>
@@ -352,6 +369,7 @@ const AdminObjectives = () => {
                 return (
                   <tr key={i}>
                     <td>{i + 1 + firstIndex} </td>
+                    <td>{val?.mediumName}</td>
                     <td>
                       <p>{val?.Objectivesname}</p>
                     </td>
@@ -464,6 +482,30 @@ const AdminObjectives = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+                {/* <input
+                  type="text"
+                  placeholder="Enter Medium"
+                  className="vi_0"
+                  onChange={(e) =>
+                    {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setmediumName(e.target.value)
+                      }else onChangeHandler(e.target.value,setmediumName )
+                    }                  
+                  }
+                />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
+              </div>
               <div className="do-sear mt-2">
                 <label>Objectives</label>
                 <input
@@ -545,6 +587,30 @@ const AdminObjectives = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+                {/* <input
+                  type="text"
+                  placeholder="Enter Medium"
+                  className="vi_0"
+                  onChange={(e) =>
+                    {
+                      if(selectedLanguage == "en-t-i0-und"){
+                        setmediumName(e.target.value)
+                      }else onChangeHandler(e.target.value,setmediumName )
+                    }                  
+                  }
+                />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
+              </div>
               <div className="do-sear mt-2">
                 <label>Name of the Objectives</label>
                 <input
