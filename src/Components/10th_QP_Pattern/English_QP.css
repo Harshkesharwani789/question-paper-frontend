@@ -85,8 +85,9 @@ h6 {
 
 .question-paper-display {
   border: 1px solid lightgray;
+  /* height: auto;
+  min-height: 1170px; */
   width: 800px;
-  /* height: 1145px; */
   justify-content: center;
   margin: 20px auto;
 }

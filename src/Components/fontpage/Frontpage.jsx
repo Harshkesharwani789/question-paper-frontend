@@ -4,7 +4,16 @@ import "../fontpage/Frontpage.css";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 const Frontpage = ({ data }) => {
-  console.log("view_data", data);
+  console.log("data", data?.bluePrint?.TypesofQuestions);
+
+  const totalQA = data?.bluePrint?.TypesofQuestions?.reduce(
+    (a, ele) => a + Number(ele?.NQA),
+    0
+  );
+const numberofStep=totalQA/2;
+
+  console.log("Total Question ==>", totalQA);
+  let array = Array.from(Array(totalQA).keys(), (x) => x + 1);
 
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
@@ -43,7 +52,7 @@ console.log("QuestionHeader",QuestionHeader);
                   <img
                     src={`http://localhost:8000/Teacher/${data?.School_Logo}`}
                     alt=""
-                    style={{ width: "80px", marginTop:"24px"}}
+                    style={{ width: "80px", marginTop: "24px" }}
                   />
                 ) : (
                   <></>
@@ -53,13 +62,13 @@ console.log("QuestionHeader",QuestionHeader);
                 {/* <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4> */}
                 {/* <h4>{data?.Board}</h4>  */}
                 {data?.Institute_Name ? (
-                <h5>
-                  {data?.Institute_Name},{data?.SchoolAddress}
-                </h5>
-              ) : (
-                <></>
-              )}
-               <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
+                  <h5>
+                    {data?.Institute_Name},{data?.SchoolAddress}
+                  </h5>
+                ) : (
+                  <></>
+                )}
+                <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
               </div>
             </div>
             <div className="title-2">
@@ -256,14 +265,14 @@ console.log("QuestionHeader",QuestionHeader);
               evaluation
             </h5> */}
             <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
-            ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
+              ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
             </h5>
             <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
             {QuestionHeader?.evaluator}
 
             </h5>
             
-            <div></div>
+            <div className="text-center">
             <Table
               responsive
               bordered
@@ -293,86 +302,34 @@ console.log("QuestionHeader",QuestionHeader);
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td></td>
-                  <td>11</td>
-                  <td></td>
-                  <td>21</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td></td>
-                  <td>12</td>
-                  <td></td>
-                  <td>22</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td></td>
-                  <td>13</td>
-                  <td></td>
-                  <td>23</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td></td>
-                  <td>14</td>
-                  <td></td>
-                  <td>24</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td></td>
-                  <td>15</td>
-                  <td></td>
-                  <td>25</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td></td>
-                  <td>16</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td></td>
-                  <td>17</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td></td>
-                  <td>18</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td></td>
-                  <td>19</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td></td>
-                  <td>20</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
+                {array?.map((ele) => {
+                  if (ele <= (numberofStep<=15? 10:10)) {
+                    return (
+                      <tr>
+                        <td>{ele <=totalQA? (ele):"-"}</td>
+                        <td></td>
+                        <td>{ (ele + 10)<=totalQA ?(ele + 10):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 20)<=totalQA ?(ele + 20):"-"}</td>
+                        <td></td>
+                      </tr>
+                    );
+                  }
+                  if (ele <= (numberofStep>15? 20:0)) {
+                    return (
+                      <tr>
+                        <td>{ (ele + 30)<=totalQA ?(ele + 30):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 40)<=totalQA ?(ele + 40):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 50)<=totalQA ?(ele + 50):"-"}</td>
+                        <td></td>
+                      </tr>
+                    );
+                  }
+                })}
+
+              
                 <tr>
                   <td>
                     {/* <b>Total marks</b> */}
@@ -406,7 +363,7 @@ console.log("QuestionHeader",QuestionHeader);
                   <td></td>
                 </tr>
               </tbody>
-            </Table>
+            </Table></div>
           </div>
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Total marks obtained (in words): </p> */}
