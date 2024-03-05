@@ -242,7 +242,7 @@ const handlePrint = () => {
 
   // Replace the content of the body with the content of the printable section including footer and spacer
   document.body.innerHTML = printableContent;
-  // document.body.appendChild(footerContainer);
+  document.body.appendChild(footerContainer);
   
   // Print the content
   window.print();
@@ -254,6 +254,29 @@ const handlePrint = () => {
   updaethequestion(true)
 };
 
+
+const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(() => {
+  getQuestionHeaderbyMedium()
+}, [])
+console.log("QuestionHeader",QuestionHeader);
 
 
 
