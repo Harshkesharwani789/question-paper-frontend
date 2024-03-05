@@ -384,6 +384,15 @@ function App() {
               </>
             }
           />
+          <Route
+            path="/CoverPage"
+            exact
+            element={
+              <>
+                <CoverPage />
+              </>
+            }
+          />
           {/* Admin pannel */}
           <Route
             path="/adminquestion"
@@ -412,10 +421,6 @@ function App() {
           <Route
             path="/adminblueprintheaderview"
             element={<Main children={<BluePrintHeaderView />} />}
-          />
-          <Route
-            path="/CoverPage"
-            element={<Main children={<CoverPage />} />}
           />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"
