@@ -95,7 +95,6 @@ const AdminBoard = () => {
   const [boardName, setboardName] = useState("");
   const AddBoradname = async () => {
     try {
-      alert(mediumName)
       if (!mediumName)
       return swal({
         title: "Opps!",

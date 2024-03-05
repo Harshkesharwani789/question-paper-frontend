@@ -265,6 +265,18 @@ const AdminQuestionDetails = () => {
       console.log(error);
     }
   };
+   //get for Difficulty Level
+   const [DifficultyLevel, setDifficultyLevel] = useState([]);
+   const getDifficultyLevel = async () => {
+     try {
+       let res = await axios.get("http://localhost:8000/api/admin/getAllDiffLevel");
+       if (res.status == 200) {
+        setDifficultyLevel(res.data.success);
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -276,6 +288,7 @@ const AdminQuestionDetails = () => {
     getChapter();
     getNameExamination();
     getObjectives();
+    getDifficultyLevel();
   }, []);
 
   const uniqueClassNamesSet = new Set(
@@ -462,7 +475,7 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setSubjects(e.target.value)}
                 >
                   <option>Select the Subject</option>
-                  {subject?.map((item, i) => {
+                  {subject?.filter((ele)=>ele.mediumName === Medium).map((item, i) => {
                     return (
                       <option value={item?.subjectName} key={i}>
                         {item?.subjectName}
@@ -528,9 +541,14 @@ const AdminQuestionDetails = () => {
                   }}
                 >
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="Easy">Easy</option>
+                  {/* <option value="Easy">Easy</option>
                   <option value="Average">Average</option>
-                  <option value="Difficult">Difficult</option>
+                  <option value="Difficult">Difficult</option> */}
+                  {DifficultyLevel?.filter((ele)=>ele.mediumName === Medium).map((item)=>{
+                  return(
+                    <option value={item?.DiffLevelName}>{item?.DiffLevelName}</option>
+                  )
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -603,7 +621,7 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  {getobjectives?.map((val, i) => {
+                  {getobjectives?.filter((ele)=>ele.mediumName === Medium).map((val, i) => {
                     return (
                       <option value={val?.Objectivesname}>
                         {val?.Objectivesname}

@@ -179,6 +179,7 @@ import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
+import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 
 function App() {
   return (
@@ -454,6 +455,18 @@ function App() {
                 children={
                   <>
                     <AdminBoard />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/admindifficultylevel"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminDifficultyLevel />
                   </>
                 }
               />
