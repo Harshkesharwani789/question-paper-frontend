@@ -8,6 +8,7 @@ import "../Admin/Admin.css";
 import { FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Last } from 'react-bootstrap/esm/PageItem';
 function QuestionHeader() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
@@ -96,7 +97,14 @@ function QuestionHeader() {
     const [GrandTotal, setGrandTotal] = useState("");
     const [TotalObtainMarks, setTotalObtainMarks] = useState("");
     const [EvaluatorSign, setEvaluatorSign] = useState("");
-    const [QFormatMedium, setQFormatMedium] = useState("")
+    const [QFormatMedium, setQFormatMedium] = useState("");
+    const [Ans, setAns] = useState("");
+    const [Or, setOr] = useState("");
+    const [AnswerHeader, setAnswerHeader] = useState("")
+const [mediumHead,setmediumHeead]=useState("");
+
+const [lastSign,setlastSign]=useState("");
+
 
     const AddQuestionHeader = async () => {
         try {
@@ -144,8 +152,12 @@ function QuestionHeader() {
                     totalobtainedmarks: TotalObtainMarks,
                     evaluatorsign: EvaluatorSign,
                     medium: QFormatMedium,
+                    ans: Ans,
+                    or: Or,
+                    answerheader:AnswerHeader,
                     authId: admin?._id,
-
+                    mediumHead:mediumHead,
+                    lastSign:lastSign
                 }
             }
             let res = await axios(config)
@@ -265,10 +277,10 @@ function QuestionHeader() {
                                     <tr style={{ textAlign: "center" }}>
                                         <td>{i + 1}</td>
                                         <td>{item?.medium}</td>
-                                       
+
                                         <td
                                             style={{ fontSize: "20px", color: "green", cursor: "pointer" }}
-                                            onClick={() => navigate("/viewheader",{ state: { item: item } })}
+                                            onClick={() => navigate("/viewheader", { state: { item: item } })}
                                         ><FaEye /></td>
                                         <td><AiFillDelete /></td>
                                     </tr>
@@ -298,8 +310,8 @@ function QuestionHeader() {
                                                 />
                                             </div>
                                             <div className="col-sm-6">
-                                            <h4 className="mb-2"> (School Name Will Come )</h4>
-                                            <h6>Exam Type - year (will come)</h6>
+                                                <h4 className="mb-2"> (School Name Will Come )</h4>
+                                                <h6>Exam Type - year (will come)</h6>
                                             </div>
                                             <div className='col-sm-4'>
                                                 <div className="do-sear mt-2">
@@ -322,6 +334,7 @@ function QuestionHeader() {
                                     </div>
 
                                     <div className="class-details mb-2">
+                                        
                                         <div className="class-data ">
                                             <b className='d-flex'>
                                                 <Form.Control
@@ -347,6 +360,18 @@ function QuestionHeader() {
                                                     }}
                                                 /><span>:</span>  </b>
                                             {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Subject}</p>}
+                                 <br/>
+                                        <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Medium Head"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setmediumHeead(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setmediumHeead)
+                                                    }}
+                                                /><span>:</span>  </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{mediumHead}</p>}
                                         </div>
                                         <div className='mb-2'>
                                             <div className="class-data ">
@@ -362,6 +387,7 @@ function QuestionHeader() {
                                                     /><span>:</span>  </b>
                                                 {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Marks}</p>}
                                             </div>
+                                            <br />
                                             <div className="class-data">
                                                 <b className='d-flex'>
                                                     <Form.Control
@@ -990,7 +1016,74 @@ function QuestionHeader() {
 
                                         <div className="line-6"></div>
                                     </div>
-                                    <div></div>
+                                    <br/>
+                                    <div className="student-details">
+                                        <p style={{ margin: "0px", width: "53%" }}>
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Signature of the Evaluator 2"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setlastSign(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setlastSign)
+                                                    }}
+                                                /> <span>:</span></b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{lastSign}</p>}
+
+                                        </p>
+
+                                        <div className="line-6"></div>
+                                    </div>
+                                </div><br />
+                                <div>
+                                    <p style={{ textAlign: "center" }}>For Question Paper</p>
+                                    <div className='d-flex justify-content-between'>
+                                        <div>
+                                            <b className='d-flex '>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Ans"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setAns(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setAns)
+                                                    }}
+                                                /> </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Ans}</p>}
+                                        </div>
+                                        <div>
+
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Or"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setOr(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setOr)
+                                                    }}
+                                                /> </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{Or}</p>}
+                                        </div>
+                                        <div>
+
+                                            <b className='d-flex'>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Answer Header"
+                                                    onChange={(e) => {
+                                                        if (selectedLanguage === "en-t-i0-und") {
+                                                            setAnswerHeader(e.target.value)
+                                                        } else onChangeHandler(e.target.value, setAnswerHeader)
+                                                    }}
+                                                /> </b>
+                                            {selectedLanguage === "en-t-i0-und" ? <></> : <p>{AnswerHeader}</p>}
+                                        </div>
+
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

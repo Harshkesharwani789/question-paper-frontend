@@ -264,6 +264,23 @@ const BluePrint = () => {
   };
   console.log("blueprint1",blueprint1)
 
+  const [bluePrintHeader, setbluePrintHeader] = useState({});
+  const GetBluePrintHeaderByMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/" + blueprint1?.medium);
+      if (res.status === 200) {
+        setbluePrintHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log("bluePrintHeader", bluePrintHeader);
+
+  useEffect(()=>{
+    GetBluePrintHeaderByMedium()
+  },[blueprint1?.medium])
+
   return (
     <div>
       <div className="">

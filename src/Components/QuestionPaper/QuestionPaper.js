@@ -255,6 +255,29 @@ const handlePrint = () => {
 };
 
 
+const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(() => {
+  getQuestionHeaderbyMedium()
+}, [])
+console.log("QuestionHeader",QuestionHeader);
+
 
 
 
