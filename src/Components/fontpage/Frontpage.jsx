@@ -58,17 +58,17 @@ console.log("QuestionHeader",QuestionHeader);
                   <></>
                 )}
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-10">
                 {/* <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4> */}
-                {/* <h4>{data?.Board}</h4>  */}
+                <h5>{data?.Board}</h5> 
                 {data?.Institute_Name ? (
-                  <h5>
+                  <h6>
                     {data?.Institute_Name},{data?.SchoolAddress}
-                  </h5>
+                  </h6>
                 ) : (
                   <></>
                 )}
-                <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
+                <h6>{data?.bluePrint?.blName}</h6>
               </div>
             </div>
             <div className="title-2">
@@ -127,7 +127,7 @@ console.log("QuestionHeader",QuestionHeader);
                 </span>{" "}
                 <br />
                 {/* <span>ಒಟ್ಟು ಪ್ರಶ್ನೆಗಳು: 25</span> */}
-                <span>{QuestionHeader?.totalquestion}: 25</span>
+                <span>{QuestionHeader?.totalquestion}: {totalQA}</span>
               </div>
             </div>
             <div className="student-details">
@@ -197,7 +197,7 @@ console.log("QuestionHeader",QuestionHeader);
             <div className="student-details">
               {/* <p style={{ margin: "0px" }}>School Name :</p> */}
               {/* <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p> */}
-              <p style={{ margin: "0px" }}>{QuestionHeader?.schoolname}:</p>
+              <p style={{ margin: "0px",fontSize:"15px" }}>{QuestionHeader?.schoolname}:</p>
               <div className="line-2"></div>
             </div>
           </div>
@@ -252,7 +252,7 @@ console.log("QuestionHeader",QuestionHeader);
           {/* <div>(Put "✓" mark for applicable information)</div> */}
           {/* <div>(ಅನ್ವಯವಾಗುವ ಮಾಹಿತಿಗಾಗಿ "✓" ಗುರುತು ಹಾಕಿ)</div> */}
           <div>({QuestionHeader?.markinfo})</div>
-          <div className="student-details" style={{ padding: "10px 0" }}>
+          <div className="student-details" style={{ padding: "4px 0" }}>
             {/* <p style={{ margin: "0px" }}>Signature of the Room Invigilator: </p> */}
             {/* <p style={{ margin: "0px" }}>ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಸಹಿ: </p> */}
             <p style={{ margin: "0px" }}>{QuestionHeader?.signatureinvigilator}: </p>
@@ -264,13 +264,13 @@ console.log("QuestionHeader",QuestionHeader);
               Information to be filled by the Evaluator at the time of
               evaluation
             </h5> */}
-            <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
+            {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
               ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
-            </h5>
-            <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
+            </h5> */}
+            <h6 style={{ textAlign: "center",  }}>
             {QuestionHeader?.evaluator}
 
-            </h5>
+            </h6>
             
             <div className="text-center">
             <Table

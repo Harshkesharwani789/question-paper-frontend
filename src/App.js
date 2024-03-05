@@ -185,6 +185,7 @@ import BluePrintHeaderAdd from "./Components/Admin/BluePrintHeaderAdd";
 import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
 import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
 import { CoverPage } from "./Components/Admin/CoverPage";
+import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 
 function App() {
   return (
@@ -372,6 +373,7 @@ function App() {
               </>
             }
           />
+          
           <Route
             path="/science10th"
             exact
@@ -476,6 +478,18 @@ function App() {
                 children={
                   <>
                     <AdminBoard />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/admindifficultylevel"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminDifficultyLevel />
                   </>
                 }
               />
@@ -1419,6 +1433,32 @@ function App() {
               />
             }
           />
+          <Route
+            path="/questionheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <QuestionHeader />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/viewheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewHeader />
+                  </>
+                }
+              />
+            }
+          />
+          
+          
           <Route
             path="/addonewordquestion"
             element={
