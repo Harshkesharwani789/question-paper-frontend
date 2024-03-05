@@ -50,6 +50,7 @@ const Side = () => {
   const [question, setquestion] = useState(false);
 
   const [Board, setBoard] = useState(false);
+  const [DiffLevel,setDiffLevel] = useState(false);
   const [Class, setClass] = useState(false);
   const [Medium, setMedium] = useState(false);
   const [Examination, setExamination] = useState(false);
@@ -133,6 +134,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(true);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -168,11 +170,53 @@ const Side = () => {
                   <span className="ms-2">Board Add </span>
                 </li>
               </Link>
+              <Link to="/admindifficultylevel" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(true);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Difficulty Level </span>
+                </li>
+              </Link>
               <Link to="/adminclass" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(true);
                     setMedium(false);
                     setExamination(false);
@@ -214,6 +258,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(true);
                     setExamination(false);
@@ -254,6 +299,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(true);
@@ -285,6 +331,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -316,6 +363,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -347,6 +395,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -378,6 +427,7 @@ const Side = () => {
                   className="a-ele"
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -409,6 +459,7 @@ const Side = () => {
                   className="a-ele"
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -440,6 +491,7 @@ const Side = () => {
                   className="a-ele"
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -466,11 +518,43 @@ const Side = () => {
                   <span className="ms-2">Question Header Add</span>
                 </li>
               </Link>
+              <Link to="/adminblueprintheadertype" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Blue Print Header</span>
+                </li>
+              </Link>
               <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -502,6 +586,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -715,6 +800,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -756,6 +842,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -797,6 +884,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -837,6 +925,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);
@@ -877,6 +966,7 @@ const Side = () => {
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
+                    setDiffLevel(false);
                     setClass(false);
                     setMedium(false);
                     setExamination(false);

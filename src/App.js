@@ -179,6 +179,13 @@ import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
+import QuestionHeader from "./Components/QuestionPaper/QuestionHeader";
+import ViewHeader from "./Components/QuestionPaper/ViewHeader";
+import BluePrintHeaderAdd from "./Components/Admin/BluePrintHeaderAdd";
+import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
+import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
+import { CoverPage } from "./Components/Admin/CoverPage";
+import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 
 function App() {
   return (
@@ -366,6 +373,7 @@ function App() {
               </>
             }
           />
+          
           <Route
             path="/science10th"
             exact
@@ -392,6 +400,22 @@ function App() {
           <Route
             path="/adminblueprintdetails"
             element={<Main children={<AdminBlueprintdetails />} />}
+          />
+          <Route
+            path="/adminblueprintheader"
+            element={<Main children={<BluePrintHeaderAdd />} />}
+          />
+          <Route
+            path="/adminblueprintheadertype"
+            element={<Main children={<BluePrintHeaderType />} />}
+          />
+          <Route
+            path="/adminblueprintheaderview"
+            element={<Main children={<BluePrintHeaderView />} />}
+          />
+          <Route
+            path="/CoverPage"
+            element={<Main children={<CoverPage />} />}
           />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"
@@ -454,6 +478,18 @@ function App() {
                 children={
                   <>
                     <AdminBoard />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/admindifficultylevel"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminDifficultyLevel />
                   </>
                 }
               />
@@ -1397,6 +1433,32 @@ function App() {
               />
             }
           />
+          <Route
+            path="/questionheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <QuestionHeader />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/viewheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewHeader />
+                  </>
+                }
+              />
+            }
+          />
+          
+          
           <Route
             path="/addonewordquestion"
             element={
