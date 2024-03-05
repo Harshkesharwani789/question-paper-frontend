@@ -308,34 +308,41 @@ h6 {
 /* CSS styles for print layout */
 @media print {
   html, body {
-    height: 100%;
+    height: 90%;
     margin: 0;
     padding: 0;
+
   }
   #footer {
     position: fixed;
-    bottom: 0mm; /* Set margin from bottom */
+    bottom: 0mm; 
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
-  @page {
-    margin-bottom: 15mm; /* Bottom margin for each printed page */
-  }
+ 
 
+   @page {
+
+    @bottom-center {
+      content : counter(page)
+    } 
+    margin-bottom: 15mm; 
+    
+  } 
   
   #printable-content {
-    /* Set fixed height per page */
-    height: calc(100vh - 50px); /* Subtracting footer height */
-    overflow: hidden; /* Hide overflow content */
+   
+    height: calc(100vh - 50px);
+    overflow: hidden; 
   }
 
-  /* Define styles for footer */
+
   .footer {
     height: 50px;
   }
 
-  /* Page break after each printable content */
+  
   #printable-content {
     page-break-after: always;
 
