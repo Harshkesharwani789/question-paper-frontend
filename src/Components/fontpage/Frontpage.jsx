@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../fontpage/Frontpage.css";
 
 import Table from "react-bootstrap/Table";
+import axios from "axios";
 const Frontpage = ({ data }) => {
-  console.log("data", data);
+  console.log("data", data?.bluePrint?.TypesofQuestions);
 
+  const totalQA = data?.bluePrint?.TypesofQuestions?.reduce(
+    (a, ele) => a + Number(ele?.NQA),
+    0
+  );
+const numberofStep=totalQA/2;
+
+  console.log("Total Question ==>", totalQA);
+  let array = Array.from(Array(totalQA).keys(), (x) => x + 1);
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const token = sessionStorage.getItem("token");
+
+  const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + data?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(() => {
+  getQuestionHeaderbyMedium()
+}, [])
+console.log("QuestionHeader",QuestionHeader);
   return (
     <div>
       {/* new  */}
@@ -17,23 +52,23 @@ const Frontpage = ({ data }) => {
                   <img
                     src={`http://localhost:8000/Teacher/${data?.School_Logo}`}
                     alt=""
-                    style={{ width: "80px", marginTop:"24px"}}
+                    style={{ width: "80px", marginTop: "24px" }}
                   />
                 ) : (
                   <></>
                 )}
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-10">
                 {/* <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4> */}
-                {/* <h4>{data?.Board}</h4>  */}
+                <h5>{data?.Board}</h5> 
                 {data?.Institute_Name ? (
-                <h5>
-                  {data?.Institute_Name},{data?.SchoolAddress}
-                </h5>
-              ) : (
-                <></>
-              )}
-               <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
+                  <h6>
+                    {data?.Institute_Name},{data?.SchoolAddress}
+                  </h6>
+                ) : (
+                  <></>
+                )}
+                <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
               </div>
             </div>
             <div className="title-2">
@@ -53,17 +88,21 @@ const Frontpage = ({ data }) => {
 
           <div className="class-details">
             <div className="class-data">
-              <b>ವರ್ಗ : {data?.Sub_Class}</b>
+              {/* <b>ವರ್ಗ : {data?.Sub_Class}</b> */}
+              <b>{QuestionHeader?.classs} : {data?.Sub_Class}</b>
             </div>
             <div className="class-data">
-              <b>ವಿಷಯ: {data?.Subject}</b>
+              {/* <b>ವಿಷಯ: {data?.Subject}</b> */}
+              <b>{QuestionHeader?.subject}: {data?.Subject}</b>
             </div>
             <div>
               <div className="class-data">
-                <b>ಅಂಕಗಳು: {data?.bluePrint?.TotalDifficultMask}</b>
+                {/* <b>ಅಂಕಗಳು: {data?.bluePrint?.TotalDifficultMask}</b> */}
+                <b>{QuestionHeader?.marks}: {data?.bluePrint?.TotalDifficultMask}</b>
               </div>
               <div className="class-data">
-                <b>ಸಮಯ: {data?.bluePrint?.DurationOfExam} </b>
+                {/* <b>ಸಮಯ: {data?.bluePrint?.DurationOfExam} </b> */}
+                <b>{QuestionHeader?.time}: {data?.bluePrint?.DurationOfExam} </b>
               </div>
             </div>
           </div>
@@ -73,19 +112,27 @@ const Frontpage = ({ data }) => {
               {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
                 Information to be filled by the Student
               </h5> */}
-              <h6 style={{ textAlign: "center", padding: "5px 0px" }}>
+              {/* <h6 style={{ textAlign: "center", padding: "5px 0px" }}>
               ವಿದ್ಯಾರ್ಥಿಯಿಂದ ಭರ್ತಿ ಮಾಡಬೇಕಾದ ಮಾಹಿತಿ
+              </h6> */}
+              <h6 style={{ textAlign: "center", padding: "5px 0px" }}>
+             {QuestionHeader?.studentinfo}
               </h6>
               <div>
-                <span style={{ fontSize: "16px" }}>
+                {/* <span style={{ fontSize: "16px" }}>
                 ಪರೀಕ್ಷೆಯ ದಿನಾಂಕ: {data?.Test_Date}
+                </span>{" "} */}
+                <span style={{ fontSize: "16px" }}>
+                {QuestionHeader?.examdate}: {data?.Test_Date}
                 </span>{" "}
                 <br />
-                <span>ಒಟ್ಟು ಪ್ರಶ್ನೆಗಳು: 25</span>
+                {/* <span>ಒಟ್ಟು ಪ್ರಶ್ನೆಗಳು: 25</span> */}
+                <span>{QuestionHeader?.totalquestion}: {totalQA}</span>
               </div>
             </div>
             <div className="student-details">
-              <p style={{ margin: "0px" }}>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು:</p>
+              {/* <p style={{ margin: "0px" }}>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು:</p> */}
+            <p style={{ margin: "0px" }}>{QuestionHeader?.nameofstudent}:</p>
               {/* <p style={{ margin: "0px" }}>Name of the Student:</p> */}
               <div className="line"></div>
             </div>
@@ -93,7 +140,8 @@ const Frontpage = ({ data }) => {
             <div className="student-number-row">
               <div style={{ margin: " auto 0" }}>
                 {/* <p>Student SATS No:</p> */}
-                <p>ವಿದ್ಯಾರ್ಥಿ SATS ನಂ:</p>
+                {/* <p>ವಿದ್ಯಾರ್ಥಿ SATS ನಂ:</p> */}
+                <p>{QuestionHeader?.satsno}:</p>
               </div>
               <div className="d-flex">
                 <div className="number-box"></div>
@@ -108,7 +156,8 @@ const Frontpage = ({ data }) => {
               </div>
               <div className="ss">
                 {/* <p>Signature of the Student:</p> */}
-                <p>ವಿದ್ಯಾರ್ಥಿಯ ಸಹಿ:</p>
+                {/* <p>ವಿದ್ಯಾರ್ಥಿಯ ಸಹಿ:</p> */}
+                <p>{QuestionHeader?.signature}:</p>
                 <div className="line"></div>
               </div>
             </div>
@@ -118,14 +167,18 @@ const Frontpage = ({ data }) => {
             {/* <h5 style={{ textAlign: "center" }}>
               Information to be filled by the Room Invigilator
             </h5> */}
-            <h6 style={{ textAlign: "center" }}>
+            {/* <h6 style={{ textAlign: "center" }}>
             ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಮೂಲಕ ಭರ್ತಿ ಮಾಡಬೇಕಾದ ಮಾಹಿತಿ
+            </h6> */}
+            <h6 style={{ textAlign: "center" }}>
+            {QuestionHeader?.roominvigilator}
             </h6>
 
             <div className="school-number-row">
               <div style={{ margin: " auto 0" }}>
                 {/* <p>School IDSE Code:</p> */}
-                <p>ಶಾಲೆಯ IDSE ಕೋಡ್:</p>
+                {/* <p>ಶಾಲೆಯ IDSE ಕೋಡ್:</p> */}
+                <p>{QuestionHeader?.idsccode}:</p>
               </div>
               <div className="d-flex">
                 <div className="number-box"></div>
@@ -143,7 +196,8 @@ const Frontpage = ({ data }) => {
             </div>
             <div className="student-details">
               {/* <p style={{ margin: "0px" }}>School Name :</p> */}
-              <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p>
+              {/* <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p> */}
+              <p style={{ margin: "0px",fontSize:"15px" }}>{QuestionHeader?.schoolname}:</p>
               <div className="line-2"></div>
             </div>
           </div>
@@ -151,48 +205,57 @@ const Frontpage = ({ data }) => {
           <div className="third-row">
             <div className="student-details">
               {/* <p style={{ margin: "0px" }}>Cluster:</p> */}
-              <p style={{ margin: "0px" }}>ಕ್ಲಸ್ಟರ್:</p>
+              {/* <p style={{ margin: "0px" }}>ಕ್ಲಸ್ಟರ್:</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.cluster}:</p>
               <div className="line-3"></div>
             </div>
             <div className="student-details">
               {/* <p style={{ margin: "0px" }}>Block:</p> */}
-              <p style={{ margin: "0px" }}>ನಿರ್ಬಂಧಿಸಿ:</p>
+              {/* <p style={{ margin: "0px" }}>ನಿರ್ಬಂಧಿಸಿ:</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.block}:</p>
               <div className="line-3"></div>
             </div>
             <div className="student-details">
               {/* <p style={{ margin: "0px" }}>District:</p> */}
-              <p style={{ margin: "0px" }}>ಜಿಲ್ಲೆ:</p>
+              {/* <p style={{ margin: "0px" }}>ಜಿಲ್ಲೆ:</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.distric}:</p>
               <div className="line-3"></div>
             </div>
           </div>
 
           <div className="fourth-row">
-            <div className="school-details">
+            {/* <div className="school-details">
+             
               <p style={{ margin: "0px" }}>ಶಾಲೆಯ ಹೆಸರು:</p>
-              {/* <p style={{ margin: "0px" }}>School Name:</p> */}
-            </div>
+              <p style={{ margin: "0px" }}>School Name:</p>
+            </div> */}
             <div className="school-details">
               {/* <p style={{ margin: "0px" }}>Govt.</p> */}
-              <p style={{ margin: "0px" }}>ಸರಕಾರ</p>
+              {/* <p style={{ margin: "0px" }}>ಸರಕಾರ</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.govt}</p>
               <div className="number-box-1"></div>
             </div>
             <div className="school-details">
-              <p style={{ margin: "0px" }}>ನೆರವು ನೀಡಿದೆ</p>
+              {/* <p style={{ margin: "0px" }}>ನೆರವು ನೀಡಿದೆ</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.aided}</p>
               {/* <p style={{ margin: "0px" }}>Aided</p> */}
               <div className="number-box-1"></div>
             </div>
             <div className="school-details">
               {/* <p style={{ margin: "0px" }}>Un-aided</p> */}
-              <p style={{ margin: "0px" }}>ಅನುದಾನರಹಿತ</p>
+              {/* <p style={{ margin: "0px" }}>ಅನುದಾನರಹಿತ</p> */}
+              <p style={{ margin: "0px" }}>{QuestionHeader?.unaided}</p>
               <div className="number-box-1"></div>
             </div>
           </div>
 
           {/* <div>(Put "✓" mark for applicable information)</div> */}
-          <div>(ಅನ್ವಯವಾಗುವ ಮಾಹಿತಿಗಾಗಿ "✓" ಗುರುತು ಹಾಕಿ)</div>
-          <div className="student-details" style={{ padding: "10px 0" }}>
+          {/* <div>(ಅನ್ವಯವಾಗುವ ಮಾಹಿತಿಗಾಗಿ "✓" ಗುರುತು ಹಾಕಿ)</div> */}
+          <div>({QuestionHeader?.markinfo})</div>
+          <div className="student-details" style={{ padding: "4px 0" }}>
             {/* <p style={{ margin: "0px" }}>Signature of the Room Invigilator: </p> */}
-            <p style={{ margin: "0px" }}>ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಸಹಿ: </p>
+            {/* <p style={{ margin: "0px" }}>ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಸಹಿ: </p> */}
+            <p style={{ margin: "0px" }}>{QuestionHeader?.signatureinvigilator}: </p>
             <div className="line-4"></div>
           </div>
 
@@ -201,11 +264,15 @@ const Frontpage = ({ data }) => {
               Information to be filled by the Evaluator at the time of
               evaluation
             </h5> */}
-            <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
-            ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
-            </h5>
+            {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
+              ಮೌಲ್ಯಮಾಪನದ ಸಮಯದಲ್ಲಿ ಮೌಲ್ಯಮಾಪಕರು ತುಂಬಬೇಕಾದ ಮಾಹಿತಿ
+            </h5> */}
+            <h6 style={{ textAlign: "center",  }}>
+            {QuestionHeader?.evaluator}
+
+            </h6>
             
-            <div></div>
+            <div className="text-center">
             <Table
               responsive
               bordered
@@ -215,114 +282,71 @@ const Frontpage = ({ data }) => {
               <thead>
                 <tr>
                   {/* <th>Question Number</th> */}
-                  <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th>
+                  {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
+                  <th>{QuestionHeader?.questionno1}</th>
                   {/* <th>Obtained marks</th> */}
-                  <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th>
+                  {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
+                  <th>{QuestionHeader?.obtainedno1}</th>
                   {/* <th>Question Number</th> */}
-                  <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th>
+                  {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
+                  <th>{QuestionHeader?.questionno2}</th>
                   {/* <th>Obtained marks</th> */}
-                  <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th>
+                  {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
+                  <th>{QuestionHeader?.obtainedno2}</th>
                   {/* <th>Question Number</th> */}
-                  <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th>
-                  <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th>
+                  {/* <th>ಪ್ರಶ್ನೆ ಸಂಖ್ಯೆ</th> */}
+                  <th>{QuestionHeader?.questionno3}</th>
+                  {/* <th>ಅಂಕಗಳನ್ನು ಪಡೆದಿದ್ದಾರೆ</th> */}
+                  <th>{QuestionHeader?.obtainedno3}</th>
                   {/* <th>Obtained marks</th> */}
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td></td>
-                  <td>11</td>
-                  <td></td>
-                  <td>21</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td></td>
-                  <td>12</td>
-                  <td></td>
-                  <td>22</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td></td>
-                  <td>13</td>
-                  <td></td>
-                  <td>23</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td></td>
-                  <td>14</td>
-                  <td></td>
-                  <td>24</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td></td>
-                  <td>15</td>
-                  <td></td>
-                  <td>25</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td></td>
-                  <td>16</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td></td>
-                  <td>17</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td></td>
-                  <td>18</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td></td>
-                  <td>19</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td></td>
-                  <td>20</td>
-                  <td></td>
-                  <td>-</td>
-                  <td></td>
-                </tr>
+                {array?.map((ele) => {
+                  if (ele <= (numberofStep<=15? 10:10)) {
+                    return (
+                      <tr>
+                        <td>{ele <=totalQA? (ele):"-"}</td>
+                        <td></td>
+                        <td>{ (ele + 10)<=totalQA ?(ele + 10):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 20)<=totalQA ?(ele + 20):"-"}</td>
+                        <td></td>
+                      </tr>
+                    );
+                  }
+                  if (ele <= (numberofStep>15? 20:0)) {
+                    return (
+                      <tr>
+                        <td>{ (ele + 30)<=totalQA ?(ele + 30):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 40)<=totalQA ?(ele + 40):"-" }</td>
+                        <td></td>
+                        <td>{ (ele + 50)<=totalQA ?(ele + 50):"-"}</td>
+                        <td></td>
+                      </tr>
+                    );
+                  }
+                })}
+
+              
                 <tr>
                   <td>
                     {/* <b>Total marks</b> */}
-                    <b>ಒಟ್ಟು ಅಂಕಗಳು</b>
+                    {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                    <b>{QuestionHeader?.totalmarks1}</b>
                   </td>
                   <td></td>
                   <td>
                    {/* <b>Total marks</b> */}
-                   <b>ಒಟ್ಟು ಅಂಕಗಳು</b>
+                   {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                   <b>{QuestionHeader?.totalmarks2}</b>
                   </td>
                   <td></td>
                   <td>
                      {/* <b>Total marks</b> */}
-                     <b>ಒಟ್ಟು ಅಂಕಗಳು</b>
+                     {/* <b>ಒಟ್ಟು ಅಂಕಗಳು</b> */}
+                     <b>{QuestionHeader?.totalmarks3}</b>
                   </td>
                   <td></td>
                 </tr>
@@ -333,21 +357,24 @@ const Frontpage = ({ data }) => {
                   <td></td>
                   <td>
                     {/* <b>Grade Total</b> */}
-                    <b>ಗ್ರೇಡ್ ಒಟ್ಟು</b>
+                    {/* <b>ಗ್ರೇಡ್ ಒಟ್ಟು</b> */}
+                    <b>{QuestionHeader?.grandtotal}</b>
                   </td>
                   <td></td>
                 </tr>
               </tbody>
-            </Table>
+            </Table></div>
           </div>
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Total marks obtained (in words): </p> */}
-            <p style={{ margin: "0px" }}>ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು (ಪದಗಳಲ್ಲಿ): </p>
+            {/* <p style={{ margin: "0px" }}>ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು (ಪದಗಳಲ್ಲಿ): </p> */}
+            <p style={{ margin: "0px" }}>{QuestionHeader?.totalobtainedmarks}: </p>
             <div className="line-5"></div>
           </div>
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Signature of the Evaluator:</p> */}
-            <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p>
+            {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
+            <p style={{ margin: "0px" }}>{QuestionHeader?.evaluatorsign}:</p>
             <div className="line-6"></div>
           </div>
           <div></div>

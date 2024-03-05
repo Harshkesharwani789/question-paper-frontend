@@ -312,7 +312,18 @@ h6 {
     margin: 0;
     padding: 0;
   }
+  #footer {
+    position: fixed;
+    bottom: 0mm; /* Set margin from bottom */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  @page {
+    margin-bottom: 15mm; /* Bottom margin for each printed page */
+  }
 
+  
   #printable-content {
     /* Set fixed height per page */
     height: calc(100vh - 50px); /* Subtracting footer height */
@@ -327,5 +338,8 @@ h6 {
   /* Page break after each printable content */
   #printable-content {
     page-break-after: always;
+
   }
+ 
 }
+
