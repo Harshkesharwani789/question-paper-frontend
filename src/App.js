@@ -184,6 +184,7 @@ import ViewHeader from "./Components/QuestionPaper/ViewHeader";
 import BluePrintHeaderAdd from "./Components/Admin/BluePrintHeaderAdd";
 import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
 import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
+import { CoverPage } from "./Components/Admin/CoverPage";
 
 function App() {
   return (
@@ -409,6 +410,10 @@ function App() {
           <Route
             path="/adminblueprintheaderview"
             element={<Main children={<BluePrintHeaderView />} />}
+          />
+          <Route
+            path="/CoverPage"
+            element={<Main children={<CoverPage />} />}
           />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"

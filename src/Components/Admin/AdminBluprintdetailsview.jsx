@@ -49,8 +49,8 @@ function AdminBlueprintdetailsview() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -216,154 +216,156 @@ function AdminBlueprintdetailsview() {
 
     pdf.save("Blueprint.pdf");
   };
-  console.log("BluePrintAAAA==>",blueprint);
+  console.log("BluePrintAAAA==>", blueprint);
 
 
   const [bluePrintHeader, setbluePrintHeader] = useState({});
   const GetBluePrintHeaderByMedium = async () => {
-      try {
-          let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/"+blueprint?.medium);
-          if (res.status === 200) {
-              setbluePrintHeader(res.data.success);
-          }
-      } catch (error) {
-          console.log(error);
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/" + blueprint?.medium);
+      if (res.status === 200) {
+        setbluePrintHeader(res.data.success);
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
-console.log("bluePrintHeader", bluePrintHeader);
+  console.log("bluePrintHeader", bluePrintHeader);
+
 
   useEffect(() => {
     GetBluePrintHeaderByMedium()
-  }, [])
-  
-  
+  }, [blueprint?.medium])
+
+
+
   return (
     <>
 
       <div className="box_1" >
         <div className="Stepper-info " style={{ padding: "20px" }}>
-        <div className="row">
-                <div className="col-md-12 text-end">
-               <div className="justify-content-end d-flex gap-3">
+          <div className="row">
+            <div className="col-md-12 text-end">
+              <div className="justify-content-end d-flex gap-3">
                 <button onClick={createPDF} className="btn btn-success">View description</button>
                 <button onClick={createPDF1} className="btn btn-success">View Blueprint</button>
-               {/* <FiPrinter onClick={createPDF} style={{cursor:"pointer",color:"blue"}} />
+                {/* <FiPrinter onClick={createPDF} style={{cursor:"pointer",color:"blue"}} />
 
                <FiPrinter onClick={createPDF1} style={{cursor:"pointer",color:"blue"}} /> */}
                 <div id="google_translate_element"></div>
-               </div>
-                
-              
-                </div>
               </div>
-              <div id="pdf">
-          <div className="blueprint-content-display" >
-          
-      
-            <div className="blueprint-titles">
-              <h3>{blueprint?.blName}</h3>
-              {/* <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆ ಕನ್ನಡ ನೇಲಿ ನಕ್ಷೆ</h3> */}
-              <h4>ನೆಲಿ ನಕ್ಷೆ</h4>
+
+
             </div>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-7">
-                  {/* table 3  */}
-                  <div className="weightage-objectives">
-                    <div className="main-title">
-                      <b>1.</b>
-                      <b>{bluePrintHeader?.UnitWiseMrk}</b>
-                    </div>
-                    <div className="objectives-table ">
-                      <Table
-                      responsive
-                        bordered
-                        hover
-                        size="md"
-                        style={{ border: "1px solid" }}
-                      >
-                        <thead>
-                          <tr>
-                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ಪಾಠಗಳು</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {uniqueObjectsArray?.map((item,i)=>{
-                          return ( <tr >
-                                <td>{i+1}</td>
+          </div>
+          <div id="pdf">
+            <div className="blueprint-content-display" >
+
+
+              <div className="blueprint-titles">
+                <h3>{blueprint?.blName}</h3>
+                {/* <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆ ಕನ್ನಡ ನೇಲಿ ನಕ್ಷೆ</h3> */}
+                <h4>{bluePrintHeader?.BluePrintName}</h4>
+              </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-7">
+                    {/* table 3  */}
+                    <div className="weightage-objectives">
+                      <div className="main-title">
+                        <b>1.</b>
+                        <b>{bluePrintHeader?.UnitWiseMrk}</b>
+                      </div>
+                      <div className="objectives-table ">
+                        <Table
+                          responsive
+                          bordered
+                          hover
+                          size="md"
+                          style={{ border: "1px solid" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>{bluePrintHeader?.SNo}</th>
+                              <th>{bluePrintHeader?.Lessons}</th>
+                              <th>{bluePrintHeader?.Questions}</th>
+                              <th>{bluePrintHeader?.Marks}</th>
+                              <th>{bluePrintHeader?.Percentage}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {uniqueObjectsArray?.map((item, i) => {
+                              return (<tr >
+                                <td>{i + 1}</td>
                                 <td>{item?.name}</td>
-                                <td>{AllChapterData?.filter((ele)=> ele?.Blueprintchapter == item?.name)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                          0
-                        )}</td>
+                                <td>{AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
                                 <td>
-                                {AllChapterData?.filter((ele)=> ele?.Blueprintchapter == item?.name)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )}
+                                  {AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
+                                    (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                    0
+                                  )}
                                 </td>
-                                <td>{(AllChapterData?.filter((ele)=> ele?.Blueprintchapter == item?.name)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )/(blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )))*100}%</td>
-                                
+                                <td>{(AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                  0
+                                ) / (blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                ))) * 100}%</td>
+
                               </tr>)
-                        })}
-                             
+                            })}
+
                             {/* );
                           })} */}
 
-                          <tr>
-                            <td>
-                              <b>ಒಟ್ಟು</b>
-                            </td>
-                            <td></td>
-                            <td><b>
-                               {blueprint?.AllChapter?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                          0
-                        )}
+                            <tr>
+                              <td>
+                                <b>{bluePrintHeader?.Total}</b>
+                              </td>
+                              <td></td>
+                              <td><b>
+                                {blueprint?.AllChapter?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+                                  0
+                                )}
                               </b></td>
-                            <td>  <b>
-                               {blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )}
-                            </b>
-                           
-                            </td>
-                            <td>
-                              <b>
-                                {/* {blueprint?.TypesofQuestions?.reduce(
+                              <td>  <b>
+                                {blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                )}
+                              </b>
+
+                              </td>
+                              <td>
+                                <b>
+                                  {/* {blueprint?.TypesofQuestions?.reduce(
                                   (a, i) => a + Number(i?.Mask * i?.NQA),
                                   0
                                 )} */}
-                                100%
-                              </b>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
+                                  100%
+                                </b>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </div>
                     </div>
-                  </div>
-                  {/* <div className="weightage-objectives">
+                    {/* <div className="weightage-objectives">
                     <div className="main-title">
                       <b>1.</b>
                       <b>Weightage to type of Questions</b>
@@ -426,109 +428,109 @@ console.log("bluePrintHeader", bluePrintHeader);
                       </Table>
                     </div>
                   </div> */}
-                </div>
-                <div className="col-md-5">
-                  {/* table 1 */}
-                  <div className="weightage-objectives">
-                    <div className="main-title">
-                      <b>2.</b>
-                      <b>ಉದ್ದೇಶವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
-                    </div>
-                    <div className="objectives-table">
-                      <Table
-                      responsive
-                        bordered
-                        hover
-                        size="md"
-                        style={{ border: "1px solid" }}
-                      >
-                        <thead>
-                          <tr>
-                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ನಿರ್ದಿಷ್ಟಗಳು</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {blueprint?.objectives?.map((item,i)=>{
-                          return (
-                              <tr >
-                                <td>{i+1}</td>
-                                <td>{item?.Objective}</td>
-                                <td>{AllChapterData?.filter((ele)=> ele?.Blueprintobjective == item?.Objective)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                          0
-                        )}</td>
-                               <td>
-                                {AllChapterData?.filter((ele)=> ele?.Blueprintobjective == item?.Objective)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )}
-                                </td>
-                                <td>{(AllChapterData?.filter((ele)=> ele?.Blueprintobjective == item?.Objective)?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )/(blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )))*100}%</td>
-                                
-                              </tr>
-                          )
-                        })}
-                            
-                              <tr>
+                  </div>
+                  <div className="col-md-5">
+                    {/* table 1 */}
+                    <div className="weightage-objectives">
+                      <div className="main-title">
+                        <b>2.</b>
+                        <b>{bluePrintHeader?.ObjectiveMrks}</b>
+                      </div>
+                      <div className="objectives-table">
+                        <Table
+                          responsive
+                          bordered
+                          hover
+                          size="md"
+                          style={{ border: "1px solid" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>{bluePrintHeader?.SNo}</th>
+                              <th>{bluePrintHeader?.Specifics}</th>
+                              <th>{bluePrintHeader?.Questions}</th>
+                              <th>{bluePrintHeader?.Marks}</th>
+                              <th>{bluePrintHeader?.Percentage}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {blueprint?.objectives?.map((item, i) => {
+                              return (
+                                <tr >
+                                  <td>{i + 1}</td>
+                                  <td>{item?.Objective}</td>
+                                  <td>{AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
+                                    (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+                                    0
+                                  )}</td>
+                                  <td>
+                                    {AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
+                                      (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                      0
+                                    )}
+                                  </td>
+                                  <td>{(AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
+                                    (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                    0
+                                  ) / (blueprint?.AllChapter?.reduce(
+                                    (a, ele) =>
+                                      a +
+                                      Number(
+                                        ele?.BluePrintmarksperquestion *
+                                        ele?.Blueprintnoofquestion
+                                      ),
+                                    0
+                                  ))) * 100}%</td>
+
+                                </tr>
+                              )
+                            })}
+
+                            <tr>
                               <td></td>
-                            <td>
-                              <b>ಒಟ್ಟು</b>
-                            </td>
-                           
-                            <td><b>
-                               {blueprint?.AllChapter?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                          0
-                        )}
+                              <td>
+                                <b>{bluePrintHeader?.Total}</b>
+                              </td>
+
+                              <td><b>
+                                {blueprint?.AllChapter?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+                                  0
+                                )}
                               </b></td>
                               <td>  <b>
-                               {blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )}
-                            </b>
-                           
-                            </td>
+                                {blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                )}
+                              </b>
 
-                            <td>
-                              <b>
-                                {/* {blueprint?.TypesofQuestions?.reduce(
+                              </td>
+
+                              <td>
+                                <b>
+                                  {/* {blueprint?.TypesofQuestions?.reduce(
                                   (a, i) => a + Number(i?.Mask * i?.NQA),
                                   0
                                 )} */}
-                                100%
-                              </b>
-                            </td>
-                          </tr>
+                                  100%
+                                </b>
+                              </td>
+                            </tr>
                             {/* );
                           })} */}
 
-                        
-                        </tbody>
-                      </Table>
+
+                          </tbody>
+                        </Table>
+                      </div>
                     </div>
-                  </div>
-                  {/* <div className="weightage-objectives">
+                    {/* <div className="weightage-objectives">
                     <div className="main-title">
                       <b>2.</b>
                       <b>Weightage to Objectives - Marks</b>
@@ -574,11 +576,152 @@ console.log("bluePrintHeader", bluePrintHeader);
                     </div>
                   </div> */}
 
-                  {/* table 2 */}
-                  <div className="weightage-objectives">
+                    {/* table 2 */}
+                    <div className="weightage-objectives">
+                      <div className="main-title">
+                        <b>3.</b>
+                        <b>{bluePrintHeader?.QuestionWiseMrk}</b>
+                      </div>
+                      <div className="text-center">
+                        <div className="objectives-table">
+                          <Table
+                            responsive
+                            bordered
+                            hover
+                            size="sm"
+                            style={{ border: "1px solid" }}
+                          >
+                            <thead>
+                              <tr>
+                                <th>{bluePrintHeader?.SNo}</th>
+                                <th>{bluePrintHeader?.TypeOfQuestion}</th>
+                                <th>{bluePrintHeader?.Questions}</th>
+                                <th>{bluePrintHeader?.Marks}</th>
+                                <th>{bluePrintHeader?.Percentage}</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {/* {blueprint?.Weightageofthecontent?.map((val, i) => {
+                              return ( */}
+                              <tr >
+                                <td>1</td>
+                                <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "O T"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "O T"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.BluePrintmarksperquestion *
+                                      am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "O T")?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                  0
+                                ) / (blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                ))) * 100}%</td>
+                              </tr>
+                              <tr >
+                                <td>2</td>
+                                <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.BluePrintmarksperquestion *
+                                      am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A")?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                  0
+                                ) / (blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                ))) * 100}%</td>
+                              </tr>
+                              <tr >
+                                <td>3</td>
+                                <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+
+                                <td>{AllChapterData?.filter(
+                                  (item) =>
+
+                                    item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3"
+                                )?.reduce(
+                                  (a, am) =>
+                                    a + Number(am?.BluePrintmarksperquestion *
+                                      am?.Blueprintnoofquestion),
+                                  0
+                                )}</td>
+                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3")?.reduce(
+                                  (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
+                                  0
+                                ) / (blueprint?.AllChapter?.reduce(
+                                  (a, ele) =>
+                                    a +
+                                    Number(
+                                      ele?.BluePrintmarksperquestion *
+                                      ele?.Blueprintnoofquestion
+                                    ),
+                                  0
+                                ))) * 100}%</td>
+                              </tr>
+                              {/* );
+                            })} */}
+                            </tbody>
+                          </Table>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <div className="weightage-objectives">
                     <div className="main-title">
                       <b>3.</b>
-                      <b>ಪ್ರಶ್ನಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                      <b>Weightage to Content</b>
                     </div>
                     <div className="text-center">
                       <div className="objectives-table">
@@ -587,241 +730,100 @@ console.log("bluePrintHeader", bluePrintHeader);
                           bordered
                           hover
                           size="sm"
+                          style={{ border: "1px solid" }}
+                        >
+                          <tbody>
+                            {blueprint?.Weightageofthecontent?.map((val, i) => {
+                              return (
+                                <tr key={i}>
+                                  <td>{val?.label}</td>
+                                  <td>{val?.Marks}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+                  </div> */}
+                    {/* <div className="weightage-objectives">
+                    <div className="main-title">
+                      <b>3.</b>
+                      <b>Weightage to Content</b>
+                    </div>
+                    <div className="text-center">
+                      <div className="objectives-table">
+                        <Table
+                          responsive
+                          bordered
+                          hover
+                          size="sm"
+                          style={{ border: "1px solid" }}
+                        >
+                          <tbody>
+                            {blueprint?.Weightageofthecontent?.map((val, i) => {
+                              return (
+                                <tr key={i}>
+                                  <td>{val?.label}</td>
+                                  <td>{val?.Marks}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+                  </div> */}
+
+                    {/* table 4  */}
+                    <div className="weightage-objectives">
+                      <div className="main-title">
+                        <b>4.</b>
+                        <b>{bluePrintHeader?.AccordingRigorMrk}</b>
+                      </div>
+                      <div className="objectives-table">
+                        <Table
+                          bordered
+                          hover
+                          size="md"
                           style={{ border: "1px solid" }}
                         >
                           <thead>
                             <tr>
-                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                              <th>ಪ್ರಶ್ನೆಗಳ ವಿಧ</th>
-                              <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
+                              <th>{bluePrintHeader?.SNo}</th>
+                              <th>{bluePrintHeader?.LevelOfDifficult}</th>
+                              <th>{bluePrintHeader?.Questions}</th>
+                              <th>{bluePrintHeader?.Marks}</th>
+                              <th>{bluePrintHeader?.Percentage}</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {/* {blueprint?.Weightageofthecontent?.map((val, i) => {
-                              return ( */}
-                                <tr >
-                                  <td>1</td>
-                                  <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                      item?.BluePrintQuestiontype == "O T"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                      item?.BluePrintQuestiontype == "O T"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(   am?.BluePrintmarksperquestion *
-                                        am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "O T")?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )/(blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )))*100}%</td>
-                                </tr>
-                                <tr >
-                                  <td>2</td>
-                                  <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                      item?.BluePrintQuestiontype == "V.S.A"|| item?.BluePrintQuestiontype == "S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                      item?.BluePrintQuestiontype == "V.S.A"|| item?.BluePrintQuestiontype == "S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(   am?.BluePrintmarksperquestion *
-                                        am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-                                 <td>{(AllChapterData?.filter((item)=>  item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A")?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )/(blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )))*100}%</td>
-                                </tr>
-                                <tr >
-                                  <td>3</td>
-                                  <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                      item?.BluePrintQuestiontype == "L.A 1"|| item?.BluePrintQuestiontype == "L.A 2"|| item?.BluePrintQuestiontype == "L.A 3"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-
-                                  <td>{AllChapterData?.filter(
-                                    (item) =>
-                                    
-                                    item?.BluePrintQuestiontype == "L.A 1"|| item?.BluePrintQuestiontype == "L.A 2"|| item?.BluePrintQuestiontype == "L.A 3"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(   am?.BluePrintmarksperquestion *
-                                        am?.Blueprintnoofquestion),
-                                    0
-                                  )}</td>
-                                 <td>{(AllChapterData?.filter((item)=>   item?.BluePrintQuestiontype == "L.A 1"|| item?.BluePrintQuestiontype == "L.A 2"|| item?.BluePrintQuestiontype == "L.A 3")?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion*ele?.BluePrintmarksperquestion),
-                          0
-                        )/(blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )))*100}%</td>
-                                </tr>
-                              {/* );
-                            })} */}
+                            <tr>
+                              <td>1</td>
+                              <td>ಸರಳ </td>
+                              <td>{blueprint?.Easy}</td>
+                              <td>{blueprint?.EasyMask}</td>
+                              <td>{blueprint?.EasyParcentage}%</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>ಸಾಧಾರಣ </td>
+                              <td>{blueprint?.Average}</td>
+                              <td>{blueprint?.AverageMask}</td>
+                              <td>{blueprint?.AverageParcentage}%</td>
+                            </tr>
+                            <tr>
+                              <td>3</td>
+                              <td>ಕಠಿಣ</td>
+                              <td>{blueprint?.Difficult}</td>
+                              <td>{blueprint?.DifficultMask}</td>
+                              <td>{blueprint?.DifficultParcentage}%</td>
+                            </tr>
                           </tbody>
                         </Table>
                       </div>
                     </div>
-                  </div>
-                  {/* <div className="weightage-objectives">
-                    <div className="main-title">
-                      <b>3.</b>
-                      <b>Weightage to Content</b>
-                    </div>
-                    <div className="text-center">
-                      <div className="objectives-table">
-                        <Table
-                          responsive
-                          bordered
-                          hover
-                          size="sm"
-                          style={{ border: "1px solid" }}
-                        >
-                          <tbody>
-                            {blueprint?.Weightageofthecontent?.map((val, i) => {
-                              return (
-                                <tr key={i}>
-                                  <td>{val?.label}</td>
-                                  <td>{val?.Marks}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </div>
-                    </div>
-                  </div> */}
-                  {/* <div className="weightage-objectives">
-                    <div className="main-title">
-                      <b>3.</b>
-                      <b>Weightage to Content</b>
-                    </div>
-                    <div className="text-center">
-                      <div className="objectives-table">
-                        <Table
-                          responsive
-                          bordered
-                          hover
-                          size="sm"
-                          style={{ border: "1px solid" }}
-                        >
-                          <tbody>
-                            {blueprint?.Weightageofthecontent?.map((val, i) => {
-                              return (
-                                <tr key={i}>
-                                  <td>{val?.label}</td>
-                                  <td>{val?.Marks}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </div>
-                    </div>
-                  </div> */}
-
-                  {/* table 4  */}
-                  <div className="weightage-objectives">
-                    <div className="main-title">
-                      <b>4.</b>
-                      <b>ಕಠಿಣತಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
-                    </div>
-                    <div className="objectives-table">
-                      <Table
-                        bordered
-                        hover
-                        size="md"
-                        style={{ border: "1px solid" }}
-                      >
-                        <thead>
-                          <tr>
-                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ಕಠಿಣತೆಯ ಮಟ್ಟ</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>ಸರಳ </td>
-                            <td>{blueprint?.Easy}</td>
-                            <td>{blueprint?.EasyMask}</td>
-                            <td>{blueprint?.EasyParcentage}%</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>ಸಾಧಾರಣ </td>
-                            <td>{blueprint?.Average}</td>
-                            <td>{blueprint?.AverageMask}</td>
-                            <td>{blueprint?.AverageParcentage}%</td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>ಕಠಿಣ</td>
-                            <td>{blueprint?.Difficult}</td>
-                            <td>{blueprint?.DifficultMask}</td>
-                            <td>{blueprint?.DifficultParcentage}%</td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </div>
-                  </div>
-                  {/* <div className="weightage-objectives">
+                    {/* <div className="weightage-objectives">
                     <div className="main-title">
                       <b>4.</b>
                       <b>Weightage to Difficult Level</b>
@@ -854,626 +856,637 @@ console.log("bluePrintHeader", bluePrintHeader);
                       </Table>
                     </div>
                   </div> */}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
+
           </div>
 
           {/* blue print 2  */}
           <div id="pdf1">
-          <div style={{ fontFamily: "sans-serif" }}>
-            <div
-              className="blueprint2-container"
-              style={{ padding: "20px 8px" }}
-            >
-             
+            <div style={{ fontFamily: "sans-serif" }}>
+              <div
+                className="blueprint2-container"
+                style={{ padding: "20px 8px" }}
+              >
 
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>
-                  <b>ಸಮಯ : {blueprint?.DurationOfExam}</b>
-                </div>
-                <div>
-                  <b>ನೆಲಿ ನಕ್ಷೆ</b>
-                </div>
-                <div>
-                  <b>
-                  ಅಂಕ :-
-                    {blueprint?.AllChapter?.reduce(
-                      (a, ele) =>
-                        a +
-                        Number(
-                          ele?.BluePrintmarksperquestion *
+
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div>
+                    <b>{bluePrintHeader?.Time} : {blueprint?.DurationOfExam}</b>
+                  </div>
+                  <div>
+                    <b>{bluePrintHeader?.BluePrintName}</b>
+                  </div>
+                  <div>
+                    <b>
+                      {bluePrintHeader?.Marks} :-
+                      {blueprint?.AllChapter?.reduce(
+                        (a, ele) =>
+                          a +
+                          Number(
+                            ele?.BluePrintmarksperquestion *
                             ele?.Blueprintnoofquestion
-                        ),
-                      0
-                    )}
-                  </b>
+                          ),
+                        0
+                      )}
+                    </b>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <Table
-                  responsive
-                  bordered
-                  style={{ border: "1px solid", width: "73.8rem",height:"32rem" }}
-                >
-                  <thead>
-                    <tr>
-                      <th style={{fontSize:"12px",width:"32px"}}>ಕ್ರ.ಸಂ</th>
-                      <th style={{ width: "125px",fontSize:"12px" }}>ಉದ್ದೇಶಿತ ಘಟಕಗಳು</th>
-                      {blueprint?.objectives?.map((ele) => {
+                <div>
+                  <Table
+                    responsive
+                    bordered
+                    style={{ border: "1px solid", width: "fit-content", height: "32rem" }}
+                  >
+                    <thead>
+                      <tr>
+                        <th style={{ fontSize: "12px", width: "32px" }}>{bluePrintHeader?.SNo} </th>
+                        <th style={{ width: "125px", fontSize: "12px" }}>{bluePrintHeader?.TargetUnit}</th>
+                        {blueprint?.objectives?.map((ele) => {
+                          return (
+                            <>
+                              <th colSpan={6} style={{ fontSize: "12px" }}>{ele?.Objective}</th>
+
+                            </>
+                          );
+                        })}
+
+                        <th colSpan={6} style={{ fontSize: "12px" }}>{bluePrintHeader?.TotalQuestion}</th>
+
+                        <th colSpan={1} style={{ fontSize: "12px" }}>{bluePrintHeader?.TotalMarks}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr style={{ borderBottom: "2px solid black" }}>
+                        <th></th>
+                        <th></th>
+
+                        <th style={{ fontSize: "12px" }}>
+                          {bluePrintHeader?.V}
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px" }}>
+                          {bluePrintHeader?.V}
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px" }}>
+                          {bluePrintHeader?.V}
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px" }}>
+                          {bluePrintHeader?.V}
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px" }}>
+                          {bluePrintHeader?.V}
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+
+                        {/* 
+                        <th style={{ fontSize: "12px" }}>
+                          ವ
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>ಕಿ.</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>ದೀ</th>
+
+                        <th style={{ fontSize: "12px" }}>
+                          ವ
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>ಕಿ.</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>ದೀ</th>
+
+                        <th style={{ fontSize: "12px" }}>
+                          ವ
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>ಕಿ.</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>ದೀ</th>
+
+                        <th style={{ fontSize: "12px" }}>
+                          ವ
+                        </th>
+                        <th colSpan={2} style={{ fontSize: "12px" }}>ಕಿ.</th>
+                        <th colSpan={3} style={{ fontSize: "12px" }}>ದೀ</th> */}
+
+
+
+                      </tr>
+                      <tr>
+                        <th></th>
+
+                        <th style={{ width: "125px", fontSize: "12px" }}></th>
+                        {blueprint?.objectives?.map((ele) => {
+                          return (
+                            <>
+
+                              <th style={{ fontSize: "12px" }}></th>
+                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.VSA}</th>
+                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+
+                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
+                            </>
+                          );
+                        })}
+
+                        <th style={{ fontSize: "12px" }}></th>
+                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.VSA}</th>
+                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+
+                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
+
+                        <th style={{ fontSize: "12px" }}></th>
+                      </tr>
+                      {uniqueObjectsArray?.map((ele, i) => {
                         return (
-                          <>
-                            <th colSpan={6} style={{fontSize:"12px"}}>{ele?.Objective}</th>
-                           
-                          </>
-                        );
-                      })}
-
-                      <th colSpan={6} style={{fontSize:"12px"}}>ಒಟ್ಟು ಪ್ರಶ್ನೆ</th>
-                    
-                      <th colSpan={1} style={{fontSize:"12px"}}>ಒಟ್ಟು ಅಂಕ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    
-                    <tr style={{borderBottom:"2px solid black"}}>
-                      <th></th>
-                      <th></th>
-
-                      <th style={{fontSize:"12px"}}>
-                      ವ
-                      </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
-
-                       <th style={{fontSize:"12px"}}>
-                      ವ
-                      </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
-
-                      <th style={{fontSize:"12px"}}>
-                      ವ
-                      </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
-
-                      <th style={{fontSize:"12px"}}>
-                      ವ
-                      </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
-
-                      <th style={{fontSize:"12px"}}>
-                      ವ
-                      </th>
-                      <th colSpan={2} style={{fontSize:"12px"}}>ಕಿ.</th>
-                      <th colSpan={3} style={{fontSize:"12px"}}>ದೀ</th>
-
-                      
-
-                    </tr>
-                    <tr>
-                      <th></th>
-
-                      <th style={{ width: "125px",fontSize:"12px" }}></th>
-                      {blueprint?.objectives?.map((ele) => {
-                        return (
-                          <>
-                      
-                            <th style={{fontSize:"12px"}}></th>
-                          
-                            <th style={{fontSize:"12px"}}>V S A</th>
-                            <th style={{fontSize:"12px"}}>S A</th>
-                           
-                            <th style={{fontSize:"12px"}}>LA 1</th>
-                            <th style={{fontSize:"12px"}}>LA 2</th>
-                            <th style={{fontSize:"12px"}}>LA 3</th>
-                         
-                          </>
-                        );
-                      })}
-
-                      <th style={{fontSize:"12px"}}></th>
-                    
-                      <th style={{fontSize:"12px"}}>VSA</th>
-                      <th style={{fontSize:"12px"}}>SA</th>
-                     
-                     
-                      <th style={{fontSize:"12px"}}>LA 1</th>
-                      <th style={{fontSize:"12px"}}>LA 2</th>
-                      <th style={{fontSize:"12px"}}>LA 3</th>
-                    
-                      <th style={{fontSize:"12px"}}></th>
-                    </tr>
-                    {uniqueObjectsArray?.map((ele, i) => {
-                      return (
-                        <tr>
-                          <td style={{fontSize:"12px"}}>{i + 1}</td>
-                          <td style={{ width: "125px",fontSize:"12px" }}>{ele?.name}</td>
-                          {blueprint?.objectives?.map((ele1) => {
-                            return (
-                              <>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
+                          <tr>
+                            <td style={{ fontSize: "12px" }}>{i + 1}</td>
+                            <td style={{ width: "125px", fontSize: "12px" }}>{ele?.name}</td>
+                            {blueprint?.objectives?.map((ele1) => {
+                              return (
+                                <>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "O T" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
                                       (item) =>
                                         item?.Blueprintobjective ==
-                                          ele1?.Objective &&
+                                        ele1?.Objective &&
                                         item?.BluePrintQuestiontype == "O T" &&
                                         item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "O T" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "O T" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
-                                      })`
-                                    : ""}
-                                </td>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
                                           ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
+                                          item?.BluePrintQuestiontype ==
+                                          "O T" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                      })`
+                                      : ""}
+                                  </td>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
                                           "V.S.A" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "V.S.A" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "V.S.A" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
-                                      })`
-                                    : ""}
-                                </td>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
                                       (item) =>
                                         item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
                                           ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                          "V.S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                      })`
+                                      : ""}
+                                  </td>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype == "S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele1?.Objective &&
                                         item?.BluePrintQuestiontype == "S.A" &&
                                         item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "S.A" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "S.A" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
-                                      })`
-                                    : ""}
-                                </td>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
                                           ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
+                                          item?.BluePrintQuestiontype ==
+                                          "S.A" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                      })`
+                                      : ""}
+                                  </td>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
                                           "L.A 1" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 1" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "L.A 1" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
-                                      })`
-                                    : ""}
-                                </td>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
                                       (item) =>
                                         item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
                                           ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
+                                          item?.BluePrintQuestiontype ==
+                                          "L.A 1" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                      })`
+                                      : ""}
+                                  </td>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
                                           "L.A 2" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 2" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "L.A 2" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
-                                      })`
-                                    : ""}
-                                </td>
-                                <td style={{fontSize:"12px"}}>
-                                  {
-                                    AllChapterData?.find(
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
                                       (item) =>
                                         item?.Blueprintobjective ==
-                                          ele1?.Objective &&
-                                        item?.BluePrintQuestiontype ==
-                                          "L.A 3" &&
-                                        item?.Blueprintchapter == ele?.name
-                                    )?.Blueprintnoofquestion
-                                  }
-                                  {AllChapterData?.some(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
                                         ele1?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 3" &&
-                                      item?.Blueprintchapter == ele?.name
-                                  )
-                                    ? `*(${
-                                        AllChapterData?.find(
-                                          (item) =>
-                                            item?.Blueprintobjective ==
-                                              ele1?.Objective &&
-                                            item?.BluePrintQuestiontype ==
-                                              "L.A 3" &&
-                                            item?.Blueprintchapter == ele?.name
-                                        )?.BluePrintmarksperquestion
+                                        item?.BluePrintQuestiontype == "L.A 2" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                          "L.A 2" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
                                       })`
-                                    : ""}
-                                </td>
-                              </>
-                            );
-                          })}
+                                      : ""}
+                                  </td>
+                                  <td style={{ fontSize: "12px" }}>
+                                    {
+                                      AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                          "L.A 3" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.Blueprintnoofquestion
+                                    }
+                                    {AllChapterData?.some(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele1?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3" &&
+                                        item?.Blueprintchapter == ele?.name
+                                    )
+                                      ? `*(${AllChapterData?.find(
+                                        (item) =>
+                                          item?.Blueprintobjective ==
+                                          ele1?.Objective &&
+                                          item?.BluePrintQuestiontype ==
+                                          "L.A 3" &&
+                                          item?.Blueprintchapter == ele?.name
+                                      )?.BluePrintmarksperquestion
+                                      })`
+                                      : ""}
+                                  </td>
+                                </>
+                              );
+                            })}
 
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "O T")?.TotalQ}
-                          </td>
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
-                          </td>
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "S.A")?.TotalQ}
-                          </td>
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "L.A 1")?.TotalQ}
-                          </td>
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "L.A 2")?.TotalQ}
-                          </td>
-                          <td style={{fontSize:"12px"}}>
-                            {bluePrintTotalQues(ele?.name, "L.A 3")?.TotalQ}
-                          </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "O T")?.TotalQ}
+                            </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
+                            </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "S.A")?.TotalQ}
+                            </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "L.A 1")?.TotalQ}
+                            </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "L.A 2")?.TotalQ}
+                            </td>
+                            <td style={{ fontSize: "12px" }}>
+                              {bluePrintTotalQues(ele?.name, "L.A 3")?.TotalQ}
+                            </td>
 
-                          <td style={{fontSize:"12px"}}>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
-                        </tr>
-                      );
-                    })}
-                    <tr>
-                      <td></td>
-                      <td style={{fontSize:"12px",width:"46px"}}>ಒಟ್ಟು</td>
-                      {blueprint?.objectives?.map((ele) => {
-                        return (
-                          <>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "O T"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "O T"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "O T"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "V.S.A"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "V.S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "V.S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "S.A"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "S.A"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "L.A 1"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 1"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 1"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "L.A 2"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 2"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 2"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td style={{fontSize:"12px"}}>
-                              {AllChapterData?.some(
-                                (item) =>
-                                  item?.Blueprintobjective == ele?.Objective &&
-                                  item?.BluePrintQuestiontype == "L.A 3"
-                              ) ? (
-                                <span>
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 3"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a + Number(am?.Blueprintnoofquestion),
-                                    0
-                                  )}{" "}
-                                  (
-                                  {AllChapterData?.filter(
-                                    (item) =>
-                                      item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                      item?.BluePrintQuestiontype == "L.A 3"
-                                  )?.reduce(
-                                    (a, am) =>
-                                      a +
-                                      Number(
-                                        am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                      ),
-                                    0
-                                  )}
-                                  )
-                                </span>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                          </>
+                            <td style={{ fontSize: "12px" }}>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
+                          </tr>
                         );
                       })}
+                      <tr>
+                        <td></td>
+                        <td style={{ fontSize: "12px", width: "46px" }}>{bluePrintHeader?.Total}</td>
+                        {blueprint?.objectives?.map((ele) => {
+                          return (
+                            <>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "O T"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "O T"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "O T"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "V.S.A"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "V.S.A"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "S.A"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "S.A"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "L.A 1"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 1"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "L.A 2"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 2"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td style={{ fontSize: "12px" }}>
+                                {AllChapterData?.some(
+                                  (item) =>
+                                    item?.Blueprintobjective == ele?.Objective &&
+                                    item?.BluePrintQuestiontype == "L.A 3"
+                                ) ? (
+                                  <span>
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a + Number(am?.Blueprintnoofquestion),
+                                      0
+                                    )}{" "}
+                                    (
+                                    {AllChapterData?.filter(
+                                      (item) =>
+                                        item?.Blueprintobjective ==
+                                        ele?.Objective &&
+                                        item?.BluePrintQuestiontype == "L.A 3"
+                                    )?.reduce(
+                                      (a, am) =>
+                                        a +
+                                        Number(
+                                          am?.BluePrintmarksperquestion *
+                                          am?.Blueprintnoofquestion
+                                        ),
+                                      0
+                                    )}
+                                    )
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                            </>
+                          );
+                        })}
 
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td style={{fontSize:"12px"}}>
-                        {blueprint?.AllChapter?.reduce(
-                          (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                          0
-                        )}
-                      </td>
-                      <td style={{fontSize:"12px"}}>
-                        {blueprint?.AllChapter?.reduce(
-                          (a, ele) =>
-                            a +
-                            Number(
-                              ele?.BluePrintmarksperquestion *
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style={{ fontSize: "12px" }}>
+                          {blueprint?.AllChapter?.reduce(
+                            (a, ele) => a + Number(ele?.Blueprintnoofquestion),
+                            0
+                          )}
+                        </td>
+                        <td style={{ fontSize: "12px" }}>
+                          {blueprint?.AllChapter?.reduce(
+                            (a, ele) =>
+                              a +
+                              Number(
+                                ele?.BluePrintmarksperquestion *
                                 ele?.Blueprintnoofquestion
-                            ),
-                          0
-                        )}
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                              ),
+                            0
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+                <span>{bluePrintHeader?.Note}:-</span>
+                {parse(`<span>${blueprint?.Instructions}</span>`)}
               </div>
-              <span>Note:-</span>
-              {parse(`<span>${blueprint?.Instructions}</span>`)}
-            </div>
-          </div></div>
+            </div></div>
         </div>
       </div>
 
-     
+
     </>
   );
 }

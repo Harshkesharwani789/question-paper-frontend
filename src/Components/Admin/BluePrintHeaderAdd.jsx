@@ -726,7 +726,7 @@ function BluePrintHeaderAdd() {
                                                         }} style={{ width: "80px" }} type="text" placeholder="V" />
                                                     {selectedLanguage == "en-t-i0-und" ? <></> : <p>{V}</p>}
                                                 </th>
-                                                <th colSpan={2}>
+                                                <th>
                                                     <input
                                                         onChange={(e) => {
                                                             if (selectedLanguage == "en-t-i0-und") {
@@ -735,7 +735,7 @@ function BluePrintHeaderAdd() {
                                                         }} style={{ width: "80px" }} type="text" placeholder="K" />
                                                     {selectedLanguage == "en-t-i0-und" ? <></> : <p>{K}</p>}
                                                 </th>
-                                                <th colSpan={3}>
+                                                <th>
                                                     <input
                                                         onChange={(e) => {
                                                             if (selectedLanguage == "en-t-i0-und") {
