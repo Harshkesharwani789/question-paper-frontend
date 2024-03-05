@@ -251,6 +251,7 @@ const handlePrint = () => {
   window.addEventListener('afterprint', () => {
       document.body.innerHTML = originalContent;
   });
+  updaethequestion(true)
 };
 
 
