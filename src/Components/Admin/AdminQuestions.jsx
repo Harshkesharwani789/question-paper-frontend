@@ -347,6 +347,7 @@ const AdminQuestions = () => {
                 <th>Class</th>
                 <th>Subject</th>
                 <th>Sub-Class</th>
+                <th>Chapter Name</th>
                 <th>Types of Question</th>
 
                 <th>
@@ -368,6 +369,7 @@ const AdminQuestions = () => {
                     <td>{val?.Class}</td>
                     <td>{val?.Subject}</td>
                     <td>{val?.Sub_Class}</td>
+                    <td>{val?.Chapter_Name}</td>
                     <td>{val?.Types_Question}</td>
 
                     <td>

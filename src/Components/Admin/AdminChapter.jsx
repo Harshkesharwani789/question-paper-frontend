@@ -847,6 +847,104 @@ const [Medium, setMedium] = useState([]);
             <Modal.Title style={{ color: "white" }}>Edit Chapter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {/* <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Class</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setSubjectPart(e.target.value)}
+                  >
+                    <option value="">Select Sub Class</option>
+                    {getaddsubclass.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+            </div> */}
+            {/* <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Sub Class</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => e.target.value}
+                  >
+                    <option value="">Select Sub Class</option>
+                    {getaddsubclass.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+            </div> */}
+            <div className="do-sear mt-2">
+                <label>Medium</label>
+                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                  <option value="">--Select medium--</option>
+                  {Medium?.map((item)=>{
+                    return(
+                      <option value={item?.mediumName}>{item?.mediumName}</option>
+                    )
+                  })}
+                </select>
+              
+              </div>
+          <div className="do-sear mt-2">
+            <label>Class</label>
+            <select className="vi_0" onChange={(e)=>setClassname(e.target.value)}>
+                  <option value="">--Select Class--</option>
+                  {getaddsubcla?.filter((ele)=>ele.mediumName==mediumName).map((item)=>{
+                    return(
+                      <option value={item?.className}>{item?.className}</option>
+                    )
+                  })}
+                </select>
+              
+            {/* <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setClassname(e.target.value)
+                    }else onChangeHandler(e.target.value,setClassname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Classname}</p>} */}
+          </div>
+          <div className="do-sear mt-2">
+            <label>Sub-Class</label>
+            <select className="vi_0" onChange={(e)=>setSub_classname(e.target.value)}>
+                  <option value="">--Select Class--</option>
+                  {getaddsubcla?.filter((item)=>item.mediumName == mediumName).map((item)=>{
+                    return(
+                      <option value={item?.subclassName}>{item?.subclassName}</option>
+                    )
+                  })}
+                </select>
+            {/* <input
+                  type="text"
+                  placeholder="Enter Subject"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if(selectedLanguage == "en-t-i0-und"){
+                      setSub_classname(e.target.value)
+                    }else onChangeHandler(e.target.value,setSub_classname)                    
+                  }}
+                />
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Sub_classname}</p>} */}
+
+          </div>
             <div className="row">
               <div className="do-sear mt-2">
                 <label>Subject</label>
@@ -855,7 +953,7 @@ const [Medium, setMedium] = useState([]);
                   onChange={(e) => setSubjectName(e.target.value)}
                 >
                   <option>Select Subject</option>
-                  {subject?.map((val, i) => {
+                  {subject?.filter((wow)=>wow.mediumName == mediumName).map((val, i) => {
                     return (
                       <option value={val?.subjectName} key={i}>
                         {val?.subjectName}
@@ -863,6 +961,26 @@ const [Medium, setMedium] = useState([]);
                     );
                   })}
                 </Form.Select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="do-sear mt-2">
+                  <label htmlFor="">Subject Part</label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setSubjectPart(e.target.value)}
+                  >
+                    <option value="">Select Subject Part</option>
+                    {weightage
+                      ?.filter((ele) => subjectName == ele?.Subject)
+                      .map((val, i) => {
+                        return (
+                          <option value={val?.Content}>{val?.Content}</option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
               </div>
             </div>
 
@@ -873,6 +991,7 @@ const [Medium, setMedium] = useState([]);
                   type="text"
                   className="vi_0"
                   placeholder="Enter Chapter Name"
+                  // onChange={(e) => setChapterName(e.target.value)}
                   onChange={(e) => {
                     if(selectedLanguage == "en-t-i0-unb"){
                       setChapterName(e.target.value);
@@ -882,24 +1001,6 @@ const [Medium, setMedium] = useState([]);
                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterName}</p>}
               </div>
             </div>
-
-            {/* <div className="do-sear mt-2">
-          <label>Title 2</label>
-          <input type="text" placeholder="Enter Title 2" className="vi_0" />
-        </div> */}
-
-            {/* <div className="do-sear mt-2">
-            <label>Description</label>
-            <CKEditor
-              editor={ClassicEditor}
-              // data={AbDescription}
-              onChange={handleChange}
-            />
-          </div> */}
-            {/* <div className="do-sear mt-2">
-          <label>URL</label>
-          <input type="text" placeholder="Enter URL" className="vi_0" />
-        </div>  */}
           </Modal.Body>
           <Modal.Footer>
             <Button

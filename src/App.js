@@ -181,6 +181,7 @@ import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
 import QuestionHeader from "./Components/QuestionPaper/QuestionHeader";
 import ViewHeader from "./Components/QuestionPaper/ViewHeader";
+import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 
 function App() {
   return (
@@ -457,6 +458,18 @@ function App() {
                 children={
                   <>
                     <AdminBoard />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/admindifficultylevel"
+            element={
+              <Main
+                children={
+                  <>
+                    <AdminDifficultyLevel />
                   </>
                 }
               />
