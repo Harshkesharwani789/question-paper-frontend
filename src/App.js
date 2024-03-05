@@ -186,6 +186,7 @@ import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
 import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
 import { CoverPage } from "./Components/Admin/CoverPage";
 import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
+import { AddCover } from "./Components/Admin/AddCover";
 
 function App() {
   return (
@@ -385,11 +386,12 @@ function App() {
             }
           />
           <Route
-            path="/CoverPage"
+            path="/science10th"
             exact
             element={
               <>
-                <CoverPage />
+                <Navbarr />
+                <Science10th />
               </>
             }
           />
@@ -421,6 +423,14 @@ function App() {
           <Route
             path="/adminblueprintheaderview"
             element={<Main children={<BluePrintHeaderView />} />}
+          />
+          <Route
+            path="/CoverPage"
+            element={<Main children={<CoverPage />} />}
+          />
+          <Route
+            path="/AddCover"
+            element={<Main children={<AddCover />} />}
           />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"

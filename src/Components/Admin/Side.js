@@ -1002,6 +1002,47 @@ const Side = () => {
                   <span className="ms-2">Account History </span>
                 </li>
               </Link>
+              <Link to="/AddCover" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(true);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                  }}
+                >
+                  <span>
+                    <IoNewspaperOutline style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Cover Page</span>
+                </li>
+              </Link>
            
             </ul>
           </div>
