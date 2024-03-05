@@ -507,6 +507,7 @@ const handlePrint = () => {
                                 ) : (
                                   <></>
                                 )}
+
                                 {item?.Types_Question ===
                                 "Recorrect the Answers Questions" ? (
                                   <>
@@ -1522,7 +1523,7 @@ const handlePrint = () => {
                                       <>
                                         {item.NumberOfLine == "4" ? (
                                           <>
-                                            <div className="">
+                                            <div className="col-sm-6">
                                               <div className="d-flex align-items-baseline mb-3">
                                                 <span> <b>{count++}.</b> {item?.PoemSt}</span>
 
