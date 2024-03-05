@@ -181,6 +181,9 @@ import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
 import QuestionHeader from "./Components/QuestionPaper/QuestionHeader";
 import ViewHeader from "./Components/QuestionPaper/ViewHeader";
+import BluePrintHeaderAdd from "./Components/Admin/BluePrintHeaderAdd";
+import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
+import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
 
 function App() {
   return (
@@ -394,6 +397,18 @@ function App() {
           <Route
             path="/adminblueprintdetails"
             element={<Main children={<AdminBlueprintdetails />} />}
+          />
+          <Route
+            path="/adminblueprintheader"
+            element={<Main children={<BluePrintHeaderAdd />} />}
+          />
+          <Route
+            path="/adminblueprintheadertype"
+            element={<Main children={<BluePrintHeaderType />} />}
+          />
+          <Route
+            path="/adminblueprintheaderview"
+            element={<Main children={<BluePrintHeaderView />} />}
           />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"

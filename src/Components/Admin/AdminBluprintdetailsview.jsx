@@ -218,6 +218,24 @@ function AdminBlueprintdetailsview() {
   };
   console.log("BluePrintAAAA==>",blueprint);
 
+
+  const [bluePrintHeader, setbluePrintHeader] = useState({});
+  const GetBluePrintHeaderByMedium = async () => {
+      try {
+          let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/"+blueprint?.medium);
+          if (res.status === 200) {
+              setbluePrintHeader(res.data.success);
+          }
+      } catch (error) {
+          console.log(error);
+      }
+  };
+console.log("bluePrintHeader", bluePrintHeader);
+
+  useEffect(() => {
+    GetBluePrintHeaderByMedium()
+  }, [])
+  
   
   return (
     <>
@@ -254,7 +272,7 @@ function AdminBlueprintdetailsview() {
                   <div className="weightage-objectives">
                     <div className="main-title">
                       <b>1.</b>
-                      <b>ಘಟಕವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                      <b>{bluePrintHeader?.UnitWiseMrk}</b>
                     </div>
                     <div className="objectives-table ">
                       <Table
