@@ -97,11 +97,10 @@ function AnswerQuestion() {
                   <div id="pdf-content" className="question-paper-display">
                     <div className="englishqp-page-body">
                       <div>
-                        <h6>ಶ್ರೀ ಮಾತಾ ಶಾರದ ಪಬ್ಲಿಕ್ ಶಾಲೆ. ಗದಗ ಜಿಲ್ಲೆ ಗದಗ,ಗದಗ
-                        <br /><br />Class 7 ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ
-೭ ನೇ ತರಗತಿ ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ<br />
-
-ಉತ್ತರ ಸೂಚಿ ವಿಶ್ಲೇಷಣೆ</h6>
+                      <h4>{state?.Institute_Name } {state?.SchoolAddress}</h4>
+                       
+                      <h4>{state?.bluePrint?.blName}</h4>
+<h6>{state?.subjects}</h6>
                         <h2>{state?.Subject}</h2>
                         {/* <h4>
                           <b>{state?.bluePrint?.blName}</b>
@@ -112,6 +111,8 @@ function AnswerQuestion() {
                       <div style={{ fontWeight: "bold" }}>
                         <div className="time-and-marks">
                           <div>ಸಮಯ :{state?.bluePrint?.DurationOfExam}</div>
+                          <div>ಉತ್ತರ ಸೂಚಿ</div>
+                          <div>{state?.Sub_Class}</div>
                           <div>
                           ಅಂಕಗಳು : {state?.bluePrint?.TotalDifficultMask}
                           </div>

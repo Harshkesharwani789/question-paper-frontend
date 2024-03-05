@@ -1530,22 +1530,22 @@ const handlePrint = () => {
                                                   className=" mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "37%",
                                                   }}
                                                 ></div>
                                               </div>
                                               <div className="" style={{marginTop:"33px"}}>
-                                                <p className="ans-line"></p>
+                                                <p className="ans-line" style={{width:"55%"}}></p>
                                               </div>
                                              <div className=""  style={{marginTop:"33px"}}>
-                                                <p className="ans-line"></p>
+                                                <p className="ans-line" style={{width:"55%"}}></p>
                                               </div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 "
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "44%",
                                                     marginTop:"33px"
                                                   }}
                                                 ></div>
@@ -1566,19 +1566,19 @@ const handlePrint = () => {
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "37%",
                                                   }}
                                                 ></div>
                                               </div>
-                                              <div className="ans-line mb-4"></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "44%",
                                                   }}
                                                 ></div>
                                                 <span>{item?.PoemEnd}</span>
@@ -1598,20 +1598,20 @@ const handlePrint = () => {
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "37%",
                                                   }}
                                                 ></div>
                                               </div>
-                                              <div className="ans-line mb-4"></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 "  style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "44%",
                                                   }}
                                                 ></div>
                                                 <span>{item?.PoemEnd}</span>
@@ -1631,21 +1631,21 @@ const handlePrint = () => {
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "37%",
                                                   }}
                                                 ></div>
                                               </div>
-                                              <div className="ans-line mb-4"></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
-                                              <div className="ans-line mb-4 "></div>
+                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 mt-2"
                                                   style={{
                                                     borderBottom: "1px solid",
-                                                    width: "80%",
+                                                    width: "44%",
                                                   }}
                                                 ></div>
                                                 <span>{item?.PoemEnd}</span>

@@ -333,7 +333,8 @@ const BluePrint = () => {
                                     </div>
                                     <div className="title-3">
                                       <h4>{val?.blName}</h4>
-                                      {/* <h4>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆಗಳ ನೇಲಿ ನಕ್ಷೆ</h4> */}
+                                      <h4>ನೀಲ ನಕ್ಷೆ</h4>
+                                   
                                     </div>
                                   </div>
                                 </div>
@@ -344,7 +345,7 @@ const BluePrint = () => {
                               <div className="row">
                                 <div className="class-details">
                                   <div className="class-data">
-                                    <b>ತರಗತಿ : 7</b>
+                                    <b>{state?.Sub_Class}</b>
                                   </div>
                                   <div className="class-data">
                                     <b>ವಿಷಯ: {val?.subjects}</b>

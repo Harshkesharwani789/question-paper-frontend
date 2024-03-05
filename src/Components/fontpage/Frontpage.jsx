@@ -68,7 +68,7 @@ console.log("QuestionHeader",QuestionHeader);
                 ) : (
                   <></>
                 )}
-                <h6>ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ಮೌಲ್ಯಮಾಪನ 2024</h6>
+                <h6>{data?.bluePrint?.blName}</h6>
               </div>
             </div>
             <div className="title-2">

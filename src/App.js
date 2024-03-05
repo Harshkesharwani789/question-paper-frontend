@@ -179,6 +179,8 @@ import OfferQuestionPaper from "./Components/Home/OfferQuestionPaper";
 import UploadPdfQuestion from "./Components/Admin/UploadPdfQuestion";
 import AnswerQuestion from "./Components/QuestionPaper/AnswerQuestion";
 import QuestionType from "./Components/Admin/QuestionType";
+import QuestionHeader from "./Components/QuestionPaper/QuestionHeader";
+import ViewHeader from "./Components/QuestionPaper/ViewHeader";
 
 function App() {
   return (
@@ -366,6 +368,7 @@ function App() {
               </>
             }
           />
+          
           <Route
             path="/science10th"
             exact
@@ -1397,6 +1400,32 @@ function App() {
               />
             }
           />
+          <Route
+            path="/questionheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <QuestionHeader />
+                  </>
+                }
+              />
+            }
+          />
+           <Route
+            path="/viewheader"
+            element={
+              <Main
+                children={
+                  <>
+                    <ViewHeader />
+                  </>
+                }
+              />
+            }
+          />
+          
+          
           <Route
             path="/addonewordquestion"
             element={
