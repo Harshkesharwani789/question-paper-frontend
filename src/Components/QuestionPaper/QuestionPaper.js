@@ -649,7 +649,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       
                                     </div>
                                     <br/>
-                                                <p>ಉತ್ತರ</p> 
+                                                <p>{QuestionHeader?.ans}</p> 
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -705,7 +705,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -767,7 +767,7 @@ console.log("QuestionHeader",QuestionHeader);
                                      
                                     </div>
                                     <br />
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -788,7 +788,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -850,7 +850,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       
                                     </div>
                                     <br />
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -871,7 +871,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -951,7 +951,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1031,7 +1031,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1111,7 +1111,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1191,7 +1191,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1286,7 +1286,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       
                                     </div>
                                     <br/>
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -1307,7 +1307,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1354,7 +1354,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     )}
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1470,7 +1470,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     </Row>
                                     {item?.ImageQ ? (
                                       <>
-                                        <h4>(OR)</h4>
+                                        <h4>({QuestionHeader?.or})</h4>
                                         <div>
                                           {item?.ImageQ ? (
                                             <>
@@ -1559,10 +1559,10 @@ console.log("QuestionHeader",QuestionHeader);
                                                 ></div>
                                               </div>
                                               <div className="" style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"55%"}}></p>
+                                                <p className="ans-line" style={{width:"72%"}}></p>
                                               </div>
                                              <div className=""  style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"55%"}}></p>
+                                                <p className="ans-line" style={{width:"72%"}}></p>
                                               </div>
                                               <div className="d-flex align-items-end">
                                                 <div
@@ -1594,9 +1594,9 @@ console.log("QuestionHeader",QuestionHeader);
                                                   }}
                                                 ></div>
                                               </div>
-                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4" style={{width:"72%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 mt-2"
@@ -1685,7 +1685,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     )}
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
 
                                         <div
                                           style={{
@@ -1970,7 +1970,7 @@ console.log("QuestionHeader",QuestionHeader);
                                     
                                     </div>
                                     <br/>
-                          <p>ಉತ್ತರ:</p>
+                          <p>{QuestionHeader?.ans}:</p>
                                     <div className="d-flex mb-1">
                                       {item?.Image_1 ? (
                                         <>
@@ -2182,7 +2182,7 @@ console.log("QuestionHeader",QuestionHeader);
                                      
                                     </div>
                                     <br/>
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div className="mb-2">
                                       {item?.NumberOfLine && (
                                         <>
@@ -2206,7 +2206,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       <>
                                         <div>
                                           <h5 style={{ textAlign: "center" }}>
-                                            (OR)
+                                            ({QuestionHeader?.or})
                                           </h5>
 
                                           <div>
@@ -2270,7 +2270,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       <>
                                         <div>
                                           <h5 style={{ textAlign: "center" }}>
-                                            (OR)
+                                            ({QuestionHeader?.or})
                                           </h5>
 
                                           <div>
