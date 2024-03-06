@@ -93,9 +93,12 @@ console.log("QuestionHeader",QuestionHeader);
             </div>
             <div className="class-data">
               {/* <b>ವಿಷಯ: {data?.Subject}</b> */}
-              <b>{QuestionHeader?.subject}: {data?.Subject}</b>
+              <b>{QuestionHeader?.subject}: {data?.Subject}</b><br/>
+              <b>ಮಾಧ್ಯಮ: {QuestionHeader?.medium}</b>
+              
+              
             </div>
-            <div>
+            <div style={{textAlign:"justify"}}>
               <div className="class-data">
                 {/* <b>ಅಂಕಗಳು: {data?.bluePrint?.TotalDifficultMask}</b> */}
                 <b>{QuestionHeader?.marks}: {data?.bluePrint?.TotalDifficultMask}</b>
@@ -104,11 +107,20 @@ console.log("QuestionHeader",QuestionHeader);
                 {/* <b>ಸಮಯ: {data?.bluePrint?.DurationOfExam} </b> */}
                 <b>{QuestionHeader?.time}: {data?.bluePrint?.DurationOfExam} </b>
               </div>
+              <div className="class-data">
+                {/* <b>ಸಮಯ: {data?.bluePrint?.DurationOfExam} </b> */}
+                {/* <b>{QuestionHeader?.time}: {data?.bluePrint?.DurationOfExam} </b> */}
+               <b>{QuestionHeader?.examdate}: {data?.Test_Date}</b> 
+              </div>
+              <div className="class-data">
+                {/* <b>ಸಮಯ: {data?.bluePrint?.DurationOfExam} </b> */}
+                <b>{QuestionHeader?.totalquestion}: {totalQA} </b>
+              </div>
             </div>
           </div>
 
           <div className="student-details-container">
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-center">
               {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
                 Information to be filled by the Student
               </h5> */}
@@ -123,11 +135,11 @@ console.log("QuestionHeader",QuestionHeader);
                 ಪರೀಕ್ಷೆಯ ದಿನಾಂಕ: {data?.Test_Date}
                 </span>{" "} */}
                 <span style={{ fontSize: "16px" }}>
-                {QuestionHeader?.examdate}: {data?.Test_Date}
+                {/* {QuestionHeader?.examdate}: {data?.Test_Date} */}
                 </span>{" "}
                 <br />
                 {/* <span>ಒಟ್ಟು ಪ್ರಶ್ನೆಗಳು: 25</span> */}
-                <span>{QuestionHeader?.totalquestion}: {totalQA}</span>
+                {/* <span>{QuestionHeader?.totalquestion}: {totalQA}</span> */}
               </div>
             </div>
             <div className="student-details">
@@ -143,7 +155,8 @@ console.log("QuestionHeader",QuestionHeader);
                 {/* <p>ವಿದ್ಯಾರ್ಥಿ SATS ನಂ:</p> */}
                 <p>{QuestionHeader?.satsno}:</p>
               </div>
-              <div className="d-flex">
+              {/* style={{marginLeft:"-59px"}} */}
+              <div className="d-flex" >
                 <div className="number-box"></div>
                 <div className="number-box"></div>
                 <div className="number-box"></div>
@@ -154,11 +167,16 @@ console.log("QuestionHeader",QuestionHeader);
                 <div className="number-box"></div>
                 <div className="number-box"></div>
               </div>
-              <div className="ss">
+              {/* style={{marginRight:"107px"}} */}
+              <div className="" >
                 {/* <p>Signature of the Student:</p> */}
                 {/* <p>ವಿದ್ಯಾರ್ಥಿಯ ಸಹಿ:</p> */}
-                <p>{QuestionHeader?.signature}:</p>
-                <div className="line"></div>
+                
+                <p>{QuestionHeader?.signature}: <b>___________</b></p>
+                <div className=""></div>
+                
+                
+                
               </div>
             </div>
           </div>
@@ -252,12 +270,17 @@ console.log("QuestionHeader",QuestionHeader);
           {/* <div>(Put "✓" mark for applicable information)</div> */}
           {/* <div>(ಅನ್ವಯವಾಗುವ ಮಾಹಿತಿಗಾಗಿ "✓" ಗುರುತು ಹಾಕಿ)</div> */}
           <div>({QuestionHeader?.markinfo})</div>
-          <div className="student-details" style={{ padding: "4px 0" }}>
+          <div className="d-flex justify-content-end">
+         
+          <div className="student-details" style={{ padding: "4px 0", width:"49%" }}>
             {/* <p style={{ margin: "0px" }}>Signature of the Room Invigilator: </p> */}
             {/* <p style={{ margin: "0px" }}>ರೂಮ್ ಇನ್ವಿಜಿಲೇಟರ್ ಸಹಿ: </p> */}
             <p style={{ margin: "0px" }}>{QuestionHeader?.signatureinvigilator}: </p>
-            <div className="line-4"></div>
+            <div className="line-4" style={{width:"40%"}}></div>
           </div>
+          </div>
+
+          
 
           <div>
             {/* <h5 style={{ textAlign: "center", padding: "5px 0px" }}>
@@ -368,16 +391,27 @@ console.log("QuestionHeader",QuestionHeader);
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Total marks obtained (in words): </p> */}
             {/* <p style={{ margin: "0px" }}>ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು (ಪದಗಳಲ್ಲಿ): </p> */}
-            <p style={{ margin: "0px" }}>{QuestionHeader?.totalobtainedmarks}: </p>
+            <p style={{ margin: "0px",fontSize:"14px" }}>{QuestionHeader?.totalobtainedmarks}: </p>
             <div className="line-5"></div>
+          </div>
+          
+         
+          <div className="d-flex justify-content-end">
+          <div style={{width:"60%"}}>
+          <div className="student-details">
+            {/* <p style={{ margin: "0px" }}>Signature of the Evaluator:</p> */}
+            {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
+            <p style={{ margin: "0px",fontSize:"14px" }}>{QuestionHeader?.evaluatorsign}:</p>
+            <div className="line-6" style={{width:"64%"}}></div>
           </div>
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Signature of the Evaluator:</p> */}
             {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
-            <p style={{ margin: "0px" }}>{QuestionHeader?.evaluatorsign}:</p>
-            <div className="line-6"></div>
+            <p style={{ margin: "0px",fontSize:"14px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p>
+            <div className="line-6" style={{width:"64%"}}></div>
           </div>
-          <div></div>
+          </div>
+          </div>
         </div>
       </div>
     </div>

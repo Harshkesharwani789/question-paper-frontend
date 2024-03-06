@@ -72,12 +72,13 @@
 .student-number-row {
   padding: 10px 0;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 16px;
 }
 
 .number-box {
   border: 1px solid;
-  padding: 10px 18px;
+  padding: 4px 13px;
 }
 .school-number-row {
   padding: 10px 0;

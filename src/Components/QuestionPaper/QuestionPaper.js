@@ -16,7 +16,7 @@ import axios from "axios";
 import swal from "sweetalert";
 // import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 // import { PDFViewer } from "@react-pdf/renderer";
-
+import ReactToPrint from 'react-to-print';
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
@@ -242,7 +242,7 @@ const handlePrint = () => {
 
   // Replace the content of the body with the content of the printable section including footer and spacer
   document.body.innerHTML = printableContent;
-  // document.body.appendChild(footerContainer);
+  document.body.appendChild(footerContainer);
   
   // Print the content
   window.print();
@@ -254,6 +254,29 @@ const handlePrint = () => {
   updaethequestion(true)
 };
 
+
+const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(() => {
+  getQuestionHeaderbyMedium()
+}, [])
+console.log("QuestionHeader",QuestionHeader);
 
 
 
@@ -507,6 +530,7 @@ const handlePrint = () => {
                                 ) : (
                                   <></>
                                 )}
+
                                 {item?.Types_Question ===
                                 "Recorrect the Answers Questions" ? (
                                   <>
@@ -1522,7 +1546,7 @@ const handlePrint = () => {
                                       <>
                                         {item.NumberOfLine == "4" ? (
                                           <>
-                                            <div className="">
+                                            <div className="col-sm-6">
                                               <div className="d-flex align-items-baseline mb-3">
                                                 <span> <b>{count++}.</b> {item?.PoemSt}</span>
 
