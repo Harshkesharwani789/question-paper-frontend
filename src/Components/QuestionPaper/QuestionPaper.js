@@ -16,7 +16,7 @@ import axios from "axios";
 import swal from "sweetalert";
 // import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 // import { PDFViewer } from "@react-pdf/renderer";
-
+import ReactToPrint from 'react-to-print';
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");

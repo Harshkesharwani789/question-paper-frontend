@@ -35,6 +35,7 @@
     "react-math-keyboard": "^1.5.8",
     "react-router-dom": "^6.21.2",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.3",
     "sweetalert": "^2.1.2",
     "translate-google": "^1.5.0",
