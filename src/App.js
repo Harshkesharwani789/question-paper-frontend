@@ -186,6 +186,9 @@ import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
 import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
 import { CoverPage } from "./Components/Admin/CoverPage";
 import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
+import AdminQuestionAnalysisHeader from "./Components/Admin/AdminQuestionAnalysisHeader";
+import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnalysisHeaderAdd";
+import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
 
 function App() {
@@ -443,6 +446,18 @@ function App() {
           <Route
             path="/weightageofthecontent"
             element={<Main children={<Weightagecontent />} />}
+          />
+          <Route
+            path="/adminquestionsanalysisheadertype"
+            element={<Main children={<AdminQuestionAnalysisHeader />} />}
+          />
+          <Route
+            path="/adminquestionsanalysisheaderadd"
+            element={<Main children={<AdminQuestionAnalysisHeaderAdd />} />}
+          />
+          <Route
+            path="/adminquestionsanalysisheaderview"
+            element={<Main children={<AdminQuestionAnalysisHeaderView />} />}
           />
           <Route
             path="/admineditquestiondetails/:question_Id"

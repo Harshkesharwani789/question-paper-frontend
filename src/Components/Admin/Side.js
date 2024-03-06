@@ -80,6 +80,7 @@ const Side = () => {
   const [oddandout, setoddandout] = useState(false);
   const [mcq, setmcq] = useState(false);
   const [passage, setpassage] = useState(false);
+  const [questAnalysis, setquestAnalysis] = useState(false);
 
   // Responsive sidebar
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -162,6 +163,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -203,6 +205,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -244,6 +247,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -286,6 +290,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -318,6 +323,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -350,6 +356,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -382,6 +389,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -414,6 +422,7 @@ const Side = () => {
                     setRecorrect(false);
                     setFivesentence(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -446,6 +455,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -478,6 +488,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -510,6 +521,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -541,12 +553,45 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
                     <FaWeightHanging style={{ fontSize: "20px" }} />
                   </span>
                   <span className="ms-2">Blue Print Header</span>
+                </li>
+              </Link>
+              <Link to="/adminquestionsanalysisheadertype" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(true);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Questions Analysis Header</span>
                 </li>
               </Link>
               <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
@@ -573,6 +618,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -605,6 +651,7 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -829,6 +876,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -871,6 +919,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -912,6 +961,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -953,6 +1003,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
@@ -994,6 +1045,7 @@ const Side = () => {
                     setoddandout(false);
                     setmcq(false);
                     setpassage(false);
+                    setquestAnalysis(false);
                   }}
                 >
                   <span>
