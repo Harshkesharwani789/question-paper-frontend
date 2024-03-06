@@ -79,26 +79,26 @@ function QuestionAnalysis() {
 
   function check(am) {
     if (
-      am == "Objective Questions" ||
+      // am == "Objective Questions" ||
       am == "One Word Question" ||
       am == "Multiple Choice Questions" ||
       am == "Fill in the Blanks Questions" ||
-      am == "Recorrect the Answers Questions" ||
+      am == "Classifications of Questions" ||
       am == "Match the Following Questions" ||
       am == "Recorrect the Answers Questions" ||
       am == "Odd and out words Questions" ||
       am == "RelationShip Words Questions" ||
-      am == "Grammer Questions"
+      am == "Grammer Questions"|| am == "One Sentence Answer Question" 
     ) {
       return "O.T";
     }
     if (
-      am == "One Sentence Answer Question" ||
+   
       am == "Two  Sentence Answer Questions" ||
       am == "Situation UnderStatnding answer Questions" ||
       am == "Complete the Poem" ||
       am == "Poet,Time, Place, Writer answer questions" ||
-      am == "Classifications of Questions" ||
+    
       am == "Two and three Sentence Answer Questions"
     ) {
       return "S.A";
@@ -145,42 +145,44 @@ function QuestionAnalysis() {
   }, []);
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className="row">
         <div className="col-md-9"></div>
-        <div className="col-md-3">
+        <div className="col-md-3 d-flex justify-content-end">
           <LuPrinter
             style={{ width: "22px", height: "40px" }}
             onClick={handlePrint}
           />
         </div>
       </div>
+      <div  >
       <Container
         className="mt-4"
-        style={{ border: "5px solid black", borderRadius: "15px" }}
+        style={{ border: "3px solid black", borderRadius: "15px" }}
         id="printable-content"
       >
         <div className="mt-4">
-          <h3>
+          <h6>
             {" "}
             {state?.Institute_Name ? (
-              <h6>
+              <h6><b>
                 {state?.Institute_Name},{state?.SchoolAddress}
+                </b>
               </h6>
             ) : (
               <></>
             )}
-          </h3>
-          <h3 className="text-center">{state?.bluePrint?.blName}</h3>
-          <h3 className="text-center">
-            {state?.Sub_Class} {state?.Subject}
-          </h3>
+          </h6>
+          <h6 className="text-center"><b>{state?.bluePrint?.blName}</b></h6>
+          <h6 className="text-center">
+            <b>{state?.Sub_Class} {state?.Subject}</b>
+          </h6>
           {/* <h3 className="text-center"> ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ </h3> */}
 
-          <h4>{GetquestAnalysisHeader?.QuestHeader}</h4>
+          <h6><b>{GetquestAnalysisHeader?.QuestHeader}</b></h6>
         </div>
         <div className="text-center">
-          <Table bordered style={{ fontFamily: "math", border: "1px solid" }}>
+          <Table bordered responsive style={{ fontFamily: "math", border: "1px solid" }}>
             <thead>
               <tr>
                 <th>{GetquestAnalysisHeader?.slno}</th>
@@ -234,6 +236,8 @@ function QuestionAnalysis() {
           <p>{GetquestAnalysisHeader?.Note}</p>
         </div>
       </Container>
+      </div>
+      
       <div className="d-flex justify-content-center mt-2 ">
         <Button
           className="md-2"

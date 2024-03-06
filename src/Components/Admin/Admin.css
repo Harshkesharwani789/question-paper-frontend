@@ -637,6 +637,7 @@ table thead tr th {
     /* width: 20%; */
     /* background-color: navy; */
     z-index: 99999;
+    height: 81px;
   }
   .custom-toggler{
     background-color: #083494 !important;

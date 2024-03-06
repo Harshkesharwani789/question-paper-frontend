@@ -308,7 +308,7 @@ h6 {
 /* CSS styles for print layout */
 @media print {
   html, body {
-    height: 90%;
+    height: 100%;
     margin: 0;
     padding: 0;
 
@@ -323,7 +323,6 @@ h6 {
  
 
    @page {
-
     @bottom-center {
       content : counter(page)
     } 
@@ -334,7 +333,7 @@ h6 {
   #printable-content {
    
     height: calc(100vh - 50px);
-    overflow: hidden; 
+  
   }
 
 
@@ -349,4 +348,7 @@ h6 {
   }
  
 }
+
+/* Global CSS or styled-components */
+
 

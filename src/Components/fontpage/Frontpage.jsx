@@ -58,17 +58,18 @@ console.log("QuestionHeader",QuestionHeader);
                   <></>
                 )}
               </div>
-              <div className="col-sm-10">
+              <div className="col-sm-10 mt-5">
                 {/* <h4 className="mb-2"> ಮೋಹನ್ ಕುಮಾರ್ ಶಿಕ್ಷಣ ಸಂಸ್ಥೆ</h4> */}
-                <h5>{data?.Board}</h5> 
+                {/* <h5>{data?.Board}</h5>  */}
                 {data?.Institute_Name ? (
                   <h6>
-                    {data?.Institute_Name},{data?.SchoolAddress}
+                    <b>{data?.Institute_Name},{data?.SchoolAddress}</b>
+                    
                   </h6>
                 ) : (
                   <></>
                 )}
-                <h6>{data?.bluePrint?.blName}</h6>
+                <h6><b>{data?.bluePrint?.blName}</b></h6>
               </div>
             </div>
             <div className="title-2">

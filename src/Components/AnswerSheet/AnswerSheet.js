@@ -10,7 +10,7 @@ import {
 import "./AnswerSheet.css";
 const AnswerSheet = () => {
   return (
-    <div>
+    <div >
       {/* first page starts here  */}
       <div className="Answer-paper-display">
         <div className="details-display ">

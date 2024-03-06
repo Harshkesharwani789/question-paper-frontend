@@ -241,3 +241,8 @@ button {
   height: 35px;
 
 }
+@media screen  and (max-width:799px){
+  .vertical-line{
+    display: none !important;
+  }
+}

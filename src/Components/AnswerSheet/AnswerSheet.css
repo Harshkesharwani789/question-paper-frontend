@@ -100,4 +100,7 @@
   .eight-10-marks-ans {
     height: 100%;
   }
+  .class-details{
+    gap:10px !important
+  }
 }
