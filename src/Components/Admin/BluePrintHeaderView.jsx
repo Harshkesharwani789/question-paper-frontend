@@ -176,7 +176,25 @@ function BluePrintHeaderView() {
                                                         <tbody>
                                                             <tr >
                                                                 <td>1</td>
-                                                                <td>Objective question</td>
+                                                                <td>{item?.Objectivequestion}</td>
+                                                                <td>
+                                                                    14
+                                                                </td>
+                                                                <td>23</td>
+                                                                <td>100%</td>
+                                                            </tr>
+                                                            <tr >
+                                                                <td>2</td>
+                                                                <td>{item?.ShortanswerQ}</td>
+                                                                <td>
+                                                                    14
+                                                                </td>
+                                                                <td>23</td>
+                                                                <td>100%</td>
+                                                            </tr>
+                                                            <tr >
+                                                                <td>3</td>
+                                                                <td>{item?.LonganswerQ}</td>
                                                                 <td>
                                                                     14
                                                                 </td>
@@ -214,7 +232,21 @@ function BluePrintHeaderView() {
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td>Level Easy or Hard</td>
+                                                            <td>{item?.Easy} </td>
+                                                            <td>12</td>
+                                                            <td>23</td>
+                                                            <td>100%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>{item?.MediumQ} </td>
+                                                            <td>12</td>
+                                                            <td>23</td>
+                                                            <td>100%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>{item?.Difficult}</td>
                                                             <td>12</td>
                                                             <td>23</td>
                                                             <td>100%</td>

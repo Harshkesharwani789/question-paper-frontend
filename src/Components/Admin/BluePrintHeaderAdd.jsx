@@ -98,6 +98,12 @@ function BluePrintHeaderAdd() {
     const [LA2, setLA2] = useState("")
     const [LA3, setLA3] = useState("")
     const [Note, setNote] = useState("")
+    const [Objectivequestion, setObjectivequestion] = useState("")
+    const [ShortanswerQ, setShortanswerQ] = useState("")
+    const [LonganswerQ, setLonganswerQ] = useState("")
+    const [Easy, setEasy] = useState("")
+    const [MediumQ, setMediumQ] = useState("")
+    const [Difficult, setDifficult] = useState("")
 
     const AddBluePrintHeader = async () => {
         if(!selectedMedium){
@@ -138,7 +144,13 @@ function BluePrintHeaderAdd() {
                     LA2: LA2,
                     LA3: LA3,
                     Note: Note,
-                    selectedMedium: selectedMedium
+                    selectedMedium: selectedMedium,
+                    Objectivequestion : Objectivequestion,
+                    ShortanswerQ : ShortanswerQ,
+                    LonganswerQ : LonganswerQ,
+                    Easy : Easy,
+                    MediumQ : MediumQ,
+                    Difficult : Difficult
                 }
             }
             const res = await axios(config)
@@ -523,7 +535,49 @@ function BluePrintHeaderAdd() {
                                                         <tbody>
                                                             <tr >
                                                                 <td>1</td>
-                                                                <td>Objective question</td>
+                                                                <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setObjectivequestion(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setObjectivequestion)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Objective question" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Objectivequestion}</p>}
+                                                                </td>
+                                                                <td>
+                                                                    14
+                                                                </td>
+                                                                <td>23</td>
+                                                                <td>100%</td>
+                                                            </tr>
+                                                            <tr >
+                                                                <td>2</td>
+                                                                <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setShortanswerQ(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setShortanswerQ)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Short answer question" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{ShortanswerQ}</p>}
+                                                                </td>
+                                                                <td>
+                                                                    14
+                                                                </td>
+                                                                <td>23</td>
+                                                                <td>100%</td>
+                                                            </tr>
+                                                            <tr >
+                                                                <td>3</td>
+                                                                <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setLonganswerQ(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setLonganswerQ)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Long answer question" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{LonganswerQ}</p>}
+                                                                </td>
                                                                 <td>
                                                                     14
                                                                 </td>
@@ -608,7 +662,45 @@ function BluePrintHeaderAdd() {
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td>Level Easy or Hard</td>
+                                                            <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setEasy(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setEasy)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Easy" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Easy}</p>}
+                                                                </td>
+                                                            <td>12</td>
+                                                            <td>23</td>
+                                                            <td>100%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setMediumQ(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setMediumQ)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Medium" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{MediumQ}</p>}
+                                                                </td>
+                                                            <td>12</td>
+                                                            <td>23</td>
+                                                            <td>100%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>
+                                                                <input
+                                                                        onChange={(e) => {
+                                                                            if (selectedLanguage == "en-t-i0-und") {
+                                                                                setDifficult(e.target.value)
+                                                                            } else onChangeHandler(e.target.value, setDifficult)
+                                                                        }} style={{ width: "100px" }} type="text" placeholder="Difficult" />
+                                                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Difficult}</p>}
+                                                                </td>
                                                             <td>12</td>
                                                             <td>23</td>
                                                             <td>100%</td>
