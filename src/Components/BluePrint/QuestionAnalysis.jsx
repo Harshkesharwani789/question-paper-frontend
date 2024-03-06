@@ -145,10 +145,10 @@ function QuestionAnalysis() {
   }, []);
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className="row">
         <div className="col-md-9"></div>
-        <div className="col-md-3">
+        <div className="col-md-3 d-flex justify-content-end">
           <LuPrinter
             style={{ width: "22px", height: "40px" }}
             onClick={handlePrint}
@@ -180,7 +180,7 @@ function QuestionAnalysis() {
           <h4>{GetquestAnalysisHeader?.QuestHeader}</h4>
         </div>
         <div className="text-center">
-          <Table bordered style={{ fontFamily: "math", border: "1px solid" }}>
+          <Table bordered responsive style={{ fontFamily: "math", border: "1px solid" }}>
             <thead>
               <tr>
                 <th>{GetquestAnalysisHeader?.slno}</th>

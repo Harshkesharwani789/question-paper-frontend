@@ -169,4 +169,7 @@
     display: block;
     text-align: center;
   }
+  .number-box {
+    padding:14px 13px !important
+  }
 }

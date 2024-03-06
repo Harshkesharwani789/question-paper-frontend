@@ -45,9 +45,19 @@
 
 @media screen  and (max-width:799px){
   .dropdown{
+    position: unset !important;
     bottom: 25px;
     display: flex;
     float: right;
     justify-content: flex-end;
+  }
+  .navbar-nav{
+    background-color: #FF9933 !important;
+  }
+  .navItems{
+    font-size: 19px !important;
+  }
+  .navItems{
+    font-size: 19px !important;
   }
 }

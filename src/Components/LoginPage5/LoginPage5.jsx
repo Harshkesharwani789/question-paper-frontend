@@ -225,7 +225,7 @@ const LoginPage5 = () => {
                     </>):<></>}
                    
                     <Row>
-                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-end">
                         <Form.Label
                           className="fs-6 fw-bold mt-2 "
                           style={{ letterSpacing: "0.5px" }}
@@ -275,7 +275,7 @@ const LoginPage5 = () => {
                           Exam Name :
                         </Form.Label>
 
-                        <div>
+                        <div >
                           <h6>{state?.Exam_Name}</h6>
                         </div>
                       </div>
