@@ -350,7 +350,16 @@ function ViewHeader({ data }) {
           {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
           <div className="line-6"></div>
         </div>
-        <div></div>
+        <div className="student-details">
+          <p style={{ margin: "0px" }}>{item?.lastSign}:</p>
+          {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
+          <div className="line-6" style={{width:"69%"}}></div>
+        </div><br/>
+        <div className='d-flex justify-content-between'>
+          <p>{item?.ans}</p>
+          <p>{item?.or}</p>
+          <p>{item?.lastSign}</p>
+        </div>
       </div>
     </div>
   </div>

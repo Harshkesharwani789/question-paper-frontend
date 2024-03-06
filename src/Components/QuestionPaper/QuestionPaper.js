@@ -628,7 +628,7 @@ const handlePrint2 = () => {
                                       
                                     </div>
                                     <br/>
-                                                <p>ಉತ್ತರ</p> 
+                                                <p>{QuestionHeader?.ans}</p> 
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -684,7 +684,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -746,7 +746,7 @@ const handlePrint2 = () => {
                                      
                                     </div>
                                     <br />
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -767,7 +767,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -829,7 +829,7 @@ const handlePrint2 = () => {
                                       
                                     </div>
                                     <br />
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -850,7 +850,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -930,7 +930,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1010,7 +1010,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1090,7 +1090,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1170,7 +1170,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1265,7 +1265,7 @@ const handlePrint2 = () => {
                                       
                                     </div>
                                     <br/>
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -1286,7 +1286,7 @@ const handlePrint2 = () => {
                                     </div>
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1333,7 +1333,7 @@ const handlePrint2 = () => {
                                     )}
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
                                       </>
                                     ) : (
                                       <></>
@@ -1449,7 +1449,7 @@ const handlePrint2 = () => {
                                     </Row>
                                     {item?.ImageQ ? (
                                       <>
-                                        <h4>(OR)</h4>
+                                        <h4>({QuestionHeader?.or})</h4>
                                         <div>
                                           {item?.ImageQ ? (
                                             <>
@@ -1538,10 +1538,10 @@ const handlePrint2 = () => {
                                                 ></div>
                                               </div>
                                               <div className="" style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"55%"}}></p>
+                                                <p className="ans-line" style={{width:"72%"}}></p>
                                               </div>
                                              <div className=""  style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"55%"}}></p>
+                                                <p className="ans-line" style={{width:"72%"}}></p>
                                               </div>
                                               <div className="d-flex align-items-end">
                                                 <div
@@ -1573,9 +1573,9 @@ const handlePrint2 = () => {
                                                   }}
                                                 ></div>
                                               </div>
-                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
+                                              <div className="ans-line mb-4" style={{width:"72%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
+                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
                                               <div className="d-flex align-items-end">
                                                 <div
                                                   className="mb-3 mt-2"
@@ -1664,7 +1664,7 @@ const handlePrint2 = () => {
                                     )}
                                     {item?.orQuestion ? (
                                       <>
-                                        <h5>(OR)</h5>
+                                        <h5>({QuestionHeader?.or})</h5>
 
                                         <div
                                           style={{
@@ -1949,7 +1949,7 @@ const handlePrint2 = () => {
                                     
                                     </div>
                                     <br/>
-                          <p>ಉತ್ತರ:</p>
+                          <p>{QuestionHeader?.ans}:</p>
                                     <div className="d-flex mb-1">
                                       {item?.Image_1 ? (
                                         <>
@@ -2161,7 +2161,7 @@ const handlePrint2 = () => {
                                      
                                     </div>
                                     <br/>
-                                      <p>ಉತ್ತರ:</p>
+                                      <p>{QuestionHeader?.ans}:</p>
                                     <div className="mb-2">
                                       {item?.NumberOfLine && (
                                         <>
@@ -2185,7 +2185,7 @@ const handlePrint2 = () => {
                                       <>
                                         <div>
                                           <h5 style={{ textAlign: "center" }}>
-                                            (OR)
+                                            ({QuestionHeader?.or})
                                           </h5>
 
                                           <div>
@@ -2249,7 +2249,7 @@ const handlePrint2 = () => {
                                       <>
                                         <div>
                                           <h5 style={{ textAlign: "center" }}>
-                                            (OR)
+                                            ({QuestionHeader?.or})
                                           </h5>
 
                                           <div>

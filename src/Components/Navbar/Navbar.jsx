@@ -35,21 +35,21 @@ const Navbarr = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
             <div 
-                 className="d-flex align-items-center" 
+                 className="d-flex align-items-center navItems" 
                  style={{fontSize:"27px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/offerquestionpaper"><span>Buy</span></Link> 
                 </div> &nbsp;&nbsp;
                 <div class="vertical-line"></div>&nbsp;&nbsp;
         
                  <div 
-                 className="d-flex align-items-center" 
+                 className="d-flex align-items-center navItems" 
                  style={{fontSize:"27px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/tutorial"><span>Tutorial</span></Link> 
                 </div> &nbsp;&nbsp;
                 <div class="vertical-line"></div>&nbsp;&nbsp;
               {user ? (
                  <div 
-                 className="d-flex align-items-center" 
+                 className="d-flex align-items-center navItems" 
                  style={{fontSize:"27px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/questionandanswerview"><span>Assessment</span></Link> 
                 </div>

@@ -78,8 +78,32 @@ function AnswerQuestion() {
       getgenratedData()
     }
   }, [token, state])
+
+  const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(() => {
+  getQuestionHeaderbyMedium()
+}, [])
+console.log("QuestionHeader",QuestionHeader);
+
   return (
-    <div>
+    <div className="container-fluid">
       <div className="row">
         <div className="col-md-9"></div>
         <div className="col-md-3">
@@ -110,11 +134,12 @@ function AnswerQuestion() {
 
               <div style={{ fontWeight: "bold" }}>
                 <div className="time-and-marks">
-                  <div>ಸಮಯ :{state?.bluePrint?.DurationOfExam}</div>
-                  <div>ಉತ್ತರ ಸೂಚಿ</div>
+                  <div>{QuestionHeader?.time} :{state?.bluePrint?.DurationOfExam}</div>
+                  {/* <div>ಉತ್ತರ ಸೂಚಿ</div> */}
+                  <div>{QuestionHeader?.answerheader}</div>
                   <div>{state?.Sub_Class}</div>
                   <div>
-                    ಅಂಕಗಳು : {state?.bluePrint?.TotalDifficultMask}
+                    {QuestionHeader?.marks} : {state?.bluePrint?.TotalDifficultMask}
                   </div>
                 </div>
                 <b>
