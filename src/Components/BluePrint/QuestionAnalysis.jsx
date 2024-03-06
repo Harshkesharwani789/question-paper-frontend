@@ -79,26 +79,26 @@ function QuestionAnalysis() {
 
   function check(am) {
     if (
-      am == "Objective Questions" ||
+      // am == "Objective Questions" ||
       am == "One Word Question" ||
       am == "Multiple Choice Questions" ||
       am == "Fill in the Blanks Questions" ||
-      am == "Recorrect the Answers Questions" ||
+      am == "Classifications of Questions" ||
       am == "Match the Following Questions" ||
       am == "Recorrect the Answers Questions" ||
       am == "Odd and out words Questions" ||
       am == "RelationShip Words Questions" ||
-      am == "Grammer Questions"
+      am == "Grammer Questions"|| am == "One Sentence Answer Question" 
     ) {
       return "O.T";
     }
     if (
-      am == "One Sentence Answer Question" ||
+   
       am == "Two  Sentence Answer Questions" ||
       am == "Situation UnderStatnding answer Questions" ||
       am == "Complete the Poem" ||
       am == "Poet,Time, Place, Writer answer questions" ||
-      am == "Classifications of Questions" ||
+    
       am == "Two and three Sentence Answer Questions"
     ) {
       return "S.A";
