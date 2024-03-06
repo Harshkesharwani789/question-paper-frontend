@@ -186,13 +186,10 @@ import BluePrintHeaderType from "./Components/Admin/BluePrintHeaderType";
 import BluePrintHeaderView from "./Components/Admin/BluePrintHeaderView";
 import { CoverPage } from "./Components/Admin/CoverPage";
 import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
-<<<<<<< HEAD
 import AdminQuestionAnalysisHeader from "./Components/Admin/AdminQuestionAnalysisHeader";
 import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnalysisHeaderAdd";
 import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
-=======
 import { AddCover } from "./Components/Admin/AddCover";
->>>>>>> 5f895b64d24757c37b242797e05a68572e7c2d57
 
 function App() {
   return (
