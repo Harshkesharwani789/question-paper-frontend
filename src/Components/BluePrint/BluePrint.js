@@ -263,11 +263,12 @@ const BluePrint = () => {
     pdf.save("Blueprint.pdf");
   };
   console.log("blueprint1",blueprint1)
+  console.log("blueprint",blueprint)
 
   const [bluePrintHeader, setbluePrintHeader] = useState({});
   const GetBluePrintHeaderByMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/" + blueprint1?.medium);
+      let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/" + state?.Medium);
       if (res.status === 200) {
         setbluePrintHeader(res.data.success);
       }
@@ -279,7 +280,7 @@ const BluePrint = () => {
 
   useEffect(()=>{
     GetBluePrintHeaderByMedium()
-  },[blueprint1?.medium])
+  },[state?.Medium])
 
   return (
     <div>
@@ -350,7 +351,7 @@ const BluePrint = () => {
                                     </div>
                                     <div className="title-3">
                                       <h4>{val?.blName}</h4>
-                                      <h4>ನೀಲ ನಕ್ಷೆ</h4>
+                                      <h4>{bluePrintHeader?.BluePrintName}</h4>
                                    
                                     </div>
                                   </div>
@@ -388,7 +389,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives mt-4">
                                   <div className="main-title">
                                     <b>1.</b>
-                                    <b>ಘಟಕವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                                    <b>{bluePrintHeader?.UnitWiseMrk}</b>
                                   </div>
                                   <div className="text-center">
                                   <div className="objectives-table">
@@ -401,11 +402,11 @@ const BluePrint = () => {
                                     >
                                       <thead>
                                       <tr>
-                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ಪಾಠಗಳು</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
+                            <th>{bluePrintHeader?.SNo}</th>
+                            <th>{bluePrintHeader?.Lessons}</th>
+                            <th>{bluePrintHeader?.Questions}</th>
+                            <th>{bluePrintHeader?.Marks}</th>
+                            <th>{bluePrintHeader?.Percentage}</th>
                           </tr>
                                       </thead>
                                       <tbody>
@@ -445,7 +446,7 @@ const BluePrint = () => {
 
                                         <tr>
                                           <td>
-                                            <b>ಒಟ್ಟು</b>
+                                            <b>{bluePrintHeader?.Total}</b>
                                           </td>
                                           <td> </td>
                                         
@@ -478,7 +479,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives mt-4">
                                   <div className="main-title">
                                     <b>2.</b>
-                                    <b>ಉದ್ದೇಶವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                                    <b>{bluePrintHeader?.ObjectiveMrks}</b>
                                   </div>
                                   <div className="text-center">
                                   <div className="objectives-table">
@@ -490,11 +491,11 @@ const BluePrint = () => {
                                     >
                                       <thead>
                                       <tr>
-                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ನಿರ್ದಿಷ್ಟಗಳು</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
+                                      <th>{bluePrintHeader?.SNo}</th>
+                            <th>{bluePrintHeader?.Specifics}</th>
+                            <th>{bluePrintHeader?.Questions}</th>
+                            <th>{bluePrintHeader?.Marks}</th>
+                            <th>{bluePrintHeader?.Percentage}</th>
                           </tr>
                                       </thead>
                                       <tbody>
@@ -531,7 +532,7 @@ const BluePrint = () => {
                                         })}
                                             <tr>
                                           <td>
-                                            <b>ಒಟ್ಟು</b>
+                                            <b>{bluePrintHeader?.Total}</b>
                                           </td>
                                           <td> </td>
                                         
@@ -563,7 +564,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives">
                                   <div className="main-title">
                                     <b>3.</b>
-                                    <b>ಪ್ರಶ್ನಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                                    <b>{bluePrintHeader?.QuestionWiseMrk}</b>
                                   </div>
                                   <div className="text-center">
                                     <div className="objectives-table">
@@ -576,11 +577,11 @@ const BluePrint = () => {
                         >
                           <thead>
                           <tr>
-                            <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                              <th>ಪ್ರಶ್ನೆಗಳ ವಿಧ</th>
-                              <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
+                          <th>{bluePrintHeader?.SNo}</th>
+                            <th>{bluePrintHeader?.TypeOfQuestion}</th>
+                            <th>{bluePrintHeader?.Questions}</th>
+                            <th>{bluePrintHeader?.Marks}</th>
+                            <th>{bluePrintHeader?.Percentage}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -588,7 +589,7 @@ const BluePrint = () => {
                               return ( */}
                                 <tr >
                                   <td>1</td>
-                                  <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
+                                  <td>{bluePrintHeader?.Objectivequestion}</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -624,7 +625,7 @@ const BluePrint = () => {
                                 </tr>
                                 <tr >
                                   <td>2</td>
-                                  <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                  <td>{bluePrintHeader?.ShortanswerQ}</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -660,7 +661,7 @@ const BluePrint = () => {
                                 </tr>
                                 <tr >
                                   <td>3</td>
-                                  <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                  <td>{bluePrintHeader?.LonganswerQ}</td>
                                   <td>{val?.AllChapter?.filter(
                                     (item) =>
                                     
@@ -696,7 +697,7 @@ const BluePrint = () => {
                                 </tr>
                                 <tr>
                                           <td>
-                                            <b>ಒಟ್ಟು</b>
+                                            <b>{bluePrintHeader?.Total}</b>
                                           </td>
                                           <td> </td>
                                         
@@ -728,7 +729,7 @@ const BluePrint = () => {
                                 <div className="weightage-objectives">
                                   <div className="main-title">
                                     <b>4.</b>
-                                    <b>ಕಠಿಣತಾವಾರು ಅಂಕ ಹಂಚಿಕೆ</b>
+                                    <b>{bluePrintHeader?.AccordingRigorMrk}</b>
                                   </div>
                                   <div className="text-center">
 
@@ -742,38 +743,38 @@ const BluePrint = () => {
                       >
                         <thead>
                         <tr>
-                          <th>ಕೆ ಸಂಖ್ಯೆ</th>
-                            <th>ಕಠಿಣತೆಯ ಮಟ್ಟ</th>
-                            <th>ಪ್ರಶ್ನೆಗಳು</th>
-                            <th>ಅಂಕಗಳು</th>
-                            <th>ಶೇಕಡಾವಾರು</th>
+                        <th>{bluePrintHeader?.SNo}</th>
+                            <th>{bluePrintHeader?.LevelOfDifficult}</th>
+                            <th>{bluePrintHeader?.Questions}</th>
+                            <th>{bluePrintHeader?.Marks}</th>
+                            <th>{bluePrintHeader?.Percentage}</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>1</td>
-                            <td>ಸರಳ</td>
+                            <td>{bluePrintHeader?.Easy} </td>
                             <td>{val?.Easy}</td>
                             <td>{val?.EasyMask}</td>
                             <td>{val?.EasyParcentage}%</td>
                           </tr>
                           <tr>
                             <td>2</td>
-                            <td>ಸಾಧಾರಣ</td>
+                            <td>{bluePrintHeader?.MediumQ} </td>
                             <td>{val?.Average}</td>
                             <td>{val?.AverageMask}</td>
                             <td>{val?.AverageParcentage}%</td>
                           </tr>
                           <tr>
                             <td>3</td>
-                            <td>ಕಠಿಣ</td>
+                            <td>{bluePrintHeader?.Difficult}</td>
                             <td>{val?.Difficult}</td>
                             <td>{val?.DifficultMask}</td>
                             <td>{val?.DifficultParcentage}%</td>
                           </tr>
                           <tr>
                                           <td>
-                                            <b>ಒಟ್ಟು</b>
+                                            <b>{bluePrintHeader?.Total}</b>
                                           </td>
                                           <td> </td>
                                         
@@ -804,6 +805,7 @@ const BluePrint = () => {
                               </div>
                             </div>
                           </div>
+                          </div>
 {/* Seconed bluePrint */}
                           <div style={{ fontFamily: "sans-serif" }} id="pdf1">
                             <div
@@ -817,14 +819,14 @@ const BluePrint = () => {
                                 }}
                               >
                                 <div>
-                                  <b>ಸಮಯ : {val?.DurationOfExam}</b>
+                                  <b>{bluePrintHeader?.Time} : {val?.DurationOfExam}</b>
                                 </div>
                                 <div>
-                                <b>ನೆಲಿ ನಕ್ಷೆ</b>
+                                <b>{bluePrintHeader?.BluePrintName}</b>
                                 </div>
                                 <div>
                                   <b>
-                                  ಅಂಕ :-
+                                  {bluePrintHeader?.Marks} :-
                                     {val?.AllChapter?.reduce(
                                       (a, ele) =>
                                         a +
@@ -844,14 +846,14 @@ const BluePrint = () => {
                                   responsive
                                   bordered
                                   style={{
-                                    border: "1px solid",
-                                    width: "76.8rem",
+                                    border: "3px solid #000",
+                                    width: "fit-content",
                                   }}
                                 >
-                                  <thead>
+                                  <thead style={{border:'2px solid #000'}}>
                                     <tr>
                                       <th style={{ fontSize: "12px" }}>
-                                      ಕ್ರ.ಸಂ
+                                      {bluePrintHeader?.SNo}
                                       </th>
                                       <th
                                         style={{
@@ -859,7 +861,7 @@ const BluePrint = () => {
                                           width: "125px",
                                         }}
                                       >
-                                       ಉದ್ದೇಶಿತ ಘಟಕಗಳು
+                                       {bluePrintHeader?.TargetUnit}
                                       </th>
                                       {val?.objectives?.map((ele) => {
                                         return (
@@ -878,95 +880,91 @@ const BluePrint = () => {
                                         colSpan={6}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        ಒಟ್ಟು ಪ್ರಶ್ನೆ
+                                        {bluePrintHeader?.TotalQuestion} 
                                       </th>
 
                                       <th
                                         colSpan={1}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ಒಟ್ಟು ಅಂಕ
+                                       {bluePrintHeader?.TotalMarks} 
                                       </th>
                                     </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody style={{border:'2px solid #000'}}>
                                   
                                     <tr
                                       style={{
-                                        borderBottom: "2px solid black",
+                                        borderBottom: "2px solid #000",
                                       }}
                                     >
                                       <th></th>
                                       <th></th>
 
-                                      <th style={{ fontSize: "12px" }}>ವ</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.V}</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        ಕಿ.
+                                        {bluePrintHeader?.K}
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ದೀ
+                                       {bluePrintHeader?.D}
                                       </th>
-
-                                      <th style={{ fontSize: "12px" }}> ವ</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.V}</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        ಕಿ.
+                                        {bluePrintHeader?.K}
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ದೀ
+                                       {bluePrintHeader?.D}
                                       </th>
-
-                                      <th style={{ fontSize: "12px" }}>ವ</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.V}</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ಕಿ.
+                                        {bluePrintHeader?.K}
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ದೀ
+                                       {bluePrintHeader?.D}
                                       </th>
-
-                                      <th style={{ fontSize: "12px" }}>ವ</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.V}</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ಕಿ.
+                                        {bluePrintHeader?.K}
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ದೀ
+                                       {bluePrintHeader?.D}
                                       </th>
-
-                                      <th style={{ fontSize: "12px" }}>ವ</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.V}</th>
                                       <th
                                         colSpan={2}
                                         style={{ fontSize: "12px" }}
                                       >
-                                       ಕಿ.
+                                        {bluePrintHeader?.K}
                                       </th>
                                       <th
                                         colSpan={3}
                                         style={{ fontSize: "12px" }}
                                       >
-                                        ದೀ
+                                       {bluePrintHeader?.D}
                                       </th>
                                     </tr>
                                     <tr>
@@ -979,43 +977,45 @@ const BluePrint = () => {
                                       ></th>
                                       <th style={{ fontSize: "12px" }}></th>
                                       <th style={{ fontSize: "12px" }}>
-                                        V S A
+                                        {bluePrintHeader?.VSA}
                                       </th>
-                                      <th style={{ fontSize: "12px" }}>S A</th>
-                                      <th style={{ fontSize: "12px" }}>LA 1</th>
-                                      <th style={{ fontSize: "12px" }}>LA 2</th>
-                                      <th style={{ fontSize: "12px" }}>LA 3</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
                                       <th style={{ fontSize: "12px" }}></th>
                                       <th style={{ fontSize: "12px" }}>
-                                        V S A
+                                        {bluePrintHeader?.VSA}
                                       </th>
-                                      <th style={{ fontSize: "12px" }}>S A</th>
-                                      <th style={{ fontSize: "12px" }}>LA 1</th>
-                                      <th style={{ fontSize: "12px" }}>LA 2</th>
-                                      <th style={{ fontSize: "12px" }}>LA 3</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
                                       <th style={{ fontSize: "12px" }}></th>
                                       <th style={{ fontSize: "12px" }}>
-                                        V S A
+                                        {bluePrintHeader?.VSA}
                                       </th>
-                                      <th style={{ fontSize: "12px" }}>S A</th>
-                                      <th style={{ fontSize: "12px" }}>LA 1</th>
-                                      <th style={{ fontSize: "12px" }}>LA 2</th>
-                                      <th style={{ fontSize: "12px" }}>LA 3</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
                                       <th style={{ fontSize: "12px" }}></th>
                                       <th style={{ fontSize: "12px" }}>
-                                        V S A
+                                        {bluePrintHeader?.VSA}
                                       </th>
-                                      <th style={{ fontSize: "12px" }}>S A</th>
-                                      <th style={{ fontSize: "12px" }}>LA 1</th>
-                                      <th style={{ fontSize: "12px" }}>LA 2</th>
-                                      <th style={{ fontSize: "12px" }}>LA 3</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
                                       <th style={{ fontSize: "12px" }}></th>
-                                      <th style={{ fontSize: "12px" }}>VSA</th>
-                                      <th style={{ fontSize: "12px" }}>SA</th>
-                                      <th style={{ fontSize: "12px" }}>LA 1</th>
-                                      <th style={{ fontSize: "12px" }}>LA 2</th>
-                                      <th style={{ fontSize: "12px" }}>LA 3</th>
-                                      <th style={{ fontSize: "12px" }}></th>
+                                      <th style={{ fontSize: "12px" }}>
+                                        {bluePrintHeader?.VSA}
+                                      </th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
+                                      <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
+                                      
                                     </tr>
                                     {niqueDataName(val?.AllChapter)?.map(
                                       (ele, i) => {
@@ -1326,7 +1326,7 @@ const BluePrint = () => {
                                     <tr>
                                       <td></td>
                                       <td style={{ fontSize: "12px" }}>
-                                      ಒಟ್ಟು
+                                      {bluePrintHeader?.Total}
                                       </td>
                                       <td></td>
                                       <td></td>
@@ -1387,11 +1387,11 @@ const BluePrint = () => {
                                 </Table>
                                 </div>
                               </div>
-                              <span>Note:-</span>
+                              <span>{bluePrintHeader?.Note}:-</span>
                               {parse(`<span>${val?.Instructions}</span>`)}
                             </div>
                           </div>
-                        </div>
+                       
                         <div
                           style={{
                             display: "flex",

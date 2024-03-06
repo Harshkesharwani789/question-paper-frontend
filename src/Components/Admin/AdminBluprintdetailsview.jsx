@@ -605,7 +605,7 @@ function AdminBlueprintdetailsview() {
                               return ( */}
                               <tr >
                                 <td>1</td>
-                                <td>ವಸ್ತುನಿಷ್ಠ ಪ್ರಶ್ನೆ</td>
+                                <td>{bluePrintHeader?.Objectivequestion}</td>
                                 <td>{AllChapterData?.filter(
                                   (item) =>
 
@@ -641,7 +641,7 @@ function AdminBlueprintdetailsview() {
                               </tr>
                               <tr >
                                 <td>2</td>
-                                <td>ಕಿರು ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                <td>{bluePrintHeader?.ShortanswerQ}</td>
                                 <td>{AllChapterData?.filter(
                                   (item) =>
 
@@ -677,7 +677,7 @@ function AdminBlueprintdetailsview() {
                               </tr>
                               <tr >
                                 <td>3</td>
-                                <td>ದೀರ್ಘ ಉತ್ತರ ಪ್ರಶ್ನೆ</td>
+                                <td>{bluePrintHeader?.LonganswerQ}</td>
                                 <td>{AllChapterData?.filter(
                                   (item) =>
 
@@ -800,21 +800,21 @@ function AdminBlueprintdetailsview() {
                           <tbody>
                             <tr>
                               <td>1</td>
-                              <td>ಸರಳ </td>
+                              <td>{bluePrintHeader?.Easy} </td>
                               <td>{blueprint?.Easy}</td>
                               <td>{blueprint?.EasyMask}</td>
                               <td>{blueprint?.EasyParcentage}%</td>
                             </tr>
                             <tr>
                               <td>2</td>
-                              <td>ಸಾಧಾರಣ </td>
+                              <td>{bluePrintHeader?.MediumQ} </td>
                               <td>{blueprint?.Average}</td>
                               <td>{blueprint?.AverageMask}</td>
                               <td>{blueprint?.AverageParcentage}%</td>
                             </tr>
                             <tr>
                               <td>3</td>
-                              <td>ಕಠಿಣ</td>
+                              <td>{bluePrintHeader?.Difficult}</td>
                               <td>{blueprint?.Difficult}</td>
                               <td>{blueprint?.DifficultMask}</td>
                               <td>{blueprint?.DifficultParcentage}%</td>
