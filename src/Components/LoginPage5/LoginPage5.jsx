@@ -63,7 +63,7 @@ const LoginPage5 = () => {
           icon: "success",
           button: "OK!",
         });
-        navigate("/blueprint", { state: res.data.success });
+        navigate("/teacher-cover-page", { state: {...res.data.success ,BlueName:bluePData[0]?.blName} });
       }
     } catch (error) {
       console.log(error);

@@ -190,6 +190,7 @@ import AdminQuestionAnalysisHeader from "./Components/Admin/AdminQuestionAnalysi
 import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnalysisHeaderAdd";
 import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
+import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
 
 function App() {
   return (
@@ -367,6 +368,16 @@ function App() {
             }
           />
 
+<Route
+            path="/teacher-cover-page"
+            exact
+            element={
+              <>
+                <Navbarr />
+                <UserCoverPage />
+              </>
+            }
+          />
           <Route
             path="/socialqp"
             exact

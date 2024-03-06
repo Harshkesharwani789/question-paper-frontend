@@ -16,7 +16,10 @@ import axios from "axios";
 import swal from "sweetalert";
 // import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 // import { PDFViewer } from "@react-pdf/renderer";
-import ReactToPrint from 'react-to-print';
+import {ReactToPrint} from 'react-to-print';
+import useReactToPdf  from 'react-to-pdf';
+
+
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = sessionStorage.getItem("token");
@@ -172,56 +175,7 @@ const QuestionPaper = ({ text }) => {
       });
     }
   };
-  // const handlePrint = () => {
-   
-  //       const printableContent =
-  //     document.getElementById("printable-content").innerHTML;
-  //   const originalContent = document.body.innerHTML;
-  //   // Create a footer element with padding
-  //   const footerContent = '<div style="padding-bottom: 50px;"></div>';
-  //   // Replace the content of the body with the content of the printable section
-  //   document.body.innerHTML = printableContent;
-  //   // Print the content
-  //   window.print();
-  //   // Restore the original content
-  //   document.body.innerHTML = originalContent;
-  //   updaethequestion(true)
-    
-  // };
 
-//   const handlePrint = () => {
-//     const printableContent = document.getElementById("printable-content").innerHTML;
-//     const originalContent = document.body.innerHTML;
-//     // Create a footer element with padding
-//     const footerContent = '<div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding-bottom: 20px;">Your footer content here</div>';
-//     // Replace the content of the body with the content of the printable section
-//     document.body.innerHTML = printableContent + footerContent;
-//     // Print the content
-//     window.print();
-//     // Restore the original content
-//     document.body.innerHTML = originalContent;
-//     // updaethequestion(true);
-// };
-
-
-// const handlePrint = () => {
-//   const printableContent = document.getElementById("printable-content").innerHTML;
-//   const originalContent = document.body.innerHTML;
-  
-//   // Create a footer element with placeholders for page count and class 7 PTO
-//   const footerContent = `<div id="footer" style="position: fixed; bottom: 0px; width: 100%; display:flex; justify-content:space-between; margin-bottom: 0px;">
-//       <div>${state?.Sub_Class},${state?.Subject} <span id="page-count-placeholder"></span></div>
-//       <div>P.T.O  <span id="class-7-pto-placeholder"></span></div>
-//   </div>`;
-  
-//   // Replace the content of the body with the content of the printable section including footer
-//   document.body.innerHTML = printableContent + footerContent;
-  
-//   // Print the content
-//   window.print();
-
-  
-// };
 
 const handlePrint = () => {
   const printableContent = document.getElementById("printable-content").innerHTML;
@@ -278,7 +232,26 @@ useEffect(() => {
 }, [])
 console.log("QuestionHeader",QuestionHeader);
 
+const componentRef = useRef();
 
+const options = {
+  orientation: 'portrait',
+  unit: 'in',
+  format: [8, 12],
+  onDocument: () => ({
+    content: [
+      { text: 'Page ' },
+      { text: 'pageNumber', alignment: 'center', margin: [0, 0, 0, 20] }, // Page number
+      { text: 'P.T.O', alignment: 'left' } // P.T.O
+    ]
+  })
+};
+
+const savePdf= useReactToPdf(options);
+
+const handlePrint2 = () => {
+  savePdf(componentRef.current);
+};
 
 
   return (
@@ -329,7 +302,13 @@ console.log("QuestionHeader",QuestionHeader);
            
             onClick={()=>handlePrint("printable-content")}
           />
-          <div style={{ size: "A4" }} id="printable-content" class="print-area">
+
+{/* <ReactToPrint
+        trigger={() => <button>Print</button>}
+        content={() => componentRef.current}
+      /> */}
+      
+          <div style={{ size: "A4" }} id="printable-content" class="print-area" ref={componentRef}>
             <Frontpage data={state} />
             <div className="question-paper-display ">
               <div className="second-page-body">

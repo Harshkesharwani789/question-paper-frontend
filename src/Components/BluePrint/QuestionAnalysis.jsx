@@ -155,29 +155,31 @@ function QuestionAnalysis() {
           />
         </div>
       </div>
+      <div  >
       <Container
         className="mt-4"
-        style={{ border: "5px solid black", borderRadius: "15px" }}
+        style={{ border: "3px solid black", borderRadius: "15px" }}
         id="printable-content"
       >
         <div className="mt-4">
-          <h3>
+          <h6>
             {" "}
             {state?.Institute_Name ? (
-              <h6>
+              <h6><b>
                 {state?.Institute_Name},{state?.SchoolAddress}
+                </b>
               </h6>
             ) : (
               <></>
             )}
-          </h3>
-          <h3 className="text-center">{state?.bluePrint?.blName}</h3>
-          <h3 className="text-center">
-            {state?.Sub_Class} {state?.Subject}
-          </h3>
+          </h6>
+          <h6 className="text-center"><b>{state?.bluePrint?.blName}</b></h6>
+          <h6 className="text-center">
+            <b>{state?.Sub_Class} {state?.Subject}</b>
+          </h6>
           {/* <h3 className="text-center"> ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ </h3> */}
 
-          <h4>{GetquestAnalysisHeader?.QuestHeader}</h4>
+          <h6><b>{GetquestAnalysisHeader?.QuestHeader}</b></h6>
         </div>
         <div className="text-center">
           <Table bordered responsive style={{ fontFamily: "math", border: "1px solid" }}>
@@ -234,6 +236,8 @@ function QuestionAnalysis() {
           <p>{GetquestAnalysisHeader?.Note}</p>
         </div>
       </Container>
+      </div>
+      
       <div className="d-flex justify-content-center mt-2 ">
         <Button
           className="md-2"
