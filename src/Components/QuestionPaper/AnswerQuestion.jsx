@@ -94,14 +94,14 @@ function AnswerQuestion() {
 
 
 
-          <div id="pdf-content" className="question-paper-display">
+          <div id="pdf-content" className="question-paper-display" style={{border:"2px solid black"}}>
             <div className="englishqp-page-body">
               <div>
-                <h4>{state?.Institute_Name} {state?.SchoolAddress}</h4>
+                <h6><b>{state?.Institute_Name} {state?.SchoolAddress}</b></h6>
 
-                <h4>{state?.bluePrint?.blName}</h4>
-                <h6>{state?.subjects}</h6>
-                <h2>{state?.Subject}</h2>
+                <h6><b>{state?.bluePrint?.blName}</b></h6>
+                <h6><b>{state?.subjects}</b></h6>
+                <h6><b>{state?.Subject}</b></h6>
                 {/* <h4>
                           <b>{state?.bluePrint?.blName}</b>
                         </h4> */}
@@ -296,7 +296,6 @@ function AnswerQuestion() {
                               ) : (
                                 <></>
                               )}
-
                               {item?.Types_Question ===
                                 "One Sentence Answer Question" ? (
                                 <>
@@ -984,6 +983,7 @@ function AnswerQuestion() {
                                 "Complete the Poem" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
+                                    <div className="col-sm-6">
                                     <div className="d-flex ">
                                       <b>{count3++}</b>
                                       <b style={{width:"90%"}}>
@@ -992,6 +992,8 @@ function AnswerQuestion() {
                                           : ""}
                                       </b>
                                     </div>
+                                    </div>
+                                    
                                     <div>{ele1?.Mask}</div>
                                   </div>
                                 </>
