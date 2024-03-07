@@ -31,11 +31,23 @@ export const CoverPage = () => {
                 <p className='fw-bold fs-4'>{item?.Classs} :- </p>
             </div>
             <div className='mb-5' style={{ marginTop: '150px' }}>
-                <ul style={{ listStyle: 'none', textAlign: 'center', fontSize: '26px', fontStyle: 'italic' }}>
-                    <li className='d-flex gap-2 align-items-center justify-content-center'><IoNewspaperOutline />{item?.questionPaper}</li>
-                    <li className='d-flex gap-2 align-items-center justify-content-center'> <SiBlueprint />{item?.blueprint}</li>
-                    <li className='d-flex gap-2 align-items-center justify-content-center'><BiSpreadsheet />{item?.answersheet}</li>
-                    <li className='d-flex gap-2 align-items-center justify-content-center'><BiAnalyse />{item?.questionanylys}</li>
+                <ul style={{ listStyle: 'none', width:'fit-content', margin:'auto', fontSize: '17px', fontStyle: 'italic' }}>
+                    <li className='d-flex gap-4 align-items-center '>
+                        <p><IoNewspaperOutline /></p>
+                        <p>{item?.questionPaper}</p>
+                    </li>
+                    <li className='d-flex gap-4 align-items-center '>
+                        <p><SiBlueprint /></p>
+                        <p>{item?.blueprint}</p>
+                    </li>
+                    <li className='d-flex gap-4 align-items-center '>
+                        <p><BiSpreadsheet /></p>
+                        <p>{item?.answersheet}</p>
+                    </li>
+                    <li className='d-flex gap-4 align-items-center '>
+                        <p><BiAnalyse /></p>
+                        <p>{item?.questionanylys}</p>
+                    </li>
                 </ul>
             </div>
             <div className="d-flex justify-content-around" style={{ marginTop: '280px' }}>

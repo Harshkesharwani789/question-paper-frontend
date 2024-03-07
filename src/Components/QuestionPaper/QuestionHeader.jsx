@@ -292,7 +292,7 @@ const [lastSign,setlastSign]=useState("");
                 </div>
 
                 {/* Add Model */}
-                <Modal show={show} onHide={handleClose} size='lg'>
+                <Modal show={show} onHide={handleClose} size='lg' style={{zIndex:"99999", paddingLeft:'0px'}}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Question Header</Modal.Title>
                     </Modal.Header>
@@ -483,7 +483,7 @@ const [lastSign,setlastSign]=useState("");
                                                     {selectedLanguage === "en-t-i0-und" ? <></> : <p>{SatsNo}</p>}
                                                 </p>
                                             </div>
-                                            <div className="d-flex">
+                                            <div className="d-flex mb-2">
                                                 <div className="number-box"></div>
                                                 <div className="number-box"></div>
                                                 <div className="number-box"></div>

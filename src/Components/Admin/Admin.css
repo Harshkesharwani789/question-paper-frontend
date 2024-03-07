@@ -595,7 +595,7 @@ table thead tr th {
   display: none;
 }
 .admin-sidebar-display {
-  width: 20%;
+  /* width: 20%; */
 }
 
 .lined-input {
@@ -630,11 +630,17 @@ table thead tr th {
     width: 200px;
     height: 78px;
   }
+  /* .admin-all{
+    width: max-content !important;
+  } */
   .admin-sidebar-display {
-    width: 18%;
-    background-color: navy;
+    /* width: 20%; */
+    /* background-color: navy; */
     z-index: 99999;
     height: 81px;
+  }
+  .custom-toggler{
+    background-color: #083494 !important;
   }
   .sidebar-close-icon {
     display: block;
@@ -644,7 +650,7 @@ table thead tr th {
     padding: 0px 15px;
   }
   .right-admin {
-    width: 80%;
+    width: 100%;
   }
   .header-c {
     font-size: 18px;

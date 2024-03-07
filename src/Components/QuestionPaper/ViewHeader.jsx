@@ -108,9 +108,9 @@ function ViewHeader({ data }) {
               <div className="number-box"></div>
             </div>
             <div className="ss">
-              <p>{item?.signature}:</p>
+              <p>{item?.signature}:<b>__________</b></p>
               {/* <p>ವಿದ್ಯಾರ್ಥಿಯ ಸಹಿ:</p> */}
-              <div className="line"></div>
+              <div className=""></div>
             </div>
           </div>
         </div>

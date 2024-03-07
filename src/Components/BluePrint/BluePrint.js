@@ -1530,7 +1530,8 @@ const BluePrint = () => {
                                       width: "fit-content",
                                     }}
                                   >
-                                    <thead >
+                                    <thead 
+                                    >
                                       <tr >
                                         <th style={{ fontSize: "12px" }}>
                                           <b>{bluePrintHeader?.SNo}</b>
@@ -1573,7 +1574,6 @@ const BluePrint = () => {
                                     </thead>
                                     <tbody >
                                       <tr
-                                       
                                       >
                                         <th></th>
                                         <th></th>
