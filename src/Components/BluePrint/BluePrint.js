@@ -1527,8 +1527,7 @@ const BluePrint = () => {
                                       width: "fit-content",
                                     }}
                                   >
-                                    <thead 
-                                    >
+                                    <thead>
                                       <tr >
                                         <th style={{ fontSize: "12px" }}>
                                           {bluePrintHeader?.SNo}
@@ -1747,7 +1746,7 @@ const BluePrint = () => {
                                               <td style={{ fontSize: "12px" }}>
                                                 {i + 1}
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px", fontWeight:'bold' }}>
                                                 {ele?.name}
                                               </td>
                                               {val?.objectives?.map((ele1) => {
@@ -2060,7 +2059,7 @@ const BluePrint = () => {
                                       )}
                                       <tr>
                         <td></td>
-                        <td style={{ fontSize: "12px", width: "46px" }}>{bluePrintHeader?.Total}</td>
+                        <td style={{ fontSize: "12px", width: "46px",  fontWeight:'bold' }}>{bluePrintHeader?.Total}</td>
                         {val?.objectives?.map((ele) => {
                           return (
                             <>
