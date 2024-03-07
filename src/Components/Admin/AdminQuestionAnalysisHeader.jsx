@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
-import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import "../Admin/Admin.css";
@@ -96,13 +96,21 @@ const AdminQuestionAnalysisHeader = () => {
                         state={{ item: item }}
                         to="/adminquestionsanalysisheaderview"
                       >
-                        <FaRegEye className="text-success fw-bold fs-5" />
+                        <FaRegEye className="text-blue fw-bold fs-5" />
                       </Link>
                     </td>
                     <td>
                       {" "}
                       <div style={{ display: "flex", gap: "20px" }}>
                         <div>
+                        <AiFillEdit 
+                            className="text-success"
+                            style={{ cursor: "pointer", fontSize: "20px" }}
+                            // onClick={() => {
+                              // setQuestionTypeId(item);
+                              // handleShow2();
+                            // }}
+                            />
                           <AiFillDelete
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
