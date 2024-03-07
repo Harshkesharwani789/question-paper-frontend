@@ -82,7 +82,10 @@ export const UserCoverPage = () => {
             </div>
             <div className=" text-center">
               <h6 className="fw-bold">
-                {state?.Institute_Name} {state?.SchoolAddress}
+                {state?.Institute_Name} 
+              </h6>
+              <h6 className="fw-bold">
+                {state?.SchoolAddress}
               </h6>
             </div>
           </div>
