@@ -135,7 +135,7 @@ export const UserCoverPage = () => {
           >
             <p className="fw-bold">{data1?.SubjectTeacher} :-</p>
             <div>
-              <span className="fw-bold mb-0">{data1?.Principal}</span>
+              <span className="fw-bold mb-0">{data1?.Principal} :-</span>
               {/* /
                     <span className='fw-bold mb-0'>Principal</span> */}
             </div>
