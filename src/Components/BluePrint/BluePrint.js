@@ -429,7 +429,7 @@ const BluePrint = () => {
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
-                                              >
+                                              > 
                                                 {bluePrintHeader?.Lessons}
                                               </th>
                                               <th
@@ -465,26 +465,29 @@ const BluePrint = () => {
                                                     border: "2px solid black",
                                                   }}
                                                 >
+                                                 
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {i + 1}
+                                                     <b>{i + 1}</b>
+                                                  </td>
+
+                                                  <td
+                                                    style={{
+                                                      border: "2px solid black",
+                                                    }}
+                                                  >
+                                                    {/* ಉದ್ದಿಷ್ಟಗಳು */}
+                                                    <b>{item?.name} </b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {item?.name}
-                                                  </td>
-                                                  <td
-                                                    style={{
-                                                      border: "2px solid black",
-                                                    }}
-                                                  >
-                                                    {val?.AllChapter?.filter(
+                                                     <b>{val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintchapter ==
                                                         item?.name
@@ -495,14 +498,14 @@ const BluePrint = () => {
                                                           ele?.Blueprintnoofquestion
                                                         ),
                                                       0
-                                                    )}
+                                                    )}</b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {val?.AllChapter?.filter(
+                                                   <b> {val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintchapter ==
                                                         item?.name
@@ -514,14 +517,14 @@ const BluePrint = () => {
                                                             ele?.BluePrintmarksperquestion
                                                         ),
                                                       0
-                                                    )}
+                                                    )}</b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {(val?.AllChapter?.filter(
+                                                    <b>{(val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintchapter ==
                                                         item?.name
@@ -544,7 +547,7 @@ const BluePrint = () => {
                                                         0
                                                       )) *
                                                       100}
-                                                    %
+                                                    %</b>
                                                   </td>
                                                 </tr>
                                               );
@@ -683,21 +686,21 @@ const BluePrint = () => {
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {i + 1}
+                                                   <b> {i + 1}</b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {item?.Objective}
+                                                    <b>{item?.Objective}</b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {val?.AllChapter?.filter(
+                                                   <b> {val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintobjective ==
                                                         item?.Objective
@@ -708,14 +711,14 @@ const BluePrint = () => {
                                                           ele?.Blueprintnoofquestion
                                                         ),
                                                       0
-                                                    )}
+                                                    )}</b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                    {val?.AllChapter?.filter(
+                                                   <b> {val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintobjective ==
                                                         item?.Objective
@@ -727,10 +730,10 @@ const BluePrint = () => {
                                                             ele?.BluePrintmarksperquestion
                                                         ),
                                                       0
-                                                    )}
+                                                    )}</b>
                                                   </td>
                                                   <td>
-                                                    {(val?.AllChapter?.filter(
+                                                  <b> {(val?.AllChapter?.filter(
                                                       (ele) =>
                                                         ele?.Blueprintobjective ==
                                                         item?.Objective
@@ -753,7 +756,7 @@ const BluePrint = () => {
                                                         0
                                                       )) *
                                                       100}
-                                                    %
+                                                    %</b>
                                                   </td>
                                                 </tr>
                                               );
@@ -845,37 +848,37 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.SNo}
+                                                <b>{bluePrintHeader?.SNo}</b>
                                               </th>
                                               <th
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {
+                                               <b> {
                                                   bluePrintHeader?.TypeOfQuestion
-                                                }
+                                                }</b>
                                               </th>
                                               <th
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.Questions}
+                                                <b>{bluePrintHeader?.Questions}</b>
                                               </th>
                                               <th
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.Marks}
+                                                <b>{bluePrintHeader?.Marks}</b>
                                               </th>
                                               <th
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.Percentage}
+                                                <b>{bluePrintHeader?.Percentage}</b>
                                               </th>
                                             </tr>
                                           </thead>
@@ -892,23 +895,23 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                1
+                                                <b>1</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {
+                                                <b>{
                                                   bluePrintHeader?.Objectivequestion
-                                                }
+                                                }</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                               <b> {val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                     "O T"
@@ -919,7 +922,7 @@ const BluePrint = () => {
                                                       am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
 
                                               <td
@@ -927,7 +930,7 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                               <b> {val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                     "O T"
@@ -939,14 +942,14 @@ const BluePrint = () => {
                                                         am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {(val?.AllChapter?.filter(
+                                               <b> {(val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                     "O T"
@@ -969,7 +972,7 @@ const BluePrint = () => {
                                                     0
                                                   )) *
                                                   100}
-                                                %
+                                                %</b>
                                               </td>
                                             </tr>
                                             <tr
@@ -982,21 +985,21 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                2
+                                               <b> 2</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.ShortanswerQ}
+                                                <b>{bluePrintHeader?.ShortanswerQ}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                                <b>{val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "V.S.A" ||
@@ -1009,7 +1012,7 @@ const BluePrint = () => {
                                                       am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
 
                                               <td
@@ -1017,7 +1020,7 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                                <b>{val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "V.S.A" ||
@@ -1031,14 +1034,14 @@ const BluePrint = () => {
                                                         am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {(val?.AllChapter?.filter(
+                                                <b>{(val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "V.S.A" ||
@@ -1063,7 +1066,7 @@ const BluePrint = () => {
                                                     0
                                                   )) *
                                                   100}
-                                                %
+                                                %</b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1076,21 +1079,21 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                3
+                                                <b>3</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.LonganswerQ}
+                                               <b> {bluePrintHeader?.LonganswerQ}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                                <b>{val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "L.A 1" ||
@@ -1105,7 +1108,7 @@ const BluePrint = () => {
                                                       am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
 
                                               <td
@@ -1113,7 +1116,7 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.AllChapter?.filter(
+                                                <b>{val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "L.A 1" ||
@@ -1129,14 +1132,14 @@ const BluePrint = () => {
                                                         am?.Blueprintnoofquestion
                                                     ),
                                                   0
-                                                )}
+                                                )}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {(val?.AllChapter?.filter(
+                                                <b>{(val?.AllChapter?.filter(
                                                   (item) =>
                                                     item?.BluePrintQuestiontype ==
                                                       "L.A 1" ||
@@ -1163,7 +1166,7 @@ const BluePrint = () => {
                                                     0
                                                   )) *
                                                   100}
-                                                %
+                                                %</b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1300,76 +1303,35 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                1
+                                                <b>1</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.Easy}{" "}
+                                                <b>{bluePrintHeader?.Easy}{" "}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.Easy}
+                                               <b> {val?.Easy}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.EasyMask}
+                                                <b>{val?.EasyMask}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.EasyParcentage}%
-                                              </td>
-                                            </tr>
-                                            <tr
-                                              style={{
-                                                border: "2px solid black",
-                                              }}
-                                            >
-                                              <td
-                                                style={{
-                                                  border: "2px solid black",
-                                                }}
-                                              >
-                                                2
-                                              </td>
-                                              <td
-                                                style={{
-                                                  border: "2px solid black",
-                                                }}
-                                              >
-                                                {bluePrintHeader?.MediumQ}{" "}
-                                              </td>
-                                              <td
-                                                style={{
-                                                  border: "2px solid black",
-                                                }}
-                                              >
-                                                {val?.Average}
-                                              </td>
-                                              <td
-                                                style={{
-                                                  border: "2px solid black",
-                                                }}
-                                              >
-                                                {val?.AverageMask}
-                                              </td>
-                                              <td
-                                                style={{
-                                                  border: "2px solid black",
-                                                }}
-                                              >
-                                                {val?.AverageParcentage}%
+                                                <b>{val?.EasyParcentage}%</b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1382,35 +1344,76 @@ const BluePrint = () => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                3
+                                               <b> 2</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {bluePrintHeader?.Difficult}
+                                                <b>{bluePrintHeader?.MediumQ}{" "}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.Difficult}
+                                               <b> {val?.Average}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.DifficultMask}
+                                                <b>{val?.AverageMask}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                {val?.DifficultParcentage}%
+                                                <b>{val?.AverageParcentage}%</b>
+                                              </td>
+                                            </tr>
+                                            <tr
+                                              style={{
+                                                border: "2px solid black",
+                                              }}
+                                            >
+                                              <td
+                                                style={{
+                                                  border: "2px solid black",
+                                                }}
+                                              >
+                                               <b> 3</b>
+                                              </td>
+                                              <td
+                                                style={{
+                                                  border: "2px solid black",
+                                                }}
+                                              >
+                                                <b>{bluePrintHeader?.Difficult}</b>
+                                              </td>
+                                              <td
+                                                style={{
+                                                  border: "2px solid black",
+                                                }}
+                                              >
+                                                <b>{val?.Difficult}</b>
+                                              </td>
+                                              <td
+                                                style={{
+                                                  border: "2px solid black",
+                                                }}
+                                              >
+                                                <b>{val?.DifficultMask}</b>
+                                              </td>
+                                              <td
+                                                style={{
+                                                  border: "2px solid black",
+                                                }}
+                                              >
+                                                <b>{val?.DifficultParcentage}%</b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1531,7 +1534,7 @@ const BluePrint = () => {
                                     >
                                       <tr >
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SNo}
+                                          <b>{bluePrintHeader?.SNo}</b>
                                         </th>
                                         <th
                                           style={{
@@ -1539,9 +1542,9 @@ const BluePrint = () => {
                                             width: "125px",
                                           }}
                                         >
-                                          {bluePrintHeader?.TargetUnit}
+                                          <b>{bluePrintHeader?.TargetUnit}</b>
                                         </th>
-                                        {val?.objectives?.map((ele) => {
+                                         {val?.objectives?.map((ele) => {
                                           return (
                                             <>
                                               <th
@@ -1557,15 +1560,15 @@ const BluePrint = () => {
                                         <th
                                           colSpan={6}
                                           style={{ fontSize: "12px" }}
-                                        >
-                                          {bluePrintHeader?.TotalQuestion}
+                                        ><b>
+                                          {bluePrintHeader?.TotalQuestion}</b>
                                         </th>
 
                                         <th
                                           colSpan={1}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.TotalMarks}
+                                          <b>{bluePrintHeader?.TotalMarks}</b>
                                         </th>
                                       </tr>
                                     </thead>
@@ -1576,79 +1579,79 @@ const BluePrint = () => {
                                         <th></th>
 
                                         <th style={{ fontSize: "12px",width:"33px" }}>
-                                          {bluePrintHeader?.V}
+                                        <b> {bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.K}
+                                         <b> {bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.D}
+                                         <b> {bluePrintHeader?.D}</b>
                                         </th>
                                         <th style={{ fontSize: "12px", width:"33px" }}>
-                                          {bluePrintHeader?.V}
+                                        <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.K}
+                                          <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
                                           style={{ fontSize: "12px"  }}
                                         >
-                                          {bluePrintHeader?.D}
+                                          <b>{bluePrintHeader?.D}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" ,width:"33px" }}>
-                                          {bluePrintHeader?.V}
+                                        <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.K}
+                                          <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.D}
+                                          <b>{bluePrintHeader?.D}</b>
                                         </th>
                                         <th style={{ fontSize: "12px",width:"33px"  }}>
-                                          {bluePrintHeader?.V}
+                                        <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.K}
+                                          <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.D}
+                                         <b> {bluePrintHeader?.D}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" ,width:"33px" }}>
-                                          {bluePrintHeader?.V}
+                                        <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.K}
+                                          <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
                                           style={{ fontSize: "12px" }}
                                         >
-                                          {bluePrintHeader?.D}
+                                         <b> {bluePrintHeader?.D}</b>
                                         </th>
                                       </tr>
                                       <tr>
@@ -1661,83 +1664,83 @@ const BluePrint = () => {
                                         ></th>
                                         <th style={{ fontSize: "12px" }}></th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.VSA}
+                                        <b> {bluePrintHeader?.VSA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SA}
+                                        <b> {bluePrintHeader?.SA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA1}
+                                        <b>{bluePrintHeader?.LA1}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA2}
+                                        <b>{bluePrintHeader?.LA2}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA3}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.VSA}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SA}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA1}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA2}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA3}
+                                        <b>{bluePrintHeader?.LA3}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}></th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.VSA}
+                                        <b> {bluePrintHeader?.VSA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SA}
+                                        <b> {bluePrintHeader?.SA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA1}
+                                        <b>{bluePrintHeader?.LA1}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA2}
+                                        <b>{bluePrintHeader?.LA2}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA3}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.VSA}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SA}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA1}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA2}
-                                        </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA3}
+                                        <b>{bluePrintHeader?.LA3}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}></th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.VSA}
+                                        <b>{bluePrintHeader?.VSA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.SA}
+                                        <b>{bluePrintHeader?.SA}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA1}
+                                        <b>{bluePrintHeader?.LA1}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA2}
+                                        <b>{bluePrintHeader?.LA2}</b>
                                         </th>
                                         <th style={{ fontSize: "12px" }}>
-                                          {bluePrintHeader?.LA3}
+                                        <b>{bluePrintHeader?.LA3}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}></th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b> {bluePrintHeader?.VSA}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.SA}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA1}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA2}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA3}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}></th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.VSA}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.SA}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA1}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA2}</b>
+                                        </th>
+                                        <th style={{ fontSize: "12px" }}>
+                                        <b>{bluePrintHeader?.LA3}</b>
                                         </th>
                                       </tr>
                                       {niqueDataName(val?.AllChapter)?.map(
@@ -1745,10 +1748,10 @@ const BluePrint = () => {
                                           return (
                                             <tr>
                                               <td style={{ fontSize: "12px" }}>
-                                                {i + 1}
+                                              <b>{i + 1}</b>
                                               </td>
                                               <td style={{ fontSize: "12px" }}>
-                                                {ele?.name}
+                                                <b>{ele?.name}</b>
                                               </td>
                                               {val?.objectives?.map((ele1) => {
                                                 return (
@@ -1758,7 +1761,7 @@ const BluePrint = () => {
                                                         fontSize: "12px",
                                                       }}
                                                     >
-                                                      {
+                                                      <b>{
                                                         val?.AllChapter?.find(
                                                           (item) =>
                                                             item?.Blueprintobjective ==
@@ -1768,8 +1771,8 @@ const BluePrint = () => {
                                                             item?.Blueprintchapter ==
                                                               ele?.name
                                                         )?.Blueprintnoofquestion
-                                                      }
-                                                      {val?.AllChapter?.some(
+                                                      }</b>
+                                                      <b>{val?.AllChapter?.some(
                                                         (item) =>
                                                           item?.Blueprintobjective ==
                                                             ele1?.Objective &&
@@ -1790,14 +1793,14 @@ const BluePrint = () => {
                                                             )
                                                               ?.BluePrintmarksperquestion
                                                           })`
-                                                        : ""}
+                                                        : ""}</b>
                                                     </td>
                                                     <td
                                                       style={{
                                                         fontSize: "12px",
                                                       }}
                                                     >
-                                                      {
+                                                      <b>{
                                                         val?.AllChapter?.find(
                                                           (item) =>
                                                             item?.Blueprintobjective ==
@@ -1807,8 +1810,8 @@ const BluePrint = () => {
                                                             item?.Blueprintchapter ==
                                                               ele?.name
                                                         )?.Blueprintnoofquestion
-                                                      }
-                                                      {val?.AllChapter?.some(
+                                                      }</b>
+                                                      <b>{val?.AllChapter?.some(
                                                         (item) =>
                                                           item?.Blueprintobjective ==
                                                             ele1?.Objective &&
@@ -1829,7 +1832,7 @@ const BluePrint = () => {
                                                             )
                                                               ?.BluePrintmarksperquestion
                                                           })`
-                                                        : ""}
+                                                        : ""}</b>
                                                     </td>
                                                     <td
                                                       style={{
@@ -2060,7 +2063,7 @@ const BluePrint = () => {
                                       )}
                                       <tr>
                         <td></td>
-                        <td style={{ fontSize: "12px", width: "46px" }}>{bluePrintHeader?.Total}</td>
+                        <td style={{ fontSize: "12px", width: "46px" }} > <b>{bluePrintHeader?.Total}</b></td>
                         {val?.objectives?.map((ele) => {
                           return (
                             <>
