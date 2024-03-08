@@ -18,12 +18,11 @@ function BluePrintHeaderView() {
 
     const location = useLocation()
     const { item } = location.state
-
+    
     return (
         <>
             <div className="box_1" >
                 <div className="Stepper-info " style={{ padding: "20px" }}>
-
                     <div id="pdf">
                         <div className="blueprint-content-display" >
                             <div className="blueprint-titles">
@@ -33,8 +32,8 @@ function BluePrintHeaderView() {
                                 </div>
                             </div>
                             <div className="container">
-                                <div className="row">
-                                    <div className="col-md-7">
+                                <div className="d-flex gap-3">
+                                    <div className="col-md-7 blue-print_1tab">
                                         {/* table 3  */}
                                         <div className="weightage-objectives">
                                             <div className="main-title">
@@ -91,7 +90,7 @@ function BluePrintHeaderView() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-5">
+                                    <div className="col-md-5 blue-print_1tab">
                                         {/* table 1 */}
                                         <div className="weightage-objectives">
                                             <div className="main-title">
@@ -274,7 +273,7 @@ function BluePrintHeaderView() {
                                         <b>{item?.Time}:10 Minuts</b>
                                     </div>
                                     <div>
-                                       <b>{item?.BluePrintName}</b> 
+                                        <b>{item?.BluePrintName}</b>
                                     </div>
                                     <div>
                                         <b>{item?.Marks}: 12</b>
@@ -283,9 +282,9 @@ function BluePrintHeaderView() {
 
                                 <div>
                                     <Table
-                                        responsive
                                         bordered
-                                        style={{ border: "1px solid", width: "73.8rem", height: "32rem" }}
+                                        style={{ border: "1px solid", width: '-webkit-fill-available', height: "32rem" }}
+                                        className="asda_res"
                                     >
                                         <thead>
                                             <tr>

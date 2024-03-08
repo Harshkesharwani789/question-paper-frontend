@@ -305,31 +305,18 @@ const AdminQuestionAnalysisHeaderAdd = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                            <Form.Label>Questions Analysis Instruction</Form.Label>
-                                            <Form.Control type="text" placeholder="note" 
-                                             onChange={(e) => {
-                                                if (selectedLanguage == "en-t-i0-und") {
-                                                    setNote(e.target.value)
-                                                } else onChangeHandler(e.target.value, setNote)
-                                            }}
-                                            />
-                                             {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
-                                        </Form.Group>
-                                        {/* <span>
-                                            <input
-                                                onChange={(e) => {
-                                                    if (selectedLanguage == "en-t-i0-und") {
-                                                        setNote(e.target.value)
-                                                    } else onChangeHandler(e.target.value, setNote)
-                                                }}  type="text" placeholder="Note" />:-
-                                            {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
-                                        </span> */}
-                                    </div>
+                                    <Form.Label>Questions Analysis Instruction</Form.Label>
+                                    <Form.Control className="mb-2" style={{width:'150px'}} type="text" placeholder="note"
+                                        onChange={(e) => {
+                                            if (selectedLanguage == "en-t-i0-und") {
+                                                setNote(e.target.value)
+                                            } else onChangeHandler(e.target.value, setNote)
+                                        }}
+                                    />
+                                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
 
                                     <div className="col-md-12 mb-2">
-                                        <div className="d-flex justify-content-center">                                      
+                                        <div className="d-flex justify-content-center">
                                             <button onClick={AddQuestAnalysisHeader} className="admin-add-btn mb-2">Add Headers</button>
                                         </div>
                                     </div>

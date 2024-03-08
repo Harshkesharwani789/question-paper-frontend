@@ -8,7 +8,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
+import { FaEdit, FaRegEye } from "react-icons/fa";
 
 function BluePrintHeaderType() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -24,7 +24,7 @@ function BluePrintHeaderType() {
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
     const handleClose2 = () => setShow2(false);
-    const handleShow2 = () => setShow2(true);
+    const handleShow2 = (item) => { setShow2(true); setdeletData(item) }
 
     const [GetbluePrintHeader, setGetbluePrintHeader] = useState([]);
     const getBluePrintHeader = async () => {
@@ -37,10 +37,32 @@ function BluePrintHeaderType() {
             console.log(error);
         }
     };
-    console.log("GetbluePrintHeader", GetbluePrintHeader);
+    const [deletData, setdeletData] = useState("")
+    const DeletBluePrintHeader = async () => {
+        try {
+            const config = {
+                url: "/admin/DeleteBluePrintHeader/" + deletData?._id,
+                baseURL: "http://localhost:8000/api",
+                method: "delete",
+                headers: { "Content-Type": "application/json" }
+            }
+            const res = await axios(config)
+            if (res.status === 200) {
+                alert(res.data.success)
+                handleClose2()
+                getBluePrintHeader()
+            }
+        } catch (error) {
+            alert(error.response.data.error)
+        }
+    }
+
     useEffect(() => {
         getBluePrintHeader()
     }, [])
+
+
+
     return (
         <>
 
@@ -94,7 +116,7 @@ function BluePrintHeaderType() {
                                         <td>{i + 1}</td>
                                         <td>{item?.selectedMedium}</td>
                                         <td className="text-center">
-                                            <Link state={{item : item}} to="/adminblueprintheaderview">
+                                            <Link state={{ item: item }} to="/adminblueprintheaderview">
                                                 <FaRegEye className="text-success fw-bold fs-5" />
                                             </Link>
                                         </td>
@@ -102,12 +124,17 @@ function BluePrintHeaderType() {
                                             {" "}
                                             <div style={{ display: "flex", gap: "20px" }}>
                                                 <div>
+                                                    <Link state={{ item: item }} to="/adminblueprintheaderedit">
+                                                        <FaEdit className="text-success" />
+                                                    </Link>
+                                                </div>
+                                                <div>
                                                     <AiFillDelete
                                                         className="text-danger"
                                                         style={{ cursor: "pointer", fontSize: "20px" }}
                                                         onClick={() => {
                                                             // setQuestionTypeId(item);
-                                                            handleShow2();
+                                                            handleShow2(item);
                                                         }}
                                                     />{" "}
                                                 </div>
@@ -148,7 +175,7 @@ function BluePrintHeaderType() {
                         <Button
                             variant=""
                             className="modal-add-btn"
-                        // onClick={DeleteQuestionType}
+                            onClick={DeletBluePrintHeader}
                         >
                             Delete
                         </Button>

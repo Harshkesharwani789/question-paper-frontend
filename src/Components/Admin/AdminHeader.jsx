@@ -25,7 +25,7 @@ const AdminHeader = () => {
 
   return (
     <div>
-      <div className="header">
+      <div className="header container">
         <div className="row justify-content-between align-items-center">
           <div
             className="mb-3"

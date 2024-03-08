@@ -156,11 +156,24 @@ function BluePrintHeaderAdd() {
             const res = await axios(config)
             if (res.status === 200) {
                 alert(res.data.success)
+                window.location.assign("/adminblueprintheadertype")
             }
         } catch (error) {
             alert(error.response.data.error)
         }
     }
+
+    const [GetbluePrintHeader, setGetbluePrintHeader] = useState([]);
+    const getBluePrintHeader = async () => {
+        try {
+            let res = await axios.get("http://localhost:8000/api/admin/getblueprintheader");
+            if (res.status == 200) {
+                setGetbluePrintHeader(res.data.success);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     //get method for medium
     const [selectedMedium, setselectedMedium] = useState("");
@@ -178,6 +191,7 @@ function BluePrintHeaderAdd() {
    
     useEffect(() => {
         getAddMedium()
+        getBluePrintHeader()
     }, [])
 
     return (
@@ -193,9 +207,10 @@ function BluePrintHeaderAdd() {
                                 style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
                             >
                                 <option value="select value">Select Medium</option>
-                                {Medium?.map((item) => (
-                                    <option value={item?.mediumName}>{item?.mediumName}</option>
-                                ))}
+                                {Medium?.filter((ele)=>!GetbluePrintHeader.some((item)=>ele?.mediumName===item?.selectedMedium))?.map((item) => {
+                                      return  <option value={item?.mediumName}>{item?.mediumName}</option>
+                                }
+                                )}
                             </select>
                         </div>
                         <div className="col-md-2">
@@ -752,11 +767,11 @@ function BluePrintHeaderAdd() {
                                     </div>
                                 </div>
 
-                                <div>
+                                <div className="asdasd_asda">
                                     <Table
                                         responsive
                                         bordered
-                                        style={{ border: "1px solid", width: "73.8rem", height: "32rem" }}
+                                        style={{ border: "1px solid", height: "32rem" }}
                                     >
                                         <thead>
                                             <tr>

@@ -8,7 +8,7 @@
 }
 
 .blueprint-content-display {
-  padding: 10px 50px;
+  padding: 10px 20px;
   border: 1px solid lightgrey;
   /* width: fit-content; */
   margin: auto;
@@ -38,6 +38,8 @@
 
 .objectives-table {
   padding: 20px 0px;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 @media screen and (max-width: 799px) {
@@ -46,6 +48,12 @@
   }
   .blueprint-content-display-container {
     padding: 10px;
+  }
+  .blueprint-content-display {
+    width: 1200px;
+  }
+  .blue-print_1tab {
+    width: -webkit-fill-available !important;
   }
 }
 

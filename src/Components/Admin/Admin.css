@@ -639,7 +639,7 @@ table thead tr th {
     z-index: 99999;
     height: 81px;
   }
-  .custom-toggler{
+  .custom-toggler {
     background-color: #083494 !important;
   }
   .sidebar-close-icon {
@@ -668,6 +668,35 @@ table thead tr th {
   .admin-login-bg {
     height: 300px;
   }
+
+  .cover-page {
+    width: 371px !important;
+  }
+  .cover-page h2,
+  h3 {
+    font-size: 16px !important;
+  }
+  .cover-page img {
+    width: 120px !important;
+    height: 114px !important;
+    image-rendering: pixelated;
+  }
+  .box_1 {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+  .blue-print_1tab {
+    width: -webkit-fill-available !important;
+  }
+  .asda_res {
+    width: max-content !important;
+  }
+  .asdasd_asda .table-responsive {
+    overflow: unset !important;
+  }
+  .asdasdasd_asdaasda{
+    width: max-content !important;
+  }
 }
 .hjhu button {
   width: 175px;
@@ -678,19 +707,29 @@ table thead tr th {
 }
 
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* .blinking {
   animation: blink 1s infinite;
 } */
 .gradient-background {
-  background: linear-gradient(45deg, #FFD700, #FF69B4); /* Adjust gradient colors */
+  background: linear-gradient(
+    45deg,
+    #ffd700,
+    #ff69b4
+  ); /* Adjust gradient colors */
 }
 
 .glow-text {
-  color: #FFFFFF; /* Text color */
-  text-shadow: 0 0 10px #FFD700, 0 0 20px #FF69B4; /* Adjust glow effect */
+  color: #ffffff; /* Text color */
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ff69b4; /* Adjust glow effect */
 }
