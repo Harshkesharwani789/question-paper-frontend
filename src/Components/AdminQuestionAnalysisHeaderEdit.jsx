@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../Admin/Admin.css";
 import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../Admin/Admin.css";
+import "./Admin/Admin.css"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";

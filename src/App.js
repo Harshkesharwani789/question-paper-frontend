@@ -192,6 +192,7 @@ import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAna
 import { AddCover } from "./Components/Admin/AddCover";
 import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
 import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
+import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
 
 function App() {
   return (
@@ -474,6 +475,10 @@ function App() {
           <Route
             path="/adminquestionsanalysisheaderview"
             element={<Main children={<AdminQuestionAnalysisHeaderView />} />}
+          />
+          <Route
+            path="/adminquestionsanalysisheaderedit"
+            element={<Main children={<AdminQuestionAnalysisHeaderEdit />} />}
           />
           <Route
             path="/admineditquestiondetails/:question_Id"

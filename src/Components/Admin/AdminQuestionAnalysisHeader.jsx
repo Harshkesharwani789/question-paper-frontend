@@ -106,6 +106,7 @@ const AdminQuestionAnalysisHeader = () => {
                         <AiFillEdit 
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
+                            // onClick={()}
                             // onClick={() => {
                               // setQuestionTypeId(item);
                               // handleShow2();

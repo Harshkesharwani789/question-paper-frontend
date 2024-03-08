@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form, Pagination, Table } from "react-bootstrap";
+import { Button, Modal, Form, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
@@ -8,8 +8,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import parse from "html-react-parser";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { debounce } from "lodash";
 const UploadPdfQuestion = () => {
@@ -80,7 +80,7 @@ const UploadPdfQuestion = () => {
   const UpdateSyllabus = async () => {
     try {
       const config = {
-        url: "/admin/updateSyllabus",
+        url: "/admin/",
         method: "put",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -102,10 +102,10 @@ const UploadPdfQuestion = () => {
         },
       };
       let res = await axios(config);
-      if (res.status == 200)
-        if (res.status == 200) {
+      if (res.status === 200)
+        if (res.status === 200) {
           handleClose1();
-
+          getallquestionPdf()
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -123,13 +123,13 @@ const UploadPdfQuestion = () => {
       });
     }
   };
-  //delete
-  const [Syllabus, setSyllabus] = useState("");
 
-  const deleteslybus = async () => {
+  //delete
+  const [Uploadd, setUploadd] = useState("");
+  const deletesQuestionAns = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8000/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        `http://localhost:8000/api/admin/deleteuploadquestion/${Uploadd?._id}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -137,25 +137,14 @@ const UploadPdfQuestion = () => {
           },
         }
       );
-      if (res.status == 200) handleClose2();
-      setQuestionAnsPdf();
-      return swal({
-        title: "Yeah!",
-        text: res.data.success,
-        icon: "success",
-        button: "Ok!",
-      });
+      if (res.status === 200)
+      getallquestionPdf()
+      handleClose2()
     } catch (error) {
       console.log("Error fetching medium:", error);
-      return swal({
-        title: "Yeah!",
-        text: error.response.data.error,
-        icon: "success",
-        button: "Ok!",
-      });
     }
   };
-  //Get All Syllabus
+  //Get All QuestionAnsPdf
   const [QuestionAnsPdf, setQuestionAnsPdf] = useState([]);
   const getallquestionPdf = async () => {
     try {
@@ -163,7 +152,7 @@ const UploadPdfQuestion = () => {
         `http://localhost:8000/api/admin/getAllpdf/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      if (res.status == 200) {
+      if (res.status === 200) {
         setQuestionAnsPdf(res.data.success);
       }
     } catch (error) {
@@ -248,7 +237,7 @@ const UploadPdfQuestion = () => {
       formData.append("questionPdf", Questionpdf);
       formData.append("answerPdf", Answerpdf);
       formData.append("authId", admin?._id);
-  
+
       const config = {
         method: "post",
         url: "http://localhost:8000/api/admin/addUploadQuestions",
@@ -258,12 +247,11 @@ const UploadPdfQuestion = () => {
         },
         data: formData,
       };
-  console.log(config);
       const res = await axios(config);
-  
+
       if (res.status === 200) {
         handleClose();
-        setQuestionAnsPdf();
+        getallquestionPdf();
         swal({
           title: "Yeah!",
           text: res.data.success,
@@ -284,6 +272,7 @@ const UploadPdfQuestion = () => {
   };
 
 
+  console.log("QuestionAnsPdf", QuestionAnsPdf);
 
   useEffect(() => {
     getallquestionPdf();
@@ -291,16 +280,15 @@ const UploadPdfQuestion = () => {
     getaddsubclasss();
     getSubject();
   }, []);
-//   onChange={(e) => {
-//     if(selectedLanguage == "en-t-i0-und"){
-//       setboardName(e.target.value);
-//     }else onChangeHandler(e.target.value, setboardName);                    
-//   }}
-// />
+
+  const handleClick = (pdfFileName) => {
+    window.open(`http://localhost:8000/QuestionPdf/${pdfFileName}`, '_blank');
+  };
   return (
     <div>
-      <div className="row d-flex justify-content-between">
-        <div className="col-lg-4 d-flex justify-content-center">
+      <div className=" d-flex justify-content-between">
+        <div>
+        <div className=" d-flex justify-content-center">
           <div class="input-group ">
             <span class="input-group-text" id="basic-addon1">
               <BsSearch />
@@ -313,6 +301,8 @@ const UploadPdfQuestion = () => {
             />
           </div>
         </div>
+        </div>
+       
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
           <select
@@ -349,7 +339,7 @@ const UploadPdfQuestion = () => {
             style={{ width: "-webkit-fill-available" }}
           >
             <thead>
-              <tr>
+              <tr style={{textAlign:"center"}}>
                 <th>S.No</th>
                 <th><div>Title</div></th>
                 <th><div>Year</div></th>
@@ -357,7 +347,8 @@ const UploadPdfQuestion = () => {
                 <th><div>Sub-Class</div></th>
                 <th><div>Medium</div></th>
                 <th><div>Subject</div></th>
-                <th> <div>View</div></th>
+                <th> <div>Question View</div></th>
+                <th> <div>Answer View</div></th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -365,7 +356,7 @@ const UploadPdfQuestion = () => {
             <tbody>
               {QuestionAnsPdf?.map((item, i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={i} style={{textAlign:"center"}}>
                     <td>{i + 1}</td>
                     <td>{item?.Title}</td>
                     <td>{item?.year}</td>
@@ -375,13 +366,41 @@ const UploadPdfQuestion = () => {
                     <td>{item?.subject}</td>
                     <td>
 
-                      <FaEye
-                        color="blue"
-                        onClick={() => {
-                          navigate(`/adminslybuscopyview/${item?._id}`);
-                        }}
-                      />
-                      {/* </Link> */}
+                      <div>
+                        <FaEye
+                          target="_blank"
+                          color="blue"
+                          onClick={() => handleClick(item?.questionPdf)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <a
+                          href={`http://localhost:8000/QuestionPdf/${item?.questionPdf}`}
+                          target="_blank"
+                          style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
+                        >
+                          View PDF
+                        </a>
+                      </div>
+
+                    </td>
+                    <td>
+
+                      <div>
+                        <FaEye
+                          target="_blank"
+                          color="blue"
+                          onClick={() => handleClick(item?.answerPdf)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                        <a
+                          href={`http://localhost:8000/QuestionPdf/${item?.answerPdf}`}
+                          target="_blank"
+                          style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
+                        >
+                          View PDF
+                        </a>
+                      </div>
+
                     </td>
                     <td>
                       {" "}
@@ -402,7 +421,7 @@ const UploadPdfQuestion = () => {
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              setSyllabus(item?._id);
+                              setUploadd(item);
                               handleShow2();
                             }}
                           />{" "}
@@ -449,18 +468,18 @@ const UploadPdfQuestion = () => {
                 <div className="do-sear mt-2">
                   <label>Year</label>
                   <input
-                   
+
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- 2023-2024"
                     onChange={(e) => {
-                      if(selectedLanguage == "en-t-i0-und"){
+                      if (selectedLanguage == "en-t-i0-und") {
                         setyear(e.target.value);
-                      }else onChangeHandler(e.target.value,setyear);
-                      
+                      } else onChangeHandler(e.target.value, setyear);
+
                     }}
                   />
-                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
                 </div>
               </div>
               <div className="col-sm-4">
@@ -609,6 +628,7 @@ const UploadPdfQuestion = () => {
           show={show1}
           onHide={handleClose1}
           backdrop="static"
+          size="lg"
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
@@ -616,51 +636,162 @@ const UploadPdfQuestion = () => {
             closeButton
             style={{ backgroundColor: "rgb(40 167 223)" }}
           >
-            <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>Edit Question Upload</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Number</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Number"
+          <div className="row">
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Question Title</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- Annoual Programe of  work for the Year"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        setTitle(e.target.value);
+                      } else onChangeHandler(e.target.value, setTitle);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>Year</label>
+                  <input
 
-                />
+                    type="text"
+                    className="vi_0"
+                    placeholder="Eg:- 2023-2024"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        setyear(e.target.value);
+                      } else onChangeHandler(e.target.value, setyear);
+
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setclasss(e.target.value);
+                    }}
+                  >
+                    <option>Select the Class</option>
+                    {uniqueClassNamesArray?.map((val, i) => {
+                      return (
+                        <option value={val} key={i}>
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Sub-Class <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setsubclass(e.target.value);
+                    }}
+                  >
+                    <option>Select the Sub-Class</option>
+                    {getaddsubclass
+                      ?.filter((ele) => ele.className === classs)
+                      ?.map((val, i) => {
+                        return (
+                          <option value={val?.subclassName} key={i}>
+                            {val?.subclassName}
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Subjects <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => setsubjectt(e.target.value)}
+                  >
+                    <option>Select the Subjects</option>
+                    {subject?.map((item, i) => {
+                      return (
+                        <>
+                          <option value={item?.subjectName}>
+                            {item?.subjectName}
+                          </option>
+                        </>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="do-sear mt-2">
+                  <label>
+                    Select Medium <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setmedium(e.target.value);
+                    }}
+                  >
+                    <option>Select the Medium</option>
+                    {Medium?.map((val, i) => {
+                      return (
+                        <option value={val?.mediumName} key={i}>
+                          {val?.mediumName}
+                        </option>
+                      );
+                    })}
+                  </Form.Select>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="do-sear mt-2">
+                  <label>Question Pdf</label>
+                  <input
+                    type="file"
+                    className="vi_0"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      setQuestionpdf(e.target.files[0]);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="do-sear mt-2">
+                  <label>Answer Pdf</label>
+                  <input
+                    type="file"
+                    className="vi_0"
+                    accept="application/pdf"
+                    onChange={(e) => {
+                      setAnswerpdf(e.target.files[0]);
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Chapter Name</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Chapter Name"
-
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Description</label>
-                <CKEditor editor={ClassicEditor} className="vi_0" />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="do-sear mt-2">
-                <label>Marks</label>
-                <input
-                  type="text"
-                  className="vi_0"
-                  placeholder="Enter Marks"
-
-                />
-              </div>
-            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -709,7 +840,7 @@ const UploadPdfQuestion = () => {
             >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={deleteslybus}>
+            <Button variant="" className="modal-add-btn" onClick={deletesQuestionAns}>
               Delete
             </Button>
           </Modal.Footer>
