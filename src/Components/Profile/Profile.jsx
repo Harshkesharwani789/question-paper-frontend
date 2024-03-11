@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
-  FaCity,
-  FaFileImage,
-  FaHome,
   FaPhoneAlt,
   FaRegEye,
   FaWhatsappSquare,
 } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
-import { LuLanguages } from "react-icons/lu";
-import { MdEmail, MdOutlineAppRegistration } from "react-icons/md";
-import { GiExplosiveMaterials } from "react-icons/gi";
+import { MdEmail } from "react-icons/md";
 import { CiCalendarDate } from "react-icons/ci";
 import { Table } from "react-bootstrap";
-import { BiSolidEdit } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
@@ -27,14 +20,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profile, setprofile] = useState(true);
   const [QuestionPaper, setQuestionPaper] = useState(false);
-  const [Reject, setReject] = useState(false);
   const [payment, setPayment] = useState(false);
-  const [show2, setShow2] = useState();
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
-  const [show, setShow] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
 
   const [AllQuestionGen, setAllQuestionGen] = useState([]);
 
@@ -302,7 +289,7 @@ const Profile = () => {
                                       handleShow2();
                                     }}
                                   />{" "} */}
-                                      {item?.status == "Completed" ? (
+                                      {item?.status === "Completed" ? (
                                         <FaRegEye
                                           className="text-primary"
                                           style={{
@@ -310,12 +297,7 @@ const Profile = () => {
                                             fontSize: "20px",
                                           }}
                                           onClick={() =>
-                                            swal({
-                                              title: "Oops!",
-                                              text: "Comming Soon",
-                                              icon: "warning",
-                                              dangerMode: true,
-                                            })
+                                           navigate("/admincoverpage",{state:{item:item}})
                                           }
                                         />
                                       ) : (
