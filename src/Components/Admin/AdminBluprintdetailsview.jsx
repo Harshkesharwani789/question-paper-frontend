@@ -247,8 +247,8 @@ function AdminBlueprintdetailsview() {
           <div className="row">
             <div className="col-md-12 text-end">
               <div className="justify-content-end d-flex gap-3">
-                <button onClick={createPDF} className="btn btn-success">View description</button>
-                <button onClick={createPDF1} className="btn btn-success">View Blueprint</button>
+                <button onClick={createPDF} className="btn btn-success">Download Blueprint 1</button>
+                <button onClick={createPDF1} className="btn btn-success">Download Blueprint 2</button>
                 {/* <FiPrinter onClick={createPDF} style={{cursor:"pointer",color:"blue"}} />
 
                <FiPrinter onClick={createPDF1} style={{cursor:"pointer",color:"blue"}} /> */}
@@ -258,18 +258,17 @@ function AdminBlueprintdetailsview() {
 
             </div>
           </div>
-          <div id="pdf">
-            <div className="blueprint-content-display" >
 
-
+          <div className="blueprint-content-display" >
+            <div id="pdf">
               <div className="blueprint-titles">
                 <h3>{blueprint?.blName}</h3>
                 {/* <h3>೭ ನೀ ತರಗತಿ ಪ್ರಥಮ ಬಾಷೆ ಕನ್ನಡ ನೇಲಿ ನಕ್ಷೆ</h3> */}
                 <h4>{bluePrintHeader?.BluePrintName}</h4>
               </div>
               <div className="container">
-                <div className="row">
-                  <div className="col-md-7">
+                <div className="d-flex gap-2">
+                  <div className="col-md-7 blue-print_1tab">
                     {/* table 3  */}
                     <div className="weightage-objectives">
                       <div className="main-title">
@@ -282,33 +281,81 @@ function AdminBlueprintdetailsview() {
                           bordered
                           hover
                           size="md"
-                          style={{ border: "1px solid" }}
+                          style={{ border: "2px solid black" }}
                         >
                           <thead>
-                            <tr>
-                              <th>{bluePrintHeader?.SNo}</th>
-                              <th>{bluePrintHeader?.Lessons}</th>
-                              <th>{bluePrintHeader?.Questions}</th>
-                              <th>{bluePrintHeader?.Marks}</th>
-                              <th>{bluePrintHeader?.Percentage}</th>
+                            <tr
+                              style={{
+                                border: "2px solid black",
+                              }}
+                            >
+                              <th
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                              >{bluePrintHeader?.SNo}</th>
+                              <th
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                              >{bluePrintHeader?.Lessons}</th>
+                              <th
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                              >{bluePrintHeader?.Questions}</th>
+                              <th
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                              >{bluePrintHeader?.Marks}</th>
+                              <th
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                              >{bluePrintHeader?.Percentage}</th>
                             </tr>
                           </thead>
                           <tbody>
                             {uniqueObjectsArray?.map((item, i) => {
-                              return (<tr >
-                                <td>{i + 1}</td>
-                                <td>{item?.name}</td>
-                                <td>{AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
+                              return (<tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                              >
+                                <td
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{i + 1}</td>
+                                <td
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{item?.name}</td>
+                                <td
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                                   0
                                 )}</td>
-                                <td>
+                                <td
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >
                                   {AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
                                     (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                     0
                                   )}
                                 </td>
-                                <td>{(AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
+                                <td
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{(AllChapterData?.filter((ele) => ele?.Blueprintchapter == item?.name)?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                   0
                                 ) / (blueprint?.AllChapter?.reduce(
@@ -327,18 +374,38 @@ function AdminBlueprintdetailsview() {
                             {/* );
                           })} */}
 
-                            <tr>
-                              <td>
+                            <tr
+                              style={{
+                                border: "2px solid black",
+                              }}
+                            >
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >
                                 <b>{bluePrintHeader?.Total}</b>
                               </td>
-                              <td></td>
-                              <td><b>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              ></td>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              ><b>
                                 {blueprint?.AllChapter?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                                   0
                                 )}
                               </b></td>
-                              <td>  <b>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >  <b>
                                 {blueprint?.AllChapter?.reduce(
                                   (a, ele) =>
                                     a +
@@ -351,7 +418,11 @@ function AdminBlueprintdetailsview() {
                               </b>
 
                               </td>
-                              <td>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >
                                 <b>
                                   {/* {blueprint?.TypesofQuestions?.reduce(
                                   (a, i) => a + Number(i?.Mask * i?.NQA),
@@ -429,7 +500,7 @@ function AdminBlueprintdetailsview() {
                     </div>
                   </div> */}
                   </div>
-                  <div className="col-md-5">
+                  <div className="col-md-5 blue-print_1tab">
                     {/* table 1 */}
                     <div className="weightage-objectives">
                       <div className="main-title">
@@ -445,31 +516,79 @@ function AdminBlueprintdetailsview() {
                           style={{ border: "1px solid" }}
                         >
                           <thead>
-                            <tr>
-                              <th>{bluePrintHeader?.SNo}</th>
-                              <th>{bluePrintHeader?.Specifics}</th>
-                              <th>{bluePrintHeader?.Questions}</th>
-                              <th>{bluePrintHeader?.Marks}</th>
-                              <th>{bluePrintHeader?.Percentage}</th>
+                            <tr
+                              style={{
+                                border: "2px solid black",
+                              }}
+                            >
+                              <th
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >{bluePrintHeader?.SNo}</th>
+                              <th
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >{bluePrintHeader?.Specifics}</th>
+                              <th
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >{bluePrintHeader?.Questions}</th>
+                              <th
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >{bluePrintHeader?.Marks}</th>
+                              <th
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >{bluePrintHeader?.Percentage}</th>
                             </tr>
                           </thead>
                           <tbody>
                             {blueprint?.objectives?.map((item, i) => {
                               return (
-                                <tr >
-                                  <td>{i + 1}</td>
-                                  <td>{item?.Objective}</td>
-                                  <td>{AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
+                                <tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                                >
+                                  <td
+                                    style={{
+                                border: "1px solid black",
+                              }}
+                                  >{i + 1}</td>
+                                  <td
+                                    style={{
+                                border: "1px solid black",
+                              }}
+                                  >{item?.Objective}</td>
+                                  <td
+                                    style={{
+                                border: "1px solid black",
+                              }}
+                                  >{AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
                                     (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                                     0
                                   )}</td>
-                                  <td>
+                                  <td
+                                    style={{
+                                border: "1px solid black",
+                              }}
+                                  >
                                     {AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
                                       (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                       0
                                     )}
                                   </td>
-                                  <td>{(AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
+                                  <td
+                                    style={{
+                                border: "1px solid black",
+                              }}
+                                  >{(AllChapterData?.filter((ele) => ele?.Blueprintobjective == item?.Objective)?.reduce(
                                     (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                     0
                                   ) / (blueprint?.AllChapter?.reduce(
@@ -487,18 +606,34 @@ function AdminBlueprintdetailsview() {
                             })}
 
                             <tr>
-                              <td></td>
-                              <td>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              ></td>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >
                                 <b>{bluePrintHeader?.Total}</b>
                               </td>
 
-                              <td><b>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              ><b>
                                 {blueprint?.AllChapter?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                                   0
                                 )}
                               </b></td>
-                              <td>  <b>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >  <b>
                                 {blueprint?.AllChapter?.reduce(
                                   (a, ele) =>
                                     a +
@@ -512,7 +647,11 @@ function AdminBlueprintdetailsview() {
 
                               </td>
 
-                              <td>
+                              <td
+                                style={{
+                                border: "1px solid black",
+                              }}
+                              >
                                 <b>
                                   {/* {blueprint?.TypesofQuestions?.reduce(
                                   (a, i) => a + Number(i?.Mask * i?.NQA),
@@ -592,21 +731,61 @@ function AdminBlueprintdetailsview() {
                             style={{ border: "1px solid" }}
                           >
                             <thead>
-                              <tr>
-                                <th>{bluePrintHeader?.SNo}</th>
-                                <th>{bluePrintHeader?.TypeOfQuestion}</th>
-                                <th>{bluePrintHeader?.Questions}</th>
-                                <th>{bluePrintHeader?.Marks}</th>
-                                <th>{bluePrintHeader?.Percentage}</th>
+                              <tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                              >
+                                <th
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{bluePrintHeader?.SNo}</th>
+                                <th
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{bluePrintHeader?.TypeOfQuestion}</th>
+                                <th
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{bluePrintHeader?.Questions}</th>
+                                <th
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{bluePrintHeader?.Marks}</th>
+                                <th
+                                  style={{
+                                border: "1px solid black",
+                              }}
+                                >{bluePrintHeader?.Percentage}</th>
                               </tr>
                             </thead>
                             <tbody>
                               {/* {blueprint?.Weightageofthecontent?.map((val, i) => {
                               return ( */}
-                              <tr >
-                                <td>1</td>
-                                <td>{bluePrintHeader?.Objectivequestion}</td>
-                                <td>{AllChapterData?.filter(
+                              <tr 
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                              >
+                                <td
+                                        style={{
+                                          border: "1px solid black",
+                                        }}
+                                >1</td>
+                                <td
+                                        style={{
+                                          border: "1px solid black",
+                                        }}
+                                >{bluePrintHeader?.Objectivequestion}</td>
+                                <td
+                                        style={{
+                                          border: "1px solid black",
+                                        }}
+                                >{AllChapterData?.filter(
                                   (item) =>
 
                                     item?.BluePrintQuestiontype == "O T"
@@ -616,7 +795,11 @@ function AdminBlueprintdetailsview() {
                                   0
                                 )}</td>
 
-                                <td>{AllChapterData?.filter(
+                                <td
+                                        style={{
+                                  border: "1px solid black",
+                                }}
+                                >{AllChapterData?.filter(
                                   (item) =>
 
                                     item?.BluePrintQuestiontype == "O T"
@@ -626,7 +809,11 @@ function AdminBlueprintdetailsview() {
                                       am?.Blueprintnoofquestion),
                                   0
                                 )}</td>
-                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "O T")?.reduce(
+                                <td
+                                        style={{
+                                  border: "1px solid black",
+                                }}
+                                >{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "O T")?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                   0
                                 ) / (blueprint?.AllChapter?.reduce(
@@ -639,10 +826,26 @@ function AdminBlueprintdetailsview() {
                                   0
                                 ))) * 100}%</td>
                               </tr>
-                              <tr >
-                                <td>2</td>
-                                <td>{bluePrintHeader?.ShortanswerQ}</td>
-                                <td>{AllChapterData?.filter(
+                              <tr 
+                                      style={{
+                                        border: "2px solid black",
+                                      }}
+                              >
+                                <td
+                                style={{
+                                        border: "1px solid black",
+                                      }}
+                                >2</td>
+                                <td
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                                >{bluePrintHeader?.ShortanswerQ}</td>
+                                <td
+                                style={{
+                                  border: "1px solid black",
+                                }}
+                                >{AllChapterData?.filter(
                                   (item) =>
 
                                     item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A"
@@ -652,7 +855,11 @@ function AdminBlueprintdetailsview() {
                                   0
                                 )}</td>
 
-                                <td>{AllChapterData?.filter(
+                                <td
+                                style={{
+                                        border: "1px solid black",
+                                      }}
+                                >{AllChapterData?.filter(
                                   (item) =>
 
                                     item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A"
@@ -662,7 +869,11 @@ function AdminBlueprintdetailsview() {
                                       am?.Blueprintnoofquestion),
                                   0
                                 )}</td>
-                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A")?.reduce(
+                                <td
+                                style={{
+                                        border: "1px solid black",
+                                      }}
+                                >{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "V.S.A" || item?.BluePrintQuestiontype == "S.A")?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                   0
                                 ) / (blueprint?.AllChapter?.reduce(
@@ -675,7 +886,11 @@ function AdminBlueprintdetailsview() {
                                   0
                                 ))) * 100}%</td>
                               </tr>
-                              <tr >
+                              <tr 
+                              style={{
+                                border: "2px solid black",
+                              }}
+                              >
                                 <td>3</td>
                                 <td>{bluePrintHeader?.LonganswerQ}</td>
                                 <td>{AllChapterData?.filter(
@@ -688,7 +903,11 @@ function AdminBlueprintdetailsview() {
                                   0
                                 )}</td>
 
-                                <td>{AllChapterData?.filter(
+                                <td
+                                style={{
+                                        border: "1px solid black",
+                                      }}
+                                >{AllChapterData?.filter(
                                   (item) =>
 
                                     item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3"
@@ -698,7 +917,11 @@ function AdminBlueprintdetailsview() {
                                       am?.Blueprintnoofquestion),
                                   0
                                 )}</td>
-                                <td>{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3")?.reduce(
+                                <td
+                                style={{
+                                        border: "1px solid black",
+                                      }}
+                                >{(AllChapterData?.filter((item) => item?.BluePrintQuestiontype == "L.A 1" || item?.BluePrintQuestiontype == "L.A 2" || item?.BluePrintQuestiontype == "L.A 3")?.reduce(
                                   (a, ele) => a + Number(ele?.Blueprintnoofquestion * ele?.BluePrintmarksperquestion),
                                   0
                                 ) / (blueprint?.AllChapter?.reduce(
@@ -789,35 +1012,131 @@ function AdminBlueprintdetailsview() {
                           style={{ border: "1px solid" }}
                         >
                           <thead>
-                            <tr>
-                              <th>{bluePrintHeader?.SNo}</th>
-                              <th>{bluePrintHeader?.LevelOfDifficult}</th>
-                              <th>{bluePrintHeader?.Questions}</th>
-                              <th>{bluePrintHeader?.Marks}</th>
-                              <th>{bluePrintHeader?.Percentage}</th>
+                            <tr
+                            style={{
+                              border: "2px solid black",
+                            }}
+                            >
+                              <th
+                              style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.SNo}</th>
+                              <th
+                              style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.LevelOfDifficult}</th>
+                              <th
+                              style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.Questions}</th>
+                              <th
+                              style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.Marks}</th>
+                              <th
+                              style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.Percentage}</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>{bluePrintHeader?.Easy} </td>
-                              <td>{blueprint?.Easy}</td>
-                              <td>{blueprint?.EasyMask}</td>
-                              <td>{blueprint?.EasyParcentage}%</td>
+                            <tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                            >
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >1</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.Easy} </td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.Easy}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.EasyMask}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.EasyParcentage}%</td>
                             </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>{bluePrintHeader?.MediumQ} </td>
-                              <td>{blueprint?.Average}</td>
-                              <td>{blueprint?.AverageMask}</td>
-                              <td>{blueprint?.AverageParcentage}%</td>
+                            <tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                            >
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >2</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.MediumQ} </td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.Average}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.AverageMask}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.AverageParcentage}%</td>
                             </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>{bluePrintHeader?.Difficult}</td>
-                              <td>{blueprint?.Difficult}</td>
-                              <td>{blueprint?.DifficultMask}</td>
-                              <td>{blueprint?.DifficultParcentage}%</td>
+                            <tr
+                                style={{
+                                  border: "2px solid black",
+                                }}
+                            >
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >3</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{bluePrintHeader?.Difficult}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.Difficult}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.DifficultMask}</td>
+                              <td
+                                  style={{
+                                        border: "1px solid black",
+                                      }}
+                              >{blueprint?.DifficultParcentage}%</td>
                             </tr>
                           </tbody>
                         </Table>
@@ -860,12 +1179,11 @@ function AdminBlueprintdetailsview() {
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* blue print 2  */}
-          <div id="pdf1">
-            <div style={{ fontFamily: "sans-serif" }}>
+          <div id="pdf1" className="asdasdasd_asdaasda">
+            <div style={{ fontFamily: "sans-serif", }}>
               <div
                 className="blueprint2-container"
                 style={{ padding: "20px 8px" }}
@@ -895,61 +1213,67 @@ function AdminBlueprintdetailsview() {
                   </div>
                 </div>
 
-                <div>
+                <div className="asdasd_asda">
                   <Table
                     responsive
                     bordered
                     style={{ border: "1px solid", width: "fit-content", height: "32rem" }}
                   >
                     <thead>
-                      <tr>
-                        <th style={{ fontSize: "12px", width: "32px" }}>{bluePrintHeader?.SNo} </th>
-                        <th style={{ width: "125px", fontSize: "12px" }}>{bluePrintHeader?.TargetUnit}</th>
+                      <tr
+                      style={{border:"2px solid #000"}}
+                      >
+                        <th style={{ fontSize: "12px", width: "32px" , border:"2px solid #000"}}>{bluePrintHeader?.SNo} </th>
+                        <th style={{ width: "125px", fontSize: "12px" , border:"2px solid #000"}}>{bluePrintHeader?.TargetUnit}</th>
                         {blueprint?.objectives?.map((ele) => {
                           return (
                             <>
-                              <th colSpan={6} style={{ fontSize: "12px" }}>{ele?.Objective}</th>
+                              <th colSpan={6} style={{ fontSize: "12px", border:"2px solid #000" }}>{ele?.Objective}</th>
 
                             </>
                           );
                         })}
 
-                        <th colSpan={6} style={{ fontSize: "12px" }}>{bluePrintHeader?.TotalQuestion}</th>
+                        <th colSpan={6} style={{ fontSize: "12px" , border:"2px solid #000"}}>{bluePrintHeader?.TotalQuestion}</th>
 
-                        <th colSpan={1} style={{ fontSize: "12px" }}>{bluePrintHeader?.TotalMarks}</th>
+                        <th colSpan={1} style={{ fontSize: "12px", border:"2px solid #000" }}>{bluePrintHeader?.TotalMarks}</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                      <tr style={{ borderBottom: "2px solid black" }}>
-                        <th></th>
-                        <th></th>
+                      <tr style={{ border: "2px solid black" }}>
+                        <th
+                        style={{ border: "1px solid black" }}
+                        ></th>
+                        <th
+                        style={{ border: "1px solid black" }}
+                        ></th>
 
-                        <th style={{ fontSize: "12px" }}>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>
                           {bluePrintHeader?.V}
                         </th>
-                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
-                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
-                        <th style={{ fontSize: "12px" }}>
+                        <th colSpan={2} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>
                           {bluePrintHeader?.V}
                         </th>
-                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
-                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
-                        <th style={{ fontSize: "12px" }}>
+                        <th colSpan={2} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>
                           {bluePrintHeader?.V}
                         </th>
-                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
-                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
-                        <th style={{ fontSize: "12px" }}>
+                        <th colSpan={2} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>
                           {bluePrintHeader?.V}
                         </th>
-                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
-                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
-                        <th style={{ fontSize: "12px" }}>
+                        <th colSpan={2} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.D}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>
                           {bluePrintHeader?.V}
                         </th>
-                        <th colSpan={2} style={{ fontSize: "12px" }}>{bluePrintHeader?.K}</th>
-                        <th colSpan={3} style={{ fontSize: "12px" }}>{bluePrintHeader?.D}</th>
+                        <th colSpan={2} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.K}</th>
+                        <th colSpan={3} style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.D}</th>
 
                         {/* 
                         <th style={{ fontSize: "12px" }}>
@@ -979,44 +1303,48 @@ function AdminBlueprintdetailsview() {
 
 
                       </tr>
-                      <tr>
-                        <th></th>
+                      <tr
+                      style={{border: "2px solid black"}}
+                      >
+                        <th style={{border: "1px solid black"}}></th>
 
-                        <th style={{ width: "125px", fontSize: "12px" }}></th>
+                        <th style={{ width: "125px", fontSize: "12px", border: "1px solid black" }}></th>
                         {blueprint?.objectives?.map((ele) => {
                           return (
                             <>
 
-                              <th style={{ fontSize: "12px" }}></th>
-                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.VSA}</th>
-                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}></th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.VSA}</th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.SA}</th>
 
-                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
-                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
-                              <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA1}</th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA2}</th>
+                              <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA3}</th>
                             </>
                           );
                         })}
 
-                        <th style={{ fontSize: "12px" }}></th>
-                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.VSA}</th>
-                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.SA}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}></th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.VSA}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.SA}</th>
 
-                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA1}</th>
-                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA2}</th>
-                        <th style={{ fontSize: "12px" }}>{bluePrintHeader?.LA3}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA1}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA2}</th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}>{bluePrintHeader?.LA3}</th>
 
-                        <th style={{ fontSize: "12px" }}></th>
+                        <th style={{ fontSize: "12px", border: "1px solid black" }}></th>
                       </tr>
                       {uniqueObjectsArray?.map((ele, i) => {
                         return (
-                          <tr>
-                            <td style={{ fontSize: "12px" }}>{i + 1}</td>
-                            <td style={{ width: "125px", fontSize: "12px" }}>{ele?.name}</td>
+                          <tr
+                          style={{border: "2px solid black"}}
+                          >
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>{i + 1}</td>
+                            <td style={{ width: "125px", fontSize: "12px", border: "1px solid black" }}>{ele?.name}</td>
                             {blueprint?.objectives?.map((ele1) => {
                               return (
                                 <>
-                                  <td style={{ fontSize: "12px" }}>
+                                  <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                     {
                                       AllChapterData?.find(
                                         (item) =>
@@ -1073,7 +1401,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                       : ""}
                                   </td>
-                                  <td style={{ fontSize: "12px" }}>
+                                  <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                     {
                                       AllChapterData?.find(
                                         (item) =>
@@ -1101,7 +1429,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                       : ""}
                                   </td>
-                                  <td style={{ fontSize: "12px" }}>
+                                  <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                     {
                                       AllChapterData?.find(
                                         (item) =>
@@ -1130,7 +1458,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                       : ""}
                                   </td>
-                                  <td style={{ fontSize: "12px" }}>
+                                  <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                     {
                                       AllChapterData?.find(
                                         (item) =>
@@ -1159,7 +1487,7 @@ function AdminBlueprintdetailsview() {
                                       })`
                                       : ""}
                                   </td>
-                                  <td style={{ fontSize: "12px" }}>
+                                  <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                     {
                                       AllChapterData?.find(
                                         (item) =>
@@ -1192,36 +1520,36 @@ function AdminBlueprintdetailsview() {
                               );
                             })}
 
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "O T")?.TotalQ}
                             </td>
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "V.S.A")?.TotalQ}
                             </td>
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "S.A")?.TotalQ}
                             </td>
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "L.A 1")?.TotalQ}
                             </td>
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "L.A 2")?.TotalQ}
                             </td>
-                            <td style={{ fontSize: "12px" }}>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>
                               {bluePrintTotalQues(ele?.name, "L.A 3")?.TotalQ}
                             </td>
 
-                            <td style={{ fontSize: "12px" }}>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
+                            <td style={{ fontSize: "12px", border: "1px solid black" }}>{QuestionNameWiseMask(ele?.name)?.totalMas}</td>
                           </tr>
                         );
                       })}
-                      <tr>
-                        <td></td>
-                        <td style={{ fontSize: "12px", width: "46px" }}>{bluePrintHeader?.Total}</td>
+                      <tr style={{border: "2px solid black"}}>
+                        <td style={{border: "1px solid black"}}></td>
+                        <td style={{ fontSize: "12px", width: "46px", border: "1px solid black" }}>{bluePrintHeader?.Total}</td>
                         {blueprint?.objectives?.map((ele) => {
                           return (
                             <>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1259,7 +1587,7 @@ function AdminBlueprintdetailsview() {
                                   ""
                                 )}
                               </td>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1297,7 +1625,7 @@ function AdminBlueprintdetailsview() {
                                   ""
                                 )}
                               </td>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1335,7 +1663,7 @@ function AdminBlueprintdetailsview() {
                                   ""
                                 )}
                               </td>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1373,7 +1701,7 @@ function AdminBlueprintdetailsview() {
                                   ""
                                 )}
                               </td>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1411,7 +1739,7 @@ function AdminBlueprintdetailsview() {
                                   ""
                                 )}
                               </td>
-                              <td style={{ fontSize: "12px" }}>
+                              <td style={{ fontSize: "12px", border: "1px solid black" }}>
                                 {AllChapterData?.some(
                                   (item) =>
                                     item?.Blueprintobjective == ele?.Objective &&
@@ -1453,18 +1781,18 @@ function AdminBlueprintdetailsview() {
                           );
                         })}
 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td style={{border: "1px solid black", }}></td>
+                        <td style={{border: "1px solid black", }}></td>
+                        <td style={{border: "1px solid black", }}></td>
+                        <td style={{border: "1px solid black", }}></td>
+                        <td style={{border: "1px solid black", }}></td>
                         <td style={{ fontSize: "12px" }}>
                           {blueprint?.AllChapter?.reduce(
                             (a, ele) => a + Number(ele?.Blueprintnoofquestion),
                             0
                           )}
                         </td>
-                        <td style={{ fontSize: "12px" }}>
+                        <td style={{ fontSize: "12px", border: "1px solid black" }}>
                           {blueprint?.AllChapter?.reduce(
                             (a, ele) =>
                               a +
@@ -1482,7 +1810,8 @@ function AdminBlueprintdetailsview() {
                 <span>{bluePrintHeader?.Note}:-</span>
                 {parse(`<span>${blueprint?.Instructions}</span>`)}
               </div>
-            </div></div>
+            </div>
+            </div>
         </div>
       </div>
 

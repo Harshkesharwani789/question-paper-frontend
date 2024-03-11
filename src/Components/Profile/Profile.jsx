@@ -70,6 +70,7 @@ const Profile = () => {
                 backgroundColor: "rgb(8, 52, 148)",
                 color: "#fff",
                 padding: "3px 4px",
+                marginBottom:'10px'
               }}
               onClick={() => {
                 setprofile(true);
@@ -86,6 +87,7 @@ const Profile = () => {
                 backgroundColor: "rgb(8, 52, 148)",
                 color: "#fff",
                 padding: "3px 6px",
+                marginBottom:'10px'
               }}
               onClick={() => {
                 setprofile(false);
@@ -102,6 +104,7 @@ const Profile = () => {
                 backgroundColor: "rgb(8, 52, 148)",
                 color: "#fff",
                 padding: "3px 4px",
+                marginBottom:'10px'
               }}
               onClick={() => {
                 setprofile(false);
@@ -119,6 +122,7 @@ const Profile = () => {
                 padding: "3px 4px",
                 float: "right",
                 borderRadius: "10px",
+                marginTop:'10px'
               }}
               onClick={() => {
                 navigate("/examboard");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../Admin/Admin.css"
+import "../Admin/Admin.css";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
@@ -14,109 +14,105 @@ import html2canvas from "html2canvas";
 import { debounce } from "lodash";
 import swal from "sweetalert";
 const steps = [
-    "Blueprint Details",
-    "Marks Details",
-    "Weightage to the Content",
-    " Weightage of the Difficulty Level",
+  "Blueprint Details",
+  "Marks Details",
+  "Weightage to the Content",
+  " Weightage of the Difficulty Level",
 ];
 
 const AdminQuestionAnalysisHeaderEdit = () => {
-    const { QuestAnalHead_Id } = useParams();
+  const { QuestAnalHead_Id } = useParams();
 
-
-    const { state } = useLocation();
-    console.log("state", state);
+  const { state } = useLocation();
+  console.log("state", state);
   //Translate
   let googleTransliterate = require("google-input-tool");
   const [translatedValue, setTranslatedValue] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
   const handleLanguageChange = (event) => {
-      setSelectedLanguage(event.target.value);
+    setSelectedLanguage(event.target.value);
   };
 
   const onChangeHandler = debounce(async (value, setData) => {
-      if (!value) {
-          setTranslatedValue("");
-          setData("");
-          return "";
-      }
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
 
-      let am = value.split(/\s+/); // Split by any whitespace characters
-      let arr = [];
-      let promises = [];
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
 
-      for (let index = 0; index < am.length; index++) {
-          promises.push(
-              new Promise(async (resolve, reject) => {
-                  try {
-                      const response = await googleTransliterate(
-                          new XMLHttpRequest(),
-                          am[index],
-                          selectedLanguage
-                      );
-                      resolve(response[0][0]);
-                  } catch (error) {
-                      console.error("Translation error:", error);
-                      resolve(am[index]);
-                  }
-              })
-          );
-      }
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
 
-      try {
-          const translations = await Promise.all(promises);
-          setTranslatedValue(translations.join(" "));
-          setData(translations.join(" "));
-          return translations;
-      } catch (error) {
-          console.error("Promise.all error:", error);
-      }
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
   }, 300); // Debounce delay in milliseconds
-
-
-  
 
   //get method for medium
   const [selectedMedium, setselectedMedium] = useState("");
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
-      try {
-          let res = await axios.get("http://localhost:8000/api/admin/getAllMedium" );
-          if (res.status == 200) {
-              setMedium(res.data.success);
-          }
-      } catch (error) {
-          console.log(error);
+    try {
+      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
-//   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
-//   const getquestAnalysisHeader = async () => {
-//     try {
-//       let res = await axios.get(
-//         "http://localhost:8000/api/admin/getQuestAnalysisheaderbymedium/" +
-//           state?.Medium
-//       );
-//       if (res.status == 200) {
-//         setGetquestAnalysisHeader(res.data.success);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
-//   const getquestAnalysisHeaderByid = async () => {
-//     try {
-//       let res = await axios.get(
-//         `http://localhost:8000/api/admin/getquestionanalysisbyid/${QuestAnalHead_Id}`
-//       );
-//       if (res.status === 200) {
-//         setGetquestAnalysisHeader(res.data.success);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-  
+  //   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
+  //   const getquestAnalysisHeader = async () => {
+  //     try {
+  //       let res = await axios.get(
+  //         "http://localhost:8000/api/admin/getQuestAnalysisheaderbymedium/" +
+  //           state?.Medium
+  //       );
+  //       if (res.status == 200) {
+  //         setGetquestAnalysisHeader(res.data.success);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
+  //   const getquestAnalysisHeaderByid = async () => {
+  //     try {
+  //       let res = await axios.get(
+  //         `http://localhost:8000/api/admin/getquestionanalysisbyid/${QuestAnalHead_Id}`
+  //       );
+  //       if (res.status === 200) {
+  //         setGetquestAnalysisHeader(res.data.success);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
   //update
   const [QuestHeader, setQuestHeader] = useState("");
   const [slno, setslno] = useState("");
@@ -129,12 +125,11 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   const [Difficultlevel, setDifficultlevel] = useState("");
   const [Time, setTime] = useState("");
   const [Note, setNote] = useState("");
- 
- 
+
   const UpdateQuestAnalysisHeader = async () => {
     try {
       const config = {
-        url: "/admin/updateQuestionAnalysisHeader/"+ state?.item?._id,
+        url: "/admin/updateQuestionAnalysisHeader/" + state?.item?._id,
         method: "put",
         baseURL: "http://localhost:8000/api",
         headers: {
@@ -147,22 +142,21 @@ const AdminQuestionAnalysisHeaderEdit = () => {
           Chapter: Chapter,
           Lesson: Lesson,
           OtSaLsa: OtSaLsa,
-          Marks:Marks,
-          Difficultlevel:Difficultlevel,
-          Time:Time,
-          Note:Note,
-         
+          Marks: Marks,
+          Difficultlevel: Difficultlevel,
+          Time: Time,
+          Note: Note,
         },
       };
       let res = await axios(config);
-      if (res.status == 200){
-      return swal({
-        title: "Yeah",
-        text: res.data.success,
-        icon: "success",
-        button: "Ok!",
-      });
-    }
+      if (res.status == 200) {
+        return swal({
+          title: "Yeah",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
     } catch (error) {
       console.log(error);
       return swal({
@@ -173,202 +167,311 @@ const AdminQuestionAnalysisHeaderEdit = () => {
       });
     }
   };
-  
 
   useEffect(() => {
-      getAddMedium();
+    getAddMedium();
     //   getquestAnalysisHeaderByid();
-
-  }, [])
-//  console.log("QuestAnalHead_Id",QuestAnalHead_Id);
+  }, []);
+  //  console.log("QuestAnalHead_Id",QuestAnalHead_Id);
 
   return (
-      <>
-          <div className="box_1" >
-              <div className="Stepper-info row " style={{ padding: "4px" }}>
-                  <div className="row justify-content-between">
-                      <div className="col-md-3">
-                          <label htmlFor="">Select Medium</label>
-                          <select
-                              onChange={(e) => setselectedMedium(e.target.value)}
-                              className="vi_0"
-                              style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
-                          >
-                              <option value="select value">Select Medium</option>
-                              {Medium?.map((item) => (
-                                  <option value={item?.mediumName}>{item?.mediumName}</option>
-                              ))}
-                          </select>
+    <>
+      <div className="box_1">
+        <div className="Stepper-info row " style={{ padding: "4px" }}>
+          <div className="row justify-content-between">
+            <div className="col-md-3">
+              <label htmlFor="">Select Medium</label>
+              <select
+                onChange={(e) => setselectedMedium(e.target.value)}
+                className="vi_0"
+                style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+              >
+                <option value="select value">Select Medium</option>
+                {Medium?.map((item) => (
+                  <option value={item?.mediumName}>{item?.mediumName}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-3">
+              <label htmlFor="">Select Langauge</label>
+              <select
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+                className="vi_0"
+                style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
+              >
+                <option value="en-t-i0-und">English</option>
+                <option value="ne-t-i0-und">Nepali</option>
+                <option value="hi-t-i0-und">Hindi</option>
+                <option value="kn-t-i0-und">Kannada</option>
+                <option value="ta-t-i0-und">Tamil</option>
+                <option value="pa-t-i0-und">Punjabi</option>
+                <option value="mr-t-i0-und">Marathi</option>
+                <option value="ur-t-i0-und">Urdu</option>
+                <option value="sa-t-i0-und">Sanskrit</option>
+              </select>
+            </div>
+          </div>
+          <div id="pdf">
+            <div className="blueprint-content-display">
+              <div className="blueprint-titles">
+                <h3>Edit Questions Analysis Name</h3>
+                <div className="d-flex justify-content-center">
+                  <input
+                    style={{ width: "10rem" }}
+                    type="text"
+                    placeholder={state?.item?.QuestHeader}
+                    //   value={state?.item?.QuestHeader}
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        setQuestHeader(e.target.value);
+                      } else onChangeHandler(e.target.value, setQuestHeader);
+                    }}
+                    // onChange={(e)=>setQuestHeader(e.target.value)}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{state?.item?.QuestHeader}</p>
+                  )}
+                </div>
+              </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                    {/* table 3  */}
+                    <div className="weightage-objectives">
+                      <div className="objectives-table ">
+                        <Table
+                          responsive
+                          bordered
+                          hover
+                          size="md"
+                          style={{ border: "1px solid" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setslno(e.target.value);
+                                    } else
+                                      onChangeHandler(e.target.value, setslno);
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.slno}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.slno}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setObjectType(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setObjectType
+                                      );
+                                  }}
+                                  style={{ width: "100px" }}
+                                  type="text"
+                                  placeholder={state?.item?.ObjectType}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.ObjectType}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setChapter(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setChapter
+                                      );
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.Chapter}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.Chapter}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setLesson(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setLesson
+                                      );
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.Lesson}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.Lesson}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setQuestionType(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setQuestionType
+                                      );
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.QuestionType}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{QuestionType}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setOtSaLsa(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setOtSaLsa
+                                      );
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.OtSaLsa}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.OtSaLsa}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setMarks(e.target.value);
+                                    } else
+                                      onChangeHandler(e.target.value, setMarks);
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.Marks}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.Marks}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setDifficultlevel(e.target.value);
+                                    } else
+                                      onChangeHandler(
+                                        e.target.value,
+                                        setDifficultlevel
+                                      );
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.Difficultlevel}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.Difficultlevel}</p>
+                                )}
+                              </th>
+                              <th>
+                                <input
+                                  onChange={(e) => {
+                                    if (selectedLanguage == "en-t-i0-und") {
+                                      setTime(e.target.value);
+                                    } else
+                                      onChangeHandler(e.target.value, setTime);
+                                  }}
+                                  style={{ width: "80px" }}
+                                  type="text"
+                                  placeholder={state?.item?.Time}
+                                />
+                                {selectedLanguage == "en-t-i0-und" ? (
+                                  <></>
+                                ) : (
+                                  <p>{state?.item?.Time}</p>
+                                )}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1.</td>
+                              <td>Understanding</td>
+                              <td>A box of Smiles</td>
+                              <td>Prose</td>
+                              <td>Fill in the blanks</td>
+                              <td>O T</td>
+                              <td>40</td>
+                              <td>Easy</td>
+                              <td>2 minutes</td>
+                            </tr>
+                          </tbody>
+                        </Table>
                       </div>
-                      <div className="col-md-3">
-                          <label htmlFor="">Select Langauge</label>
-                          <select
-                              value={selectedLanguage}
-                              onChange={handleLanguageChange}
-                              className="vi_0"
-                              style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
-                          >
-                              <option value="en-t-i0-und">English</option>
-                              <option value="ne-t-i0-und">Nepali</option>
-                              <option value="hi-t-i0-und">Hindi</option>
-                              <option value="kn-t-i0-und">Kannada</option>
-                              <option value="ta-t-i0-und">Tamil</option>
-                              <option value="pa-t-i0-und">Punjabi</option>
-                              <option value="mr-t-i0-und">Marathi</option>
-                              <option value="ur-t-i0-und">Urdu</option>
-                              <option value="sa-t-i0-und">Sanskrit</option>
-                          </select>
-                      </div>
+                    </div>
                   </div>
-                  <div id="pdf">
-                      <div className="blueprint-content-display" >
-                          <div className="blueprint-titles">
-                              <h3>Edit Questions Analysis Name</h3>
-                              <div className="d-flex justify-content-center">
-                                  <input
-                                      style={{ width: "10rem" }} 
-                                      type="text" 
-                                      placeholder={state?.item?.QuestHeader}
-                                    //   value={state?.item?.QuestHeader}
-                                      onChange={(e) => {
-                                          if (selectedLanguage == "en-t-i0-und") {
-                                              setQuestHeader(e.target.value)
-                                          } else onChangeHandler(e.target.value, setQuestHeader)
-                                      }}
-                                    // onChange={(e)=>setQuestHeader(e.target.value)}
-                                  />
-                                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.QuestHeader}</p>}
-                              </div>
-                          </div>
-                          <div className="container">
-                              <div className="row">
-                                  <div className="col-md-12">
-                                      {/* table 3  */}
-                                      <div className="weightage-objectives">
-
-                                          <div className="objectives-table ">
-                                              <Table
-                                                  responsive
-                                                  bordered
-                                                  hover
-                                                  size="md"
-                                                  style={{ border: "1px solid" }}
-                                              >
-                                                  <thead>
-                                                      <tr>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setslno(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setslno)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.slno} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.slno}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setObjectType(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setObjectType)
-                                                                  }} style={{ width: "100px" }} type="text" placeholder={state?.item?.ObjectType} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.ObjectType}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setChapter(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setChapter)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Chapter} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Chapter}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setLesson(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setLesson)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Lesson} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Lesson}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setQuestionType(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setQuestionType)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.QuestionType} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{QuestionType}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setOtSaLsa(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setOtSaLsa)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.OtSaLsa} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.OtSaLsa}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setMarks(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setMarks)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Marks} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Marks}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setDifficultlevel(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setDifficultlevel)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Difficultlevel} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Difficultlevel}</p>}
-                                                          </th>
-                                                          <th>
-                                                              <input
-                                                                  onChange={(e) => {
-                                                                      if (selectedLanguage == "en-t-i0-und") {
-                                                                          setTime(e.target.value)
-                                                                      } else onChangeHandler(e.target.value, setTime)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Time} />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Time}</p>}
-                                                          </th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                      <tr>
-                                                          <td>1.</td>
-                                                          <td>Understanding</td>
-                                                          <td>A box of Smiles</td>
-                                                          <td>Prose</td>
-                                                          <td>Fill in the blanks</td>
-                                                          <td>O T</td>
-                                                          <td>40</td>
-                                                          <td>Easy</td>
-                                                          <td>2 minutes</td>
-                                                      </tr>
-                                                  </tbody>
-                                              </Table>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="row">
-                                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                          <Form.Label>Questions Analysis Instruction</Form.Label>
-                                          <Form.Control type="text" placeholder={state?.item?.Note} 
-                                           onChange={(e) => {
-                                              if (selectedLanguage == "en-t-i0-und") {
-                                                  setNote(e.target.value)
-                                              } else onChangeHandler(e.target.value, setNote)
-                                          }}
-                                          />
-                                           {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
-                                      </Form.Group>
-                                      {/* <span>
+                  <div className="row">
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Questions Analysis Instruction</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={state?.item?.Note}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setNote(e.target.value);
+                          } else onChangeHandler(e.target.value, setNote);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Note}</p>
+                      )}
+                    </Form.Group>
+                    {/* <span>
                                           <input
                                               onChange={(e) => {
                                                   if (selectedLanguage == "en-t-i0-und") {
@@ -377,29 +480,28 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                               }}  type="text" placeholder="Note" />:-
                                           {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
                                       </span> */}
-                                  </div>
-
-                                  <div className="col-md-12 mb-2">
-                                      <div className="d-flex justify-content-center">                                      
-                                          <button 
-                                          onClick={()=>{
-                                            UpdateQuestAnalysisHeader();
-                                            }}
-                                           className="admin-add-btn mb-2">Update Headers</button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
                   </div>
 
-
+                  <div className="col-md-12 mb-2">
+                    <div className="d-flex justify-content-center">
+                      <button
+                        onClick={() => {
+                          UpdateQuestAnalysisHeader();
+                        }}
+                        className="admin-add-btn mb-2"
+                      >
+                        Update Headers
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
-
-
-      </>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
-export default AdminQuestionAnalysisHeaderEdit
+export default AdminQuestionAnalysisHeaderEdit;

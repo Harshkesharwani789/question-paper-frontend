@@ -7,8 +7,8 @@ function OfferQuestionPaper() {
             <Container>
                 <div className='mt-5 row'>
                     <h2 className='text-center mb-4'>-: Purchase Subscription :-</h2>
-                    <div className='col-md-4'>
-                    <div className='offerbox'>
+                    <div className='col-md-4 mb-4 '>
+                    <div className='offerbox p-2'>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex">
                                 <h2>₹12</h2><sapn className="mt-2">/paper</sapn>
@@ -42,8 +42,8 @@ function OfferQuestionPaper() {
 
                     </div>
                     </div>
-                    <div className='col-md-4'>
-                    <div className='offerbox'>
+                    <div className='col-md-4 mb-4 '>
+                    <div className='offerbox  p-2'>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex">
                                 <h2>₹12</h2><sapn className="mt-2">/paper</sapn>
@@ -77,8 +77,8 @@ function OfferQuestionPaper() {
 
                     </div>
                     </div>
-                    <div className='col-md-4'>
-                    <div className='offerbox'>
+                    <div className='col-md-4 mb-4 '>
+                    <div className='offerbox  p-2'>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex">
                                 <h2>₹12</h2><sapn className="mt-2">/paper</sapn>

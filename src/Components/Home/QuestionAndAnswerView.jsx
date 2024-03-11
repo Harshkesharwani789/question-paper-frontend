@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import "../../App.css"
+import axios from 'axios';
 function QuestionAndAnswerView() {
+    const admin = JSON.parse(sessionStorage.getItem("admin"));
+    const token = sessionStorage.getItem("token");
+
+    console.log("sd",admin,token);
+    //Get All QuestionAnsPdf
+    const [QuestionAnsPdf, setQuestionAnsPdf] = useState([]);
+    const getallquestionPdf = async () => {
+        try {
+            let res = await axios.get(
+                `http://localhost:8000/api/admin/getAllpdf/${admin?._id}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            if (res.status === 200) {
+                setQuestionAnsPdf(res.data.success);
+            }
+        } catch (error) {
+            console.log("Error fetching medium:", error);
+        }
+    };
+    useEffect(() => {
+        getallquestionPdf()
+    }, [])
+console.log("QuestionAnsPdf",QuestionAnsPdf);
     return (
         <div>
             <Container>
@@ -18,14 +42,18 @@ function QuestionAndAnswerView() {
                 <div className='questionpdfview'>
                     <h3 className='mt-3'>2023-24</h3>
                     <Table>
-                        {/* <thead>
-                            <tr>
-                                <th>Class 5 8 and 9 Assessment - Question</th>
-                                <th>Answer</th>
-                            </tr>
-                        </thead> */}
+
                         <tbody>
-                            <tr>
+                            {QuestionAnsPdf?.map((item, i) => {
+                                return (
+                                    <tr>
+                                        <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
+                                        <td>Answer</td>
+                                    </tr>
+                                )
+                            })}
+
+                            {/* <tr>
                                 <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
                                 <td>Answer</td>
                             </tr>
@@ -48,11 +76,7 @@ function QuestionAndAnswerView() {
                             <tr>
                                 <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
                                 <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
+                            </tr> */}
 
                         </tbody>
                     </Table>

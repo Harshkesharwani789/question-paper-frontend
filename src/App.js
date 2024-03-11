@@ -188,11 +188,14 @@ import { CoverPage } from "./Components/Admin/CoverPage";
 import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 import AdminQuestionAnalysisHeader from "./Components/Admin/AdminQuestionAnalysisHeader";
 import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnalysisHeaderAdd";
-import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
+// import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
+// import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
+import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
+// import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
 import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
+import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import AdminQuestionAnalysisHeaderEdit from "./Components/Admin/AdminQuestionAnalysisHeaderEdit";
-import BluePrintHeaderedit from "./Components/Admin/BluePrintHeaderedit";
 
 function App() {
   return (
@@ -441,7 +444,7 @@ function App() {
           />
           <Route
             path="/adminblueprintheaderedit"
-            element={<Main children={<BluePrintHeaderedit />} />}
+            element={<Main children={<BluePrintHeaderEdit />} />}
           />
           <Route
             path="/CoverPage"

@@ -67,7 +67,7 @@ const Dashboard = () => {
     getAllTeacher();
   },[])
   return (
-    <div>
+    <div className="container">
       <h2 className="header-c ">Dashboard</h2>
 
       <div className="cards-container">

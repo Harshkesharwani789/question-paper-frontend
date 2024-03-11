@@ -311,7 +311,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
 
             <div className="weightage-objectives">
               <div className="container">
-                <div className="row">
+                <div className="row my-2">
                   <div className="col-md-12 text-end">
                     <div className="justify-content-end d-flex gap-3">
                       {/* <FiPrinter
@@ -319,10 +319,10 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                         style={{ cursor: "pointer" }}
                       /> */}
                       <button onClick={createPDF} className="btn btn-success">
-                        View description
+                        Download Blueprint 1
                       </button>
                       <button onClick={createPDF1} className="btn btn-success">
-                        View Blueprint
+                        Download Blueprint 2
                       </button>
                       <div id="google_translate_element"></div>
                     </div>
@@ -367,16 +367,22 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     </div>
                                     <div className="col-10 col-sm-10 col-md-10 col-lg-10">
                                       <div className="title-1 text-center">
-                                        <h6 style={{fontWeight:"bold"}}>{state?.Institute_Name}</h6>
+                                        <h6 style={{ fontWeight: "bold" }}>
+                                          {state?.Institute_Name}
+                                        </h6>
                                         {/* <h4>ಸಾಂತಾ ಪಾಲ್ ಶಾಲೇ</h4> */}
                                       </div>
                                       <div className="title-2">
-                                        <h6 style={{fontWeight:"bold"}}>{state?.SchoolAddress}</h6>
+                                        <h6 style={{ fontWeight: "bold" }}>
+                                          {state?.SchoolAddress}
+                                        </h6>
                                         {/* <h5>ಬೆಂಗಳೂರು</h5> */}
                                       </div>
                                       <div className="title-3">
-                                        <h6 style={{fontWeight:"bold"}}>{val?.blName}</h6>
-                                        <h6 style={{fontWeight:"bold"}}>
+                                        <h6 style={{ fontWeight: "bold" }}>
+                                          {val?.blName}
+                                        </h6>
+                                        <h6 style={{ fontWeight: "bold" }}>
                                           {bluePrintHeader?.BluePrintName}
                                         </h6>
                                       </div>
@@ -408,8 +414,8 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                             </div>
                             {/* First BluePrint */}
                             <div className="container">
-                              <div className="row">
-                                <div className="col-md-7">
+                              <div className="d-flex gap-3 ">
+                                <div className="col-md-7 blue-print_1tab">
                                   {/* table 3  */}
 
                                   <div className="weightage-objectives mt-4">
@@ -443,7 +449,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
-                                              > 
+                                              >
                                                 {bluePrintHeader?.Lessons}
                                               </th>
                                               <th
@@ -479,13 +485,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     border: "2px solid black",
                                                   }}
                                                 >
-                                                 
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                     <b>{i + 1}</b>
+                                                    <b>{i + 1}</b>
                                                   </td>
 
                                                   <td
@@ -501,67 +506,74 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                     <b>{val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintchapter ==
-                                                        item?.name
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion
-                                                        ),
-                                                      0
-                                                    )}</b>
-                                                  </td>
-                                                  <td
-                                                    style={{
-                                                      border: "2px solid black",
-                                                    }}
-                                                  >
-                                                   <b> {val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintchapter ==
-                                                        item?.name
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion *
-                                                            ele?.BluePrintmarksperquestion
-                                                        ),
-                                                      0
-                                                    )}</b>
-                                                  </td>
-                                                  <td
-                                                    style={{
-                                                      border: "2px solid black",
-                                                    }}
-                                                  >
-                                                    <b>{(val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintchapter ==
-                                                        item?.name
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion *
-                                                            ele?.BluePrintmarksperquestion
-                                                        ),
-                                                      0
-                                                    ) /
-                                                      val?.AllChapter?.reduce(
+                                                    <b>
+                                                      {val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintchapter ==
+                                                          item?.name
+                                                      )?.reduce(
                                                         (a, ele) =>
                                                           a +
                                                           Number(
-                                                            ele?.BluePrintmarksperquestion *
-                                                              ele?.Blueprintnoofquestion
+                                                            ele?.Blueprintnoofquestion
                                                           ),
                                                         0
-                                                      )) *
-                                                      100}
-                                                    %</b>
+                                                      )}
+                                                    </b>
+                                                  </td>
+                                                  <td
+                                                    style={{
+                                                      border: "2px solid black",
+                                                    }}
+                                                  >
+                                                    <b>
+                                                      {" "}
+                                                      {val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintchapter ==
+                                                          item?.name
+                                                      )?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.Blueprintnoofquestion *
+                                                              ele?.BluePrintmarksperquestion
+                                                          ),
+                                                        0
+                                                      )}
+                                                    </b>
+                                                  </td>
+                                                  <td
+                                                    style={{
+                                                      border: "2px solid black",
+                                                    }}
+                                                  >
+                                                    <b>
+                                                      {(val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintchapter ==
+                                                          item?.name
+                                                      )?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.Blueprintnoofquestion *
+                                                              ele?.BluePrintmarksperquestion
+                                                          ),
+                                                        0
+                                                      ) /
+                                                        val?.AllChapter?.reduce(
+                                                          (a, ele) =>
+                                                            a +
+                                                            Number(
+                                                              ele?.BluePrintmarksperquestion *
+                                                                ele?.Blueprintnoofquestion
+                                                            ),
+                                                          0
+                                                        )) *
+                                                        100}
+                                                      %
+                                                    </b>
                                                   </td>
                                                 </tr>
                                               );
@@ -629,7 +641,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-md-5">
+                                <div className="col-md-5 blue-print_1tab">
                                   {/* table 1 */}
                                   <div className="weightage-objectives mt-4">
                                     <div className="main-title">
@@ -700,7 +712,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                   <b> {i + 1}</b>
+                                                    <b> {i + 1}</b>
                                                   </td>
                                                   <td
                                                     style={{
@@ -714,63 +726,72 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                   <b> {val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintobjective ==
-                                                        item?.Objective
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion
-                                                        ),
-                                                      0
-                                                    )}</b>
+                                                    <b>
+                                                      {" "}
+                                                      {val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintobjective ==
+                                                          item?.Objective
+                                                      )?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.Blueprintnoofquestion
+                                                          ),
+                                                        0
+                                                      )}
+                                                    </b>
                                                   </td>
                                                   <td
                                                     style={{
                                                       border: "2px solid black",
                                                     }}
                                                   >
-                                                   <b> {val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintobjective ==
-                                                        item?.Objective
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion *
-                                                            ele?.BluePrintmarksperquestion
-                                                        ),
-                                                      0
-                                                    )}</b>
-                                                  </td>
-                                                  <td>
-                                                  <b> {(val?.AllChapter?.filter(
-                                                      (ele) =>
-                                                        ele?.Blueprintobjective ==
-                                                        item?.Objective
-                                                    )?.reduce(
-                                                      (a, ele) =>
-                                                        a +
-                                                        Number(
-                                                          ele?.Blueprintnoofquestion *
-                                                            ele?.BluePrintmarksperquestion
-                                                        ),
-                                                      0
-                                                    ) /
-                                                      val?.AllChapter?.reduce(
+                                                    <b>
+                                                      {" "}
+                                                      {val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintobjective ==
+                                                          item?.Objective
+                                                      )?.reduce(
                                                         (a, ele) =>
                                                           a +
                                                           Number(
-                                                            ele?.BluePrintmarksperquestion *
-                                                              ele?.Blueprintnoofquestion
+                                                            ele?.Blueprintnoofquestion *
+                                                              ele?.BluePrintmarksperquestion
                                                           ),
                                                         0
-                                                      )) *
-                                                      100}
-                                                    %</b>
+                                                      )}
+                                                    </b>
+                                                  </td>
+                                                  <td>
+                                                    <b>
+                                                      {" "}
+                                                      {(val?.AllChapter?.filter(
+                                                        (ele) =>
+                                                          ele?.Blueprintobjective ==
+                                                          item?.Objective
+                                                      )?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.Blueprintnoofquestion *
+                                                              ele?.BluePrintmarksperquestion
+                                                          ),
+                                                        0
+                                                      ) /
+                                                        val?.AllChapter?.reduce(
+                                                          (a, ele) =>
+                                                            a +
+                                                            Number(
+                                                              ele?.BluePrintmarksperquestion *
+                                                                ele?.Blueprintnoofquestion
+                                                            ),
+                                                          0
+                                                        )) *
+                                                        100}
+                                                      %
+                                                    </b>
                                                   </td>
                                                 </tr>
                                               );
@@ -869,16 +890,21 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {
-                                                  bluePrintHeader?.TypeOfQuestion
-                                                }</b>
+                                                <b>
+                                                  {" "}
+                                                  {
+                                                    bluePrintHeader?.TypeOfQuestion
+                                                  }
+                                                </b>
                                               </th>
                                               <th
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.Questions}</b>
+                                                <b>
+                                                  {bluePrintHeader?.Questions}
+                                                </b>
                                               </th>
                                               <th
                                                 style={{
@@ -892,7 +918,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.Percentage}</b>
+                                                <b>
+                                                  {bluePrintHeader?.Percentage}
+                                                </b>
                                               </th>
                                             </tr>
                                           </thead>
@@ -916,27 +944,32 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{
-                                                  bluePrintHeader?.Objectivequestion
-                                                }</b>
+                                                <b>
+                                                  {
+                                                    bluePrintHeader?.Objectivequestion
+                                                  }
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                    "O T"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {" "}
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                      "O T"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
 
                                               <td
@@ -944,49 +977,55 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                    "O T"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.BluePrintmarksperquestion *
-                                                        am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {" "}
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                      "O T"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.BluePrintmarksperquestion *
+                                                          am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {(val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                    "O T"
-                                                )?.reduce(
-                                                  (a, ele) =>
-                                                    a +
-                                                    Number(
-                                                      ele?.Blueprintnoofquestion *
-                                                        ele?.BluePrintmarksperquestion
-                                                    ),
-                                                  0
-                                                ) /
-                                                  val?.AllChapter?.reduce(
+                                                <b>
+                                                  {" "}
+                                                  {(val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                      "O T"
+                                                  )?.reduce(
                                                     (a, ele) =>
                                                       a +
                                                       Number(
-                                                        ele?.BluePrintmarksperquestion *
-                                                          ele?.Blueprintnoofquestion
+                                                        ele?.Blueprintnoofquestion *
+                                                          ele?.BluePrintmarksperquestion
                                                       ),
                                                     0
-                                                  )) *
-                                                  100}
-                                                %</b>
+                                                  ) /
+                                                    val?.AllChapter?.reduce(
+                                                      (a, ele) =>
+                                                        a +
+                                                        Number(
+                                                          ele?.BluePrintmarksperquestion *
+                                                            ele?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )) *
+                                                    100}
+                                                  %
+                                                </b>
                                               </td>
                                             </tr>
                                             <tr
@@ -999,34 +1038,40 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> 2</b>
+                                                <b> 2</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.ShortanswerQ}</b>
+                                                <b>
+                                                  {
+                                                    bluePrintHeader?.ShortanswerQ
+                                                  }
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "V.S.A" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "S.A"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "V.S.A" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "S.A"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
 
                                               <td
@@ -1034,53 +1079,57 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "V.S.A" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "S.A"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.BluePrintmarksperquestion *
-                                                        am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "V.S.A" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "S.A"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.BluePrintmarksperquestion *
+                                                          am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{(val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "V.S.A" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "S.A"
-                                                )?.reduce(
-                                                  (a, ele) =>
-                                                    a +
-                                                    Number(
-                                                      ele?.Blueprintnoofquestion *
-                                                        ele?.BluePrintmarksperquestion
-                                                    ),
-                                                  0
-                                                ) /
-                                                  val?.AllChapter?.reduce(
+                                                <b>
+                                                  {(val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "V.S.A" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "S.A"
+                                                  )?.reduce(
                                                     (a, ele) =>
                                                       a +
                                                       Number(
-                                                        ele?.BluePrintmarksperquestion *
-                                                          ele?.Blueprintnoofquestion
+                                                        ele?.Blueprintnoofquestion *
+                                                          ele?.BluePrintmarksperquestion
                                                       ),
                                                     0
-                                                  )) *
-                                                  100}
-                                                %</b>
+                                                  ) /
+                                                    val?.AllChapter?.reduce(
+                                                      (a, ele) =>
+                                                        a +
+                                                        Number(
+                                                          ele?.BluePrintmarksperquestion *
+                                                            ele?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )) *
+                                                    100}
+                                                  %
+                                                </b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1100,29 +1149,34 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {bluePrintHeader?.LonganswerQ}</b>
+                                                <b>
+                                                  {" "}
+                                                  {bluePrintHeader?.LonganswerQ}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 1" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 2" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 3"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 1" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 2" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 3"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
 
                                               <td
@@ -1130,57 +1184,61 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 1" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 2" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 3"
-                                                )?.reduce(
-                                                  (a, am) =>
-                                                    a +
-                                                    Number(
-                                                      am?.BluePrintmarksperquestion *
-                                                        am?.Blueprintnoofquestion
-                                                    ),
-                                                  0
-                                                )}</b>
+                                                <b>
+                                                  {val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 1" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 2" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 3"
+                                                  )?.reduce(
+                                                    (a, am) =>
+                                                      a +
+                                                      Number(
+                                                        am?.BluePrintmarksperquestion *
+                                                          am?.Blueprintnoofquestion
+                                                      ),
+                                                    0
+                                                  )}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{(val?.AllChapter?.filter(
-                                                  (item) =>
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 1" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 2" ||
-                                                    item?.BluePrintQuestiontype ==
-                                                      "L.A 3"
-                                                )?.reduce(
-                                                  (a, ele) =>
-                                                    a +
-                                                    Number(
-                                                      ele?.Blueprintnoofquestion *
-                                                        ele?.BluePrintmarksperquestion
-                                                    ),
-                                                  0
-                                                ) /
-                                                  val?.AllChapter?.reduce(
+                                                <b>
+                                                  {(val?.AllChapter?.filter(
+                                                    (item) =>
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 1" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 2" ||
+                                                      item?.BluePrintQuestiontype ==
+                                                        "L.A 3"
+                                                  )?.reduce(
                                                     (a, ele) =>
                                                       a +
                                                       Number(
-                                                        ele?.BluePrintmarksperquestion *
-                                                          ele?.Blueprintnoofquestion
+                                                        ele?.Blueprintnoofquestion *
+                                                          ele?.BluePrintmarksperquestion
                                                       ),
                                                     0
-                                                  )) *
-                                                  100}
-                                                %</b>
+                                                  ) /
+                                                    val?.AllChapter?.reduce(
+                                                      (a, ele) =>
+                                                        a +
+                                                        Number(
+                                                          ele?.BluePrintmarksperquestion *
+                                                            ele?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )) *
+                                                    100}
+                                                  %
+                                                </b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1324,14 +1382,14 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.Easy}{" "}</b>
+                                                <b>{bluePrintHeader?.Easy} </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {val?.Easy}</b>
+                                                <b> {val?.Easy}</b>
                                               </td>
                                               <td
                                                 style={{
@@ -1358,21 +1416,23 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> 2</b>
+                                                <b> 2</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.MediumQ}{" "}</b>
+                                                <b>
+                                                  {bluePrintHeader?.MediumQ}{" "}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> {val?.Average}</b>
+                                                <b> {val?.Average}</b>
                                               </td>
                                               <td
                                                 style={{
@@ -1399,14 +1459,16 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                               <b> 3</b>
+                                                <b> 3</b>
                                               </td>
                                               <td
                                                 style={{
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{bluePrintHeader?.Difficult}</b>
+                                                <b>
+                                                  {bluePrintHeader?.Difficult}
+                                                </b>
                                               </td>
                                               <td
                                                 style={{
@@ -1427,7 +1489,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   border: "2px solid black",
                                                 }}
                                               >
-                                                <b>{val?.DifficultParcentage}%</b>
+                                                <b>
+                                                  {val?.DifficultParcentage}%
+                                                </b>
                                               </td>
                                             </tr>
                                             <tr
@@ -1545,24 +1609,27 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     }}
                                   >
                                     <thead>
-                                      <tr >
-                                        <th style={{ fontSize: "12px" }}>
+                                      <tr
+                                      style={{ border: "3px solid #000" }}
+                                      >
+                                        <th style={{ fontSize: "12px" , border: "1px solid #000" }}>
                                           <b>{bluePrintHeader?.SNo}</b>
                                         </th>
                                         <th
                                           style={{
                                             fontSize: "12px",
                                             width: "125px",
+                                            border: "1px solid #000" 
                                           }}
                                         >
                                           <b>{bluePrintHeader?.TargetUnit}</b>
                                         </th>
-                                         {val?.objectives?.map((ele) => {
+                                        {val?.objectives?.map((ele) => {
                                           return (
                                             <>
                                               <th
                                                 colSpan={6}
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "12px", border: "1px solid #000"  }}
                                               >
                                                 {ele?.Objective}
                                               </th>
@@ -1572,61 +1639,81 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
 
                                         <th
                                           colSpan={6}
-                                          style={{ fontSize: "12px" }}
-                                        ><b>
-                                          {bluePrintHeader?.TotalQuestion}</b>
+                                          style={{ fontSize: "12px" , border: "1px solid #000" }}
+                                        >
+                                          <b>
+                                            {bluePrintHeader?.TotalQuestion}
+                                          </b>
                                         </th>
 
                                         <th
                                           colSpan={1}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px",border: "1px solid #000"  }}
                                         >
                                           <b>{bluePrintHeader?.TotalMarks}</b>
                                         </th>
                                       </tr>
                                     </thead>
-                                    <tbody >
+                                    <tbody>
                                       <tr
+                                      style={{ border: "2px solid #000" }}
                                       >
-                                        <th></th>
-                                        <th></th>
+                                        <th style={{border: "1px solid #000" }}></th>
+                                        <th style={{border: "1px solid #000" }}></th>
 
-                                        <th style={{ fontSize: "12px",width:"33px" }}>
-                                        <b> {bluePrintHeader?.V}</b>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "33px",
+                                            border: "1px solid #000"
+                                          }}
+                                        >
+                                          <b> {bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000" }}
                                         >
-                                         <b> {bluePrintHeader?.K}</b>
+                                          <b> {bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000" }}
                                         >
-                                         <b> {bluePrintHeader?.D}</b>
+                                          <b> {bluePrintHeader?.D}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", width:"33px" }}>
-                                        <b>{bluePrintHeader?.V}</b>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "33px",
+                                            border: "1px solid #000"
+                                          }}
+                                        >
+                                          <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000" }}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px"  }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
                                           <b>{bluePrintHeader?.D}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" ,width:"33px" }}>
-                                        <b>{bluePrintHeader?.V}</b>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "33px", border: "1px solid #000"
+                                          }}
+                                        >
+                                          <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
@@ -1636,134 +1723,149 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                         >
                                           <b>{bluePrintHeader?.D}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px",width:"33px"  }}>
-                                        <b>{bluePrintHeader?.V}</b>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "33px", border: "1px solid #000"
+                                          }}
+                                        >
+                                          <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
-                                         <b> {bluePrintHeader?.D}</b>
+                                          <b> {bluePrintHeader?.D}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" ,width:"33px" }}>
-                                        <b>{bluePrintHeader?.V}</b>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "33px", border: "1px solid #000"
+                                          }}
+                                        >
+                                          <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "12px", border: "1px solid #000"}}
                                         >
-                                         <b> {bluePrintHeader?.D}</b>
+                                          <b> {bluePrintHeader?.D}</b>
                                         </th>
                                       </tr>
-                                      <tr>
+                                      <tr  style={{border:'2px solid #000'}}>
                                         <th></th>
                                         <th
                                           style={{
                                             width: "125px",
-                                            fontSize: "12px",
+                                            fontSize: "12px", border: "1px solid #000"
                                           }}
                                         ></th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b> {bluePrintHeader?.VSA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b> {bluePrintHeader?.SA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b> {bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA1}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA2}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA3}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b> {bluePrintHeader?.VSA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b> {bluePrintHeader?.SA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b> {bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA1}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA2}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA3}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.VSA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.SA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA1}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA2}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA3}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b> {bluePrintHeader?.VSA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.SA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA1}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA2}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA3}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}></th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.VSA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.SA}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA1}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA2}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px" }}>
-                                        <b>{bluePrintHeader?.LA3}</b>
+                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                          <b>{bluePrintHeader?.LA3}</b>
                                         </th>
                                       </tr>
                                       {niqueDataName(val?.AllChapter)?.map(
                                         (ele, i) => {
                                           return (
-                                            <tr>
-                                              <td style={{ fontSize: "12px" }}>
-                                              <b>{i + 1}</b>
+                                            <tr  style={{border:'2px solid #000'}}>
+                                              <td style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                                <b>{i + 1}</b>
                                               </td>
-                                              <td style={{ fontSize: "12px", fontWeight:'bold' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  fontWeight: "bold", border: "1px solid #000"
+                                                }}
+                                              >
                                                 {ele?.name}
                                               </td>
                                               {val?.objectives?.map((ele1) => {
@@ -1771,11 +1873,25 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   <>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px", border: "1px solid #000"
                                                       }}
                                                     >
-                                                      <b>{
-                                                        val?.AllChapter?.find(
+                                                      <b>
+                                                        {
+                                                          val?.AllChapter?.find(
+                                                            (item) =>
+                                                              item?.Blueprintobjective ==
+                                                                ele1?.Objective &&
+                                                              item?.BluePrintQuestiontype ==
+                                                                "O T" &&
+                                                              item?.Blueprintchapter ==
+                                                                ele?.name
+                                                          )
+                                                            ?.Blueprintnoofquestion
+                                                        }
+                                                      </b>
+                                                      <b>
+                                                        {val?.AllChapter?.some(
                                                           (item) =>
                                                             item?.Blueprintobjective ==
                                                               ele1?.Objective &&
@@ -1783,38 +1899,43 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                               "O T" &&
                                                             item?.Blueprintchapter ==
                                                               ele?.name
-                                                        )?.Blueprintnoofquestion
-                                                      }</b>
-                                                      <b>{val?.AllChapter?.some(
-                                                        (item) =>
-                                                          item?.Blueprintobjective ==
-                                                            ele1?.Objective &&
-                                                          item?.BluePrintQuestiontype ==
-                                                            "O T" &&
-                                                          item?.Blueprintchapter ==
-                                                            ele?.name
-                                                      )
-                                                        ? `*(${
-                                                            val?.AllChapter?.find(
-                                                              (item) =>
-                                                                item?.Blueprintobjective ==
-                                                                  ele1?.Objective &&
-                                                                item?.BluePrintQuestiontype ==
-                                                                  "O T" &&
-                                                                item?.Blueprintchapter ==
-                                                                  ele?.name
-                                                            )
-                                                              ?.BluePrintmarksperquestion
-                                                          })`
-                                                        : ""}</b>
+                                                        )
+                                                          ? `*(${
+                                                              val?.AllChapter?.find(
+                                                                (item) =>
+                                                                  item?.Blueprintobjective ==
+                                                                    ele1?.Objective &&
+                                                                  item?.BluePrintQuestiontype ==
+                                                                    "O T" &&
+                                                                  item?.Blueprintchapter ==
+                                                                    ele?.name
+                                                              )
+                                                                ?.BluePrintmarksperquestion
+                                                            })`
+                                                          : ""}
+                                                      </b>
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px",border: "1px solid #000"
                                                       }}
                                                     >
-                                                      <b>{
-                                                        val?.AllChapter?.find(
+                                                      <b>
+                                                        {
+                                                          val?.AllChapter?.find(
+                                                            (item) =>
+                                                              item?.Blueprintobjective ==
+                                                                ele1?.Objective &&
+                                                              item?.BluePrintQuestiontype ==
+                                                                "V.S.A" &&
+                                                              item?.Blueprintchapter ==
+                                                                ele?.name
+                                                          )
+                                                            ?.Blueprintnoofquestion
+                                                        }
+                                                      </b>
+                                                      <b>
+                                                        {val?.AllChapter?.some(
                                                           (item) =>
                                                             item?.Blueprintobjective ==
                                                               ele1?.Objective &&
@@ -1822,34 +1943,25 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                               "V.S.A" &&
                                                             item?.Blueprintchapter ==
                                                               ele?.name
-                                                        )?.Blueprintnoofquestion
-                                                      }</b>
-                                                      <b>{val?.AllChapter?.some(
-                                                        (item) =>
-                                                          item?.Blueprintobjective ==
-                                                            ele1?.Objective &&
-                                                          item?.BluePrintQuestiontype ==
-                                                            "V.S.A" &&
-                                                          item?.Blueprintchapter ==
-                                                            ele?.name
-                                                      )
-                                                        ? `*(${
-                                                            val?.AllChapter?.find(
-                                                              (item) =>
-                                                                item?.Blueprintobjective ==
-                                                                  ele1?.Objective &&
-                                                                item?.BluePrintQuestiontype ==
-                                                                  "V.S.A" &&
-                                                                item?.Blueprintchapter ==
-                                                                  ele?.name
-                                                            )
-                                                              ?.BluePrintmarksperquestion
-                                                          })`
-                                                        : ""}</b>
+                                                        )
+                                                          ? `*(${
+                                                              val?.AllChapter?.find(
+                                                                (item) =>
+                                                                  item?.Blueprintobjective ==
+                                                                    ele1?.Objective &&
+                                                                  item?.BluePrintQuestiontype ==
+                                                                    "V.S.A" &&
+                                                                  item?.Blueprintchapter ==
+                                                                    ele?.name
+                                                              )
+                                                                ?.BluePrintmarksperquestion
+                                                            })`
+                                                          : ""}
+                                                      </b>
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px",border: "1px solid #000"
                                                       }}
                                                     >
                                                       {
@@ -1888,7 +2000,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px",border: "1px solid #000"
                                                       }}
                                                     >
                                                       {
@@ -1927,7 +2039,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px",border: "1px solid #000"
                                                       }}
                                                     >
                                                       {
@@ -1966,7 +2078,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "12px",border: "1px solid #000"
                                                       }}
                                                     >
                                                       {
@@ -2007,7 +2119,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                 );
                                               })}
 
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px", border: "1px solid #000" }}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2016,7 +2128,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2025,7 +2137,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2034,7 +2146,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2043,7 +2155,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px" ,border: "1px solid #000"}}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2052,7 +2164,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2062,7 +2174,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                 }
                                               </td>
 
-                                              <td style={{ fontSize: "12px" }}>
+                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
                                                 {
                                                   QuestionNameWiseMask(
                                                     val?.AllChapter,
@@ -2074,267 +2186,321 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                           );
                                         }
                                       )}
-                                      <tr>
-                        <td></td>
-                        <td style={{ fontSize: "12px", width: "46px",  fontWeight:'bold' }}>{bluePrintHeader?.Total}</td>
-                        {val?.objectives?.map((ele) => {
-                          return (
-                            <>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "O T"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "O T"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "O T"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "V.S.A"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "V.S.A"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "V.S.A"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "S.A"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "S.A"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "S.A"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "L.A 1"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 1"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 1"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "L.A 2"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 2"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 2"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                              <td style={{ fontSize: "12px" }}>
-                                {val?.AllChapter?.some(
-                                  (item) =>
-                                    item?.Blueprintobjective == ele?.Objective &&
-                                    item?.BluePrintQuestiontype == "L.A 3"
-                                ) ? (
-                                  <span>
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 3"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a + Number(am?.Blueprintnoofquestion),
-                                      0
-                                    )}{" "}
-                                    (
-                                    {val?.AllChapter?.filter(
-                                      (item) =>
-                                        item?.Blueprintobjective ==
-                                        ele?.Objective &&
-                                        item?.BluePrintQuestiontype == "L.A 3"
-                                    )?.reduce(
-                                      (a, am) =>
-                                        a +
-                                        Number(
-                                          am?.BluePrintmarksperquestion *
-                                          am?.Blueprintnoofquestion
-                                        ),
-                                      0
-                                    )}
-                                    )
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </td>
-                            </>
-                          );
-                        })}
+                                      <tr style={{border:'2px solid #000'}}>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td
+                                          style={{
+                                            fontSize: "12px",
+                                            width: "46px",
+                                            fontWeight: "bold",border:'1px solid #000'
+                                          }}
+                                        >
+                                          {bluePrintHeader?.Total}
+                                        </td>
+                                        {val?.objectives?.map((ele) => {
+                                          return (
+                                            <>
+                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "O T"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "O T"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "O T"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "V.S.A"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "V.S.A"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "V.S.A"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                              <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "S.A"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "S.A"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "S.A"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "L.A 1"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 1"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 1"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "L.A 2"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 2"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 2"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                                {val?.AllChapter?.some(
+                                                  (item) =>
+                                                    item?.Blueprintobjective ==
+                                                      ele?.Objective &&
+                                                    item?.BluePrintQuestiontype ==
+                                                      "L.A 3"
+                                                ) ? (
+                                                  <span>
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 3"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}{" "}
+                                                    (
+                                                    {val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.Blueprintobjective ==
+                                                          ele?.Objective &&
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 3"
+                                                    )?.reduce(
+                                                      (a, am) =>
+                                                        a +
+                                                        Number(
+                                                          am?.BluePrintmarksperquestion *
+                                                            am?.Blueprintnoofquestion
+                                                        ),
+                                                      0
+                                                    )}
+                                                    )
+                                                  </span>
+                                                ) : (
+                                                  ""
+                                                )}
+                                              </td>
+                                            </>
+                                          );
+                                        })}
 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style={{ fontSize: "12px" }}>
-                          {val?.AllChapter?.reduce(
-                            (a, ele) => a + Number(ele?.Blueprintnoofquestion),
-                            0
-                          )}
-                        </td>
-                        <td style={{ fontSize: "12px" }}>
-                          {val?.AllChapter?.reduce(
-                            (a, ele) =>
-                              a +
-                              Number(
-                                ele?.BluePrintmarksperquestion *
-                                ele?.Blueprintnoofquestion
-                              ),
-                            0
-                          )}
-                        </td>
-                      </tr>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td style={{border:'1px solid #000'}}></td>
+                                        <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                          {val?.AllChapter?.reduce(
+                                            (a, ele) =>
+                                              a +
+                                              Number(
+                                                ele?.Blueprintnoofquestion
+                                              ),
+                                            0
+                                          )}
+                                        </td>
+                                        <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                          {val?.AllChapter?.reduce(
+                                            (a, ele) =>
+                                              a +
+                                              Number(
+                                                ele?.BluePrintmarksperquestion *
+                                                  ele?.Blueprintnoofquestion
+                                              ),
+                                            0
+                                          )}
+                                        </td>
+                                      </tr>
                                     </tbody>
                                   </Table>
                                 </div>

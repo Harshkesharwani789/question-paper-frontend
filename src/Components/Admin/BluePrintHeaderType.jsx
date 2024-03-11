@@ -25,7 +25,7 @@ function BluePrintHeaderType() {
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
     const handleClose2 = () => setShow2(false);
-    const handleShow2 = () => setShow2(true);
+    const handleShow2 = (item) => { setShow2(true); setdeletData(item) }
 
     const [GetbluePrintHeader, setGetbluePrintHeader] = useState([]);
     const getBluePrintHeader = async () => {
@@ -38,44 +38,32 @@ function BluePrintHeaderType() {
             console.log(error);
         }
     };
-    console.log("GetbluePrintHeader", GetbluePrintHeader);
-
-    const [deleteA, setDeleteA] = useState("");
+    const [deletData, setdeletData] = useState("")
     const DeletBluePrintHeader = async () => {
         try {
-          const config = {
-            url: "/admin/deleteblueprintheader/" + deleteA ,
-            baseURL: "http://localhost:8000/api",
-            method: "delete",
-            headers: {
-              "content-type": "application/json",
-            },
-          };
-          let res = await axios(config);
-          if (res.status === 200) {
-            handleClose2();
-            getBluePrintHeader();
-            return swal({
-              title: "Delete!",
-              text: res.data.success,
-              icon: "success",
-              button: "OK!",
-            });
-          }
+            const config = {
+                url: "/admin/DeleteBluePrintHeader/" + deletData?._id,
+                baseURL: "http://localhost:8000/api",
+                method: "delete",
+                headers: { "Content-Type": "application/json" }
+            }
+            const res = await axios(config)
+            if (res.status === 200) {
+                alert(res.data.success)
+                handleClose2()
+                getBluePrintHeader()
+            }
         } catch (error) {
-          console.log(error);
-          return swal({
-            title: "Error!",
-            text: error.response.data.error,
-            icon: "error",
-            button: "OK!",
-          });
+            alert(error.response.data.error)
         }
-      };
+    }
 
     useEffect(() => {
         getBluePrintHeader()
     }, [])
+
+
+
     return (
         <>
 
@@ -129,7 +117,7 @@ function BluePrintHeaderType() {
                                         <td>{i + 1}</td>
                                         <td>{item?.selectedMedium}</td>
                                         <td className="text-center">
-                                            <Link state={{item : item}} to="/adminblueprintheaderview">
+                                            <Link state={{ item: item }} to="/adminblueprintheaderview">
                                                 <FaRegEye className="text-success fw-bold fs-5" />
                                             </Link>
                                         </td>
@@ -137,22 +125,17 @@ function BluePrintHeaderType() {
                                             {" "}
                                             <div style={{ display: "flex", gap: "20px" }}>
                                                 <div>
-                                                <FaEdit
-                                                        className="text-success"
-                                                        style={{ cursor: "pointer", fontSize: "20px" }}
-                                                        onClick={() => {
-                                                            navigate("/adminblueprintheaderedit",{state:{item:item}})
-                                                            // setQuestionTypeId(item);
-                                                            // handleShow2();
-                                                        }}
-                                                    />
+                                                    <Link state={{ item: item }} to="/adminblueprintheaderedit">
+                                                        <FaEdit className="text-success" />
+                                                    </Link>
+                                                </div>
+                                                <div>
                                                     <AiFillDelete
                                                         className="text-danger"
                                                         style={{ cursor: "pointer", fontSize: "20px" }}
                                                         onClick={() => {
                                                             // setQuestionTypeId(item);
-                                                            setDeleteA(item?._id);
-                                                            handleShow2();
+                                                            handleShow2(item);
                                                         }}
                                                     />{" "}
                                                 </div>
@@ -193,7 +176,7 @@ function BluePrintHeaderType() {
                         <Button
                             variant=""
                             className="modal-add-btn"
-                        onClick={DeletBluePrintHeader}
+                            onClick={DeletBluePrintHeader}
                         >
                             Delete
                         </Button>
