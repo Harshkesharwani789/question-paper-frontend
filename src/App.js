@@ -188,10 +188,15 @@ import { CoverPage } from "./Components/Admin/CoverPage";
 import AdminDifficultyLevel from "./Components/Admin/AdminDifficultyLevel";
 import AdminQuestionAnalysisHeader from "./Components/Admin/AdminQuestionAnalysisHeader";
 import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnalysisHeaderAdd";
-import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
+// import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
+// import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
+// import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
+// import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
 import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
-import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
+import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
+import AdminQuestionAnalysisHeaderEdit from "./Components/Admin/AdminQuestionAnalysisHeaderEdit";
+import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderedit";
 
 function App() {
   return (
@@ -332,7 +337,6 @@ function App() {
                 <Navbarr />
 
                 <QuestionPaper />
-
               </>
             }
           />
@@ -369,7 +373,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="/teacher-cover-page"
             exact
             element={
@@ -389,7 +393,7 @@ function App() {
               </>
             }
           />
-          
+
           <Route
             path="/science10th"
             exact
@@ -440,13 +444,14 @@ function App() {
             element={<Main children={<BluePrintHeaderView />} />}
           />
           <Route
+            path="/adminblueprintheaderedit"
+            element={<Main children={<BluePrintHeaderEdit />} />}
+          />
+          <Route
             path="/CoverPage"
             element={<Main children={<CoverPage />} />}
           />
-          <Route
-            path="/AddCover"
-            element={<Main children={<AddCover />} />}
-          />
+          <Route path="/AddCover" element={<Main children={<AddCover />} />} />
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"
             element={<Main children={<AdminBlueprintdetailsview />} />}
@@ -529,7 +534,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/admindifficultylevel"
             element={
               <Main
@@ -1491,7 +1496,7 @@ function App() {
               />
             }
           />
-           <Route
+          <Route
             path="/viewheader"
             element={
               <Main
@@ -1503,8 +1508,7 @@ function App() {
               />
             }
           />
-          
-          
+
           <Route
             path="/addonewordquestion"
             element={
@@ -1904,8 +1908,6 @@ function App() {
             }
           />
           {/* Question TYpe */}
-
-          
 
           <Route
             path="/questiontype"

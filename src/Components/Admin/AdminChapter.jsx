@@ -495,7 +495,7 @@ const [Medium, setMedium] = useState([]);
                 </>):(<>
                   <button              
                   className="admin-add-btn mt-4"
-                  style={{ float: "right",cursor:" no-drop",filter:"blur(2px)" }}                 
+                  style={{ float: "right",cursor:" no-drop" }}                 
                 >
                   Add Chapters
                 </button></>)}

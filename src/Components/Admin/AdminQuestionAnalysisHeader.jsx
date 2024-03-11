@@ -7,10 +7,11 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 
 const AdminQuestionAnalysisHeader = () => {
+  const navigate = useNavigate();
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -39,6 +40,39 @@ const AdminQuestionAnalysisHeader = () => {
       console.log(error);
     }
   };
+  const [deleteA, setDeleteA] = useState("");
+  const DeletQuestAnaHeader = async () => {
+    try {
+      const config = {
+        url: "/admin/deleteQuestionAnalysisHeader/" + deleteA ,
+        baseURL: "http://localhost:8000/api",
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+        },
+      };
+      let res = await axios(config);
+      if (res.status === 200) {
+        handleClose2();
+        getquestAnalysisHeader();
+        return swal({
+          title: "Delete!",
+          text: res.data.success,
+          icon: "success",
+          button: "OK!",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Error!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "OK!",
+      });
+    }
+  };
+
   console.log("GetquestAnalysisHeader", GetquestAnalysisHeader);
   useEffect(() => {
     getquestAnalysisHeader();
@@ -61,8 +95,13 @@ const AdminQuestionAnalysisHeader = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Question Analysis Format</h2>
-          <Link to="/adminquestionsanalysisheaderadd" className="text-decoration-none">
-            <button className="admin-add-btn">Add Question Analysis Type</button>
+          <Link
+            to="/adminquestionsanalysisheaderadd"
+            className="text-decoration-none"
+          >
+            <button className="admin-add-btn">
+              Add Question Analysis Type
+            </button>
           </Link>
         </div>
 
@@ -103,20 +142,20 @@ const AdminQuestionAnalysisHeader = () => {
                       {" "}
                       <div style={{ display: "flex", gap: "20px" }}>
                         <div>
-                        <AiFillEdit 
+                          <AiFillEdit
                             className="text-success"
                             style={{ cursor: "pointer", fontSize: "20px" }}
-                            // onClick={()}
-                            // onClick={() => {
-                              // setQuestionTypeId(item);
-                              // handleShow2();
-                            // }}
-                            />
+                            onClick={() =>
+                              navigate("/adminquestionsanalysisheaderedit", {
+                                state: { item: item },
+                              })
+                            }
+                          />
                           <AiFillDelete
                             className="text-danger"
                             style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => {
-                              // setQuestionTypeId(item);
+                              setDeleteA(item?._id);
                               handleShow2();
                             }}
                           />{" "}
@@ -156,7 +195,7 @@ const AdminQuestionAnalysisHeader = () => {
             <Button
               variant=""
               className="modal-add-btn"
-              // onClick={DeleteQuestionType}
+              onClick={DeletQuestAnaHeader}
             >
               Delete
             </Button>

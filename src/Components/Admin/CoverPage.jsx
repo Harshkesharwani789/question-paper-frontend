@@ -12,7 +12,7 @@ export const CoverPage = () => {
     const { item } = location.state
 
     return (<>
-        <div style={{ padding: '15px', border: '2px solid #000', width: '750px', margin: 'auto', borderRadius: '20px', height: '1100px' }}>
+        <div className='cover-page' style={{ padding: '15px', border: '2px solid #000', width: '750px', margin: 'auto', borderRadius: '20px', height: '1100px' }}>
             <div className='d-flex align-items-center mb-5 justify-content-around'>
                 <div>
                     <img

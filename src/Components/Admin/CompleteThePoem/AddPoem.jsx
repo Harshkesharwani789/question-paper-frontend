@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import parse from "html-react-parser";
 import MathEditor from "../MyEditor";
+import { debounce } from "lodash";
+let googleTransliterate = require("google-input-tool");
+
 function AddPoem({ selectdetails }) {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -26,6 +29,53 @@ function AddPoem({ selectdetails }) {
     const data = editor.getData();
     setAnswer(data);
   };
+  
+  //Translate
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300);
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+
+
   //post
 
   const [QuestionT, setQuestionT] = useState("");
@@ -161,6 +211,21 @@ function AddPoem({ selectdetails }) {
                       placeholder="enter text"
                       onChange={(e) => setPoemSat(e.target.value)}
                     />
+                    {/* <input
+                          type="text"
+                          className="vi_0"
+                          value={PoemSat}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPoemSat(e.target.value);
+                            } else onChangeHandler(e.target.value, setPoemSat);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{PoemSat}</p>
+                        )} */}
                     <div className="ans-line mb-3 mt-2"></div>
                   </div>
 

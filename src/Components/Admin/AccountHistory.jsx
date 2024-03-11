@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Modal, Pagination, Table } from "react-bootstrap";
+import { Button, Form, FormSelect, Modal, Pagination, Table } from "react-bootstrap";
 import "../Admin/Admin.css";
+import { AiFillDelete } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import axios from "axios";
 
 const AccountHistory = () => {
+
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -10,10 +17,7 @@ const AccountHistory = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+
   //   Row Filter
   const [itempage, setItempage] = useState(5);
 
@@ -39,6 +43,148 @@ const AccountHistory = () => {
   const visitedPage = pageNumber * productPerPage;
   const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(data.length / productPerPage);
+
+  const [status, setstatus] = useState("")
+  const [title, settitle] = useState("")
+  const [Pay_Amount, setPay_Amount] = useState("")
+  const [date, setdate] = useState("")
+  const [Pay_mode, setPay_mode] = useState("")
+  const [TeacherID, setTeacherID] = useState("")
+
+
+  // post
+  const AddAccountHistory = async () => {
+    try {
+      const config = {
+        url: "admin/AddAccount",
+        baseURL: "http://localhost:8000/api/",
+        method: "post",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        data: {
+          Pay_id: "756454652323",
+          status: status,
+          title: title,
+          Pay_Amount: Pay_Amount,
+          date: date,
+          Pay_mode: Pay_mode,
+          teacherId: TeacherID,
+          authId: admin?._id
+        }
+      }
+      const res = await axios(config)
+      if (res.status === 200) {
+        alert(res.data.success)
+        handleClose()
+        getaccounthistory()
+      }
+    } catch (error) {
+      alert(error.response.data.errorr)
+    }
+  }
+
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = (item) => { setShow1(true); setEditData(item) }
+  const [EditData, setEditData] = useState("")
+  const EditAccountHistory = async () => {
+    try {
+      const config = {
+        url: "admin/EditAccount/" + EditData?._id,
+        baseURL: "http://localhost:8000/api/",
+        method: "put",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        data: {
+          Pay_id: "756454652323",
+          status: status,
+          title: title,
+          Pay_Amount: Pay_Amount,
+          date: date,
+          Pay_mode: Pay_mode,
+          teacherId: TeacherID,
+          authId: admin?._id
+        }
+      }
+      const res = await axios(config)
+      if (res.status === 200) {
+        alert(res.data.success)
+        handleClose1()
+        getaccounthistory()
+      }
+    } catch (error) {
+      alert(error.response.data.errorr)
+    }
+  }
+
+  // Delete history
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = (item) => { setShow2(true); setdeleteData(item) }
+  const [deleteData, setdeleteData] = useState("")
+  const DeleteAccountHistory = async () => {
+    try {
+      const config = {
+        url: "admin/DeleteAccount/" + deleteData?._id,
+        baseURL: "http://localhost:8000/api/",
+        method: "delete",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        data : {
+          authId: admin?._id
+        }
+      }
+      const res = await axios(config)
+      if (res.status === 200) {
+        alert(res.data.success)
+        handleClose2()
+        getaccounthistory()
+      }
+    } catch (error) {
+      alert(error.response.data.errorr)
+    }
+  }
+
+  // get account history
+  const [accHitory, setaccHitory] = useState([])
+  const getaccounthistory = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getAllAcountHistory/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setaccHitory(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //get
+  const [Teacher, setTeacher] = useState([]);
+  const getAllTeacher = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8000/api/admin/getAllTeachers/${admin?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setTeacher(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllTeacher()
+    getaccounthistory()
+  }, [])
+
   return (
     <div className="customerhead p-2">
       <div className="d-flex justify-content-between align-items-center">
@@ -56,47 +202,50 @@ const AccountHistory = () => {
           <thead>
             <tr>
               <th>S.No</th>
-              <th>
-                <div>Name</div>
-              </th>
-              <th>
-                <div>Booking Id</div>
-              </th>
-              <th>
-                <div>Payment Mode</div>
-              </th>
-              <th>
-                <div>Payment Id</div>
-              </th>
-              <th>
-                <div>
-                  Payment Date <br /> Time
-                </div>
-              </th>
-              <th>
-                <div>Credit</div>
-              </th>
-              <th>
-                <div>Debit</div>
-              </th>
+              <th>Name</th>
+              <th>Teacher ID</th>
+              <th>Title</th>
+              <th>Payment Mode</th>
+              <th>Payment Id</th>
+              <th>Payment Date</th>
+              <th>Status</th>
+              <th>Aciton</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-
-              {/* <td>
-                <img src="" alt="" style={{ width: "75px" }} />
-                </td> */}
-            </tr>
+            {accHitory?.map((item, i) => (<>
+              <tr>
+                <td>{i + 1}</td>
+                <td>{item?.teacherId?.FirstName}</td>
+                <td>{item?.teacherId?.teacherId}</td>
+                <td>{item?.title}</td>
+                <td>{item?.Pay_mode}</td>
+                <td>{item?.Pay_id}</td>
+                <td>{item?.date}</td>
+                <td>{item?.status}</td>
+                <td>
+                    <div style={{ display: "flex", gap: "20px" }}>
+                      <div>
+                        <FaEdit className="text-success"
+                        // style={{cursor : 'pointer'}}
+                        role="button"
+                          onClick={() => handleShow1(item)}
+                        />
+                      </div>
+                      <div>
+                        <AiFillDelete
+                          className="text-danger"
+                          style={{ cursor: "pointer", fontSize: "20px" }}
+                          onClick={() => {
+                            handleShow2(item);
+                          }}
+                        />{" "}
+                      </div>
+                    </div>
+                </td>
+              </tr>
+            </>))}
           </tbody>
         </Table>
       </div>
@@ -122,8 +271,10 @@ const AccountHistory = () => {
         />
         <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
       </Pagination>
+
+
       {/* Add Package modal */}
-      <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+      <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
           <Modal.Title style={{ color: "white" }}>
             Add Account History
@@ -132,72 +283,50 @@ const AccountHistory = () => {
         <Modal.Body>
           <div className="row">
             <div className="do-sear mt-2">
-              <label>Name</label>
-              <input type="text" placeholder="Enter Name" className="vi_0" />
-            </div>
-            <div className="do-sear mt-2">
-              <label>Booking Id</label>
-              <input
-                type="text"
-                placeholder="Enter Booking Id"
-                className="vi_0"
-              />
+              <label>Teacher</label>
+              <FormSelect
+                onChange={(e) => setTeacherID(e.target.value)}
+              >
+                <option value="Select">Select</option>
+                {Teacher?.map((ele) => <option value={ele?._id}>{ele?.FirstName}</option>)}
+              </FormSelect>
             </div>
             <div className="do-sear mt-2">
               <label>Payment Mode</label>
-              <input
-                type="text"
-                placeholder="Enter Payment Mode"
-                className="vi_0"
-              />
-            </div>
-            <div className="do-sear mt-2">
-              <label>Payment ID</label>
-              <input
-                type="text"
-                placeholder="Enter Payment Id"
-                className="vi_0"
-              />
+              <FormSelect onChange={(e) => setPay_mode(e.target.value)} >
+                <option value="Select">Select</option>
+                <option value="Online Payment">Online Payment</option>
+                <option value="Cash">Cash</option>
+              </FormSelect>
             </div>
             <div className="do-sear mt-2">
               <label>Payment Date & Time</label>
-              <input type="date" placeholder="Enter Date" className="vi_0" />
-              <input type="time" placeholder="Enter Time" className="vi_0" />
+              <input onChange={(e) => setdate(e.target.value)} type="date" placeholder="Enter Date" className="vi_0" />
             </div>
             <div className="do-sear mt-2">
-              <label>Credit</label>
-              <input type="text" placeholder="Enter Credit" className="vi_0" />
+              <label>Amount</label>
+              <input onChange={(e) => setPay_Amount(e.target.value)} type="text" placeholder="Amount" className="vi_0" />
             </div>
             <div className="do-sear mt-2">
-              <label>Debit</label>
-              <input type="text" placeholder="Enter Debit" className="vi_0" />
+              <label>Title</label>
+              <input onChange={(e) => settitle(e.target.value)} type="text" placeholder="Title" className="vi_0" />
+            </div>
+            <div className="do-sear mt-2">
+              <label>Select Status</label>
+              <FormSelect onChange={(e) => setstatus(e.target.value)}>
+                <option value="Select">Select</option>
+                <option value="Credit">Credit</option>
+                <option value="Debit">Debit</option>
+              </FormSelect>
             </div>
           </div>
-
-          {/* <div className="do-sear mt-2">
-            <label>Title 2</label>
-            <input type="text" placeholder="Enter Title 2" className="vi_0" />
-        </div> */}
-
-          {/* <div className="do-sear mt-2">
-            <label>Description</label>
-            <CKEditor
-                editor={ClassicEditor}
-                // data={AbDescription}
-                onChange={handleChange}
-            />
-            </div> */}
-          {/* <div className="do-sear mt-2">
-            <label>URL</label>
-            <input type="text" placeholder="Enter URL" className="vi_0" />
-        </div>  */}
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
-          <Button className="mx-2 modal-close-btn" variant=""  onClick={handleClose}>
+            <Button className="mx-2 modal-close-btn" variant="" onClick={handleClose}>
               Close
             </Button>
-            <Button className="mx-2 modal-add-btn" variant="" >
+            <Button className="mx-2 modal-add-btn" variant="" onClick={AddAccountHistory} >
               Add
             </Button>
           </div>
@@ -210,7 +339,7 @@ const AccountHistory = () => {
         onHide={handleClose1}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
           <Modal.Title style={{ color: "white" }}>Edit UserList</Modal.Title>
@@ -218,72 +347,61 @@ const AccountHistory = () => {
         <Modal.Body>
           <div className="row">
             <div className="do-sear mt-2">
-              <label>Registration ID</label>
-              <input
-                type="text"
-                placeholder="Enter Registration ID"
-                className="vi_0"
-              />
+              <label>Teacher</label>
+              <FormSelect
+                onChange={(e) => setTeacherID(e.target.value)}
+              >
+                <option value="Select">Select</option>
+                {Teacher?.map((ele) => <option value={ele?._id}>{ele?.FirstName}</option>)}
+              </FormSelect>
             </div>
             <div className="do-sear mt-2">
-              <label>Registration Date</label>
-              <input
-                type="text"
-                placeholder="Enter Registration Date"
-                className="vi_0"
-              />
+              <label>Payment Mode</label>
+              <FormSelect onChange={(e) => setPay_mode(e.target.value)} >
+                <option value="Select">Select</option>
+                <option value="Online Payment">Online Payment</option>
+                <option value="Cash">Cash</option>
+              </FormSelect>
             </div>
             <div className="do-sear mt-2">
-              <label>Mobile Number</label>
-              <input
-                type="text"
-                placeholder="Enter Mobile Number"
-                className="vi_0"
-              />
+              <label>Payment Date & Time</label>
+              <input onChange={(e) => setdate(e.target.value)} type="date" placeholder="Enter Date" className="vi_0" />
             </div>
             <div className="do-sear mt-2">
-              <label>Email ID</label>
-              <input
-                type="text"
-                placeholder="Enter Email Id"
-                className="vi_0"
-              />
+              <label>Amount</label>
+              <input onChange={(e) => setPay_Amount(e.target.value)} type="text" placeholder="Amount" className="vi_0" />
+            </div>
+            <div className="do-sear mt-2">
+              <label>Title</label>
+              <input onChange={(e) => settitle(e.target.value)} type="text" placeholder="Title" className="vi_0" />
+            </div>
+            <div className="do-sear mt-2">
+              <label>Select Status</label>
+              <FormSelect onChange={(e) => setstatus(e.target.value)}>
+                <option value="Select">Select</option>
+                <option value="Credit">Credit</option>
+                <option value="Debit">Debit</option>
+              </FormSelect>
             </div>
           </div>
-
-          {/* <div className="do-sear mt-2">
-            <label>Title 2</label>
-            <input type="text" placeholder="Enter Title 2" className="vi_0" />
-        </div> */}
-
-          {/* <div className="do-sear mt-2">
-            <label>Description</label>
-            <CKEditor
-                editor={ClassicEditor}
-                // data={AbDescription}
-                onChange={handleChange}
-            />
-            </div> */}
-          {/* <div className="do-sear mt-2"> */}
-          {/* <label>URL</label>
-            <input type="text" placeholder="Enter URL" className="vi_0" />
-        </div>  */}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" className= "modal-close-btn" onClick={handleClose1}>
+          <Button variant="" className="modal-close-btn" onClick={handleClose1}>
             Close
           </Button>
-          <Button variant="" className="modal-add-btn" >
+          <Button variant="" className="modal-add-btn" onClick={EditAccountHistory}>
             Edit
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* Delete Modal */}
       <Modal
         show={show2}
         onHide={handleClose2}
         backdrop="static"
         keyboard={false}
-        style={{zIndex:"99999"}}
+        style={{ zIndex: "99999" }}
       >
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -301,7 +419,7 @@ const AccountHistory = () => {
           <Button variant="" className="modal-close-btn" onClick={handleClose2}>
             Close
           </Button>
-          <Button variant="" className="modal-add-btn">Delete</Button>
+          <Button variant="" className="modal-add-btn" onClick={DeleteAccountHistory}>Delete</Button>
         </Modal.Footer>
       </Modal>
     </div>

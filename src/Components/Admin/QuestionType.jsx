@@ -161,6 +161,7 @@ function QuestionType() {
                     Authorization: `Bearer ${token}`,
                 },
                 data: {
+                    QFormatMedium:QFormatMedium,
                     typeOfquestion: typeOfquestion,
                     Qformat: Qformat,
                     authId: admin?._id,
@@ -354,7 +355,7 @@ function QuestionType() {
                                                         style={{ cursor: "pointer", fontSize: "20px" }}
                                                         onClick={() => {
                                                             handleShow1();
-                                                            setQuestionTypeId(item);
+                                                            setQuestionTypeId(item?._id);
 
                                                         }}
                                                     />{" "}
@@ -493,6 +494,8 @@ function QuestionType() {
                                 <label> Medium</label>
                                 <Form.Select
                                     className="vi_0"
+                                   
+                                    value={QFormatMedium}
                                     onChange={(e) => setQFormatMedium(e.target.value)}
                                 >
                                     <option>Select medium</option>
@@ -510,7 +513,7 @@ function QuestionType() {
                                 <label>Type Of Question</label>
                                 <input
                                     type="text"
-                                    placeholder="Enter Type Of Question"
+                                    placeholder={typeOfquestion}
                                     className="vi_0"
                                     onChange={(e) => {
                                         if (selectedLanguage == "en-t-i0-und") {
@@ -524,6 +527,8 @@ function QuestionType() {
                                 <label> Question Format</label>
                                 <Form.Select
                                     className="vi_0"
+                                    placeholder={Qformat}
+                                    // value={Qformat}
                                     onChange={(e) => setQformat(e.target.value)}
                                 >
                                     <option >Select Format</option>
