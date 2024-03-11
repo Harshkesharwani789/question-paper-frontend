@@ -7,8 +7,6 @@ import "../Admin/Admin.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
-
-import MathInput from "react-math-keyboard";
 import { FiPrinter } from "react-icons/fi";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";

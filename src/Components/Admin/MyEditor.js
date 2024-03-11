@@ -3,7 +3,9 @@ import "katex/dist/katex.min.css";
 
 import JoditEditor from "jodit-react";
 import { debounce } from "lodash";
-
+import { InlineMath } from "react-katex";
+import MathInput from "react-math-keyboard";
+import parse from "html-react-parser";
 let googleTransliterate = require("google-input-tool");
 
 const MathEditor = ({ data }) => {
@@ -115,6 +117,11 @@ const MathEditor = ({ data }) => {
     }
   };
 
+  const [isMath, setisMath] = useState(false);
+
+  const handlechangeMath = (value) => {
+    data.B(value);
+  };
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -129,8 +136,18 @@ const MathEditor = ({ data }) => {
           {/* <button onClick={startListening}>Start Voice Input</button>
           <button onClick={stopListening}>Stop Voice Input</button>
         */}
-         </div>
+        </div>
         <div>
+          <button
+            onClick={() => {
+              if (isMath == true) {
+                data.B("");
+              }
+              setisMath(!isMath);
+            }}
+          >
+            Math Editor
+          </button>
           {data.selectedLanguage == "en-t-i0-und" ? (
             <></>
           ) : (
@@ -152,17 +169,25 @@ const MathEditor = ({ data }) => {
           onChange={(event) => data?.settran(event.target.value)}
         ></textarea>
       )}
-      <JoditEditor
-        ref={joditEditor}
-        value={data.A}
-        className="vi_0"
-        config={{
-          readonly: false,
-          onBlur: (newContent) => data.B(newContent),
-        }}
-        onBlur={(newContent) => data.B(newContent)}
-        tabIndex={1}
-      />
+      {isMath == true ? (
+        <div>
+          <MathInput setValue={handlechangeMath} />
+          <p>
+            <InlineMath>{data?.A}</InlineMath></p>
+        </div>
+      ) : (
+        <JoditEditor
+          ref={joditEditor}
+          value={data.A}
+          className="vi_0"
+          config={{
+            readonly: false,
+            onBlur: (newContent) => data.B(newContent),
+          }}
+          onBlur={(newContent) => data.B(newContent)}
+          tabIndex={1}
+        />
+      )}
     </div>
   );
 };

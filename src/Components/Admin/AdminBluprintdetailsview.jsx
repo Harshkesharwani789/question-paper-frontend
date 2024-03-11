@@ -13,6 +13,8 @@ import { FiPrinter } from "react-icons/fi";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
+import "katex/dist/katex.min.css";
+import { InlineMath } from "react-katex";
 const steps = [
   "Blueprint Details",
   "Marks Details",
