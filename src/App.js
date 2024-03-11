@@ -191,11 +191,12 @@ import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnal
 // import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
 // import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
-import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
+// import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
 // import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
 import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
 import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import AdminQuestionAnalysisHeaderEdit from "./Components/Admin/AdminQuestionAnalysisHeaderEdit";
+import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderedit";
 
 function App() {
   return (
