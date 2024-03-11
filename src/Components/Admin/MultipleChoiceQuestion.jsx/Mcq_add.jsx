@@ -12,7 +12,7 @@ import { debounce } from "lodash";
 import MathEditor from "../MyEditor";
 let googleTransliterate = require("google-input-tool");
 
-const Mcq_add = ({selectdetails}) => {
+const Mcq_add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   // const selectdetails = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -72,14 +72,20 @@ const Mcq_add = ({selectdetails}) => {
     }
   }, 300); // Debounce delay in milliseconds
   const [AnswerT, setAnswerT] = useState("");
-  const [QuestionT,setQuestionT]=useState("");
+  const [QuestionT, setQuestionT] = useState("");
   const [Question, setQuestion] = useState("");
   const [Option_1, setOption_1] = useState("");
+  const [Option_1T, setOption_1T] = useState("");
   const [Option_2, setOption_2] = useState("");
+  const [Option_2T, setOption_2T] = useState("");
   const [Option_3, setOption_3] = useState("");
+  const [Option_3T, setOption_3T] = useState("");
   const [Option_4, setOption_4] = useState("");
+  const [Option_4T, setOption_4T] = useState("");
   const [Option_5, setOption_5] = useState("");
+  const [Option_5T, setOption_5T] = useState("");
   const [Option_6, setOption_6] = useState("");
+  const [Option_6T, setOption_6T] = useState("");
 
   const [Answer, setAnswer] = useState("");
   const [ImageQ, setImageQ] = useState("");
@@ -114,7 +120,7 @@ const Mcq_add = ({selectdetails}) => {
           Section: selectdetails?.Section,
           Sub_Class: selectdetails?.Sub_Class,
           Subject: selectdetails?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
@@ -172,82 +178,198 @@ const Mcq_add = ({selectdetails}) => {
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question 1</label>
-                <MathEditor data={{A:Question,B:setQuestion,selectedLanguage:selectdetails?.selectedLanguage,trans:QuestionT,settran:setQuestionT}}/>
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
-                <input
+                <MathEditor
+                  data={{
+                    A: Option_1,
+                    B: setOption_1,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_1T,
+                    settran: setOption_1T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_1(e.target.value):onChangeHandler(e.target.value,setOption_1)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_1(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_1)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_1}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_1}</p>
+                )} */}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2</label>
-                <input
+                <MathEditor
+                  data={{
+                    A: Option_2,
+                    B: setOption_2,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_2T,
+                    settran: setOption_2T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_2(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_2)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_2}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_2}</p>
+                )} */}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3</label>
-    
-                  <input
+                <MathEditor
+                  data={{
+                    A: Option_3,
+                    B: setOption_3,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_3T,
+                    settran: setOption_3T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_3(e.target.value):onChangeHandler(e.target.value,setOption_3)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_3(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_3)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_3}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_3}</p>
+                )} */}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4</label>
-                <input
+                <MathEditor
+                  data={{
+                    A: Option_4,
+                    B: setOption_4,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_4T,
+                    settran: setOption_4T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_4(e.target.value):onChangeHandler(e.target.value,setOption_4)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_4(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_4)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_4}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_4}</p>
+                )} */}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 5</label>
-                <input
+                <MathEditor
+                  data={{
+                    A: Option_5,
+                    B: setOption_5,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_5T,
+                    settran: setOption_5T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_5(e.target.value):onChangeHandler(e.target.value,setOption_5)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_5(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_5)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_5}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_5}</p>
+                )}*/}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 6</label>
-                <input
+                <MathEditor
+                  data={{
+                    A: Option_6,
+                    B: setOption_6,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: Option_6T,
+                    settran: setOption_6T,
+                  }}
+                />
+                {/* <input
                   type="text"
                   className="vi_0"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setOption_6(e.target.value):onChangeHandler(e.target.value,setOption_6)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_6(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_6)
+                  }
                 />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_6}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_6}</p>
+                )} */}
               </div>
             </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer 1</label>
-                <MathEditor data={{A:Answer,B:setAnswer,selectedLanguage:selectdetails?.selectedLanguage,trans:AnswerT,settran:setAnswerT}}/>
-              
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
+                />
               </div>
             </div>
             <div className="mt-4">
@@ -341,10 +463,14 @@ const Mcq_add = ({selectdetails}) => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-              <label htmlFor=""> Marks</label>
+                <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value):onChangeHandler(e.target.value,setMarks)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setMarks(e.target.value)
+                      : onChangeHandler(e.target.value, setMarks)
+                  }
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -360,15 +486,23 @@ const Mcq_add = ({selectdetails}) => {
                   <option>8</option>
                   <option>10</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Marks}</p>
+                )}
               </div>
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
-              <label htmlFor=""> Answer Timing</label>
+                <label htmlFor=""> Answer Timing</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value):onChangeHandler(e.target.value,setAnswer_Time)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setAnswer_Time(e.target.value)
+                      : onChangeHandler(e.target.value, setAnswer_Time)
+                  }
                 >
                   <option>Select the Time</option>
                   <option value="1/2 minutes">1/2 minutes</option>
@@ -385,7 +519,11 @@ const Mcq_add = ({selectdetails}) => {
                   <option value="9 minutes">9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Answer_Time}</p>
+                )}
               </div>
             </div>
           </div>
@@ -484,7 +622,11 @@ const Mcq_add = ({selectdetails}) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Image Question</label>
               <div>
-                <img style={{width:"200px", height:"140px"}} src={ImageQ && URL.createObjectURL(ImageQ)} alt="" />
+                <img
+                  style={{ width: "200px", height: "140px" }}
+                  src={ImageQ && URL.createObjectURL(ImageQ)}
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -493,7 +635,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1 </label>
                 <div>
-                  <img style={{width:"200px", height:"140px"}}  src={Image_1 && URL.createObjectURL(Image_1)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_1 && URL.createObjectURL(Image_1)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -501,7 +647,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 2 </label>
                 <div>
-                  <img  style={{width:"200px", height:"140px"}} src={Image_2 && URL.createObjectURL(Image_2)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_2 && URL.createObjectURL(Image_2)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -509,7 +659,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 3 </label>
                 <div>
-                  <img style={{width:"200px", height:"140px"}}  src={Image_3 && URL.createObjectURL(Image_3)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_3 && URL.createObjectURL(Image_3)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -517,7 +671,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 4 </label>
                 <div>
-                  <img style={{width:"200px", height:"140px"}}  src={Image_4 && URL.createObjectURL(Image_4)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_4 && URL.createObjectURL(Image_4)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -525,7 +683,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 5 </label>
                 <div>
-                  <img  style={{width:"200px", height:"140px"}} src={Image_5 && URL.createObjectURL(Image_5)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_5 && URL.createObjectURL(Image_5)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -533,7 +695,11 @@ const Mcq_add = ({selectdetails}) => {
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 6 </label>
                 <div>
-                  <img  style={{width:"200px", height:"140px"}} src={Image_6 && URL.createObjectURL(Image_6)} alt="" />
+                  <img
+                    style={{ width: "200px", height: "140px" }}
+                    src={Image_6 && URL.createObjectURL(Image_6)}
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -542,7 +708,11 @@ const Mcq_add = ({selectdetails}) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Image Answer</label>
               <div>
-                <img  style={{width:"200px", height:"140px"}} src={Image_Ans && URL.createObjectURL(Image_Ans)} alt="" />
+                <img
+                  style={{ width: "200px", height: "140px" }}
+                  src={Image_Ans && URL.createObjectURL(Image_Ans)}
+                  alt=""
+                />
               </div>
             </div>
           </div>

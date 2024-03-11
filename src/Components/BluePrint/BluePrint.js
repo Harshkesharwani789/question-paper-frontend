@@ -233,6 +233,20 @@ const BluePrint = () => {
 
     pdf.save("Blueprint.pdf");
   };
+ 
+
+// Function to calculate font size dynamically to fit content within available space
+const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
+    let fontSize = 10; // Initial font size
+    const padding = 10; // Padding to avoid content touching the edges
+
+    // Loop until content fits within available space
+    while (pdf.getStringUnitWidth(content) * fontSize + padding > maxWidth || fontSize + padding > maxHeight) {
+        fontSize--; // Decrease font size
+    }
+
+    return fontSize;
+};
 
   const createPDF1 = async () => {
     // setRotate(360);
@@ -337,7 +351,7 @@ const BluePrint = () => {
                               <div className="top-titles-container">
                                 <div className="container">
                                   <div className="row">
-                                    <div className="col-md-2">
+                                    <div className="col-2 col-sm-2 col-md-2 col-lg-2">
                                       {state?.School_Logo ? (
                                         <img
                                           src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
@@ -351,7 +365,7 @@ const BluePrint = () => {
                                         <></>
                                       )}
                                     </div>
-                                    <div className="col-md-10">
+                                    <div className="col-10 col-sm-10 col-md-10 col-lg-10">
                                       <div className="title-1 text-center">
                                         <h6 style={{fontWeight:"bold"}}>{state?.Institute_Name}</h6>
                                         {/* <h4>ಸಾಂತಾ ಪಾಲ್ ಶಾಲೇ</h4> */}

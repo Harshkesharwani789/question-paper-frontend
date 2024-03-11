@@ -7,6 +7,7 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { LuPrinter } from "react-icons/lu";
 import { SiBlueprint } from "react-icons/si";
 import { useLocation, useNavigate } from "react-router-dom";
+import "../Admin/CoverPage.css";
 
 export const UserCoverPage = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ export const UserCoverPage = () => {
         />
         <div  id="CoverPage" style={{padding:"15px"}}>
         <div
-         
+         className="coverpageR"
           style={{
             padding: "15px",
             border: "2px solid #000",

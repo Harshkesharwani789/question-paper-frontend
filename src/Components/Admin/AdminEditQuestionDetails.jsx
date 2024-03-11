@@ -26,6 +26,8 @@ const AdminEditQuestionDetails = () => {
   const { question_Id } = useParams();
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
 
+console.log("selectedLanguage",selectedLanguage);
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
@@ -69,6 +71,7 @@ const AdminEditQuestionDetails = () => {
       console.error("Promise.all error:", error);
     }
   }, 300);
+
   const fileInputRef = useRef(null);
   const handleEditClick = () => {
     if (fileInputRef.current) {
@@ -178,7 +181,16 @@ const AdminEditQuestionDetails = () => {
     const data = editor.getData();
     setQuestion(data);
   };
+  const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("");
+  const [Option_1T, setOption_1T] = useState("");
+  const [Option_2T, setOption_2T] = useState("");
+  const [Option_3T, setOption_3T] = useState("");
+  const [Option_4T, setOption_4T] = useState("");
+  const [Option_5T, setOption_5T] = useState("");
+  const [Option_6T, setOption_6T] = useState("");
 
   const handleChange1 = (e, editor) => {
     const data = editor.getData();
@@ -668,6 +680,20 @@ const AdminEditQuestionDetails = () => {
       console.log(error);
     }
   };
+  //get for Difficulty Level
+  const [DifficultyLevel, setDifficultyLevel] = useState([]);
+  const getDifficultyLevel = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/getAllDiffLevel"
+      );
+      if (res.status == 200) {
+        setDifficultyLevel(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -679,7 +705,25 @@ const AdminEditQuestionDetails = () => {
     getChapter();
     getNameExamination();
     getObjectives();
+    getDifficultyLevel();
   }, []);
+
+  const uniqueClassNamesSet = new Set(
+    getaddsubclass.map((item) => item.className)
+  );
+  const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
+  console.log("uniqueClassNamesArray", uniqueClassNamesArray);
+  const [trans, settran] = useState("");
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
 
   // Line
   const [oneline, setOneline] = useState(true);
@@ -753,7 +797,7 @@ const AdminEditQuestionDetails = () => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Section</label>
-                <input
+                {/* <input
                   type="text"
                   className="vi_0"
                   placeholder="Enter Section"
@@ -761,27 +805,18 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => {
                     setSection(e.target.value);
                   }}
-                />
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Examination Board</label>
-                <Form.Select
-                  aria-label="Default select example"
+                /> */}
+                <input
+                  type="text"
                   className="vi_0"
-                  value={Board}
-                  onChange={(e) => setBoard(e.target.value)}
-                >
-                  <option>Select the Board</option>
-                  {getboardname?.map((item, i) => {
-                    return (
-                      <option value={item?.boardName} key={i}>
-                        {item?.boardName}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
+                  value={section}
+                  onChange={(e) => {
+                    if (selectedLanguage == "en-t-i0-und") {
+                      setSection(e.target.value);
+                    } else onChangeHandler(e.target.value, setSection);
+                  }}
+                />
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{section}</p>}
               </div>
             </div>
             <div className="col-md-6">
@@ -813,6 +848,29 @@ const AdminEditQuestionDetails = () => {
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
+                <label htmlFor=""> Examination Board</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  className="vi_0"
+                  value={Board}
+                  onChange={(e) => setBoard(e.target.value)}
+                >
+                  <option>Select the Board</option>
+                  {getboardname
+                    ?.filter((ele) => ele?.mediumName === Medium)
+                    .map((item, i) => {
+                      return (
+                        <option value={item?.boardName} key={i}>
+                          {item?.boardName}
+                        </option>
+                      );
+                    })}
+                </Form.Select>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
                 <label htmlFor="">Select Class</label>
                 <Form.Select
                   aria-label="Default select example"
@@ -821,13 +879,24 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => setClass(e.target.value)}
                 >
                   <option>Select the Class</option>
-                  {getclassname?.map((item, i) => {
+                  {/* {getaddsubclass?.filter((ele)=>ele?.Medium===Medium).map((item, i) => {
                     return (
                       <option value={item?.className} key={i}>
                         {item?.className}
                       </option>
                     );
-                  })}
+                  })} */}
+                  {[
+                    ...new Set(
+                      getaddsubclass
+                        .filter((ele) => ele.mediumName === Medium)
+                        .map((val) => val.className)
+                    ),
+                  ].map((className, i) => (
+                    <option value={className} key={i}>
+                      {className}
+                    </option>
+                  ))}
                 </Form.Select>
               </div>
             </div>
@@ -841,13 +910,25 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => setSub_Class(e.target.value)}
                 >
                   <option>Select the Sub-Class</option>
-                  {getaddsubclass?.map((item, i) => {
+                  {/* {getaddsubclass?.filter((ele)=>ele?.className === Class || ele?.mediumName === Medium).map((item, i) => {
                     return (
                       <option value={item?.subclassName} key={i}>
                         {item?.subclassName}
                       </option>
                     );
-                  })}
+                  })} */}
+                  {getaddsubclass
+                    ?.filter(
+                      (ele) =>
+                        Class === ele.className || ele.mediumName === Medium
+                    )
+                    ?.map((val, i) => {
+                      return (
+                        <option value={val?.subclassName} key={i}>
+                          {val?.subclassName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -861,13 +942,15 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => setSubjects(e.target.value)}
                 >
                   <option>Select the Subject</option>
-                  {subject?.map((item, i) => {
-                    return (
-                      <option value={item?.subjectName} key={i}>
-                        {item?.subjectName}
-                      </option>
-                    );
-                  })}
+                  {subject
+                    ?.filter((ele) => ele.mediumName === Medium)
+                    .map((item, i) => {
+                      return (
+                        <option value={item?.subjectName} key={i}>
+                          {item?.subjectName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -905,13 +988,19 @@ const AdminEditQuestionDetails = () => {
                   onChange={(e) => setChapter_Name(e.target.value)}
                 >
                   <option>Select the Chapter Name</option>
-                  {chapters?.map((item, i) => {
-                    return (
-                      <option value={item?.chapterName} key={i}>
-                        {item?.chapterName}
-                      </option>
-                    );
-                  })}
+                  {chapters
+                    ?.filter(
+                      (ele) =>
+                        ele?.subjectName == Subjects &&
+                        ele?.SubjectPart == Lesson
+                    )
+                    .map((item, i) => {
+                      return (
+                        <option value={item?.chapterName} key={i}>
+                          {item?.chapterName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -929,9 +1018,15 @@ const AdminEditQuestionDetails = () => {
                   }}
                 >
                   <option>Select the Difficulty level of Paper</option>
-                  <option value="Easy">Easy</option>
-                  <option value="Average">Average</option>
-                  <option value="Difficult">Difficult</option>
+                  {DifficultyLevel?.filter(
+                    (ele) => ele.mediumName === Medium
+                  ).map((item) => {
+                    return (
+                      <option value={item?.DiffLevelName}>
+                        {item?.DiffLevelName}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </div>
             </div>
@@ -975,17 +1070,19 @@ const AdminEditQuestionDetails = () => {
                 <Form.Select
                   aria-label="Default select example"
                   className="vi_0"
-                  // value={Objectives}
+                  value={Objectives}
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  {getobjectives?.map((val, i) => {
-                    return (
-                      <option value={val?.Objectivesname}>
-                        {val?.Objectivesname}
-                      </option>
-                    );
-                  })}
+                  {getobjectives
+                    ?.filter((item) => item?.mediumName === Medium)
+                    .map((val, i) => {
+                      return (
+                        <option value={val?.Objectivesname}>
+                          {val?.Objectivesname}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -1001,7 +1098,9 @@ const AdminEditQuestionDetails = () => {
                   {[
                     ...new Set(
                       QuestionType?.filter(
-                        (ele) => ele.QFormatMedium === Medium
+                        (ele) =>
+                          ele.QFormatMedium === Medium &&
+                          ele?.Questiontype === Objectives
                       )?.map((item) => item.typeOfquestion)
                     ),
                   ]?.map((type, index) => (
@@ -1034,7 +1133,7 @@ const AdminEditQuestionDetails = () => {
               </div>
             </div>
 
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <div className="do-sear">
                 <label htmlFor="">Instructions</label>
                 <CKEditor
@@ -1044,7 +1143,22 @@ const AdminEditQuestionDetails = () => {
                   onChange={handleChange2}
                 />
               </div>
+            </div> */}
+            <div className="col-md-12">
+              <div className="do-sear">
+                <label htmlFor="">Instructions</label>
+                <MathEditor
+                  data={{
+                    A: Instruction,
+                    B: setInstruction,
+                    selectedLanguage,
+                    trans: trans,
+                    settran: settran,
+                  }}
+                />
+              </div>
             </div>
+
             {/* <div className="col-md-12 mt-3">
             <AdminQuestioneditprops Types_Question={Types_Question} />
           </div> */}
@@ -1060,11 +1174,20 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Question</label>
-                    <CKEditor
+                    {/* <CKEditor
                       editor={ClassicEditor}
                       className="vi_0"
                       data={Question}
                       onChange={handleChange}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Question,
+                        B: setQuestion,
+                        selectedLanguage,
+                        trans: QuestionT,
+                        settran: setQuestionT,
+                      }}
                     />
                   </div>
                 </div>
@@ -1123,7 +1246,18 @@ const AdminEditQuestionDetails = () => {
                         value={RealetionA}
                         onChange={(e) => setRealetionA(e.target.value)}
                       />
+                      {/* onChange={(e)=>selectedLanguage == "en-t-i0-und" ? 
+                       setRealetionA(e.target.value):onChangeHandler(e.target.value,setRealetionA)}
+                     /> */}
+
                       <p className="m-2">:</p>
+                      <br />
+                      <br />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{RealetionA}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -2028,11 +2162,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Question</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orQuestion}
-                      onChange={handleChange4}
+                    <MathEditor
+                      data={{
+                        A: orQuestion,
+                        B: setorQuestion,
+                        selectedLanguage,
+                        trans: orQuestionT,
+                        settran: setorQuestionT,
+                      }}
                     />
                   </div>
                 </div>
@@ -2040,11 +2177,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Answer</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orAnswer}
-                      onChange={handleChange5}
+                    <MathEditor
+                      data={{
+                        A: orAnswer,
+                        B: setorAnswer,
+                        selectedLanguage,
+                        trans: orAnswerT,
+                        settran: setorAnswerT,
+                      }}
                     />
                   </div>
                 </div>
@@ -2062,11 +2202,20 @@ const AdminEditQuestionDetails = () => {
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 1</label>
 
-                    <CKEditor
+                    {/* <CKEditor
                       editor={ClassicEditor}
                       className="vi_0"
                       data={Option_1}
                       onChange={Option1}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_1,
+                        B: setOption_1,
+                        selectedLanguage,
+                        trans: Option_1T,
+                        settran: setOption_1T,
+                      }}
                     />
                   </div>
                 </div>
@@ -2074,11 +2223,20 @@ const AdminEditQuestionDetails = () => {
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 2</label>
 
-                    <CKEditor
+                    {/* <CKEditor
                       editor={ClassicEditor}
                       className="vi_0"
                       data={Option_2}
                       onChange={Option2}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_2,
+                        B: setOption_2,
+                        selectedLanguage,
+                        trans: Option_2T,
+                        settran: setOption_2T,
+                      }}
                     />
                   </div>
                 </div>
@@ -2086,11 +2244,20 @@ const AdminEditQuestionDetails = () => {
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 3</label>
 
-                    <CKEditor
+                    {/* <CKEditor
                       editor={ClassicEditor}
                       className="vi_0"
                       data={Option_3}
                       onChange={Option3}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_3,
+                        B: setOption_3,
+                        selectedLanguage,
+                        trans: Option_3T,
+                        settran: setOption_3T,
+                      }}
                     />
                   </div>
                 </div>
@@ -2098,11 +2265,20 @@ const AdminEditQuestionDetails = () => {
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 4</label>
 
-                    <CKEditor
+                    {/* <CKEditor
                       editor={ClassicEditor}
                       className="vi_0"
                       data={Option_4}
                       onChange={Option4}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_4,
+                        B: setOption_4,
+                        selectedLanguage,
+                        trans: Option_4T,
+                        settran: setOption_4T,
+                      }}
                     />
                   </div>
                 </div>
@@ -2342,7 +2518,7 @@ const AdminEditQuestionDetails = () => {
                           {" "}
                           PART A
                         </label>
-                        <input
+                        {/* <input
                           value={Part_A1}
                           type="text"
                           className="vi_0 mb-2"
@@ -2350,52 +2526,103 @@ const AdminEditQuestionDetails = () => {
                           onChange={(e) => {
                             setPart_A1(e.target.value);
                           }}
-                        />
+                        /> */}
                         <input
-                          value={Part_A2}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Question"
+                          placeholder={Part_A1}
+                          // value={Part_A1}
                           onChange={(e) => {
-                            setPart_A2(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A1(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A1);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A1}</p>
+                        )}
                         <input
-                          value={Part_A3}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Question"
+                          placeholder={Part_A2}
+                          // value={Part_A2}
                           onChange={(e) => {
-                            setPart_A3(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A2(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A2);
                           }}
                         />
-                        <input
-                          value={Part_A4}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A2}</p>
+                        )}
+                         <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Question"
+                          placeholder={Part_A3}
+                          // value={Part_A3}
                           onChange={(e) => {
-                            setPart_A4(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A3(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A3);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A3}</p>
+                        )}
                         <input
-                          value={Part_A5}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Question"
+                          placeholder={Part_A4}
+                          // value={Part_A4}
                           onChange={(e) => {
-                            setPart_A5(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A4(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A4);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A4}</p>
+                        )}
                         <input
-                          value={Part_A6}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Question"
+                          placeholder={Part_A5}
+                          // value={Part_A5}
                           onChange={(e) => {
-                            setPart_A6(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A5(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A5);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A5}</p>
+                        )}
+                         <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A6}
+                          // value={Part_A6}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A6(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A6);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A6}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-4">
@@ -2407,69 +2634,119 @@ const AdminEditQuestionDetails = () => {
                           {" "}
                           PART B
                         </label>
-                        <input
-                          value={Part_B1}
+                       
+                         <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B1}
+                          // value={Part_B1}
                           onChange={(e) => {
-                            setPart_B1(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B1(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B1);
                           }}
                         />
-                        <input
-                          value={Part_B2}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B1}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B2}
+                          // value={Part_B2}
                           onChange={(e) => {
-                            setPart_B2(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B2(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B2);
                           }}
                         />
-                        <input
-                          value={Part_B3}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B2}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B3}
+                          // value={Part_B3}
                           onChange={(e) => {
-                            setPart_B3(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B3(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B3);
                           }}
                         />
-                        <input
-                          value={Part_B4}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B3}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B4}
+                          // value={Part_B4}
                           onChange={(e) => {
-                            setPart_B4(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B4(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B4);
                           }}
                         />
-                        <input
-                          value={Part_B5}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B4}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B5}
+                          // value={Part_B5}
                           onChange={(e) => {
-                            setPart_B5(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B5(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B5);
                           }}
                         />
-                        <input
-                          value={Part_B6}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B5}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B6}
+                          // value={Part_B6}
                           onChange={(e) => {
-                            setPart_B6(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B6(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B6);
                           }}
                         />
-                        <input
-                          value={Part_B7}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B6}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_B7}
+                          // value={Part_B7}
                           onChange={(e) => {
-                            setPart_B7(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B7(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B7);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B7}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-4">
@@ -2482,68 +2759,117 @@ const AdminEditQuestionDetails = () => {
                           PART C
                         </label>
                         <input
-                          value={Part_C1}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_C1}
+                          // value={Part_C1}
                           onChange={(e) => {
-                            setPart_C1(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C1(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C1);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C1}</p>
+                        )}
                         <input
-                          value={Part_C2}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_C2}
+                          // value={Part_C2}
                           onChange={(e) => {
-                            setPart_C2(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C2(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C2);
                           }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C2}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C3}
+                          // value={Part_C3}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C3(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C3);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C3}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C4}
+                          // value={Part_C4}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C4(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C4);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C4}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C5}
+                          // value={Part_C5}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C5(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C5);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C5}</p>
+                        )}
                         <input
-                          value={Part_C3}
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_C6}
+                          // value={Part_C6}
                           onChange={(e) => {
-                            setPart_C3(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C6(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C6);
                           }}
                         />
-                        <input
-                          value={Part_C4}
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C6}</p>
+                        )}
+                       <input
                           type="text"
                           className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
+                          placeholder={Part_C7}
+                          // value={Part_C7}
                           onChange={(e) => {
-                            setPart_C4(e.target.value);
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C7(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C7);
                           }}
                         />
-                        <input
-                          value={Part_C5}
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
-                          onChange={(e) => {
-                            setPart_C5(e.target.value);
-                          }}
-                        />
-                        <input
-                          value={Part_C6}
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
-                          onChange={(e) => {
-                            setPart_C6(e.target.value);
-                          }}
-                        />
-                        <input
-                          value={Part_C7}
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder="Enter Your Answer"
-                          onChange={(e) => {
-                            setPart_C7(e.target.value);
-                          }}
-                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C7}</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -2561,60 +2887,103 @@ const AdminEditQuestionDetails = () => {
                         {" "}
                         PART A
                       </label>
+                     
                       <input
-                        value={Part_A1_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A1_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A1_A}
+                          // value={Part_A1_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A1_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A1_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A1_A}</p>
+                        )}
                       <input
-                        value={Part_A2_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A2_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A2_A}
+                          // value={Part_A2_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A2_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A2_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A2_A}</p>
+                        )}
                       <input
-                        value={Part_A3_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A3_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A3_A}
+                          // value={Part_A3_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A3_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A3_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A3_A}</p>
+                        )}
                       <input
-                        value={Part_A4_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A4_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A4_A}
+                          // value={Part_A4_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A4_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A4_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A4_A}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A5_A}
+                          // value={Part_A5_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A5_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A5_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A5_A}</p>
+                        )}
                       <input
-                        value={Part_A5_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A5_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_A6_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Question"
-                        onChange={(e) => {
-                          setPart_A6_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_A6_A}
+                          // value={Part_A6_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_A6_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_A6_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_A6_A}</p>
+                        )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -2627,59 +2996,101 @@ const AdminEditQuestionDetails = () => {
                         PART B
                       </label>
                       <input
-                        value={Part_B1_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B1_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B1_A}
+                          // value={Part_B1_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B1_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B1_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B1_A}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B2_A}
+                          // value={Part_B2_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B2_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B2_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B2_A}</p>
+                        )}
                       <input
-                        value={Part_B2_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B2_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B3_A}
+                          // value={Part_B3_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B3_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B3_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B3_A}</p>
+                        )}
+                       <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B4_A}
+                          // value={Part_B4_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B4_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B4_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B4_A}</p>
+                        )}
                       <input
-                        value={Part_B3_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B3_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B5_A}
+                          // value={Part_B5_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B5_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B5_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B5_A}</p>
+                        )}
                       <input
-                        value={Part_B4_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B4_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_B5_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B5_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_B6_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_B6_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_B6_A}
+                          // value={Part_B6_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_B6_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_B6_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_B6_A}</p>
+                        )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -2692,59 +3103,101 @@ const AdminEditQuestionDetails = () => {
                         PART C
                       </label>
                       <input
-                        value={Part_C1_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C1_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C1_A}
+                          // value={Part_C1_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C1_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C1_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C1_A}</p>
+                        )}
+                     <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C2_A}
+                          // value={Part_C2_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C2_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C2_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C2_A}</p>
+                        )}
                       <input
-                        value={Part_C2_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C2_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_C3_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C3_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_C4_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C4_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_C5_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C5_A(e.target.value);
-                        }}
-                      />
-                      <input
-                        value={Part_C6_A}
-                        type="text"
-                        className="vi_0 mb-2"
-                        placeholder="Enter Your Answer"
-                        onChange={(e) => {
-                          setPart_C6_A(e.target.value);
-                        }}
-                      />
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C3_A}
+                          // value={Part_C3_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C3_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C3_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C3_A}</p>
+                        )}
+                     <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C4_A}
+                          // value={Part_C4_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C4_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C4_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C4_A}</p>
+                        )}
+                     <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C5_A}
+                          // value={Part_C5_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C5_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C5_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C5_A}</p>
+                        )}
+                     <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={Part_C6_A}
+                          // value={Part_C6_A}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPart_C6_A(e.target.value);
+                            } else onChangeHandler(e.target.value, setPart_C6_A);
+                          }}
+                        />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{Part_C6_A}</p>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -3569,11 +4022,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Question</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orQuestion}
-                      onChange={handleChange4}
+                    <MathEditor
+                      data={{
+                        A: orQuestion,
+                        B: setorQuestion,
+                        selectedLanguage,
+                        trans: orQuestionT,
+                        settran: setorQuestionT,
+                      }}
                     />
                   </div>
                 </div>
@@ -3581,11 +4037,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Answer</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orAnswer}
-                      onChange={handleChange5}
+                    <MathEditor
+                      data={{
+                        A: orAnswer,
+                        B: setorAnswer,
+                        selectedLanguage,
+                        trans: orAnswerT,
+                        settran: setorAnswerT,
+                      }}
                     />
                   </div>
                 </div>
@@ -3785,66 +4244,120 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 1</label>
-                    <input
+                    {/* <input
                       value={Option_1}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_1(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_1,
+                        B: setOption_1,
+                        selectedLanguage,
+                        trans: Option_1T,
+                        settran: setOption_1T,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 2</label>
-                    <input
+                    {/* <input
                       value={Option_2}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_2(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_2,
+                        B: setOption_2,
+                        selectedLanguage,
+                        trans: Option_2T,
+                        settran: setOption_2T,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 3</label>
-                    <input
+                    {/* <input
                       value={Option_3}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_3(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_3,
+                        B: setOption_3,
+                        selectedLanguage,
+                        trans: Option_3T,
+                        settran: setOption_3T,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 4</label>
-                    <input
+                    {/* <input
                       value={Option_4}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_4(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_4,
+                        B: setOption_4,
+                        selectedLanguage,
+                        trans: Option_4T,
+                        settran: setOption_4T,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 5</label>
-                    <input
+                    {/* <input
                       value={Option_5}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_5(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_5,
+                        B: setOption_5,
+                        selectedLanguage,
+                        trans: Option_5T,
+                        settran: setOption_5T,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option 6</label>
-                    <input
+                    {/* <input
                       value={Option_6}
                       type="text"
                       className="vi_0"
                       onChange={(e) => setOption_6(e.target.value)}
+                    /> */}
+                    <MathEditor
+                      data={{
+                        A: Option_6,
+                        B: setOption_6,
+                        selectedLanguage,
+                        trans: Option_6T,
+                        settran: setOption_6T,
+                      }}
                     />
                   </div>
                 </div>
@@ -5880,11 +6393,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Question</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orQuestion}
-                      onChange={handleChange4}
+                    <MathEditor
+                      data={{
+                        A: orQuestion,
+                        B: setorQuestion,
+                        selectedLanguage,
+                        trans: orQuestionT,
+                        settran: setorQuestionT,
+                      }}
                     />
                   </div>
                 </div>
@@ -5892,11 +6408,14 @@ const AdminEditQuestionDetails = () => {
                 <div className="col-md-12">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Answer</label>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      className="vi_0"
-                      data={orAnswer}
-                      onChange={handleChange5}
+                    <MathEditor
+                      data={{
+                        A: orAnswer,
+                        B: setorAnswer,
+                        selectedLanguage,
+                        trans: orAnswerT,
+                        settran: setorAnswerT,
+                      }}
                     />
                   </div>
                 </div>
@@ -6272,13 +6791,28 @@ const AdminEditQuestionDetails = () => {
                     <div className="col-md-7">
                       <label htmlFor=""> Write Poem </label>
                       <div className="d-flex align-items-end">
-                        <input
+                        {/* <input
                           value={PoemSat}
                           className="vi_0"
                           type="text"
                           placeholder="enter text"
                           onChange={(e) => setPoemSat(e.target.value)}
+                        /> */}
+                        <input
+                          type="text"
+                          className="vi_0"
+                          value={PoemSat}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPoemSat(e.target.value);
+                            } else onChangeHandler(e.target.value, setPoemSat);
+                          }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{PoemSat}</p>
+                        )}
                         <div className="ans-line mb-3 mt-2"></div>
                       </div>
 

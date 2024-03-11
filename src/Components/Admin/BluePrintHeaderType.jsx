@@ -7,10 +7,11 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
-import { Link } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEdit, FaRegEye } from "react-icons/fa";
 
 function BluePrintHeaderType() {
+    const navigate = useNavigate();
     const admin = JSON.parse(sessionStorage.getItem("admin"));
     const token = sessionStorage.getItem("token");
 
@@ -38,6 +39,40 @@ function BluePrintHeaderType() {
         }
     };
     console.log("GetbluePrintHeader", GetbluePrintHeader);
+
+    const [deleteA, setDeleteA] = useState("");
+    const DeletBluePrintHeader = async () => {
+        try {
+          const config = {
+            url: "/admin/deleteblueprintheader/" + deleteA ,
+            baseURL: "http://localhost:8000/api",
+            method: "delete",
+            headers: {
+              "content-type": "application/json",
+            },
+          };
+          let res = await axios(config);
+          if (res.status === 200) {
+            handleClose2();
+            getBluePrintHeader();
+            return swal({
+              title: "Delete!",
+              text: res.data.success,
+              icon: "success",
+              button: "OK!",
+            });
+          }
+        } catch (error) {
+          console.log(error);
+          return swal({
+            title: "Error!",
+            text: error.response.data.error,
+            icon: "error",
+            button: "OK!",
+          });
+        }
+      };
+
     useEffect(() => {
         getBluePrintHeader()
     }, [])
@@ -102,11 +137,21 @@ function BluePrintHeaderType() {
                                             {" "}
                                             <div style={{ display: "flex", gap: "20px" }}>
                                                 <div>
+                                                <FaEdit
+                                                        className="text-success"
+                                                        style={{ cursor: "pointer", fontSize: "20px" }}
+                                                        onClick={() => {
+                                                            navigate("/adminblueprintheaderedit",{state:{item:item}})
+                                                            // setQuestionTypeId(item);
+                                                            // handleShow2();
+                                                        }}
+                                                    />
                                                     <AiFillDelete
                                                         className="text-danger"
                                                         style={{ cursor: "pointer", fontSize: "20px" }}
                                                         onClick={() => {
                                                             // setQuestionTypeId(item);
+                                                            setDeleteA(item?._id);
                                                             handleShow2();
                                                         }}
                                                     />{" "}
@@ -148,7 +193,7 @@ function BluePrintHeaderType() {
                         <Button
                             variant=""
                             className="modal-add-btn"
-                        // onClick={DeleteQuestionType}
+                        onClick={DeletBluePrintHeader}
                         >
                             Delete
                         </Button>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "./Admin/Admin.css"
-import { useParams } from "react-router-dom";
+import "../Admin/Admin.css"
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
 
@@ -12,6 +12,7 @@ import { FiPrinter } from "react-icons/fi";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { debounce } from "lodash";
+import swal from "sweetalert";
 const steps = [
     "Blueprint Details",
     "Marks Details",
@@ -20,6 +21,11 @@ const steps = [
 ];
 
 const AdminQuestionAnalysisHeaderEdit = () => {
+    const { QuestAnalHead_Id } = useParams();
+
+
+    const { state } = useLocation();
+    console.log("state", state);
   //Translate
   let googleTransliterate = require("google-input-tool");
   const [translatedValue, setTranslatedValue] = useState("");
@@ -68,60 +74,14 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   }, 300); // Debounce delay in milliseconds
 
 
-  const [QuestHeader, setQuestHeader] = useState("")
-  const [slno, setslno] = useState("")
-  const [ObjectType, setObjectType] = useState("")
-  const [Chapter, setChapter] = useState("")
-  const [Lesson, setLesson] = useState("")
-  const [QuestionType, setQuestionType] = useState("")
-  const [OtSaLsa, setOtSaLsa] = useState("")
-  const [Marks, setMarks] = useState("")
-  const [Difficultlevel, setDifficultlevel] = useState("")
-  const [Time, setTime] = useState("")
-  const [Note, setNote] = useState("");
-
-
-  const AddQuestAnalysisHeader = async () => {
-      if (!selectedMedium) {
-          return alert("Please Select Medium")
-      }
-      try {
-          const config = {
-              url: "/admin/addQuestAnalysisheader",
-              baseURL: "http://localhost:8000/api",
-              method: "post",
-              headers: { "Content-Type": "application/json" },
-              data: {
-                  selectedLanguage: selectedLanguage,
-                  QuestHeader: QuestHeader,
-                  slno: slno,
-                  ObjectType: ObjectType,
-                  Chapter: Chapter,
-                  Lesson: Lesson,
-                  QuestionType: QuestionType,
-                  OtSaLsa: OtSaLsa,
-                  Marks: Marks,
-                  Difficultlevel: Difficultlevel,
-                  Time: Time,
-                  Note: Note,
-                  selectedMedium: selectedMedium
-              }
-          }
-          const res = await axios(config)
-          if (res.status === 200) {
-              alert(res.data.success)
-          }
-      } catch (error) {
-          alert(error.response.data.error)
-      }
-  }
+  
 
   //get method for medium
   const [selectedMedium, setselectedMedium] = useState("");
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
       try {
-          let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+          let res = await axios.get("http://localhost:8000/api/admin/getAllMedium" );
           if (res.status == 200) {
               setMedium(res.data.success);
           }
@@ -129,10 +89,98 @@ const AdminQuestionAnalysisHeaderEdit = () => {
           console.log(error);
       }
   };
+//   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
+//   const getquestAnalysisHeader = async () => {
+//     try {
+//       let res = await axios.get(
+//         "http://localhost:8000/api/admin/getQuestAnalysisheaderbymedium/" +
+//           state?.Medium
+//       );
+//       if (res.status == 200) {
+//         setGetquestAnalysisHeader(res.data.success);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   const [GetquestAnalysisHeader, setGetquestAnalysisHeader] = useState([]);
+//   const getquestAnalysisHeaderByid = async () => {
+//     try {
+//       let res = await axios.get(
+//         `http://localhost:8000/api/admin/getquestionanalysisbyid/${QuestAnalHead_Id}`
+//       );
+//       if (res.status === 200) {
+//         setGetquestAnalysisHeader(res.data.success);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+  
+  //update
+  const [QuestHeader, setQuestHeader] = useState("");
+  const [slno, setslno] = useState("");
+  const [ObjectType, setObjectType] = useState("");
+  const [Chapter, setChapter] = useState("");
+  const [Lesson, setLesson] = useState("");
+  const [QuestionType, setQuestionType] = useState("");
+  const [OtSaLsa, setOtSaLsa] = useState("");
+  const [Marks, setMarks] = useState("");
+  const [Difficultlevel, setDifficultlevel] = useState("");
+  const [Time, setTime] = useState("");
+  const [Note, setNote] = useState("");
+ 
+ 
+  const UpdateQuestAnalysisHeader = async () => {
+    try {
+      const config = {
+        url: "/admin/updateQuestionAnalysisHeader/"+ state?.item?._id,
+        method: "put",
+        baseURL: "http://localhost:8000/api",
+        headers: {
+          "content-type": "application/json",
+        },
+        data: {
+          QuestHeader: QuestHeader,
+          slno: slno,
+          ObjectType: ObjectType,
+          Chapter: Chapter,
+          Lesson: Lesson,
+          OtSaLsa: OtSaLsa,
+          Marks:Marks,
+          Difficultlevel:Difficultlevel,
+          Time:Time,
+          Note:Note,
+         
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200){
+      return swal({
+        title: "Yeah",
+        text: res.data.success,
+        icon: "success",
+        button: "Ok!",
+      });
+    }
+    } catch (error) {
+      console.log(error);
+      return swal({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+        button: "Ok!",
+      });
+    }
+  };
+  
 
   useEffect(() => {
-      getAddMedium()
+      getAddMedium();
+    //   getquestAnalysisHeaderByid();
+
   }, [])
+//  console.log("QuestAnalHead_Id",QuestAnalHead_Id);
 
   return (
       <>
@@ -175,17 +223,21 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                   <div id="pdf">
                       <div className="blueprint-content-display" >
                           <div className="blueprint-titles">
-                              <h3>Questions Analysis Name</h3>
+                              <h3>Edit Questions Analysis Name</h3>
                               <div className="d-flex justify-content-center">
                                   <input
-                                      style={{ width: "80px" }} type="text" placeholder="Questions Analysis"
+                                      style={{ width: "10rem" }} 
+                                      type="text" 
+                                      placeholder={state?.item?.QuestHeader}
+                                    //   value={state?.item?.QuestHeader}
                                       onChange={(e) => {
                                           if (selectedLanguage == "en-t-i0-und") {
                                               setQuestHeader(e.target.value)
                                           } else onChangeHandler(e.target.value, setQuestHeader)
                                       }}
+                                    // onChange={(e)=>setQuestHeader(e.target.value)}
                                   />
-                                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{QuestHeader}</p>}
+                                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.QuestHeader}</p>}
                               </div>
                           </div>
                           <div className="container">
@@ -210,8 +262,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setslno(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setslno)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="S No." />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{slno}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.slno} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.slno}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -219,8 +271,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setObjectType(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setObjectType)
-                                                                  }} style={{ width: "100px" }} type="text" placeholder="ObjectType" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{ObjectType}</p>}
+                                                                  }} style={{ width: "100px" }} type="text" placeholder={state?.item?.ObjectType} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.ObjectType}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -228,8 +280,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setChapter(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setChapter)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="Chapter" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Chapter}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Chapter} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Chapter}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -237,8 +289,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setLesson(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setLesson)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="Lesson" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Lesson}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Lesson} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Lesson}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -246,7 +298,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setQuestionType(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setQuestionType)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="QuestionType" />
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.QuestionType} />
                                                               {selectedLanguage == "en-t-i0-und" ? <></> : <p>{QuestionType}</p>}
                                                           </th>
                                                           <th>
@@ -255,8 +307,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setOtSaLsa(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setOtSaLsa)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="OtSaLsa" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{OtSaLsa}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.OtSaLsa} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.OtSaLsa}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -264,8 +316,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setMarks(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setMarks)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="Marks" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Marks} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Marks}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -273,8 +325,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setDifficultlevel(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setDifficultlevel)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="Difficultlevel" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Difficultlevel}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Difficultlevel} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Difficultlevel}</p>}
                                                           </th>
                                                           <th>
                                                               <input
@@ -282,8 +334,8 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                                                       if (selectedLanguage == "en-t-i0-und") {
                                                                           setTime(e.target.value)
                                                                       } else onChangeHandler(e.target.value, setTime)
-                                                                  }} style={{ width: "80px" }} type="text" placeholder="Time" />
-                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Time}</p>}
+                                                                  }} style={{ width: "80px" }} type="text" placeholder={state?.item?.Time} />
+                                                              {selectedLanguage == "en-t-i0-und" ? <></> : <p>{state?.item?.Time}</p>}
                                                           </th>
                                                       </tr>
                                                   </thead>
@@ -307,7 +359,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                   <div className="row">
                                       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                           <Form.Label>Questions Analysis Instruction</Form.Label>
-                                          <Form.Control type="text" placeholder="note" 
+                                          <Form.Control type="text" placeholder={state?.item?.Note} 
                                            onChange={(e) => {
                                               if (selectedLanguage == "en-t-i0-und") {
                                                   setNote(e.target.value)
@@ -329,7 +381,11 @@ const AdminQuestionAnalysisHeaderEdit = () => {
 
                                   <div className="col-md-12 mb-2">
                                       <div className="d-flex justify-content-center">                                      
-                                          <button onClick={AddQuestAnalysisHeader} className="admin-add-btn mb-2">Add Headers</button>
+                                          <button 
+                                          onClick={()=>{
+                                            UpdateQuestAnalysisHeader();
+                                            }}
+                                           className="admin-add-btn mb-2">Update Headers</button>
                                       </div>
                                   </div>
                               </div>
