@@ -186,7 +186,7 @@ const AdminQuestions = () => {
         ele.Board === Selectboard &&
         ele.Sub_Class === SelectClass &&
         ele.Medium === SelectMedium &&
-        ele.Subject === SelectSubject         
+        ele.Subject === SelectSubject
       )
       setQuestions(allsubject)
     }
@@ -202,35 +202,41 @@ const AdminQuestions = () => {
       setQuestions(alltypeofquestion)
     }
 
-  }, [SelectSubject,SelectTypeQuestion,TypeofQuestionFilter, SunjectFilter, SelectClass, BoardFilter, Selectboard, MediumFilter, SelectMedium, ClassFilter])
+  }, [SelectSubject, SelectTypeQuestion, TypeofQuestionFilter, SunjectFilter, SelectClass, BoardFilter, Selectboard, MediumFilter, SelectMedium, ClassFilter])
 
 
   useEffect(() => {
     getAllQuestions();
   }, []);
-  console.log("question=>", Questions);
+
   return (
     <>
-      <div className="row">
-        <div className="col-lg-4 d-flex justify-content-center">
-          <div class="input-group ">
-            <span class="input-group-text" id="basic-addon1">
-              <BsSearch />
-            </span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search..."
-              aria-describedby="basic-addon1"
-            />
+      <div className="row p-2">
+        
+          <div className="col-lg-4 d-flex justify-content-center mt-2">
+            <div>
+            <div class="input-group ">
+              <span class="input-group-text" id="basic-addon1">
+                <BsSearch />
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            </div>
+            
           </div>
-        </div>
-        <div className="col-lg-4">
+    
+
+        <div className="col-lg-4 mt-2">
           <div class="text-container ">
             <p className="beautiful-text">Questions List </p>
           </div>
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-4 mt-2">
           <div className="text-center">
             <button
               className="admin-add-btn "
@@ -304,9 +310,9 @@ const AdminQuestions = () => {
         </div>
         <div className="">
           <label> Type Of Question </label>
-          <Form.Select 
-          onChange={(e)=>setSelectTypeQuestion(e.target.value)}
-          className="beautiful-select">
+          <Form.Select
+            onChange={(e) => setSelectTypeQuestion(e.target.value)}
+            className="beautiful-select">
             <option value="" >Open this select menu</option>
             {ForSelectData?.filter((ele) =>
               ele.Board === Selectboard &&
@@ -316,7 +322,7 @@ const AdminQuestions = () => {
             )?.map((item, i) => {
               return (
                 <option key={item} value={item?.Types_Question}>
-                 {i+1} {item?.Types_Question}
+                  {i + 1} {item?.Types_Question}
                 </option>
               )
             })}

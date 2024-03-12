@@ -104,6 +104,7 @@ const AdminQuestionDetails = () => {
   const [Objectives, setObjectives] = useState("");
   const [QuestionTYpe, setQuestionTYpe] = useState("");
   const [Instruction, setInstruction] = useState("");
+  const [QuestionTypeTranlate, setQuestionTypeTranlate] = useState("")
 
   const addExamaData = (name) => {
     try {
@@ -131,13 +132,14 @@ const AdminQuestionDetails = () => {
     Difficulty_level: Difficulty_level,
     Name_of_examination: Name_of_examination,
     Objectives: Objectives,
-    Questiontype: QuestionTYpe,
+    Types_QuestionTranslate: QuestionTypeTranlate,
     Types_Question: Types_Question,
     Instruction: Instruction,
     selectedLanguage: selectedLanguage,
     QuestionTYpe: QuestionTYpe,
   };
 
+  console.log("selectdetailscheck",selectdetails);
   useEffect(() => {
     if (Types_Question && selectedLanguage) {
       sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
@@ -659,7 +661,18 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select the Types of the Question</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => setTypes_Question(e.target.value)}
+                 
+                  onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    const values = selectedValue.split(',');
+                
+                    if (values.length === 2) {
+                      setQuestionTypeTranlate(values[0]);
+                      setTypes_Question(values[1]);
+                    } else {
+                      setTypes_Question(selectedValue);
+                    }
+                  }}
                 >
                   <option>Select Question Type</option>
                   {QuestionType?.filter(
@@ -668,7 +681,9 @@ const AdminQuestionDetails = () => {
                       ele.QFormatMedium === Medium
                   )?.map((item2) => {
                     return (
-                      <option value={item2?.Qformat}>
+                      <option 
+                      value={item2?.translatelang ? `${item2.translatelang},${item2.Qformat}` : item2.Qformat}
+                      >
                         {item2?.translatelang ? (
                           <>{item2?.translatelang}</>
                         ) : (

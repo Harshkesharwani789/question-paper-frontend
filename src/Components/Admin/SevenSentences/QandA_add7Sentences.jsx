@@ -76,6 +76,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
+          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,

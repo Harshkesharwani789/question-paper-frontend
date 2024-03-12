@@ -38,7 +38,7 @@ const AdminMedium = () => {
         return "";
       }
       let am = value.split(/\s+/); // Split by any whitespace characters
-      let arr = [];
+     
       let promises = [];
   
       for (let index = 0; index < am.length; index++) {
@@ -88,7 +88,7 @@ const AdminMedium = () => {
       };
 
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         swal({
           title: "Success!",
           text: res.data.success,
@@ -100,6 +100,7 @@ const AdminMedium = () => {
       }
     } catch (error) {
       console.log(error);
+      handleClose();
       swal({
         title: "Oops",
         text: error.response.data.error,
@@ -115,7 +116,7 @@ const AdminMedium = () => {
   const getAddMedium = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
-      if (res.status == 200) {
+      if (res.status === 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
       }
@@ -143,7 +144,7 @@ const AdminMedium = () => {
         },
       };
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         getAddMedium();
         handleClose1();
         return swal({
@@ -155,6 +156,7 @@ const AdminMedium = () => {
       }
     } catch (error) {
       console.log(error);
+      handleClose1();
       swal({
         title: "Error!",
         text: error.response.data.error,
@@ -189,6 +191,7 @@ const AdminMedium = () => {
       }
     } catch (error) {
       console.log(error);
+      handleClose2();
       swal({
         title: "Error!",
         text: error.response.data.error,
@@ -198,8 +201,6 @@ const AdminMedium = () => {
     }
   };
 
-  //   Row Filter
-  const [itempage, setItempage] = useState(5);
 
   //search filter for about us
   const [searchH, setSearchH] = useState("");
@@ -230,10 +231,11 @@ const AdminMedium = () => {
   });
   // Pagination
   const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = 5;
+  const productPerPage = 10;
   const visitedPage = pageNumber * productPerPage;
   const displayPage = Medium.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(Medium.length / productPerPage);
+  
   useEffect(() => {
     getAddMedium();
   }, []);
@@ -324,12 +326,10 @@ const AdminMedium = () => {
             bordered
             style={{ width: "-webkit-fill-available" }}
           >
-            <thead>
+            <thead style={{border:"1px solid black"}}>
               <tr>
                 <th>S.No</th>
-                <th>
-                  <div>Medium</div>
-                </th>
+                <th>Medium</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -337,14 +337,14 @@ const AdminMedium = () => {
             <tbody>
               {records?.map((item, i) => {
                 return (
-                  <tr>
+                  <tr className="text-center">
                     <td>{i + 1 + visitedPage}</td>
 
                     <td>{item?.mediumName}</td>
 
-                    <td>
+                    <td >
                       {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
+                      <div style={{ display: "flex", gap: "20px",justifyContent:"space-around" }}>
                         <div>
                           <BiSolidEdit
                             className="text-success"

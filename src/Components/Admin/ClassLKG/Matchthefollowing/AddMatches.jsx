@@ -152,6 +152,8 @@ const AddMatches = ({ selectdetails }) => {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+
           Part_A1: Part_A1,
           Part_A2: Part_A2,
           Part_A3: Part_A3,
