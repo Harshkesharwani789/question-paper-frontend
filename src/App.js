@@ -202,6 +202,7 @@ import AdminViewBlueprint from "./Components/Admin/QuestionPaperDetails/AdminVie
 import AdminViewQuestionPaper from "./Components/Admin/QuestionPaperDetails/AdminViewQuestionPaper";
 import AdminQuestionAnalysis from "./Components/Admin/QuestionPaperDetails/AdminQuestionAnalysis";
 import AdminAnswerSheet from "./Components/Admin/QuestionPaperDetails/AdminAnswerSheet";
+import Class10thQuestionpaper from "./Components/Admin/QuestionPaperDetails/Class10thQuestionpaper";
 
 function App() {
   return (
@@ -464,6 +465,7 @@ function App() {
           <Route path="/adminviewquestionpaper" element={<AdminViewQuestionPaper />} />
           <Route path="/adminquestionanalysis" element={<AdminQuestionAnalysis />} />
           <Route path="/adminanswersheet" element={<AdminAnswerSheet />} />
+          <Route path="/class10thquestionpaper" element={<Class10thQuestionpaper />} />
          
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"

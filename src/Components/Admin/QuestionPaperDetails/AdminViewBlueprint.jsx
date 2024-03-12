@@ -46,6 +46,7 @@ const getallblueprint = async () => {
     }
 };
 
+console.log("blueprinttt",blueprint);
 function niqueDataName(AllChapterData) {
     const uniqueObjectsArray = [];
     const uniqueNames = new Set(); // Using a Set to keep track of unique names
@@ -119,9 +120,14 @@ const upcomingStaus = async (status, val) => {
 
         let res = await axios(config);
         if (res.status === 200) {
-            return navigate("/adminviewquestionpaper", {
-                state: { ...state, bluePrint: val },
-            });
+            if(val.SubClassName === "10"){
+                return navigate("/class10thquestionpaper")
+            }else{
+                return navigate("/adminviewquestionpaper", {
+                    state: { ...state, bluePrint: val },
+                });
+            }
+          
         }
     } catch (error) {
         console.log(error);

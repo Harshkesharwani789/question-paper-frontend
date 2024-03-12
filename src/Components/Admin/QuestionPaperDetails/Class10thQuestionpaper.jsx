@@ -2,19 +2,17 @@ import axios from 'axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
-import useReactToPdf from 'react-to-pdf';
+import { Button, Row, Table } from 'react-bootstrap';
 import { CiSaveDown2 } from 'react-icons/ci';
 import { IoMdShare } from 'react-icons/io';
 import { IoLogoWhatsapp } from 'react-icons/io5';
-import { MdOutlineEmail } from 'react-icons/md';
 import { LuPrinter } from 'react-icons/lu';
+import { MdOutlineEmail } from 'react-icons/md';
+import { useLocation, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import AdminQuestionFrontPage from './AdminQuestionFrontPage';
 import parse from "html-react-parser";
-import { Button, Row, Table } from 'react-bootstrap';
-import AdminQuestionFrontPage from '../../Admin/QuestionPaperDetails/AdminQuestionFrontPage'
-function AdminViewQuestionPaper() {
-    // const admin = JSON.parse(sessionStorage.getItem("admin"));
+function Class10thQuestionpaper() {
     const adminFromSession = JSON.parse(sessionStorage.getItem("admin"));
     const userFromSession = JSON.parse(sessionStorage.getItem("user"));
 
@@ -27,7 +25,9 @@ function AdminViewQuestionPaper() {
 
     const token = sessionStorage.getItem("token");
     const { state } = useLocation();
+    const navigate = useNavigate();
 
+    const [show, setShow] = useState("");
     const [Questions, setQuestions] = useState([]);
     const getAllQuestions = async () => {
         try {
@@ -68,10 +68,6 @@ function AdminViewQuestionPaper() {
     useEffect(() => {
         getAllQuestions()
     }, [])
-
-    const navigate = useNavigate();
-
-    const [show, setShow] = useState("");
     const createPDF = async () => {
         const pdf = new jsPDF("portrait", "pt", "a4");
         const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -99,24 +95,7 @@ function AdminViewQuestionPaper() {
 
         pdf.save("Question_Paper.pdf");
     };
-    useEffect(() => {
-        if (state._id && token) {
-            getAllQuestions();
-        }
-    }, [state, token]);
-    let count = 1;
-    let count2 = 1;
-    let count3 = 1;
-    const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-    const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 
-    const lines = [
-        <div className="col-md-12 ">
-            <div className="do-sear mt-4">
-                <p type="text" className="lined-input"></p>
-            </div>
-        </div>,
-    ];
     const updaethequestion = async (am) => {
         try {
             const config = {
@@ -198,6 +177,18 @@ function AdminViewQuestionPaper() {
         updaethequestion(true)
     };
 
+    const componentRef = useRef();
+
+    const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+    let count = 1;
+    let count3 = 1;
+    const lines = [
+        <div className="col-md-12 ">
+            <div className="do-sear mt-4">
+                <p type="text" className="lined-input"></p>
+            </div>
+        </div>,
+    ];
     const [QuestionHeader, setQuestionHeader] = useState([]);
     const getQuestionHeaderbyMedium = async () => {
         try {
@@ -219,27 +210,6 @@ function AdminViewQuestionPaper() {
     useEffect(() => {
         getQuestionHeaderbyMedium()
     }, [])
-
-
-    const componentRef = useRef();
-    const options = {
-        orientation: 'portrait',
-        unit: 'in',
-        format: [8, 12],
-        onDocument: () => ({
-            content: [
-                { text: 'Page ' },
-                { text: 'pageNumber', alignment: 'center', margin: [0, 0, 0, 20] }, // Page number
-                { text: 'P.T.O', alignment: 'left' } // P.T.O
-            ]
-        })
-    };
-
-    const savePdf = useReactToPdf(options);
-
-    const handlePrint2 = () => {
-        savePdf(componentRef.current);
-    };
     return (
         <div>
             <div className="top-header">
@@ -248,11 +218,6 @@ function AdminViewQuestionPaper() {
                         style={{ width: "22px", height: "40px" }}
                         onClick={createPDF}
                     />
-                    {/* <LuPrinter
-              style={{ width: "22px", height: "40px" }}
-              ref={aTagRef}
-              onClick={handlePrint}
-            /> */}
                     <IoMdShare
                         style={{ width: "22px", height: "40px" }}
                         onClick={() => {
@@ -279,10 +244,8 @@ function AdminViewQuestionPaper() {
                     <></>
                 )}
             </div>
-
-
-            <div id="pdf">
-                <div className="question-paper-display-container">
+            <div id='pdf'>
+                <div className='question-paper-display-container'>
                     <div className='d-flex justify-content-around'>
                         <div className='mt-2'>
                             <Button onClick={() => navigate(-1)}>Back</Button>
@@ -295,28 +258,21 @@ function AdminViewQuestionPaper() {
                         </div>
                     </div>
 
-
-
-
                     <div style={{ size: "A4" }} id="printable-content" class="print-area" ref={componentRef}>
                         <AdminQuestionFrontPage data={state} />
-                        <div className="question-paper-display ">
-                            <div className="second-page-body">
+                        <div className='question-paper-display'>
+                            <div className='second-page-body'>
                                 {state?.bluePrint?.TypesofQuestions?.map((ele1, a) => {
                                     return (
                                         <>
-                                            {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
-
                                             <div className="question-body-main">
                                                 <div>
                                                     <div style={{ display: "flex", gap: "12px" }}>
                                                         <b> {RomanAA[a++]}</b>
-
                                                         <b style={{ textAlign: "left" }}>
                                                             {ele1?.QAInstruction}
                                                         </b>
                                                     </div>
-
                                                 </div>
                                                 <div style={{ display: "flex", marginTop: "10px" }}>
                                                     <b>
@@ -324,13 +280,11 @@ function AdminViewQuestionPaper() {
                                                     </b>
                                                 </div>
                                             </div>
-
                                             {Questions?.filter(
                                                 (ele) => ele?.Types_Question === ele1?.QAType
                                             )?.map((item, i) => {
                                                 if (i < Number(ele1?.NQA)) {
-                                                    return (
-                                                        <>
+                                                    return (<>
                                                             <div className="question-body">
                                                                 {item?.Types_Question ===
                                                                     "Multiple Choice Questions" ? (
@@ -2407,16 +2361,19 @@ function AdminViewQuestionPaper() {
                                                                     <></>
                                                                 )}
                                                             </div>
-                                                        </>
-                                                    );
+                                                    </>)
                                                 }
+
                                             })}
                                         </>
-                                    );
-                                })}
+                                    )
+                                })
+
+                                }
                             </div>
                         </div>
                     </div>
+
                     {/*------ QuestionAnalysis---- */}
 
                     <div className='d-flex justify-content-center mt-2 '>
@@ -2428,4 +2385,4 @@ function AdminViewQuestionPaper() {
     )
 }
 
-export default AdminViewQuestionPaper
+export default Class10thQuestionpaper
