@@ -95,7 +95,7 @@ console.log("QuestionHeader",QuestionHeader);
             <div className="class-data">
               {/* <b>ವಿಷಯ: {data?.Subject}</b> */}
               <b>{QuestionHeader?.subject}: {data?.Subject}</b><br/>
-              <b>ಮಾಧ್ಯಮ: {QuestionHeader?.medium}</b>
+              <b>{QuestionHeader?.medium}: {QuestionHeader?.medium}</b>
               
               
             </div>
@@ -408,7 +408,7 @@ console.log("QuestionHeader",QuestionHeader);
           <div className="student-details">
             {/* <p style={{ margin: "0px" }}>Signature of the Evaluator:</p> */}
             {/* <p style={{ margin: "0px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p> */}
-            <p style={{ margin: "0px",fontSize:"14px" }}>ಮೌಲ್ಯಮಾಪಕರ ಸಹಿ:</p>
+            <p style={{ margin: "0px",fontSize:"14px" }}>{QuestionHeader?.lastSign}:</p>
             <div className="line-6" style={{width:"64%"}}></div>
           </div>
           </div>
