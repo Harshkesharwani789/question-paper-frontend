@@ -976,17 +976,37 @@ console.log("subQuestions",subQuestions);
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6">
+          {Image1 ? (
+                    <div className="col-md-6">
+                      <div className="do-sear mt-2">
+                        <label>Image 2</label>
+                        <br />
+                        <img
+                          className=""
+                          src={Image1 && URL.createObjectURL(Image1)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1 </label>
                 <img
                   className="w-100 "
                   src={Image1 && URL.createObjectURL(Image1)}
                   alt="fig."
+                  style={{width:"30%",height:"40%"}}
                 />
               </div>
-            </div>
-            <div className="col-md-6">
+            </div> */}
+            {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 2 </label>
                 <img
@@ -995,7 +1015,27 @@ console.log("subQuestions",subQuestions);
                   alt="fig."
                 />
               </div>
-            </div>
+            </div> */}
+            {Image2 ? (
+                    <div className="col-md-6">
+                      <div className="do-sear mt-2">
+                        <label>Image 2</label>
+                        <br />
+                        <img
+                          className=""
+                          src={Image2 && URL.createObjectURL(Image2)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+            
 
             <div className="col-md-12">
               <div className="do-sear mt-2">

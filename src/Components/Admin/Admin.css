@@ -522,9 +522,8 @@ tr:hover {
   padding: 1%;
 }
 
-table thead tr th {
-  /* background: navy !important ; */
-  /* color: #fff !important; */
+td {
+  text-align: center !important;
 }
 /* Scrollbar */
 .kSMAC {

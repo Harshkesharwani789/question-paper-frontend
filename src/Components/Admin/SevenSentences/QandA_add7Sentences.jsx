@@ -40,7 +40,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -72,7 +72,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
@@ -177,7 +177,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
-                    setNumberOfLine(selectedValue)
+                    setNumberOfLine(selectedValue);
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");
@@ -794,7 +794,6 @@ const QandA_add7Sentences = ({ selectdetails }) => {
               )}
             </div>
 
-
             <div>
               <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                 <b>(OR)</b>
@@ -831,7 +830,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
                   data={orQuestion}
                   onChange={handleChange2}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orQuestion,
                     B: setorQuestion,
@@ -852,7 +851,7 @@ const QandA_add7Sentences = ({ selectdetails }) => {
                   data={orAnswer}
                   onChange={handleChange3}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orAnswer,
                     B: setorAnswer,
@@ -926,7 +925,6 @@ const QandA_add7Sentences = ({ selectdetails }) => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
-
               handleShow();
             }}
             className="modal-add-btn"
@@ -955,6 +953,36 @@ const QandA_add7Sentences = ({ selectdetails }) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Answer 1</label>
               <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 1</label>
+              <br />
+              <img
+                className=""
+                src={Image_1 && URL.createObjectURL(Image_1)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 2</label>
+              <br />
+              <img
+                className=""
+                src={orImageQ && URL.createObjectURL(orImageQ)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
             </div>
           </div>
           <div className="mt-4">

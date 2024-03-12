@@ -860,7 +860,7 @@ const Map_add = ({ selectdetails }) => {
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Poet,Time,Place,Writer the answer question</Modal.Title>
+          <Modal.Title>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="container">

@@ -230,7 +230,7 @@ function AddDrawFigure({ selectdetails }) {
 
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Answer the Question Draw the Figure</Modal.Title>
+                    <Modal.Title>Preview</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>

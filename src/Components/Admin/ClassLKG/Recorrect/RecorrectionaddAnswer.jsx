@@ -983,7 +983,7 @@ const [orAnswerT, setorAnswerT] = useState("")
             size="lg"
           >
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {/* <div className="box_1"> */}

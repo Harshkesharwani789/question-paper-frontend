@@ -106,7 +106,8 @@ function QuestionHeader() {
     const [Ans, setAns] = useState("");
     const [Or, setOr] = useState("");
     const [AnswerHeader, setAnswerHeader] = useState("")
-    const [mediumHead, setmediumHeead] = useState("");
+    const [blueprintBoard,setblueprintBoard] = useState("")
+;    const [mediumHead, setmediumHeead] = useState("");
 
     const [lastSign, setlastSign] = useState("");
 
@@ -160,6 +161,7 @@ function QuestionHeader() {
                     ans: Ans,
                     or: Or,
                     answerheader: AnswerHeader,
+                    blueprintBoard:blueprintBoard,
                     authId: admin?._id,
                     mediumHead: mediumHead,
                     lastSign: lastSign
@@ -267,6 +269,7 @@ function QuestionHeader() {
                     ans: Ans,
                     or: Or,
                     answerheader: AnswerHeader,
+                    blueprintBoard:blueprintBoard,
                     authId: admin?._id,
                     mediumHead: mediumHead,
                     lastSign: lastSign,
@@ -1193,6 +1196,20 @@ function QuestionHeader() {
                                                 /> </b>
                                             {selectedLanguage === "en-t-i0-und" ? <></> : <p>{AnswerHeader}</p>}
                                         </div>
+                                        <div>
+
+<b className='d-flex'>
+    <Form.Control
+        type="text"
+        placeholder="Blueprint Board"
+        onChange={(e) => {
+            if (selectedLanguage === "en-t-i0-und") {
+                setblueprintBoard(e.target.value)
+            } else onChangeHandler(e.target.value, setblueprintBoard)
+        }}
+    /> </b>
+{selectedLanguage === "en-t-i0-und" ? <></> : <p>{blueprintBoard}</p>}
+</div>
 
 
 
@@ -2000,6 +2017,20 @@ function QuestionHeader() {
                                                 /> </b>
                                             {selectedLanguage === "en-t-i0-und" ? <></> : <p>{AnswerHeader}</p>}
                                         </div>
+                                        <div>
+
+<b className='d-flex'>
+    <Form.Control
+        type="text"
+        placeholder="Blue Print Board"
+        onChange={(e) => {
+            if (selectedLanguage === "en-t-i0-und") {
+                setblueprintBoard(e.target.value)
+            } else onChangeHandler(e.target.value, setblueprintBoard)
+        }}
+    /> </b>
+{selectedLanguage === "en-t-i0-und" ? <></> : <p>{blueprintBoard}</p>}
+</div>
 
 
 

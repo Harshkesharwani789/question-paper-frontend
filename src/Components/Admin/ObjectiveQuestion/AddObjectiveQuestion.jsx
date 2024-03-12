@@ -672,7 +672,7 @@ onChange={handleChange6}
 
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Grammer Questions</Modal.Title>
+                    <Modal.Title>Preview</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>

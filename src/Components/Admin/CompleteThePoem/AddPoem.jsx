@@ -605,7 +605,7 @@ console.log("questiondata",questiondata);
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Complete The Poem</Modal.Title>
+          <Modal.Title>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
