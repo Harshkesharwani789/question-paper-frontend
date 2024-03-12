@@ -155,7 +155,7 @@ function AddPoem({ selectdetails }) {
     }
   };
 
-
+console.log("questiondata",questiondata);
   // For Dash
   const [Dash, setDash] = useState("4");
   const [OrDash, setOrDash] = useState("4");
@@ -211,21 +211,19 @@ function AddPoem({ selectdetails }) {
                       placeholder="enter text"
                       onChange={(e) => setPoemSat(e.target.value)}
                     />
-                    {/* <input
-                          type="text"
-                          className="vi_0"
-                          value={PoemSat}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPoemSat(e.target.value);
-                            } else onChangeHandler(e.target.value, setPoemSat);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{PoemSat}</p>
-                        )} */}
+                    {/* <div>
+                    <input
+                        type="text"
+                        className="vi_0"
+                        placeholder="Enter text"
+                        onChange={(e) => {
+                          if (questiondata?.selectdetails?.selectedLanguage == "en-t-i0-und") {
+                            setPoemSat(e.target.value);
+                          } else onChangeHandler(e.target.value, setPoemSat);
+                        }}
+                      />
+                      {questiondata?.selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{PoemSat}</p>}
+                        </div> */}
                     <div className="ans-line mb-3 mt-2"></div>
                   </div>
 

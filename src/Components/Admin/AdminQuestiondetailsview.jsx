@@ -111,6 +111,7 @@ const AdminQuestionDetailsview = () => {
                 <label htmlFor=""> Types of the Question</label>
               </div>{" "}
               <p className="vi_0">{question_details?.Types_Question}</p>
+
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
