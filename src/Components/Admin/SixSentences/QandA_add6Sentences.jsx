@@ -959,6 +959,36 @@ const QandA_add6Sentences = ({ selectdetails }) => {
               <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
             </div>
           </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 1</label>
+              <br />
+              <img
+                className=""
+                src={Image_1 && URL.createObjectURL(Image_1)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 2</label>
+              <br />
+              <img
+                className=""
+                src={orImageQ && URL.createObjectURL(orImageQ)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
+            </div>
+          </div>
           <div className="mt-4">
             <label
               htmlFor=""

@@ -984,7 +984,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
             size="lg"
           >
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {/* <div className="box_1"> */}
@@ -1488,6 +1488,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                     <div className="col-md-6">
                       <div className="do-sear mt-2">
                         <label>Image 1</label>
+                        <br />
                         <img
                           className=""
                           src={Image_1 && URL.createObjectURL(Image_1)}
@@ -1506,6 +1507,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                     <div className="col-md-6">
                       <div className="do-sear mt-2">
                         <label>Image 2</label>
+                        <br/>
                         <img
                           className=""
                           src={Image_2 && URL.createObjectURL(Image_2)}

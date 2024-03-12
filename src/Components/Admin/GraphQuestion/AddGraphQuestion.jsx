@@ -223,7 +223,7 @@ function AddGraphQuestion({ selectdetails }) {
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Graph Questions</Modal.Title>
+          <Modal.Title>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
@@ -232,11 +232,24 @@ function AddGraphQuestion({ selectdetails }) {
               {Question}
             </p>
             <div>
-              <img
+              {/* <img
                 className="w-100 "
                 src={AnsImage && URL.createObjectURL(AnsImage)}
                 alt="fig."
-              />
+                style={{width:"30%",height:"40%"}}
+              /> */}
+              
+                        <label>Image 2</label>
+                        <br />
+                        <img
+                          className=""
+                          src={AnsImage && URL.createObjectURL(AnsImage)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
             </div>
             <label htmlFor="">Answer</label>
             <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
