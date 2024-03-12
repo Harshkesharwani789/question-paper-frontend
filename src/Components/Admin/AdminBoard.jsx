@@ -356,7 +356,7 @@ const AdminBoard = () => {
             <tbody>
               {records?.map((val, i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={i} style={{textAlign:"center"}}>
                     <td>{i + 1 + firstIndex} </td>
                     <td>{val?.mediumName}</td>
                     <td>
@@ -365,7 +365,7 @@ const AdminBoard = () => {
 
                     <td>
                       {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
+                      <div style={{ display: "flex", gap: "20px", justifyContent:"space-around" }}>
                         <div>
                           <BiSolidEdit
                             className="text-success"
