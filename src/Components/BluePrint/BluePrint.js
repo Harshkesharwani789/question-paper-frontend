@@ -423,7 +423,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     </div>
                                     <div>
                                       <div className="class-data">
-                                        <b>ಬೋರ್ಡ್: {val?.board}</b>
+                                        <b>{QuestionHeader?.blueprintBoard}: {val?.board}</b>
                                       </div>
                                       <div className="class-data">
                                         <b>{QuestionHeader?.time}: {val?.DurationOfExam}</b>

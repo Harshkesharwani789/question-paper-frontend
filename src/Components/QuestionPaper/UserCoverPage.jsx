@@ -146,7 +146,7 @@ export const UserCoverPage = () => {
             onClick={() => navigate("/blueprint", { state: state })}
             variant="success"
           >
-            Contienue
+            Continue
           </Button>
         </div>
       </div>
