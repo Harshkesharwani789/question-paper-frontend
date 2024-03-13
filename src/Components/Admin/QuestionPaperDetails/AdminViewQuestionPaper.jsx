@@ -65,9 +65,7 @@ function AdminViewQuestionPaper() {
             });
         }
     };
-    useEffect(() => {
-        getAllQuestions()
-    }, [])
+  
 
     const navigate = useNavigate();
 
@@ -101,9 +99,18 @@ function AdminViewQuestionPaper() {
     };
     useEffect(() => {
         if (state._id && token) {
-            getAllQuestions();
+            if(state?.Questions?.length==0){
+                getAllQuestions(); 
+            }else{
+                setQuestions(state?.Questions)
+            }
+           
         }
     }, [state, token]);
+
+    console.log("Checkkkkstate",state);
+
+
     let count = 1;
     let count2 = 1;
     let count3 = 1;
@@ -287,11 +294,14 @@ function AdminViewQuestionPaper() {
                         <div className='mt-2'>
                             <Button onClick={() => navigate(-1)}>Back</Button>
                         </div>
-                        <div>
+                        <div className='d-flex gap-3'>
                             <LuPrinter
-                                style={{ width: "22px", height: "40px" }}
+                                style={{ width: "22px", height: "40px", cursor:"pointer" }}
                                 onClick={() => handlePrint("printable-content")}
                             />
+                            {adminFromSession && ( <Button className='mt-2' onClick={() =>getAllQuestions()}>Regenrate</Button>)}
+                           
+                             
                         </div>
                     </div>
 

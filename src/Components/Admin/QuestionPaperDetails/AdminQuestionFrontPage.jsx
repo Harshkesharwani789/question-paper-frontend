@@ -3,18 +3,25 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 
 function AdminQuestionFrontPage({data}) {
-    console.log("dataaaaaaa", data?.bluePrint?.TypesofQuestions);
+  const adminFromSession = JSON.parse(sessionStorage.getItem("admin"));
+  const userFromSession = JSON.parse(sessionStorage.getItem("user"));
+
+  let admin;
+  if (adminFromSession) {
+      admin = adminFromSession;
+  } else if (userFromSession) {
+      admin = userFromSession;
+  }
+  const token = sessionStorage.getItem("token");
 
     const totalQA = data?.bluePrint?.TypesofQuestions?.reduce(
       (a, ele) => a + Number(ele?.NQA),
       0
     );
   const numberofStep=totalQA/2;
-  
-    console.log("Total Question ==>", totalQA);
+
     let array = Array.from(Array(totalQA).keys(), (x) => x + 1);
-    const admin = JSON.parse(sessionStorage.getItem("admin"));
-    const token = sessionStorage.getItem("token");
+
   
     const [QuestionHeader, setQuestionHeader] = useState([]);
     const getQuestionHeaderbyMedium = async () => {
