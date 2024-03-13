@@ -29,8 +29,8 @@ function BluePrintHeaderEdit() {
     setSelectedLanguage(event.target.value);
   };
 
-  const location = useLocation()
-  const { item } = location.state
+  const location = useLocation();
+  const { item } = location.state;
   console.log("item", item);
   const onChangeHandler = debounce(async (value, setData) => {
     if (!value) {
@@ -105,7 +105,6 @@ function BluePrintHeaderEdit() {
   const [MediumQ, setMediumQ] = useState("");
   const [Difficult, setDifficult] = useState("");
 
-
   //get method for medium
   const [selectedMedium, setselectedMedium] = useState("");
   const [Medium, setMedium] = useState([]);
@@ -122,7 +121,7 @@ function BluePrintHeaderEdit() {
 
   const EditBluePrint = async () => {
     if (!selectedMedium) {
-      return alert("Please Select Medium")
+      return alert("Please Select Medium");
     }
     try {
       const config = {
@@ -171,7 +170,7 @@ function BluePrintHeaderEdit() {
       const res = await axios(config);
       if (res.status === 200) {
         alert(res.data.success);
-        window.location.assign("/adminblueprintheadertype")
+        window.location.assign("/adminblueprintheadertype");
       }
     } catch (error) {
       alert(error.response.data.error);
@@ -697,7 +696,10 @@ function BluePrintHeaderEdit() {
                                       if (selectedLanguage == "en-t-i0-und") {
                                         setMarks(e.target.value);
                                       } else
-                                        onChangeHandler(e.target.value, setMarks);
+                                        onChangeHandler(
+                                          e.target.value,
+                                          setMarks
+                                        );
                                     }}
                                     style={{ width: "80px" }}
                                     type="text"

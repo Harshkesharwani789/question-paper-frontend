@@ -359,6 +359,7 @@ function ViewHeader({ data }) {
           <p>{item?.ans}</p>
           <p>{item?.or}</p>
           <p>{item?.lastSign}</p>
+          <p>{item?.blueprintBoard}</p>
         </div>
       </div>
     </div>
