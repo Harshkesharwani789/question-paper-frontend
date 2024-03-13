@@ -104,6 +104,7 @@ const Fillintheblanks_add = ({ selectdetails }) => {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
 
           input1: input1,
           input2: input2,

@@ -202,7 +202,7 @@ import AdminViewQuestionPaper from "./Components/Admin/QuestionPaperDetails/Admi
 import AdminQuestionAnalysis from "./Components/Admin/QuestionPaperDetails/AdminQuestionAnalysis";
 import AdminAnswerSheet from "./Components/Admin/QuestionPaperDetails/AdminAnswerSheet";
 import Class10thQuestionpaper from "./Components/Admin/QuestionPaperDetails/Class10thQuestionpaper";
-import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
+import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderedit";
 
 function App() {
   return (

@@ -35,7 +35,7 @@ const AdminQuestprops = (props) => {
     const { Types_Question,selectedLanguage,selectdetails } = props;
     // console.log("hkh",Types_Question,selectedLanguage);
 
-
+    
     const componentMap = {
         "Objective Questions":<Objective_add data={selectedLanguage} selectdetails={selectdetails}/>,
         "Multiple Choice Questions": <Mcq_add  data={selectedLanguage} selectdetails={selectdetails}/>,

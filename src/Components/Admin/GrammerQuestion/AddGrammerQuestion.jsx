@@ -214,6 +214,7 @@ function AddGrammerQuestion({ selectdetails }) {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
 
           Question: Question,
           NumberOfLine: Line,
