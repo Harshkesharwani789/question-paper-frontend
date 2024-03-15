@@ -459,8 +459,7 @@ function App() {
             path="/CoverPage"
             element={<Main children={<CoverPage />} />}
           />
-          <Route path="/AddCover" element={<Main children={<AddCover />} />} />
-        
+          <Route path="/AddCover" element={<Main children={<AddCover />} />} />       
          
           <Route path="/admincoverpage" element={<AdminCoverPage />} />
           <Route path="/adminviewblueprint" element={<AdminViewBlueprint />} />
