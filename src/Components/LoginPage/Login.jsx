@@ -4,18 +4,12 @@ import Form from "react-bootstrap/Form";
 // import "../LoginPage3/LoginPage3.css";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { eyeOff } from "react-icons-kit/feather/eyeOff";
-import { eye } from "react-icons-kit/feather/eye";
 import axios from "axios";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate("");
-  //ForgotPassword
-  const admin = JSON.parse(sessionStorage.getItem("admin"));
-  const token = sessionStorage.getItem("token");
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
