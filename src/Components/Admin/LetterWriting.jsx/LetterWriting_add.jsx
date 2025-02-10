@@ -70,6 +70,7 @@ const LetterWriting_add = ({ selectdetails }) => {
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
+          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           NumberOfLine: NumberOfLine,
@@ -823,7 +824,7 @@ const LetterWriting_add = ({ selectdetails }) => {
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Poet,Time,Place,Writer the answer question</Modal.Title>
+          <Modal.Title>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="container">

@@ -1,11 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { BiAnalyse, BiSpreadsheet } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
-import { IoNewspaperOutline } from "react-icons/io5";
 import { LuPrinter } from "react-icons/lu";
-import { SiBlueprint } from "react-icons/si";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../Admin/CoverPage.css";
 
@@ -20,7 +17,7 @@ export const UserCoverPage = () => {
       let res = await axios.get(
         "http://localhost:8000/api/admin/getCoverPageBYMedium/" + state?.Medium
       );
-      if (res.status == 200) {
+      if (res.status === 200) {
         setData1(res.data.success);
       }
     } catch (error) {
@@ -149,7 +146,7 @@ export const UserCoverPage = () => {
             onClick={() => navigate("/blueprint", { state: state })}
             variant="success"
           >
-            Contienue
+            Continue
           </Button>
         </div>
       </div>

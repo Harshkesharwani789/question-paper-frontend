@@ -78,6 +78,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
+          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -956,6 +957,36 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
             <div className="do-sear mt-2">
               <label htmlFor="">Answer 1</label>
               <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 1</label>
+              <br />
+              <img
+                className=""
+                src={Image_1 && URL.createObjectURL(Image_1)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="do-sear mt-2">
+              <label>Image 2</label>
+              <br />
+              <img
+                className=""
+                src={orImageQ && URL.createObjectURL(orImageQ)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
             </div>
           </div>
           <div className="mt-4">

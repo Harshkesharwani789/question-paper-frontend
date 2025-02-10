@@ -115,6 +115,10 @@ const AdminEditBluePrint = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  const [show1, setShow1] = useState(false);
+  const handleShow1 = () => setShow1(true);
+  const handleClose1 = () => setShow1(false);
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
   const { state } = useLocation();
@@ -281,6 +285,7 @@ const AdminEditBluePrint = () => {
   const [TotalMask, setTotalMask] = useState("");
   const [Objective, setObjective] = useState("");
   const [NoofQues, setNoofQues] = useState("");
+  const [NoofQuestion, setNoofQuestion] = useState("");
   const [objMarks, setobjMarks] = useState("");
   const [Blueprintchapter, setBlueprintchapter] = useState("");
   const [Blueprintobjective, setblueprintobjective] = useState("");
@@ -331,7 +336,7 @@ const AdminEditBluePrint = () => {
       }
       let content = 1;
       Arr1.forEach((ele) => {
-        if (ele?.label === labels && ele?.Marks === Marks) {
+        if (ele?.labels === labels && ele?.Marks === Marks) {
           content = 0;
           swal({
             title: "Oops!",
@@ -343,7 +348,7 @@ const AdminEditBluePrint = () => {
       });
       if (content) {
         const obj = {
-          label: labels,
+          labels: labels,
           Marks: Marks,
         };
         Arr1.push(obj);
@@ -357,6 +362,26 @@ const AdminEditBluePrint = () => {
         });
       }
     } catch (error) {}
+  };
+  const [WeightageBl, setWeightageBl] = useState(false);
+  const [Weightageid, setWeightageid] = useState("");
+  const UpdateWeightEdit = () => {
+    try {
+      let am = Arr1.map((item, i) => {
+        if (i == Weightageid) {
+          return {
+            ...item,
+            labels: labels,
+            Marks: Marks,
+          };
+        }
+        return item;
+      });
+      setArr1(am);
+      setWeightageBl(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deletedWeightageofthecontent = (index) => {
@@ -454,6 +479,28 @@ const AdminEditBluePrint = () => {
       console.error(error);
     }
   };
+  const [ConBl, setConBl] = useState(false);
+  const [Conid, setConid] = useState("");
+  const UpdateContentblueEdit = () => {
+    try {
+      let am = Arr.map((item, i) => {
+        if (i == Conid) {
+          return {
+            ...item,
+            Mask: Mask,
+            NQA: NQA,
+            QAInstruction: QAInstruction,
+            QAType: QAType,
+          };
+        }
+        return item;
+      });
+      setArr(am);
+      setConBl(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const deleteQuestionType = (index) => {
     try {
@@ -475,6 +522,7 @@ const AdminEditBluePrint = () => {
       console.error(error);
     }
   };
+  //Objectives
 
   const Addobjectivess = () => {
     try {
@@ -491,11 +539,20 @@ const AdminEditBluePrint = () => {
       if (!NoofQues) {
         swal({
           title: "Oops!",
-          text: "Please Enter No. of Questions",
+          text: "Please Enter No. of Percentage",
           icon: "error",
           button: "Try Again!",
         });
         return; // Stop further execution if NQA is not provided
+      }
+      if (!NoofQuestion) {
+        swal({
+          title: "Oops!",
+          text: "Please Enter No. of Questions",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return; // Stop further execution if Mask is not provided
       }
 
       if (!objMarks) {
@@ -525,6 +582,7 @@ const AdminEditBluePrint = () => {
         const obj = {
           Objective: Objective,
           NoofQues: NoofQues,
+          NoofQuestion: NoofQuestion,
           Marks: objMarks,
         };
 
@@ -539,6 +597,28 @@ const AdminEditBluePrint = () => {
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+  const [ObjBl, setObjBl] = useState(false);
+  const [Objid, setObjid] = useState("");
+  const UpdateObjectiveblueEdit = () => {
+    try {
+      let am = Arr3.map((item, i) => {
+        if (i == Objid) {
+          return {
+            ...item,
+            Objective: Objective,
+            NoofQues: NoofQues,
+            NoofQuestion:NoofQuestion,
+            Marks: Marks,
+          };
+        }
+        return item;
+      });
+      setArr3(am);
+      setObjBl(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -564,7 +644,7 @@ const AdminEditBluePrint = () => {
   };
 
   const [ChaBl, setChaBl] = useState(false);
-const [id,setid]=useState("");
+  const [id, setid] = useState("");
   const blueEdit = () => {
     try {
       let am = Arr5.map((item, i) => {
@@ -961,51 +1041,6 @@ const [id,setid]=useState("");
                             <div className="col-md-6">
                               <div className="do-sear mt-2">
                                 <label>
-                                  Select Board
-                                  <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <Form.Select
-                                  aria-label="Default select example"
-                                  value={board}
-                                  className="vi_0"
-                                  onChange={(e) => setboard(e.target.value)}
-                                >
-                                  <option>Select the Board</option>
-                                  {getboardname?.map((val, i) => {
-                                    return (
-                                      <option value={val?.boardName} key={i}>
-                                        {val?.boardName}
-                                      </option>
-                                    );
-                                  })}
-                                </Form.Select>
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <div className="do-sear mt-2">
-                                <label>
-                                  Select Subjects{" "}
-                                  <span style={{ color: "red" }}>*</span>
-                                </label>
-                                <Form.Select
-                                  aria-label="Default select example"
-                                  value={subjects}
-                                  onChange={(e) => setsubjects(e.target.value)}
-                                >
-                                  <option>Select the Subjects</option>
-                                  {subject?.map((val, i) => {
-                                    return (
-                                      <option value={val?.subjectName}>
-                                        {val?.subjectName}
-                                      </option>
-                                    );
-                                  })}
-                                </Form.Select>
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <div className="do-sear mt-2">
-                                <label>
                                   Select Medium{" "}
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
@@ -1027,6 +1062,60 @@ const [id,setid]=useState("");
                                 </Form.Select>
                               </div>
                             </div>
+                            <div className="col-md-6">
+                              <div className="do-sear mt-2">
+                                <label>
+                                  Select Board
+                                  <span style={{ color: "red" }}>*</span>
+                                </label>
+                                <Form.Select
+                                  aria-label="Default select example"
+                                  value={board}
+                                  className="vi_0"
+                                  onChange={(e) => setboard(e.target.value)}
+                                >
+                                  <option>Select the Board</option>
+                                  {getboardname
+                                    ?.filter(
+                                      (ele) => ele?.mediumName === medium
+                                    )
+                                    .map((val, i) => {
+                                      return (
+                                        <option value={val?.boardName} key={i}>
+                                          {val?.boardName}
+                                        </option>
+                                      );
+                                    })}
+                                </Form.Select>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="do-sear mt-2">
+                                <label>
+                                  Select Subjects{" "}
+                                  <span style={{ color: "red" }}>*</span>
+                                </label>
+                                <Form.Select
+                                  aria-label="Default select example"
+                                  value={subjects}
+                                  onChange={(e) => setsubjects(e.target.value)}
+                                >
+                                  <option>Select the Subjects</option>
+                                  {subject
+                                    ?.filter(
+                                      (ele) => ele?.mediumName === medium
+                                    )
+                                    .map((val, i) => {
+                                      return (
+                                        <option value={val?.subjectName}>
+                                          {val?.subjectName}
+                                        </option>
+                                      );
+                                    })}
+                                </Form.Select>
+                              </div>
+                            </div>
+
                             <div className="col-md-6">
                               <div className="do-sear mt-2">
                                 <label>
@@ -1106,6 +1195,11 @@ const [id,setid]=useState("");
                                 </div>
                                 <div className="col-md-3">
                                   <div className="do-sear">
+                                    <label htmlFor="">No. of Question</label>
+                                  </div>
+                                </div>
+                                <div className="col-md-3">
+                                  <div className="do-sear">
                                     <label htmlFor="">No. of Marks</label>
                                   </div>
                                 </div>
@@ -1165,6 +1259,33 @@ const [id,setid]=useState("");
                                       type="number"
                                       name=""
                                       id=""
+                                      placeholder="Enter the Percentage"
+                                      className="vi_0"
+                                      onChange={(e) =>
+                                        setNoofQuestion(e.target.value)
+                                      }
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setNoofQues(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setNoofQues
+                                      //       )
+                                      // }
+                                    />
+                                    {/* {selectedLanguage == "en-t-i0-und" ? (
+                                      <></>
+                                    ) : (
+                                      <p>{NoofQues}</p>
+                                    )} */}
+                                  </div>
+                                </div>
+                                <div className="col-md-2">
+                                  <div className="do-sear mt-2">
+                                    <input
+                                      type="number"
+                                      name=""
+                                      id=""
                                       placeholder="Enter the marks"
                                       className="vi_0"
                                       onChange={(e) =>
@@ -1186,7 +1307,7 @@ const [id,setid]=useState("");
                                     )} */}
                                   </div>
                                 </div>
-                                <div className="col-md-3">
+                                <div className="col-md-1">
                                   <div className="do-sear mt-2">
                                     <Button
                                       style={{
@@ -1214,9 +1335,10 @@ const [id,setid]=useState("");
                                   >
                                     <thead>
                                       <tr>
-                                        <th>S No.</th>
+                                        <th>Sl No.</th>
                                         <th>Objectives</th>
                                         <th>Percentage of Question</th>
+                                        <th>No of Questions</th>
                                         <th>No of Marks </th>
                                         <th>Action</th>
                                       </tr>
@@ -1228,8 +1350,21 @@ const [id,setid]=useState("");
                                             <td>{i + 1}</td>
                                             <td>{item?.Objective}</td>
                                             <td>{item?.NoofQues}%</td>
+                                            <td>{item?.NoofQuestion}</td>
                                             <td>{item?.Marks}</td>
-                                            <td>
+                                            <td className="d-flex gap-3">
+                                              <FaEdit
+                                                color="green"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  setObjid(i);
+                                                  setObjective(item?.Objective);
+                                                  setNoofQues(item?.NoofQues);
+                                                  setNoofQuestion(item?.NoofQuestion);
+                                                  setMarks(item?.Marks);
+                                                  setObjBl(true);
+                                                }}
+                                              />
                                               <AiFillDelete
                                                 color="red"
                                                 cursor="pointer"
@@ -1413,7 +1548,7 @@ const [id,setid]=useState("");
                                       }}
                                     >
                                       <option value="">
-                                        Selete the Type of Question
+                                        Select the Type of Question
                                       </option>
                                       {weightage
                                         ?.filter(
@@ -1492,9 +1627,19 @@ const [id,setid]=useState("");
                                         return (
                                           <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td>{item?.label}</td>
+                                            <td>{item?.labels}</td>
                                             <td>{item?.Marks}</td>
-                                            <td>
+                                            <td className="d-flex gap-3">
+                                              <FaEdit
+                                                color="green"
+                                                cursor="pointer"
+                                                onClick={() => {
+                                                  setWeightageid(i);
+                                                  setlabels(item?.labels);
+                                                  setMarks(item?.Marks);
+                                                  setWeightageBl(true);
+                                                }}
+                                              />
                                               <AiFillDelete
                                                 color="red"
                                                 cursor="pointer"
@@ -1782,8 +1927,23 @@ const [id,setid]=useState("");
                                                 <td>{val?.QAInstruction}</td>
                                                 <td>{val?.NQA}</td>
                                                 <td>{val?.Mask}</td>
-                                                <td>
+                                                <td className="d-flex gap-3">
                                                   {" "}
+                                                  <FaEdit
+                                                    color="green"
+                                                    cursor="pointer"
+                                                    onClick={() => {
+                                                      setConid(i);
+                                                      setQAType(val?.QAType);
+                                                      setQAInstruction(
+                                                        val?.QAInstruction
+                                                      );
+                                                      setNQA(val?.NQA);
+                                                      setMask(val?.Mask);
+                                                      
+                                                      setConBl(true);
+                                                    }}
+                                                  />
                                                   <AiFillDelete
                                                     color="red"
                                                     cursor="pointer"
@@ -2234,17 +2394,15 @@ const [id,setid]=useState("");
                                             <option value="">
                                               Selete the Chapter
                                             </option>
-                                            {chapters
-                                              
-                                              ?.map((val, i) => {
-                                                return (
-                                                  <option
-                                                    value={val?.chapterName}
-                                                  >
-                                                    {val?.chapterName}
-                                                  </option>
-                                                );
-                                              })}
+                                            {chapters?.map((val, i) => {
+                                              return (
+                                                <option
+                                                  value={val?.chapterName}
+                                                >
+                                                  {val?.chapterName}
+                                                </option>
+                                              );
+                                            })}
                                           </Form.Select>
                                         </div>
                                         <div className="col-md-4">
@@ -2433,8 +2591,13 @@ const [id,setid]=useState("");
                                                           val?.BluePrintmarksperquestion
                                                         }
                                                       </td>
-                                                      <td style={{display:"flex",gap:"5px"}}>
-                                                      <FaEdit
+                                                      <td
+                                                        style={{
+                                                          display: "flex",
+                                                          gap: "5px",
+                                                        }}
+                                                      >
+                                                        <FaEdit
                                                           color="blue"
                                                           cursor="pointer"
                                                           onClick={() => {
@@ -2664,10 +2827,9 @@ const [id,setid]=useState("");
         </Modal.Body>
       </Modal>
 
+      {/* Edit The data of question content */}
 
-         {/* Edit The data of question content */}
-
-         <Modal show={ChaBl} onHide={() => setChaBl(false)} size="lg">
+      <Modal show={ChaBl} onHide={() => setChaBl(false)} size="lg">
         <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
           <Modal.Title style={{ color: "white" }}>
             Edit chapter and marks{" "}
@@ -2801,6 +2963,380 @@ const [id,setid]=useState("");
               color: "white",
             }}
             onClick={blueEdit}
+          >
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* edit of objective */}
+      <Modal show={ObjBl} onHide={() => setObjBl(false)} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>Edit Objectives</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-4">
+              <label htmlFor="">Select Objective</label>
+              <Form.Select
+                value={Objective}
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setObjective(e.target.value);
+                }}
+              >
+                <option value="">Selete the Chapter</option>
+                {Arr3?.map((val, i) => {
+                  return (
+                    <option value={val?.Objective}>{val?.Objective}</option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            <div className="col-md-3">
+              <label htmlFor="">Percentage</label>
+              <input
+                type="number"
+                className="vi_0"
+                value={NoofQues}
+                onChange={(e) => {
+                  setNoofQues(e.target.value);
+                }}
+                placeholder="Enter No.of Percentage"
+              />
+            </div>
+            <div className="col-md-3">
+              <label htmlFor="">No of Questions</label>
+
+              <input
+                type="number"
+                className="vi_0"
+                value={NoofQuestion}
+                onChange={(e) => {
+                  setNoofQuestion(e.target.value);
+                }}
+                placeholder="Marks Per Question"
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBluePrintmarksperquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBluePrintmarksperquestion
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{BluePrintmarksperquestion}</p>
+                                          )} */}
+            </div>
+            <div className="col-md-2">
+              <label htmlFor="">No of Marks</label>
+
+              <input
+                type="number"
+                className="vi_0"
+                value={Marks}
+                onChange={(e) => {
+                  setMarks(e.target.value);
+                }}
+                placeholder="Marks Per Question"
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBluePrintmarksperquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBluePrintmarksperquestion
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{BluePrintmarksperquestion}</p>
+                                          )} */}
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            style={{
+              backgroundColor: "#4C4C4C",
+              color: "white",
+            }}
+            onClick={handleClose1}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="success"
+            style={{
+              backgroundColor: "green",
+              color: "white",
+            }}
+            onClick={UpdateObjectiveblueEdit}
+          >
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* edit of Weightage */}
+      <Modal show={WeightageBl} onHide={() => setWeightageBl(false)} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>
+            Edit Weightage of the content
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-6">
+              <label htmlFor="">Content</label>
+
+              <Form.Select
+                aria-label="Default select example"
+                value={labels}
+                onChange={(e) => {
+                  setlabels(e.target.value);
+                }}
+              >
+                <option value="">Select the Type of Question</option>
+                {weightage
+                  ?.filter((ele) => subjects == ele?.Subject)
+                  .map((val, i) => {
+                    return <option value={val?.Content}>{val?.Content}</option>;
+                  })}
+              </Form.Select>
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="">No of Marks</label>
+
+              <input
+                type="number"
+                className="vi_0"
+                value={Marks}
+                onChange={(e) => {
+                  setMarks(e.target.value);
+                }}
+                placeholder="Marks Per Question"
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBluePrintmarksperquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBluePrintmarksperquestion
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                            <></>
+                                          ) : (
+                                            <p>{BluePrintmarksperquestion}</p>
+                                          )} */}
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            style={{
+              backgroundColor: "#4C4C4C",
+              color: "white",
+            }}
+            onClick={handleClose1}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="success"
+            style={{
+              backgroundColor: "green",
+              color: "white",
+            }}
+            onClick={UpdateWeightEdit}
+          >
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* edit of Instructions */}
+      <Modal show={ConBl} onHide={() => setConBl(false)} size="lg">
+        <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
+          <Modal.Title style={{ color: "white" }}>Edit Instruction</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-3 ">
+              <Form.Select
+                className="vi_0"
+                value={QAType}
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setQAType(e.target.value);
+                }}
+              >
+                <option value="default">Types of the Question</option>
+                <option value="Objective Questions">Objective Questions</option>
+                <option value="Multiple Choice Questions">
+                  Multiple Choice Questions
+                </option>
+                <option value="Fill in the Blanks Questions">
+                  Fill in the Blanks
+                </option>
+                <option value="Match the Following Questions">
+                  Match the Following
+                </option>
+                <option value="Recorrect the Answers Questions">
+                  Recorrect the Answers
+                </option>
+                <option value="Classifications of Questions">
+                  Classifications of Questions
+                </option>
+                <option value="Odd and out words Questions">
+                  Odd and out words Questions
+                </option>
+                <option value="RelationShip Words Questions">
+                  RelationShip Words Questions
+                </option>
+                <option value="Grammer Questions">Grammer Questions</option>
+                <option value="One Word Question">One Word Question</option>
+                <option value="One Sentence Answer Question">
+                  One Sentence Answer Question
+                </option>
+                <option value="Two  Sentence Answer Questions">
+                  Two Sentence Answer Questions
+                </option>
+                <option value="Two and three Sentence Answer Questions">
+                  Two and three Sentence Answer Questions
+                </option>
+                <option value="Three and Four Sentence Answer Questions">
+                  Three and Four Sentence Answer Questions
+                </option>
+                {/* <option value="Five Sentence Answer Questions">
+                  Five Sentence Answer Questions
+                </option> */}
+                <option value="Five and Six Sentence Answer Questions">
+                  Five and Six Sentence Answer Questions
+                </option>
+                <option value="Six Sentence Answer Questions">
+                  Six Sentence Answer Questions
+                </option>
+                <option value="Seven Sentence Answer Questions">
+                  Seven Sentence Answer Questions
+                </option>
+                <option value="Eight Sentence Answer Questions">
+                  Eight Sentence Answer Questions
+                </option>
+                <option value="Ten Sentence Answer Questions">
+                  Ten Sentence Answer Questions
+                </option>
+                <option value="Expanding and Explanations Answer Questions">
+                  {" "}
+                  Expanding and Explanations Answer Questions
+                </option>
+                <option value="Answer the Questions and Draw the Figure Questions">
+                  Answer the Questions and Draw the Figure Questions{" "}
+                </option>
+                <option value="Graph Questions">Graph Questions</option>
+                <option value="Complete the Poem">Complete the Poem</option>
+                <option value="Situation UnderStatnding answer Questions">
+                  {" "}
+                  Situation UnderStatnding answer Questions
+                </option>
+                <option value="Poet,Time, Place, Writer answer questions">
+                  {" "}
+                  Poet,Time, Place, Writer answer questions
+                </option>
+                <option value="Letter Writting">Letter Writting</option>
+                <option value="Map Reading">Map Reading</option>
+              </Form.Select>
+            </div>
+            <div className="col-md-4">
+              <input
+                type="text"
+                className="vi_0"
+                value={QAInstruction}
+                onChange={(e) =>
+                  selectedLanguage == "en-t-i0-und"
+                    ? setQAInstruction(e.target.value)
+                    : onChangeHandler(e.target.value, setQAInstruction)
+                }
+              />
+              {selectedLanguage == "en-t-i0-und" ? (
+                <></>
+              ) : (
+                <p>{QAInstruction}</p>
+              )}
+            </div>
+            <div className="col-md-2">
+              <input
+                type="number"
+                className="vi_0"
+                value={NQA}
+                onChange={(e) => setNQA(e.target.value)}
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ? setNQA(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setNQA
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{NQA}</p>
+                                      )} */}
+            </div>
+            <div className="col-md-2">
+              <input
+                type="number"
+                className="vi_0"
+                value={Mask}
+                placeholder="Enter the mask per question"
+                onChange={(e) => setMask(e.target.value)}
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ? setMask(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setMask
+                //       )
+                // }
+              />
+              {/* {selectedLanguage == "en-t-i0-und" ? (
+                                        <></>
+                                      ) : (
+                                        <p>{Mask}</p>
+                                      )} */}
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            style={{
+              backgroundColor: "#4C4C4C",
+              color: "white",
+            }}
+            onClick={handleClose1}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="success"
+            style={{
+              backgroundColor: "green",
+              color: "white",
+            }}
+            onClick={UpdateContentblueEdit}
           >
             Update
           </Button>

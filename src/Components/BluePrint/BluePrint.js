@@ -295,10 +295,31 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
   };
   console.log("bluePrintHeader", bluePrintHeader);
 
+  const [QuestionHeader, setQuestionHeader] = useState([]);
+  const getQuestionHeaderbyMedium = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setQuestionHeader(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     GetBluePrintHeaderByMedium();
+    getQuestionHeaderbyMedium();
   }, [state?.Medium]);
 
+  console.log("QuestionHeader",QuestionHeader);
   return (
     <div>
       <div className="">
@@ -398,14 +419,14 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                       <b>{state?.Sub_Class}</b>
                                     </div>
                                     <div className="class-data">
-                                      <b>ವಿಷಯ: {val?.subjects}</b>
+                                      <b>{QuestionHeader?.subject}: {val?.subjects}</b>
                                     </div>
                                     <div>
                                       <div className="class-data">
-                                        <b>ಬೋರ್ಡ್: {val?.board}</b>
+                                        <b>{QuestionHeader?.blueprintBoard}: {val?.board}</b>
                                       </div>
                                       <div className="class-data">
-                                        <b>ಸಮಯ: {val?.DurationOfExam}</b>
+                                        <b>{QuestionHeader?.time}: {val?.DurationOfExam}</b>
                                       </div>
                                     </div>
                                   </div>

@@ -152,6 +152,8 @@ const AddMatches = ({ selectdetails }) => {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+
           Part_A1: Part_A1,
           Part_A2: Part_A2,
           Part_A3: Part_A3,
@@ -952,9 +954,27 @@ const AddMatches = ({ selectdetails }) => {
 
           <Modal show={show} onHide={handleClose} size="lg">
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+             
+            
+                    <div className="col-md-6">
+                      <div className="do-sear mt-2">
+                        <label>Image</label>
+                        <br />
+                        <img
+                          className=""
+                          src={ImageQ && URL.createObjectURL(ImageQ)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      </div>
+                    </div>
+              
               <div className="col-12">
                 <label htmlFor=""> Questions</label>
                 <Table

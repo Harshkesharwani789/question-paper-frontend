@@ -66,6 +66,7 @@ function AddDrawFigure({ selectdetails }) {
                     Types_Question: questiondata?.Types_Question,
                     Class: questiondata?.Class,
                     Instruction: questiondata?.Instruction,
+                    Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
                     Question: Question,
                     Marks: Marks,
@@ -229,7 +230,7 @@ function AddDrawFigure({ selectdetails }) {
 
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Answer the Question Draw the Figure</Modal.Title>
+                    <Modal.Title>Preview</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>

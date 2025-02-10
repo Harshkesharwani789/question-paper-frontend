@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { InputGroup, Modal, Button, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { eyeOff } from "react-icons-kit/feather/eyeOff";
-import { eye } from "react-icons-kit/feather/eye";
 import "../LoginPage3/LoginPage3.css";
 import axios from "axios";
 import swal from "sweetalert";
@@ -19,15 +17,17 @@ const SignUp = () => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  //post
+  //Post
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Mobile, setMobile] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-const [whatsAppNumber,setWhatsAppNumber]=useState("");
+  const [CPassword, setCPassword] = useState("");
+  const [whatsAppNumber,setWhatsAppNumber]=useState("");
+  const [termndcond,setTermndcond]=useState("");
 
-  const TeacherRegister = async () => {
+  const TeacherRegister = async () => {  
     try {
       const config = {
         url: "/admin/registerTeacher",
@@ -44,11 +44,13 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
           Email: Email,
           Password: Password,
           authId: user?.id,
-          whatsAppNumber:whatsAppNumber
+          whatsAppNumber:whatsAppNumber,
+          CPassword:CPassword,
+          termndcond:termndcond,
         },
       };
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         handleClose();
          swal({
           title: "yeah!",
@@ -96,7 +98,7 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                   <Col>
                     <div className="col-12">
                       <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>First Name</Form.Label>
+                        <Form.Label>First Name<span style={{color:"red"}}>*</span></Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Your First Name"
@@ -110,7 +112,7 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                   <Col>
                     <div className="col-12">
                       <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>Last Name</Form.Label>
+                        <Form.Label>Last Name<span style={{color:"red"}}>*</span></Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Your Last Name"
@@ -125,7 +127,7 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>Mobile Number</Form.Label>
+                      <Form.Label>Mobile Number<span style={{color:"red"}}>*</span></Form.Label>
                       <Form.Control
                         type="number"
                         placeholder="Enter Your Number"
@@ -137,10 +139,10 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>Whats App Number</Form.Label>
+                      <Form.Label>WhatsApp Number<span style={{color:"red"}}>*</span></Form.Label>
                       <Form.Control
                         type="number"
-                        placeholder="Enter Your Whats App Number"
+                        placeholder="Enter Your WhatsApp Number"
                         onChange={(e) => setWhatsAppNumber(e.target.value)}
                       />
                     </Form.Group>
@@ -148,7 +150,7 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 </Row>
                 <Row>
                   <div className="col-12">
-                    <Form.Label>Email ID</Form.Label>
+                    <Form.Label>Email ID<span style={{color:"red"}}>*</span></Form.Label>
                     <InputGroup className="mb-2">
                       <Form.Control
                         className="login-input"
@@ -164,7 +166,7 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupPassword">
-                      <Form.Label>Password</Form.Label>
+                      <Form.Label>Password<span style={{color:"red"}}>*</span></Form.Label>
                       <InputGroup className="col-lg-3 mb-2">
                         <Form.Control
                           type={PasswordShow ? "text" : "password"}
@@ -196,14 +198,14 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 <Row>
                   <div className="col-12 ">
                     <Form.Group className="mb-2" controlId="formGroupPassword">
-                      <Form.Label>Confirm Password</Form.Label>
+                      <Form.Label>Confirm Password<span style={{color:"red"}}>*</span></Form.Label>
                       <InputGroup className="col-lg-3 mb-2">
                         <Form.Control
                           type={PasswordShow1 ? "text" : "password"}
                           className="login-input"
                           placeholder="Password"
                           aria-describedby="basic-addon1"
-                          onChange={(e) => setPassword(e.target.value)}
+                          onChange={(e) => setCPassword(e.target.value)}
                         />
                         {PasswordShow1 ? (
                           <button
@@ -226,17 +228,18 @@ const [whatsAppNumber,setWhatsAppNumber]=useState("");
                 </Row>
                 <div>
                   <Form style={{ display: "flex", padding: "0 4px" }}>
-                    {["checkbox"].map((type) => (
-                      <div key={`inline-${type}`} className="mb-3">
+                    {/* {["checkbox"].map((type) => ( */}
+                      <div  className="mb-3">
                         <Form.Check
                           inline
                           label="I agree the terms and conditions"
                           name="group1"
-                          type={type}
-                          id={`inline-${type}-1`}
+                          // type={type}
+                          // id={`inline-${type}-1`}
+                          onChange={(e)=>setTermndcond(e.target.value)}
                         />
                       </div>
-                    ))}
+                  
                   </Form>
                 </div>
                 <Row>

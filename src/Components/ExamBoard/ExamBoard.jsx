@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Icon from "react-icons-kit";
-import { Button, Container, InputGroup, Row, Modal } from "react-bootstrap";
+import { Button, Row, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
@@ -16,9 +15,6 @@ const ExamBoard = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [show1, setShow1] = useState(false);
-  const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
 
   const [before, setBefore] = useState(false);
   const [userType, setuserType] = useState("");
@@ -48,17 +44,17 @@ const ExamBoard = () => {
           Exam_Name: Exam_Name,
           Exam_Lavel: Exam_Lavel,
           authId: user?._id,
-          userType:userType,
+          userType: userType,
         },
       };
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         swal({
           title: "Yeah!",
           text: "Successfully Payment Done !!!",
           icon: "success",
           button: "OK!",
-          
+
         });
         navigate("/loginpage3", { state: res.data.success });
       }
@@ -78,7 +74,7 @@ const ExamBoard = () => {
   const getallboardname = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
-      if (res.status == 200) {
+      if (res.status === 200) {
         setboardname(res.data.success);
       }
     } catch (error) {
@@ -92,7 +88,7 @@ const ExamBoard = () => {
       let res = await axios.get(
         "http://localhost:8000/api/admin/getAllNameExamination"
       );
-      if (res.status == 200) {
+      if (res.status === 200) {
         setNameExam(res.data.success);
       }
     } catch (error) {
@@ -104,7 +100,7 @@ const ExamBoard = () => {
   const getAddMedium = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
-      if (res.status == 200) {
+      if (res.status === 200) {
         setMedium(res.data.success);
       }
     } catch (error) {
@@ -116,25 +112,14 @@ const ExamBoard = () => {
   const getExamLevel = async () => {
     try {
       let res = await axios.get("http://localhost:8000/api/admin/getExamLevel");
-      if (res.status == 200) {
+      if (res.status === 200) {
         setExamlevell(res.data.success);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // get method of add class
-  const [getclassname, setgetclassName] = useState([]);
-  const getallclassname = async () => {
-    try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
-      if (res.status == 200) {
-        setgetclassName(res.data.success);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   // get method for subclass
   const [getaddsubclass, setgetaddsubclass] = useState([]);
@@ -143,7 +128,7 @@ const ExamBoard = () => {
       const res = await axios.get(
         "http://localhost:8000/api/admin/getAllSubClass"
       );
-      if (res.status == 200) {
+      if (res.status === 200) {
         setgetaddsubclass(res.data.success);
       }
     } catch (error) {
@@ -155,7 +140,6 @@ const ExamBoard = () => {
     getNameExamination();
     getAddMedium();
     getExamLevel();
-    getallclassname();
     getaddsubclasss();
   }, []);
 
@@ -184,207 +168,156 @@ const ExamBoard = () => {
               <div className="col-6">
                 <div className="page2-content-display">
                   <h4>Tell Us</h4>
-                  <hr></hr>
-                  {before ? (
-                    <>
-                      <Row>
-                        <div style={{ textAlign: "left", padding: "0px 12px" }}>
-                          <div className="col-8 mb-4">
-                            <input type="radio" name="fav_language" /> &nbsp;
-                            {/* <Button>
-                              Syllabus question paper with blue print
-                            </Button> */}
-                            <Button style={{backgroundColor:"#ff5200", border:"none"}}>Individual</Button>
-                          </div>
-                          <div className="col-8 mb-4">
-                            <input type="radio" name="fav_language" /> &nbsp;
-                            {/* <Button
-                              variant="success"
-                              style={{ backgroundColor: "green" }}
-                            >
-                              Result Sheet and Marks Card
-                            </Button> */}
-                            <Button
-                              variant="success"
-                              style={{ backgroundColor: "green" }}
-                            >
-                              Student
-                            </Button>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              padding: "0px 20px",
-                            }}
-                          >
-                            <Button onClick={handleShow} style={{backgroundColor:"navy"}}>Start</Button>
-                          </div>
-                        </div>
-                      </Row>
-                    </>
-                  ) : (
-                    <>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setBoard(e.target.value);
-                            }}
-                          >
-                            <option>Select Education Board</option>
-                            {getboardname?.map((item, i) => {
-                              return (
-                                <option value={item?.boardName}>
-                                  {item?.boardName}
-                                </option>
-                              );
-                            })}
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setClasss(e.target.value);
-                            }}
-                          >
-                            <option value="">Select Class</option>
-                                  <option value="Lower Primary">
-                                    Lower Primary
-                                  </option>
-                                  <option value="Primary">Primary </option>
-                                  <option value="Upper Primary">
-                                    Upper Primary
-                                  </option>
-                                  <option value="Secondary">Secondary</option>
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setSub_Classs(e.target.value);
-                            }}
-                          >
-                            <option value={""} >Select Sub Class</option>
-                            {getaddsubclass
-                                    ?.filter(
-                                      (ele) => ele.className == Classs
-                                    )
-                                    ?.map((val, i) => {
-                                      return (
-                                        <option
-                                          value={val?.subclassName}
-                                          key={i}
-                                        >
-                                          {val?.subclassName}
-                                        </option>
-                                      );
-                                    })}
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setExam_Name(e.target.value);
-                            }}
-                          >
-                            <option>Select Exams Name</option>
-                            {NameExam?.map((item, i) => {
-                              return (
-                                <option value={item?.NameExamination}>
-                                  {item?.NameExamination}
-                                </option>
-                              );
-                            })}
-                          </Form.Select>
-                        </div>
-                      </Row>
+                  <hr />
 
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setMediumm(e.target.value);
-                            }}
-                          >
-                            <option>Select Medium</option>
-                            {Medium?.map((item, i) => {
-                              return (
-                                <option value={item?.mediumName}>
-                                  {item?.mediumName}
-                                </option>
-                              );
-                            })}
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setExam_Lavel(e.target.value);
-                            }}
-                          >
-                            <option>Select Exam Level</option>
-                            {Examlevell?.map((item, i) => {
-                              return (
-                                <option value={item?.Examlevel}>
-                                  {item?.Examlevel}
-                                </option>
-                              );
-                            })}
-                          </Form.Select>
-                        </div>
-                      </Row>
-                     
-                      <Row>
-                        <div className="col-10 mb-4">
-                          <Form.Select
-                            aria-label="Default select example"
-                            onChange={(e) => {
-                              setuserType(e.target.value);
-                            }}
-                          >
-                            <option value={""} >Select User Type </option>
-                          <option value={"Teacher"}>Teacher</option>
-                          <option value={"Student"}>Student</option>
-                          </Form.Select>
-                        </div>
-                      </Row>
-                      <Row>
-                        <div
-                          style={{
-                            float: "right",
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            padding: "0px 100px",
-                          }}
-                        >
-                          <Button
-                            variant=""
-                            style={{ backgroundColor: "green", color: "white" }}
-                            onClick={() => {
-                             tellus()
-                            }}
-                          >
-                            Submit
-                          </Button>
-                        </div>
-                      </Row>
-                    </>
-                  )}
+                  <div>
+                    <div className="mb-4">
+                      <Form.Label>Medium<span style={{ color: "red" }}>*</span></Form.Label>
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setMediumm(e.target.value);
+                        }}
+                      >
+                        <option>Select Medium</option>
+                        {Medium?.map((item) => {
+                          return (
+                            <option value={item?.mediumName}>
+                              {item?.mediumName}
+                            </option>
+                          );
+                        })}
+                      </Form.Select>
+                    </div>
+                    <div className="mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setBoard(e.target.value);
+                        }}
+                      >
+                        <option>Select Education Board</option>
+                        {getboardname?.map((item) => {
+                          return (
+                            <option value={item?.boardName}>
+                              {item?.boardName}
+                            </option>
+                          );
+                        })}
+                      </Form.Select>
+                    </div>
+                    <div className="mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setClasss(e.target.value);
+                        }}
+                      >
+                        <option value="">Select Class</option>
+                        <option value="Lower Primary">
+                          Lower Primary
+                        </option>
+                        <option value="Primary">Primary </option>
+                        <option value="Upper Primary">
+                          Upper Primary
+                        </option>
+                        <option value="Secondary">Secondary</option>
+                      </Form.Select>
+                    </div>
+                    <div className=" mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setSub_Classs(e.target.value);
+                        }}
+                      >
+                        <option value={""} >Select Sub Class</option>
+                        {getaddsubclass
+                          ?.filter(
+                            (ele) => ele.className == Classs
+                          )
+                          ?.map((val, i) => {
+                            return (
+                              <option
+                                value={val?.subclassName}
+                                key={i}
+                              >
+                                {val?.subclassName}
+                              </option>
+                            );
+                          })}
+                      </Form.Select>
+                    </div>
+                    <div className=" mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setExam_Name(e.target.value);
+                        }}
+                      >
+                        <option>Select Exams Name</option>
+                        {NameExam?.map((item, i) => {
+                          return (
+                            <option value={item?.NameExamination}>
+                              {item?.NameExamination}
+                            </option>
+                          );
+                        })}
+                      </Form.Select>
+                    </div>
+                    <div className=" mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setExam_Lavel(e.target.value);
+                        }}
+                      >
+                        <option>Select Exam Level</option>
+                        {Examlevell?.map((item, i) => {
+                          return (
+                            <option value={item?.Examlevel}>
+                              {item?.Examlevel}
+                            </option>
+                          );
+                        })}
+                      </Form.Select>
+                    </div>
+                    <div className=" mb-4">
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => {
+                          setuserType(e.target.value);
+                        }}
+                      >
+                        <option value={""} >Select User Type </option>
+                        <option value={"Teacher"}>Teacher</option>
+                        <option value={"Student"}>Student</option>
+                      </Form.Select>
+                    </div>
+                  </div>
+
+
+                  <Row>
+                    <div
+                      style={{
+                        float: "right",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        padding: "0px 100px",
+                      }}
+                    >
+                      <Button
+                        variant=""
+                        style={{ backgroundColor: "green", color: "white" }}
+                        onClick={() => {
+                          tellus()
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </Row>
+
 
                   <br />
                 </div>
@@ -410,12 +343,12 @@ const ExamBoard = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" style={{backgroundColor:"#ff5200", color:"white"}} onClick={handleClose}>
+          <Button variant="" style={{ backgroundColor: "#ff5200", color: "white" }} onClick={handleClose}>
             Cancel
           </Button>
           <Button
             variant="primary"
-            style={{backgroundColor:"green"}}
+            style={{ backgroundColor: "green" }}
             onClick={() => {
               tellus();
             }}

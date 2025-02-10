@@ -214,6 +214,7 @@ function AddGrammerQuestion({ selectdetails }) {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
 
           Question: Question,
           NumberOfLine: Line,
@@ -747,7 +748,7 @@ function AddGrammerQuestion({ selectdetails }) {
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Grammer Questions</Modal.Title>
+          <Modal.Title>Preview</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>

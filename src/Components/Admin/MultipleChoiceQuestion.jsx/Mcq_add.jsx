@@ -124,6 +124,7 @@ const Mcq_add = ({ selectdetails }) => {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
+          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
 
           Question: Question,
           Option_1: Option_1,

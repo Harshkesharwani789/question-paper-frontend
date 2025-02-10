@@ -191,12 +191,20 @@ import AdminQuestionAnalysisHeaderAdd from "./Components/Admin/AdminQuestionAnal
 // import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import { AddCover } from "./Components/Admin/AddCover";
 // import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
-// import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderEdit";
 // import AdminQuestionAnalysisHeaderEdit from "./Components/AdminQuestionAnalysisHeaderEdit";
 import { UserCoverPage } from "./Components/QuestionPaper/UserCoverPage";
 import AdminQuestionAnalysisHeaderView from "./Components/Admin/AdminQuestionAnalysisHeaderView";
 import AdminQuestionAnalysisHeaderEdit from "./Components/Admin/AdminQuestionAnalysisHeaderEdit";
+
+import AdminCoverPage from "./Components/Admin/QuestionPaperDetails/AdminCoverPage";
+import AdminViewBlueprint from "./Components/Admin/QuestionPaperDetails/AdminViewBlueprint";
+import AdminViewQuestionPaper from "./Components/Admin/QuestionPaperDetails/AdminViewQuestionPaper";
+import AdminQuestionAnalysis from "./Components/Admin/QuestionPaperDetails/AdminQuestionAnalysis";
+import AdminAnswerSheet from "./Components/Admin/QuestionPaperDetails/AdminAnswerSheet";
+import Class10thQuestionpaper from "./Components/Admin/QuestionPaperDetails/Class10thQuestionpaper";
 import BluePrintHeaderEdit from "./Components/Admin/BluePrintHeaderedit";
+
+
 
 function App() {
   return (
@@ -451,7 +459,15 @@ function App() {
             path="/CoverPage"
             element={<Main children={<CoverPage />} />}
           />
-          <Route path="/AddCover" element={<Main children={<AddCover />} />} />
+          <Route path="/AddCover" element={<Main children={<AddCover />} />} />       
+         
+          <Route path="/admincoverpage" element={<AdminCoverPage />} />
+          <Route path="/adminviewblueprint" element={<AdminViewBlueprint />} />
+          <Route path="/adminviewquestionpaper" element={<AdminViewQuestionPaper />} />
+          <Route path="/adminquestionanalysis" element={<AdminQuestionAnalysis />} />
+          <Route path="/adminanswersheet" element={<AdminAnswerSheet />} />
+          <Route path="/class10thquestionpaper" element={<Class10thQuestionpaper />} />
+         
           <Route
             path="/adminblueprintdetailsview/:blueprint_ID"
             element={<Main children={<AdminBlueprintdetailsview />} />}

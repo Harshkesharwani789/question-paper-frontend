@@ -23,7 +23,7 @@
 .right-admin {
   background-color: rgb(222 225 230 / 28%);
   padding-left: 8px;
-  width: 82.23%;
+  width: 80%;
 }
 
 .dark label {
@@ -522,9 +522,8 @@ tr:hover {
   padding: 1%;
 }
 
-table thead tr th {
-  /* background: navy !important ; */
-  /* color: #fff !important; */
+td {
+  text-align: center !important;
 }
 /* Scrollbar */
 .kSMAC {

@@ -26,7 +26,7 @@ const AdminEditQuestionDetails = () => {
   const { question_Id } = useParams();
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
 
-console.log("selectedLanguage",selectedLanguage);
+  console.log("selectedLanguage", selectedLanguage);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -1201,7 +1201,7 @@ console.log("selectedLanguage",selectedLanguage);
               <>
                 <div className="col-md-6">
                   <div className="do-sear">
-                    <label htmlFor="upload"> Image</label>
+                    <label htmlFor="upload"> Image </label>
                     <div className="d-flex">
                       <img
                         style={{
@@ -1239,49 +1239,99 @@ console.log("selectedLanguage",selectedLanguage);
                   <label htmlFor="">Question</label>
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
+                      {/* <input
                         type="text"
                         className="vi_0"
                         placeholder="Enter The question"
                         value={RealetionA}
                         onChange={(e) => setRealetionA(e.target.value)}
-                      />
-                      {/* onChange={(e)=>selectedLanguage == "en-t-i0-und" ? 
-                       setRealetionA(e.target.value):onChangeHandler(e.target.value,setRealetionA)}
-                     /> */}
+                      /> */}
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={RealetionA}
+                          // value={RealetionA}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setRealetionA(e.target.value);
+                            } else
+                              onChangeHandler(e.target.value, setRealetionA);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionA}</p>
+                        )}
+                      </div>
 
                       <p className="m-2">:</p>
-                      <br />
+                      {/* <br />
                       <br />
                       {selectedLanguage == "en-t-i0-und" ? (
                         <></>
                       ) : (
                         <p>{RealetionA}</p>
-                      )}
+                      )} */}
                     </div>
                   </div>
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
+                      {/* <input
                         type="text"
                         className="vi_0"
                         placeholder="Enter The question"
                         value={RealetionB}
                         onChange={(e) => setRealetionB(e.target.value)}
-                      />
+                      /> */}
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={RealetionB}
+                          // value={RealetionB}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setRealetionB(e.target.value);
+                            } else
+                              onChangeHandler(e.target.value, setRealetionB);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionB}</p>
+                        )}
+                      </div>
                       <p className="m-2 ">::</p>
                     </div>
                   </div>
 
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                        value={RealetionC}
-                        onChange={(e) => setRealetionC(e.target.value)}
-                      />
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mb-2"
+                          placeholder={RealetionC}
+                          // value={RealetionC}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setRealetionC(e.target.value);
+                            } else
+                              onChangeHandler(e.target.value, setRealetionC);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionC}</p>
+                        )}
+                      </div>
                       <p className="m-2">:</p>
                     </div>
                   </div>
@@ -1302,13 +1352,24 @@ console.log("selectedLanguage",selectedLanguage);
                 <div className="col-md-3">
                   <div className="do-sear mt-2">
                     <label htmlFor="">Option A)</label>
+
                     <input
                       type="text"
-                      className="vi_0"
-                      placeholder="Enter The question"
-                      value={Option_1}
-                      onChange={(e) => setOption_1(e.target.value)}
+                      className="vi_0 mb-2"
+                      placeholder={Option_1}
+                      // value={Option_1}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          setOption_1(e.target.value);
+                        } else onChangeHandler(e.target.value, setOption_1);
+                      }}
                     />
+                    <br />
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Option_1}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -1316,11 +1377,21 @@ console.log("selectedLanguage",selectedLanguage);
                     <label htmlFor="">Option B)</label>
                     <input
                       type="text"
-                      className="vi_0"
-                      placeholder="Enter The question"
-                      value={Option_2}
-                      onChange={(e) => setOption_2(e.target.value)}
+                      className="vi_0 mb-2"
+                      placeholder={Option_2}
+                      // value={Option_2}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          setOption_2(e.target.value);
+                        } else onChangeHandler(e.target.value, setOption_2);
+                      }}
                     />
+                    <br />
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Option_2}</p>
+                    )}
                   </div>
                 </div>
 
@@ -1329,11 +1400,21 @@ console.log("selectedLanguage",selectedLanguage);
                     <label htmlFor="">Option C)</label>
                     <input
                       type="text"
-                      className="vi_0"
-                      placeholder="Enter The question"
-                      value={Option_3}
-                      onChange={(e) => setOption_3(e.target.value)}
+                      className="vi_0 mb-2"
+                      placeholder={Option_3}
+                      // value={Option_3}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          setOption_3(e.target.value);
+                        } else onChangeHandler(e.target.value, setOption_3);
+                      }}
                     />
+                    <br />
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Option_3}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -1341,11 +1422,21 @@ console.log("selectedLanguage",selectedLanguage);
                     <label htmlFor="">Option D)</label>
                     <input
                       type="text"
-                      className="vi_0"
-                      placeholder="Enter The question"
-                      value={Option_4}
-                      onChange={(e) => setOption_4(e.target.value)}
+                      className="vi_0 mb-2"
+                      placeholder={Option_4}
+                      // value={Option_4}
+                      onChange={(e) => {
+                        if (selectedLanguage == "en-t-i0-und") {
+                          setOption_4(e.target.value);
+                        } else onChangeHandler(e.target.value, setOption_4);
+                      }}
                     />
+                    <br />
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Option_4}</p>
+                    )}
                   </div>
                 </div>
 
@@ -1355,11 +1446,21 @@ console.log("selectedLanguage",selectedLanguage);
                       <label htmlFor="">Answer</label>
                       <input
                         type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                        value={Answer}
-                        onChange={(e) => setAnswer(e.target.value)}
+                        className="vi_0 mb-2"
+                        placeholder={Answer}
+                        // value={Answer}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setAnswer(e.target.value);
+                          } else onChangeHandler(e.target.value, setAnswer);
+                        }}
                       />
+                      <br />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Answer}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -2559,7 +2660,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_A2}</p>
                         )}
-                         <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_A3}
@@ -2607,7 +2708,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_A5}</p>
                         )}
-                         <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_A6}
@@ -2634,8 +2735,8 @@ console.log("selectedLanguage",selectedLanguage);
                           {" "}
                           PART B
                         </label>
-                       
-                         <input
+
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B1}
@@ -2651,7 +2752,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B1}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B2}
@@ -2667,7 +2768,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B2}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B3}
@@ -2683,7 +2784,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B3}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B4}
@@ -2699,7 +2800,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B4}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B5}
@@ -2715,7 +2816,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B5}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B6}
@@ -2731,7 +2832,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_B6}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_B7}
@@ -2790,7 +2891,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_C2}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_C3}
@@ -2806,7 +2907,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_C3}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_C4}
@@ -2822,7 +2923,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_C4}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_C5}
@@ -2854,7 +2955,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{Part_C6}</p>
                         )}
-                       <input
+                        <input
                           type="text"
                           className="vi_0 mb-2"
                           placeholder={Part_C7}
@@ -2887,103 +2988,103 @@ console.log("selectedLanguage",selectedLanguage);
                         {" "}
                         PART A
                       </label>
-                     
+
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A1_A}
-                          // value={Part_A1_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A1_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A1_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A1_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A1_A}
+                        // value={Part_A1_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A1_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A1_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A1_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A2_A}
-                          // value={Part_A2_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A2_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A2_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A2_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A2_A}
+                        // value={Part_A2_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A2_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A2_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A2_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A3_A}
-                          // value={Part_A3_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A3_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A3_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A3_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A3_A}
+                        // value={Part_A3_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A3_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A3_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A3_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A4_A}
-                          // value={Part_A4_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A4_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A4_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A4_A}</p>
-                        )}
-                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A5_A}
-                          // value={Part_A5_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A5_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A5_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A5_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A4_A}
+                        // value={Part_A4_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A4_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A4_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A4_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_A6_A}
-                          // value={Part_A6_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_A6_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_A6_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_A6_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A5_A}
+                        // value={Part_A5_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A5_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A5_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A5_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_A6_A}
+                        // value={Part_A6_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_A6_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_A6_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_A6_A}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -2996,101 +3097,101 @@ console.log("selectedLanguage",selectedLanguage);
                         PART B
                       </label>
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B1_A}
-                          // value={Part_B1_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B1_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B1_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B1_A}</p>
-                        )}
-                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B2_A}
-                          // value={Part_B2_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B2_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B2_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B2_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B1_A}
+                        // value={Part_B1_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B1_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B1_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B1_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B3_A}
-                          // value={Part_B3_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B3_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B3_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B3_A}</p>
-                        )}
-                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B4_A}
-                          // value={Part_B4_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B4_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B4_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B4_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B2_A}
+                        // value={Part_B2_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B2_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B2_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B2_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B5_A}
-                          // value={Part_B5_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B5_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B5_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B5_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B3_A}
+                        // value={Part_B3_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B3_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B3_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B3_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_B6_A}
-                          // value={Part_B6_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_B6_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_B6_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_B6_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B4_A}
+                        // value={Part_B4_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B4_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B4_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B4_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B5_A}
+                        // value={Part_B5_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B5_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B5_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B5_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_B6_A}
+                        // value={Part_B6_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_B6_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_B6_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_B6_A}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -3103,101 +3204,101 @@ console.log("selectedLanguage",selectedLanguage);
                         PART C
                       </label>
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C1_A}
-                          // value={Part_C1_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C1_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C1_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C1_A}</p>
-                        )}
-                     <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C2_A}
-                          // value={Part_C2_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C2_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C2_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C2_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C1_A}
+                        // value={Part_C1_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C1_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C1_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C1_A}</p>
+                      )}
                       <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C3_A}
-                          // value={Part_C3_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C3_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C3_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C3_A}</p>
-                        )}
-                     <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C4_A}
-                          // value={Part_C4_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C4_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C4_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C4_A}</p>
-                        )}
-                     <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C5_A}
-                          // value={Part_C5_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C5_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C5_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C5_A}</p>
-                        )}
-                     <input
-                          type="text"
-                          className="vi_0 mb-2"
-                          placeholder={Part_C6_A}
-                          // value={Part_C6_A}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPart_C6_A(e.target.value);
-                            } else onChangeHandler(e.target.value, setPart_C6_A);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{Part_C6_A}</p>
-                        )}
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C2_A}
+                        // value={Part_C2_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C2_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C2_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C2_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C3_A}
+                        // value={Part_C3_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C3_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C3_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C3_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C4_A}
+                        // value={Part_C4_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C4_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C4_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C4_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C5_A}
+                        // value={Part_C5_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C5_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C5_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C5_A}</p>
+                      )}
+                      <input
+                        type="text"
+                        className="vi_0 mb-2"
+                        placeholder={Part_C6_A}
+                        // value={Part_C6_A}
+                        onChange={(e) => {
+                          if (selectedLanguage == "en-t-i0-und") {
+                            setPart_C6_A(e.target.value);
+                          } else onChangeHandler(e.target.value, setPart_C6_A);
+                        }}
+                      />
+                      {selectedLanguage == "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{Part_C6_A}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -4666,23 +4767,60 @@ console.log("selectedLanguage",selectedLanguage);
                 {Dash === "1" ? (
                   <>
                     <div className="col-md-9 d-flex align-items-end ">
-                      <input
+                      {/* <input
                         value={input1}
                         className="vi_0"
                         type="text"
                         placeholder="enter text"
                         onChange={(e) => setinput1(e.target.value)}
-                      />
-
+                      /> */}
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mt-4"
+                          placeholder={input1}
+                          // value={input1}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setinput1(e.target.value);
+                            } else onChangeHandler(e.target.value, setinput1);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{input1}</p>
+                        )}
+                      </div>
                       <span>___________</span>
 
-                      <input
+                      {/* <input
                         value={input2}
                         className="vi_0"
                         type="text"
                         placeholder="enter text"
                         onChange={(e) => setinput2(e.target.value)}
-                      />
+                      /> */}
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mt-4"
+                          placeholder={input2}
+                          // value={input2}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setinput2(e.target.value);
+                            } else onChangeHandler(e.target.value, setinput2);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{input2}</p>
+                        )}
+                      </div>
                     </div>
                   </>
                 ) : (
@@ -4691,31 +4829,67 @@ console.log("selectedLanguage",selectedLanguage);
                 {Dash === "2" ? (
                   <>
                     <div className="col-md-9 d-flex align-items-end ">
-                      <input
-                        value={input1}
-                        className="vi_0"
-                        type="text"
-                        placeholder="enter text"
-                        onChange={(e) => setinput1(e.target.value)}
-                      />
-
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mt-4"
+                          placeholder={input1}
+                          // value={input1}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setinput1(e.target.value);
+                            } else onChangeHandler(e.target.value, setinput1);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{input1}</p>
+                        )}
+                      </div>
                       <span>___________</span>
-
-                      <input
-                        value={input2}
-                        className="vi_0"
-                        type="text"
-                        placeholder="enter text"
-                        onChange={(e) => setinput2(e.target.value)}
-                      />
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mt-4"
+                          placeholder={input2}
+                          // value={input2}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setinput2(e.target.value);
+                            } else onChangeHandler(e.target.value, setinput2);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{input2}</p>
+                        )}
+                      </div>
+                      
                       <span>___________</span>
-                      <input
-                        value={input3}
-                        className="vi_0"
-                        type="text"
-                        placeholder="enter text"
-                        onChange={(e) => setinput3(e.target.value)}
-                      />
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0 mt-4"
+                          placeholder={input3}
+                          // value={input3}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setinput3(e.target.value);
+                            } else onChangeHandler(e.target.value, setinput3);
+                          }}
+                        />
+                        <br />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{input3}</p>
+                        )}
+                      </div>
+                     
                     </div>
                   </>
                 ) : (
@@ -6798,10 +6972,12 @@ console.log("selectedLanguage",selectedLanguage);
                           placeholder="enter text"
                           onChange={(e) => setPoemSat(e.target.value)}
                         /> */}
+                        <div>
                         <input
                           type="text"
                           className="vi_0"
-                          value={PoemSat}
+                          placeholder={PoemSat}
+                          // value={PoemSat}
                           onChange={(e) => {
                             if (selectedLanguage == "en-t-i0-und") {
                               setPoemSat(e.target.value);
@@ -6813,6 +6989,7 @@ console.log("selectedLanguage",selectedLanguage);
                         ) : (
                           <p>{PoemSat}</p>
                         )}
+                        </div>
                         <div className="ans-line mb-3 mt-2"></div>
                       </div>
 
@@ -6821,13 +6998,31 @@ console.log("selectedLanguage",selectedLanguage);
 
                       <div className="d-flex align-items-end">
                         <div className="ans-line mb-3 mt-2"></div>
-                        <input
+                        {/* <input
                           value={PoemEnd}
                           className="vi_0"
                           type="text"
                           placeholder="enter text"
                           onChange={(e) => setPoemEnd(e.target.value)}
+                        /> */}
+                        <div>
+                         <input
+                          type="text"
+                          className="vi_0"
+                          placeholder={PoemEnd}
+                          // value={PoemSat}
+                          onChange={(e) => {
+                            if (selectedLanguage == "en-t-i0-und") {
+                              setPoemEnd(e.target.value);
+                            } else onChangeHandler(e.target.value, setPoemEnd);
+                          }}
                         />
+                        {selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{PoemEnd}</p>
+                        )}
+                        </div>
                       </div>
                     </div>
                   </>

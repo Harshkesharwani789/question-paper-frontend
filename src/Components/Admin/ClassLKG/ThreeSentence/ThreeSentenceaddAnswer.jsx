@@ -26,6 +26,8 @@ const ThreeSentenceaddAnswer = ({selectdetails}) => {
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
 
+  console.log("selectdetails",selectdetails,questiondata);
+
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -79,10 +81,11 @@ const ThreeSentenceaddAnswer = ({selectdetails}) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype:questiondata?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
+          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -948,7 +951,7 @@ const ThreeSentenceaddAnswer = ({selectdetails}) => {
             size="lg"
           >
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {/* <div className="box_1"> */}

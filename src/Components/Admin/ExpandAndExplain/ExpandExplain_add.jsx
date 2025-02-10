@@ -71,6 +71,7 @@ const ExpandExplain_add = ({ selectdetails }) => {
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
+          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -955,7 +956,7 @@ const ExpandExplain_add = ({ selectdetails }) => {
             size="lg"
           >
             <Modal.Header closeButton style={{ backgroundColor: "orange" }}>
-              <Modal.Title style={{ color: "white" }}>View </Modal.Title>
+              <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {/* <div className="box_1"> */}

@@ -13,6 +13,7 @@ const AdminClass = () => {
   const token = sessionStorage.getItem("token");
   const [Class, setClass] = useState(true);
   const [Subclass, setSubclass] = useState(false);
+
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
   const [show2, setShow2] = useState();
@@ -820,7 +821,7 @@ const AdminClass = () => {
           </div>
           <div className="do-sear mt-2">
             <label>Sub-Class</label>
-            {/* <Form.Select
+            <Form.Select
               aria-label="Default select example"
               onChange={(e) => {
                 setsubclasssname(e.target.value);
@@ -829,20 +830,20 @@ const AdminClass = () => {
               <option value="">Select Sub-Class</option>
               <option value="LKG">LKG</option>
               <option value="UKG">UKG</option>
-              <option value="Class 1">Class 1</option>
-              <option value="Class 2">Class 2</option>
-              <option value="Class 3">Class 3</option>
-              <option value="Class 4">Class 4</option>
-              <option value="Class 5">Class 5</option>
-              <option value="Class 6">Class 6</option>
-              <option value="Class 7">Class 7</option>
-              <option value="Class 8">Class 8</option>
-              <option value="Class 9">Class 9</option>
-              <option value="Class 10">Class 10</option>
-              <option value="Class 11">Class 11</option>
-              <option value="Class 12">Class 12</option>
-            </Form.Select> */}
-            <input
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </Form.Select>
+            {/* <input
                   type="text"
                   placeholder="Enter Subject"
                   className="vi_0"
@@ -852,7 +853,7 @@ const AdminClass = () => {
                     }else onChangeHandler(e.target.value,setsubclasssname)                    
                   }}
                 />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>}
+                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>} */}
 
           </div>
         </Modal.Body>

@@ -8,10 +8,13 @@ import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
 import { FaRegEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const UserGenratedQuestion = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
+
+  const navigate = useNavigate()
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -237,11 +240,12 @@ const UserGenratedQuestion = () => {
                         {item?.ExamTime}
                       </td>
                       <tb>
-                        {item?.status == "Not Complete Staps" ? (
+                        <div>
+                        {item?.status === "Not Complete Staps" ? (
                           <span style={{ color: "red" }}>{item?.status}</span>
                         ) : (
                           <span>
-                            {item?.status == "Completed" ? (
+                            {item?.status === "Completed" ? (
                               <span style={{ color: "green" }}>
                                 {item?.status}
                               </span>
@@ -252,10 +256,12 @@ const UserGenratedQuestion = () => {
                             )}
                           </span>
                         )}
+                        </div>
+                      
                       </tb>
                       <td>
                         {" "}
-                        <div style={{ display: "flex", gap: "5px" }}>
+                        <div style={{ display: "flex", gap: "10px",padding:"10px" }}>
                           <div>
                             <FaRegEye
                               style={{
@@ -263,14 +269,7 @@ const UserGenratedQuestion = () => {
                                 fontSize: "15px",
                                 color: "green",
                               }}
-                              onClick={() => {
-                                return swal({
-                                  title: "Opps!",
-                                  text: "Comming Soon...",
-                                  icon: "warning",
-                                  button: "OK!",
-                                });
-                              }}
+                              onClick={() => navigate("/admincoverpage", { state: { item: item } })}
                             />{" "}
                           </div>
                           <div>
