@@ -97,7 +97,7 @@ const Adminslybuscopyview = () => {
   const Adminslybusbyid = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getslybusbyid/${Slybus_id}`
+        `https://guru-resorce-backend.onrender.com/api/admin/getslybusbyid/${Slybus_id}`
       );
       if (res.status == 200) setaddslybus(res.data.succes);
     } catch (error) {

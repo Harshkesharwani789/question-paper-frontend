@@ -22,7 +22,7 @@ const numberofStep=totalQA/2;
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + data?.Medium  + "/"+ user?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + data?.Medium  + "/"+ user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ console.log("QuestionHeader",QuestionHeader);
               <div className="col-sm-2">
                 {data?.School_Logo ? (
                   <img
-                    src={`http://localhost:8000/Teacher/${data?.School_Logo}`}
+                    src={`https://guru-resorce-backend.onrender.com/Teacher/${data?.School_Logo}`}
                     alt=""
                     style={{ width: "80px", marginTop: "24px" }}
                   />

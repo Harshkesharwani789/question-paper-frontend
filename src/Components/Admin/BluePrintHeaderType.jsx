@@ -30,7 +30,7 @@ function BluePrintHeaderType() {
     const [GetbluePrintHeader, setGetbluePrintHeader] = useState([]);
     const getBluePrintHeader = async () => {
         try {
-            let res = await axios.get("http://localhost:8000/api/admin/getblueprintheader");
+            let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getblueprintheader");
             if (res.status == 200) {
                 setGetbluePrintHeader(res.data.success);
             }
@@ -43,7 +43,7 @@ function BluePrintHeaderType() {
         try {
             const config = {
                 url: "/admin/DeleteBluePrintHeader/" + deletData?._id,
-                baseURL: "http://localhost:8000/api",
+                baseURL: "https://guru-resorce-backend.onrender.com/api",
                 method: "delete",
                 headers: { "Content-Type": "application/json" }
             }

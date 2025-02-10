@@ -77,7 +77,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -89,7 +89,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   //   const getquestAnalysisHeader = async () => {
   //     try {
   //       let res = await axios.get(
-  //         "http://localhost:8000/api/admin/getQuestAnalysisheaderbymedium/" +
+  //         "https://guru-resorce-backend.onrender.com/api/admin/getQuestAnalysisheaderbymedium/" +
   //           state?.Medium
   //       );
   //       if (res.status == 200) {
@@ -103,7 +103,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   //   const getquestAnalysisHeaderByid = async () => {
   //     try {
   //       let res = await axios.get(
-  //         `http://localhost:8000/api/admin/getquestionanalysisbyid/${QuestAnalHead_Id}`
+  //         `https://guru-resorce-backend.onrender.com/api/admin/getquestionanalysisbyid/${QuestAnalHead_Id}`
   //       );
   //       if (res.status === 200) {
   //         setGetquestAnalysisHeader(res.data.success);
@@ -131,7 +131,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
       const config = {
         url: "/admin/updateQuestionAnalysisHeader/" + state?.item?._id,
         method: "put",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
         },

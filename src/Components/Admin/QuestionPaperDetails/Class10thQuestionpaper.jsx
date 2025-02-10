@@ -33,7 +33,7 @@ function Class10thQuestionpaper() {
         try {
             const config = {
                 url: "/admin/getQuestionByClasswise/" + admin?._id,
-                baseURL: "http://localhost:8000/api",
+                baseURL: "https://guru-resorce-backend.onrender.com/api",
                 method: "put",
                 headers: {
                     "content-type": "application/json",
@@ -100,7 +100,7 @@ function Class10thQuestionpaper() {
         try {
             const config = {
                 url: "/teacher/upadeteQuestionPaper",
-                baseURL: "http://localhost:8000/api",
+                baseURL: "https://guru-resorce-backend.onrender.com/api",
                 method: "put",
                 headers: {
                     "content-type": "multipart/form-data",
@@ -193,7 +193,7 @@ function Class10thQuestionpaper() {
     const getQuestionHeaderbyMedium = async () => {
         try {
             let res = await axios.get(
-                "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium + "/" + admin?._id,
+                "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium + "/" + admin?._id,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -304,7 +304,7 @@ function Class10thQuestionpaper() {
                                                                         {item?.Image ? (
                                                                             <div>
                                                                                 <img
-                                                                                    src={`http://localhost:8000/Questions/${item?.Image}`}
+                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image}`}
                                                                                     className="mcq-img"
                                                                                     alt=""
                                                                                 />
@@ -648,7 +648,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -660,7 +660,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -731,7 +731,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -743,7 +743,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -814,7 +814,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -826,7 +826,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -894,7 +894,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -906,7 +906,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -974,7 +974,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -986,7 +986,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1054,7 +1054,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1066,7 +1066,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1134,7 +1134,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1146,7 +1146,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1250,7 +1250,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1262,7 +1262,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1297,7 +1297,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>a)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1309,7 +1309,7 @@ function Class10thQuestionpaper() {
                                                                                         <>
                                                                                             <span>b)</span>
                                                                                             <img
-                                                                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                 className="mcq-img"
                                                                                                 alt=""
                                                                                             />
@@ -1400,7 +1400,7 @@ function Class10thQuestionpaper() {
                                                                                             <b>Question Image:</b>
                                                                                             <div>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -1416,7 +1416,7 @@ function Class10thQuestionpaper() {
                                                                                             <>
                                                                                                 <span>a)</span>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -1428,7 +1428,7 @@ function Class10thQuestionpaper() {
                                                                                             <>
                                                                                                 <span>b)</span>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -1884,7 +1884,7 @@ function Class10thQuestionpaper() {
                                                                                 <>
                                                                                     <span>a)</span>
                                                                                     <img
-                                                                                        src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                         className="mcq-img"
                                                                                         alt=""
                                                                                     />
@@ -1896,7 +1896,7 @@ function Class10thQuestionpaper() {
                                                                                 <>
                                                                                     <span>b)</span>
                                                                                     <img
-                                                                                        src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                         className="mcq-img"
                                                                                         alt=""
                                                                                     />
@@ -2121,7 +2121,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_1 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2132,7 +2132,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_2 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2185,7 +2185,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_1 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2196,7 +2196,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_2 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2209,7 +2209,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_3 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_3}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_3}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2220,7 +2220,7 @@ function Class10thQuestionpaper() {
                                                                                         {item?.Image_4 ? (
                                                                                             <>
                                                                                                 <img
-                                                                                                    src={`http://localhost:8000/Questions/${item?.Image_4}`}
+                                                                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_4}`}
                                                                                                     className="mcq-img"
                                                                                                     alt=""
                                                                                                 />
@@ -2308,7 +2308,7 @@ function Class10thQuestionpaper() {
                                                                                 <>
                                                                                     <span>a)</span>
                                                                                     <img
-                                                                                        src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                                                         className="mcq-img"
                                                                                         alt=""
                                                                                     />

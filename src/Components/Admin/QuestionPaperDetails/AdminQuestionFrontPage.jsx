@@ -27,7 +27,7 @@ function AdminQuestionFrontPage({data}) {
     const getQuestionHeaderbyMedium = async () => {
       try {
         let res = await axios.get(
-          "http://localhost:8000/api/admin/questiontheadergetbymedium/" + data?.Medium  + "/"+ admin?._id,
+          "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + data?.Medium  + "/"+ admin?._id,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ function AdminQuestionFrontPage({data}) {
             <div className="col-sm-2">
               {data?.School_Logo ? (
                 <img
-                  src={`http://localhost:8000/Teacher/${data?.School_Logo}`}
+                  src={`https://guru-resorce-backend.onrender.com/Teacher/${data?.School_Logo}`}
                   alt=""
                   style={{ width: "80px", marginTop: "24px" }}
                 />

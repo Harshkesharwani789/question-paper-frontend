@@ -34,7 +34,7 @@ const QuestionPaper = ({ text }) => {
     try {
       const config = {
         url: "/admin/getQuestionByClasswise/" + user?._id,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -129,7 +129,7 @@ const QuestionPaper = ({ text }) => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -213,7 +213,7 @@ const [QuestionHeader, setQuestionHeader] = useState([]);
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -360,7 +360,7 @@ const handlePrint2 = () => {
                                     {item?.Image ? (
                                       <div>
                                         <img
-                                          src={`http://localhost:8000/Questions/${item?.Image}`}
+                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -704,7 +704,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -716,7 +716,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -787,7 +787,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -799,7 +799,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -870,7 +870,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -882,7 +882,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -950,7 +950,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -962,7 +962,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1030,7 +1030,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1042,7 +1042,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1110,7 +1110,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1122,7 +1122,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1190,7 +1190,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1202,7 +1202,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1306,7 +1306,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1318,7 +1318,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1353,7 +1353,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1365,7 +1365,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1456,7 +1456,7 @@ const handlePrint2 = () => {
                                               <b>Question Image:</b>
                                               <div>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1472,7 +1472,7 @@ const handlePrint2 = () => {
                                               <>
                                                 <span>a)</span>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1484,7 +1484,7 @@ const handlePrint2 = () => {
                                               <>
                                                 <span>b)</span>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1955,7 +1955,7 @@ const handlePrint2 = () => {
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -1967,7 +1967,7 @@ const handlePrint2 = () => {
                                         <>
                                           <span>b)</span>
                                           <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -2192,7 +2192,7 @@ const handlePrint2 = () => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2203,7 +2203,7 @@ const handlePrint2 = () => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2256,7 +2256,7 @@ const handlePrint2 = () => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2267,7 +2267,7 @@ const handlePrint2 = () => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2280,7 +2280,7 @@ const handlePrint2 = () => {
                                             {item?.Image_3 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_3}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_3}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2291,7 +2291,7 @@ const handlePrint2 = () => {
                                             {item?.Image_4 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_4}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_4}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2379,7 +2379,7 @@ const handlePrint2 = () => {
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />

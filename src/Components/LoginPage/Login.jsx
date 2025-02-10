@@ -45,7 +45,7 @@ const Login = () => {
       const config = {
         url: "/admin/loginTeacher",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           // Authorization:`Bearer ${token}`,
@@ -103,7 +103,7 @@ const Login = () => {
       const config = {
         url: "/otp/sendOtpRegisterEmail",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -139,7 +139,7 @@ const Login = () => {
       const config = {
         url: "/otp/verifyEmail",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -178,7 +178,7 @@ const UpdatePassword = async()=>{
     const config = {
       url: "/admin/updatepassword",
       method: "put",
-      baseURL: "http://localhost:8000/api",
+      baseURL: "https://guru-resorce-backend.onrender.com/api",
       headers: { "content-type": "application/json" },
       data: {
         Email:Optmail,

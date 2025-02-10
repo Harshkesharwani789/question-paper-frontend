@@ -12,7 +12,7 @@ function QuestionAndAnswerView() {
     const getallquestionPdf = async () => {
         try {
             let res = await axios.get(
-                `http://localhost:8000/api/admin/getAllpdf/${admin?._id}`,
+                `https://guru-resorce-backend.onrender.com/api/admin/getAllpdf/${admin?._id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             if (res.status === 200) {

@@ -58,7 +58,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

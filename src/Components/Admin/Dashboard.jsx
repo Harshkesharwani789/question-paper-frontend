@@ -20,7 +20,7 @@ const Dashboard = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllTeachers/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -176,7 +176,7 @@ const AdminEditBluePrint = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -188,7 +188,7 @@ const AdminEditBluePrint = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -201,7 +201,7 @@ const AdminEditBluePrint = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -215,7 +215,7 @@ const AdminEditBluePrint = () => {
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
@@ -230,7 +230,7 @@ const AdminEditBluePrint = () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/admin/getobjective`
+        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -776,7 +776,7 @@ const AdminEditBluePrint = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllChapter"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -792,7 +792,7 @@ const AdminEditBluePrint = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
+        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -805,7 +805,7 @@ const AdminEditBluePrint = () => {
     try {
       const config = {
         url: "/admin/updateBLUEPRINT",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -878,7 +878,7 @@ const AdminEditBluePrint = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);

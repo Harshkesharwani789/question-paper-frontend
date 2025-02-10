@@ -168,7 +168,7 @@ function AdminBlueprint() {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -181,7 +181,7 @@ function AdminBlueprint() {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -195,7 +195,7 @@ function AdminBlueprint() {
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
@@ -210,7 +210,7 @@ function AdminBlueprint() {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/admin/getobjective`
+        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -726,7 +726,7 @@ function AdminBlueprint() {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllChapter"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -741,7 +741,7 @@ function AdminBlueprint() {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllNameExamination"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -757,7 +757,7 @@ function AdminBlueprint() {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
+        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -770,7 +770,7 @@ function AdminBlueprint() {
     try {
       const config = {
         url: "/admin/registerBLUEPRINT",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "post",
         headers: { "content-type": "application/json" },
         data: {
@@ -842,7 +842,7 @@ function AdminBlueprint() {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -857,7 +857,7 @@ function AdminBlueprint() {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getquestiontype/" + admin?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`

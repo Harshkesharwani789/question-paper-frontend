@@ -25,7 +25,7 @@ const LoginPage3 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -72,7 +72,7 @@ const LoginPage3 = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);

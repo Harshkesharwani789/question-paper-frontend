@@ -49,7 +49,7 @@ const AdminSignin = () => {
       const config = {
         url: "/admin/login",
         method: "Post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         header: { "Content-Type": "application/json" },
         data: { email: email, password: passward },
       };

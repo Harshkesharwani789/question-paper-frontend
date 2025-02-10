@@ -86,7 +86,7 @@ const AdminQuestionAnalysisHeaderAdd = () => {
     try {
       const config = {
         url: "/admin/addQuestAnalysisheader",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -132,7 +132,7 @@ const AdminQuestionAnalysisHeaderAdd = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }

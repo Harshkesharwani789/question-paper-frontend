@@ -37,7 +37,7 @@ const AdminTypeOfQuestions = () => {
       const config = {
         url: "/admin/addtypesofquestion",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ const AdminTypeOfQuestions = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllTypesofquestion"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -90,7 +90,7 @@ const AdminTypeOfQuestions = () => {
     try {
       const config = {
         url: "/admin/updateTypesofquestions",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -133,7 +133,7 @@ const AdminTypeOfQuestions = () => {
           "/" +
           admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

@@ -82,7 +82,7 @@ const UploadPdfQuestion = () => {
       const config = {
         url: "/admin/",
         method: "put",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -129,7 +129,7 @@ const UploadPdfQuestion = () => {
   const deletesQuestionAns = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8000/api/admin/deleteuploadquestion/${Uploadd?._id}/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/deleteuploadquestion/${Uploadd?._id}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -149,7 +149,7 @@ const UploadPdfQuestion = () => {
   const getallquestionPdf = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllpdf/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/getAllpdf/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 200) {
@@ -164,7 +164,7 @@ const UploadPdfQuestion = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -178,7 +178,7 @@ const UploadPdfQuestion = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status === 200) {
         setsubject(res.data.success);
@@ -193,7 +193,7 @@ const UploadPdfQuestion = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status === 200) {
         setgetaddsubclass(res.data.success);
@@ -240,7 +240,7 @@ const UploadPdfQuestion = () => {
 
       const config = {
         method: "post",
-        url: "http://localhost:8000/api/admin/addUploadQuestions",
+        url: "https://guru-resorce-backend.onrender.com/api/admin/addUploadQuestions",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -282,7 +282,7 @@ const UploadPdfQuestion = () => {
   }, []);
 
   const handleClick = (pdfFileName) => {
-    window.open(`http://localhost:8000/QuestionPdf/${pdfFileName}`, '_blank');
+    window.open(`https://guru-resorce-backend.onrender.com/QuestionPdf/${pdfFileName}`, '_blank');
   };
   return (
     <div>
@@ -374,7 +374,7 @@ const UploadPdfQuestion = () => {
                           style={{ cursor: 'pointer' }}
                         />
                         <a
-                          href={`http://localhost:8000/QuestionPdf/${item?.questionPdf}`}
+                          href={`https://guru-resorce-backend.onrender.com/QuestionPdf/${item?.questionPdf}`}
                           target="_blank"
                           style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
                         >
@@ -393,7 +393,7 @@ const UploadPdfQuestion = () => {
                           style={{ cursor: 'pointer' }}
                         />
                         <a
-                          href={`http://localhost:8000/QuestionPdf/${item?.answerPdf}`}
+                          href={`https://guru-resorce-backend.onrender.com/QuestionPdf/${item?.answerPdf}`}
                           target="_blank"
                           style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
                         >

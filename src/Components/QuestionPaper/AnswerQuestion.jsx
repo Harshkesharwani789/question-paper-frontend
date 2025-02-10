@@ -50,7 +50,7 @@ function AnswerQuestion() {
     try {
       const config = {
         url: "/teacher/getGenQuestionById/" + state?._id + "/" + user?._id,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "get",
         headers: {
           "content-type": "application/json",
@@ -83,7 +83,7 @@ function AnswerQuestion() {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -202,7 +202,7 @@ console.log("QuestionHeader",QuestionHeader);
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -255,7 +255,7 @@ console.log("QuestionHeader",QuestionHeader);
                                               <b>Answer Image:</b>
                                               <div>
                                                 <img
-                                                  src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                   style={{
                                                     width: "174px",
                                                     height: "98px",
@@ -767,7 +767,7 @@ console.log("QuestionHeader",QuestionHeader);
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -904,7 +904,7 @@ console.log("QuestionHeader",QuestionHeader);
                                           <>
                                             <div>
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                 style={{
                                                   width: "174px",
                                                   height: "98px",

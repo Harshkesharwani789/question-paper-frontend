@@ -30,7 +30,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -80,7 +80,7 @@ const LoginPage5 = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -97,7 +97,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -120,7 +120,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/admin/getBluePrintGetByTeacherRequired",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -201,7 +201,7 @@ const LoginPage5 = () => {
                               height: "139px",
                               borderRadius: "50%",
                             }}
-                            src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
+                            src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
                             alt="school logo"
                           />
                         </div>

@@ -30,7 +30,7 @@ const ExamBoard = () => {
     try {
       const config = {
         url: "/teacher/registerGuestionGenrate  ",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -73,7 +73,7 @@ const ExamBoard = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
       if (res.status === 200) {
         setboardname(res.data.success);
       }
@@ -86,7 +86,7 @@ const ExamBoard = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllNameExamination"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status === 200) {
         setNameExam(res.data.success);
@@ -99,7 +99,7 @@ const ExamBoard = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -111,7 +111,7 @@ const ExamBoard = () => {
   const [Examlevell, setExamlevell] = useState([]);
   const getExamLevel = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getExamLevel");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getExamLevel");
       if (res.status === 200) {
         setExamlevell(res.data.success);
       }
@@ -126,7 +126,7 @@ const ExamBoard = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status === 200) {
         setgetaddsubclass(res.data.success);

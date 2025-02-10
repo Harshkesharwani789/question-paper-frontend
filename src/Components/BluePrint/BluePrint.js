@@ -22,7 +22,7 @@ const BluePrint = () => {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllBLUEPRINTs/" + user?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllBLUEPRINTs/" + user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const BluePrint = () => {
   const getallblueprint1 = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getblueprintsbyid"
+        "https://guru-resorce-backend.onrender.com/api/admin/getblueprintsbyid"
       );
 
       if (res.status == 200) {
@@ -63,7 +63,7 @@ const BluePrint = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -283,7 +283,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
   const GetBluePrintHeaderByMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getblueprintheaderbymedium/" +
+        "https://guru-resorce-backend.onrender.com/api/admin/getblueprintheaderbymedium/" +
           state?.Medium
       );
       if (res.status === 200) {
@@ -299,7 +299,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -375,7 +375,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     <div className="col-2 col-sm-2 col-md-2 col-lg-2">
                                       {state?.School_Logo ? (
                                         <img
-                                          src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
+                                          src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
                                           alt=""
                                           style={{
                                             width: "80px",

@@ -76,7 +76,7 @@ function AdminBlueprintdetailsview() {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getblueprintsbyid/${blueprint_ID}`
+        `https://guru-resorce-backend.onrender.com/api/admin/getblueprintsbyid/${blueprint_ID}`
       );
 
       if (res.status == 200) {
@@ -92,7 +92,7 @@ function AdminBlueprintdetailsview() {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
+        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -224,7 +224,7 @@ function AdminBlueprintdetailsview() {
   const [bluePrintHeader, setbluePrintHeader] = useState({});
   const GetBluePrintHeaderByMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getblueprintheaderbymedium/" + blueprint?.medium);
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getblueprintheaderbymedium/" + blueprint?.medium);
       if (res.status === 200) {
         setbluePrintHeader(res.data.success);
       }

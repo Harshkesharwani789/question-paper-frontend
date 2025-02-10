@@ -93,7 +93,7 @@ const AdminSyllabusCopy = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -108,7 +108,7 @@ const AdminSyllabusCopy = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
+        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -123,7 +123,7 @@ const AdminSyllabusCopy = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllChapter"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -138,7 +138,7 @@ const AdminSyllabusCopy = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllNameExamination"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -290,7 +290,7 @@ const [Title,setTitle]=useState("")
       const config = {
         url: "/admin/addSyllabus",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -338,7 +338,7 @@ getSyllabus()
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -351,7 +351,7 @@ getSyllabus()
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -365,7 +365,7 @@ getSyllabus()
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -380,7 +380,7 @@ getSyllabus()
       const config = {
         url: "/admin/updateSyllabus",
         method: "put",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -426,7 +426,7 @@ getSyllabus()
   const deleteslybus = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8000/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -457,7 +457,7 @@ getSyllabus()
   const getSyllabus = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllSyllabus/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/getAllSyllabus/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status == 200) {

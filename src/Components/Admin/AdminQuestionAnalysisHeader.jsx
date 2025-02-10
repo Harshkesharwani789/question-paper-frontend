@@ -31,7 +31,7 @@ const AdminQuestionAnalysisHeader = () => {
   const getquestAnalysisHeader = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getQuestAnalysisheader"
+        "https://guru-resorce-backend.onrender.com/api/admin/getQuestAnalysisheader"
       );
       if (res.status == 200) {
         setGetquestAnalysisHeader(res.data.success);
@@ -45,7 +45,7 @@ const AdminQuestionAnalysisHeader = () => {
     try {
       const config = {
         url: "/admin/deleteQuestionAnalysisHeader/" + deleteA ,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

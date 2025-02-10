@@ -105,7 +105,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/addClass",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -140,7 +140,7 @@ const AdminClass = () => {
   //  const [nochangedata, setnochangedata] = useState([]);
    const getAddMedium = async () => {
      try {
-       let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+       let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
        if (res.status == 200) {
          setMedium(res.data.success);
         //  setnochangedata(res.data.success);
@@ -153,7 +153,7 @@ const AdminClass = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllClass");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -168,7 +168,7 @@ const AdminClass = () => {
       const config = {
         url: "admin/updateClass",
         method: "put",
-        baseURL: "http://localhost:8000/api/",
+        baseURL: "https://guru-resorce-backend.onrender.com/api/",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -207,7 +207,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/deleteClass/" + deleteclassname + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -265,7 +265,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/addSubClass",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -303,7 +303,7 @@ const AdminClass = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -318,7 +318,7 @@ const AdminClass = () => {
     try {
       const config = {
         url: "/admin/updateSubClass",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -360,7 +360,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/deleteSubClass/" + deletesubclass + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,

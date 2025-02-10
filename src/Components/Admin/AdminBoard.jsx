@@ -112,7 +112,7 @@ const AdminBoard = () => {
       const config = {
         url: "/admin/addBoard",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -150,7 +150,7 @@ const AdminBoard = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -163,7 +163,7 @@ const AdminBoard = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllBoard");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -178,7 +178,7 @@ const AdminBoard = () => {
       const config = {
         url: "/admin/updateBoard",
         method: "put",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -217,7 +217,7 @@ const AdminBoard = () => {
     try {
       const config = {
         url: "/admin/deleteBoard/" + deleteA + "/" + admin?._id,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

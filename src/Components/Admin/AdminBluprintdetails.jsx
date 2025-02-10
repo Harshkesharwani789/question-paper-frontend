@@ -81,7 +81,7 @@ const AdminBlueprintdetails = () => {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllBLUEPRINTs/" + admin?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllBLUEPRINTs/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -112,7 +112,7 @@ const AdminBlueprintdetails = () => {
   const makedeleteblueprint = async () => {
     try {
       let data = await axios.delete(
-        "http://localhost:8000/api/admin/deleteBLUEPRINT/" +
+        "https://guru-resorce-backend.onrender.com/api/admin/deleteBLUEPRINT/" +
           deleteId +
           "/" +
           admin?._id,
@@ -175,7 +175,7 @@ const AdminBlueprintdetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSubClass"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -197,7 +197,7 @@ const AdminBlueprintdetails = () => {
     try {
       const config={
         url: "/admin/makeBlockAndUnblockBLUEPRINTs",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: { "content-type": "application/json", Authorization: `Bearer ${token}` },
         data:{

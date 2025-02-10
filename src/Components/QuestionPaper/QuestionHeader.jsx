@@ -117,7 +117,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/addquestionheader",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -184,7 +184,7 @@ function QuestionHeader() {
   const getallQuestionHeader = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getquestiontheader/" + admin?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontheader/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -204,7 +204,7 @@ function QuestionHeader() {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -225,7 +225,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/editquestionheader",
         method: "put",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -291,7 +291,7 @@ function QuestionHeader() {
     try {
       const config = {
         url: "/admin/deleteQuestionHeader/" + Headerid?._id + "/" + admin?._id,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

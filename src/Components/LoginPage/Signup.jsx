@@ -32,7 +32,7 @@ const SignUp = () => {
       const config = {
         url: "/admin/registerTeacher",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

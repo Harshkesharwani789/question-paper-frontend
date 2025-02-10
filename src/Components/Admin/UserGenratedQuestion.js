@@ -33,7 +33,7 @@ const UserGenratedQuestion = () => {
   const getAllGenQuestionPaper = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/teacher/getAllGenQuestionPaper/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/teacher/getAllGenQuestionPaper/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const UserGenratedQuestion = () => {
   const DeleteTeacher = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8000/api/teacher/deleteGenQuestionPaper/${delteacher}/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/teacher/deleteGenQuestionPaper/${delteacher}/${admin?._id}`,
         {
           headers: {
             "content-type": "application/json",
@@ -214,11 +214,11 @@ const UserGenratedQuestion = () => {
                       <td>
                         {item?.School_Logo ? (
                           <a
-                            href={`http://localhost:8000/Teacher/${item?.School_Logo}`}
+                            href={`https://guru-resorce-backend.onrender.com/Teacher/${item?.School_Logo}`}
                             target="_blank"
                           >
                             <img
-                              src={`http://localhost:8000/Teacher/${item?.School_Logo}`}
+                              src={`https://guru-resorce-backend.onrender.com/Teacher/${item?.School_Logo}`}
                               style={{
                                 width: "40px",
                                 height: "40px",

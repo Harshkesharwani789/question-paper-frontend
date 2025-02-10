@@ -18,7 +18,7 @@ const Social_QP = () => {
     try {
       const config = {
         url: "/admin/getQuestionByClasswise/" + user?._id,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -88,7 +88,7 @@ const Social_QP = () => {
       const config = {
         url: "/teacher/sendmail",
         method: "post",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         headers: { 'Content-Type': 'application/json' }, // Set Content-Type to application/json
         data: requestData
       };
@@ -201,7 +201,7 @@ const Social_QP = () => {
                                     <div>
 
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -214,7 +214,7 @@ const Social_QP = () => {
                                     {item?.Image_1 ? (<>
                                       <span>a)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -222,7 +222,7 @@ const Social_QP = () => {
                                     {item?.Image_2 ? (<>
                                       <span>b)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -317,7 +317,7 @@ const Social_QP = () => {
                                     <div>
 
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.ImageQ}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -330,7 +330,7 @@ const Social_QP = () => {
                                     {item?.Image_1 ? (<>
                                       <span>a)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -338,7 +338,7 @@ const Social_QP = () => {
                                     {item?.Image_2 ? (<>
                                       <span>b)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -348,7 +348,7 @@ const Social_QP = () => {
                                     {item?.Image_3 ? (<>
                                       <span>c)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_3}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_3}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -356,7 +356,7 @@ const Social_QP = () => {
                                     {item?.Image_4 ? (<>
                                       <span>d)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_4}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_4}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -366,7 +366,7 @@ const Social_QP = () => {
                                     {item?.Image_5 ? (<>
                                       <span>e)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_5}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_5}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -374,7 +374,7 @@ const Social_QP = () => {
                                     {item?.Image_6 ? (<>
                                       <span>f)</span>
                                       <img
-                                        src={`http://localhost:8000/Questions/${item?.Image_6}`}
+                                        src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_6}`}
                                         className="mcq-img"
                                         alt=""
                                       />
@@ -416,7 +416,7 @@ const Social_QP = () => {
                                   {item?.Image_1 ? (<>
                                     <span>a)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -424,7 +424,7 @@ const Social_QP = () => {
                                   {item?.Image_2 ? (<>
                                     <span>b)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -466,7 +466,7 @@ const Social_QP = () => {
                                   {item?.Image_1 ? (<>
                                     <span>a)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -474,7 +474,7 @@ const Social_QP = () => {
                                   {item?.Image_2 ? (<>
                                     <span>b)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -514,7 +514,7 @@ const Social_QP = () => {
                                   {item?.Image_1 ? (<>
                                     <span>a)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -522,7 +522,7 @@ const Social_QP = () => {
                                   {item?.Image_2 ? (<>
                                     <span>b)</span>
                                     <img
-                                      src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                      src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                       className="mcq-img"
                                       alt=""
                                     />
@@ -541,7 +541,7 @@ const Social_QP = () => {
                                 {item?.Image_1 ? (<>
                                   <span>a)</span>
                                   <img
-                                    src={`http://localhost:8000/Questions/${item?.Image_1}`}
+                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
                                     className="mcq-img"
                                     alt=""
                                   />
@@ -549,7 +549,7 @@ const Social_QP = () => {
                                 {item?.Image_2 ? (<>
                                   <span>b)</span>
                                   <img
-                                    src={`http://localhost:8000/Questions/${item?.Image_2}`}
+                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
                                     className="mcq-img"
                                     alt=""
                                   />
@@ -640,7 +640,7 @@ const Social_QP = () => {
                                             <div>
 
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                 style={{ width: "174px", height: "98px", border: "groove" }}
                                                 alt="answer img"
                                               />
@@ -673,7 +673,7 @@ const Social_QP = () => {
                                             <div>
 
                                               <img
-                                                src={`http://localhost:8000/Questions/${item?.Image_Ans}`}
+                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
                                                 style={{ width: "174px", height: "98px", border: "groove" }}
                                                 alt="answer img"
                                               />

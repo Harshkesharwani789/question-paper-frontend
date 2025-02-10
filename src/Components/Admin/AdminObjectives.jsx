@@ -98,7 +98,7 @@ const AdminObjectives = () => {
     try {
       const config = {
         url: "/admin/addobjectives",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -132,7 +132,7 @@ const [Medium, setMedium] = useState([]);
 // const [nochangedata, setnochangedata] = useState([]);
 const getAddMedium = async () => {
   try {
-    let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+    let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
     if (res.status == 200) {
       setMedium(res.data.success);
       // setnochangedata(res.data.success);
@@ -146,7 +146,7 @@ const getAddMedium = async () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/admin/getobjective`
+        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -174,7 +174,7 @@ const getAddMedium = async () => {
 
       const config = {
         url: "/admin/updateObjectives",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "Content-type": "application/json",
@@ -227,7 +227,7 @@ const getAddMedium = async () => {
   
       const config = {
         url: `/admin/deleteobjectives/${deleteA}/${admin?._id}`,
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

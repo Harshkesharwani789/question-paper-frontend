@@ -30,7 +30,7 @@ const [blueprint, setblueprint] = useState([]);
 const getallblueprint = async () => {
     try {
         let res = await axios.get(
-            "http://localhost:8000/api/admin/getAllBLUEPRINTs/" + admin?._id,
+            "https://guru-resorce-backend.onrender.com/api/admin/getAllBLUEPRINTs/" + admin?._id,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ const upcomingStaus = async (status, val) => {
     try {
         const config = {
             url: "/teacher/upadeteQuestionPaper",
-            baseURL: "http://localhost:8000/api",
+            baseURL: "https://guru-resorce-backend.onrender.com/api",
             method: "put",
             headers: {
                 "content-type": "multipart/form-data",
@@ -171,7 +171,7 @@ const [bluePrintHeader, setbluePrintHeader] = useState({});
 const GetBluePrintHeaderByMedium = async () => {
     try {
         let res = await axios.get(
-            "http://localhost:8000/api/admin/getblueprintheaderbymedium/" +
+            "https://guru-resorce-backend.onrender.com/api/admin/getblueprintheaderbymedium/" +
             state?.Medium
         );
         if (res.status === 200) {
@@ -235,7 +235,7 @@ return (
                                                                     <div className="col-2 col-sm-2 col-md-2 col-lg-2">
                                                                         {state?.School_Logo ? (
                                                                             <img
-                                                                                src={`http://localhost:8000/Teacher/${state?.School_Logo}`}
+                                                                                src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
                                                                                 alt=""
                                                                                 style={{
                                                                                     width: "80px",

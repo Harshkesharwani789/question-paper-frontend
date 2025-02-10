@@ -98,7 +98,7 @@ const Weightagecontent = () => {
     try {
       let config = {
         url: "/admin/addweightage",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -136,7 +136,7 @@ const Weightagecontent = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/api/admin/getAllMedium");
+      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -150,7 +150,7 @@ const Weightagecontent = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getAllSujects"
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -164,7 +164,7 @@ const Weightagecontent = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/api/admin/getallcontent"
+        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -180,7 +180,7 @@ const Weightagecontent = () => {
     try {
       let config = {
         url: "/admin/updateallcontent",
-        baseURL: "http://localhost:8000/api",
+        baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -220,7 +220,7 @@ const Weightagecontent = () => {
   const deletallcontent = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/admin/deleteweightage/${deletecontent}/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/deleteweightage/${deletecontent}/${admin?._id}`,
         {
           headers: {
             "content-type": "application/json",

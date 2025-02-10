@@ -57,7 +57,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/AddAccount",
-        baseURL: "http://localhost:8000/api/",
+        baseURL: "https://guru-resorce-backend.onrender.com/api/",
         method: "post",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         data: {
@@ -89,7 +89,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/EditAccount/" + EditData?._id,
-        baseURL: "http://localhost:8000/api/",
+        baseURL: "https://guru-resorce-backend.onrender.com/api/",
         method: "put",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         data: {
@@ -122,7 +122,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/DeleteAccount/" + deleteData?._id,
-        baseURL: "http://localhost:8000/api/",
+        baseURL: "https://guru-resorce-backend.onrender.com/api/",
         method: "delete",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         data : {
@@ -145,7 +145,7 @@ const AccountHistory = () => {
   const getaccounthistory = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllAcountHistory/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/getAllAcountHistory/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -165,7 +165,7 @@ const AccountHistory = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8000/api/admin/getAllTeachers/${admin?._id}`,
+        `https://guru-resorce-backend.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

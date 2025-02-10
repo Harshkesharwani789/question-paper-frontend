@@ -27,7 +27,7 @@ const Profile = () => {
 
   const getAllQuestion = async () => {
     const res = await axios.get(
-      `http://localhost:8000/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
+      `https://guru-resorce-backend.onrender.com/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

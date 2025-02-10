@@ -44,7 +44,7 @@ function AdminQuestionAnalysis() {
       try {
         const config = {
           url: "/teacher/getGenQuestionById/" + state?._id + "/" + admin?._id,
-          baseURL: "http://localhost:8000/api",
+          baseURL: "https://guru-resorce-backend.onrender.com/api",
           method: "get",
           headers: {
             "content-type": "application/json",
@@ -126,7 +126,7 @@ function AdminQuestionAnalysis() {
     const getquestAnalysisHeader = async () => {
       try {
         let res = await axios.get(
-          "http://localhost:8000/api/admin/getQuestAnalysisheaderbymedium/" +
+          "https://guru-resorce-backend.onrender.com/api/admin/getQuestAnalysisheaderbymedium/" +
             state?.Medium
         );
         if (res.status == 200) {
