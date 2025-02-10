@@ -171,7 +171,7 @@ const MathEditor = ({ data }) => {
       )}
       {isMath == true ? (
         <div>
-          <MathInput setValue={handlechangeMath} />
+          <MathInput  className="vi_0" setValue={handlechangeMath} />
           <p>
             <InlineMath>{data?.A}</InlineMath></p>
         </div>

@@ -51,7 +51,7 @@ const ExamBoard = () => {
       if (res.status === 200) {
         swal({
           title: "Yeah!",
-          text: "Successfully Payment Done !!!",
+          text: "Successfully  Done !!!",
           icon: "success",
           button: "OK!",
 

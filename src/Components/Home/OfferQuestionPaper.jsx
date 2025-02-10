@@ -18,7 +18,7 @@ function OfferQuestionPaper() {
                         <hr />
                         <div className='uiline'>
                             <ul>
-                                <FiCheckCircle style={{ color: "blue", fontSize: "22px" }} /> <span>1000 Papers</span>
+                                <FiCheckCircle style={{ color: "blue", fontSize: "16px" }} /> <span>1000 Papers</span>
                             </ul>
                             <ul>
                                 <FiCheckCircle style={{ color: "blue", fontSize: "22px" }} /> <span>10000 Online Test Attempts</span>

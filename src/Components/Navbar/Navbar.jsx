@@ -29,7 +29,7 @@ const Navbarr = () => {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="/">
-            <img src="../Images/logo.png" alt="" style={{ width: "100px", height:'60px' }} />
+            <img src="../Images/logo.png" alt="" style={{ width: "150px", height:'80px' }} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
