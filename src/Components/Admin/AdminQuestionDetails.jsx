@@ -554,6 +554,47 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div>
             </div>
+         
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Objectives</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setObjectives(e.target.value)}
+                >
+                  <option>Select Objectives</option>
+                  {getobjectives?.filter((ele)=>ele.mediumName === Medium).map((val, i) => {
+                    return (
+                      <option value={val?.Objectivesname}>
+                        {val?.Objectivesname}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Select Question Type</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setQuestionTYpe(e.target.value)}
+                >
+                  <option>Select Question Type</option>
+                  {[
+                    ...new Set(
+                      QuestionType?.filter(
+                        (ele) => ele.QFormatMedium === Medium
+                      )?.map((item) => item.typeOfquestion)
+                    ),
+                  ].map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </Form.Select>
+              </div>
+            </div>
             <div className="col-md-4">
               <label className="fw-bold">Name Of Examnation :</label>
               <FormControl sx={{ m: 1, width: 245, height: 43 }}>
@@ -615,47 +656,6 @@ const AdminQuestionDetails = () => {
                 </Form.Select>
               </div> */}
             </div>
-            <div className="col-md-4">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Objectives</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setObjectives(e.target.value)}
-                >
-                  <option>Select Objectives</option>
-                  {getobjectives?.filter((ele)=>ele.mediumName === Medium).map((val, i) => {
-                    return (
-                      <option value={val?.Objectivesname}>
-                        {val?.Objectivesname}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Select Question Type</label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setQuestionTYpe(e.target.value)}
-                >
-                  <option>Select Question Type</option>
-                  {[
-                    ...new Set(
-                      QuestionType?.filter(
-                        (ele) => ele.QFormatMedium === Medium
-                      )?.map((item) => item.typeOfquestion)
-                    ),
-                  ].map((type, index) => (
-                    <option key={index} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </Form.Select>
-              </div>
-            </div>
-
             <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Select the Types of the Question</label>

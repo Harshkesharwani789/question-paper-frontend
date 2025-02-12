@@ -142,6 +142,8 @@ const AdminBlueprintdetails = () => {
       console.log(error);
     }
   };
+  
+  const [subclass,setSub_classname]=useState("");
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
   // const productPerPage = 5;
@@ -152,8 +154,8 @@ const AdminBlueprintdetails = () => {
   const recordsperpage = 10;
   const lastIndex = currenpage * recordsperpage;
   const firstIndex = lastIndex - recordsperpage;
-  const records = blueprint.slice(firstIndex, lastIndex);
-  const npages = Math.ceil(blueprint.length / recordsperpage);
+  const records = blueprint?.filter((item)=> subclass ? item.SubClassName==subclass:item ).slice(firstIndex, lastIndex);
+  const npages = Math.ceil(blueprint?.filter((item)=> subclass ? item.SubClassName==subclass:item ).length / recordsperpage);
   const numbers = [...Array(npages + 1).keys()].slice(1);
 
   function changePage(id) {
@@ -220,6 +222,7 @@ const AdminBlueprintdetails = () => {
     }
   }
 
+
   return (
     <>
       <div className="col-lg-4 d-flex justify-content-center">
@@ -245,10 +248,10 @@ const AdminBlueprintdetails = () => {
               <label htmlFor="">Select Class</label>
               <Form.Select
                 aria-label="Default select example"
-                // onChange={(e) => {
-                //   // setClasstype(e.target.value);
-                //   setClassname(e.target.value);
-                // }}
+                onChange={(e) => {
+                  // setClasstype(e.target.value);
+                  setClassname(e.target.value);
+                }}
               >
                 <option value="">Select Class</option>
                 {uniqueClassNamesArray?.map((val, i) => {
@@ -264,13 +267,13 @@ const AdminBlueprintdetails = () => {
               <label htmlFor="">Select Sub Class</label>
               <Form.Select
                 aria-label="Default select example"
-                // onChange={(e) => {
-                //   setSub_classname(e.target.value);
-                // }}
+                onChange={(e) => {
+                  setSub_classname(e.target.value);
+                }}
               >
                 <option value="">Select Sub Class</option>
                 {getaddsubclass
-                  ?.filter((ele) => ele.className === blueprint.className)
+                  ?.filter((ele) => ele.className === Classname)
                   ?.map((val, i) => {
                     return (
                       <option value={val?.subclassName} key={i}>
