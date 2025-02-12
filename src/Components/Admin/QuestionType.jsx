@@ -89,6 +89,9 @@ function QuestionType() {
     const [QFormatMedium, setQFormatMedium] = useState("")
     const [Translater, setTranslater] = useState("")
     const AddQuestionTYpe = async () => {
+        if(!QFormatMedium) return alert("Please select medium");
+        if(!Qformat) return alert("Please enter question format");
+        if(!typeOfquestion) return alert("Please select question type");
         try {
             const config = {
                 url: "/admin/addquestiontype",
@@ -109,6 +112,9 @@ function QuestionType() {
             let res = await axios(config);
             if (res.status == 200) {
                 handleClose();
+                setQformat("");
+                setQFormatMedium
+                setQuestionType("")
                 getallQuestiontype();
                 return swal({
                     title: "Yeah!",
@@ -165,7 +171,7 @@ function QuestionType() {
                     typeOfquestion: typeOfquestion,
                     Qformat: Qformat,
                     authId: admin?._id,
-                    id: QuestionTypeId?._id,
+                    id: QuestionTypeId,
                 },
             };
             let res = await axios(config);
@@ -389,7 +395,7 @@ function QuestionType() {
 
                             <div className="do-sear mt-2">
                                 <label> Medium</label>
-                                <Form.Select
+                                <Form.Select required
                                     className="vi_0"
                                     onChange={(e) => setQFormatMedium(e.target.value)}
                                 >
@@ -415,6 +421,7 @@ function QuestionType() {
                                             settypeOfquestion(e.target.value)
                                         } else onChangeHandler(e.target.value, settypeOfquestion)
                                     }}
+                                    required
                                 />
                                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{typeOfquestion}</p>}
                             </div>
@@ -422,6 +429,7 @@ function QuestionType() {
                                 <label> Question Format</label>
                                 <Form.Select
                                     className="vi_0"
+                                    required
                                     onChange={(e) => setQformat(e.target.value)}
                                 >
                                     <option >Select Format</option>
