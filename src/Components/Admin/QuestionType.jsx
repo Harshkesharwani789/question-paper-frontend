@@ -113,7 +113,7 @@ function QuestionType() {
             if (res.status == 200) {
                 handleClose();
                 setQformat("");
-                setQFormatMedium
+                setQFormatMedium("")
                 setQuestionType("")
                 getallQuestiontype();
                 return swal({
