@@ -143,6 +143,8 @@ const ExamBoard = () => {
     getaddsubclasss();
   }, []);
 
+  const uniqueClassNames = [...new Set(getaddsubclass?.map(item => item.className))];
+
   return (
     <div>
       <div className="container p-3">
@@ -214,14 +216,11 @@ const ExamBoard = () => {
                         }}
                       >
                         <option value="">Select Class</option>
-                        <option value="Lower Primary">
-                          Lower Primary
-                        </option>
-                        <option value="Primary">Primary </option>
-                        <option value="Upper Primary">
-                          Upper Primary
-                        </option>
-                        <option value="Secondary">Secondary</option>
+                        {uniqueClassNames?.map((ele)=>  <option value={ele}>
+                          {ele}
+                        </option>)}
+                      
+                       
                       </Form.Select>
                     </div>
                     <div className=" mb-4">
