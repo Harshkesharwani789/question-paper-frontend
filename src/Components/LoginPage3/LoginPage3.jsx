@@ -84,7 +84,11 @@ const LoginPage3 = () => {
   useEffect(() => {
     getSubject();
   }, []);
-
+  
+  if(!user){
+    alert("Please login")
+    return window.location.assign("/")
+  }
   return (
     <div>
       <div className="container p-3">
