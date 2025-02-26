@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
 import axios from "axios";
 import swal from "sweetalert";
+import logo from './../../assets/logo.png';
+
+
 
 const ExamBoard = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -158,21 +161,21 @@ const ExamBoard = () => {
                         className="anim-typewriter text-dark"
                         style={{ paddingLeft: "3rem" }}
                       >
-                        Welcome {user?.FirstName} {user?.LastName}!{" "}
+                        Welcome <span className="text-uppercase Lato-regular">{user?.FirstName}</span> <span className="text-uppercase Lato-regular">{user?.LastName}!{" "}</span>
                       </p>
-                      <span className="fs-4">Please Enter Your Details</span>
+                      <span className="fs-4 lato-regular">Please Enter Your Details</span>
                     </h2>
                   </div>
                 </div>
               </div>
               <div className="col-6">
                 <div className="page2-content-display">
-                  <h4>Tell Us</h4>
+                  <h4 className="alfa-slab">Tell Us</h4>
                   <hr />
 
                   <div>
                     <div className="mb-4">
-                      <Form.Label>Medium<span style={{ color: "red" }}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">Medium<span style={{ color: "red" }}>*</span></Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         onChange={(e) => {

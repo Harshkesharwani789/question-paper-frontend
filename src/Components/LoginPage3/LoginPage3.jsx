@@ -97,8 +97,8 @@ const LoginPage3 = () => {
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
-                        Welcome {user?.FirstName} {user?.LastName} !{" "}
-                      </p>{" "}
+                        Welcome   {" "}<span className="text-uppercase Lato-regular"> {user?.FirstName}</span> <span className="text-uppercase Lato-regular">{user?.LastName}!{" "}</span>
+                      </p>
                       <span className="fs-4" style={{ textAlign: "center" }}>
                         Start Generating Your Paper
                       </span>

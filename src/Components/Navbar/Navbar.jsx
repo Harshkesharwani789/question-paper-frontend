@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaRegUserCircle } from "react-icons/fa";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
+import logo from './../../assets/logo.png';
 
 const Navbarr = () => {
   const Navigate = useNavigate("");
@@ -26,31 +27,31 @@ const Navbarr = () => {
   };
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="" style={{ backgroundColor: "#E17D1F" }}>
         <Container>
           <Navbar.Brand href="/">
-            <img src="../Images/logo.png" alt="" style={{ width: "150px", height:'80px' }} />
+            <img src={logo} alt="" style={{ width: "150px", height:'80px' }} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
             <div 
                  className="d-flex align-items-center navItems" 
-                 style={{fontSize:"27px",color:"white"}}>
+                 style={{fontSize:"16px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/offerquestionpaper"><span>Buy</span></Link> 
                 </div> &nbsp;&nbsp;
                 <div class="vertical-line"></div>&nbsp;&nbsp;
         
                  <div 
                  className="d-flex align-items-center navItems" 
-                 style={{fontSize:"27px",color:"white"}}>
+                 style={{fontSize:"16px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/tutorial"><span>Tutorial</span></Link> 
                 </div> &nbsp;&nbsp;
                 <div class="vertical-line"></div>&nbsp;&nbsp;
               {user ? (
                  <div 
                  className="d-flex align-items-center navItems" 
-                 style={{fontSize:"27px",color:"white"}}>
+                 style={{fontSize:"16px",color:"white"}}>
                  <Link style={{color:"white",textDecoration:"none"}} to="/questionandanswerview"><span>Assessment</span></Link> 
                 </div>
               ):("")}
@@ -58,7 +59,7 @@ const Navbarr = () => {
               <div class="dropdown">
                 <span class="dropbtn">
                   <CgProfile color="#fff" />{" "}
-                  <span className="fs-6 text-light">
+                  <span className="fs-6 text-light mt-4">
                     {user?.FirstName} {user?.LastName}
                   </span>
                 </span>

@@ -54,7 +54,7 @@ const Profile = () => {
             <button
               className=" btn"
               style={{
-                backgroundColor: "rgb(8, 52, 148)",
+                backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 4px",
                 marginBottom:'10px'
@@ -71,7 +71,7 @@ const Profile = () => {
             <button
               className=" btn"
               style={{
-                backgroundColor: "rgb(8, 52, 148)",
+                backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 6px",
                 marginBottom:'10px'
@@ -88,7 +88,7 @@ const Profile = () => {
             <button
               className=" btn"
               style={{
-                backgroundColor: "rgb(8, 52, 148)",
+                backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 4px",
                 marginBottom:'10px'

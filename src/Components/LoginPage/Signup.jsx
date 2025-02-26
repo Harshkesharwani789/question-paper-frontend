@@ -7,6 +7,8 @@ import { FaEye } from "react-icons/fa";
 import "../LoginPage3/LoginPage3.css";
 import axios from "axios";
 import swal from "sweetalert";
+import logo from "./../../assets/logo.png";
+import Button1 from "../Button1";
 
 const SignUp = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -24,10 +26,10 @@ const SignUp = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [CPassword, setCPassword] = useState("");
-  const [whatsAppNumber,setWhatsAppNumber]=useState("");
-  const [termndcond,setTermndcond]=useState("");
+  const [whatsAppNumber, setWhatsAppNumber] = useState("");
+  const [termndcond, setTermndcond] = useState("");
 
-  const TeacherRegister = async () => {  
+  const TeacherRegister = async () => {
     try {
       const config = {
         url: "/admin/registerTeacher",
@@ -44,15 +46,15 @@ const SignUp = () => {
           Email: Email,
           Password: Password,
           authId: user?.id,
-          whatsAppNumber:whatsAppNumber,
-          CPassword:CPassword,
-          termndcond:termndcond,
+          whatsAppNumber: whatsAppNumber,
+          CPassword: CPassword,
+          termndcond: termndcond,
         },
       };
       let res = await axios(config);
       if (res.status === 200) {
         handleClose();
-         swal({
+        swal({
           title: "yeah!",
           text: res.data.success,
           icon: "success",
@@ -60,9 +62,9 @@ const SignUp = () => {
         });
       }
       setTimeout(() => {
-         return navigate("/login")
+        return navigate("/login");
       }, 1000);
-     
+
       // window.location.assign("/login");
     } catch (error) {
       console.log(error);
@@ -78,27 +80,30 @@ const SignUp = () => {
   const [PasswordShow, setPasswordShow] = useState(false);
 
   const [PasswordShow1, setPasswordShow1] = useState(false);
- 
-
 
   return (
     <div>
-      
-
       {/* new Register form  */}
       <div className="container p-3">
         <div className="box">
           <div className="row">
             <div className="col-6">
               <div className="page2-content-display p-4">
-                <h4 style={{ textAlign: "center" }}>Register Here</h4>
+                <h4
+                  style={{ textAlign: "center" }}
+                  className="space-mono-bolder"
+                >
+                  Register Here
+                </h4>
                 <hr></hr>
 
                 <Row>
                   <Col>
                     <div className="col-12">
                       <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>First Name<span style={{color:"red"}}>*</span></Form.Label>
+                        <Form.Label className="lato-regular">
+                          First Name<span style={{ color: "red" }}>*</span>
+                        </Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Your First Name"
@@ -112,7 +117,9 @@ const SignUp = () => {
                   <Col>
                     <div className="col-12">
                       <Form.Group className="mb-2" controlId="formGroupEmail">
-                        <Form.Label>Last Name<span style={{color:"red"}}>*</span></Form.Label>
+                        <Form.Label className="lato-regular">
+                          Last Name<span style={{ color: "red" }}>*</span>
+                        </Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Your Last Name"
@@ -127,7 +134,9 @@ const SignUp = () => {
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>Mobile Number<span style={{color:"red"}}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">
+                        Mobile Number<span style={{ color: "red" }}>*</span>
+                      </Form.Label>
                       <Form.Control
                         type="number"
                         placeholder="Enter Your Number"
@@ -139,7 +148,9 @@ const SignUp = () => {
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupEmail">
-                      <Form.Label>WhatsApp Number<span style={{color:"red"}}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">
+                        WhatsApp Number<span style={{ color: "red" }}>*</span>
+                      </Form.Label>
                       <Form.Control
                         type="number"
                         placeholder="Enter Your WhatsApp Number"
@@ -150,7 +161,9 @@ const SignUp = () => {
                 </Row>
                 <Row>
                   <div className="col-12">
-                    <Form.Label>Email ID<span style={{color:"red"}}>*</span></Form.Label>
+                    <Form.Label className="lato-regular">
+                      Email ID<span style={{ color: "red" }}>*</span>
+                    </Form.Label>
                     <InputGroup className="mb-2">
                       <Form.Control
                         className="login-input"
@@ -166,7 +179,9 @@ const SignUp = () => {
                 <Row>
                   <div className="col-12">
                     <Form.Group className="mb-2" controlId="formGroupPassword">
-                      <Form.Label>Password<span style={{color:"red"}}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">
+                        Password<span style={{ color: "red" }}>*</span>
+                      </Form.Label>
                       <InputGroup className="col-lg-3 mb-2">
                         <Form.Control
                           type={PasswordShow ? "text" : "password"}
@@ -198,7 +213,9 @@ const SignUp = () => {
                 <Row>
                   <div className="col-12 ">
                     <Form.Group className="mb-2" controlId="formGroupPassword">
-                      <Form.Label>Confirm Password<span style={{color:"red"}}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">
+                        Confirm Password<span style={{ color: "red" }}>*</span>
+                      </Form.Label>
                       <InputGroup className="col-lg-3 mb-2">
                         <Form.Control
                           type={PasswordShow1 ? "text" : "password"}
@@ -229,17 +246,16 @@ const SignUp = () => {
                 <div>
                   <Form style={{ display: "flex", padding: "0 4px" }}>
                     {/* {["checkbox"].map((type) => ( */}
-                      <div  className="mb-3">
-                        <Form.Check
-                          inline
-                          label="I agree the terms and conditions"
-                          name="group1"
-                          // type={type}
-                          // id={`inline-${type}-1`}
-                          onChange={(e)=>setTermndcond(e.target.value)}
-                        />
-                      </div>
-                  
+                    <div className="mb-3">
+                      <Form.Check
+                        inline
+                        label="I agree the terms and conditions"
+                        name="group1"
+                        // type={type}
+                        // id={`inline-${type}-1`}
+                        onChange={(e) => setTermndcond(e.target.value)}
+                      />
+                    </div>
                   </Form>
                 </div>
                 <Row>
@@ -251,15 +267,13 @@ const SignUp = () => {
                       padding: "0px 100px",
                     }}
                   >
-                    <Button
-                      variant=""
-                      style={{ backgroundColor: "green", color: "white" }}
+                    <a
                       onClick={() => {
                         TeacherRegister();
                       }}
                     >
-                      Register
-                    </Button>
+                      <Button1 text={"Register"} />
+                    </a>
                   </div>
                 </Row>
               </div>
@@ -267,15 +281,23 @@ const SignUp = () => {
             <div className="col-md-6">
               <div className="signup-bg-img">
                 <div className="line-1">
+                  <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
+                    Welcome To,
+                  </h2>
+                  <img src={logo} alt=" " className="w-50" />
                   <h3>
-                    Welcome To <br></br>
-                    Question Paper Generator
+                    {/* Welcome To <br></br>
+                      Question Paper Generator */}
                   </h3>
-                  <span className="fs-6" style={{ textAlign: "center" }}>
+                  <span
+                    className="fs-6 space-mono-regular fw-normal"
+                    style={{ textAlign: "center" }}
+                  >
                     If you have already an account Login Here
                   </span>
+
                   <div>
-                    <a href="/login">
+                    {/* <a href="/login">
                       <Button
                         style={{
                           padding: "7px 30px",
@@ -286,6 +308,9 @@ const SignUp = () => {
                       >
                         Log in
                       </Button>
+                    </a> */}
+                    <a href="/login" style={{textDecoration:"none"}} className="d-flex justify-content-center align-items-center">
+                      <Button1 text={"Log In"} />
                     </a>
                   </div>
                 </div>
