@@ -45,6 +45,9 @@ import { PiNumberSquareFiveFill } from "react-icons/pi";
 import { TiTick } from "react-icons/ti";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { FaPersonCircleQuestion } from "react-icons/fa6";
+import logo from "./../../assets/logo.png"
+
+
 
 const Side = () => {
   const [question, setquestion] = useState(false);
@@ -87,7 +90,7 @@ const Side = () => {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary p-0">
+      <Navbar expand="lg" className=" p-0" style={{background:"#E17D1F"}}>
         <button
           class="custom-toggler navbar-toggler"
           type="button"
@@ -111,7 +114,7 @@ const Side = () => {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="lo-ad">
                 <img
-                  src="../Images/logo.png"
+                  src={logo}
                   alt="adminlogo"
                   className="admin-logo-img"
                 />
@@ -121,7 +124,7 @@ const Side = () => {
               </div>
             </div>
             <ul>
-              <Link to="/dashboard" onClick={handleNavCollapse}>
+              <Link to="" onClick={handleNavCollapse}>
                 <li className="a-ele ">
                   <span>
                     <MdOutlineSupportAgent style={{ fontSize: "20px" }} />

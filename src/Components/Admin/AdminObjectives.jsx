@@ -8,6 +8,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
 import { debounce } from "lodash";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 let googleTransliterate = require("google-input-tool");
 
 const AdminObjectives = () => {
@@ -338,13 +340,8 @@ const getAddMedium = async () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Objectives</h2>
-          <button
-            className=" btn"
-            style={{ backgroundColor: "#138808", color: "white" }}
-            onClick={handleShow}
-          >
-            Add Objectives
-          </button>
+        
+         <Link onClick={handleShow}> <Button2 text={"Add Objective"} /></Link>
         </div>
 
         <div className="mb-3">

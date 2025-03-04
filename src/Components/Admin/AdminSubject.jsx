@@ -7,6 +7,8 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import { Link } from "react-router-dom";
+import Button2 from "../Button2";
 const AdminSubject = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -128,7 +130,9 @@ const AdminSubject = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -313,9 +317,10 @@ const AdminSubject = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subject</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
-            Add Subject
-          </button>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Subject"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -398,7 +403,6 @@ const AdminSubject = () => {
                     );
                   })}
                 </select>
-                
               </div>
               <div className="do-sear mt-2">
                 <label>Subject</label>

@@ -9,6 +9,7 @@ import swal from "sweetalert";
 import { debounce } from "lodash";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
+import Button2 from "../Button2";
 
 const AdminQuestionAnalysisHeader = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const AdminQuestionAnalysisHeader = () => {
   const DeletQuestAnaHeader = async () => {
     try {
       const config = {
-        url: "/admin/deleteQuestionAnalysisHeader/" + deleteA ,
+        url: "/admin/deleteQuestionAnalysisHeader/" + deleteA,
         baseURL: "https://guru-resorce-backend.onrender.com/api",
         method: "delete",
         headers: {
@@ -99,9 +100,7 @@ const AdminQuestionAnalysisHeader = () => {
             to="/adminquestionsanalysisheaderadd"
             className="text-decoration-none"
           >
-            <button className="admin-add-btn">
-              Add Question Analysis Type
-            </button>
+            <Button2 text={"Add Question Analysis Type"} />
           </Link>
         </div>
 

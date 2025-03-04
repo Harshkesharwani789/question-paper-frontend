@@ -7,6 +7,8 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import { Link } from "react-router-dom";
+import Button2 from "../Button2";
 const AdminExam = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -23,55 +25,54 @@ const AdminExam = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-    // Language Translater
-    let googleTransliterate = require("google-input-tool");
-    const [translatedValue, setTranslatedValue] = useState("");
-    const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
-    
-    const handleLanguageChange = (event) => {
-      setSelectedLanguage(event.target.value);
-    };
-    const onChangeHandler = debounce(async (value, setData) => {
-      if (!value) {
-        setTranslatedValue("");
-        setData("");
-        return "";
-      }
-      let am = value.split(/\s+/); // Split by any whitespace characters
-      let arr = [];
-      let promises = [];
-  
-      for (let index = 0; index < am.length; index++) {
-        promises.push(
-          new Promise(async (resolve, reject) => {
-            try {
-              const response = await googleTransliterate(
-                new XMLHttpRequest(),
-                am[index],
-                selectedLanguage
-              );
-              resolve(response[0][0]);
-            } catch (error) {
-              console.error("Translation error:", error);
-              resolve(am[index]);
-            }
-          })
-        );
-      }
-  
-      try {
-        const translations = await Promise.all(promises);
-        setTranslatedValue(translations.join(" "));
-        setData(translations.join(" "));
-        return translations;
-      } catch (error) {
-        console.error("Promise.all error:", error);
-      }
-    }, 300); // Debounce delay in milliseconds
-    
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
   //Post
-  const [mediumName,setmediumName] = useState("");
+  const [mediumName, setmediumName] = useState("");
   const [NameExamination, setNameExamination] = useState("");
   const AddNameExamination = async () => {
     try {
@@ -84,7 +85,7 @@ const AdminExam = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           NameExamination: NameExamination,
           authId: admin?._id,
         },
@@ -108,26 +109,27 @@ const AdminExam = () => {
         icon: "error",
         dangerMode: true,
       });
-
     }
   };
-   //get method for medium
-   const [Medium, setMedium] = useState([]);
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
   //  const [nochangedata, setnochangedata] = useState([]);
-   const getAddMedium = async () => {
-     try {
-       let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
-       if (res.status == 200) {
-         setMedium(res.data.success);
-         setnochangedata(res.data.success);
-       }
-     } catch (error) {
-       console.log(error);
-     }
-   };
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
+      );
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //get
   const [NameExam, setNameExam] = useState([]);
-  const [nochangedata,setnochangedata] = useState([]);
+  const [nochangedata, setnochangedata] = useState([]);
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
@@ -141,7 +143,7 @@ const AdminExam = () => {
       console.log(error);
     }
   };
-  console.log("NameExam",NameExam);
+  console.log("NameExam", NameExam);
   //edit
   const [updateNameExam, setupdateNameExam] = useState("");
   const EditNameExam = async () => {
@@ -155,7 +157,7 @@ const AdminExam = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           NameExamination: NameExamination,
           authId: admin?._id,
           id: updateNameExam,
@@ -257,7 +259,7 @@ const AdminExam = () => {
     getAddMedium();
   }, []);
 
-// newpagination 
+  // newpagination
   const [data1, setData1] = useState([]);
   const [Products, setProducts] = useState();
 
@@ -286,7 +288,7 @@ const AdminExam = () => {
   }
   return (
     <>
-     <div className="row">
+      <div className="row">
         <div className="col-md-10"></div>
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
@@ -325,13 +327,10 @@ const AdminExam = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Name Of Examination</h2>
-          <button
-            className=" btn"
-            style={{ backgroundColor: "#138808", color: "white" }}
-            onClick={handleShow}
-          >
-            Add Exam
-          </button>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Exam"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -414,7 +413,7 @@ const AdminExam = () => {
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
 
-<div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -438,65 +437,87 @@ const AdminExam = () => {
                       className="inactive"
                       onClick={() => changePage(n)}
                     >
-                       {n}
+                      {n}
                     </a>
                   </li>
                 );
               })}
-             
+
               <li className="not-allow">
                 <span>
-                  <li className="next-prev"  onClick={() => {
-                    nextpage();
-                  }}>&gt; </li>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
                 </span>
               </li>
             </ul>
           </nav>
         </div>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>Add Exam s</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
-                <input type="text" placeholder="Enter Name" className="vi_0" 
-                onChange={(e)=>
-                  {
-                    if(selectedLanguage == "em-t-i0-und"){
-                      setNameExamination(e.target.value)
-                    } else onChangeHandler(e.target.value,setNameExamination)
-                  }                     
-                }/>
-                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{NameExamination}</p>}
+                <input
+                  type="text"
+                  placeholder="Enter Name"
+                  className="vi_0"
+                  onChange={(e) => {
+                    if (selectedLanguage == "em-t-i0-und") {
+                      setNameExamination(e.target.value);
+                    } else onChangeHandler(e.target.value, setNameExamination);
+                  }}
+                />
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{NameExamination}</p>
+                )}
               </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button className="mx-2" variant="secondary"
-              onClick={handleClose}>
+              <Button
+                className="mx-2"
+                variant="secondary"
+                onClick={handleClose}
+              >
                 Close
-                
               </Button>
-              <Button className="mx-2" variant="" style={{backgroundColor:"green", color:"white"}}
-              onClick={()=>{
-                AddNameExamination();
-              }}>
+              <Button
+                className="mx-2"
+                variant=""
+                style={{ backgroundColor: "green", color: "white" }}
+                onClick={() => {
+                  AddNameExamination();
+                }}
+              >
                 Add
               </Button>
             </div>
@@ -509,49 +530,64 @@ const AdminExam = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>Edit Exam</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
               <div className="do-sear mt-2">
                 <label>Name Of Examination</label>
-                <input type="text" className="vi_0" 
-                placeholder={NameExamination}
-                // value={NameExamination}
-                onChange={(e)=>
-                  {
-                    if(selectedLanguage == "em-t-i0-und"){
-                      setNameExamination(e.target.value)
-                    } else onChangeHandler(e.target.value,setNameExamination)
-                  }                     
-                }/>
-                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{NameExamination}</p>}
+                <input
+                  type="text"
+                  className="vi_0"
+                  placeholder={NameExamination}
+                  // value={NameExamination}
+                  onChange={(e) => {
+                    if (selectedLanguage == "em-t-i0-und") {
+                      setNameExamination(e.target.value);
+                    } else onChangeHandler(e.target.value, setNameExamination);
+                  }}
+                />
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{NameExamination}</p>
+                )}
               </div>
             </div>
-
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose1}>
               Close
             </Button>
-            <Button variant="" className="modal-add-btn"
-            onClick={()=>{
-              EditNameExam();
-            }}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={() => {
+                EditNameExam();
+              }}
+            >
               Edit
             </Button>
           </Modal.Footer>
@@ -562,7 +598,7 @@ const AdminExam = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -580,10 +616,15 @@ const AdminExam = () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" className="modal-add-btn"
-            onClick={()=>{
-              DeleteNameExam();
-            }}>Delete</Button>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={() => {
+                DeleteNameExam();
+              }}
+            >
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

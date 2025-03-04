@@ -18,9 +18,10 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { FaEye } from "react-icons/fa";
 import "../Admin/Admin.css";
 import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import Button2 from "../Button2";
 
 const AdminQuestions = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -47,12 +48,12 @@ const AdminQuestions = () => {
 
   const [formdata, setformdata] = useState();
   //get
-  const [ForSelectData, setForSelectData] = useState([])
-  const [TypeofQuestionFilter, setTypeofQuestionFilter] = useState([])
-  const [SunjectFilter, setSunjectFilter] = useState([])
-  const [MediumFilter, setMediumFilter] = useState([])
-  const [BoardFilter, setBoardFilter] = useState([])
-  const [ClassFilter, setClassFilter] = useState([])
+  const [ForSelectData, setForSelectData] = useState([]);
+  const [TypeofQuestionFilter, setTypeofQuestionFilter] = useState([]);
+  const [SunjectFilter, setSunjectFilter] = useState([]);
+  const [MediumFilter, setMediumFilter] = useState([]);
+  const [BoardFilter, setBoardFilter] = useState([]);
+  const [ClassFilter, setClassFilter] = useState([]);
   const [Questions, setQuestions] = useState([]);
   const getAllQuestions = async () => {
     try {
@@ -77,7 +78,6 @@ const AdminQuestions = () => {
       console.log(error);
     }
   };
-
 
   //Delete
   const [deleteA, setDeleteA] = useState("");
@@ -151,59 +151,78 @@ const AdminQuestions = () => {
     }
   };
 
-  // Filter 
+  // Filter
   const [SelectClass, setSelectClass] = useState("");
   const [Selectboard, setSelectboard] = useState("");
   const [SelectMedium, setSelectMedium] = useState("");
   const [SelectSubject, setSelectSubject] = useState("");
-  const [SelectTypeQuestion, setSelectTypeQuestion] = useState("")
+  const [SelectTypeQuestion, setSelectTypeQuestion] = useState("");
 
   useEffect(() => {
     if (SelectClass) {
-      const allclass = ClassFilter.filter((ele) =>
-        ele.Sub_Class === SelectClass)
-      setQuestions(allclass)
+      const allclass = ClassFilter.filter(
+        (ele) => ele.Sub_Class === SelectClass
+      );
+      setQuestions(allclass);
     }
 
     if (Selectboard && SelectClass) {
-      const allclassboard = BoardFilter?.filter((ele) =>
-        ele.Board === Selectboard &&
-        ele.Sub_Class === SelectClass)
-      setQuestions(allclassboard)
+      const allclassboard = BoardFilter?.filter(
+        (ele) => ele.Board === Selectboard && ele.Sub_Class === SelectClass
+      );
+      setQuestions(allclassboard);
     }
 
     if (Selectboard && SelectClass && SelectMedium) {
-      const allmedium = MediumFilter?.filter((ele) =>
-        ele.Board === Selectboard &&
-        ele.Sub_Class === SelectClass &&
-        ele.Medium === SelectMedium
-      )
-      setQuestions(allmedium)
+      const allmedium = MediumFilter?.filter(
+        (ele) =>
+          ele.Board === Selectboard &&
+          ele.Sub_Class === SelectClass &&
+          ele.Medium === SelectMedium
+      );
+      setQuestions(allmedium);
     }
 
     if (Selectboard && SelectClass && SelectMedium && SelectSubject) {
-      const allsubject = SunjectFilter?.filter((ele) =>
-        ele.Board === Selectboard &&
-        ele.Sub_Class === SelectClass &&
-        ele.Medium === SelectMedium &&
-        ele.Subject === SelectSubject
-      )
-      setQuestions(allsubject)
+      const allsubject = SunjectFilter?.filter(
+        (ele) =>
+          ele.Board === Selectboard &&
+          ele.Sub_Class === SelectClass &&
+          ele.Medium === SelectMedium &&
+          ele.Subject === SelectSubject
+      );
+      setQuestions(allsubject);
     }
 
-    if (Selectboard && SelectClass && SelectMedium && SelectSubject && SelectTypeQuestion) {
-      const alltypeofquestion = TypeofQuestionFilter?.filter((ele) =>
-        ele.Board === Selectboard &&
-        ele.Sub_Class === SelectClass &&
-        ele.Medium === SelectMedium &&
-        ele.Subject === SelectSubject &&
-        ele.Types_Question === SelectTypeQuestion
-      )
-      setQuestions(alltypeofquestion)
+    if (
+      Selectboard &&
+      SelectClass &&
+      SelectMedium &&
+      SelectSubject &&
+      SelectTypeQuestion
+    ) {
+      const alltypeofquestion = TypeofQuestionFilter?.filter(
+        (ele) =>
+          ele.Board === Selectboard &&
+          ele.Sub_Class === SelectClass &&
+          ele.Medium === SelectMedium &&
+          ele.Subject === SelectSubject &&
+          ele.Types_Question === SelectTypeQuestion
+      );
+      setQuestions(alltypeofquestion);
     }
-
-  }, [SelectSubject, SelectTypeQuestion, TypeofQuestionFilter, SunjectFilter, SelectClass, BoardFilter, Selectboard, MediumFilter, SelectMedium, ClassFilter])
-
+  }, [
+    SelectSubject,
+    SelectTypeQuestion,
+    TypeofQuestionFilter,
+    SunjectFilter,
+    SelectClass,
+    BoardFilter,
+    Selectboard,
+    MediumFilter,
+    SelectMedium,
+    ClassFilter,
+  ]);
 
   useEffect(() => {
     getAllQuestions();
@@ -212,9 +231,8 @@ const AdminQuestions = () => {
   return (
     <>
       <div className="row p-2">
-        
-          <div className="col-lg-4 d-flex justify-content-center mt-2">
-            <div>
+        <div className="col-lg-4 d-flex justify-content-center mt-2">
+          <div>
             <div class="input-group ">
               <span class="input-group-text" id="basic-addon1">
                 <BsSearch />
@@ -226,10 +244,8 @@ const AdminQuestions = () => {
                 aria-describedby="basic-addon1"
               />
             </div>
-            </div>
-            
           </div>
-    
+        </div>
 
         <div className="col-lg-4 mt-2">
           <div class="text-container ">
@@ -238,14 +254,13 @@ const AdminQuestions = () => {
         </div>
         <div className="col-lg-4 mt-2">
           <div className="text-center">
-            <button
-              className="admin-add-btn "
+            <Link
               onClick={() => {
                 navigate("/adminquestiondetails");
               }}
             >
-              Add Questions
-            </button>
+              <Button2 text={"Add Questions"} />
+            </Link>
           </div>
         </div>
       </div>
@@ -255,23 +270,32 @@ const AdminQuestions = () => {
           <label> Class: </label>
           <Form.Select
             onChange={(e) => setSelectClass(e.target.value)}
-            className="beautiful-select">
+            className="beautiful-select"
+          >
             <option value="">Select Class</option>
-            {Array.from(new Set(ForSelectData?.map(item => item?.Sub_Class)))?.map(subClass => (
+            {Array.from(
+              new Set(ForSelectData?.map((item) => item?.Sub_Class))
+            )?.map((subClass) => (
               <option key={subClass} value={subClass}>
                 {subClass}
               </option>
             ))}
-
           </Form.Select>
         </div>
         <div className="">
           <label> Board </label>
           <Form.Select
             onChange={(e) => setSelectboard(e.target.value)}
-            className="beautiful-select">
+            className="beautiful-select"
+          >
             <option value=""> select Board</option>
-            {Array.from(new Set(ForSelectData?.filter((ele) => ele?.Sub_Class === SelectClass)?.map(item => item?.Board)))?.map(Board => (
+            {Array.from(
+              new Set(
+                ForSelectData?.filter(
+                  (ele) => ele?.Sub_Class === SelectClass
+                )?.map((item) => item?.Board)
+              )
+            )?.map((Board) => (
               <option key={Board} value={Board}>
                 {Board}
               </option>
@@ -282,9 +306,17 @@ const AdminQuestions = () => {
           <label> Medium </label>
           <Form.Select
             onChange={(e) => setSelectMedium(e.target.value)}
-            className="beautiful-select">
+            className="beautiful-select"
+          >
             <option value="">Select Medium</option>
-            {Array.from(new Set(ForSelectData?.filter((ele) => ele.Board === Selectboard && ele.Sub_Class === SelectClass)?.map(item => item?.Medium)))?.map(Medium => (
+            {Array.from(
+              new Set(
+                ForSelectData?.filter(
+                  (ele) =>
+                    ele.Board === Selectboard && ele.Sub_Class === SelectClass
+                )?.map((item) => item?.Medium)
+              )
+            )?.map((Medium) => (
               <option key={Medium} value={Medium}>
                 {Medium}
               </option>
@@ -295,13 +327,19 @@ const AdminQuestions = () => {
           <label> Subject </label>
           <Form.Select
             onChange={(e) => setSelectSubject(e.target.value)}
-            className="beautiful-select">
+            className="beautiful-select"
+          >
             <option value="">Select Subject</option>
-            {Array.from(new Set(ForSelectData?.filter((ele) =>
-              ele.Board === Selectboard &&
-              ele.Sub_Class === SelectClass &&
-              ele.Medium === SelectMedium
-            )?.map(item => item?.Subject)))?.map(Subject => (
+            {Array.from(
+              new Set(
+                ForSelectData?.filter(
+                  (ele) =>
+                    ele.Board === Selectboard &&
+                    ele.Sub_Class === SelectClass &&
+                    ele.Medium === SelectMedium
+                )?.map((item) => item?.Subject)
+              )
+            )?.map((Subject) => (
               <option key={Subject} value={Subject}>
                 {Subject}
               </option>
@@ -312,31 +350,28 @@ const AdminQuestions = () => {
           <label> Type Of Question </label>
           <Form.Select
             onChange={(e) => setSelectTypeQuestion(e.target.value)}
-            className="beautiful-select">
-            <option value="" >Open this select menu</option>
-            {ForSelectData?.filter((ele) =>
-              ele.Board === Selectboard &&
-              ele.Sub_Class === SelectClass &&
-              ele.Medium === SelectMedium &&
-              ele.Subject === SelectSubject
+            className="beautiful-select"
+          >
+            <option value="">Open this select menu</option>
+            {ForSelectData?.filter(
+              (ele) =>
+                ele.Board === Selectboard &&
+                ele.Sub_Class === SelectClass &&
+                ele.Medium === SelectMedium &&
+                ele.Subject === SelectSubject
             )?.map((item, i) => {
               return (
                 <option key={item} value={item?.Types_Question}>
                   {i + 1} {item?.Types_Question}
                 </option>
-              )
+              );
             })}
           </Form.Select>
         </div>
-
       </div>
 
-
-
       <div className="customerhead p-2 mt-4">
-        <div className="d-flex justify-content-between align-items-center">
-
-        </div>
+        <div className="d-flex justify-content-between align-items-center"></div>
 
         <div className="">
           <Table
@@ -457,11 +492,11 @@ const AdminQuestions = () => {
               <CKEditor
                 editor={ClassicEditor}
                 className="vi_0"
-              // data={lodingdetails}
-              // onChange={(event, editor) => {
-              //   const data = editor.getData();
-              //   setlodingdetails(data);
-              // }}
+                // data={lodingdetails}
+                // onChange={(event, editor) => {
+                //   const data = editor.getData();
+                //   setlodingdetails(data);
+                // }}
               />
             </div>
           </Modal.Body>
@@ -495,11 +530,11 @@ const AdminQuestions = () => {
               <CKEditor
                 editor={ClassicEditor}
                 className="vi_0"
-              // data={lodingdetails}
-              // onChange={(event, editor) => {
-              //   const data = editor.getData();
-              //   setlodingdetails(data);
-              // }}
+                // data={lodingdetails}
+                // onChange={(event, editor) => {
+                //   const data = editor.getData();
+                //   setlodingdetails(data);
+                // }}
               />
             </div>
           </Modal.Body>

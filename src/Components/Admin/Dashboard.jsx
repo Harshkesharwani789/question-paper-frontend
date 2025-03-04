@@ -6,6 +6,8 @@ import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import axios from "axios";
 import moment from "moment";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const admin =JSON.parse(sessionStorage.getItem("admin"));
@@ -68,7 +70,7 @@ const Dashboard = () => {
   },[])
   return (
     <div className="container">
-      <h2 className="header-c ">Dashboard</h2>
+      <h2 className="header-c " style={{color:"#5140EB"}}>Dashboard</h2>
 
       <div className="cards-container">
         <Card style={{ width: "15rem" }}>
@@ -101,7 +103,7 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h2 className="header-c ">User List</h2>
+        <h2 className="header-c " style={{color:"#5140EB"}}>User List</h2>
 
         <div className="srch-icon">
           <div>
@@ -120,14 +122,7 @@ const Dashboard = () => {
           </div>
 
           <div>
-            <Button className="admin-add-btn">
-              <a
-                style={{ color: "white", textDecoration: "none" }}
-                href="/adminuserlist"
-              >
-                View All Users
-              </a>
-            </Button>
+            <Link to='/adminuserlist'><Button2  text={"View All Users"}  /></Link>
           </div>
         </div>
         <div className="row">

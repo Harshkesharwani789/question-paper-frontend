@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react'
 import "../Home/Home.css"
+import logo from "./../../assets/logo.png"
+
+
+
 const Home = () => {
     useEffect(() => {
         // Set a timeout for 2000 milliseconds (2 seconds)
@@ -16,7 +20,7 @@ const Home = () => {
             <div className= "hhhh">
                 <div class="welcome-container">
                     <h1>Welcome!</h1>
-                    <p>Teachers</p>
+                      <img src={logo} className='w-50' />
                 </div>
             </div>
 

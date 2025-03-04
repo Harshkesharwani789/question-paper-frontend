@@ -8,6 +8,8 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 const AdminClass = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -534,13 +536,8 @@ const AdminClass = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subclass </h2>
-          <button
-            className=" btn"
-            style={{ backgroundColor: "#138808", color: "white" }}
-            onClick={handleShow3}
-          >
-            Add Subclass
-          </button>
+         
+          <Link onClick={handleShow3}><Button2 text={"Add Subclass"} /></Link>
         </div>
 
         <div className="mb-3">

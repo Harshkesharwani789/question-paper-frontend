@@ -8,6 +8,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
 import { debounce } from "lodash";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 
 const AdminDifficultyLevel = () => {
     const ThemeContext = React.createContext();
@@ -327,13 +329,7 @@ const AdminDifficultyLevel = () => {
           <div className="d-flex justify-content-between align-items-center">
             <h2 className="header-c ">Difficulty Level</h2>
   
-            <button
-              className=" btn"
-              style={{ backgroundColor: "#138808", color: "white" }}
-              onClick={handleShow}
-            >
-              Add Difficulty Level
-            </button>
+            <Link onClick={handleShow}><Button2   text={"Add Difficulty Level"} /></Link>
           </div>
   
           <div className="mb-3">

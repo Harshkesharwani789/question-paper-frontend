@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import "../ExamBoard/ExamBoard.css";
 import axios from "axios";
 import swal from "sweetalert";
-import logo from './../../assets/logo.png';
-
-
+import logo from "./../../assets/logo.png";
+import Button1 from "../Button1";
 
 const ExamBoard = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -17,7 +16,6 @@ const ExamBoard = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   const [before, setBefore] = useState(false);
   const [userType, setuserType] = useState("");
@@ -57,7 +55,6 @@ const ExamBoard = () => {
           text: "Successfully  Done !!!",
           icon: "success",
           button: "OK!",
-
         });
         navigate("/loginpage3", { state: res.data.success });
       }
@@ -76,7 +73,9 @@ const ExamBoard = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllBoard"
+      );
       if (res.status === 200) {
         setboardname(res.data.success);
       }
@@ -102,7 +101,9 @@ const ExamBoard = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -114,7 +115,9 @@ const ExamBoard = () => {
   const [Examlevell, setExamlevell] = useState([]);
   const getExamLevel = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getExamLevel");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getExamLevel"
+      );
       if (res.status === 200) {
         setExamlevell(res.data.success);
       }
@@ -122,7 +125,6 @@ const ExamBoard = () => {
       console.log(error);
     }
   };
-
 
   // get method for subclass
   const [getaddsubclass, setgetaddsubclass] = useState([]);
@@ -146,7 +148,9 @@ const ExamBoard = () => {
     getaddsubclasss();
   }, []);
 
-  const uniqueClassNames = [...new Set(getaddsubclass?.map(item => item.className))];
+  const uniqueClassNames = [
+    ...new Set(getaddsubclass?.map((item) => item.className)),
+  ];
 
   return (
     <div>
@@ -158,14 +162,30 @@ const ExamBoard = () => {
                 <div className="bg-img">
                   <div className="line-1">
                     <h2>
-                      {" "}
                       <p
                         className="anim-typewriter text-dark"
-                        style={{ paddingLeft: "3rem" }}
+                        style={{ fontSize: "25px" }}
                       >
-                        Welcome <span className="text-uppercase Lato-regular">{user?.FirstName}</span> <span className="text-uppercase Lato-regular">{user?.LastName}!{" "}</span>
+                        Welcome{" "}
+                        <span
+                          className="text-uppercase Lato-regular fw-bold"
+                          style={{ color: "#5140EB" }}
+                        >
+                          {user?.FirstName}
+                        </span>{" "}
+                        <span
+                          className="text-uppercase Lato-regular fw-bold"
+                          style={{ color: "#5140EB" }}
+                        >
+                          {user?.LastName}!{" "}
+                        </span>
                       </p>
-                      <span className="fs-4 lato-regular">Please Enter Your Details</span>
+                        
+                        <div className="d-flex justify-content-center align-items-center">
+                          <span className=" lato-regular text-center" style={{ fontSize: "18px"}}>
+                          Please Enter Your Details
+                        </span>
+                        </div>
                     </h2>
                   </div>
                 </div>
@@ -177,7 +197,9 @@ const ExamBoard = () => {
 
                   <div>
                     <div className="mb-4">
-                      <Form.Label className="lato-regular">Medium<span style={{ color: "red" }}>*</span></Form.Label>
+                      <Form.Label className="lato-regular">
+                        Medium<span style={{ color: "red" }}>*</span>
+                      </Form.Label>
                       <Form.Select
                         aria-label="Default select example"
                         onChange={(e) => {
@@ -219,11 +241,9 @@ const ExamBoard = () => {
                         }}
                       >
                         <option value="">Select Class</option>
-                        {uniqueClassNames?.map((ele)=>  <option value={ele}>
-                          {ele}
-                        </option>)}
-                      
-                       
+                        {uniqueClassNames?.map((ele) => (
+                          <option value={ele}>{ele}</option>
+                        ))}
                       </Form.Select>
                     </div>
                     <div className=" mb-4">
@@ -233,17 +253,12 @@ const ExamBoard = () => {
                           setSub_Classs(e.target.value);
                         }}
                       >
-                        <option value={""} >Select Sub Class</option>
+                        <option value={""}>Select Sub Class</option>
                         {getaddsubclass
-                          ?.filter(
-                            (ele) => ele.className == Classs
-                          )
+                          ?.filter((ele) => ele.className == Classs)
                           ?.map((val, i) => {
                             return (
-                              <option
-                                value={val?.subclassName}
-                                key={i}
-                              >
+                              <option value={val?.subclassName} key={i}>
                                 {val?.subclassName}
                               </option>
                             );
@@ -291,13 +306,12 @@ const ExamBoard = () => {
                           setuserType(e.target.value);
                         }}
                       >
-                        <option value={""} >Select User Type </option>
+                        <option value={""}>Select User Type </option>
                         <option value={"Teacher"}>Teacher</option>
                         <option value={"Student"}>Student</option>
                       </Form.Select>
                     </div>
                   </div>
-
 
                   <Row>
                     <div
@@ -308,18 +322,15 @@ const ExamBoard = () => {
                         padding: "0px 100px",
                       }}
                     >
-                      <Button
-                        variant=""
-                        style={{ backgroundColor: "green", color: "white" }}
+                      <a
                         onClick={() => {
-                          tellus()
+                          tellus();
                         }}
                       >
-                        Submit
-                      </Button>
+                        <Button1 text={"Submit"} />
+                      </a>
                     </div>
                   </Row>
-
 
                   <br />
                 </div>
@@ -345,7 +356,11 @@ const ExamBoard = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" style={{ backgroundColor: "#ff5200", color: "white" }} onClick={handleClose}>
+          <Button
+            variant=""
+            style={{ backgroundColor: "#ff5200", color: "white" }}
+            onClick={handleClose}
+          >
             Cancel
           </Button>
           <Button

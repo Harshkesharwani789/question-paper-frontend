@@ -5,8 +5,9 @@ import { AiFillDelete } from "react-icons/ai";
 import { Button, Form, Modal, Table } from "react-bootstrap";
 import "../Admin/Admin.css";
 import { FaEdit, FaEye } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button2 from "../Button2";
 function QuestionHeader() {
     const [View,setView] = useState({});
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -347,9 +348,8 @@ function QuestionHeader() {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Question Header List :</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
-            Add Header
-          </button>
+         
+          <Link onClick={handleShow}><Button2   text={"Add Header"} /></Link>
         </div>
         <div className="mb-3">
           <Table

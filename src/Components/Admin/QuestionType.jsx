@@ -7,6 +7,8 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import { Link } from "react-router-dom";
+import Button2 from "../Button2";
 
 function QuestionType() {
     const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -307,9 +309,8 @@ function QuestionType() {
             <div className="customerhead p-2">
                 <div className="d-flex justify-content-between align-items-center">
                     <h2 className="header-c ">Question Type</h2>
-                    <button className="admin-add-btn" onClick={handleShow}>
-                        Add Type
-                    </button>
+                  
+                    <Link onClick={handleShow}><Button2 text={"Add Type"} /></Link>
                 </div>
 
                 <div className="mb-3">

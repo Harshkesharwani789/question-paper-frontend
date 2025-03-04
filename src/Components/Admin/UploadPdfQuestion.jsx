@@ -9,9 +9,10 @@ import swal from "sweetalert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { debounce } from "lodash";
+import Button2 from "../Button2";
 const UploadPdfQuestion = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -327,9 +328,8 @@ const UploadPdfQuestion = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Upload Question Paper</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
-            Add
-          </button>
+         
+          <Link onClick={handleShow}><Button2 text={"Add"}  /></Link>
         </div>
 
         <div className="mb-3">

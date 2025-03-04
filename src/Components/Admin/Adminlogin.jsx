@@ -7,6 +7,10 @@ import "../Admin/Admin.css";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import logo from './../../assets/logo.png';
+import Button1 from "../Button1";
+
+
 
 const AdminSignin = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -98,12 +102,17 @@ const AdminSignin = () => {
               <div className="col-md-6">
                 <div className="admin-login-bg">
                   <div style={{ padding: "150px 0px", textAlign: "center" }}>
-                    <h3 style={{ color: "white", fontSize: "35px" }}>
-                      Welcome To <br></br>Admin Pannel
+                  <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
+                      Welcome To, Admin Panel
+                    </h2>
+                    <img src={logo} alt=" " className="w-50" />
+                   
+                    <h3
+                      className="fs-6 space-mono-regular fw-normal text-light"
+                      style={{ textAlign: "center" }}
+                    >
+                      If you are a New User Please Register Here
                     </h3>
-                    <p style={{ color: "white" }}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -112,7 +121,7 @@ const AdminSignin = () => {
                 className="col-md-6"
                 style={{ padding: "30px", textAlign: "center" }}
               >
-                <h2>Admin Log-In</h2>
+                <h2 className="space-mono-regular">Admin Log-In</h2>
                 <Form>
                   <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label style={{ display: "flex", padding: "0 4px" }}>
@@ -171,18 +180,8 @@ const AdminSignin = () => {
                 </h6>
                 <br />
 
-                <div>
-                  <button
-                    style={{
-                      padding: "6px 30px",
-                      backgroundColor: "green",
-                      border: "1px solid green",
-                      color: "white",
-                    }}
-                    onClick={() => login()}
-                  >
-                    Sign-In
-                  </button>
+                <div className="d-flex justify-content-center align-items-center">
+                  <a onClick={() => login()}  style={{textDecoration:"none"}}><Button1  text={"Sign In"}  /></a>
                 </div>
               </div>
             </div>

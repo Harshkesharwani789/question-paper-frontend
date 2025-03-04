@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { debounce } from "lodash";
 import moment from "moment";
+import Button2 from "../Button2";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -566,9 +567,8 @@ getSyllabus()
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
-            Add Syllabus
-          </button>
+         
+          <Link onClick={handleShow} ><Button2 text={"Add Syllabus"} /></Link>
         </div>
 
         <div className="mb-3">

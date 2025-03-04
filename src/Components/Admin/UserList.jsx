@@ -159,7 +159,7 @@ const UserList = () => {
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c ">User List</h2>
+          <h2 className="header-c " style={{color:"#5140EB"}}>User List</h2>
           {/* <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}

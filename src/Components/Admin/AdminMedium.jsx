@@ -7,6 +7,8 @@ import "../Admin/Admin.css";
 import axios from "axios";
 import swal from "sweetalert";
 import { debounce } from "lodash";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 const AdminMedium = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -311,13 +313,8 @@ const AdminMedium = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Medium</h2>
-          <button
-            className=" btn"
-            style={{ backgroundColor: "#138808", color: "white" }}
-            onClick={handleShow}
-          >
-            Add Medium
-          </button>
+         
+         <Link onClick={handleShow}> <Button2 text={"Add Medium"} /></Link>
         </div>
 
         <div className="mb-3">

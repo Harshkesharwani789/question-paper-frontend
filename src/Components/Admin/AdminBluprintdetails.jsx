@@ -19,6 +19,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import Button2 from "../Button2";
 
 const AdminBlueprintdetails = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -284,15 +285,15 @@ const AdminBlueprintdetails = () => {
               </Form.Select>
             </div>
             <div className="col-md-4">
-              <button
-                className="admin-add-btn mt-4"
+             
+              <div
                 style={{ float: "right" }}
                 onClick={() => {
                   navigate("/adminblueprint");
                 }}
               >
-                Add Blue Print
-              </button>
+                <Button2 text={"Add Blue Print"} />
+              </div>
             </div>
           </div>
         </div>

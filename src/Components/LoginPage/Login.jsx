@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Button, InputGroup, Modal, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 // import "../LoginPage3/LoginPage3.css";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaPhoneAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./../../assets/logo.png";
 import Button1 from "../Button1";
+import { MdEmail } from "react-icons/md";
+import { IoLocationSharp } from "react-icons/io5";
 // import Button from "../Button";
 
 const Login = () => {
@@ -212,29 +214,175 @@ const Login = () => {
               <div className="col-md-6">
                 <div className="bg-img">
                   <div className="line-1">
-                    <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
+                    <h2 className="alfa-slab mt-2" style={{ color: "#5140EB" }}>
                       Welcome To,
                     </h2>
                     <img src={logo} alt=" " className="w-50" />
-                    <h3>
-                      {/* Welcome To <br></br>
-                      Question Paper Generator */}
-                    </h3>
-                    <span
-                      className="fs-6 space-mono-regular fw-normal"
-                      style={{ textAlign: "center" }}
+
+                    <h3
+                      className=" space-mono-regular fw-normal text-light"
+                      style={{ textAlign: "center" , fontSize:"14px"}}
                     >
                       If you are a New User Please Register Here
-                    </span>
+                    </h3>
                     <div className="d-flex justify-content-center">
                       <a href="/signup" style={{ textDecoration: "none" }}>
                         <Button1 text={"Register"} />
                       </a>
                     </div>
+
+                    {/* <div
+                      className="border border-white mt-5 contact-width p-3"
+                      style={{ backdropFilter: "blur(10px)", maxWidth: "100%" }}
+                    >
+                      <h2 style={{ fontSize: "20px" }} className="text-light">
+                        Contact Information
+                      </h2>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "start",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <FaPhoneAlt className="text-white mr-2" />
+                        <b className="text-light">Phone:</b>
+                        <span
+                          style={{ marginLeft: "5px" }}
+                          className="text-white"
+                        >
+                          +91 73378 75208
+                        </span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "start",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <MdEmail className="text-white" />
+                        <b className="text-light">Email:</b>
+                        <span
+                          style={{ marginLeft: "5px" }}
+                          className="text-white"
+                        >
+                          ganesh.m@shikshakworld.com
+                        </span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "start",
+                          flexWrap: "wrap",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <IoLocationSharp className="mt-1 text-white" />
+                        <b className="text-light">Address:</b>
+                        <div
+                          style={{
+                            marginLeft: "5px",
+                            // wordWrap: "break-word",
+                            maxWidth: "100%",
+                          }}
+                          className="text-light"
+                        >
+                          1138, 1st Floor, 20th Main Road, 53rd Cross 7th Block,
+                          Rajajinagar, Bengaluru - 560010
+                        </div>
+                      </div>
+                    </div> */}
+
+                    <div
+                      className="border border-white mt-5 contact-width p-3"
+                      style={{ backdropFilter: "blur(10px)", maxWidth: "100%" }}
+                    >
+                      <h2 style={{ fontSize: "20px" }} className="text-light">
+                        Contact Information
+                      </h2>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "start",
+                          fontSize: "16px",
+                          gap:"4px"
+                        }}
+                      >
+                        <FaPhoneAlt className="text-white mr-2" />
+                        <b className="text-light">Phone:</b>
+                        <span
+                          style={{ marginLeft: "5px" }}
+                          className="text-white"
+                        >
+                          +91 73378 75208
+                        </span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "16px",
+                          gap:"4px"
+
+                        }}
+                      >
+                        <MdEmail className="text-white" />
+                        <b className="text-light">Email:</b>
+                        <span
+                          style={{ marginLeft: "5px" }}
+                          className="text-white"
+                        >
+                          ganesh.m@shikshakworld.com
+                        </span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <IoLocationSharp className="mt-1 text-white" />
+                        <b className="text-light">Address:</b>
+                        <div
+                          style={{
+                            marginLeft: "5px",
+                          }}
+                          className="text-light"
+                        >
+                          1138, 1st Floor, 20th Main Road,
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "5px",
+                          fontSize: "16px",
+                        }}
+                        className="text-light"
+                      >
+                        53rd Cross 7th Block, Rajajinagar,
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "5px",
+                          fontSize: "16px",
+                        }}
+                        className="text-light"
+                      >
+                        Bengaluru - 560010
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <div className="page2-content-display">
                   <h4
                     style={{ textAlign: "center" }}
@@ -338,18 +486,24 @@ const Login = () => {
                           TeacherLogin();
                         }}
                       >
-                   
                         <Button1 text={"Log In"} />
                       </a>
                       {/* </a> */}
                     </div>
+                    {/* <div className="d-flex align-items-center">
+                      <p style={{ fontSize: "12px" }}>Any Query.. </p>{" "}
+                      &nbsp;&nbsp;
+                      <Link
+                        to="/contactus"
+                        style={{ fontSize: "12px" }}
+                        className="mb-3"
+                      >
+                        click here
+                      </Link>
+                    </div> */}
                   </Row>
                 </div>
                 <br />
-                <div className="d-flex">
-                  <p>Any Query.. </p> &nbsp;&nbsp;
-                  <Link to="/contactus">click here</Link>
-                </div>
               </div>
             </div>
           </div>

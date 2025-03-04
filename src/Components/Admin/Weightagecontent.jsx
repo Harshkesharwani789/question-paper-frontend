@@ -8,6 +8,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import moment from "moment";
 import { debounce } from "lodash";
+import { Link } from "react-router-dom";
+import Button2 from "../Button2";
 const Weightagecontent = () => {
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -43,54 +45,54 @@ const Weightagecontent = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-    // Language Translater
-    let googleTransliterate = require("google-input-tool");
-    const [translatedValue, setTranslatedValue] = useState("");
-    const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
-    
-    const handleLanguageChange = (event) => {
-      setSelectedLanguage(event.target.value);
-    };
-    const onChangeHandler = debounce(async (value, setData) => {
-      if (!value) {
-        setTranslatedValue("");
-        setData("");
-        return "";
-      }
-      let am = value.split(/\s+/); // Split by any whitespace characters
-      let arr = [];
-      let promises = [];
-  
-      for (let index = 0; index < am.length; index++) {
-        promises.push(
-          new Promise(async (resolve, reject) => {
-            try {
-              const response = await googleTransliterate(
-                new XMLHttpRequest(),
-                am[index],
-                selectedLanguage
-              );
-              resolve(response[0][0]);
-            } catch (error) {
-              console.error("Translation error:", error);
-              resolve(am[index]);
-            }
-          })
-        );
-      }
-  
-      try {
-        const translations = await Promise.all(promises);
-        setTranslatedValue(translations.join(" "));
-        setData(translations.join(" "));
-        return translations;
-      } catch (error) {
-        console.error("Promise.all error:", error);
-      }
-    }, 300); // Debounce delay in milliseconds
+  // Language Translater
+  let googleTransliterate = require("google-input-tool");
+  const [translatedValue, setTranslatedValue] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+  const onChangeHandler = debounce(async (value, setData) => {
+    if (!value) {
+      setTranslatedValue("");
+      setData("");
+      return "";
+    }
+    let am = value.split(/\s+/); // Split by any whitespace characters
+    let arr = [];
+    let promises = [];
+
+    for (let index = 0; index < am.length; index++) {
+      promises.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const response = await googleTransliterate(
+              new XMLHttpRequest(),
+              am[index],
+              selectedLanguage
+            );
+            resolve(response[0][0]);
+          } catch (error) {
+            console.error("Translation error:", error);
+            resolve(am[index]);
+          }
+        })
+      );
+    }
+
+    try {
+      const translations = await Promise.all(promises);
+      setTranslatedValue(translations.join(" "));
+      setData(translations.join(" "));
+      return translations;
+    } catch (error) {
+      console.error("Promise.all error:", error);
+    }
+  }, 300); // Debounce delay in milliseconds
 
   // Post method Integration
-  const [mediumName,setmediumName] = useState("");
+  const [mediumName, setmediumName] = useState("");
   const [Subject, setSubject] = useState("");
   const [Content, setContent] = useState("");
 
@@ -105,7 +107,7 @@ const Weightagecontent = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           Subject: Subject,
           Content: Content,
           authId: admin?._id,
@@ -136,7 +138,9 @@ const Weightagecontent = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -187,7 +191,7 @@ const Weightagecontent = () => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           Subject: Subject,
           Content: Content,
           authId: admin?._id,
@@ -289,7 +293,7 @@ const Weightagecontent = () => {
   console.log("weightage", weightage);
   return (
     <>
-     <div className="row">
+      <div className="row">
         <div className="col-md-10"></div>
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
@@ -327,9 +331,10 @@ const Weightagecontent = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subject Part</h2>
-          <button className="admin-add-btn" onClick={handleShow}>
-            Add Subject Part
-          </button>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Subject Part"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -469,7 +474,7 @@ const Weightagecontent = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
                 <select
                   className="vi_0"
@@ -484,7 +489,6 @@ const Weightagecontent = () => {
                     );
                   })}
                 </select>
-                
               </div>
               <div className="do-sear">
                 <label htmlFor="">Subject</label>
@@ -495,13 +499,15 @@ const Weightagecontent = () => {
                   }}
                 >
                   <option value="">Select Subject</option>
-                  {subject?.filter((ele)=>ele.mediumName == mediumName).map((val, i) => {
-                    return (
-                      <option value={val?.subjectName} key={i}>
-                        {val?.subjectName}
-                      </option>
-                    );
-                  })}
+                  {subject
+                    ?.filter((ele) => ele.mediumName == mediumName)
+                    .map((val, i) => {
+                      return (
+                        <option value={val?.subjectName} key={i}>
+                          {val?.subjectName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
               <div className="do-sear mt-2">
@@ -511,9 +517,9 @@ const Weightagecontent = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-unb"){
+                    if (selectedLanguage == "en-t-i0-unb") {
                       setContent(e.target.value);
-                    }else onChangeHandler(e.target.value,setContent)                   
+                    } else onChangeHandler(e.target.value, setContent);
                   }}
                 />
                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Content}</p>}
@@ -551,7 +557,7 @@ const Weightagecontent = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
                 <select
                   className="vi_0"
@@ -566,7 +572,6 @@ const Weightagecontent = () => {
                     );
                   })}
                 </select>
-                
               </div>
               <div className="do-sear">
                 <label htmlFor="">Subject</label>
@@ -593,9 +598,9 @@ const Weightagecontent = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-unb"){
+                    if (selectedLanguage == "en-t-i0-unb") {
                       setContent(e.target.value);
-                    }else onChangeHandler(e.target.value,setContent)                   
+                    } else onChangeHandler(e.target.value, setContent);
                   }}
                 />
                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Content}</p>}

@@ -4,6 +4,8 @@ import "../Admin/Admin.css";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 import axios from "axios";
+import Button2 from "../Button2";
+import { Link } from "react-router-dom";
 
 const AccountHistory = () => {
 
@@ -189,12 +191,8 @@ const AccountHistory = () => {
     <div className="customerhead p-2">
       <div className="d-flex justify-content-between align-items-center">
         <h2 className="header-c ">Account History</h2>
-        <button
-          className="admin-add-btn"
-          onClick={handleShow}
-        >
-          Add Account History
-        </button>
+        
+        <Link onClick={handleShow}><Button2 text={"Add Account History"}  /></Link>
       </div>
 
       <div className="mb-3">
