@@ -140,8 +140,8 @@ function AdminBlueprint() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
-        steps.findIndex((step, i) => !(i in completed))
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -168,7 +168,9 @@ function AdminBlueprint() {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllBoard"
+      );
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -195,7 +197,9 @@ function AdminBlueprint() {
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
@@ -343,7 +347,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
   const [WeModel, setWeModel] = useState(false);
   const [id, setid] = useState("");
@@ -678,7 +682,7 @@ function AdminBlueprint() {
           button: "OK!",
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const [ChaBl, setChaBl] = useState(false);
@@ -857,11 +861,12 @@ function AdminBlueprint() {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" + admin?._id,
+        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" +
+          admin?._id,
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       if (res.status == 200) {
@@ -999,9 +1004,9 @@ function AdminBlueprint() {
                                     selectedLanguage === "en-t-i0-und"
                                       ? setblName(e.target.value)
                                       : onChangeHandler(
-                                        e.target.value,
-                                        setblName
-                                      )
+                                          e.target.value,
+                                          setblName
+                                        )
                                   }
                                 />
                                 {selectedLanguage === "en-t-i0-und" ? (
@@ -1019,7 +1024,6 @@ function AdminBlueprint() {
                                 </label>
                                 <Form.Select
                                   aria-label="Default select example"
-
                                   onChange={(e) => {
                                     setmedium(e.target.value);
                                   }}
@@ -1047,13 +1051,17 @@ function AdminBlueprint() {
                                   onChange={(e) => setboard(e.target.value)}
                                 >
                                   <option>Select the Board</option>
-                                  {getboardname?.filter((ele) => ele?.mediumName === medium)?.map((val, i) => {
-                                    return (
-                                      <option value={val?.boardName} key={i}>
-                                        {val?.boardName}
-                                      </option>
-                                    );
-                                  })}
+                                  {getboardname
+                                    ?.filter(
+                                      (ele) => ele?.mediumName === medium
+                                    )
+                                    ?.map((val, i) => {
+                                      return (
+                                        <option value={val?.boardName} key={i}>
+                                          {val?.boardName}
+                                        </option>
+                                      );
+                                    })}
                                 </Form.Select>
                               </div>
                             </div>
@@ -1071,16 +1079,19 @@ function AdminBlueprint() {
                                   }}
                                 >
                                   <option value="">Select Class</option>
-                                  {[...new Set(getaddsubclass?.filter(ele => ele?.className === className || ele?.mediumName === medium) || [])]
-                                    .map((val, i) => (
-                                      <option
-                                        value={val?.className}
-                                        key={i}
-                                      >
-                                        {val?.className}
-                                      </option>
-                                    ))
-                                  }
+                                  {[
+                                    ...new Set(
+                                      getaddsubclass?.filter(
+                                        (ele) =>
+                                          ele?.className === className ||
+                                          ele?.mediumName === medium
+                                      ) || []
+                                    ),
+                                  ].map((val, i) => (
+                                    <option value={val?.className} key={i}>
+                                      {val?.className}
+                                    </option>
+                                  ))}
                                 </Form.Select>
                               </div>
                             </div>
@@ -1129,18 +1140,20 @@ function AdminBlueprint() {
                                   onChange={(e) => setsubjects(e.target.value)}
                                 >
                                   <option>Select the Subjects</option>
-                                  {subject?.filter((ele) => ele?.mediumName === medium)?.map((val, i) => {
-                                    return (
-                                      <option value={val?.subjectName}>
-                                        {val?.subjectName}
-                                      </option>
-                                    );
-                                  })}
+                                  {subject
+                                    ?.filter(
+                                      (ele) => ele?.mediumName === medium
+                                    )
+                                    ?.map((val, i) => {
+                                      return (
+                                        <option value={val?.subjectName}>
+                                          {val?.subjectName}
+                                        </option>
+                                      );
+                                    })}
                                 </Form.Select>
                               </div>
                             </div>
-
-
 
                             <div className="col-md-4">
                               <div className="do-sear mt-2">
@@ -1151,7 +1164,9 @@ function AdminBlueprint() {
                                   onChange={(e) => setExamName(e.target.value)}
                                 >
                                   <option>Select the Exame Name</option>
-                                  {NameExam?.filter((ele) => ele?.mediumName === medium)?.map((item, i) => {
+                                  {NameExam?.filter(
+                                    (ele) => ele?.mediumName === medium
+                                  )?.map((item, i) => {
                                     return (
                                       <>
                                         <option value={item?.NameExamination}>
@@ -1204,15 +1219,19 @@ function AdminBlueprint() {
                                       }}
                                     >
                                       <option value="">
-                                        Selete the Type of Question
+                                        Select the Type of Question
                                       </option>
-                                      {getobjectives?.filter((ele) => ele?.mediumName === medium)?.map((val, i) => {
-                                        return (
-                                          <option value={val?.Objectivesname}>
-                                            {val?.Objectivesname}
-                                          </option>
-                                        );
-                                      })}
+                                      {getobjectives
+                                        ?.filter(
+                                          (ele) => ele?.mediumName === medium
+                                        )
+                                        ?.map((val, i) => {
+                                          return (
+                                            <option value={val?.Objectivesname}>
+                                              {val?.Objectivesname}
+                                            </option>
+                                          );
+                                        })}
                                     </Form.Select>
                                   </div>
                                 </div>
@@ -1227,14 +1246,14 @@ function AdminBlueprint() {
                                       onChange={(e) =>
                                         setNoofQues(e.target.value)
                                       }
-                                    // onChange={(e) =>
-                                    //   selectedLanguage == "en-t-i0-und"
-                                    //     ? setNoofQues(e.target.value)
-                                    //     : onChangeHandler(
-                                    //         e.target.value,
-                                    //         setNoofQues
-                                    //       )
-                                    // }
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setNoofQues(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setNoofQues
+                                      //       )
+                                      // }
                                     />
                                     {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -1254,14 +1273,14 @@ function AdminBlueprint() {
                                       onChange={(e) =>
                                         settotalQuestion(e.target.value)
                                       }
-                                    // onChange={(e) =>
-                                    //   selectedLanguage == "en-t-i0-und"
-                                    //     ? setobjMarks(e.target.value)
-                                    //     : onChangeHandler(
-                                    //         e.target.value,
-                                    //         setobjMarks
-                                    //       )
-                                    // }
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setobjMarks(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setobjMarks
+                                      //       )
+                                      // }
                                     />
                                     {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -1281,14 +1300,14 @@ function AdminBlueprint() {
                                       onChange={(e) =>
                                         setobjMarks(e.target.value)
                                       }
-                                    // onChange={(e) =>
-                                    //   selectedLanguage == "en-t-i0-und"
-                                    //     ? setobjMarks(e.target.value)
-                                    //     : onChangeHandler(
-                                    //         e.target.value,
-                                    //         setobjMarks
-                                    //       )
-                                    // }
+                                      // onChange={(e) =>
+                                      //   selectedLanguage == "en-t-i0-und"
+                                      //     ? setobjMarks(e.target.value)
+                                      //     : onChangeHandler(
+                                      //         e.target.value,
+                                      //         setobjMarks
+                                      //       )
+                                      // }
                                     />
                                     {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -1546,11 +1565,14 @@ function AdminBlueprint() {
                                       }}
                                     >
                                       <option value="">
-                                        Selete the Type of Question
+                                        Select the Type of Question
                                       </option>
-                                      {weightage?.filter(
-                                        (ele) => subjects === ele?.Subject || ele.mediumName === medium
-                                      )
+                                      {weightage
+                                        ?.filter(
+                                          (ele) =>
+                                            subjects === ele?.Subject ||
+                                            ele.mediumName === medium
+                                        )
                                         .map((val, i) => {
                                           return (
                                             <option value={val?.Content}>
@@ -1570,14 +1592,14 @@ function AdminBlueprint() {
                                       placeholder="Enter the Weightage"
                                       className="vi_0"
                                       onChange={(e) => setMarks(e.target.value)}
-                                    //  onChange={(e) =>
-                                    //       selectedLanguage == "en-t-i0-und"
-                                    //         ? setMarks(e.target.value)
-                                    //         : onChangeHandler(
-                                    //             e.target.value,
-                                    //             setMarks
-                                    //           )
-                                    //     }
+                                      //  onChange={(e) =>
+                                      //       selectedLanguage == "en-t-i0-und"
+                                      //         ? setMarks(e.target.value)
+                                      //         : onChangeHandler(
+                                      //             e.target.value,
+                                      //             setMarks
+                                      //           )
+                                      //     }
                                     />
                                     {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -1704,16 +1726,18 @@ function AdminBlueprint() {
                                         <option value="default">
                                           Types of the Question
                                         </option>
-                                        {QuestionType?.filter((ele)=>ele?.QFormatMedium === medium)?.map((item) => {
+                                        {QuestionType?.filter(
+                                          (ele) => ele?.QFormatMedium === medium
+                                        )?.map((item) => {
                                           return (
                                             <option value={item?.Qformat}>
-                                              {item?.translatelang ? (<>
-                                                {item?.translatelang}
-                                              </>) : (<>
-                                                {item?.Qformat}
-                                              </>)}
+                                              {item?.translatelang ? (
+                                                <>{item?.translatelang}</>
+                                              ) : (
+                                                <>{item?.Qformat}</>
+                                              )}
                                             </option>
-                                          )
+                                          );
                                         })}
                                         {/* <option value="Objective Questions">
                                           Objective Questions
@@ -1817,9 +1841,9 @@ function AdminBlueprint() {
                                           selectedLanguage == "en-t-i0-und"
                                             ? setQAInstruction(e.target.value)
                                             : onChangeHandler(
-                                              e.target.value,
-                                              setQAInstruction
-                                            )
+                                                e.target.value,
+                                                setQAInstruction
+                                              )
                                         }
                                       />
                                       {selectedLanguage == "en-t-i0-und" ? (
@@ -1834,14 +1858,14 @@ function AdminBlueprint() {
                                         className="vi_0"
                                         placeholder="Enter Total No. of Questions"
                                         onChange={(e) => setNQA(e.target.value)}
-                                      // onChange={(e) =>
-                                      //   selectedLanguage == "en-t-i0-und"
-                                      //     ? setNQA(e.target.value)
-                                      //     : onChangeHandler(
-                                      //         e.target.value,
-                                      //         setNQA
-                                      //       )
-                                      // }
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setNQA(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setNQA
+                                        //       )
+                                        // }
                                       />
                                       {/* {selectedLanguage == "en-t-i0-und" ? (
                                         <></>
@@ -1857,14 +1881,14 @@ function AdminBlueprint() {
                                         onChange={(e) =>
                                           setMask(e.target.value)
                                         }
-                                      // onChange={(e) =>
-                                      //   selectedLanguage == "en-t-i0-und"
-                                      //     ? setMask(e.target.value)
-                                      //     : onChangeHandler(
-                                      //         e.target.value,
-                                      //         setMask
-                                      //       )
-                                      // }
+                                        // onChange={(e) =>
+                                        //   selectedLanguage == "en-t-i0-und"
+                                        //     ? setMask(e.target.value)
+                                        //     : onChangeHandler(
+                                        //         e.target.value,
+                                        //         setMask
+                                        //       )
+                                        // }
                                       />
                                       {/* {selectedLanguage == "en-t-i0-und" ? (
                                         <></>
@@ -1973,9 +1997,9 @@ function AdminBlueprint() {
                                           selectedLanguage == "en-t-i0-und"
                                             ? setDurationOfExam(e.target.value)
                                             : onChangeHandler(
-                                              e.target.value,
-                                              setDurationOfExam
-                                            )
+                                                e.target.value,
+                                                setDurationOfExam
+                                              )
                                         }
                                       />
                                       {selectedLanguage == "en-t-i0-und" ? (
@@ -1994,7 +2018,7 @@ function AdminBlueprint() {
                                         )}
                                         className="vi_0"
                                         placeholder="Total Marks"
-                                      // onChange={(e)=>{setTotalMask(e.target.value)}}
+                                        // onChange={(e)=>{setTotalMask(e.target.value)}}
                                       />
                                     </div>
                                     <div className="col-md-4">
@@ -2050,14 +2074,14 @@ function AdminBlueprint() {
                                             onChange={(e) =>
                                               setEasy(e.target.value)
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ? setEasy(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setEasy
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? setEasy(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setEasy
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2072,14 +2096,14 @@ function AdminBlueprint() {
                                             className="vi_0 mt-2"
                                             placeholder="Enter the Marks"
                                             onChange={handleChangeeasy}
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ? handleChangeeasy(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangeeasy
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? handleChangeeasy(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeeasy
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2096,14 +2120,14 @@ function AdminBlueprint() {
                                             onChange={(e) =>
                                               setEasyParcentage(e.target.value)
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ? handleChangeeasy(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangeeasy
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ? handleChangeeasy(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeeasy
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2128,14 +2152,14 @@ function AdminBlueprint() {
                                             onChange={(e) =>
                                               setAverage(e.target.value)
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?setAverage(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setAverage
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?setAverage(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setAverage
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2150,14 +2174,14 @@ function AdminBlueprint() {
                                             // value={AverageMask}
                                             placeholder="Enter the Marks"
                                             onChange={handleChangeaverage}
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?handleChangeaverage(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangeaverage
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?handleChangeaverage(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeaverage
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2176,14 +2200,14 @@ function AdminBlueprint() {
                                                 e.target.value
                                               )
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?handleChangeaverage(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangeaverage
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?handleChangeaverage(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangeaverage
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2208,14 +2232,14 @@ function AdminBlueprint() {
                                             onChange={(e) =>
                                               setDifficult(e.target.value)
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  setDifficult(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setDifficult
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setDifficult(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setDifficult
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2230,14 +2254,14 @@ function AdminBlueprint() {
                                             // value={DifficultMask}
                                             placeholder="Enter the Marks"
                                             onChange={handleChangedifficult}
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  handleChangedifficult(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangedifficult
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  handleChangedifficult(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangedifficult
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2256,14 +2280,14 @@ function AdminBlueprint() {
                                                 e.target.value
                                               )
                                             }
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  handleChangedifficult(e)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         handleChangedifficult
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  handleChangedifficult(e)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         handleChangedifficult
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2316,7 +2340,7 @@ function AdminBlueprint() {
                                               // }}
                                             >
                                               <option value="">
-                                                Selete the Objectives
+                                                Select the Objectives
                                               </option>
                                               {getobjectives.map((val, i) => {
                                                 return (
@@ -2450,17 +2474,23 @@ function AdminBlueprint() {
                                             }}
                                           >
                                             <option value="">
-                                              Selete the Chapter
+                                              Select the Chapter
                                             </option>
-                                            {chapters?.filter((ele)=>ele?.mediumName === medium || ele?.SubjectPart === labels )?.map((val, i) => {
-                                              return (
-                                                <option
-                                                  value={val?.chapterName}
-                                                >
-                                                  {val?.chapterName}
-                                                </option>
-                                              );
-                                            })}
+                                            {chapters
+                                              ?.filter(
+                                                (ele) =>
+                                                  ele?.mediumName === medium ||
+                                                  ele?.SubjectPart === labels
+                                              )
+                                              ?.map((val, i) => {
+                                                return (
+                                                  <option
+                                                    value={val?.chapterName}
+                                                  >
+                                                    {val?.chapterName}
+                                                  </option>
+                                                );
+                                              })}
                                           </Form.Select>
                                         </div>
                                         <div className="col-md-4">
@@ -2480,7 +2510,7 @@ function AdminBlueprint() {
                                             }}
                                           >
                                             <option value="">
-                                              Selete Objectives
+                                              Select Objectives
                                             </option>
                                             {Arr3?.map((item, i) => {
                                               return (
@@ -2548,14 +2578,14 @@ function AdminBlueprint() {
                                               );
                                             }}
                                             placeholder="Enter No.of Questions"
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  setBlueprintnoofquestion(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setBlueprintnoofquestion
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBlueprintnoofquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBlueprintnoofquestion
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2577,14 +2607,14 @@ function AdminBlueprint() {
                                               );
                                             }}
                                             placeholder="Marks Per Question"
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  setBluePrintmarksperquestion(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setBluePrintmarksperquestion
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBluePrintmarksperquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBluePrintmarksperquestion
+                                            //       )
+                                            // }
                                           />
                                           {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -2715,7 +2745,7 @@ function AdminBlueprint() {
                                                         a +
                                                         Number(
                                                           ele?.BluePrintmarksperquestion *
-                                                          ele?.Blueprintnoofquestion
+                                                            ele?.Blueprintnoofquestion
                                                         ),
                                                       0
                                                     )}
@@ -2736,14 +2766,14 @@ function AdminBlueprint() {
                                               setprice(e.target.value);
                                             }}
                                             placeholder="total price blue print with quetion paper"
-                                          // onChange={(e) =>
-                                          //   selectedLanguage == "en-t-i0-und"
-                                          //     ?  setBluePrintmarksperquestion(e.target.value)
-                                          //     : onChangeHandler(
-                                          //         e.target.value,
-                                          //         setBluePrintmarksperquestion
-                                          //       )
-                                          // }
+                                            // onChange={(e) =>
+                                            //   selectedLanguage == "en-t-i0-und"
+                                            //     ?  setBluePrintmarksperquestion(e.target.value)
+                                            //     : onChangeHandler(
+                                            //         e.target.value,
+                                            //         setBluePrintmarksperquestion
+                                            //       )
+                                            // }
                                           />
                                         </div>
                                       </div>
@@ -3002,14 +3032,14 @@ function AdminBlueprint() {
                 value={NQAE}
                 placeholder="Enter Total No. of Questions"
                 onChange={(e) => setNQAE(e.target.value)}
-              // onChange={(e) =>
-              //   selectedLanguage == "en-t-i0-und"
-              //     ? setNQA(e.target.value)
-              //     : onChangeHandler(
-              //         e.target.value,
-              //         setNQA
-              //       )
-              // }
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ? setNQA(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setNQA
+                //       )
+                // }
               />
               {/* {selectedLanguage == "en-t-i0-und" ? (
                                         <></>
@@ -3024,14 +3054,14 @@ function AdminBlueprint() {
                 className="vi_0"
                 placeholder="Enter the mask per question"
                 onChange={(e) => setMaskE(e.target.value)}
-              // onChange={(e) =>
-              //   selectedLanguage == "en-t-i0-und"
-              //     ? setMask(e.target.value)
-              //     : onChangeHandler(
-              //         e.target.value,
-              //         setMask
-              //       )
-              // }
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ? setMask(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setMask
+                //       )
+                // }
               />
               {/* {selectedLanguage == "en-t-i0-und" ? (
                                         <></>
@@ -3102,7 +3132,7 @@ function AdminBlueprint() {
                       setObjective(e.target.value);
                     }}
                   >
-                    <option value="">Selete the Type of Question</option>
+                    <option value="">Select the Type of Question</option>
                     {getobjectives.map((val, i) => {
                       return (
                         <option value={val?.Objectivesname}>
@@ -3123,14 +3153,14 @@ function AdminBlueprint() {
                     placeholder="Enter the Percentage"
                     className="vi_0"
                     onChange={(e) => setNoofQues(e.target.value)}
-                  // onChange={(e) =>
-                  //   selectedLanguage == "en-t-i0-und"
-                  //     ? setNoofQues(e.target.value)
-                  //     : onChangeHandler(
-                  //         e.target.value,
-                  //         setNoofQues
-                  //       )
-                  // }
+                    // onChange={(e) =>
+                    //   selectedLanguage == "en-t-i0-und"
+                    //     ? setNoofQues(e.target.value)
+                    //     : onChangeHandler(
+                    //         e.target.value,
+                    //         setNoofQues
+                    //       )
+                    // }
                   />
                   {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -3149,14 +3179,14 @@ function AdminBlueprint() {
                     className="vi_0"
                     value={totalQuestion}
                     onChange={(e) => settotalQuestion(e.target.value)}
-                  // onChange={(e) =>
-                  //   selectedLanguage == "en-t-i0-und"
-                  //     ? setobjMarks(e.target.value)
-                  //     : onChangeHandler(
-                  //         e.target.value,
-                  //         setobjMarks
-                  //       )
-                  // }
+                    // onChange={(e) =>
+                    //   selectedLanguage == "en-t-i0-und"
+                    //     ? setobjMarks(e.target.value)
+                    //     : onChangeHandler(
+                    //         e.target.value,
+                    //         setobjMarks
+                    //       )
+                    // }
                   />
                   {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -3175,14 +3205,14 @@ function AdminBlueprint() {
                     placeholder="Enter the marks"
                     className="vi_0"
                     onChange={(e) => setobjMarks(e.target.value)}
-                  // onChange={(e) =>
-                  //   selectedLanguage == "en-t-i0-und"
-                  //     ? setobjMarks(e.target.value)
-                  //     : onChangeHandler(
-                  //         e.target.value,
-                  //         setobjMarks
-                  //       )
-                  // }
+                    // onChange={(e) =>
+                    //   selectedLanguage == "en-t-i0-und"
+                    //     ? setobjMarks(e.target.value)
+                    //     : onChangeHandler(
+                    //         e.target.value,
+                    //         setobjMarks
+                    //       )
+                    // }
                   />
                   {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -3228,7 +3258,7 @@ function AdminBlueprint() {
                     setlabels(e.target.value);
                   }}
                 >
-                  <option value="">Selete the Type of Question</option>
+                  <option value="">Select the Type of Question</option>
                   {weightage
                     ?.filter((ele) => subjects == ele?.Subject)
                     .map((val, i) => {
@@ -3249,14 +3279,14 @@ function AdminBlueprint() {
                   placeholder="Enter the Weightage"
                   className="vi_0"
                   onChange={(e) => setMarks(e.target.value)}
-                //  onChange={(e) =>
-                //       selectedLanguage == "en-t-i0-und"
-                //         ? setMarks(e.target.value)
-                //         : onChangeHandler(
-                //             e.target.value,
-                //             setMarks
-                //           )
-                //     }
+                  //  onChange={(e) =>
+                  //       selectedLanguage == "en-t-i0-und"
+                  //         ? setMarks(e.target.value)
+                  //         : onChangeHandler(
+                  //             e.target.value,
+                  //             setMarks
+                  //           )
+                  //     }
                 />
                 {/* {selectedLanguage == "en-t-i0-und" ? (
                                       <></>
@@ -3301,7 +3331,7 @@ function AdminBlueprint() {
                   setBlueprintchapter(e.target.value);
                 }}
               >
-                <option value="">Selete the Chapter</option>
+                <option value="">Select the Chapter</option>
                 {chapters?.map((val, i) => {
                   return (
                     <option value={val?.chapterName}>{val?.chapterName}</option>
@@ -3322,7 +3352,7 @@ function AdminBlueprint() {
                   }
                 }}
               >
-                <option value="">Selete Objectives</option>
+                <option value="">Select Objectives</option>
                 {Arr3?.map((item, i) => {
                   return (
                     <option value={JSON.stringify(item)} key={i}>
@@ -3366,14 +3396,14 @@ function AdminBlueprint() {
                   setBlueprintnoofquestion(e.target.value);
                 }}
                 placeholder="Enter No.of Questions"
-              // onChange={(e) =>
-              //   selectedLanguage == "en-t-i0-und"
-              //     ?  setBlueprintnoofquestion(e.target.value)
-              //     : onChangeHandler(
-              //         e.target.value,
-              //         setBlueprintnoofquestion
-              //       )
-              // }
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBlueprintnoofquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBlueprintnoofquestion
+                //       )
+                // }
               />
               {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
@@ -3392,14 +3422,14 @@ function AdminBlueprint() {
                   setBluePrintmarksperquestion(e.target.value);
                 }}
                 placeholder="Marks Per Question"
-              // onChange={(e) =>
-              //   selectedLanguage == "en-t-i0-und"
-              //     ?  setBluePrintmarksperquestion(e.target.value)
-              //     : onChangeHandler(
-              //         e.target.value,
-              //         setBluePrintmarksperquestion
-              //       )
-              // }
+                // onChange={(e) =>
+                //   selectedLanguage == "en-t-i0-und"
+                //     ?  setBluePrintmarksperquestion(e.target.value)
+                //     : onChangeHandler(
+                //         e.target.value,
+                //         setBluePrintmarksperquestion
+                //       )
+                // }
               />
               {/* {selectedLanguage == "en-t-i0-und" ? (
                                             <></>
