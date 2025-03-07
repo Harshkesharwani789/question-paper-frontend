@@ -29,7 +29,7 @@ const UserList = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ const UserList = () => {
   const DeleteTeacher = async () => {
     try {
       let res = await axios.delete(
-        `https://guru-resorce-backend.onrender.com/api/admin/deleteTeacher/${delteacher}/${admin?._id}`,
+        `http://localhost:8001/api/admin/deleteTeacher/${delteacher}/${admin?._id}`,
         {
           headers: {
             "content-type": "application/json",
@@ -59,7 +59,7 @@ const UserList = () => {
       );
       // const config = {
       //   url: "/teacher/deleteTeacher/" + delteacher + "/" + admin?._id,
-      //   baseURL: "https://guru-resorce-backend.onrender.com/api",
+      //   baseURL: "http://localhost:8001/api",
       //   method: "delete",
       //   headers: {
       //     "content-type": "application/json",
@@ -159,7 +159,9 @@ const UserList = () => {
       </div>
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="header-c " style={{color:"#5140EB"}}>User List</h2>
+          <h2 className="header-c " style={{ color: "#5140EB" }}>
+            User List
+          </h2>
           {/* <button
             className=" btn"
             style={{ backgroundColor: "#083494", color: "white" }}

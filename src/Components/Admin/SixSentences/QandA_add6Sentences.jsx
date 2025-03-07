@@ -41,7 +41,7 @@ const QandA_add6Sentences = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -57,7 +57,7 @@ const QandA_add6Sentences = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -73,11 +73,11 @@ const QandA_add6Sentences = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -151,7 +151,6 @@ const QandA_add6Sentences = ({ selectdetails }) => {
               </div>
             </div>
 
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
@@ -179,7 +178,7 @@ const QandA_add6Sentences = ({ selectdetails }) => {
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
-                    setNumberOfLine(selectedValue)
+                    setNumberOfLine(selectedValue);
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");
@@ -874,8 +873,8 @@ const QandA_add6Sentences = ({ selectdetails }) => {
                 >
                   <option value="">Select the Marks</option>
                   <option value={"1/2"}>1/2</option>
-                  <option value={'1/4'}>1/4</option>
-                  <option value={'1/3'}>1/3</option>
+                  <option value={"1/4"}>1/4</option>
+                  <option value={"1/3"}>1/3</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
@@ -929,7 +928,6 @@ const QandA_add6Sentences = ({ selectdetails }) => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
-
               handleShow();
             }}
             className="modal-add-btn"

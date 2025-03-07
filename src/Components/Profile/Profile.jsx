@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  FaPhoneAlt,
-  FaRegEye,
-  FaWhatsappSquare,
-} from "react-icons/fa";
+import { FaPhoneAlt, FaRegEye, FaWhatsappSquare } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { CiCalendarDate } from "react-icons/ci";
 import { Table } from "react-bootstrap";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
@@ -22,12 +18,11 @@ const Profile = () => {
   const [QuestionPaper, setQuestionPaper] = useState(false);
   const [payment, setPayment] = useState(false);
 
-
   const [AllQuestionGen, setAllQuestionGen] = useState([]);
 
   const getAllQuestion = async () => {
     const res = await axios.get(
-      `https://guru-resorce-backend.onrender.com/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
+      `http://localhost:8001/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,7 +52,7 @@ const Profile = () => {
                 backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 4px",
-                marginBottom:'10px'
+                marginBottom: "10px",
               }}
               onClick={() => {
                 setprofile(true);
@@ -74,7 +69,7 @@ const Profile = () => {
                 backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 6px",
-                marginBottom:'10px'
+                marginBottom: "10px",
               }}
               onClick={() => {
                 setprofile(false);
@@ -91,7 +86,7 @@ const Profile = () => {
                 backgroundColor: "#AC199F",
                 color: "#fff",
                 padding: "3px 4px",
-                marginBottom:'10px'
+                marginBottom: "10px",
               }}
               onClick={() => {
                 setprofile(false);
@@ -109,7 +104,7 @@ const Profile = () => {
                 padding: "3px 4px",
                 float: "right",
                 borderRadius: "10px",
-                marginTop:'10px'
+                marginTop: "10px",
               }}
               onClick={() => {
                 navigate("/examboard");
@@ -243,7 +238,8 @@ const Profile = () => {
                               <tr>
                                 <td>{i + 1}</td>
                                 <td>
-                                  {moment(item?.Test_Date).format("DD/MM/YYYY")} {item?.ExamTime}
+                                  {moment(item?.Test_Date).format("DD/MM/YYYY")}{" "}
+                                  {item?.ExamTime}
                                 </td>
                                 <td>{item?.Institute_Name}</td>
                                 <td>
@@ -297,7 +293,9 @@ const Profile = () => {
                                             fontSize: "20px",
                                           }}
                                           onClick={() =>
-                                           navigate("/admincoverpage",{state:{item:item}})
+                                            navigate("/admincoverpage", {
+                                              state: { item: item },
+                                            })
                                           }
                                         />
                                       ) : (

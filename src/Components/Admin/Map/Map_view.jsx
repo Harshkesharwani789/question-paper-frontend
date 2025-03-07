@@ -81,7 +81,7 @@ const Map_view = () => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -138,7 +138,7 @@ const Map_view = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -152,7 +152,7 @@ const Map_view = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -164,7 +164,7 @@ const Map_view = () => {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -176,7 +176,7 @@ const Map_view = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -189,7 +189,7 @@ const Map_view = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -203,7 +203,7 @@ const Map_view = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -217,7 +217,7 @@ const Map_view = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
+        "http://localhost:8001/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -231,7 +231,7 @@ const Map_view = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -245,7 +245,7 @@ const Map_view = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);

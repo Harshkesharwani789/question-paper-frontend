@@ -24,10 +24,9 @@ function AnswerQuestion() {
     return <td>{value}</td>;
   };
   const [Questions, setQuestions] = useState([]);
-  let count3 = 1
+  let count3 = 1;
   const SectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const RomanAA = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-
 
   const handlePrint = () => {
     const printableContent =
@@ -42,21 +41,20 @@ function AnswerQuestion() {
     // Restore the original content
     document.body.innerHTML = originalContent;
     setTimeout(() => {
-      return window.location.reload()
-    }, 1000)
+      return window.location.reload();
+    }, 1000);
   };
 
   const getgenratedData = async () => {
     try {
       const config = {
         url: "/teacher/getGenQuestionById/" + state?._id + "/" + user?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "get",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-
       };
       let res = await axios(config);
       if (res.status == 200) {
@@ -71,19 +69,22 @@ function AnswerQuestion() {
         button: "Ok!",
       });
     }
-  }
+  };
 
   useEffect(() => {
     if (token && state) {
-      getgenratedData()
+      getgenratedData();
     }
-  }, [token, state])
+  }, [token, state]);
 
   const [QuestionHeader, setQuestionHeader] = useState([]);
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+          state?.Medium +
+          "/" +
+          user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -97,10 +98,10 @@ function AnswerQuestion() {
       console.log(error);
     }
   };
-useEffect(() => {
-  getQuestionHeaderbyMedium()
-}, [])
-console.log("QuestionHeader",QuestionHeader);
+  useEffect(() => {
+    getQuestionHeaderbyMedium();
+  }, []);
+  console.log("QuestionHeader", QuestionHeader);
 
   return (
     <div className="container-fluid">
@@ -115,31 +116,44 @@ console.log("QuestionHeader",QuestionHeader);
       </div>
       <div id="printable-content" class="print-area">
         <div style={{ textAlign: "center" }}>
-
-
-
-          <div id="pdf-content" className="question-paper-display" style={{border:"2px solid black"}}>
+          <div
+            id="pdf-content"
+            className="question-paper-display"
+            style={{ border: "2px solid black" }}
+          >
             <div className="englishqp-page-body">
               <div>
-                <h6><b>{state?.Institute_Name} {state?.SchoolAddress}</b></h6>
+                <h6>
+                  <b>
+                    {state?.Institute_Name} {state?.SchoolAddress}
+                  </b>
+                </h6>
 
-                <h6><b>{state?.bluePrint?.blName}</b></h6>
-                <h6><b>{state?.subjects}</b></h6>
-                <h6><b>{state?.Subject}</b></h6>
+                <h6>
+                  <b>{state?.bluePrint?.blName}</b>
+                </h6>
+                <h6>
+                  <b>{state?.subjects}</b>
+                </h6>
+                <h6>
+                  <b>{state?.Subject}</b>
+                </h6>
                 {/* <h4>
                           <b>{state?.bluePrint?.blName}</b>
                         </h4> */}
               </div>
 
-
               <div style={{ fontWeight: "bold" }}>
                 <div className="time-and-marks">
-                  <div>{QuestionHeader?.time} :{state?.bluePrint?.DurationOfExam}</div>
+                  <div>
+                    {QuestionHeader?.time} :{state?.bluePrint?.DurationOfExam}
+                  </div>
                   {/* <div>ಉತ್ತರ ಸೂಚಿ</div> */}
                   <div>{QuestionHeader?.answerheader}</div>
                   <div>{state?.Sub_Class}</div>
                   <div>
-                    {QuestionHeader?.marks} : {state?.bluePrint?.TotalDifficultMask}
+                    {QuestionHeader?.marks} :{" "}
+                    {state?.bluePrint?.TotalDifficultMask}
                   </div>
                 </div>
                 <b>
@@ -162,8 +176,7 @@ console.log("QuestionHeader",QuestionHeader);
                         </div>
                         <div style={{ display: "flex" }}>
                           <b>
-                            {ele1?.NQA}x{ele1?.Mask}=
-                            {ele1?.NQA * ele1?.Mask}
+                            {ele1?.NQA}x{ele1?.Mask}={ele1?.NQA * ele1?.Mask}
                           </b>
                         </div>
                       </div>
@@ -175,7 +188,7 @@ console.log("QuestionHeader",QuestionHeader);
                           return (
                             <div className="question-body">
                               {item?.Types_Question ===
-                                "Objective Questions" ? (
+                              "Objective Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
@@ -187,7 +200,7 @@ console.log("QuestionHeader",QuestionHeader);
                                         key={i}
                                       >
                                         <b>{count3++}</b>
-                                        <p style={{width:"90%"}}>
+                                        <p style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -202,7 +215,7 @@ console.log("QuestionHeader",QuestionHeader);
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
+                                                    src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -215,7 +228,6 @@ console.log("QuestionHeader",QuestionHeader);
                                             ) : (
                                               <></>
                                             )}
-
                                           </div>
                                         </>
                                       ) : (
@@ -229,7 +241,7 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Multiple Choice Questions" ? (
+                              "Multiple Choice Questions" ? (
                                 <div className="d-flex justify-content-between">
                                   <div>
                                     <div
@@ -240,7 +252,7 @@ console.log("QuestionHeader",QuestionHeader);
                                       key={i}
                                     >
                                       <b>{count3++}</b>
-                                      <b style={{width:"90%"}}>
+                                      <b style={{ width: "90%" }}>
                                         {item?.Answer
                                           ? parse(item?.Answer)
                                           : ""}
@@ -255,7 +267,7 @@ console.log("QuestionHeader",QuestionHeader);
                                               <b>Answer Image:</b>
                                               <div>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
                                                   style={{
                                                     width: "174px",
                                                     height: "98px",
@@ -268,7 +280,6 @@ console.log("QuestionHeader",QuestionHeader);
                                           ) : (
                                             <></>
                                           )}
-
                                         </div>
                                       </>
                                     ) : (
@@ -280,19 +291,17 @@ console.log("QuestionHeader",QuestionHeader);
                               ) : (
                                 ""
                               )}
-                              {item?.Types_Question ===
-                                "One Word Question" ? (
+                              {item?.Types_Question === "One Word Question" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex ">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
                                         </b>
-
                                       </div>
                                       {item?.orAnswer ? (
                                         <>
@@ -322,13 +331,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "One Sentence Answer Question" ? (
+                              "One Sentence Answer Question" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -362,13 +371,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Two  Sentence Answer Questions" ? (
+                              "Two  Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -402,13 +411,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Two and three Sentence Answer Questions" ? (
+                              "Two and three Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -442,13 +451,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Three and Four Sentence Answer Questions" ? (
+                              "Three and Four Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -482,13 +491,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Five and Six Sentence Answer Questions" ? (
+                              "Five and Six Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -522,13 +531,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Six Sentence Answer Questions" ? (
+                              "Six Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -562,13 +571,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Seven Sentence Answer Questions" ? (
+                              "Seven Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -602,13 +611,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Eight Sentence Answer Questions" ? (
+                              "Eight Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -642,13 +651,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Ten Sentence Answer Questions" ? (
+                              "Ten Sentence Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -681,13 +690,12 @@ console.log("QuestionHeader",QuestionHeader);
                               ) : (
                                 <></>
                               )}
-                              {item?.Types_Question ===
-                                "Map Reading" ? (
+                              {item?.Types_Question === "Map Reading" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div className="d-flex mt-2">
                                       <b>{count3++}).</b>
-                                      <b style={{width:"90%"}}>
+                                      <b style={{ width: "90%" }}>
                                         {item?.Answer
                                           ? parse(item?.Answer)
                                           : ""}
@@ -700,13 +708,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Classifications of Questions" ? (
+                              "Classifications of Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex ">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -740,13 +748,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Odd and out words Questions" ? (
+                              "Odd and out words Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -767,7 +775,7 @@ console.log("QuestionHeader",QuestionHeader);
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
+                                                    src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -793,14 +801,13 @@ console.log("QuestionHeader",QuestionHeader);
                               ) : (
                                 <></>
                               )}
-                              {item?.Types_Question ===
-                                "Grammer Questions" ? (
+                              {item?.Types_Question === "Grammer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -811,8 +818,7 @@ console.log("QuestionHeader",QuestionHeader);
                                           responsive
                                           bordered
                                           style={{
-                                            width:
-                                              "-webkit-fill-available",
+                                            width: "-webkit-fill-available",
                                           }}
                                         >
                                           <tbody>
@@ -820,10 +826,7 @@ console.log("QuestionHeader",QuestionHeader);
                                               (row, rowIndex) => (
                                                 <tr key={rowIndex}>
                                                   {row.map(
-                                                    (
-                                                      cell,
-                                                      cellIndex
-                                                    ) => (
+                                                    (cell, cellIndex) => (
                                                       <ViewTableCell
                                                         key={cellIndex}
                                                         className="vi_0"
@@ -845,13 +848,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Expanding and Explanations Answer Questions" ? (
+                              "Expanding and Explanations Answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -886,14 +889,13 @@ console.log("QuestionHeader",QuestionHeader);
                               ) : (
                                 <></>
                               )}
-                              {item?.Types_Question ===
-                                "Graph Questions" ? (
+                              {item?.Types_Question === "Graph Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -904,7 +906,7 @@ console.log("QuestionHeader",QuestionHeader);
                                           <>
                                             <div>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_Ans}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
                                                 style={{
                                                   width: "174px",
                                                   height: "98px",
@@ -927,13 +929,32 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Poet,Time, Place, Writer answer questions" ? (
+                              "Poet,Time, Place, Writer answer questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
+                                          {item?.Answer
+                                            ? parse(item?.Answer)
+                                            : ""}
+                                        </b>
+                                      </div>
+                                    </div>
+                                    <div>{ele1?.Mask}</div>
+                                  </div>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                              {item?.Types_Question === "Letter Writting" ? (
+                                <>
+                                  <div className="d-flex justify-content-between">
+                                    <div>
+                                      <div className="d-flex mt-2">
+                                        <b>{count3++}).</b>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -947,33 +968,13 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Letter Writting" ? (
-                                <>
-                                  <div className="d-flex justify-content-between">
-                                    <div>
-                                      <div className="d-flex mt-2">
-                                        <b>{count3++}).</b>
-                                        <b style={{width:"90%"}}>
-                                          {item?.Answer
-                                            ? parse(item?.Answer)
-                                            : ""}
-                                        </b>
-                                      </div>
-                                    </div>
-                                    <div>{ele1?.Mask}</div>
-                                  </div>
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                              {item?.Types_Question ===
-                                "Situation UnderStatnding answer Questions" ? (
+                              "Situation UnderStatnding answer Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div>
                                       <div className="d-flex mt-2">
                                         <b>{count3++}.</b>
-                                        <b style={{width:"90%"}}>
+                                        <b style={{ width: "90%" }}>
                                           {item?.Answer
                                             ? parse(item?.Answer)
                                             : ""}
@@ -987,12 +988,12 @@ console.log("QuestionHeader",QuestionHeader);
                                 <></>
                               )}
                               {item?.Types_Question ===
-                                "Fill in the Blanks Questions" ? (
+                              "Fill in the Blanks Questions" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div className="d-flex ">
                                       <b>{count3++}.</b>
-                                      <b style={{width:"90%"}}>
+                                      <b style={{ width: "90%" }}>
                                         {item?.Answer
                                           ? parse(item?.Answer)
                                           : ""}
@@ -1004,21 +1005,20 @@ console.log("QuestionHeader",QuestionHeader);
                               ) : (
                                 <></>
                               )}
-                              {item?.Types_Question ===
-                                "Complete the Poem" ? (
+                              {item?.Types_Question === "Complete the Poem" ? (
                                 <>
                                   <div className="d-flex justify-content-between">
                                     <div className="col-sm-6">
-                                    <div className="d-flex ">
-                                      <b>{count3++}</b>
-                                      <b style={{width:"90%"}}>
-                                        {item?.Answer
-                                          ? parse(item?.Answer)
-                                          : ""}
-                                      </b>
+                                      <div className="d-flex ">
+                                        <b>{count3++}</b>
+                                        <b style={{ width: "90%" }}>
+                                          {item?.Answer
+                                            ? parse(item?.Answer)
+                                            : ""}
+                                        </b>
+                                      </div>
                                     </div>
-                                    </div>
-                                    
+
                                     <div>{ele1?.Mask}</div>
                                   </div>
                                 </>
@@ -1037,13 +1037,10 @@ console.log("QuestionHeader",QuestionHeader);
               </main>
             </div>
           </div>
-
-
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
-export default AnswerQuestion
+export default AnswerQuestion;

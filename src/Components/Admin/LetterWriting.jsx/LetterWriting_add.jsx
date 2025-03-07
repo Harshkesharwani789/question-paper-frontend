@@ -32,8 +32,6 @@ const LetterWriting_add = ({ selectdetails }) => {
 
   const navigate = useNavigate();
 
-
-
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
 
@@ -50,7 +48,7 @@ const LetterWriting_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -66,11 +64,11 @@ const LetterWriting_add = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           NumberOfLine: NumberOfLine,
@@ -106,7 +104,6 @@ const LetterWriting_add = ({ selectdetails }) => {
     setQuestion(data);
   };
 
-
   const handleChange7 = (e, editor) => {
     const data = editor.getData();
     setAnswer(data);
@@ -116,7 +113,6 @@ const LetterWriting_add = ({ selectdetails }) => {
       <div className="">
         <div className="container">
           <div className="row">
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -250,7 +246,6 @@ const LetterWriting_add = ({ selectdetails }) => {
                   >
                     7
                   </option>
-
 
                   <option
                     value="10"
@@ -734,14 +729,14 @@ const LetterWriting_add = ({ selectdetails }) => {
                     onChange={handleChange7}
                   /> */}
                   <MathEditor
-                  data={{
-                    A: Answer,
-                    B: setAnswer,
-                    selectedLanguage: selectdetails?.selectedLanguage,
-                    trans: AnswerT,
-                    settran: setAnswerT,
-                  }}
-                />
+                    data={{
+                      A: Answer,
+                      B: setAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: AnswerT,
+                      settran: setAnswerT,
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -829,7 +824,6 @@ const LetterWriting_add = ({ selectdetails }) => {
         <Modal.Body>
           <div className="container">
             <div className="row">
-
               <div className="col-md-12">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Question</label>
@@ -837,8 +831,6 @@ const LetterWriting_add = ({ selectdetails }) => {
                   <p>{Question ? parse(Question) : ""}</p>
                 </div>
               </div>
-
-
 
               <div className="col-12">
                 {twoline ? (
@@ -1113,7 +1105,6 @@ const LetterWriting_add = ({ selectdetails }) => {
                                             </div>
                                           </>
                                         ) : (
-
                                           <>
                                             {tenline ? (
                                               <>
@@ -1236,8 +1227,6 @@ const LetterWriting_add = ({ selectdetails }) => {
                   <p>{Answer_Time}</p>
                 </div>
               </div>
-
-
             </div>
           </div>
         </Modal.Body>
@@ -1265,5 +1254,4 @@ const LetterWriting_add = ({ selectdetails }) => {
   );
 };
 
-
-export default LetterWriting_add
+export default LetterWriting_add;

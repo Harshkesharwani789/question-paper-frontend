@@ -23,7 +23,6 @@ const AdminClass = () => {
   const [show4, setShow4] = useState();
   const [show5, setShow5] = useState();
 
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -41,7 +40,6 @@ const AdminClass = () => {
 
   const handleClose5 = () => setShow5(false);
   const handleShow5 = () => setShow5(true);
-
 
   // Language Translater
   let googleTransliterate = require("google-input-tool");
@@ -89,8 +87,6 @@ const AdminClass = () => {
     }
   }, 300); // Debounce delay in milliseconds
 
-
-
   // post method add class
   const [className, setclassName] = useState("");
   const classNamee = async () => {
@@ -107,7 +103,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/addClass",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -137,25 +133,25 @@ const AdminClass = () => {
       });
     }
   };
-   //get method for medium
-   const [Medium, setMedium] = useState([]);
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
   //  const [nochangedata, setnochangedata] = useState([]);
-   const getAddMedium = async () => {
-     try {
-       let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
-       if (res.status == 200) {
-         setMedium(res.data.success);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
         //  setnochangedata(res.data.success);
-       }
-     } catch (error) {
-       console.log(error);
-     }
-   };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // get method add class
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -170,7 +166,7 @@ const AdminClass = () => {
       const config = {
         url: "admin/updateClass",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api/",
+        baseURL: "http://localhost:8001/api/",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -209,7 +205,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/deleteClass/" + deleteclassname + "/" + admin?._id,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -235,7 +231,7 @@ const AdminClass = () => {
     }
   };
   // post method for sub classname
-  const [mediumName,setmediumName] = useState("");
+  const [mediumName, setmediumName] = useState("");
   const [classsname, setclasssname] = useState("");
   const [subclasssname, setsubclasssname] = useState("");
   const subclassnamee = async () => {
@@ -267,13 +263,13 @@ const AdminClass = () => {
       const config = {
         url: "/admin/addSubClass",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           className: classsname,
           subclassName: subclasssname,
           authId: admin?._id,
@@ -305,7 +301,7 @@ const AdminClass = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -320,14 +316,14 @@ const AdminClass = () => {
     try {
       const config = {
         url: "/admin/updateSubClass",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           className: classsname,
           subclassName: subclasssname,
           authId: admin?._id,
@@ -362,7 +358,7 @@ const AdminClass = () => {
       const config = {
         url: "/admin/deleteSubClass/" + deletesubclass + "/" + admin?._id,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -503,15 +499,12 @@ const AdminClass = () => {
   }
   return (
     <div>
-
-
       <div className="d-flex justify-content-between align-items-center">
-       
-          <Form.Group className="mb-3" >
-            <Form.Label>Search</Form.Label>
-            <Form.Control type="text" placeholder="Search..." />
-          </Form.Group>
-        
+        <Form.Group className="mb-3">
+          <Form.Label>Search</Form.Label>
+          <Form.Control type="text" placeholder="Search..." />
+        </Form.Group>
+
         <div className="">
           <label htmlFor="">Select Langauge</label>
           <select
@@ -536,8 +529,10 @@ const AdminClass = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subclass </h2>
-         
-          <Link onClick={handleShow3}><Button2 text={"Add Subclass"} /></Link>
+
+          <Link onClick={handleShow3}>
+            <Button2 text={"Add Subclass"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -679,7 +674,6 @@ const AdminClass = () => {
         </div>
       </div>
 
-
       {/* Edit Indian modal */}
       <Modal
         show={show1}
@@ -766,17 +760,20 @@ const AdminClass = () => {
           <Modal.Title style={{ color: "white" }}>Add Class </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="do-sear mt-2">
-                <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
-                  <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
-                  })}
-                </select>
-                {/* <input
+          <div className="do-sear mt-2">
+            <label>Medium</label>
+            <select
+              className="vi_0"
+              onChange={(e) => setmediumName(e.target.value)}
+            >
+              <option value="">--Select medium--</option>
+              {Medium?.map((item) => {
+                return (
+                  <option value={item?.mediumName}>{item?.mediumName}</option>
+                );
+              })}
+            </select>
+            {/* <input
                   type="text"
                   placeholder="Enter Medium"
                   className="vi_0"
@@ -789,7 +786,7 @@ const AdminClass = () => {
                   }
                 />
                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
-              </div>
+          </div>
           <div className="do-sear mt-2">
             <label>Class</label>
             {/* <Form.Select
@@ -805,16 +802,16 @@ const AdminClass = () => {
               <option value="Secondary">Secondary</option>
             </Form.Select> */}
             <input
-                  type="text"
-                  placeholder="Enter Subject"
-                  className="vi_0"
-                  onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
-                      setclasssname(e.target.value)
-                    }else onChangeHandler(e.target.value,setclasssname)                    
-                  }}
-                />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
+              type="text"
+              placeholder="Enter Subject"
+              className="vi_0"
+              onChange={(e) => {
+                if (selectedLanguage == "en-t-i0-und") {
+                  setclasssname(e.target.value);
+                } else onChangeHandler(e.target.value, setclasssname);
+              }}
+            />
+            {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
           </div>
           <div className="do-sear mt-2">
             <label>Sub-Class</label>
@@ -851,7 +848,6 @@ const AdminClass = () => {
                   }}
                 />
                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>} */}
-
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -884,19 +880,22 @@ const AdminClass = () => {
           <Modal.Title style={{ color: "white" }}>Edit Subclass</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div className="do-sear mt-2">
-                <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
-                  <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
-                  })}
-                </select>
-              </div>
-              
-              <div className="do-sear mt-2">
+          <div className="do-sear mt-2">
+            <label>Medium</label>
+            <select
+              className="vi_0"
+              onChange={(e) => setmediumName(e.target.value)}
+            >
+              <option value="">--Select medium--</option>
+              {Medium?.map((item) => {
+                return (
+                  <option value={item?.mediumName}>{item?.mediumName}</option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="do-sear mt-2">
             <label>Class</label>
             {/* <Form.Select
               aria-label="Default select example"
@@ -911,16 +910,16 @@ const AdminClass = () => {
               <option value="Secondary">Secondary</option>
             </Form.Select> */}
             <input
-                  type="text"
-                  placeholder={classsname}
-                  className="vi_0"
-                  onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
-                      setclasssname(e.target.value)
-                    }else onChangeHandler(e.target.value,setclasssname)                    
-                  }}
-                />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
+              type="text"
+              placeholder={classsname}
+              className="vi_0"
+              onChange={(e) => {
+                if (selectedLanguage == "en-t-i0-und") {
+                  setclasssname(e.target.value);
+                } else onChangeHandler(e.target.value, setclasssname);
+              }}
+            />
+            {selectedLanguage == "en-t-i0-und" ? <></> : <p>{classsname}</p>}
           </div>
           <div className="do-sear mt-2">
             <label>Sub-Class</label>
@@ -947,17 +946,16 @@ const AdminClass = () => {
               <option value="Class 12">Class 12</option>
             </Form.Select> */}
             <input
-                  type="text"
-                  placeholder={subclasssname}
-                  className="vi_0"
-                  onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
-                      setsubclasssname(e.target.value)
-                    }else onChangeHandler(e.target.value,setsubclasssname)                    
-                  }}
-                />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>}
-
+              type="text"
+              placeholder={subclasssname}
+              className="vi_0"
+              onChange={(e) => {
+                if (selectedLanguage == "en-t-i0-und") {
+                  setsubclasssname(e.target.value);
+                } else onChangeHandler(e.target.value, setsubclasssname);
+              }}
+            />
+            {selectedLanguage == "en-t-i0-und" ? <></> : <p>{subclasssname}</p>}
           </div>
           {/* <div className="do-sear mt-2">
             <label>Class</label>
@@ -989,7 +987,6 @@ const AdminClass = () => {
               }}
             />
           </div> */}
-          
         </Modal.Body>
         <Modal.Footer>
           <Button className="mx-2" variant="secondary" onClick={handleClose4}>

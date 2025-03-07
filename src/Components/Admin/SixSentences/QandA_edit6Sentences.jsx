@@ -75,7 +75,7 @@ const QandA_edit6Sentences = () => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ const QandA_edit6Sentences = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -146,7 +146,7 @@ const QandA_edit6Sentences = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -158,7 +158,7 @@ const QandA_edit6Sentences = () => {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -170,7 +170,7 @@ const QandA_edit6Sentences = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -183,7 +183,7 @@ const QandA_edit6Sentences = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -197,7 +197,7 @@ const QandA_edit6Sentences = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -211,7 +211,7 @@ const QandA_edit6Sentences = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
+        "http://localhost:8001/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -225,7 +225,7 @@ const QandA_edit6Sentences = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -239,7 +239,7 @@ const QandA_edit6Sentences = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -262,8 +262,8 @@ const QandA_edit6Sentences = () => {
   return (
     <div>
       <div className="mb-4">
-      <div className="container">
-        {/* <div className="row">
+        <div className="container">
+          {/* <div className="row">
           <div className="col-md-6">
             <div className="do-sear mt-2">
               <label htmlFor=""> Examination Board</label>
@@ -412,8 +412,8 @@ const QandA_edit6Sentences = () => {
             </div>
           </div>
         </div> */}
-        <div className="row mt-2">
-          {/* <div className="col-md-6">
+          <div className="row mt-2">
+            {/* <div className="col-md-6">
             <div className="do-sear mt-2">
               <label htmlFor="">Name Of the Examination</label>
               <Form.Select
@@ -449,158 +449,158 @@ const QandA_edit6Sentences = () => {
             </Form.Select>
           </div> */}
 
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Question 1</label>
-              {/* <textarea
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question 1</label>
+                {/* <textarea
               name=""
               id=""
               cols="30"
               rows="5"
               className="vi_0"
             ></textarea> */}
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                data={Question}
-                onChange={handleChange}
-              />
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Answer 1</label>
-              {/* <textarea
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer 1</label>
+                {/* <textarea
               name=""
               id=""
               cols="30"
               rows="5"
               className="vi_0"
             ></textarea> */}
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                data={Question}
-                onChange={handleChange}
-              />
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor=""
-              style={{ display: "flex", justifyContent: "space-around" }}
-            >
-              (OR)
-            </label>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Question 2</label>
-              {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                data={Question}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="do-sear mt-2">
-              <label htmlFor="">Answer 2</label>
-              {/* <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              className="vi_0"
-            ></textarea> */}
-              <CKEditor
-                editor={ClassicEditor}
-                className="vi_0"
-                data={Question}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="do-sear">
-              <label htmlFor="">Question 1-Image</label>
-              <input
-                type="file"
-                className="vi_0"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="do-sear">
-              <label htmlFor="">Question 2-Image</label>
-              <input
-                type="file"
-                className="vi_0"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="do-sear mt-2">
-              <label htmlFor=""> Marks</label>
-              <Form.Select
-                aria-label="Default select example"
-                // onChange={(e) => {
-                //   setTypes_Question(e.target.value);
-                // }}
+            <div className="mt-4">
+              <label
+                htmlFor=""
+                style={{ display: "flex", justifyContent: "space-around" }}
               >
-                <option>Select the Marks</option>
-                <option>1/2</option>
-                <option>1/4</option>
-                <option>1/3</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>10</option>
-              </Form.Select>
+                (OR)
+              </label>
             </div>
-          </div>
-          <div className="col-md-6">
-            <div className="do-sear mt-2">
-              <label htmlFor=""> Answer Timing</label>
-              <Form.Select
-                aria-label="Default select example"
-                // onChange={(e) => {
-                //   setTypes_Question(e.target.value);
-                // }}
-              >
-                <option>Select the Time</option>
-                <option>1/2 Mnt</option>
-                <option>1/4 Mnt</option>
-                <option>1 mnt</option>
-                <option>1.30 minutes</option>
-                <option>2 minutes</option>
-                <option>3 minutes</option>
-                <option>4 minutes</option>
-                <option>5 minutes</option>
-                <option>6 minutes</option>
-                <option>7 minutes</option>
-                <option>8 minutes</option>
-                <option>9 minutes</option>
-                <option>10 minutes</option>
-              </Form.Select>
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Question 2</label>
+                {/* <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="5"
+              className="vi_0"
+            ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
-          {/* <div className="col-md-6">
+            <div className="col-md-12">
+              <div className="do-sear mt-2">
+                <label htmlFor="">Answer 2</label>
+                {/* <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="5"
+              className="vi_0"
+            ></textarea> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  className="vi_0"
+                  data={Question}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question 1-Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear">
+                <label htmlFor="">Question 2-Image</label>
+                <input
+                  type="file"
+                  className="vi_0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Marks</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Marks</option>
+                  <option>1/2</option>
+                  <option>1/4</option>
+                  <option>1/3</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>10</option>
+                </Form.Select>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="do-sear mt-2">
+                <label htmlFor=""> Answer Timing</label>
+                <Form.Select
+                  aria-label="Default select example"
+                  // onChange={(e) => {
+                  //   setTypes_Question(e.target.value);
+                  // }}
+                >
+                  <option>Select the Time</option>
+                  <option>1/2 Mnt</option>
+                  <option>1/4 Mnt</option>
+                  <option>1 mnt</option>
+                  <option>1.30 minutes</option>
+                  <option>2 minutes</option>
+                  <option>3 minutes</option>
+                  <option>4 minutes</option>
+                  <option>5 minutes</option>
+                  <option>6 minutes</option>
+                  <option>7 minutes</option>
+                  <option>8 minutes</option>
+                  <option>9 minutes</option>
+                  <option>10 minutes</option>
+                </Form.Select>
+              </div>
+            </div>
+            {/* <div className="col-md-6">
           <div className="do-sear">
             <label htmlFor="">Answer Time</label>
             <input
@@ -611,12 +611,12 @@ const QandA_edit6Sentences = () => {
           </div>
         </div> */}
 
-          {/* <div className="yoihjij my-4">
+            {/* <div className="yoihjij my-4">
           <button style={{ float: "right" }}>Add</button>
         </div> */}
+          </div>
         </div>
-      </div>
-      <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
             <Button className="modal-add-btn">Update</Button>
           </div>

@@ -7,10 +7,8 @@ import "../Admin/Admin.css";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import logo from './../../assets/logo.png';
+import logo from "./../../assets/logo.png";
 import Button1 from "../Button1";
-
-
 
 const AdminSignin = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -53,7 +51,7 @@ const AdminSignin = () => {
       const config = {
         url: "/admin/login",
         method: "Post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         header: { "Content-Type": "application/json" },
         data: { email: email, password: passward },
       };
@@ -102,11 +100,11 @@ const AdminSignin = () => {
               <div className="col-md-6">
                 <div className="admin-login-bg">
                   <div style={{ padding: "150px 0px", textAlign: "center" }}>
-                  <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
+                    <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
                       Welcome To, Admin Panel
                     </h2>
                     <img src={logo} alt=" " className="w-50" />
-                   
+
                     <h3
                       className="fs-6 space-mono-regular fw-normal text-light"
                       style={{ textAlign: "center" }}
@@ -181,7 +179,9 @@ const AdminSignin = () => {
                 <br />
 
                 <div className="d-flex justify-content-center align-items-center">
-                  <a onClick={() => login()}  style={{textDecoration:"none"}}><Button1  text={"Sign In"}  /></a>
+                  <a onClick={() => login()} style={{ textDecoration: "none" }}>
+                    <Button1 text={"Sign In"} />
+                  </a>
                 </div>
               </div>
             </div>

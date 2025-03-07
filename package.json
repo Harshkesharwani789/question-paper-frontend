@@ -36,6 +36,7 @@
     "react-math-keyboard": "^1.5.8",
     "react-router-dom": "^6.21.2",
     "react-scripts": "5.0.1",
+    "react-select": "^5.10.1",
     "react-to-pdf": "^1.0.1",
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.3",

@@ -17,7 +17,6 @@ import MathEditor from "./MyEditor";
 import AdminQuestprops from "./AdminQuestprops";
 
 const Adminslybuscopyview = () => {
-  
   //Translate
   const [text, settext] = useState();
 
@@ -97,7 +96,7 @@ const Adminslybuscopyview = () => {
   const Adminslybusbyid = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getslybusbyid/${Slybus_id}`
+        `http://localhost:8001/api/admin/getslybusbyid/${Slybus_id}`
       );
       if (res.status == 200) setaddslybus(res.data.succes);
     } catch (error) {
@@ -167,44 +166,44 @@ const Adminslybuscopyview = () => {
     // Store the value in localStorage
     localStorage.setItem("editableInputValue2", value2);
   };
-//change value for unit no
-const [value3, setValue3] = useState(() => {
-  // Retrieve the value from localStorage if available, otherwise use the default value
-  const storedValue3 = localStorage.getItem("editableInputValue3");
-  return storedValue3 !== null ? storedValue3 : "Click to edit";
-});
-const [editable3, setEditable3] = useState(false);
+  //change value for unit no
+  const [value3, setValue3] = useState(() => {
+    // Retrieve the value from localStorage if available, otherwise use the default value
+    const storedValue3 = localStorage.getItem("editableInputValue3");
+    return storedValue3 !== null ? storedValue3 : "Click to edit";
+  });
+  const [editable3, setEditable3] = useState(false);
 
-const handleClick3 = () => {
-  setEditable3(true);
-};
+  const handleClick3 = () => {
+    setEditable3(true);
+  };
 
-const handleSave3 = () => {
-  setEditable3(false);
-  // Here you can perform any actions you want with the edited value, like saving it to a database.
-  alert("Saved value: " + value3);
-  // Store the value in localStorage
-  localStorage.setItem("editableInputValue3", value3);
-};
-//change value for unit name
-const [value4, setValue4] = useState(() => {
-  // Retrieve the value from localStorage if available, otherwise use the default value
-  const storedValue4 = localStorage.getItem("editableInputValue4");
-  return storedValue4 !== null ? storedValue4 : "Click to edit";
-});
-const [editable4, setEditable4] = useState(false);
+  const handleSave3 = () => {
+    setEditable3(false);
+    // Here you can perform any actions you want with the edited value, like saving it to a database.
+    alert("Saved value: " + value3);
+    // Store the value in localStorage
+    localStorage.setItem("editableInputValue3", value3);
+  };
+  //change value for unit name
+  const [value4, setValue4] = useState(() => {
+    // Retrieve the value from localStorage if available, otherwise use the default value
+    const storedValue4 = localStorage.getItem("editableInputValue4");
+    return storedValue4 !== null ? storedValue4 : "Click to edit";
+  });
+  const [editable4, setEditable4] = useState(false);
 
-const handleClick4 = () => {
-  setEditable4(true);
-};
+  const handleClick4 = () => {
+    setEditable4(true);
+  };
 
-const handleSave4 = () => {
-  setEditable4(false);
-  // Here you can perform any actions you want with the edited value, like saving it to a database.
-  alert("Saved value: " + value4);
-  // Store the value in localStorage
-  localStorage.setItem("editableInputValue4", value4);
-};
+  const handleSave4 = () => {
+    setEditable4(false);
+    // Here you can perform any actions you want with the edited value, like saving it to a database.
+    alert("Saved value: " + value4);
+    // Store the value in localStorage
+    localStorage.setItem("editableInputValue4", value4);
+  };
 
   useEffect(() => {
     // Update the input field value when the component mounts
@@ -215,7 +214,7 @@ const handleSave4 = () => {
     setValue4(localStorage.getItem("editableInputValue4"));
   }, []);
   // console.console.log("head1",data);
-  let count=1
+  let count = 1;
   return (
     <div>
       {/* first sem first page starts here  */}
@@ -292,7 +291,7 @@ const handleSave4 = () => {
           {selectedLanguage == "en-t-i0-und" ? <></> : <p>{text}</p>}
         </div>
       </div>
-      <div className="question-paper-display" style={{width:"1024px"}}>
+      <div className="question-paper-display" style={{ width: "1024px" }}>
         <div className="details-display">
           {/* <div className="top-titles-container">
                         <div className="top-logo">
@@ -362,33 +361,35 @@ const handleSave4 = () => {
                   <th>
                     {" "}
                     {editable1 ? (
-                    <input
-                      style={{
-                        backgroundColor: "#000080",
-                        color: "white",
-                        border: "unset",
-                      }}
-                      type="text"
-                      value={value1}
-                      onChange={(e) => setValue1(e.target.value)}
-                      autoFocus
-                    />
+                      <input
+                        style={{
+                          backgroundColor: "#000080",
+                          color: "white",
+                          border: "unset",
+                        }}
+                        type="text"
+                        value={value1}
+                        onChange={(e) => setValue1(e.target.value)}
+                        autoFocus
+                      />
                     ) : (
-                    <input
-                      style={{
-                        backgroundColor: "#000080",
-                        color: "white",
-                        border: "unset",
-                      }}
-                      type="text"
-                      value={value1}
-                      onClick={handleClick1}
-                      readOnly
-                    />
+                      <input
+                        style={{
+                          backgroundColor: "#000080",
+                          color: "white",
+                          border: "unset",
+                        }}
+                        type="text"
+                        value={value1}
+                        onClick={handleClick1}
+                        readOnly
+                      />
                     )}
                     {editable1 && <button onClick={handleSave1}>Save</button>}
                   </th>
-                  <th> {editable2 ? (
+                  <th>
+                    {" "}
+                    {editable2 ? (
                       <input
                         style={{
                           backgroundColor: "#000080",
@@ -414,8 +415,10 @@ const handleSave4 = () => {
                       />
                     )}
                     {editable2 && <button onClick={handleSave2}>Save</button>}
-                    </th>
-                  <th> {editable3 ? (
+                  </th>
+                  <th>
+                    {" "}
+                    {editable3 ? (
                       <input
                         style={{
                           backgroundColor: "#000080",
@@ -441,8 +444,10 @@ const handleSave4 = () => {
                       />
                     )}
                     {editable3 && <button onClick={handleSave3}>Save</button>}
-                    </th>
-                  <th> {editable4 ? (
+                  </th>
+                  <th>
+                    {" "}
+                    {editable4 ? (
                       <input
                         style={{
                           backgroundColor: "#000080",
@@ -468,12 +473,10 @@ const handleSave4 = () => {
                       />
                     )}
                     {editable4 && <button onClick={handleSave4}>Save</button>}
-                    </th>
+                  </th>
                 </tr>
                 <tr>
-                  <th>
-                    {addslybus?.head}
-                  </th>
+                  <th>{addslybus?.head}</th>
                   <th>{addslybus?.head1}</th>
                   <th>{addslybus?.head2}</th>
                   <th>{addslybus?.head3}</th>
@@ -488,7 +491,6 @@ const handleSave4 = () => {
                     parseInt(b?.unitArr[0]?.realMonth?.split("-").join(""))
                   );
                 }).map((item, i) => {
-                  
                   return (
                     <>
                       {" "}

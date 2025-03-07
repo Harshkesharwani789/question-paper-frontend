@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, FormSelect, Modal, Pagination, Table } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  FormSelect,
+  Modal,
+  Pagination,
+  Table,
+} from "react-bootstrap";
 import "../Admin/Admin.css";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
@@ -8,7 +15,6 @@ import Button2 from "../Button2";
 import { Link } from "react-router-dom";
 
 const AccountHistory = () => {
-
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
@@ -18,7 +24,6 @@ const AccountHistory = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   //   Row Filter
   const [itempage, setItempage] = useState(5);
@@ -46,22 +51,24 @@ const AccountHistory = () => {
   const displayPage = data.slice(visitedPage, visitedPage + productPerPage);
   const pageCount = Math.ceil(data.length / productPerPage);
 
-  const [status, setstatus] = useState("")
-  const [title, settitle] = useState("")
-  const [Pay_Amount, setPay_Amount] = useState("")
-  const [date, setdate] = useState("")
-  const [Pay_mode, setPay_mode] = useState("")
-  const [TeacherID, setTeacherID] = useState("")
-
+  const [status, setstatus] = useState("");
+  const [title, settitle] = useState("");
+  const [Pay_Amount, setPay_Amount] = useState("");
+  const [date, setdate] = useState("");
+  const [Pay_mode, setPay_mode] = useState("");
+  const [TeacherID, setTeacherID] = useState("");
 
   // post
   const AddAccountHistory = async () => {
     try {
       const config = {
         url: "admin/AddAccount",
-        baseURL: "https://guru-resorce-backend.onrender.com/api/",
+        baseURL: "http://localhost:8001/api/",
         method: "post",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         data: {
           Pay_id: "756454652323",
           status: status,
@@ -70,30 +77,36 @@ const AccountHistory = () => {
           date: date,
           Pay_mode: Pay_mode,
           teacherId: TeacherID,
-          authId: admin?._id
-        }
-      }
-      const res = await axios(config)
+          authId: admin?._id,
+        },
+      };
+      const res = await axios(config);
       if (res.status === 200) {
-        alert(res.data.success)
-        handleClose()
-        getaccounthistory()
+        alert(res.data.success);
+        handleClose();
+        getaccounthistory();
       }
     } catch (error) {
-      alert(error.response.data.errorr)
+      alert(error.response.data.errorr);
     }
-  }
+  };
 
   const handleClose1 = () => setShow1(false);
-  const handleShow1 = (item) => { setShow1(true); setEditData(item) }
-  const [EditData, setEditData] = useState("")
+  const handleShow1 = (item) => {
+    setShow1(true);
+    setEditData(item);
+  };
+  const [EditData, setEditData] = useState("");
   const EditAccountHistory = async () => {
     try {
       const config = {
         url: "admin/EditAccount/" + EditData?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api/",
+        baseURL: "http://localhost:8001/api/",
         method: "put",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         data: {
           Pay_id: "756454652323",
           status: status,
@@ -102,52 +115,58 @@ const AccountHistory = () => {
           date: date,
           Pay_mode: Pay_mode,
           teacherId: TeacherID,
-          authId: admin?._id
-        }
-      }
-      const res = await axios(config)
+          authId: admin?._id,
+        },
+      };
+      const res = await axios(config);
       if (res.status === 200) {
-        alert(res.data.success)
-        handleClose1()
-        getaccounthistory()
+        alert(res.data.success);
+        handleClose1();
+        getaccounthistory();
       }
     } catch (error) {
-      alert(error.response.data.errorr)
+      alert(error.response.data.errorr);
     }
-  }
+  };
 
   // Delete history
   const handleClose2 = () => setShow2(false);
-  const handleShow2 = (item) => { setShow2(true); setdeleteData(item) }
-  const [deleteData, setdeleteData] = useState("")
+  const handleShow2 = (item) => {
+    setShow2(true);
+    setdeleteData(item);
+  };
+  const [deleteData, setdeleteData] = useState("");
   const DeleteAccountHistory = async () => {
     try {
       const config = {
         url: "admin/DeleteAccount/" + deleteData?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api/",
+        baseURL: "http://localhost:8001/api/",
         method: "delete",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        data : {
-          authId: admin?._id
-        }
-      }
-      const res = await axios(config)
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          authId: admin?._id,
+        },
+      };
+      const res = await axios(config);
       if (res.status === 200) {
-        alert(res.data.success)
-        handleClose2()
-        getaccounthistory()
+        alert(res.data.success);
+        handleClose2();
+        getaccounthistory();
       }
     } catch (error) {
-      alert(error.response.data.errorr)
+      alert(error.response.data.errorr);
     }
-  }
+  };
 
   // get account history
-  const [accHitory, setaccHitory] = useState([])
+  const [accHitory, setaccHitory] = useState([]);
   const getaccounthistory = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllAcountHistory/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllAcountHistory/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -167,7 +186,7 @@ const AccountHistory = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -183,16 +202,18 @@ const AccountHistory = () => {
   };
 
   useEffect(() => {
-    getAllTeacher()
-    getaccounthistory()
-  }, [])
+    getAllTeacher();
+    getaccounthistory();
+  }, []);
 
   return (
     <div className="customerhead p-2">
       <div className="d-flex justify-content-between align-items-center">
         <h2 className="header-c ">Account History</h2>
-        
-        <Link onClick={handleShow}><Button2 text={"Add Account History"}  /></Link>
+
+        <Link onClick={handleShow}>
+          <Button2 text={"Add Account History"} />
+        </Link>
       </div>
 
       <div className="mb-3">
@@ -212,22 +233,24 @@ const AccountHistory = () => {
           </thead>
 
           <tbody>
-            {accHitory?.map((item, i) => (<>
-              <tr>
-                <td>{i + 1}</td>
-                <td>{item?.teacherId?.FirstName}</td>
-                <td>{item?.teacherId?.teacherId}</td>
-                <td>{item?.title}</td>
-                <td>{item?.Pay_mode}</td>
-                <td>{item?.Pay_id}</td>
-                <td>{item?.date}</td>
-                <td>{item?.status}</td>
-                <td>
+            {accHitory?.map((item, i) => (
+              <>
+                <tr>
+                  <td>{i + 1}</td>
+                  <td>{item?.teacherId?.FirstName}</td>
+                  <td>{item?.teacherId?.teacherId}</td>
+                  <td>{item?.title}</td>
+                  <td>{item?.Pay_mode}</td>
+                  <td>{item?.Pay_id}</td>
+                  <td>{item?.date}</td>
+                  <td>{item?.status}</td>
+                  <td>
                     <div style={{ display: "flex", gap: "20px" }}>
                       <div>
-                        <FaEdit className="text-success"
-                        // style={{cursor : 'pointer'}}
-                        role="button"
+                        <FaEdit
+                          className="text-success"
+                          // style={{cursor : 'pointer'}}
+                          role="button"
                           onClick={() => handleShow1(item)}
                         />
                       </div>
@@ -241,9 +264,10 @@ const AccountHistory = () => {
                         />{" "}
                       </div>
                     </div>
-                </td>
-              </tr>
-            </>))}
+                  </td>
+                </tr>
+              </>
+            ))}
           </tbody>
         </Table>
       </div>
@@ -270,7 +294,6 @@ const AccountHistory = () => {
         <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
       </Pagination>
 
-
       {/* Add Package modal */}
       <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
         <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
@@ -282,16 +305,16 @@ const AccountHistory = () => {
           <div className="row">
             <div className="do-sear mt-2">
               <label>Teacher</label>
-              <FormSelect
-                onChange={(e) => setTeacherID(e.target.value)}
-              >
+              <FormSelect onChange={(e) => setTeacherID(e.target.value)}>
                 <option value="Select">Select</option>
-                {Teacher?.map((ele) => <option value={ele?._id}>{ele?.FirstName}</option>)}
+                {Teacher?.map((ele) => (
+                  <option value={ele?._id}>{ele?.FirstName}</option>
+                ))}
               </FormSelect>
             </div>
             <div className="do-sear mt-2">
               <label>Payment Mode</label>
-              <FormSelect onChange={(e) => setPay_mode(e.target.value)} >
+              <FormSelect onChange={(e) => setPay_mode(e.target.value)}>
                 <option value="Select">Select</option>
                 <option value="Online Payment">Online Payment</option>
                 <option value="Cash">Cash</option>
@@ -299,15 +322,30 @@ const AccountHistory = () => {
             </div>
             <div className="do-sear mt-2">
               <label>Payment Date & Time</label>
-              <input onChange={(e) => setdate(e.target.value)} type="date" placeholder="Enter Date" className="vi_0" />
+              <input
+                onChange={(e) => setdate(e.target.value)}
+                type="date"
+                placeholder="Enter Date"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Amount</label>
-              <input onChange={(e) => setPay_Amount(e.target.value)} type="text" placeholder="Amount" className="vi_0" />
+              <input
+                onChange={(e) => setPay_Amount(e.target.value)}
+                type="text"
+                placeholder="Amount"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Title</label>
-              <input onChange={(e) => settitle(e.target.value)} type="text" placeholder="Title" className="vi_0" />
+              <input
+                onChange={(e) => settitle(e.target.value)}
+                type="text"
+                placeholder="Title"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Select Status</label>
@@ -321,10 +359,18 @@ const AccountHistory = () => {
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
-            <Button className="mx-2 modal-close-btn" variant="" onClick={handleClose}>
+            <Button
+              className="mx-2 modal-close-btn"
+              variant=""
+              onClick={handleClose}
+            >
               Close
             </Button>
-            <Button className="mx-2 modal-add-btn" variant="" onClick={AddAccountHistory} >
+            <Button
+              className="mx-2 modal-add-btn"
+              variant=""
+              onClick={AddAccountHistory}
+            >
               Add
             </Button>
           </div>
@@ -339,23 +385,26 @@ const AccountHistory = () => {
         keyboard={false}
         style={{ zIndex: "99999" }}
       >
-        <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "rgb(40 167 223)" }}
+        >
           <Modal.Title style={{ color: "white" }}>Edit UserList</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
             <div className="do-sear mt-2">
               <label>Teacher</label>
-              <FormSelect
-                onChange={(e) => setTeacherID(e.target.value)}
-              >
+              <FormSelect onChange={(e) => setTeacherID(e.target.value)}>
                 <option value="Select">Select</option>
-                {Teacher?.map((ele) => <option value={ele?._id}>{ele?.FirstName}</option>)}
+                {Teacher?.map((ele) => (
+                  <option value={ele?._id}>{ele?.FirstName}</option>
+                ))}
               </FormSelect>
             </div>
             <div className="do-sear mt-2">
               <label>Payment Mode</label>
-              <FormSelect onChange={(e) => setPay_mode(e.target.value)} >
+              <FormSelect onChange={(e) => setPay_mode(e.target.value)}>
                 <option value="Select">Select</option>
                 <option value="Online Payment">Online Payment</option>
                 <option value="Cash">Cash</option>
@@ -363,15 +412,30 @@ const AccountHistory = () => {
             </div>
             <div className="do-sear mt-2">
               <label>Payment Date & Time</label>
-              <input onChange={(e) => setdate(e.target.value)} type="date" placeholder="Enter Date" className="vi_0" />
+              <input
+                onChange={(e) => setdate(e.target.value)}
+                type="date"
+                placeholder="Enter Date"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Amount</label>
-              <input onChange={(e) => setPay_Amount(e.target.value)} type="text" placeholder="Amount" className="vi_0" />
+              <input
+                onChange={(e) => setPay_Amount(e.target.value)}
+                type="text"
+                placeholder="Amount"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Title</label>
-              <input onChange={(e) => settitle(e.target.value)} type="text" placeholder="Title" className="vi_0" />
+              <input
+                onChange={(e) => settitle(e.target.value)}
+                type="text"
+                placeholder="Title"
+                className="vi_0"
+              />
             </div>
             <div className="do-sear mt-2">
               <label>Select Status</label>
@@ -387,7 +451,11 @@ const AccountHistory = () => {
           <Button variant="" className="modal-close-btn" onClick={handleClose1}>
             Close
           </Button>
-          <Button variant="" className="modal-add-btn" onClick={EditAccountHistory}>
+          <Button
+            variant=""
+            className="modal-add-btn"
+            onClick={EditAccountHistory}
+          >
             Edit
           </Button>
         </Modal.Footer>
@@ -417,7 +485,13 @@ const AccountHistory = () => {
           <Button variant="" className="modal-close-btn" onClick={handleClose2}>
             Close
           </Button>
-          <Button variant="" className="modal-add-btn" onClick={DeleteAccountHistory}>Delete</Button>
+          <Button
+            variant=""
+            className="modal-add-btn"
+            onClick={DeleteAccountHistory}
+          >
+            Delete
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

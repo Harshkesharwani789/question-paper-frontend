@@ -6,7 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import parse from "html-react-parser"
+import parse from "html-react-parser";
 import MathEditor from "../MyEditor";
 const SituationAnalysis_add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -28,7 +28,6 @@ const SituationAnalysis_add = ({ selectdetails }) => {
     setAnswer(data);
   };
 
-
   const [formFields, setFormFields] = useState([
     { SubQue: "" }, // Example initial form field
   ]);
@@ -38,9 +37,8 @@ const SituationAnalysis_add = ({ selectdetails }) => {
     const updatedSubQuestions = [...subQuestions];
     updatedSubQuestions[index] = { question: data };
     setSubQuestions(updatedSubQuestions);
-
   };
-console.log("subQuestions",subQuestions);
+  console.log("subQuestions", subQuestions);
   const addFields = () => {
     setFormFields([...formFields, { SubQue: "" }]);
   };
@@ -59,7 +57,7 @@ console.log("subQuestions",subQuestions);
 
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
-  const [SubQuestionT, setSubQuestionT] = useState("")
+  const [SubQuestionT, setSubQuestionT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Image1, setImage1] = useState("");
@@ -74,7 +72,7 @@ console.log("subQuestions",subQuestions);
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -90,12 +88,11 @@ console.log("subQuestions",subQuestions);
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
-
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Image_1: Image1,
@@ -122,21 +119,20 @@ console.log("subQuestions",subQuestions);
       }
     } catch (error) {
       console.log(error);
-
     }
   };
 
-    // Line
-    const [twoline, setTwoline] = useState(false);
-    const [threeline, setThreeline] = useState(false);
-    const [fourline, setFourline] = useState(true);
-    const [fiveline, setFiveline] = useState(false);
-    const [sixline, setSixline] = useState(false);
-    const [sevenline, setSevenline] = useState(false);
-    const [eightline, setEightline] = useState(false);
-    const [nineline, setNineline] = useState(false);
-    const [tenline, setTenline] = useState(false);
-    const [NumberOfLine, setNumberOfLine] = useState(4);
+  // Line
+  const [twoline, setTwoline] = useState(false);
+  const [threeline, setThreeline] = useState(false);
+  const [fourline, setFourline] = useState(true);
+  const [fiveline, setFiveline] = useState(false);
+  const [sixline, setSixline] = useState(false);
+  const [sevenline, setSevenline] = useState(false);
+  const [eightline, setEightline] = useState(false);
+  const [nineline, setNineline] = useState(false);
+  const [tenline, setTenline] = useState(false);
+  const [NumberOfLine, setNumberOfLine] = useState(4);
 
   return (
     <div>
@@ -170,7 +166,7 @@ console.log("subQuestions",subQuestions);
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
-                    setNumberOfLine(selectedValue)
+                    setNumberOfLine(selectedValue);
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");
@@ -817,7 +813,7 @@ console.log("subQuestions",subQuestions);
                 Add SubQuestion
               </button>
             </div>
-            <Form >
+            <Form>
               <div className="col-md-12">
                 <div className="do-sear mt-2">
                   <label htmlFor="">Sub Questions</label>
@@ -831,7 +827,6 @@ console.log("subQuestions",subQuestions);
                           data={form.SubQue}                      
                           onChange={(e, editor) => handleChange1(index, editor.getData())}
                         /> */}
-                        
 
                         <MathEditor
                           style={{ width: "100%" }}
@@ -859,7 +854,7 @@ console.log("subQuestions",subQuestions);
                 </div>
               </div>
             </Form>
-            
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
@@ -950,7 +945,6 @@ console.log("subQuestions",subQuestions);
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
-
               handleShow();
             }}
             className="modal-add-btn"
@@ -976,25 +970,25 @@ console.log("subQuestions",subQuestions);
             </div>
           </div>
           <div className="row">
-          {Image1 ? (
-                    <div className="col-md-6">
-                      <div className="do-sear mt-2">
-                        <label>Image 2</label>
-                        <br />
-                        <img
-                          className=""
-                          src={Image1 && URL.createObjectURL(Image1)}
-                          alt="fig."
-                          style={{
-                            width: "30%",
-                            height: "40%",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+            {Image1 ? (
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Image 2</label>
+                  <br />
+                  <img
+                    className=""
+                    src={Image1 && URL.createObjectURL(Image1)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
             {/* <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Image 1 </label>
@@ -1017,25 +1011,24 @@ console.log("subQuestions",subQuestions);
               </div>
             </div> */}
             {Image2 ? (
-                    <div className="col-md-6">
-                      <div className="do-sear mt-2">
-                        <label>Image 2</label>
-                        <br />
-                        <img
-                          className=""
-                          src={Image2 && URL.createObjectURL(Image2)}
-                          alt="fig."
-                          style={{
-                            width: "30%",
-                            height: "40%",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-            
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Image 2</label>
+                  <br />
+                  <img
+                    className=""
+                    src={Image2 && URL.createObjectURL(Image2)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -1043,20 +1036,14 @@ console.log("subQuestions",subQuestions);
                 {subQuestions?.map((form, index) => {
                   return (
                     <div className="d-flex gap-2 mb-1">
-                      <p
-                        style={{ width: "100%" }}
-
-                        className="vi_0"
-
-                      >{parse(`<div>${form?.question}</div>`)} </p>
-
+                      <p style={{ width: "100%" }} className="vi_0">
+                        {parse(`<div>${form?.question}</div>`)}{" "}
+                      </p>
                     </div>
                   );
                 })}
               </div>
             </div>
-
-
           </div>
           <div className="col-md-12">
             <div className="do-sear mt-2">
@@ -1066,8 +1053,6 @@ console.log("subQuestions",subQuestions);
               </p>
             </div>
           </div>
-
-
         </Modal.Body>
         <Modal.Footer>
           <div className="d-flex">
@@ -1075,7 +1060,6 @@ console.log("subQuestions",subQuestions);
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-
                 handleClose();
               }}
             >
@@ -1085,8 +1069,7 @@ console.log("subQuestions",subQuestions);
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-                addquestions()
-
+                addquestions();
               }}
             >
               Submit

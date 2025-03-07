@@ -32,7 +32,7 @@ const ExpandExplain_add = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
   const [Question, setQuestion] = useState("");
@@ -51,7 +51,7 @@ const ExpandExplain_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -67,11 +67,11 @@ const ExpandExplain_add = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -870,7 +870,7 @@ const ExpandExplain_add = ({ selectdetails }) => {
                   data={orAnswer}
                   onChange={handleChange3}
                 /> */}
-                   <MathEditor
+                <MathEditor
                   data={{
                     A: orAnswer,
                     B: setorAnswer,
@@ -1580,6 +1580,5 @@ const ExpandExplain_add = ({ selectdetails }) => {
     </div>
   );
 };
-
 
 export default ExpandExplain_add;

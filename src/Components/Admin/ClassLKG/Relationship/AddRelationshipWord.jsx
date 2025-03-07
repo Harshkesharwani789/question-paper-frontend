@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import "../../../Admin/Admin.css"
+import "../../../Admin/Admin.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
@@ -10,7 +10,7 @@ import swal from "sweetalert";
 import parse from "html-react-parser";
 let googleTransliterate = require("google-input-tool");
 
-const AddRelationshipWord = ({selectdetails}) => {
+const AddRelationshipWord = ({ selectdetails }) => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -20,9 +20,7 @@ const AddRelationshipWord = ({selectdetails}) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-  
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-
 
   const [translatedValue, setTranslatedValue] = useState("");
   // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
@@ -65,7 +63,6 @@ const AddRelationshipWord = ({selectdetails}) => {
     }
   }, 300); // Debounce delay in milliseconds
 
-
   const [RealetionA, setRealetionA] = useState("");
   const [Answer, setAnswer] = useState("");
   const [RealetionB, setRealetionB] = useState("");
@@ -76,18 +73,17 @@ const AddRelationshipWord = ({selectdetails}) => {
   const [Answer_Time, setAnswer_Time] = useState("");
   const [NumberOfLine, setNumberOfLine] = useState(4);
   const [Image_2, setImage_2] = useState("");
-  const [Option_1,setOption_1]=useState("");
-  const [Option_2,setOption_2]=useState("");
-  const [Option_3,setOption_3]=useState("");
-  const [Option_4,setOption_4]=useState("");
-  
+  const [Option_1, setOption_1] = useState("");
+  const [Option_2, setOption_2] = useState("");
+  const [Option_3, setOption_3] = useState("");
+  const [Option_4, setOption_4] = useState("");
 
   const addquestions = async () => {
     try {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -103,11 +99,11 @@ const AddRelationshipWord = ({selectdetails}) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           RealetionA: RealetionA,
           Answer: Answer,
@@ -158,11 +154,15 @@ const AddRelationshipWord = ({selectdetails}) => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload1">Image</label>
-                <input type="file" className="vi_0" id="upload1" 
-                onChange={(e)=>setImage(e.target.files[0])}/>
+                <input
+                  type="file"
+                  className="vi_0"
+                  id="upload1"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
               </div>
             </div>
-           
+
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -171,15 +171,22 @@ const AddRelationshipWord = ({selectdetails}) => {
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex justify-content-space-evenly">
                       <div>
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                        // value={RealetionA}
-                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                        setRealetionA(e.target.value):onChangeHandler(e.target.value,setRealetionA)}
-                      />
-                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionA}</p>}
+                        <input
+                          type="text"
+                          className="vi_0"
+                          placeholder="Enter The question"
+                          // value={RealetionA}
+                          onChange={(e) =>
+                            selectdetails?.selectedLanguage == "en-t-i0-und"
+                              ? setRealetionA(e.target.value)
+                              : onChangeHandler(e.target.value, setRealetionA)
+                          }
+                        />
+                        {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionA}</p>
+                        )}
                       </div>
                       <p className="m-2">:</p>
                     </div>
@@ -187,35 +194,50 @@ const AddRelationshipWord = ({selectdetails}) => {
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
                       <div>
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                        // value={RealetionB}
-                        // onChange={(e)=>setRealetionB(e.target.value)}
-                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                        setRealetionB(e.target.value):onChangeHandler(e.target.value,setRealetionB)}
-                      />
-              {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionB}</p>}
-                      </div>                     
-                    
+                        <input
+                          type="text"
+                          className="vi_0"
+                          placeholder="Enter The question"
+                          // value={RealetionB}
+                          // onChange={(e)=>setRealetionB(e.target.value)}
+                          onChange={(e) =>
+                            selectdetails?.selectedLanguage == "en-t-i0-und"
+                              ? setRealetionB(e.target.value)
+                              : onChangeHandler(e.target.value, setRealetionB)
+                          }
+                        />
+                        {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionB}</p>
+                        )}
+                      </div>
+
                       <p className="m-2 ">::</p>
                     </div>
                   </div>
 
                   <div className="col-md-3">
                     <div className="do-sear mt-2 d-flex">
-                    <div>
-                      <input
-                        type="text"
-                        className="vi_0"
-                        placeholder="Enter The question"
-                        // value={RealetionC}
-                        // onChange={(e)=>setRealetionC(e.target.value)}
-                        onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                        setRealetionC(e.target.value):onChangeHandler(e.target.value,setRealetionC)}
-                      />
-                      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{RealetionC}</p>}</div>
+                      <div>
+                        <input
+                          type="text"
+                          className="vi_0"
+                          placeholder="Enter The question"
+                          // value={RealetionC}
+                          // onChange={(e)=>setRealetionC(e.target.value)}
+                          onChange={(e) =>
+                            selectdetails?.selectedLanguage == "en-t-i0-und"
+                              ? setRealetionC(e.target.value)
+                              : onChangeHandler(e.target.value, setRealetionC)
+                          }
+                        />
+                        {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                          <></>
+                        ) : (
+                          <p>{RealetionC}</p>
+                        )}
+                      </div>
                       <p className="m-2">:</p>
                     </div>
                   </div>
@@ -244,10 +266,17 @@ const AddRelationshipWord = ({selectdetails}) => {
                   placeholder="Enter The question"
                   // value={Option_1}
                   // onChange={(e)=>setOption_1(e.target.value)}
-                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                  setOption_1(e.target.value):onChangeHandler(e.target.value,setOption_1)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_1(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_1)
+                  }
                 />
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_1}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_1}</p>
+                )}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -260,10 +289,17 @@ const AddRelationshipWord = ({selectdetails}) => {
                   placeholder="Enter The question"
                   // value={Option_2}
                   // onChange={(e)=>setOption_2(e.target.value)}
-                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                  setOption_2(e.target.value):onChangeHandler(e.target.value,setOption_2)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_2(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_2)
+                  }
                 />
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_2}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_2}</p>
+                )}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -277,10 +313,17 @@ const AddRelationshipWord = ({selectdetails}) => {
                   placeholder="Enter The question"
                   // value={Option_3}
                   // onChange={(e)=>setOption_3(e.target.value)}
-                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                  setOption_3(e.target.value):onChangeHandler(e.target.value,setOption_3)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_3(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_3)
+                  }
                 />
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_3}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_3}</p>
+                )}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -293,10 +336,17 @@ const AddRelationshipWord = ({selectdetails}) => {
                   placeholder="Enter The question"
                   // value={Option_4}
                   // onChange={(e)=>setOption_4(e.target.value)}
-                  onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                  setOption_4(e.target.value):onChangeHandler(e.target.value,setOption_4)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setOption_4(e.target.value)
+                      : onChangeHandler(e.target.value, setOption_4)
+                  }
                 />
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Option_4}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Option_4}</p>
+                )}
                 {/* <CKEditor editor={ClassicEditor} className="vi_0" /> */}
               </div>
             </div>
@@ -312,10 +362,17 @@ const AddRelationshipWord = ({selectdetails}) => {
                     placeholder="Enter The question"
                     // value={Answer}
                     // onChange={(e)=>setAnswer(e.target.value)}
-                    onChange={(e)=>selectdetails?.selectedLanguage == "en-t-i0-und" ? 
-                    setAnswer(e.target.value):onChangeHandler(e.target.value,setAnswer)}
-                />
-                 {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer}</p>}
+                    onChange={(e) =>
+                      selectdetails?.selectedLanguage == "en-t-i0-und"
+                        ? setAnswer(e.target.value)
+                        : onChangeHandler(e.target.value, setAnswer)
+                    }
+                  />
+                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{Answer}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -364,7 +421,7 @@ const AddRelationshipWord = ({selectdetails}) => {
                   <option value="8 minutes"> 8 minutes</option>
                   <option value="9 minutes"> 9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
-                </Form.Select> 
+                </Form.Select>
               </div>
             </div>
           </div>
@@ -372,15 +429,16 @@ const AddRelationshipWord = ({selectdetails}) => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-          <button
-                    style={{backgroundColor:"orange"}}
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                        className="modal-add-btn"
-                    >
-                        Back
-                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button
+              style={{ backgroundColor: "orange" }}
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="modal-add-btn"
+            >
+              Back
+            </button>{" "}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Button className="modal-add-btn" onClick={handleShow}>
               Save
             </Button>
@@ -396,114 +454,114 @@ const AddRelationshipWord = ({selectdetails}) => {
               <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <div className="container">
-          <div className="row mt-2">
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-              {Image ? (
-                      <img
-                        className=""
-                        src={Image && URL.createObjectURL(Image)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
-              </div>
-            </div>
-           
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Question</label>
-
-                <div className="row">
-                  <div className="col-md-3">
-                    <div className="do-sear mt-2 d-flex">
-                     <p className="vi_0">{RealetionA}</p>
-                      <p className="m-2">:</p>
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="do-sear mt-2 d-flex">
-                    <p className="vi_0">{RealetionB}</p>
-                      <p className="m-2 ">::</p>
+              <div className="container">
+                <div className="row mt-2">
+                  <div className="col-md-6">
+                    <div className="do-sear mt-2">
+                      {Image ? (
+                        <img
+                          className=""
+                          src={Image && URL.createObjectURL(Image)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
 
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Question</label>
+
+                      <div className="row">
+                        <div className="col-md-3">
+                          <div className="do-sear mt-2 d-flex">
+                            <p className="vi_0">{RealetionA}</p>
+                            <p className="m-2">:</p>
+                          </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="do-sear mt-2 d-flex">
+                            <p className="vi_0">{RealetionB}</p>
+                            <p className="m-2 ">::</p>
+                          </div>
+                        </div>
+
+                        <div className="col-md-3">
+                          <div className="do-sear mt-2 d-flex">
+                            <p className="vi_0">{RealetionC}</p>
+                            <p className="m-2">:</p>
+                          </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="do-sear mt-2">
+                            <p
+                              className=""
+                              style={{
+                                borderBottom: "1px solid",
+                                marginTop: "45px",
+                                marginBottom: "0px",
+                              }}
+                            ></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="col-md-3">
-                    <div className="do-sear mt-2 d-flex">
-                    <p className="vi_0">{RealetionC}</p>
-                      <p className="m-2">:</p>
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Option A)</label>
+                      <p>{Option_1}</p>
                     </div>
                   </div>
                   <div className="col-md-3">
                     <div className="do-sear mt-2">
-                      <p
-                        className=""
-                        style={{
-                          borderBottom: "1px solid",
-                          marginTop: "45px",
-                          marginBottom: "0px",
-                        }}
-                      ></p>
+                      <label htmlFor="">Option B)</label>
+                      <p>{Option_2}</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Option C)</label>
+                      <p>{Option_3}</p>
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="do-sear mt-2">
+                      <label htmlFor="">Option D)</label>
+                      <p>{Option_4}</p>
+                    </div>
+                  </div>
+
+                  <div className="col-md-12">
+                    <div className="do-sear mt-2">
+                      <div className="do-sear mt-2">
+                        <label htmlFor="">Answer</label>
+                        <p>{Answer}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="do-sear mt-2">
+                      <label htmlFor=""> Marks</label>
+                      <p>{Marks}</p>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="do-sear mt-2">
+                      <label htmlFor=""> Answer Timing</label>
+                      <p>{Answer_Time}</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="col-md-3">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option A)</label>
-                <p>{Option_1}</p>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option B)</label>
-                <p>{Option_2}</p>
-              </div>
-            </div>
-
-            <div className="col-md-3">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option C)</label>
-                <p>{Option_3}</p>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="do-sear mt-2">
-                <label htmlFor="">Option D)</label>
-                <p>{Option_4}</p>
-              </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="do-sear mt-2">
-                <div className="do-sear mt-2">
-                  <label htmlFor="">Answer</label>
-                  <p>{Answer}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Marks</label>
-                <p>{Marks}</p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="do-sear mt-2">
-                <label htmlFor=""> Answer Timing</label>
-               <p>{Answer_Time}</p>
-              </div>
-            </div>
-          </div>
-        </div>
             </Modal.Body>
             <Modal.Footer>
               <div className="d-flex justify-content-center m-auto">

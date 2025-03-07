@@ -29,7 +29,7 @@ function AddPoem({ selectdetails }) {
     const data = editor.getData();
     setAnswer(data);
   };
-  
+
   //Translate
   const [translatedValue, setTranslatedValue] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
@@ -75,13 +75,12 @@ function AddPoem({ selectdetails }) {
     setSelectedLanguage(event.target.value);
   };
 
-
   //post
 
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [orAnswer, setorAnswer] = useState("");
   const [orQuestion, setorQuestion] = useState("");
@@ -98,7 +97,7 @@ function AddPoem({ selectdetails }) {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -114,11 +113,11 @@ function AddPoem({ selectdetails }) {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           orAnswer: orAnswer,
@@ -156,13 +155,12 @@ function AddPoem({ selectdetails }) {
     }
   };
 
-console.log("questiondata",questiondata);
+  console.log("questiondata", questiondata);
   // For Dash
   const [Dash, setDash] = useState("4");
   const [OrDash, setOrDash] = useState("4");
   return (
     <div>
-   
       <div className="">
         <div className="container">
           <div className="row mt-2">
@@ -355,7 +353,9 @@ console.log("questiondata",questiondata);
               </div>
             </div>
 
-            <div className="d-flex justify-content-center mt-2"><h5>(OR)</h5></div>
+            <div className="d-flex justify-content-center mt-2">
+              <h5>(OR)</h5>
+            </div>
 
             <div className="col-md-12">
               <div className="do-sear mt-2">
@@ -576,8 +576,6 @@ console.log("questiondata",questiondata);
                 </Form.Select>
               </div>
             </div>
-
-
           </div>
         </div>
 

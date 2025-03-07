@@ -9,13 +9,15 @@ import swal from "sweetalert";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
 import Button2 from "../Button2";
+
 const AdminSubject = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-  const [show, setShow] = useState();
-  const [show1, setShow1] = useState();
-  const [show2, setShow2] = useState();
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [SubClassName, setSubClassName] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,50 +28,7 @@ const AdminSubject = () => {
   const handleShow2 = () => setShow2(true);
 
   //Translate
-  let googleTransliterate = require("google-input-tool");
-  const [translatedValue, setTranslatedValue] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
-  const handleLanguageChange = (event) => {
-    setSelectedLanguage(event.target.value);
-  };
-  const onChangeHandler = debounce(async (value, setData) => {
-    if (!value) {
-      setTranslatedValue("");
-      setData("");
-      return "";
-    }
-
-    let am = value.split(/\s+/); // Split by any whitespace characters
-
-    let promises = [];
-
-    for (let index = 0; index < am.length; index++) {
-      promises.push(
-        new Promise(async (resolve, reject) => {
-          try {
-            const response = await googleTransliterate(
-              new XMLHttpRequest(),
-              am[index],
-              selectedLanguage
-            );
-            resolve(response[0][0]);
-          } catch (error) {
-            console.error("Translation error:", error);
-            resolve(am[index]);
-          }
-        })
-      );
-    }
-
-    try {
-      const translations = await Promise.all(promises);
-      setTranslatedValue(translations.join(" "));
-      setData(translations.join(" "));
-      return translations;
-    } catch (error) {
-      console.error("Promise.all error:", error);
-    }
-  }, 300); // Debounce delay in milliseconds
+  // googleTransliterate is removed due to dependency issues in WebContainer
 
   //Post
   const [mediumName, setmediumName] = useState("");
@@ -90,10 +49,23 @@ const AdminSubject = () => {
         button: "Ok!",
       });
     try {
+      const subClassId = getaddsubclass.find(
+        (item) => item.subclassName === SubClassName
+      )?._id;
+
+      if (!subClassId) {
+        return swal({
+          title: "Oops!",
+          text: "Please select a valid Sub-Class",
+          icon: "error",
+          button: "Ok!",
+        });
+      }
+
       const config = {
         url: "/admin/addSubjects",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -102,10 +74,12 @@ const AdminSubject = () => {
           mediumName: mediumName,
           subjectName: subjectName,
           authId: admin?._id,
+          subClass: subClassId,
         },
       };
+      console.log("Data being sent:", config.data);
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         handleClose();
         getSubject();
         return swal({
@@ -116,10 +90,10 @@ const AdminSubject = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error adding subject:", error);
       return swal({
         title: "Oops!",
-        text: error.response.data.error,
+        text: error.response?.data?.error || "An error occurred",
         icon: "error",
         button: "Ok!",
       });
@@ -127,29 +101,40 @@ const AdminSubject = () => {
   };
   //get method for medium
   const [Medium, setMedium] = useState([]);
-  // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
-      );
-      if (res.status == 200) {
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      if (res.status === 200) {
         setMedium(res.data.success);
-        // setnochangedata(res.data.success);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  const [getaddsubclass, setgetaddsubclass] = useState([]);
+  const getaddsubclasss = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8001/api/admin/getAllSubClass"
+      );
+      console.log("ok", res);
+      if (res.status == 200) {
+        setgetaddsubclass(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //get
   const [subject, setsubject] = useState([]);
   const [nochangedata, setnochangedata] = useState([]);
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
-      if (res.status == 200) {
+      if (res.status === 200) {
         setsubject(res.data.success);
         setnochangedata(res.data.success);
       }
@@ -165,7 +150,7 @@ const AdminSubject = () => {
       const config = {
         url: "/admin/updateSubjects",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -174,26 +159,25 @@ const AdminSubject = () => {
           mediumName: mediumName,
           subjectName: subjectName,
           authId: admin?._id,
-          id: updateSubject,
+          id: updateSubject._id,
         },
       };
       let res = await axios(config);
-      if (res.status == 200)
-        if (res.status == 200) {
-          handleClose1();
-          getSubject();
-          return swal({
-            title: "Yeah!",
-            text: res.data.success,
-            icon: "success",
-            button: "Ok!",
-          });
-        }
+      if (res.status === 200) {
+        handleClose1();
+        getSubject();
+        return swal({
+          title: "Yeah!",
+          text: res.data.success,
+          icon: "success",
+          button: "Ok!",
+        });
+      }
     } catch (error) {
       console.log(error);
       return swal({
         title: "Oops!",
-        text: error.response.data.error,
+        text: error.response?.data?.error || "An error occurred",
         icon: "error",
         button: "Ok!",
       });
@@ -204,16 +188,16 @@ const AdminSubject = () => {
   const DeleteSubject = async () => {
     try {
       const config = {
-        url: "/admin/deleteSubjects/" + sub + "/" + admin?._id,
+        url: `/admin/deleteSubjects/${sub}/${admin?._id}`,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
       let res = await axios(config);
-      if (res.status == 200) {
+      if (res.status === 200) {
         handleClose2();
         getSubject();
         return swal({
@@ -227,7 +211,7 @@ const AdminSubject = () => {
       console.log(error);
       return swal({
         title: "Oops!",
-        text: error.response.data.error,
+        text: error.response?.data?.error || "An error occurred",
         icon: "error",
         button: "Ok!",
       });
@@ -240,66 +224,27 @@ const AdminSubject = () => {
   //   DateRange Filter
   const [searchH, setSearchH] = useState("");
   const handleFilterH = (e) => {
-    if (e.target.value != "") {
-      setSearchH(e.target.value);
+    const value = e.target.value.toLowerCase();
+    if (value) {
+      setSearchH(value);
       const filterTableH = nochangedata.filter((o) =>
-        Object.keys(o).some((k) =>
-          String(o[k])?.toLowerCase().includes(e.target.value?.toLowerCase())
-        )
+        Object.keys(o).some((k) => String(o[k])?.toLowerCase().includes(value))
       );
       setsubject([...filterTableH]);
     } else {
-      setSearchH(e.target.value);
+      setSearchH("");
       setsubject([...nochangedata]);
     }
   };
-  const [searchTermH, setSearchTermH] = useState("");
-  const searchedProductH = subject.filter((item) => {
-    if (searchTermH.value === "") {
-      return item;
-    }
-    if (item?.EName?.toLowerCase().includes(searchTermH?.toLowerCase())) {
-      return item;
-    } else {
-      return console.log("not found");
-    }
-  });
-  // Pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const productPerPage = 5;
-  // const visitedPage = pageNumber * productPerPage;
-  // const displayPage = subject.slice(visitedPage, visitedPage + productPerPage);
-  // const pageCount = Math.ceil(subject.length / productPerPage);
 
   useEffect(() => {
     getSubject();
     getAddMedium();
+    getaddsubclasss();
   }, []);
 
   return (
     <>
-      <div className="row">
-        <div className="col-md-10"></div>
-        <div className="col-md-2">
-          <label htmlFor="">Select Langauge</label>
-          <select
-            value={selectedLanguage}
-            onChange={handleLanguageChange}
-            className="vi_0"
-            style={{ borderRadius: "20px", backgroundColor: "#e2cbd0" }}
-          >
-            <option value="en-t-i0-und">English</option>
-            <option value="ne-t-i0-und">Nepali</option>
-            <option value="hi-t-i0-und">Hindi</option>
-            <option value="kn-t-i0-und">Kannada</option>
-            <option value="ta-t-i0-und">Tamil</option>
-            <option value="pa-t-i0-und">Punjabi</option>
-            <option value="mr-t-i0-und">Marathi</option>
-            <option value="ur-t-i0-und">Urdu</option>
-            <option value="sa-t-i0-und">Sanskrit</option>
-          </select>
-        </div>
-      </div>
       <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -317,7 +262,6 @@ const AdminSubject = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Subject</h2>
-
           <Link onClick={handleShow}>
             <Button2 text={"Add Subject"} />
           </Link>
@@ -333,50 +277,41 @@ const AdminSubject = () => {
               <tr>
                 <th>S.No</th>
                 <th>Medium</th>
-                <th>
-                  <div>Subject</div>
-                </th>
+                <th>Subject</th>
                 <th>Action</th>
               </tr>
             </thead>
-
             <tbody>
-              {subject?.map((item, i) => {
-                return (
-                  <tr>
-                    <td>{i + 1}</td>
-                    <td>{item?.mediumName}</td>
-                    <td>{item?.subjectName}</td>
-
-                    <td>
-                      {" "}
-                      <div style={{ display: "flex", gap: "20px" }}>
-                        <div>
-                          <BiSolidEdit
-                            className="text-success"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              handleShow1();
-                              setpdateSubject(item);
-                              setsubjectName(item?.subjectName);
-                            }}
-                          />{" "}
-                        </div>
-                        <div>
-                          <AiFillDelete
-                            className="text-danger"
-                            style={{ cursor: "pointer", fontSize: "20px" }}
-                            onClick={() => {
-                              setsub(item?._id);
-                              handleShow2();
-                            }}
-                          />{" "}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+              {subject?.map((item, i) => (
+                <tr key={item._id}>
+                  <td>{i + 1}</td>
+                  <td>{item?.mediumName}</td>
+                  <td>{item?.subjectName}</td>
+                  <td>
+                    <div style={{ display: "flex", gap: "20px" }}>
+                      <BiSolidEdit
+                        className="text-success"
+                        style={{ cursor: "pointer", fontSize: "20px" }}
+                        onClick={() => {
+                          handleShow1();
+                          setpdateSubject(item);
+                          setsubjectName(item?.subjectName);
+                          setmediumName(item?.mediumName);
+                          setSubClassName(item?.subclassName);
+                        }}
+                      />
+                      <AiFillDelete
+                        className="text-danger"
+                        style={{ cursor: "pointer", fontSize: "20px" }}
+                        onClick={() => {
+                          setsub(item?._id);
+                          handleShow2();
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>
@@ -395,14 +330,31 @@ const AdminSubject = () => {
                   onChange={(e) => setmediumName(e.target.value)}
                 >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item) => {
+                  {Medium?.map((item) => (
+                    <option key={item._id} value={item?.mediumName}>
+                      {item?.mediumName}
+                    </option>
+                  ))}
+                </select>
+                <label>
+                  Select Sub-Class <span style={{ color: "red" }}>*</span>
+                </label>
+                <Form.Select
+                  value={SubClassName}
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setSubClassName(e.target.value);
+                  }}
+                >
+                  <option value={""}>Select the Sub-Class</option>
+                  {getaddsubclass?.map((val, i) => {
                     return (
-                      <option value={item?.mediumName}>
-                        {item?.mediumName}
+                      <option value={val?.subclassName} key={i}>
+                        {val?.subclassName}
                       </option>
                     );
                   })}
-                </select>
+                </Form.Select>
               </div>
               <div className="do-sear mt-2">
                 <label>Subject</label>
@@ -410,17 +362,8 @@ const AdminSubject = () => {
                   type="text"
                   placeholder="Enter Subject"
                   className="vi_0"
-                  onChange={(e) => {
-                    if (selectedLanguage == "en-t-i0-und") {
-                      setsubjectName(e.target.value);
-                    } else onChangeHandler(e.target.value, setsubjectName);
-                  }}
+                  onChange={(e) => setsubjectName(e.target.value)}
                 />
-                {selectedLanguage == "en-t-i0-und" ? (
-                  <></>
-                ) : (
-                  <p>{subjectName}</p>
-                )}
               </div>
             </div>
           </Modal.Body>
@@ -436,9 +379,7 @@ const AdminSubject = () => {
               <Button
                 className="mx-2 modal-add-btn"
                 variant=""
-                onClick={() => {
-                  AddSubject();
-                }}
+                onClick={AddSubject}
               >
                 Add
               </Button>
@@ -466,49 +407,44 @@ const AdminSubject = () => {
                 <label>Medium</label>
                 <select
                   className="vi_0"
+                  value={mediumName}
                   onChange={(e) => setmediumName(e.target.value)}
                 >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item) => {
-                    return (
-                      <option value={item?.mediumName}>
-                        {item?.mediumName}
-                      </option>
-                    );
-                  })}
+                  {Medium?.map((item) => (
+                    <option key={item._id} value={item?.mediumName}>
+                      {item?.mediumName}
+                    </option>
+                  ))}
                 </select>
-                {/* <input
-                  type="text"
-                  placeholder="Enter Medium"
-                  className="vi_0"
-                  onChange={(e) =>
-                    {
-                      if(selectedLanguage == "en-t-i0-und"){
-                        setmediumName(e.target.value)
-                      }else onChangeHandler(e.target.value,setmediumName )
-                    }                  
-                  }
-                />
-                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{mediumName}</p>} */}
               </div>
               <div className="do-sear mt-2">
                 <label>Subject</label>
                 <input
                   type="text"
-                  // placeholder="Enter Subject"
                   className="vi_0"
-                  // value={subjectName}
-                  onChange={(e) => {
-                    if (selectedLanguage == "en-t-i0-und") {
-                      setsubjectName(e.target.value);
-                    } else onChangeHandler(e.target.value, setsubjectName);
-                  }}
+                  value={subjectName}
+                  onChange={(e) => setsubjectName(e.target.value)}
                 />
-                {selectedLanguage == "en-t-i0-und" ? (
-                  <></>
-                ) : (
-                  <p>{subjectName}</p>
-                )}
+              </div>
+              <div className="do-sear mt-2">
+                <label>Sub-Class</label>
+                <Form.Select
+                  value={SubClassName}
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setSubClassName(e.target.value);
+                  }}
+                >
+                  <option value={""}>Select the Sub-Class</option>
+                  {getaddsubclass?.map((val, i) => {
+                    return (
+                      <option value={val?.subclassName} key={i}>
+                        {val?.subclassName}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
               </div>
             </div>
           </Modal.Body>
@@ -519,9 +455,7 @@ const AdminSubject = () => {
             <Button
               variant=""
               className="modal-add-btn"
-              onClick={() => {
-                UpdateSubject();
-              }}
+              onClick={UpdateSubject}
             >
               Edit
             </Button>

@@ -14,7 +14,7 @@ const UserGenratedQuestion = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -33,7 +33,7 @@ const UserGenratedQuestion = () => {
   const getAllGenQuestionPaper = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/teacher/getAllGenQuestionPaper/${admin?._id}`,
+        `http://localhost:8001/api/teacher/getAllGenQuestionPaper/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const UserGenratedQuestion = () => {
   const DeleteTeacher = async () => {
     try {
       let res = await axios.delete(
-        `https://guru-resorce-backend.onrender.com/api/teacher/deleteGenQuestionPaper/${delteacher}/${admin?._id}`,
+        `http://localhost:8001/api/teacher/deleteGenQuestionPaper/${delteacher}/${admin?._id}`,
         {
           headers: {
             "content-type": "application/json",
@@ -214,11 +214,11 @@ const UserGenratedQuestion = () => {
                       <td>
                         {item?.School_Logo ? (
                           <a
-                            href={`https://guru-resorce-backend.onrender.com/Teacher/${item?.School_Logo}`}
+                            href={`http://localhost:8001/Teacher/${item?.School_Logo}`}
                             target="_blank"
                           >
                             <img
-                              src={`https://guru-resorce-backend.onrender.com/Teacher/${item?.School_Logo}`}
+                              src={`http://localhost:8001/Teacher/${item?.School_Logo}`}
                               style={{
                                 width: "40px",
                                 height: "40px",
@@ -241,27 +241,32 @@ const UserGenratedQuestion = () => {
                       </td>
                       <tb>
                         <div>
-                        {item?.status === "Not Complete Staps" ? (
-                          <span style={{ color: "red" }}>{item?.status}</span>
-                        ) : (
-                          <span>
-                            {item?.status === "Completed" ? (
-                              <span style={{ color: "green" }}>
-                                {item?.status}
-                              </span>
-                            ) : (
-                              <span style={{ color: "blue" }}>
-                                {item?.status}
-                              </span>
-                            )}
-                          </span>
-                        )}
+                          {item?.status === "Not Complete Staps" ? (
+                            <span style={{ color: "red" }}>{item?.status}</span>
+                          ) : (
+                            <span>
+                              {item?.status === "Completed" ? (
+                                <span style={{ color: "green" }}>
+                                  {item?.status}
+                                </span>
+                              ) : (
+                                <span style={{ color: "blue" }}>
+                                  {item?.status}
+                                </span>
+                              )}
+                            </span>
+                          )}
                         </div>
-                      
                       </tb>
                       <td>
                         {" "}
-                        <div style={{ display: "flex", gap: "10px",padding:"10px" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "10px",
+                            padding: "10px",
+                          }}
+                        >
                           <div>
                             <FaRegEye
                               style={{
@@ -269,7 +274,11 @@ const UserGenratedQuestion = () => {
                                 fontSize: "15px",
                                 color: "green",
                               }}
-                              onClick={() => navigate("/admincoverpage", { state: { item: item } })}
+                              onClick={() =>
+                                navigate("/admincoverpage", {
+                                  state: { item: item },
+                                })
+                              }
                             />{" "}
                           </div>
                           <div>

@@ -18,7 +18,7 @@ const Maths_Pattern = () => {
     try {
       const config = {
         url: "/admin/getQuestionByClasswise/" + user?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -87,7 +87,7 @@ const Maths_Pattern = () => {
                     a +
                     Number(
                       ele?.BluePrintmarksperquestion *
-                      ele?.Blueprintnoofquestion
+                        ele?.Blueprintnoofquestion
                     ),
                   0
                 )}
@@ -141,7 +141,8 @@ const Maths_Pattern = () => {
                         if (i < Number(ele?.NQA)) {
                           return (
                             <div className="container-fluid">
-                              {item?.Types_Question == "Multiple Choice Questions" ? (
+                              {item?.Types_Question ==
+                              "Multiple Choice Questions" ? (
                                 <div className="row">
                                   <div
                                     className="col-md-1"
@@ -174,7 +175,7 @@ const Maths_Pattern = () => {
                                         {item?.Image ? (
                                           <div>
                                             <img
-                                              src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image}`}
+                                              src={`http://localhost:8001/Questions/${item?.Image}`}
                                               className="mcq-img"
                                               alt=""
                                             />
@@ -330,89 +331,117 @@ const Maths_Pattern = () => {
                                       <div className="ans-line"></div>
                                     </div>
                                   </div>
-                                  {item?.ImageQ ? (<>
-                                    <div>
-                                      <h5>(OR)</h5>
-                                    </div>
-                                  </>) : (<></>)}
+                                  {item?.ImageQ ? (
+                                    <>
+                                      <div>
+                                        <h5>(OR)</h5>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
 
                                   <div>
-                                    {item?.ImageQ ? (<>
-                                      <b>Question Image:</b>
-                                      <div>
-
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </div>
-                                    </>) : (
+                                    {item?.ImageQ ? (
+                                      <>
+                                        <b>Question Image:</b>
+                                        <div>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.ImageQ}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </div>
+                                      </>
+                                    ) : (
                                       <></>
-                                    )}<br />
+                                    )}
+                                    <br />
                                     <b>Options :</b>
                                     <div className="d-flex mb-1">
-                                      {item?.Image_1 ? (<>
-                                        <span>a)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
-                                      {item?.Image_2 ? (<>
-                                        <span>b)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
+                                      {item?.Image_1 ? (
+                                        <>
+                                          <span>a)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {item?.Image_2 ? (
+                                        <>
+                                          <span>b)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
                                     </div>
                                     <div className="d-flex mb-1">
-                                      {item?.Image_3 ? (<>
-                                        <span>c)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_3}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
-                                      {item?.Image_4 ? (<>
-                                        <span>d)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_4}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
+                                      {item?.Image_3 ? (
+                                        <>
+                                          <span>c)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_3}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {item?.Image_4 ? (
+                                        <>
+                                          <span>d)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_4}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
                                     </div>
                                     <div className="d-flex mb-1">
-                                      {item?.Image_5 ? (<>
-                                        <span>e)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_5}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
-                                      {item?.Image_6 ? (<>
-                                        <span>f)</span>
-                                        <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_6}`}
-                                          className="mcq-img"
-                                          alt=""
-                                        />
-                                      </>) : (<></>)}
+                                      {item?.Image_5 ? (
+                                        <>
+                                          <span>e)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_5}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {item?.Image_6 ? (
+                                        <>
+                                          <span>f)</span>
+                                          <img
+                                            src={`http://localhost:8001/Questions/${item?.Image_6}`}
+                                            className="mcq-img"
+                                            alt=""
+                                          />
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
                                     </div>
                                   </div>
-
                                 </div>
                               ) : (
                                 <></>
                               )}
-                              {item?.Types_Question ==
-                                "Objective Questions" ? (
+                              {item?.Types_Question == "Objective Questions" ? (
                                 <div className="row">
                                   <div
                                     className="col-md-1"
@@ -445,7 +474,7 @@ const Maths_Pattern = () => {
                                         {item?.Image ? (
                                           <div>
                                             <img
-                                              src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image}`}
+                                              src={`http://localhost:8001/Questions/${item?.Image}`}
                                               className="mcq-img"
                                               alt=""
                                             />
@@ -607,7 +636,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Fill in the Blanks Questions" ? (
+                              "Fill in the Blanks Questions" ? (
                                 <>
                                   {item?.NumberOfLine == "2" ? (
                                     <>
@@ -716,7 +745,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -727,7 +756,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -761,7 +790,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "One Sentence Answer Question" ? (
+                              "One Sentence Answer Question" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -822,7 +851,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -833,7 +862,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -866,7 +895,7 @@ const Maths_Pattern = () => {
                                 <></>
                               )}
                               {item?.Types_Question ==
-                                "Two  Sentence Answer Questions" ? (
+                              "Two  Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -927,7 +956,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -938,7 +967,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -971,7 +1000,7 @@ const Maths_Pattern = () => {
                                 <></>
                               )}
                               {item?.Types_Question ==
-                                "Two and three Sentence Answer Questions" ? (
+                              "Two and three Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1032,7 +1061,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1043,7 +1072,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1077,7 +1106,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Three and Four Sentence Answer Questions" ? (
+                              "Three and Four Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1138,7 +1167,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1149,7 +1178,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1183,7 +1212,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Five and Six Sentence Answer Questions" ? (
+                              "Five and Six Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1244,7 +1273,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1255,7 +1284,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1289,7 +1318,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Six Sentence Answer Questions" ? (
+                              "Six Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1350,7 +1379,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1361,7 +1390,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1395,7 +1424,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Seven Sentence Answer Questions" ? (
+                              "Seven Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1456,7 +1485,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1467,7 +1496,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1501,7 +1530,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Eight Sentence Answer Questions" ? (
+                              "Eight Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1562,7 +1591,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1573,7 +1602,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1607,7 +1636,7 @@ const Maths_Pattern = () => {
                               )}
 
                               {item?.Types_Question ==
-                                "Ten Sentence Answer Questions" ? (
+                              "Ten Sentence Answer Questions" ? (
                                 <>
                                   <div className="row">
                                     <div
@@ -1668,7 +1697,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_1 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -1679,7 +1708,7 @@ const Maths_Pattern = () => {
                                     {item?.Image_2 ? (
                                       <div className="col-md-6">
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                           className="mcq-img"
                                           alt=""
                                         />

@@ -47,7 +47,7 @@ function QuestionAnalysis() {
     try {
       const config = {
         url: "/teacher/getGenQuestionById/" + state?._id + "/" + user?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "get",
         headers: {
           "content-type": "application/json",
@@ -88,17 +88,16 @@ function QuestionAnalysis() {
       am == "Recorrect the Answers Questions" ||
       am == "Odd and out words Questions" ||
       am == "RelationShip Words Questions" ||
-      am == "Grammer Questions"|| am == "One Sentence Answer Question" 
+      am == "Grammer Questions" ||
+      am == "One Sentence Answer Question"
     ) {
       return "O.T";
     }
     if (
-   
       am == "Two  Sentence Answer Questions" ||
       am == "Situation UnderStatnding answer Questions" ||
       am == "Complete the Poem" ||
       am == "Poet,Time, Place, Writer answer questions" ||
-    
       am == "Two and three Sentence Answer Questions"
     ) {
       return "S.A";
@@ -129,7 +128,7 @@ function QuestionAnalysis() {
   const getquestAnalysisHeader = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getQuestAnalysisheaderbymedium/" +
+        "http://localhost:8001/api/admin/getQuestAnalysisheaderbymedium/" +
           state?.Medium
       );
       if (res.status == 200) {
@@ -155,89 +154,111 @@ function QuestionAnalysis() {
           />
         </div>
       </div>
-      <div  >
-      <Container
-        className="mt-4"
-        style={{ border: "3px solid black", borderRadius: "15px" }}
-        id="printable-content"
-      >
-        <div className="mt-4">
-          <h6>
-            {" "}
-            {state?.Institute_Name ? (
-              <h6><b>
-                {state?.Institute_Name},{state?.SchoolAddress}
-                </b>
-              </h6>
-            ) : (
-              <></>
-            )}
-          </h6>
-          <h6 className="text-center"><b>{state?.bluePrint?.blName}</b></h6>
-          <h6 className="text-center">
-            <b>{state?.Sub_Class} {state?.Subject}</b>
-          </h6>
-          {/* <h3 className="text-center"> ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ </h3> */}
+      <div>
+        <Container
+          className="mt-4"
+          style={{ border: "3px solid black", borderRadius: "15px" }}
+          id="printable-content"
+        >
+          <div className="mt-4">
+            <h6>
+              {" "}
+              {state?.Institute_Name ? (
+                <h6>
+                  <b>
+                    {state?.Institute_Name},{state?.SchoolAddress}
+                  </b>
+                </h6>
+              ) : (
+                <></>
+              )}
+            </h6>
+            <h6 className="text-center">
+              <b>{state?.bluePrint?.blName}</b>
+            </h6>
+            <h6 className="text-center">
+              <b>
+                {state?.Sub_Class} {state?.Subject}
+              </b>
+            </h6>
+            {/* <h3 className="text-center"> ಪ್ರಥಮ ಭಾಷೆ ಕನ್ನಡ ಒಂದನೆಯ ಸಂಕಲನಾತ್ಮಕ ,ಮೌಲ್ಯಮಾಪನ </h3> */}
 
-          <h6><b>{GetquestAnalysisHeader?.QuestHeader}</b></h6>
-        </div>
-        <div className="text-center">
-          <Table bordered responsive style={{ fontFamily: "math", border: "1px solid" }}>
-            <thead>
-              <tr>
-                <th>{GetquestAnalysisHeader?.slno}</th>
-                <th>{GetquestAnalysisHeader?.ObjectType}</th>
-                <th>{GetquestAnalysisHeader?.Chapter}</th>
-                <th>{GetquestAnalysisHeader?.Lesson}</th>
-                <th>{GetquestAnalysisHeader?.QuestionType}</th>
-                <th>{GetquestAnalysisHeader?.OtSaLsa}</th>
-                <th>{GetquestAnalysisHeader?.Marks}</th>
-                <th>{GetquestAnalysisHeader?.Difficultlevel}</th>
-                <th>{GetquestAnalysisHeader?.Time}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {state?.bluePrint?.TypesofQuestions?.map((ele2) => {
-                return (
-                  <>
-                    {Questions?.filter(
-                      (ele) => ele.Types_Question === ele2?.QAType
-                    )?.map((item, i) => {
-                      if (i < Number(ele2?.NQA)) {
-                        return (
-                          <tr>
-                            <td> {count2++}</td>
-                            <td>{item?.Objectives}</td>
-                            <td>{item?.Chapter_Name}</td>
-                            <td>{item?.Lesson}</td>
-                            <td>{item?.Types_Question}</td>
-                            <td>
-                              {check(ele2?.QAType)}
-                              {/* {item?.Questiontype} */}
-                            </td>
-                            <td>{(ele2?.NQA * ele2?.Mask) / ele2?.NQA}</td>
-                            <td>{item?.Difficulty_level?.slice(0, 1)}</td>
-                            <td>{item?.Answer_Time}</td>
-                          </tr>
+            <h6>
+              <b>{GetquestAnalysisHeader?.QuestHeader}</b>
+            </h6>
+          </div>
+          <div className="text-center">
+            <Table
+              bordered
+              responsive
+              style={{ fontFamily: "math", border: "1px solid" }}
+            >
+              <thead>
+                <tr>
+                  <th>{GetquestAnalysisHeader?.slno}</th>
+                  <th>{GetquestAnalysisHeader?.ObjectType}</th>
+                  <th>{GetquestAnalysisHeader?.Chapter}</th>
+                  <th>{GetquestAnalysisHeader?.Lesson}</th>
+                  <th>{GetquestAnalysisHeader?.QuestionType}</th>
+                  <th>{GetquestAnalysisHeader?.OtSaLsa}</th>
+                  <th>{GetquestAnalysisHeader?.Marks}</th>
+                  <th>{GetquestAnalysisHeader?.Difficultlevel}</th>
+                  <th>{GetquestAnalysisHeader?.Time}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {state?.bluePrint?.TypesofQuestions?.map((ele2) => {
+                  return (
+                    <>
+                      {(() => {
+                        const filteredQuestions = Questions?.filter(
+                          (ele) => ele.Types_Question === ele2?.QAType
                         );
-                      }
-                    })}
-                  </>
-                );
-              })}
-            </tbody>
-          </Table>
-        </div>
+                        const requiredQuestions = Number(ele2?.NQA);
+                        const addedQuestions = filteredQuestions?.length || 0;
+                        
+                        return filteredQuestions?.map((item, i) => {
+                          if (i < requiredQuestions) {
+                            return (
+                              <tr key={i}>
+                                <td>{count2++}</td>
+                                <td>{item?.Objectives}</td>
+                                <td>{item?.Chapter_Name}</td>
+                                <td>{item?.Lesson}</td>
+                                <td>
+                                  {item?.Types_Question}
+                                  <div>
+                                    <small>Required: {requiredQuestions}</small>
+                                    <br />
+                                    <small>Added: {addedQuestions}</small>
+                                  </div>
+                                </td>
+                                <td>{check(ele2?.QAType)}</td>
+                                <td>{(ele2?.NQA * ele2?.Mask) / ele2?.NQA}</td>
+                                <td>{item?.Difficulty_level?.slice(0, 1)}</td>
+                                <td>{item?.Answer_Time}</td>
+                              </tr>
+                            );
+                          }
+                          return null;
+                        });
+                      })()}
+                    </>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
 
-        <div className="d-flex mt-2">
-          <b>
-            Note<span style={{ color: "red" }}>*</span>
-          </b>
-          <p>{GetquestAnalysisHeader?.Note}</p>
-        </div>
-      </Container>
+          <div className="d-flex mt-2">
+            <b>
+              Note<span style={{ color: "red" }}>*</span>
+            </b>
+            <p>{GetquestAnalysisHeader?.Note}</p>
+          </div>
+        </Container>
       </div>
-      
+
       <div className="d-flex justify-content-center mt-2 ">
         <Button
           className="md-2"

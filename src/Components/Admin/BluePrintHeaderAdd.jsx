@@ -109,7 +109,7 @@ function BluePrintHeaderAdd() {
     try {
       const config = {
         url: "/admin/addblueprintheader",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -164,7 +164,7 @@ function BluePrintHeaderAdd() {
   const getBluePrintHeader = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getblueprintheader"
+        "http://localhost:8001/api/admin/getblueprintheader"
       );
       if (res.status == 200) {
         setGetbluePrintHeader(res.data.success);
@@ -179,9 +179,7 @@ function BluePrintHeaderAdd() {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
-      );
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }

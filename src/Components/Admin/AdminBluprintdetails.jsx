@@ -77,12 +77,11 @@ const AdminBlueprintdetails = () => {
   };
   // get method   for blue print
 
-
   const [blueprint, setblueprint] = useState([]);
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllBLUEPRINTs/" + admin?._id,
+        "http://localhost:8001/api/admin/getAllBLUEPRINTs/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -113,7 +112,7 @@ const AdminBlueprintdetails = () => {
   const makedeleteblueprint = async () => {
     try {
       let data = await axios.delete(
-        "https://guru-resorce-backend.onrender.com/api/admin/deleteBLUEPRINT/" +
+        "http://localhost:8001/api/admin/deleteBLUEPRINT/" +
           deleteId +
           "/" +
           admin?._id,
@@ -143,8 +142,8 @@ const AdminBlueprintdetails = () => {
       console.log(error);
     }
   };
-  
-  const [subclass,setSub_classname]=useState("");
+
+  const [subclass, setSub_classname] = useState("");
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
   // const productPerPage = 5;
@@ -155,8 +154,14 @@ const AdminBlueprintdetails = () => {
   const recordsperpage = 10;
   const lastIndex = currenpage * recordsperpage;
   const firstIndex = lastIndex - recordsperpage;
-  const records = blueprint?.filter((item)=> subclass ? item.SubClassName==subclass:item ).slice(firstIndex, lastIndex);
-  const npages = Math.ceil(blueprint?.filter((item)=> subclass ? item.SubClassName==subclass:item ).length / recordsperpage);
+  const records = blueprint
+    ?.filter((item) => (subclass ? item.SubClassName == subclass : item))
+    .slice(firstIndex, lastIndex);
+  const npages = Math.ceil(
+    blueprint?.filter((item) =>
+      subclass ? item.SubClassName == subclass : item
+    ).length / recordsperpage
+  );
   const numbers = [...Array(npages + 1).keys()].slice(1);
 
   function changePage(id) {
@@ -178,7 +183,7 @@ const AdminBlueprintdetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -196,20 +201,24 @@ const AdminBlueprintdetails = () => {
   }, []);
   const [Classname, setClassname] = useState("");
 
-  const makeApprovedAndHold=async(id, isBlock)=>{
+  const makeApprovedAndHold = async (id, isBlock) => {
     try {
-      const config={
+      const config = {
         url: "/admin/makeBlockAndUnblockBLUEPRINTs",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
-        headers: { "content-type": "application/json", Authorization: `Bearer ${token}` },
-        data:{
-          id, isBlock,
-          authId:admin?._id
-        }
-      }
-      let res=await axios(config);
-      if(res.status==200){
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          id,
+          isBlock,
+          authId: admin?._id,
+        },
+      };
+      let res = await axios(config);
+      if (res.status == 200) {
         swal({
           title: "Success!",
           text: res.data.success,
@@ -221,8 +230,7 @@ const AdminBlueprintdetails = () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
     <>
@@ -236,9 +244,7 @@ const AdminBlueprintdetails = () => {
             class="form-control"
             placeholder="Search..."
             aria-describedby="basic-addon1"
-           
           />
-         
         </div>
       </div>
       <div className="customerhead p-2 mt-4">
@@ -285,7 +291,6 @@ const AdminBlueprintdetails = () => {
               </Form.Select>
             </div>
             <div className="col-md-4">
-             
               <div
                 style={{ float: "right" }}
                 onClick={() => {
@@ -404,7 +409,13 @@ const AdminBlueprintdetails = () => {
                         <FaEye color="blue" />
                       </Link>
                     </td>
-                    <td>{val.isBlock==true ? <span style={{color:"green"}}>Approved</span>:<span style={{color:"red"}}>Holded</span>}</td>
+                    <td>
+                      {val.isBlock == true ? (
+                        <span style={{ color: "green" }}>Approved</span>
+                      ) : (
+                        <span style={{ color: "red" }}>Holded</span>
+                      )}
+                    </td>
                     <td>
                       <div style={{ display: "flex", gap: "20px" }}>
                         <div>
@@ -428,7 +439,27 @@ const AdminBlueprintdetails = () => {
                           />{" "}
                         </div>
                         <div>
-                          {val?.isBlock==false ? (<button type="button" class="btn btn-success" onClick={()=>makeApprovedAndHold(val?._id,true)}>Approved</button>):(<button type="button" class="btn btn-danger" onClick={()=>makeApprovedAndHold(val?._id,false)}>Hold</button>)}
+                          {val?.isBlock == false ? (
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              onClick={() =>
+                                makeApprovedAndHold(val?._id, true)
+                              }
+                            >
+                              Approved
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              onClick={() =>
+                                makeApprovedAndHold(val?._id, false)
+                              }
+                            >
+                              Hold
+                            </button>
+                          )}
                         </div>
                       </div>
                     </td>

@@ -79,7 +79,7 @@ const AdminExam = () => {
       let config = {
         url: "/admin/addNameExamination",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -116,9 +116,7 @@ const AdminExam = () => {
   //  const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
-      );
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
@@ -133,7 +131,7 @@ const AdminExam = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -151,7 +149,7 @@ const AdminExam = () => {
       let config = {
         url: "/admin/updateNameExamination",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -192,7 +190,7 @@ const AdminExam = () => {
         url:
           "/admin/deleteNameExamination/" + deleteNameExam + "/" + admin?._id,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application-data",
           Authorization: `Bearer ${token}`,

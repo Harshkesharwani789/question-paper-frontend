@@ -15,7 +15,7 @@ export const UserCoverPage = () => {
   const getCoverPage = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getCoverPageBYMedium/" + state?.Medium
+        "http://localhost:8001/api/admin/getCoverPageBYMedium/" + state?.Medium
       );
       if (res.status === 200) {
         setData1(res.data.success);
@@ -54,7 +54,10 @@ export const UserCoverPage = () => {
           style={{ width: "22px", height: "40px" }}
           onClick={() => handlePrint("printable-content")}
         />
-        <div id="CoverPage" style={{ padding: "15px" , overflow:'hidden', overflowX:"scroll"}}>
+        <div
+          id="CoverPage"
+          style={{ padding: "15px", overflow: "hidden", overflowX: "scroll" }}
+        >
           <div
             style={{
               padding: "15px",
@@ -69,7 +72,7 @@ export const UserCoverPage = () => {
               <div>
                 {state?.School_Logo ? (
                   <img
-                    src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
+                    src={`http://localhost:8001/Teacher/${state?.School_Logo}`}
                     alt=""
                     style={{ width: "80px", marginTop: "24px" }}
                   />
@@ -78,9 +81,7 @@ export const UserCoverPage = () => {
                 )}
               </div>
               <div className=" text-center">
-                <h6 className="fw-bold">
-                  {state?.Institute_Name} 
-                </h6>
+                <h6 className="fw-bold">{state?.Institute_Name}</h6>
                 <h6 className="fw-bold">{state?.SchoolAddress}</h6>
               </div>
             </div>
@@ -109,20 +110,32 @@ export const UserCoverPage = () => {
                   fontStyle: "italic",
                 }}
               >
-                <li className='d-flex gap-4 align-items-center '>
-                  <p> <FaStar /></p>
+                <li className="d-flex gap-4 align-items-center ">
+                  <p>
+                    {" "}
+                    <FaStar />
+                  </p>
                   <p>{data1?.questionPaper}</p>
                 </li>
-                <li className='d-flex gap-4 align-items-center '>
-                  <p> <FaStar /></p>
+                <li className="d-flex gap-4 align-items-center ">
+                  <p>
+                    {" "}
+                    <FaStar />
+                  </p>
                   <p>{data1?.blueprint}</p>
                 </li>
-                <li className='d-flex gap-4 align-items-center '>
-                  <p> <FaStar /></p>
+                <li className="d-flex gap-4 align-items-center ">
+                  <p>
+                    {" "}
+                    <FaStar />
+                  </p>
                   <p>{data1?.answersheet}</p>
                 </li>
-                <li className='d-flex gap-4 align-items-center '>
-                  <p> <FaStar /></p>
+                <li className="d-flex gap-4 align-items-center ">
+                  <p>
+                    {" "}
+                    <FaStar />
+                  </p>
                   <p>{data1?.questionanylys}</p>
                 </li>
               </ul>

@@ -33,7 +33,7 @@ const QandA_add10Sentences = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -50,7 +50,7 @@ const QandA_add10Sentences = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -66,11 +66,11 @@ const QandA_add10Sentences = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -118,14 +118,11 @@ const QandA_add10Sentences = ({ selectdetails }) => {
     setorAnswer(data);
   };
 
-
   return (
     <div>
       <div className="">
         <div className="container">
-
           <div className="row mt-2">
-
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -816,7 +813,9 @@ const QandA_add10Sentences = ({ selectdetails }) => {
                 <input
                   id="upload3"
                   onChange={(e) => setImage_2(e.target.files[0])}
-                  type="file" className="vi_0" />
+                  type="file"
+                  className="vi_0"
+                />
               </div>
             </div>
 
@@ -894,7 +893,8 @@ const QandA_add10Sentences = ({ selectdetails }) => {
                   onChange={(e) => {
                     setAnswer_Time(e.target.value);
                   }}
-                  aria-label="Default select example">
+                  aria-label="Default select example"
+                >
                   <option>Select the Time</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
@@ -925,7 +925,8 @@ const QandA_add10Sentences = ({ selectdetails }) => {
             className="modal-add-btn"
           >
             Back
-          </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </button>{" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();
@@ -998,34 +999,22 @@ const QandA_add10Sentences = ({ selectdetails }) => {
                           <>
                             <div className="col-md-12">
                               <div className="do-sear mt-4">
-                                <p
-                                  type="text"
-                                  className="lined-input"
-                                ></p>
+                                <p type="text" className="lined-input"></p>
                               </div>
                             </div>
                             <div className="col-md-12">
                               <div className="do-sear mt-2">
-                                <p
-                                  type="text"
-                                  className="lined-input"
-                                ></p>
+                                <p type="text" className="lined-input"></p>
                               </div>
                             </div>
                             <div className="col-md-12">
                               <div className="do-sear mt-2">
-                                <p
-                                  type="text"
-                                  className="lined-input"
-                                ></p>
+                                <p type="text" className="lined-input"></p>
                               </div>
                             </div>
                             <div className="col-md-12">
                               <div className="do-sear mt-2">
-                                <p
-                                  type="text"
-                                  className="lined-input"
-                                ></p>
+                                <p type="text" className="lined-input"></p>
                               </div>
                             </div>
                           </>
@@ -1035,42 +1024,27 @@ const QandA_add10Sentences = ({ selectdetails }) => {
                               <>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-4">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                               </>
@@ -1537,7 +1511,7 @@ const QandA_add10Sentences = ({ selectdetails }) => {
                 className="modal-add-btn"
                 onClick={() => {
                   // navigate("/Classlkg");
-                  addquestions()
+                  addquestions();
                 }}
               >
                 Submit

@@ -1,59 +1,69 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Table } from 'react-bootstrap'
-import "../../App.css"
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Container, Table } from "react-bootstrap";
+import "../../App.css";
+import axios from "axios";
 function QuestionAndAnswerView() {
-    const admin = JSON.parse(sessionStorage.getItem("admin"));
-    const token = sessionStorage.getItem("token");
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
+  const token = sessionStorage.getItem("token");
 
-    console.log("sd",admin,token);
-    //Get All QuestionAnsPdf
-    const [QuestionAnsPdf, setQuestionAnsPdf] = useState([]);
-    const getallquestionPdf = async () => {
-        try {
-            let res = await axios.get(
-                `https://guru-resorce-backend.onrender.com/api/admin/getAllpdf/${admin?._id}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            if (res.status === 200) {
-                setQuestionAnsPdf(res.data.success);
-            }
-        } catch (error) {
-            console.log("Error fetching medium:", error);
-        }
-    };
-    useEffect(() => {
-        getallquestionPdf()
-    }, [])
-console.log("QuestionAnsPdf",QuestionAnsPdf);
-    return (
-        <div>
-            <Container>
-                <div className='mt-4' style={{
-                    backgroundColor: "#f9b26b",
-                    padding: "4px",
-                    borderRadius: "10px",
-                    color: "white",
-                    fontWeight: "bold"
-                }}>
-                    <h4>All Assessment</h4>
-                </div>
+  console.log("sd", admin, token);
+  //Get All QuestionAnsPdf
+  const [QuestionAnsPdf, setQuestionAnsPdf] = useState([]);
+  const getallquestionPdf = async () => {
+    try {
+      let res = await axios.get(
+        `http://localhost:8001/api/admin/getAllpdf/${admin?._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (res.status === 200) {
+        setQuestionAnsPdf(res.data.success);
+      }
+    } catch (error) {
+      console.log("Error fetching medium:", error);
+    }
+  };
+  useEffect(() => {
+    getallquestionPdf();
+  }, []);
+  console.log("QuestionAnsPdf", QuestionAnsPdf);
+  return (
+    <div>
+      <Container>
+        <div
+          className="mt-4"
+          style={{
+            backgroundColor: "#f9b26b",
+            padding: "4px",
+            borderRadius: "10px",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          <h4>All Assessment</h4>
+        </div>
 
-                <div className='questionpdfview'>
-                    <h3 className='mt-3'>2023-24</h3>
-                    <Table>
+        <div className="questionpdfview">
+          <h3 className="mt-3">2023-24</h3>
+          <Table>
+            <tbody>
+              {QuestionAnsPdf?.map((item, i) => {
+                return (
+                  <tr>
+                    <td>
+                      <a
+                        href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                        target="_blank"
+                      >
+                        Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                        Assessment Final timetable
+                      </a>
+                    </td>
+                    <td>Answer</td>
+                  </tr>
+                );
+              })}
 
-                        <tbody>
-                            {QuestionAnsPdf?.map((item, i) => {
-                                return (
-                                    <tr>
-                                        <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                        <td>Answer</td>
-                                    </tr>
-                                )
-                            })}
-
-                            {/* <tr>
+              {/* <tr>
                                 <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
                                 <td>Answer</td>
                             </tr>
@@ -77,51 +87,105 @@ console.log("QuestionAnsPdf",QuestionAnsPdf);
                                 <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
                                 <td>Answer</td>
                             </tr> */}
+            </tbody>
+          </Table>
 
-                        </tbody>
-                    </Table>
-
-                    <h3>2023-24</h3>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Class 4 7 and 10 Assessment - Question</th>
-                                <th>Answer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></td>
-                                <td>Answer</td>
-                            </tr>
-
-                        </tbody>
-                    </Table>
-                    {/* <ui>
+          <h3>2023-24</h3>
+          <Table>
+            <thead>
+              <tr>
+                <th>Class 4 7 and 10 Assessment - Question</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="./PDF/2023-24-5th-8th-9th-Assessment.pdf"
+                    target="_blank"
+                  >
+                    Circular regarding March-2024 5th, 8th & 9th Std (SA-2)
+                    Assessment Final timetable
+                  </a>
+                </td>
+                <td>Answer</td>
+              </tr>
+            </tbody>
+          </Table>
+          {/* <ui>
                         <li><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding March-2024 5th, 8th & 9th Std (SA-2) Assessment Final timetable</a></li>
                         <li><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Tentative Time Table for the Assessment (SA-2) of Class 5th, 8th and 9th for the year 2023-24</a></li>
                         <li><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Class 5, 8 & 9 Assessment Model Question Cum Answer Booklets</a></li>
@@ -140,16 +204,15 @@ console.log("QuestionAnsPdf",QuestionAnsPdf);
                         <li><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding AML sheets of 5th & 8th standard assessment for the year 2022-23</a></li>
                         <li><a href="./PDF/2023-24-5th-8th-9th-Assessment.pdf" target="_blank">Circular regarding helpline for 5th & 8th standard assessment year 2022-23</a></li>
                     </ui> */}
-                    <br />
+          <br />
 
-                    <div>
-                        <p>Last Updated: 26-01-2024 10:48 AM Updated By: Admin</p>
-                    </div>
-                </div>
-
-            </Container>
+          <div>
+            <p>Last Updated: 26-01-2024 10:48 AM Updated By: Admin</p>
+          </div>
         </div>
-    )
+      </Container>
+    </div>
+  );
 }
 
-export default QuestionAndAnswerView
+export default QuestionAndAnswerView;

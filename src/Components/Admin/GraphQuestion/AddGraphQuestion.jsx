@@ -6,7 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import parse from "html-react-parser"
+import parse from "html-react-parser";
 import MathEditor from "../MyEditor";
 function AddGraphQuestion({ selectdetails }) {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -39,13 +39,12 @@ function AddGraphQuestion({ selectdetails }) {
   const [AnsImage, setAnsImage] = useState("");
   const [Answer, setAnswer] = useState("");
 
-
   const addquestions = async () => {
     try {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -61,12 +60,11 @@ function AddGraphQuestion({ selectdetails }) {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
-
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Marks: Marks,
@@ -84,16 +82,14 @@ function AddGraphQuestion({ selectdetails }) {
           icon: "success",
           button: "Ok!",
         });
-        handleClose()
-        sessionStorage.removeItem("selectdetails")
+        handleClose();
+        sessionStorage.removeItem("selectdetails");
         return navigate("/adminquestions");
       }
     } catch (error) {
       console.log(error);
-
     }
   };
-
 
   return (
     <div>
@@ -109,7 +105,7 @@ function AddGraphQuestion({ selectdetails }) {
                   data={Question}
                   onChange={handleChange}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: Question,
                     B: setQuestion,
@@ -125,7 +121,8 @@ function AddGraphQuestion({ selectdetails }) {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   className="vi_0"
-                  onChange={(e) => setMarks(e.target.value)}                >
+                  onChange={(e) => setMarks(e.target.value)}
+                >
                   <option value="">Select Marks</option>
                   <option value="1/2">1/2</option>
                   <option value="1/4">1/4</option>
@@ -147,7 +144,8 @@ function AddGraphQuestion({ selectdetails }) {
                 <label htmlFor="">Answer Time</label>
                 <Form.Select
                   onChange={(e) => setAnswer_Time(e.target.value)}
-                  className="vi_0">
+                  className="vi_0"
+                >
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
@@ -185,15 +183,15 @@ function AddGraphQuestion({ selectdetails }) {
                     data={Answer}
                     onChange={handleChange7}
                   /> */}
-                    <MathEditor
-                  data={{
-                    A: Answer,
-                    B: setAnswer,
-                    selectedLanguage: selectdetails?.selectedLanguage,
-                    trans: AnswerT,
-                    settran: setAnswerT,
-                  }}
-                />
+                  <MathEditor
+                    data={{
+                      A: Answer,
+                      B: setAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: AnswerT,
+                      settran: setAnswerT,
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -229,9 +227,7 @@ function AddGraphQuestion({ selectdetails }) {
         <Modal.Body>
           <div>
             <label htmlFor="">Question</label>
-            <p className="vi_0">
-              {Question}
-            </p>
+            <p className="vi_0">{Question}</p>
             <div>
               {/* <img
                 className="w-100 "
@@ -239,18 +235,18 @@ function AddGraphQuestion({ selectdetails }) {
                 alt="fig."
                 style={{width:"30%",height:"40%"}}
               /> */}
-              
-                        <label>Image 2</label>
-                        <br />
-                        <img
-                          className=""
-                          src={AnsImage && URL.createObjectURL(AnsImage)}
-                          alt="fig."
-                          style={{
-                            width: "30%",
-                            height: "40%",
-                          }}
-                        />
+
+              <label>Image 2</label>
+              <br />
+              <img
+                className=""
+                src={AnsImage && URL.createObjectURL(AnsImage)}
+                alt="fig."
+                style={{
+                  width: "30%",
+                  height: "40%",
+                }}
+              />
             </div>
             <label htmlFor="">Answer</label>
             <p className="vi_0">{parse(`<div>${Answer}</div>`)}</p>

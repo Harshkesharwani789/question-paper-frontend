@@ -9,7 +9,7 @@ import swal from "sweetalert";
 import parse from "html-react-parser";
 import MathEditor from "../MyEditor";
 
-const QandA_5to6_addQandA = ({selectdetails}) => {
+const QandA_5to6_addQandA = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -42,7 +42,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -58,7 +58,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -74,11 +74,11 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -86,7 +86,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
           orAnswer: orAnswer,
           Image_1: Image_1,
           Image_2: orImageQ,
-          NumberOfLine:NumberOfLine,
+          NumberOfLine: NumberOfLine,
 
           Marks: Marks,
           Answer_Time: Answer_Time,
@@ -141,7 +141,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
                   data={Question}
                   onChange={handleChange}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: Question,
                     B: setQuestion,
@@ -153,7 +153,6 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
               </div>
             </div>
 
-            
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Answer</label>
@@ -163,7 +162,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
                   data={Answer}
                   onChange={handleChange1}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: Answer,
                     B: setAnswer,
@@ -833,7 +832,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
                   data={orQuestion}
                   onChange={handleChange2}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orQuestion,
                     B: setorQuestion,
@@ -854,7 +853,7 @@ const QandA_5to6_addQandA = ({selectdetails}) => {
                   data={orAnswer}
                   onChange={handleChange3}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: orAnswer,
                     B: setorAnswer,

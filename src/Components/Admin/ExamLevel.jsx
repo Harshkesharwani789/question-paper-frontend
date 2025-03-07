@@ -36,7 +36,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/addExamLevel",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const ExamLevel = () => {
   const [nochangedata, setnochangedata] = useState([]);
   const getExamLevel = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getExamLevel");
+      let res = await axios.get("http://localhost:8001/api/admin/getExamLevel");
       if (res.status == 200) {
         setExamlevell(res.data.success);
         setnochangedata(res.data.success);
@@ -89,7 +89,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/updateExamLevel",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -129,7 +129,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/deleteExamLevel/" + exam + "/" + admin?._id,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -242,10 +242,7 @@ const ExamLevel = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Exam Level</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Exam Level
           </button>
         </div>
@@ -328,7 +325,7 @@ const ExamLevel = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-         <div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -439,7 +436,10 @@ const ExamLevel = () => {
           keyboard={false}
           style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>
               Edit Exam Level
             </Modal.Title>
@@ -477,11 +477,16 @@ const ExamLevel = () => {
         </div>  */}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose1}
+            >
               Close
             </Button>
             <Button
-              variant="" className="modal-add-btn"
+              variant=""
+              className="modal-add-btn"
               onClick={() => {
                 UpdateExamLevel();
               }}
@@ -510,10 +515,18 @@ const ExamLevel = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={Deleteexamlevel}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={Deleteexamlevel}
+            >
               Delete
             </Button>
           </Modal.Footer>

@@ -81,7 +81,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/addcoverpage",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -114,7 +114,7 @@ export const AddCover = () => {
   const getCoverPage = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getcoverpagedetails"
+        "http://localhost:8001/api/admin/getcoverpagedetails"
       );
       if (res.status === 200) {
         setgetcoverpagedetails(res.data.success);
@@ -130,9 +130,7 @@ export const AddCover = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
-      );
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -151,7 +149,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/EditCoverPageHeader/" + EditData?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -190,7 +188,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/DeleteCoverPageHeader/" + deleteData?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "delete",
         headers: { "Content-Type": "application/json" },
       };

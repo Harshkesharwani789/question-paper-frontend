@@ -10,7 +10,7 @@ import Button2 from "../Button2";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const admin =JSON.parse(sessionStorage.getItem("admin"));
+  const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
 
   const [show2, setShow2] = useState();
@@ -22,7 +22,7 @@ const Dashboard = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const Dashboard = () => {
       console.log(error);
     }
   };
-   //search filter for about us
+  //search filter for about us
   const [searchH, setSearchH] = useState("");
   const handleFilterH = (e) => {
     if (e.target.value != "") {
@@ -65,12 +65,14 @@ const Dashboard = () => {
     }
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllTeacher();
-  },[])
+  }, []);
   return (
     <div className="container">
-      <h2 className="header-c " style={{color:"#5140EB"}}>Dashboard</h2>
+      <h2 className="header-c " style={{ color: "#5140EB" }}>
+        Dashboard
+      </h2>
 
       <div className="cards-container">
         <Card style={{ width: "15rem" }}>
@@ -103,7 +105,9 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h2 className="header-c " style={{color:"#5140EB"}}>User List</h2>
+        <h2 className="header-c " style={{ color: "#5140EB" }}>
+          User List
+        </h2>
 
         <div className="srch-icon">
           <div>
@@ -122,7 +126,9 @@ const Dashboard = () => {
           </div>
 
           <div>
-            <Link to='/adminuserlist'><Button2  text={"View All Users"}  /></Link>
+            <Link to="/adminuserlist">
+              <Button2 text={"View All Users"} />
+            </Link>
           </div>
         </div>
         <div className="row">
@@ -149,48 +155,56 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-               
-                    <tr>
-                    <td>1</td>
-                    <td>{Teacher[0]?.teacherId}</td>
-                    <td>{Teacher[0]?.FirstName} {Teacher[0]?.LastName}</td>
-                    <td>{moment(Teacher[0]?.createdAt)?.format("DD/MM/YYYY")}</td>
-                    <td>{Teacher[0]?.Mobile}</td>
-                    <td>{Teacher[0]?.Email}</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>{Teacher[1]?.teacherId}</td>
-                    <td>{Teacher[1]?.FirstName} {Teacher[1]?.LastName}</td>
-                    <td>{moment(Teacher[1]?.createdAt)?.format("DD/MM/YYYY")}</td>
-                    <td>{Teacher[1]?.Mobile}</td>
-                    <td>{Teacher[1]?.Email}</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>{Teacher[2]?.teacherId}</td>
-                    <td>{Teacher[2]?.FirstName} {Teacher[2]?.LastName}</td>
-                    <td>{moment(Teacher[2]?.createdAt)?.format("DD/MM/YYYY")}</td>
-                    <td>{Teacher[2]?.Mobile}</td>
-                    <td>{Teacher[2]?.Email}</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>{Teacher[3]?.teacherId}</td>
-                    <td>{Teacher[3]?.FirstName} {Teacher[3]?.LastName}</td>
-                    <td>{moment(Teacher[3]?.createdAt)?.format("DD/MM/YYYY")}</td>
-                    <td>{Teacher[3]?.Mobile}</td>
-                    <td>{Teacher[3]?.Email}</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>{Teacher[4]?.teacherId}</td>
-                    <td>{Teacher[4]?.FirstName} {Teacher[4]?.LastName}</td>
-                    <td>{moment(Teacher[4]?.createdAt)?.format("DD/MM/YYYY")}</td>
-                    <td>{Teacher[4]?.Mobile}</td>
-                    <td>{Teacher[4]?.Email}</td>
-                  </tr>
-                 
+                <tr>
+                  <td>1</td>
+                  <td>{Teacher[0]?.teacherId}</td>
+                  <td>
+                    {Teacher[0]?.FirstName} {Teacher[0]?.LastName}
+                  </td>
+                  <td>{moment(Teacher[0]?.createdAt)?.format("DD/MM/YYYY")}</td>
+                  <td>{Teacher[0]?.Mobile}</td>
+                  <td>{Teacher[0]?.Email}</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>{Teacher[1]?.teacherId}</td>
+                  <td>
+                    {Teacher[1]?.FirstName} {Teacher[1]?.LastName}
+                  </td>
+                  <td>{moment(Teacher[1]?.createdAt)?.format("DD/MM/YYYY")}</td>
+                  <td>{Teacher[1]?.Mobile}</td>
+                  <td>{Teacher[1]?.Email}</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>{Teacher[2]?.teacherId}</td>
+                  <td>
+                    {Teacher[2]?.FirstName} {Teacher[2]?.LastName}
+                  </td>
+                  <td>{moment(Teacher[2]?.createdAt)?.format("DD/MM/YYYY")}</td>
+                  <td>{Teacher[2]?.Mobile}</td>
+                  <td>{Teacher[2]?.Email}</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>{Teacher[3]?.teacherId}</td>
+                  <td>
+                    {Teacher[3]?.FirstName} {Teacher[3]?.LastName}
+                  </td>
+                  <td>{moment(Teacher[3]?.createdAt)?.format("DD/MM/YYYY")}</td>
+                  <td>{Teacher[3]?.Mobile}</td>
+                  <td>{Teacher[3]?.Email}</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>{Teacher[4]?.teacherId}</td>
+                  <td>
+                    {Teacher[4]?.FirstName} {Teacher[4]?.LastName}
+                  </td>
+                  <td>{moment(Teacher[4]?.createdAt)?.format("DD/MM/YYYY")}</td>
+                  <td>{Teacher[4]?.Mobile}</td>
+                  <td>{Teacher[4]?.Email}</td>
+                </tr>
               </tbody>
             </Table>
           </div>

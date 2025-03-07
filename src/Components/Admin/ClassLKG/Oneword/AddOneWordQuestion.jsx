@@ -5,7 +5,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import "../../../Admin/Admin.css"
+import "../../../Admin/Admin.css";
 import parse from "html-react-parser";
 import MathEditor from "../../MyEditor";
 
@@ -34,7 +34,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -51,7 +51,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -67,11 +67,11 @@ const AddOneWordQuestion = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -860,7 +860,9 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                 <input
                   id="upload3"
                   onChange={(e) => setImage_2(e.target.files[0])}
-                  type="file" className="vi_0" />
+                  type="file"
+                  className="vi_0"
+                />
               </div>
             </div>
 
@@ -1039,34 +1041,22 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                               <>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-4">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-2">
-                                    <p
-                                      type="text"
-                                      className="lined-input"
-                                    ></p>
+                                    <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
                               </>
@@ -1508,7 +1498,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                     <div className="col-md-6">
                       <div className="do-sear mt-2">
                         <label>Image 2</label>
-                        <br/>
+                        <br />
                         <img
                           className=""
                           src={Image_2 && URL.createObjectURL(Image_2)}
@@ -1580,7 +1570,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
                     className="modal-add-btn"
                     onClick={() => {
                       // navigate("/Classlkg");
-                      addquestions()
+                      addquestions();
                     }}
                   >
                     Submit
@@ -1592,7 +1582,7 @@ const AddOneWordQuestion = ({ selectdetails }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddOneWordQuestion
+export default AddOneWordQuestion;

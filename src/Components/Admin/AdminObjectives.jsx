@@ -95,19 +95,19 @@ const AdminObjectives = () => {
 
   // post method
   const [Objectivesname, setObjectivesname] = useState("");
-  const [mediumName,setmediumName] = useState("");
+  const [mediumName, setmediumName] = useState("");
   const objectivesnamee = async () => {
     try {
       const config = {
         url: "/admin/addobjectives",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "post",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           Objectivesname: Objectivesname,
           authId: admin?._id,
         },
@@ -129,26 +129,26 @@ const AdminObjectives = () => {
       console.log(error);
     }
   };
-//get method for medium
-const [Medium, setMedium] = useState([]);
-// const [nochangedata, setnochangedata] = useState([]);
-const getAddMedium = async () => {
-  try {
-    let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
-    if (res.status == 200) {
-      setMedium(res.data.success);
-      // setnochangedata(res.data.success);
+  //get method for medium
+  const [Medium, setMedium] = useState([]);
+  // const [nochangedata, setnochangedata] = useState([]);
+  const getAddMedium = async () => {
+    try {
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      if (res.status == 200) {
+        setMedium(res.data.success);
+        // setnochangedata(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
   const [getobjectives, setgetobjectives] = useState([]);
 
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
+        `http://localhost:8001/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -176,14 +176,14 @@ const getAddMedium = async () => {
 
       const config = {
         url: "/admin/updateObjectives",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           Objectivesname: Objectivesname,
           id: update,
           authId: admin?._id,
@@ -194,7 +194,7 @@ const getAddMedium = async () => {
 
       if (res.status === 200) {
         handleClose1();
-        getObjectives()
+        getObjectives();
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -226,19 +226,19 @@ const getAddMedium = async () => {
         console.error("deleteA and admin?._id must be defined and not empty");
         return;
       }
-  
+
       const config = {
         url: `/admin/deleteobjectives/${deleteA}/${admin?._id}`,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "delete",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
-  
+
       const res = await axios(config);
-  
+
       if (res.status === 200) {
         handleClose2();
         getObjectives();
@@ -269,7 +269,7 @@ const getAddMedium = async () => {
       });
     }
   };
-  
+
   useEffect(() => {
     getObjectives();
     getAddMedium();
@@ -315,7 +315,7 @@ const getAddMedium = async () => {
 
   return (
     <>
-       <div className="row">
+      <div className="row">
         <div className="col-md-10"></div>
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
@@ -340,8 +340,11 @@ const getAddMedium = async () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Objectives</h2>
-        
-         <Link onClick={handleShow}> <Button2 text={"Add Objective"} /></Link>
+
+          <Link onClick={handleShow}>
+            {" "}
+            <Button2 text={"Add Objective"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -479,14 +482,19 @@ const getAddMedium = async () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
                 {/* <input
@@ -515,17 +523,14 @@ const getAddMedium = async () => {
                   onChange={(e) =>
                     selectedLanguage == "en-t-i0-und"
                       ? setObjectivesname(e.target.value)
-                      : onChangeHandler(
-                          e.target.value,
-                          setObjectivesname
-                        )
+                      : onChangeHandler(e.target.value, setObjectivesname)
                   }
                 />
-                 {selectedLanguage == "en-t-i0-und" ? (
-                                  <></>
-                                ) : (
-                                  <p>{Objectivesname}</p>
-                                )}
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Objectivesname}</p>
+                )}
               </div>
             </div>
 
@@ -584,14 +589,19 @@ const getAddMedium = async () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
                 {/* <input
@@ -680,7 +690,11 @@ const getAddMedium = async () => {
             <Button variant="secondary" onClick={handleClose2}>
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={deleteObjectives}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={deleteObjectives}
+            >
               Delete
             </Button>
           </Modal.Footer>

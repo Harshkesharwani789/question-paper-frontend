@@ -75,7 +75,7 @@ const AdminQuestionDetails = () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
+        `http://localhost:8001/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -104,7 +104,7 @@ const AdminQuestionDetails = () => {
   const [Objectives, setObjectives] = useState("");
   const [QuestionTYpe, setQuestionTYpe] = useState("");
   const [Instruction, setInstruction] = useState("");
-  const [QuestionTypeTranlate, setQuestionTypeTranlate] = useState("")
+  const [QuestionTypeTranlate, setQuestionTypeTranlate] = useState("");
 
   const addExamaData = (name) => {
     try {
@@ -139,7 +139,7 @@ const AdminQuestionDetails = () => {
     QuestionTYpe: QuestionTYpe,
   };
 
-  console.log("selectdetailscheck",selectdetails);
+  console.log("selectdetailscheck", selectdetails);
   useEffect(() => {
     if (Types_Question && selectedLanguage) {
       sessionStorage.setItem("selectdetails", JSON.stringify(selectdetails));
@@ -151,7 +151,7 @@ const AdminQuestionDetails = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -165,7 +165,7 @@ const AdminQuestionDetails = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -177,7 +177,7 @@ const AdminQuestionDetails = () => {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -189,7 +189,7 @@ const AdminQuestionDetails = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -202,7 +202,7 @@ const AdminQuestionDetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -216,7 +216,7 @@ const AdminQuestionDetails = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -230,7 +230,7 @@ const AdminQuestionDetails = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
+        "http://localhost:8001/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -244,7 +244,7 @@ const AdminQuestionDetails = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -258,7 +258,7 @@ const AdminQuestionDetails = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -267,18 +267,20 @@ const AdminQuestionDetails = () => {
       console.log(error);
     }
   };
-   //get for Difficulty Level
-   const [DifficultyLevel, setDifficultyLevel] = useState([]);
-   const getDifficultyLevel = async () => {
-     try {
-       let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllDiffLevel");
-       if (res.status == 200) {
+  //get for Difficulty Level
+  const [DifficultyLevel, setDifficultyLevel] = useState([]);
+  const getDifficultyLevel = async () => {
+    try {
+      let res = await axios.get(
+        "http://localhost:8001/api/admin/getAllDiffLevel"
+      );
+      if (res.status == 200) {
         setDifficultyLevel(res.data.success);
-       }
-     } catch (error) {
-       console.log(error);
-     }
-   };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getallboardname();
     getAddMedium();
@@ -322,7 +324,7 @@ const AdminQuestionDetails = () => {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" + admin?._id,
+        "http://localhost:8001/api/admin/getquestiontype/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -458,7 +460,10 @@ const AdminQuestionDetails = () => {
                 >
                   <option>Select the Sub-Class</option>
                   {getaddsubclass
-                    ?.filter((ele) => ele.className === Class || ele.mediumName === Medium )
+                    ?.filter(
+                      (ele) =>
+                        ele.className === Class || ele.mediumName === Medium
+                    )
                     ?.map((val, i) => {
                       return (
                         <option value={val?.subclassName} key={i}>
@@ -477,13 +482,15 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setSubjects(e.target.value)}
                 >
                   <option>Select the Subject</option>
-                  {subject?.filter((ele)=>ele.mediumName === Medium).map((item, i) => {
-                    return (
-                      <option value={item?.subjectName} key={i}>
-                        {item?.subjectName}
-                      </option>
-                    );
-                  })}
+                  {subject
+                    ?.filter((ele) => ele.mediumName === Medium)
+                    .map((item, i) => {
+                      return (
+                        <option value={item?.subjectName} key={i}>
+                          {item?.subjectName}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -546,15 +553,19 @@ const AdminQuestionDetails = () => {
                   {/* <option value="Easy">Easy</option>
                   <option value="Average">Average</option>
                   <option value="Difficult">Difficult</option> */}
-                  {DifficultyLevel?.filter((ele)=>ele.mediumName === Medium).map((item)=>{
-                  return(
-                    <option value={item?.DiffLevelName}>{item?.DiffLevelName}</option>
-                  )
+                  {DifficultyLevel?.filter(
+                    (ele) => ele.mediumName === Medium
+                  ).map((item) => {
+                    return (
+                      <option value={item?.DiffLevelName}>
+                        {item?.DiffLevelName}
+                      </option>
+                    );
                   })}
                 </Form.Select>
               </div>
             </div>
-         
+
             <div className="col-md-4">
               <div className="do-sear mt-2">
                 <label htmlFor="">Objectives</label>
@@ -563,13 +574,15 @@ const AdminQuestionDetails = () => {
                   onChange={(e) => setObjectives(e.target.value)}
                 >
                   <option>Select Objectives</option>
-                  {getobjectives?.filter((ele)=>ele.mediumName === Medium).map((val, i) => {
-                    return (
-                      <option value={val?.Objectivesname}>
-                        {val?.Objectivesname}
-                      </option>
-                    );
-                  })}
+                  {getobjectives
+                    ?.filter((ele) => ele.mediumName === Medium)
+                    .map((val, i) => {
+                      return (
+                        <option value={val?.Objectivesname}>
+                          {val?.Objectivesname}
+                        </option>
+                      );
+                    })}
                 </Form.Select>
               </div>
             </div>
@@ -661,11 +674,10 @@ const AdminQuestionDetails = () => {
                 <label htmlFor="">Select the Types of the Question</label>
                 <Form.Select
                   aria-label="Default select example"
-                 
                   onChange={(e) => {
                     const selectedValue = e.target.value;
-                    const values = selectedValue.split(',');
-                
+                    const values = selectedValue.split(",");
+
                     if (values.length === 2) {
                       setQuestionTypeTranlate(values[0]);
                       setTypes_Question(values[1]);
@@ -681,8 +693,12 @@ const AdminQuestionDetails = () => {
                       ele.QFormatMedium === Medium
                   )?.map((item2) => {
                     return (
-                      <option 
-                      value={item2?.translatelang ? `${item2.translatelang},${item2.Qformat}` : item2.Qformat}
+                      <option
+                        value={
+                          item2?.translatelang
+                            ? `${item2.translatelang},${item2.Qformat}`
+                            : item2.Qformat
+                        }
                       >
                         {item2?.translatelang ? (
                           <>{item2?.translatelang}</>

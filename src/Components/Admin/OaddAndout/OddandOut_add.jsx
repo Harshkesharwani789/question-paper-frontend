@@ -57,7 +57,7 @@ const OddandOut_add = ({ selectdetails }) => {
   const [Option2T, setOption2T] = useState("");
   const [Option3T, setOption3T] = useState("");
   const [Option4T, setOption4T] = useState("");
-  const [AnswerT, setAnswerT] = useState("")
+  const [AnswerT, setAnswerT] = useState("");
 
   const [Option_1, setOption_1] = useState("");
   const [Option_2, setOption_2] = useState("");
@@ -75,7 +75,6 @@ const OddandOut_add = ({ selectdetails }) => {
 
   const [Answer_Time, setAnswer_Time] = useState("");
 
-
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
 
   const addquestions = async () => {
@@ -83,7 +82,7 @@ const OddandOut_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -99,11 +98,11 @@ const OddandOut_add = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           // Question: Question,
           Option_1: Option_1,
@@ -147,9 +146,7 @@ const OddandOut_add = ({ selectdetails }) => {
     <div>
       <div className="">
         <div className="container">
-
           <div className="row mt-2">
-
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Option 1</label>
@@ -269,7 +266,13 @@ const OddandOut_add = ({ selectdetails }) => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload1">Image 1</label>
-                <input type="file" className="vi_0" id="upload1" accept="images/*" onChange={(e) => setImage_1(e.target.files[0])} />
+                <input
+                  type="file"
+                  className="vi_0"
+                  id="upload1"
+                  accept="images/*"
+                  onChange={(e) => setImage_1(e.target.files[0])}
+                />
               </div>
             </div>
             <div className="col-md-6">
@@ -338,7 +341,8 @@ const OddandOut_add = ({ selectdetails }) => {
                   <option value={6}>6</option>
                   <option value={7}>7</option>
                   <option value={8}>8</option>
-                  <option value={10}>10</option>                </Form.Select>
+                  <option value={10}>10</option>{" "}
+                </Form.Select>
               </div>
             </div>
             <div className="col-md-6">
@@ -392,7 +396,8 @@ const OddandOut_add = ({ selectdetails }) => {
             className="modal-add-btn"
           >
             Back
-          </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </button>{" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
             onClick={() => {
               //   addquestions();
@@ -554,7 +559,7 @@ const OddandOut_add = ({ selectdetails }) => {
               className="mx-2 modal-add-btn"
               variant=""
               onClick={() => {
-                addquestions()
+                addquestions();
               }}
             >
               Submit

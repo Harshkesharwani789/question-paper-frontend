@@ -7,10 +7,8 @@ import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 
 const ViewTableCell = ({ value, onChange }) => {
-  return (<td>
-    {value}
-  </td>)
-}
+  return <td>{value}</td>;
+};
 const AdminQuestionDetailsview = () => {
   const { question_Id } = useParams();
   const admin = JSON.parse(sessionStorage.getItem("admin"));
@@ -24,7 +22,7 @@ const AdminQuestionDetailsview = () => {
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getQuestionpaperadminbyid/${question_Id}`
+        `http://localhost:8001/api/admin/getQuestionpaperadminbyid/${question_Id}`
       );
       if (res.status == 200) {
         setquestion_details(res.data.success);
@@ -111,14 +109,19 @@ const AdminQuestionDetailsview = () => {
                 <label htmlFor=""> Types of the Question</label>
               </div>{" "}
               <p className="vi_0">
-                {question_details?.Types_QuestionTranslate ? (question_details?.Types_QuestionTranslate):(question_details?.Types_Question)}
+                {question_details?.Types_QuestionTranslate
+                  ? question_details?.Types_QuestionTranslate
+                  : question_details?.Types_Question}
               </p>
-
             </div>
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="">Name Of the Examination</label>
-                <p className="vi_0">{question_details?.Name_of_examination?.map((item) => <span>{item?.NameExamination} {" "}</span>)}</p>
+                <p className="vi_0">
+                  {question_details?.Name_of_examination?.map((item) => (
+                    <span>{item?.NameExamination} </span>
+                  ))}
+                </p>
               </div>
             </div>
             <div className="col-md-6">
@@ -139,17 +142,18 @@ const AdminQuestionDetailsview = () => {
             </div>
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Match the Following Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "RelationShip Words Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-              question_details?.Types_Question === "Fill in the Blanks Questions" ? (
+            question_details?.Types_Question ===
+              "Fill in the Blanks Questions" ? (
               <> </>
             ) : (
               <>
@@ -167,58 +171,58 @@ const AdminQuestionDetailsview = () => {
             )}
 
             {/* GarmmerQuestion */}
-            {question_details?.Types_Question === "Grammer Questions" ? (<>
-              <div className="row" >
-                <p>Question : </p>
-                <Table
-                  responsive
-                  bordered
-                  style={{ width: "-webkit-fill-available" }}
-                >
-                  <tbody>
-                    {question_details?.GrammerArrQ?.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {row.map((cell, cellIndex) => (
-                          <ViewTableCell
-
-                            key={cellIndex}
-                            className="vi_0"
-                            value={cell}
-
-                          />
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-                <p>Answer : </p>
-                <Table
-                  responsive
-                  bordered
-                  style={{ width: "-webkit-fill-available" }}
-                >
-                  <tbody>
-                    {question_details?.GrammerArrAns?.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {row.map((cell, cellIndex) => (
-                          <ViewTableCell
-
-                            key={cellIndex}
-                            className="vi_0"
-                            value={cell}
-
-                          />
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-            </>) : (<></>)}
+            {question_details?.Types_Question === "Grammer Questions" ? (
+              <>
+                <div className="row">
+                  <p>Question : </p>
+                  <Table
+                    responsive
+                    bordered
+                    style={{ width: "-webkit-fill-available" }}
+                  >
+                    <tbody>
+                      {question_details?.GrammerArrQ?.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, cellIndex) => (
+                            <ViewTableCell
+                              key={cellIndex}
+                              className="vi_0"
+                              value={cell}
+                            />
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <p>Answer : </p>
+                  <Table
+                    responsive
+                    bordered
+                    style={{ width: "-webkit-fill-available" }}
+                  >
+                    <tbody>
+                      {question_details?.GrammerArrAns?.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, cellIndex) => (
+                            <ViewTableCell
+                              key={cellIndex}
+                              className="vi_0"
+                              value={cell}
+                            />
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
 
             {/* Fill In the Blanks */}
             {question_details?.Types_Question ===
-              "Fill in the Blanks Questions" ? (
+            "Fill in the Blanks Questions" ? (
               <>
                 {question_details?.NumberOfLine == "2" ? (
                   <>
@@ -271,7 +275,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Letter Writing */}
             {question_details?.Types_Question === "Letter Writting" ||
-              question_details?.Types_Question === "Map Reading" ? (
+            question_details?.Types_Question === "Map Reading" ? (
               <>
                 <div className="col-8">
                   {question_details?.NumberOfLine === "1" ? (
@@ -566,7 +570,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Question Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -582,7 +586,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Answer Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                           alt=""
                         />
                       </div>
@@ -606,25 +610,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* Expand and Explain*/}
             {question_details?.Types_Question ===
-              "Expanding and Explanations Answer Questions" ? (
+            "Expanding and Explanations Answer Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -636,7 +640,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image}`}
                               alt=""
                             />
                           </div>
@@ -651,7 +655,6 @@ const AdminQuestionDetailsview = () => {
                 <div className="col-md-12">
                   <div className="do-sear ">
                     <label htmlFor="">Question</label> <br />
-
                     <div className="d-flex">
                       <p className="vi_0">
                         {parse(`<div>${question_details?.Question}</div>`)}
@@ -959,21 +962,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -985,7 +988,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -998,21 +1001,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1024,7 +1027,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -1063,29 +1066,25 @@ const AdminQuestionDetailsview = () => {
               <></>
             )}
 
-
-
-
-
             {/* One word */}
             {question_details?.Types_Question === "One Word Question" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "One Sentence Answer Question" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Two  Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Two and three Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Three and Four Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Five and Six Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Six Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Seven Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Eight Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Ten Sentence Answer Questions" ? (
               <>
                 <div className="col-md-12">
@@ -1387,21 +1386,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1413,7 +1412,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -1426,21 +1425,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1452,7 +1451,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -1493,25 +1492,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* RelationShip Words Questions */}
             {question_details?.Types_Question ===
-              "RelationShip Words Questions" ? (
+            "RelationShip Words Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1523,7 +1522,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image}`}
                               alt=""
                             />
                           </div>
@@ -1627,7 +1626,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Classificatio of question */}
             {question_details?.Types_Question ===
-              "Classifications of Questions" ? (
+            "Classifications of Questions" ? (
               <>
                 <div className="col-md-12">
                   <div className="do-sear">
@@ -1925,21 +1924,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1951,7 +1950,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -1964,21 +1963,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -1990,7 +1989,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2025,25 +2024,25 @@ const AdminQuestionDetailsview = () => {
 
             {/* Recorrect the following */}
             {question_details?.Types_Question ===
-              "Recorrect the Answers Questions" ? (
+            "Recorrect the Answers Questions" ? (
               <>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2055,7 +2054,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.ImageQ}`}
+                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2068,21 +2067,21 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2094,7 +2093,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.orImage_Ans}`}
+                              src={`http://localhost:8001/Questions/${question_details?.orImage_Ans}`}
                               alt=""
                             />
                           </div>
@@ -2410,21 +2409,21 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2436,7 +2435,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -2450,21 +2449,21 @@ const AdminQuestionDetailsview = () => {
 
                 {question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2476,7 +2475,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2511,7 +2510,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Multiple choice questions */}
             {question_details?.Types_Question ===
-              "Multiple Choice Questions" ? (
+            "Multiple Choice Questions" ? (
               <>
                 <div className="col-md-6">
                   <div className="do-sear">
@@ -2575,23 +2574,23 @@ const AdminQuestionDetailsview = () => {
                 </div>
                 {question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2603,7 +2602,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.ImageQ}`}
+                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2621,7 +2620,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option1 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -2637,7 +2636,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option2 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                           alt=""
                         />
                       </div>
@@ -2653,7 +2652,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option3 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_3}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_3}`}
                           alt=""
                         />
                       </div>
@@ -2669,7 +2668,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option4 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_4}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_4}`}
                           alt=""
                         />
                       </div>
@@ -2685,7 +2684,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option5 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_5}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_5}`}
                           alt=""
                         />
                       </div>
@@ -2701,7 +2700,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option6 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_6}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_6}`}
                           alt=""
                         />
                       </div>
@@ -2712,25 +2711,25 @@ const AdminQuestionDetailsview = () => {
                 )}
                 {question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -2742,7 +2741,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -2760,7 +2759,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Match the following */}
             {question_details?.Types_Question ===
-              "Match the Following Questions" ? (
+            "Match the Following Questions" ? (
               <>
                 <div className="col-12">
                   <label htmlFor=""> Questions</label>
@@ -2875,7 +2874,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Objective Type */}
             {question_details?.Types_Question ===
-              "Match the Following Questions" ? (
+            "Match the Following Questions" ? (
               <></>
             ) : (
               <>
@@ -2912,7 +2911,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.ImageQ}`}
+                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2928,7 +2927,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Option 1 Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -2944,7 +2943,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Option 2 Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2960,7 +2959,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Answer Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -2978,7 +2977,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Odd and Out */}
             {question_details?.Types_Question ===
-              "Odd and out words Questions" ? (
+            "Odd and out words Questions" ? (
               <>
                 <div className="col-md-6">
                   <div className="do-sear">
@@ -3021,16 +3020,16 @@ const AdminQuestionDetailsview = () => {
                   </div>
                 </div>
                 {question_details?.Types_Question === "Objective Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Classifications of Questions" ||
-                  question_details?.Types_Question === "One Word Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question === "One Word Question" ||
+                question_details?.Types_Question ===
                   "Expanding and Explanations Answer Questions" ||
-                  question_details?.Types_Question === "Map Reading" ? (
+                question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
@@ -3041,7 +3040,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 1</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -3053,16 +3052,16 @@ const AdminQuestionDetailsview = () => {
                   </>
                 )}
                 {question_details?.Types_Question === "Objective Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Multiple Choice Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Recorrect the Answers Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Classifications of Questions" ||
-                  question_details?.Types_Question === "One Word Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question === "One Word Question" ||
+                question_details?.Types_Question ===
                   "Expanding and Explanations Answer Questions" ||
-                  question_details?.Types_Question === "Map Reading" ? (
+                question_details?.Types_Question === "Map Reading" ? (
                   <></>
                 ) : (
                   <>
@@ -3073,7 +3072,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 2</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -3095,7 +3094,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 3</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_3}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_3}`}
                               alt=""
                             />
                           </div>
@@ -3117,7 +3116,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 4</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_4}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_4}`}
                               alt=""
                             />
                           </div>
@@ -3130,23 +3129,23 @@ const AdminQuestionDetailsview = () => {
                 )}
 
                 {question_details?.Types_Question === "Objective Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "One Sentence Answer Question" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two  Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Two and three Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Three and Four Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Five and Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Six Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Seven Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Eight Sentence Answer Questions" ||
-                  question_details?.Types_Question ===
+                question_details?.Types_Question ===
                   "Ten Sentence Answer Questions" ? (
                   <></>
                 ) : (
@@ -3159,7 +3158,7 @@ const AdminQuestionDetailsview = () => {
                             <br />
                             <img
                               className="img-fluid h-50"
-                              src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`}
+                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -3177,7 +3176,7 @@ const AdminQuestionDetailsview = () => {
 
             {/* Poet,Time,Place ,Writer */}
             {question_details?.Types_Question ===
-              "Poet,Time, Place, Writer answer questions" ? (
+            "Poet,Time, Place, Writer answer questions" ? (
               <>
                 <div className="col-md-4">
                   <div className="do-sear mt-2">
@@ -3480,344 +3479,349 @@ const AdminQuestionDetailsview = () => {
             )}
 
             {/* Situation And Understanding Question And Answer */}
-            {question_details?.Types_Question === "Situation UnderStatnding answer Questions" ? (<>
-              <div className="col-12">
-                {question_details?.NumberOfLine === "1" ? (
+            {question_details?.Types_Question ===
+            "Situation UnderStatnding answer Questions" ? (
+              <>
+                <div className="col-12">
+                  {question_details?.NumberOfLine === "1" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "2" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "3" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "4" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "5" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "6" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "7" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "8" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {question_details?.NumberOfLine === "9" ? (
+                    <>
+                      <div className="col-md-12">
+                        <div className="do-sear mt-4">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>{" "}
+                      <div className="col-md-12">
+                        <div className="do-sear mt-2">
+                          <p type="text" className="lined-input"></p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {question_details?.Image_1 ? (
                   <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
+                    <div className="col-md-6">
+                      <div className="do-sear">
+                        <label htmlFor="">Question Image 1</label> <br />
+                        <img
+                          className="img-fluid h-50"
+                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                          alt=""
+                        />
                       </div>
                     </div>
                   </>
                 ) : (
                   <></>
                 )}
-                {question_details?.NumberOfLine === "2" ? (
+                {question_details?.Image_2 ? (
                   <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
+                    <div className="col-md-6">
+                      <div className="do-sear">
+                        <label htmlFor="">Question Image 2</label> <br />
+                        <img
+                          className="img-fluid h-50"
+                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                          alt=""
+                        />
                       </div>
                     </div>
                   </>
                 ) : (
                   <></>
                 )}
-                {question_details?.NumberOfLine === "3" ? (
+                {question_details?.PassiveQuesion?.length ? (
                   <>
                     <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
+                      <div className="do-sear">
+                        <label htmlFor=""> Sub Questions</label> <br />
+                        {question_details?.PassiveQuesion?.map((item, i) => {
+                          return (
+                            <p className="vi_0">
+                              {parse(`<div>${item?.question}</div>`)}
+                            </p>
+                          );
+                        })}
                       </div>
                     </div>
                   </>
                 ) : (
                   <></>
                 )}
-                {question_details?.NumberOfLine === "4" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.NumberOfLine === "5" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.NumberOfLine === "6" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.NumberOfLine === "7" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.NumberOfLine === "8" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {question_details?.NumberOfLine === "9" ? (
-                  <>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>{" "}
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-              {question_details?.Image_1 ? (
-                <>
-                  <div className="col-md-6">
-                    <div className="do-sear">
-                      <label htmlFor="">Question Image 1</label> <br />
-                      <img
-                        className="img-fluid h-50"
-                        src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
-              {question_details?.Image_2 ? (
-                <>
-                  <div className="col-md-6">
-                    <div className="do-sear">
-                      <label htmlFor="">Question Image 2</label> <br />
-                      <img
-                        className="img-fluid h-50"
-                        src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
-              {question_details?.PassiveQuesion?.length ? (
-                <>
-                  <div className="col-md-12">
-                    <div className="do-sear">
-                      <label htmlFor=""> Sub Questions</label> <br />
-                      {question_details?.PassiveQuesion?.map((item, i) => {
-                        return (
-                          <p className="vi_0">
-                            {parse(`<div>${item?.question}</div>`)}
-                          </p>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
-            </>) : (<></>)}
+              </>
+            ) : (
+              <></>
+            )}
 
             {/* Complete The Poem */}
             {question_details?.Types_Question === "Complete the Poem" ? (
@@ -3921,12 +3925,10 @@ const AdminQuestionDetailsview = () => {
               <></>
             )}
 
-
-
             {/* Answer The Question And Draw The Figure */}
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-              question_details?.Types_Question === "Objective Questions" ? (
+            question_details?.Types_Question === "Objective Questions" ? (
               <></>
             ) : (
               <>
@@ -3937,7 +3939,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Answer Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`}
+                          src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
                           alt=""
                         />
                       </div>
@@ -3963,38 +3965,38 @@ const AdminQuestionDetailsview = () => {
             </div>
             {question_details?.Types_Question ===
               "Odd and out words Questions" ||
-              question_details?.Types_Question === "Objective Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question === "Objective Questions" ||
+            question_details?.Types_Question ===
               "Match the Following Questions" ||
-              question_details?.Types_Question === "Multiple Choice Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question === "Multiple Choice Questions" ||
+            question_details?.Types_Question ===
               "Recorrect the Answers Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Classifications of Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "RelationShip Words Questions" ||
-              question_details?.Types_Question === "One Word Question" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question === "One Word Question" ||
+            question_details?.Types_Question ===
               "Expanding and Explanations Answer Questions" ||
-              question_details?.Types_Question === "Letter Writting" ||
-              question_details?.Types_Question === "Map Reading" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question === "Letter Writting" ||
+            question_details?.Types_Question === "Map Reading" ||
+            question_details?.Types_Question ===
               "One Sentence Answer Question" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Two  Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Two and three Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Three and Four Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Five and Six Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Six Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Seven Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Eight Sentence Answer Questions" ||
-              question_details?.Types_Question ===
+            question_details?.Types_Question ===
               "Ten Sentence Answer Questions" ? (
               <></>
             ) : (

@@ -16,9 +16,8 @@ import axios from "axios";
 import swal from "sweetalert";
 // import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 // import { PDFViewer } from "@react-pdf/renderer";
-import {ReactToPrint} from 'react-to-print';
-import useReactToPdf  from 'react-to-pdf';
-
+import { ReactToPrint } from "react-to-print";
+import useReactToPdf from "react-to-pdf";
 
 const QuestionPaper = ({ text }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -34,7 +33,7 @@ const QuestionPaper = ({ text }) => {
     try {
       const config = {
         url: "/admin/getQuestionByClasswise/" + user?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -46,10 +45,10 @@ const QuestionPaper = ({ text }) => {
           Class: state.Class,
           Sub_Class: state.Sub_Class,
           Subject: state.Subject,
-          ExamName:state?.Exam_Name,
-          AllChapter:state?.bluePrint?.AllChapter,
-          QusetionType:state?.bluePrint?.TypesofQuestions,
-          Weightageofthecontent:state?.bluePrint?.Weightageofthecontent
+          ExamName: state?.Exam_Name,
+          AllChapter: state?.bluePrint?.AllChapter,
+          QusetionType: state?.bluePrint?.TypesofQuestions,
+          Weightageofthecontent: state?.bluePrint?.Weightageofthecontent,
         },
       };
       let res = await axios(config);
@@ -122,14 +121,13 @@ const QuestionPaper = ({ text }) => {
   const aTagRef = useRef(null);
   const aTagRef1 = useRef(null);
 
-  console.log("AllQuestion",Questions);
-
+  console.log("AllQuestion", Questions);
 
   const updaethequestion = async (am) => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -138,32 +136,27 @@ const QuestionPaper = ({ text }) => {
         data: {
           id: state?._id,
           authId: user?._id,
-          Questions:Questions
+          Questions: Questions,
         },
       };
 
       let res = await axios(config);
       if (res.status == 200) {
-
+        setTimeout(() => {
+          navigate("/question_analysis", { state: state });
+        }, 1000);
+        if (am == true) {
           setTimeout(() => {
-             navigate("/question_analysis",{state:state});
-         
-          }, 1000);
-          if(am==true){
-             setTimeout(()=>{
-    
-            window.location.reload()
-         },2000)
-          }
-         
-          return swal({
-            title: "Yeah!",
-            text: "Successfully ",
-            icon: "success",
-            button: "OK!",
-          });
-      
-        
+            window.location.reload();
+          }, 2000);
+        }
+
+        return swal({
+          title: "Yeah!",
+          text: "Successfully ",
+          icon: "success",
+          button: "OK!",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -176,44 +169,46 @@ const QuestionPaper = ({ text }) => {
     }
   };
 
+  const handlePrint = () => {
+    const printableContent =
+      document.getElementById("printable-content").innerHTML;
+    const originalContent = document.body.innerHTML;
 
-const handlePrint = () => {
-  const printableContent = document.getElementById("printable-content").innerHTML;
-  const originalContent = document.body.innerHTML;
-  
-  // Create a footer element with placeholders for page count and class 7 PTO
-  const footerContent = `<div id="footer" style="width: 100%; display: flex; justify-content: space-between;">
+    // Create a footer element with placeholders for page count and class 7 PTO
+    const footerContent = `<div id="footer" style="width: 100%; display: flex; justify-content: space-between;">
       <div>${state?.Sub_Class},${state?.Subject} <span id="page-count-placeholder"></span></div>
       <div>P.T.O  <span id="class-7-pto-placeholder"></span></div>
   </div>`;
 
-  // Create a container for the footer with margin
-  const footerContainer = document.createElement('div');
-  footerContainer.style.position = 'fixed';
-  footerContainer.style.bottom = '0mm'; // Adjust margin from bottom as needed
-  footerContainer.style.width = '100%';
-  footerContainer.innerHTML = footerContent;
+    // Create a container for the footer with margin
+    const footerContainer = document.createElement("div");
+    footerContainer.style.position = "fixed";
+    footerContainer.style.bottom = "0mm"; // Adjust margin from bottom as needed
+    footerContainer.style.width = "100%";
+    footerContainer.innerHTML = footerContent;
 
-  // Replace the content of the body with the content of the printable section including footer and spacer
-  document.body.innerHTML = printableContent;
-  document.body.appendChild(footerContainer);
-  
-  // Print the content
-  window.print();
+    // Replace the content of the body with the content of the printable section including footer and spacer
+    document.body.innerHTML = printableContent;
+    document.body.appendChild(footerContainer);
 
-  // Listen for 'afterprint' event to restore original content after printing
-  window.addEventListener('afterprint', () => {
+    // Print the content
+    window.print();
+
+    // Listen for 'afterprint' event to restore original content after printing
+    window.addEventListener("afterprint", () => {
       document.body.innerHTML = originalContent;
-  });
-  updaethequestion(true)
-};
+    });
+    updaethequestion(true);
+  };
 
-
-const [QuestionHeader, setQuestionHeader] = useState([]);
+  const [QuestionHeader, setQuestionHeader] = useState([]);
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+          state?.Medium +
+          "/" +
+          user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -227,32 +222,31 @@ const [QuestionHeader, setQuestionHeader] = useState([]);
       console.log(error);
     }
   };
-useEffect(() => {
-  getQuestionHeaderbyMedium()
-}, [])
-console.log("QuestionHeader",QuestionHeader);
+  useEffect(() => {
+    getQuestionHeaderbyMedium();
+  }, []);
+  console.log("QuestionHeader", QuestionHeader);
 
-const componentRef = useRef();
+  const componentRef = useRef();
 
-const options = {
-  orientation: 'portrait',
-  unit: 'in',
-  format: [8, 12],
-  onDocument: () => ({
-    content: [
-      { text: 'Page ' },
-      { text: 'pageNumber', alignment: 'center', margin: [0, 0, 0, 20] }, // Page number
-      { text: 'P.T.O', alignment: 'left' } // P.T.O
-    ]
-  })
-};
+  const options = {
+    orientation: "portrait",
+    unit: "in",
+    format: [8, 12],
+    onDocument: () => ({
+      content: [
+        { text: "Page " },
+        { text: "pageNumber", alignment: "center", margin: [0, 0, 0, 20] }, // Page number
+        { text: "P.T.O", alignment: "left" }, // P.T.O
+      ],
+    }),
+  };
 
-const savePdf= useReactToPdf(options);
+  const savePdf = useReactToPdf(options);
 
-const handlePrint2 = () => {
-  savePdf(componentRef.current);
-};
-
+  const handlePrint2 = () => {
+    savePdf(componentRef.current);
+  };
 
   return (
     <div>
@@ -293,22 +287,25 @@ const handlePrint2 = () => {
           <></>
         )}
       </div>
-     
 
       <div id="pdf">
         <div className="question-paper-display-container">
           <LuPrinter
             style={{ width: "22px", height: "40px" }}
-           
-            onClick={()=>handlePrint("printable-content")}
+            onClick={() => handlePrint("printable-content")}
           />
 
-{/* <ReactToPrint
+          {/* <ReactToPrint
         trigger={() => <button>Print</button>}
         content={() => componentRef.current}
       /> */}
-      
-          <div style={{ size: "A4" }} id="printable-content" class="print-area" ref={componentRef}>
+
+          <div
+            style={{ size: "A4" }}
+            id="printable-content"
+            class="print-area"
+            ref={componentRef}
+          >
             <Frontpage data={state} />
             <div className="question-paper-display ">
               <div className="second-page-body">
@@ -316,7 +313,7 @@ const handlePrint2 = () => {
                   return (
                     <>
                       {/* <h3 style={{ textAlign: "center" }}>Section {SectionArr[a]}</h3> */}
-                      
+
                       <div className="question-body-main">
                         <div>
                           <div style={{ display: "flex", gap: "12px" }}>
@@ -326,7 +323,6 @@ const handlePrint2 = () => {
                               {ele1?.QAInstruction}
                             </b>
                           </div>
-
                         </div>
                         <div style={{ display: "flex", marginTop: "10px" }}>
                           <b>
@@ -334,9 +330,9 @@ const handlePrint2 = () => {
                           </b>
                         </div>
                       </div>
-                      
+
                       {Questions?.filter(
-                        (ele) => ele?.Types_Question == ele1?.QAType 
+                        (ele) => ele?.Types_Question == ele1?.QAType
                       )?.map((item, i) => {
                         if (i < Number(ele1?.NQA)) {
                           return (
@@ -360,7 +356,7 @@ const handlePrint2 = () => {
                                     {item?.Image ? (
                                       <div>
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image}`}
+                                          src={`http://localhost:8001/Questions/${item?.Image}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -479,7 +475,7 @@ const handlePrint2 = () => {
                                               `<div>${item?.input1}</div>`
                                             )}
                                           </p>
-                                          <div className="ques-line"></div> 
+                                          <div className="ques-line"></div>
                                           {item?.input2 ? (
                                             <>
                                               <p>
@@ -493,7 +489,6 @@ const handlePrint2 = () => {
                                             <></>
                                           )}
 
-                                         
                                           <p>
                                             {" "}
                                             {parse(
@@ -625,10 +620,9 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
-                                      
                                     </div>
-                                    <br/>
-                                                <p>{QuestionHeader?.ans}</p> 
+                                    <br />
+                                    <p>{QuestionHeader?.ans}</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -704,7 +698,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -716,7 +710,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -743,10 +737,9 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
-                                     
                                     </div>
                                     <br />
-                                      <p>{QuestionHeader?.ans}:</p>
+                                    <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -787,7 +780,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -799,7 +792,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -826,10 +819,9 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
-                                      
                                     </div>
                                     <br />
-                                      <p>{QuestionHeader?.ans}:</p>
+                                    <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -870,7 +862,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -882,7 +874,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -950,7 +942,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -962,7 +954,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1030,7 +1022,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1042,7 +1034,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1110,7 +1102,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1122,7 +1114,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1190,7 +1182,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1202,7 +1194,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1262,10 +1254,9 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
-                                      
                                     </div>
-                                    <br/>
-                                      <p>{QuestionHeader?.ans}:</p>
+                                    <br />
+                                    <p>{QuestionHeader?.ans}:</p>
                                     <div>
                                       {item?.NumberOfLine && (
                                         <>
@@ -1306,7 +1297,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1318,7 +1309,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1353,7 +1344,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1365,7 +1356,7 @@ const handlePrint2 = () => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1456,7 +1447,7 @@ const handlePrint2 = () => {
                                               <b>Question Image:</b>
                                               <div>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.ImageQ}`}
+                                                  src={`http://localhost:8001/Questions/${item?.ImageQ}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1472,7 +1463,7 @@ const handlePrint2 = () => {
                                               <>
                                                 <span>a)</span>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1484,7 +1475,7 @@ const handlePrint2 = () => {
                                               <>
                                                 <span>b)</span>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1520,271 +1511,323 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </b> */}
-                                   
-                                    {item?.PoemSt ? (
-                                      <>
-                                        {item.NumberOfLine == "4" ? (
-                                          <>
-                                            <div className="col-sm-6">
-                                              <div className="d-flex align-items-baseline mb-3">
-                                                <span> <b>{count++}.</b> {item?.PoemSt}</span>
 
-                                                <div
-                                                  className=" mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "37%",
-                                                  }}
-                                                ></div>
-                                              </div>
-                                              <div className="" style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"72%"}}></p>
-                                              </div>
-                                             <div className=""  style={{marginTop:"33px"}}>
-                                                <p className="ans-line" style={{width:"72%"}}></p>
-                                              </div>
-                                              <div className="d-flex align-items-end">
-                                                <div
-                                                  className="mb-3 "
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "44%",
-                                                    marginTop:"33px"
-                                                  }}
-                                                ></div>
-                                                <span>{item?.PoemEnd}</span>
-                                              </div>
-                                            </div>
-                                          </>
-                                        ) : (
-                                          <> </>
-                                        )}
-                                        {item.NumberOfLine == "5" ? (
-                                          <>
-                                            <div className="">
-                                              <div className="d-flex align-items-baseline mb-4">
-                                                <span>{item?.PoemSt}</span>
+                                      {item?.PoemSt ? (
+                                        <>
+                                          {item.NumberOfLine == "4" ? (
+                                            <>
+                                              <div className="col-sm-6">
+                                                <div className="d-flex align-items-baseline mb-3">
+                                                  <span>
+                                                    {" "}
+                                                    <b>{count++}.</b>{" "}
+                                                    {item?.PoemSt}
+                                                  </span>
 
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "37%",
-                                                  }}
-                                                ></div>
-                                              </div>
-                                              <div className="ans-line mb-4" style={{width:"72%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"72%"}}></div>
-                                              <div className="d-flex align-items-end">
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "44%",
-                                                  }}
-                                                ></div>
-                                                <span>{item?.PoemEnd}</span>
-                                              </div>
-                                            </div>
-                                          </>
-                                        ) : (
-                                          <> </>
-                                        )}
-                                        {item.NumberOfLin == "6" ? (
-                                          <>
-                                            <div className="">
-                                              <div className="d-flex align-items-baseline mb-4">
-                                                <span>{item?.PoemSt}</span>
-
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "37%",
-                                                  }}
-                                                ></div>
-                                              </div>
-                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 "  style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="d-flex align-items-end">
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "44%",
-                                                  }}
-                                                ></div>
-                                                <span>{item?.PoemEnd}</span>
-                                              </div>
-                                            </div>
-                                          </>
-                                        ) : (
-                                          <> </>
-                                        )}
-                                        {item.NumberOfLin == "7" ? (
-                                          <>
-                                            <div className="">
-                                              <div className="d-flex align-items-baseline mb-4">
-                                                <span>{item?.PoemSt}</span>
-
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "37%",
-                                                  }}
-                                                ></div>
-                                              </div>
-                                              <div className="ans-line mb-4" style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="ans-line mb-4 " style={{width:"55%"}}></div>
-                                              <div className="d-flex align-items-end">
-                                                <div
-                                                  className="mb-3 mt-2"
-                                                  style={{
-                                                    borderBottom: "1px solid",
-                                                    width: "44%",
-                                                  }}
-                                                ></div>
-                                                <span>{item?.PoemEnd}</span>
-                                              </div>
-                                            </div>
-                                          </>
-                                        ) : (
-                                          <> </>
-                                        )}
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                    {item?.orQuestion ? (
-                                      <>
-                                        <h5>({QuestionHeader?.or})</h5>
-
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            gap: "12px",
-                                          }}
-                                          key={i}
-                                        >
-                                          <b>
-                                            {item?.orQuestion
-                                              ? parse(item?.orQuestion)
-                                              : ""}
-                                          </b>
-                                        </div>
-
-                                        {item?.orNumberOfLine ? (
-                                          <>
-                                            {item?.orNumberOfLine === "4" ? (
-                                              <>
-                                                <div className="">
-                                                  <div className="d-flex align-items-end">
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemSat}
-                                                    </p>
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                  </div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="d-flex align-items-end">
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemEnd}
-                                                    </p>
-                                                  </div>
+                                                  <div
+                                                    className=" mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "37%",
+                                                    }}
+                                                  ></div>
                                                 </div>
-                                              </>
-                                            ) : (
-                                              <> </>
-                                            )}
-                                            {item.NumberOfLine === "5" ? (
-                                              <>
-                                                <div className="">
-                                                  <div className="d-flex align-items-end">
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemSat}
-                                                    </p>
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                  </div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="d-flex align-items-end">
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemEnd}
-                                                    </p>
-                                                  </div>
+                                                <div
+                                                  className=""
+                                                  style={{ marginTop: "33px" }}
+                                                >
+                                                  <p
+                                                    className="ans-line"
+                                                    style={{ width: "72%" }}
+                                                  ></p>
                                                 </div>
-                                              </>
-                                            ) : (
-                                              <> </>
-                                            )}
-                                            {item.NumberOfLin === "6" ? (
-                                              <>
-                                                <div className="">
-                                                  <div className="d-flex align-items-end">
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemSat}
-                                                    </p>
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                  </div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="d-flex align-items-end">
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemEnd}
-                                                    </p>
-                                                  </div>
+                                                <div
+                                                  className=""
+                                                  style={{ marginTop: "33px" }}
+                                                >
+                                                  <p
+                                                    className="ans-line"
+                                                    style={{ width: "72%" }}
+                                                  ></p>
                                                 </div>
-                                              </>
-                                            ) : (
-                                              <> </>
-                                            )}
-                                            {item.NumberOfLin === "7" ? (
-                                              <>
-                                                <div className="">
-                                                  <div className="d-flex align-items-end">
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemSat}
-                                                    </p>
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                  </div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="ans-line mb-3 mt-2"></div>
-                                                  <div className="d-flex align-items-end">
-                                                    <div className="ans-line mb-3 mt-2"></div>
-                                                    <p className="vi_0">
-                                                      {item?.OrPoemEnd}
-                                                    </p>
-                                                  </div>
+                                                <div className="d-flex align-items-end">
+                                                  <div
+                                                    className="mb-3 "
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "44%",
+                                                      marginTop: "33px",
+                                                    }}
+                                                  ></div>
+                                                  <span>{item?.PoemEnd}</span>
                                                 </div>
-                                              </>
-                                            ) : (
-                                              <> </>
-                                            )}
-                                          </>
-                                        ) : (
-                                          <></>
-                                        )}
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
- </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <> </>
+                                          )}
+                                          {item.NumberOfLine == "5" ? (
+                                            <>
+                                              <div className="">
+                                                <div className="d-flex align-items-baseline mb-4">
+                                                  <span>{item?.PoemSt}</span>
+
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "37%",
+                                                    }}
+                                                  ></div>
+                                                </div>
+                                                <div
+                                                  className="ans-line mb-4"
+                                                  style={{ width: "72%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "72%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "72%" }}
+                                                ></div>
+                                                <div className="d-flex align-items-end">
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "44%",
+                                                    }}
+                                                  ></div>
+                                                  <span>{item?.PoemEnd}</span>
+                                                </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <> </>
+                                          )}
+                                          {item.NumberOfLin == "6" ? (
+                                            <>
+                                              <div className="">
+                                                <div className="d-flex align-items-baseline mb-4">
+                                                  <span>{item?.PoemSt}</span>
+
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "37%",
+                                                    }}
+                                                  ></div>
+                                                </div>
+                                                <div
+                                                  className="ans-line mb-4"
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div className="d-flex align-items-end">
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "44%",
+                                                    }}
+                                                  ></div>
+                                                  <span>{item?.PoemEnd}</span>
+                                                </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <> </>
+                                          )}
+                                          {item.NumberOfLin == "7" ? (
+                                            <>
+                                              <div className="">
+                                                <div className="d-flex align-items-baseline mb-4">
+                                                  <span>{item?.PoemSt}</span>
+
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "37%",
+                                                    }}
+                                                  ></div>
+                                                </div>
+                                                <div
+                                                  className="ans-line mb-4"
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div
+                                                  className="ans-line mb-4 "
+                                                  style={{ width: "55%" }}
+                                                ></div>
+                                                <div className="d-flex align-items-end">
+                                                  <div
+                                                    className="mb-3 mt-2"
+                                                    style={{
+                                                      borderBottom: "1px solid",
+                                                      width: "44%",
+                                                    }}
+                                                  ></div>
+                                                  <span>{item?.PoemEnd}</span>
+                                                </div>
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <> </>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {item?.orQuestion ? (
+                                        <>
+                                          <h5>({QuestionHeader?.or})</h5>
+
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              gap: "12px",
+                                            }}
+                                            key={i}
+                                          >
+                                            <b>
+                                              {item?.orQuestion
+                                                ? parse(item?.orQuestion)
+                                                : ""}
+                                            </b>
+                                          </div>
+
+                                          {item?.orNumberOfLine ? (
+                                            <>
+                                              {item?.orNumberOfLine === "4" ? (
+                                                <>
+                                                  <div className="">
+                                                    <div className="d-flex align-items-end">
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemSat}
+                                                      </p>
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                    </div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="d-flex align-items-end">
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemEnd}
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <> </>
+                                              )}
+                                              {item.NumberOfLine === "5" ? (
+                                                <>
+                                                  <div className="">
+                                                    <div className="d-flex align-items-end">
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemSat}
+                                                      </p>
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                    </div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="d-flex align-items-end">
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemEnd}
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <> </>
+                                              )}
+                                              {item.NumberOfLin === "6" ? (
+                                                <>
+                                                  <div className="">
+                                                    <div className="d-flex align-items-end">
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemSat}
+                                                      </p>
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                    </div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="d-flex align-items-end">
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemEnd}
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <> </>
+                                              )}
+                                              {item.NumberOfLin === "7" ? (
+                                                <>
+                                                  <div className="">
+                                                    <div className="d-flex align-items-end">
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemSat}
+                                                      </p>
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                    </div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="ans-line mb-3 mt-2"></div>
+                                                    <div className="d-flex align-items-end">
+                                                      <div className="ans-line mb-3 mt-2"></div>
+                                                      <p className="vi_0">
+                                                        {item?.OrPoemEnd}
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                <> </>
+                                              )}
+                                            </>
+                                          ) : (
+                                            <></>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
+                                    </div>
                                     <div
                                       style={{ display: "flex", gap: "12px" }}
                                       key={i}
@@ -1946,16 +1989,15 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </b>
-                                    
                                     </div>
-                                    <br/>
-                          <p>{QuestionHeader?.ans}:</p>
+                                    <br />
+                                    <p>{QuestionHeader?.ans}:</p>
                                     <div className="d-flex mb-1">
                                       {item?.Image_1 ? (
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                            src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -1967,7 +2009,7 @@ const handlePrint2 = () => {
                                         <>
                                           <span>b)</span>
                                           <img
-                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                            src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -1994,27 +2036,30 @@ const handlePrint2 = () => {
                                         </>
                                       )}
                                     </div>
-                                    <br/>
+                                    <br />
 
                                     <div>
-                                      {item?.PassiveQuesion?.length ? (<>
-                                        {item?.PassiveQuesion?.map(
-                                        (item1, index) => {
-                                          return (
-                                            <div>
-                                              <p>
-                                                {item1?.question
-                                                  ? parse(item1?.question)
-                                                  : ""}
-                                              </p>
-                                              {lines}
-                                              {lines}
-                                            </div>
-                                          );
-                                        }
+                                      {item?.PassiveQuesion?.length ? (
+                                        <>
+                                          {item?.PassiveQuesion?.map(
+                                            (item1, index) => {
+                                              return (
+                                                <div>
+                                                  <p>
+                                                    {item1?.question
+                                                      ? parse(item1?.question)
+                                                      : ""}
+                                                  </p>
+                                                  {lines}
+                                                  {lines}
+                                                </div>
+                                              );
+                                            }
+                                          )}
+                                        </>
+                                      ) : (
+                                        <></>
                                       )}
-                                      </>):(<></>)}
-                                      
                                     </div>
                                   </>
                                 ) : (
@@ -2158,10 +2203,9 @@ const handlePrint2 = () => {
                                           ? parse(item?.Question)
                                           : ""}
                                       </p>
-                                     
                                     </div>
-                                    <br/>
-                                      <p>{QuestionHeader?.ans}:</p>
+                                    <br />
+                                    <p>{QuestionHeader?.ans}:</p>
                                     <div className="mb-2">
                                       {item?.NumberOfLine && (
                                         <>
@@ -2192,7 +2236,7 @@ const handlePrint2 = () => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2203,7 +2247,7 @@ const handlePrint2 = () => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2256,7 +2300,7 @@ const handlePrint2 = () => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2267,7 +2311,7 @@ const handlePrint2 = () => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_2}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2280,7 +2324,7 @@ const handlePrint2 = () => {
                                             {item?.Image_3 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_3}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_3}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2291,7 +2335,7 @@ const handlePrint2 = () => {
                                             {item?.Image_4 ? (
                                               <>
                                                 <img
-                                                  src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_4}`}
+                                                  src={`http://localhost:8001/Questions/${item?.Image_4}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2379,7 +2423,7 @@ const handlePrint2 = () => {
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`https://guru-resorce-backend.onrender.com/Questions/${item?.Image_1}`}
+                                            src={`http://localhost:8001/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -2440,21 +2484,17 @@ const handlePrint2 = () => {
                   );
                 })}
               </div>
-             
-           
             </div>
           </div>
           {/*------ QuestionAnalysis---- */}
-         
-<div className='d-flex justify-content-center mt-2 '>
-    <Button className='md-2' onClick={()=>updaethequestion(false)}>View Question Analysis</Button><br/>
-</div><br/>
-         
-         
 
-     
-
-
+          <div className="d-flex justify-content-center mt-2 ">
+            <Button className="md-2" onClick={() => updaethequestion(false)}>
+              View Question Analysis
+            </Button>
+            <br />
+          </div>
+          <br />
         </div>
       </div>
     </div>

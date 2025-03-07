@@ -34,7 +34,7 @@ const SignUp = () => {
       const config = {
         url: "/admin/registerTeacher",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -309,7 +309,11 @@ const SignUp = () => {
                         Log in
                       </Button>
                     </a> */}
-                    <a href="/login" style={{textDecoration:"none"}} className="d-flex justify-content-center align-items-center">
+                    <a
+                      href="/login"
+                      style={{ textDecoration: "none" }}
+                      className="d-flex justify-content-center align-items-center"
+                    >
                       <Button1 text={"Log In"} />
                     </a>
                   </div>

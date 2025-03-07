@@ -58,19 +58,25 @@ const TableCell = ({ value, onChange, selectdetails }) => {
         type="text"
         placeholder={value}
         // value={selectdetails?.selectedLanguage=="en-t-i0-und" ? value={value}:<></>}
-        onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? onChange(e.target.value) : onChangeHandler(e.target.value, onChange)}
-      // onChange={(e) => onChange(e.target.value)}
+        onChange={(e) =>
+          selectdetails?.selectedLanguage == "en-t-i0-und"
+            ? onChange(e.target.value)
+            : onChangeHandler(e.target.value, onChange)
+        }
+        // onChange={(e) => onChange(e.target.value)}
       />
-      {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{value}</p>}
+      {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+        <></>
+      ) : (
+        <p>{value}</p>
+      )}
     </td>
   );
 };
 
 const ViewTableCell = ({ value, onChange }) => {
-  return (<td>
-    {value}
-  </td>)
-}
+  return <td>{value}</td>;
+};
 
 function AddGrammerQuestion({ selectdetails }) {
   // const selectdetails = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -80,7 +86,6 @@ function AddGrammerQuestion({ selectdetails }) {
   // new Row and new column
   const [tableData, setTableData] = useState([]);
   const [AtableData, setATableData] = useState([]);
-
 
   const [translatedValue, setTranslatedValue] = useState("");
   // const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
@@ -179,7 +184,6 @@ function AddGrammerQuestion({ selectdetails }) {
 
   const navigate = useNavigate();
 
-
   // Debounce delay in milliseconds
   const [AnswerT, setAnswerT] = useState("");
   const [QuestionT, setQuestionT] = useState("");
@@ -194,7 +198,7 @@ function AddGrammerQuestion({ selectdetails }) {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -210,11 +214,11 @@ function AddGrammerQuestion({ selectdetails }) {
           Section: selectdetails?.Section,
           Sub_Class: selectdetails?.Sub_Class,
           Subject: selectdetails?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
-          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+          Types_QuestionTranslate: selectdetails?.Types_QuestionTranslate,
 
           Question: Question,
           NumberOfLine: Line,
@@ -247,20 +251,20 @@ function AddGrammerQuestion({ selectdetails }) {
         <div className="container">
           <div className="row mt-2">
             <div className="col-md-12">
-            <label htmlFor="">Question</label>
-            <MathEditor
-                  data={{
-                    A: Question,
-                    B: setQuestion,
-                    selectedLanguage: selectdetails?.selectedLanguage,
-                    trans: QuestionT,
-                    settran: setQuestionT,
-                  }}
-                />
+              <label htmlFor="">Question</label>
+              <MathEditor
+                data={{
+                  A: Question,
+                  B: setQuestion,
+                  selectedLanguage: selectdetails?.selectedLanguage,
+                  trans: QuestionT,
+                  settran: setQuestionT,
+                }}
+              />
             </div>
             <div className="col-md-12">
               <div className="do-sear mt-2">
-                <label htmlFor="">Answer</label>               
+                <label htmlFor="">Answer</label>
                 <div>
                   <div className="my-2">
                     <button
@@ -332,7 +336,6 @@ function AddGrammerQuestion({ selectdetails }) {
                     </tbody>
                   </Table>
                 </div>
-               
               </div>
             </div>
 
@@ -661,13 +664,15 @@ function AddGrammerQuestion({ selectdetails }) {
                     </tbody>
                   </Table>
                 </div> */}
-                <MathEditor 
-                data={{ 
-                  A: Answer, 
-                  B: setAnswer, 
-                  selectedLanguage: selectdetails?.selectedLanguage, 
-                  trans: AnswerT, 
-                  settran: setAnswerT }} />
+                <MathEditor
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
+                />
               </div>
             </div>
 
@@ -676,7 +681,11 @@ function AddGrammerQuestion({ selectdetails }) {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value) : onChangeHandler(e.target.value, setMarks)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setMarks(e.target.value)
+                      : onChangeHandler(e.target.value, setMarks)
+                  }
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -692,7 +701,11 @@ function AddGrammerQuestion({ selectdetails }) {
                   <option>8</option>
                   <option>10</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Marks}</p>
+                )}
               </div>
             </div>
             <div className="col-md-6">
@@ -700,7 +713,11 @@ function AddGrammerQuestion({ selectdetails }) {
                 <label htmlFor="">Answer Time</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) => selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value) : onChangeHandler(e.target.value, setAnswer_Time)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setAnswer_Time(e.target.value)
+                      : onChangeHandler(e.target.value, setAnswer_Time)
+                  }
                 >
                   <option>Select the Time</option>
                   <option value="1/2 minutes">1/2 minutes</option>
@@ -717,10 +734,13 @@ function AddGrammerQuestion({ selectdetails }) {
                   <option value="9 minutes">9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Answer_Time}</p>
+                )}
               </div>
             </div>
-
           </div>
         </div>
 
@@ -768,7 +788,6 @@ function AddGrammerQuestion({ selectdetails }) {
                           key={cellIndex}
                           className="vi_0"
                           value={cell}
-
                         />
                       ))}
                     </tr>

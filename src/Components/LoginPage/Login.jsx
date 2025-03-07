@@ -51,7 +51,7 @@ const Login = () => {
       const config = {
         url: "/admin/loginTeacher",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           // Authorization:`Bearer ${token}`,
@@ -108,7 +108,7 @@ const Login = () => {
       const config = {
         url: "/otp/sendOtpRegisterEmail",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -144,7 +144,7 @@ const Login = () => {
       const config = {
         url: "/otp/verifyEmail",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -182,7 +182,7 @@ const Login = () => {
       const config = {
         url: "/admin/updatepassword",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: { "content-type": "application/json" },
         data: {
           Email: Optmail,
@@ -221,7 +221,7 @@ const Login = () => {
 
                     <h3
                       className=" space-mono-regular fw-normal text-light"
-                      style={{ textAlign: "center" , fontSize:"14px"}}
+                      style={{ textAlign: "center", fontSize: "14px" }}
                     >
                       If you are a New User Please Register Here
                     </h3>
@@ -310,7 +310,7 @@ const Login = () => {
                           display: "flex",
                           alignItems: "start",
                           fontSize: "16px",
-                          gap:"4px"
+                          gap: "4px",
                         }}
                       >
                         <FaPhoneAlt className="text-white mr-2" />
@@ -328,8 +328,7 @@ const Login = () => {
                           display: "flex",
                           alignItems: "center",
                           fontSize: "16px",
-                          gap:"4px"
-
+                          gap: "4px",
                         }}
                       >
                         <MdEmail className="text-white" />

@@ -19,20 +19,20 @@ import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import  parse  from "html-react-parser";
+import parse from "html-react-parser";
 import MathEditor from "../../MyEditor";
-const FourSentenceaddAnswer = ({selectdetails}) => {
+const FourSentenceaddAnswer = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
-    const [show, setShow] = useState();
+  const [show, setShow] = useState();
 
-    const navigate = useNavigate();
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const navigate = useNavigate();
 
-      // Line
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Line
   const [twoline, setTwoline] = useState(false);
   const [threeline, setThreeline] = useState(false);
   const [fourline, setFourline] = useState(true);
@@ -46,7 +46,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -63,7 +63,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -79,17 +79,17 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
           orQuestion: orQuestion,
           orAnswer: orAnswer,
-        
+
           Image_1: Image_1,
           NumberOfLine: NumberOfLine,
           Marks: Marks,
@@ -111,7 +111,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
         return navigate("/adminquestions");
       }
     } catch (error) {
-      console.log(error);    
+      console.log(error);
     }
   };
   const handleChange = (e, editor) => {
@@ -131,12 +131,11 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
     setorAnswer(data);
   };
 
-
   return (
     <div>
-        <div className="">
-        <div className="container">        
-          <div className="row mt-2">        
+      <div className="">
+        <div className="container">
+          <div className="row mt-2">
             <div className="col-md-12">
               <div className="do-sear mt-2">
                 <label htmlFor="">Question</label>
@@ -146,7 +145,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                 data={Question}
                 onChange={handleChange}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: Question,
                     B: setQuestion,
@@ -790,7 +789,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                 data={Answer}
                   onChange={handleChange1}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: Answer,
                     B: setAnswer,
@@ -810,12 +809,12 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload2">Image 1</label>
-                <input 
-                type="file" 
-                className="vi_0"
-                id="upload2"
-                accept="images/*"
-                onChange={(e) => setImage_1(e.target.files[0])}
+                <input
+                  type="file"
+                  className="vi_0"
+                  id="upload2"
+                  accept="images/*"
+                  onChange={(e) => setImage_1(e.target.files[0])}
                 />
               </div>
             </div>
@@ -823,10 +822,12 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
             <div className="col-md-6">
               <div className="do-sear mt-2">
                 <label htmlFor="upload3">Image 2</label>
-                <input 
+                <input
                   id="upload3"
                   onChange={(e) => setImage_2(e.target.files[0])}
-                type="file" className="vi_0" />
+                  type="file"
+                  className="vi_0"
+                />
               </div>
             </div>
 
@@ -839,7 +840,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                  data={orQuestion}
                   onChange={handleChange2}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orQuestion,
                     B: setorQuestion,
@@ -860,7 +861,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                 data={orAnswer}
                 onChange={handleChange3}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orAnswer,
                     B: setorAnswer,
@@ -880,7 +881,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                     setMarks(e.target.value);
                   }}
                 >
-                   <option>Select the Marks</option>
+                  <option>Select the Marks</option>
                   <option value={"1/2"}>1/2</option>
                   <option value={"1/4"}>1/4</option>
                   <option value={"1/3"}>1/3</option>
@@ -892,7 +893,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                   <option value={6}>6</option>
                   <option value={7}>7</option>
                   <option value={8}>8</option>
-                  <option value={10}>10</option>  
+                  <option value={10}>10</option>
                 </Form.Select>
               </div>
             </div>
@@ -905,7 +906,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                     setAnswer_Time(e.target.value);
                   }}
                 >
-                    <option>Select the Time</option>
+                  <option>Select the Time</option>
                   <option value="1/2 Mnt">1/2 Mnt</option>
                   <option value="1/4 Mnt">1/4 Mnt</option>
                   <option value="1 Mnt">1 Mnt</option>
@@ -928,21 +929,21 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
 
         <div className="d-flex justify-content-center">
           <div className="yoihjij text-center my-2 p-2 ">
-          <button
-                    style={{backgroundColor:"orange"}}
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                        className="modal-add-btn"
-                    >
-                        Back
-                    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button
+              style={{ backgroundColor: "orange" }}
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="modal-add-btn"
+            >
+              Back
+            </button>{" "}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Button className="modal-add-btn" onClick={handleShow}>
               Save
             </Button>
           </div>
 
-          
           <Modal
             show={show}
             onHide={handleClose}
@@ -965,7 +966,22 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                     </div>
                   </div>
                   <div className="col-12">
-                        {twoline ? (
+                    {twoline ? (
+                      <>
+                        <div className="col-md-12">
+                          <div className="do-sear mt-4">
+                            <p type="text" className="lined-input"></p>
+                          </div>
+                        </div>
+                        <div className="col-md-12">
+                          <div className="do-sear mt-2">
+                            <p type="text" className="lined-input"></p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {threeline ? (
                           <>
                             <div className="col-md-12">
                               <div className="do-sear mt-4">
@@ -977,10 +993,15 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                 <p type="text" className="lined-input"></p>
                               </div>
                             </div>
+                            <div className="col-md-12">
+                              <div className="do-sear mt-2">
+                                <p type="text" className="lined-input"></p>
+                              </div>
+                            </div>
                           </>
                         ) : (
                           <>
-                            {threeline ? (
+                            {fourline ? (
                               <>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-4">
@@ -997,10 +1018,15 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                     <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
+                                <div className="col-md-12">
+                                  <div className="do-sear mt-2">
+                                    <p type="text" className="lined-input"></p>
+                                  </div>
+                                </div>
                               </>
                             ) : (
                               <>
-                                {fourline ? (
+                                {fiveline ? (
                                   <>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-4">
@@ -1034,10 +1060,18 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                         ></p>
                                       </div>
                                     </div>
+                                    <div className="col-md-12">
+                                      <div className="do-sear mt-2">
+                                        <p
+                                          type="text"
+                                          className="lined-input"
+                                        ></p>
+                                      </div>
+                                    </div>
                                   </>
                                 ) : (
                                   <>
-                                    {fiveline ? (
+                                    {sixline ? (
                                       <>
                                         <div className="col-md-12">
                                           <div className="do-sear mt-4">
@@ -1046,7 +1080,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                               className="lined-input"
                                             ></p>
                                           </div>
-                                        </div>
+                                        </div>{" "}
                                         <div className="col-md-12">
                                           <div className="do-sear mt-2">
                                             <p
@@ -1054,7 +1088,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                               className="lined-input"
                                             ></p>
                                           </div>
-                                        </div>
+                                        </div>{" "}
                                         <div className="col-md-12">
                                           <div className="do-sear mt-2">
                                             <p
@@ -1062,7 +1096,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                               className="lined-input"
                                             ></p>
                                           </div>
-                                        </div>
+                                        </div>{" "}
                                         <div className="col-md-12">
                                           <div className="do-sear mt-2">
                                             <p
@@ -1070,7 +1104,15 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                               className="lined-input"
                                             ></p>
                                           </div>
-                                        </div>
+                                        </div>{" "}
+                                        <div className="col-md-12">
+                                          <div className="do-sear mt-2">
+                                            <p
+                                              type="text"
+                                              className="lined-input"
+                                            ></p>
+                                          </div>
+                                        </div>{" "}
                                         <div className="col-md-12">
                                           <div className="do-sear mt-2">
                                             <p
@@ -1082,10 +1124,18 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                       </>
                                     ) : (
                                       <>
-                                        {sixline ? (
+                                        {sevenline ? (
                                           <>
                                             <div className="col-md-12">
                                               <div className="do-sear mt-4">
+                                                <p
+                                                  type="text"
+                                                  className="lined-input"
+                                                ></p>
+                                              </div>
+                                            </div>{" "}
+                                            <div className="col-md-12">
+                                              <div className="do-sear mt-2">
                                                 <p
                                                   type="text"
                                                   className="lined-input"
@@ -1135,10 +1185,18 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                           </>
                                         ) : (
                                           <>
-                                            {sevenline ? (
+                                            {eightline ? (
                                               <>
                                                 <div className="col-md-12">
                                                   <div className="do-sear mt-4">
+                                                    <p
+                                                      type="text"
+                                                      className="lined-input"
+                                                    ></p>
+                                                  </div>
+                                                </div>{" "}
+                                                <div className="col-md-12">
+                                                  <div className="do-sear mt-2">
                                                     <p
                                                       type="text"
                                                       className="lined-input"
@@ -1196,10 +1254,18 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                               </>
                                             ) : (
                                               <>
-                                                {eightline ? (
+                                                {nineline ? (
                                                   <>
                                                     <div className="col-md-12">
                                                       <div className="do-sear mt-4">
+                                                        <p
+                                                          type="text"
+                                                          className="lined-input"
+                                                        ></p>
+                                                      </div>
+                                                    </div>{" "}
+                                                    <div className="col-md-12">
+                                                      <div className="do-sear mt-2">
                                                         <p
                                                           type="text"
                                                           className="lined-input"
@@ -1265,7 +1331,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                                   </>
                                                 ) : (
                                                   <>
-                                                    {nineline ? (
+                                                    {tenline ? (
                                                       <>
                                                         <div className="col-md-12">
                                                           <div className="do-sear mt-4">
@@ -1338,97 +1404,18 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                                                               className="lined-input"
                                                             ></p>
                                                           </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
                                                         </div>
                                                       </>
                                                     ) : (
-                                                      <>
-                                                        {tenline ? (
-                                                          <>
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-4">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>{" "}
-                                                            <div className="col-md-12">
-                                                              <div className="do-sear mt-2">
-                                                                <p
-                                                                  type="text"
-                                                                  className="lined-input"
-                                                                ></p>
-                                                              </div>
-                                                            </div>
-                                                          </>
-                                                        ) : (
-                                                          <></>
-                                                        )}
-                                                      </>
+                                                      <></>
                                                     )}
                                                   </>
                                                 )}
@@ -1444,8 +1431,10 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                             )}
                           </>
                         )}
-                      </div>
-                      <div>
+                      </>
+                    )}
+                  </div>
+                  <div>
                     <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                       <b>(OR)</b>
                     </h6>
@@ -1486,7 +1475,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                   ) : (
                     <></>
                   )}
-                      <div className="col-md-12">
+                  <div className="col-md-12">
                     <div className="do-sear mt-2">
                       <label htmlFor="">Question</label>
                       <p>{orQuestion ? parse(orQuestion) : ""}</p>
@@ -1543,7 +1532,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
                     className="modal-add-btn"
                     onClick={() => {
                       // navigate("/Classlkg");
-                      addquestions()
+                      addquestions();
                     }}
                   >
                     Submit
@@ -1555,7 +1544,7 @@ const FourSentenceaddAnswer = ({selectdetails}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FourSentenceaddAnswer
+export default FourSentenceaddAnswer;

@@ -30,7 +30,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -63,7 +63,9 @@ const LoginPage5 = () => {
           icon: "success",
           button: "OK!",
         });
-        navigate("/teacher-cover-page", { state: {...res.data.success ,BlueName:bluePData[0]?.blName} });
+        navigate("/teacher-cover-page", {
+          state: { ...res.data.success, BlueName: bluePData[0]?.blName },
+        });
       }
     } catch (error) {
       console.log(error);
@@ -80,7 +82,7 @@ const LoginPage5 = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -97,7 +99,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -120,7 +122,7 @@ const LoginPage5 = () => {
     try {
       const config = {
         url: "/admin/getBluePrintGetByTeacherRequired",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -133,7 +135,7 @@ const LoginPage5 = () => {
           className: state?.Class,
           SubClassName: state?.Sub_Class,
           subjects: state?.Subject,
-          ExameName:state?.Exam_Name
+          ExameName: state?.Exam_Name,
         },
       };
 
@@ -185,45 +187,51 @@ const LoginPage5 = () => {
                     <div style={{ textAlign: "center" }}>
                       <h5>-: School Details :-</h5>
                     </div>
-                    {state?.userType =="Teacher" ? (<>
-                      <Row>
-                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
-                        <Form.Label
-                          className="fs-6 fw-bold mt-2 "
-                          style={{ letterSpacing: "0.5px" }}
-                        >
-                          School Logo :
-                        </Form.Label>
-                        <div className="">
-                          <img
-                            style={{
-                              width: "142px",
-                              height: "139px",
-                              borderRadius: "50%",
-                            }}
-                            src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
-                            alt="school logo"
-                          />
-                        </div>
-                      </div>
-                    </Row>
+                    {state?.userType == "Teacher" ? (
+                      <>
+                        <Row>
+                          <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                            <Form.Label
+                              className="fs-6 fw-bold mt-2 "
+                              style={{ letterSpacing: "0.5px" }}
+                            >
+                              School Logo :
+                            </Form.Label>
+                            <div className="">
+                              <img
+                                style={{
+                                  width: "142px",
+                                  height: "139px",
+                                  borderRadius: "50%",
+                                }}
+                                src={`http://localhost:8001/Teacher/${state?.School_Logo}`}
+                                alt="school logo"
+                              />
+                            </div>
+                          </div>
+                        </Row>
 
-                    <Row>
-                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
-                        <Form.Label
-                          className="fs-6 fw-bold mt-2 "
-                          style={{ letterSpacing: "0.5px" }}
-                        >
-                          Institute_Name :
-                        </Form.Label>
+                        <Row>
+                          <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                            <Form.Label
+                              className="fs-6 fw-bold mt-2 "
+                              style={{ letterSpacing: "0.5px" }}
+                            >
+                              Institute_Name :
+                            </Form.Label>
 
-                        <div>
-                          <h6>{state?.Institute_Name} {state?.SchoolAddress}</h6>
-                        </div>
-                      </div>
-                    </Row>
-                    </>):<></>}
-                   
+                            <div>
+                              <h6>
+                                {state?.Institute_Name} {state?.SchoolAddress}
+                              </h6>
+                            </div>
+                          </div>
+                        </Row>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
                     <Row>
                       <div className="col-12 mb-2 d-flex justify-content-between align-items-end">
                         <Form.Label
@@ -275,7 +283,7 @@ const LoginPage5 = () => {
                           Exam Name :
                         </Form.Label>
 
-                        <div >
+                        <div>
                           <h6>{state?.Exam_Name}</h6>
                         </div>
                       </div>
@@ -322,64 +330,68 @@ const LoginPage5 = () => {
                         </div>
                       </div>
                     </Row>
-                    {state?.userType=="Teacher" ? (  <Row>
-                      <div style={{ textAlign: "left", padding: "0px 12px" }}>
-                        <div className="col-8 mb-4">
-                          <input
-                            type="radio"
-                            name="fav_language"
-                            checked={Individual == "Individual"}
-                            onClick={() => {
-                              setquecount(1);
-                              setIndividual("Individual");
-                            }}
-                          />{" "}
-                          &nbsp;
-                          <Button
-                            style={{
-                              backgroundColor: "#ff5200",
-                              border: "none",
-                            }}
-                            onClick={() => {
-                              setquecount(1);
-                              setIndividual("Individual");
-                            }}
-                          >
-                            Individual
-                          </Button>
+                    {state?.userType == "Teacher" ? (
+                      <Row>
+                        <div style={{ textAlign: "left", padding: "0px 12px" }}>
+                          <div className="col-8 mb-4">
+                            <input
+                              type="radio"
+                              name="fav_language"
+                              checked={Individual == "Individual"}
+                              onClick={() => {
+                                setquecount(1);
+                                setIndividual("Individual");
+                              }}
+                            />{" "}
+                            &nbsp;
+                            <Button
+                              style={{
+                                backgroundColor: "#ff5200",
+                                border: "none",
+                              }}
+                              onClick={() => {
+                                setquecount(1);
+                                setIndividual("Individual");
+                              }}
+                            >
+                              Individual
+                            </Button>
+                          </div>
+                          <div className="col-12 mb-4">
+                            <input
+                              type="radio"
+                              name="fav_language"
+                              checked={Individual == "No.of Student"}
+                              onClick={() => setIndividual("No.of Student")}
+                            />{" "}
+                            &nbsp;
+                            <Button
+                              variant="success"
+                              style={{ backgroundColor: "green" }}
+                              onClick={() => setIndividual("No.of Student")}
+                            >
+                              No.of Student
+                            </Button>
+                            {Individual == "No.of Student" ? (
+                              <div style={{ float: "right", width: "100px" }}>
+                                <input
+                                  type="number"
+                                  className="vi_0"
+                                  min={1}
+                                  value={quenCount}
+                                  onChange={(e) => setquecount(e.target.value)}
+                                />
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
-                        <div className="col-12 mb-4">
-                          <input
-                            type="radio"
-                            name="fav_language"
-                            checked={Individual == "No.of Student"}
-                            onClick={() => setIndividual("No.of Student")}
-                          />{" "}
-                          &nbsp;
-                          <Button
-                            variant="success"
-                            style={{ backgroundColor: "green" }}
-                            onClick={() => setIndividual("No.of Student")}
-                          >
-                            No.of Student
-                          </Button>
-                          {Individual == "No.of Student" ? (
-                            <div style={{ float: "right", width: "100px" }}>
-                              <input
-                                type="number"
-                                className="vi_0"
-                                min={1}
-                                value={quenCount}
-                                onChange={(e) => setquecount(e.target.value)}
-                              />
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    </Row>):(<></>)}
-                  
+                      </Row>
+                    ) : (
+                      <></>
+                    )}
+
                     {bluePData.length == 0 ? (
                       <></>
                     ) : (

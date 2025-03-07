@@ -5,6 +5,7 @@ import { Button, FormLabel } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import logo from "./../../assets/logo.png";
 
 const LoginPage3 = () => {
   const { state } = useLocation();
@@ -25,7 +26,7 @@ const LoginPage3 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -42,7 +43,7 @@ const LoginPage3 = () => {
           teacherId: user?._id,
           teacheName: user?.FirstName,
           ExamTime: ExamTime,
-          SchoolAddress:SchoolAddress
+          SchoolAddress: SchoolAddress,
         },
       };
 
@@ -72,8 +73,9 @@ const LoginPage3 = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
+      console.log("ressss==>", res);
       if (res.status == 200) {
         setsubject(res.data.success);
       }
@@ -84,10 +86,10 @@ const LoginPage3 = () => {
   useEffect(() => {
     getSubject();
   }, []);
-  
-  if(!user){
-    alert("Please login")
-    return window.location.assign("/")
+
+  if (!user) {
+    alert("Please login");
+    return window.location.assign("/");
   }
   return (
     <div>
@@ -96,12 +98,33 @@ const LoginPage3 = () => {
           <div className="box">
             <div className="row">
               <div className="col-md-6 gfffg">
-                <div className="login3-bg">
-                  <div className="line-1">
+                <div
+                  className="login3-bg"
+                  style={{
+                    padding: "150px 0px",
+                    textAlign: "center",
+                  }}
+                >
+                  <img
+                    src={logo}
+                    alt=""
+                    style={{
+                      width: "250px",
+                      height: "100px",
+                    }}
+                  />
+                  <div className="line-1 mt-10">
                     <h2>
                       {" "}
                       <p className="anim-typewriter text-dark">
-                        Welcome   {" "}<span className="text-uppercase Lato-regular"> {user?.FirstName}</span> <span className="text-uppercase Lato-regular">{user?.LastName}!{" "}</span>
+                        Welcome{" "}
+                        <span className="text-uppercase Lato-regular">
+                          {" "}
+                          {user?.FirstName}
+                        </span>{" "}
+                        <span className="text-uppercase Lato-regular">
+                          {user?.LastName}!{" "}
+                        </span>
                       </p>
                       <span className="fs-4" style={{ textAlign: "center" }}>
                         Start Generating Your Paper
@@ -113,49 +136,51 @@ const LoginPage3 = () => {
               <div className="col-md-6 yoihjij ">
                 <Form className="pe-2 pt-3">
                   <Form.Group controlId="formFile" className="mb-2">
-                    {state?.userType=="Teacher" ? (<>  <Form.Label
-                      className="fs-6 fw-bold"
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      School Logo
-                    </Form.Label>
-                    <Form.Control
-                      type="file"
-                      onChange={(e) => {
-                        setSchool_Logo(e.target.files[0]);
-                      }}
-                    />
-                     <Form.Label
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      School / Institute Name
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Your School / Institute Name"
-                      onChange={(e) => {
-                        setInstitute_Name(e.target.value);
-                      }}
-                    />
-
-                    <Form.Label
-                      className="fs-6 fw-bold mt-2 "
-                      style={{ letterSpacing: "0.5px" }}
-                    >
-                      Address Details
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Your Address Details"
-                      onChange={(e) => {
-                        setSchoolAddress(e.target.value);
-                      }}
-                    />
-                    </>):(<></>)}
-                  
-
-                   
+                    {state?.userType == "Teacher" ? (
+                      <>
+                        {" "}
+                        <Form.Label
+                          className="fs-6 fw-bold"
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          School Logo
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          onChange={(e) => {
+                            setSchool_Logo(e.target.files[0]);
+                          }}
+                        />
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          School / Institute Name
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your School / Institute Name"
+                          onChange={(e) => {
+                            setInstitute_Name(e.target.value);
+                          }}
+                        />
+                        <Form.Label
+                          className="fs-6 fw-bold mt-2 "
+                          style={{ letterSpacing: "0.5px" }}
+                        >
+                          Address Details
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Your Address Details"
+                          onChange={(e) => {
+                            setSchoolAddress(e.target.value);
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
 
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "

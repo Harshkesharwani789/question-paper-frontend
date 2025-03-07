@@ -37,7 +37,7 @@ const AdminTypeOfQuestions = () => {
       const config = {
         url: "/admin/addtypesofquestion",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ const AdminTypeOfQuestions = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
+        "http://localhost:8001/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -90,7 +90,7 @@ const AdminTypeOfQuestions = () => {
     try {
       const config = {
         url: "/admin/updateTypesofquestions",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -133,7 +133,7 @@ const AdminTypeOfQuestions = () => {
           "/" +
           admin?._id,
         method: "delete",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -213,10 +213,7 @@ const AdminTypeOfQuestions = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Type Of Questions</h2>
-          <button
-            className="admin-add-btn"
-            onClick={handleShow}
-          >
+          <button className="admin-add-btn" onClick={handleShow}>
             Add Type Of Question
           </button>
         </div>
@@ -299,7 +296,7 @@ const AdminTypeOfQuestions = () => {
           />
           <Pagination.Last onClick={() => setPageNumber(pageCount - 1)} />
         </Pagination> */}
-         <div>
+        <div>
           <nav>
             <ul className="pagination">
               <li className="not-allow">
@@ -345,7 +342,7 @@ const AdminTypeOfQuestions = () => {
           </nav>
         </div>
         {/* Add Package modal */}
-        <Modal show={show} onHide={handleClose} style={{zIndex:"99999"}}>
+        <Modal show={show} onHide={handleClose} style={{ zIndex: "99999" }}>
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
             <Modal.Title style={{ color: "white" }}>
               Add Type Of Question
@@ -384,9 +381,13 @@ const AdminTypeOfQuestions = () => {
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
-            <Button variant="" className="modal-close-btn" onClick={handleClose}>
-              Close
-            </Button>
+              <Button
+                variant=""
+                className="modal-close-btn"
+                onClick={handleClose}
+              >
+                Close
+              </Button>
               <Button
                 className="mx-2 modal-add-btn"
                 variant=""
@@ -406,9 +407,12 @@ const AdminTypeOfQuestions = () => {
           onHide={handleClose1}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
-          <Modal.Header closeButton style={{ backgroundColor: "rgb(40 167 223)" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "rgb(40 167 223)" }}
+          >
             <Modal.Title style={{ color: "white" }}>
               Edit Type Of Question
             </Modal.Title>
@@ -428,13 +432,17 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose1}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose1}
+            >
               Close
             </Button>
             <Button
               variant=""
               className="modal-add-btn"
-                            onClick={() => {
+              onClick={() => {
                 updatetypesofquestion();
               }}
             >
@@ -447,7 +455,7 @@ const AdminTypeOfQuestions = () => {
           onHide={handleClose2}
           backdrop="static"
           keyboard={false}
-          style={{zIndex:"99999"}}
+          style={{ zIndex: "99999" }}
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Warning</Modal.Title>
@@ -462,10 +470,18 @@ const AdminTypeOfQuestions = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="" className="modal-close-btn" onClick={handleClose2}>
+            <Button
+              variant=""
+              className="modal-close-btn"
+              onClick={handleClose2}
+            >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={Deletedeletetypsofques}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={Deletedeletetypsofques}
+            >
               Delete
             </Button>
           </Modal.Footer>

@@ -4,6 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
+import Select from "react-select";
 import Typography from "@mui/material/Typography";
 import "../Admin/Admin.css";
 import { Form, Modal, Table } from "react-bootstrap";
@@ -155,6 +156,35 @@ function AdminBlueprint() {
   };
 
   const handleComplete = () => {
+    // Calculate total questions added
+    const totalQuestionsAdded = Arr.reduce(
+      (sum, item) => sum + parseInt(item.NQA || 0),
+      0
+    );
+
+    // Calculate total required questions
+    const totalRequiredQuestions = parseInt(NoofQues || 0);
+
+    if (totalQuestionsAdded < totalRequiredQuestions) {
+      swal({
+        title: "Warning!",
+        text: "Number of added questions is less than required. Please add more questions.",
+        icon: "warning",
+        button: "OK",
+      });
+      return;
+    }
+
+    if (totalQuestionsAdded > totalRequiredQuestions) {
+      swal({
+        title: "Warning!",
+        text: "Number of added questions exceeds the requirement. Please remove some questions.",
+        icon: "warning",
+        button: "OK",
+      });
+      return;
+    }
+
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
@@ -168,9 +198,7 @@ function AdminBlueprint() {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllBoard"
-      );
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -183,7 +211,7 @@ function AdminBlueprint() {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -197,9 +225,7 @@ function AdminBlueprint() {
   const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllMedium"
-      );
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         setnochangedata(res.data.success);
@@ -214,7 +240,7 @@ function AdminBlueprint() {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
+        `http://localhost:8001/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -227,6 +253,58 @@ function AdminBlueprint() {
       console.error("Error fetching objectives:", error);
     }
   };
+
+  useEffect(() => {
+    const calculateTotals = () => {
+      const totals = {
+        remembering: { count: 0, mask: 0 },
+        understanding: { count: 0, mask: 0 },
+        expression: { count: 0, mask: 0 },
+        appreciation: { count: 0, mask: 0 },
+      };
+
+      Arr.forEach((question) => {
+        const type = question.QAType.toLowerCase();
+        const nqa = parseInt(question.NQA) || 0;
+        const mask = parseInt(question.Mask) || 0;
+
+        switch (type) {
+          case "remembering":
+          case "knowledge":
+            totals.remembering.count += nqa;
+            totals.remembering.mask += nqa * mask;
+            break;
+          case "understanding":
+          case "comprehension":
+            totals.understanding.count += nqa;
+            totals.understanding.mask += nqa * mask;
+            break;
+          case "expression":
+            totals.expression.count += nqa;
+            totals.expression.mask += nqa * mask;
+            break;
+          case "appreciation":
+            totals.appreciation.count += nqa;
+            totals.appreciation.mask += nqa * mask;
+            break;
+        }
+      });
+
+      return totals;
+    };
+
+    const totals = calculateTotals();
+
+    // Batch state updates
+    setNQRemembering(totals.remembering.count);
+    setMaskRemembering(totals.remembering.mask);
+    setNQUnderstanding(totals.understanding.count);
+    setMaskUnderstanding(totals.understanding.mask);
+    setNQExpression(totals.expression.count);
+    setMaskExpression(totals.expression.mask);
+    setNQAppreciation(totals.appreciation.count);
+    setMaskAppreciation(totals.appreciation.mask);
+  }, [Arr]);
   const [price, setprice] = useState("");
   const [objectiveadd, setobjectiveadd] = useState(false);
   const [blName, setblName] = useState("");
@@ -237,18 +315,18 @@ function AdminBlueprint() {
   const [subjects, setsubjects] = useState("");
   const [Instructions, setInstructions] = useState("");
   const [InstructionsT, setInstructionsT] = useState("");
-  const [Remembering, setRemembering] = useState("");
-  const [NQRemembering, setNQRemembering] = useState("");
-  const [MaskRemembering, setMaskRemembering] = useState("");
-  const [Understanding, setUnderstanding] = useState("");
-  const [NQUnderstanding, setNQUnderstanding] = useState("");
-  const [MaskUnderstanding, setMaskUnderstanding] = useState("");
-  const [Expression, setExpression] = useState("");
-  const [NQExpression, setNQExpression] = useState("");
-  const [MaskExpression, setMaskExpression] = useState("");
-  const [Appreciation, setAppreciation] = useState("");
-  const [MaskAppreciation, setMaskAppreciation] = useState("");
-  const [NQAppreciation, setNQAppreciation] = useState("");
+  const [Remembering, setRemembering] = useState(0);
+  const [NQRemembering, setNQRemembering] = useState(0);
+  const [MaskRemembering, setMaskRemembering] = useState(0);
+  const [Understanding, setUnderstanding] = useState(0);
+  const [NQUnderstanding, setNQUnderstanding] = useState(0);
+  const [MaskUnderstanding, setMaskUnderstanding] = useState(0);
+  const [Expression, setExpression] = useState(0);
+  const [NQExpression, setNQExpression] = useState(0);
+  const [MaskExpression, setMaskExpression] = useState(0);
+  const [Appreciation, setAppreciation] = useState(0);
+  const [MaskAppreciation, setMaskAppreciation] = useState(0);
+  const [NQAppreciation, setNQAppreciation] = useState(0);
   const [QAType, setQAType] = useState("");
   const [NQA, setNQA] = useState("");
   const [Mask, setMask] = useState("");
@@ -390,79 +468,75 @@ function AdminBlueprint() {
 
   const AddTypesofquestion = () => {
     try {
-      if (!QAType) {
-        swal({
-          title: "Oops!",
-          text: "Please Select Question Type",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if QAType is not provided
-      }
-      if (!QAInstruction) {
-        swal({
-          title: "Oops!",
-          text: "Please write Question Instruction",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if QAType is not provided
-      }
+      // Input validation
+      const validationChecks = [
+        { condition: !QAType, message: "Please Select Question Type" },
+        {
+          condition: !QAInstruction,
+          message: "Please write Question Instruction",
+        },
+        {
+          condition: !NQA || NQA <= 0,
+          message: "Please Enter Valid No. of Questions",
+        },
+        { condition: !Mask || Mask <= 0, message: "Please Enter Valid Marks" },
+      ];
 
-      if (!NQA) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter No. of Questions",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if NQA is not provided
-      }
-
-      if (!Mask) {
-        swal({
-          title: "Oops!",
-          text: "Please Enter Marks",
-          icon: "error",
-          button: "Try Again!",
-        });
-        return; // Stop further execution if Mask is not provided
-      }
-
-      let Question = 1;
-      Arr.forEach((ele) => {
-        if (ele?.QAType === QAType) {
-          Question = 0;
+      for (const check of validationChecks) {
+        if (check.condition) {
           swal({
             title: "Oops!",
-            text: "Already Exists...",
+            text: check.message,
             icon: "error",
             button: "Try Again!",
           });
+          return;
         }
-      });
-
-      if (Question) {
-        const obj = {
-          QAType: QAType,
-          NQA: NQA,
-          Mask: Mask,
-          QAInstruction: QAInstruction,
-        };
-
-        Arr.push(obj);
-        setArr([...Arr]); // Ensure you create a new array reference to trigger a re-render
-        console.log("Arr", Arr);
-
-        swal({
-          title: "Yeah!",
-          text: "Added Successfully...",
-          icon: "success",
-          button: "OK!",
-        });
       }
+
+      // Check if question type already exists
+      const existingQuestion = Arr.find((ele) => ele.QAType === QAType);
+      if (existingQuestion) {
+        swal({
+          title: "Oops!",
+          text: "Question Type Already Exists",
+          icon: "error",
+          button: "Try Again!",
+        });
+        return;
+      }
+
+      const parsedNQA = parseInt(NQA);
+      const parsedMask = parseInt(Mask);
+
+      const obj = {
+        QAType: QAType,
+        NQA: parsedNQA,
+        Mask: parsedMask,
+        QAInstruction: QAInstruction,
+      };
+
+      setArr((prevArr) => [...prevArr, obj]);
+
+      // Update appreciation counts using functional updates
+      setNQAppreciation((prev) => prev + parsedNQA);
+      setMaskAppreciation((prev) => prev + parsedMask);
+      setNoofQues(parsedNQA);
+
+      swal({
+        title: "Yeah!",
+        text: "Added Successfully...",
+        icon: "success",
+        button: "OK!",
+      });
     } catch (error) {
       console.error(error);
+      swal({
+        title: "Error!",
+        text: "Failed to add question type",
+        icon: "error",
+        button: "OK",
+      });
     }
   };
 
@@ -470,20 +544,30 @@ function AdminBlueprint() {
     try {
       const deletedQuestion = Arr[index];
 
+      // Update appreciation counts before removing the question
+      if (deletedQuestion) {
+        setNQAppreciation((prev) => prev - parseInt(deletedQuestion.NQA));
+        setMaskAppreciation((prev) => prev - parseInt(deletedQuestion.Mask));
+      }
+
       // Create a new array excluding the element at the specified index
       const updatedArr = Arr.filter((_, i) => i !== index);
-
       setArr(updatedArr);
-      console.log("Arr after deletion", updatedArr);
 
       swal({
         title: "Deleted!",
-        text: " Deleted Successfully.",
+        text: "Deleted Successfully.",
         icon: "warning",
         button: "OK!",
       });
     } catch (error) {
       console.error(error);
+      swal({
+        title: "Error!",
+        text: "Failed to delete question type",
+        icon: "error",
+        button: "OK",
+      });
     }
   };
 
@@ -496,7 +580,7 @@ function AdminBlueprint() {
           icon: "error",
           button: "Try Again!",
         });
-        return; // Stop further execution if QAType is not provided
+        return;
       }
 
       if (!NoofQues) {
@@ -506,7 +590,7 @@ function AdminBlueprint() {
           icon: "error",
           button: "Try Again!",
         });
-        return; // Stop further execution if NQA is not provided
+        return;
       }
 
       if (!objMarks) {
@@ -516,7 +600,7 @@ function AdminBlueprint() {
           icon: "error",
           button: "Try Again!",
         });
-        return; // Stop further execution if Mask is not provided
+        return;
       }
 
       let objectives = 1;
@@ -533,14 +617,15 @@ function AdminBlueprint() {
       });
 
       if (objectives) {
+        const calculatedTotalQuestion = Number(totalQuestion); // Convert to number
         const obj = {
           Objective: Objective,
           NoofQues: NoofQues,
           Marks: objMarks,
-          NoofQuestion: totalQuestion,
+          NoofQuestion: calculatedTotalQuestion, // Use calculated value
         };
 
-        setArr3([...Arr3, obj]); // Corrected this line to update the state correctly
+        setArr3([...Arr3, obj]);
 
         swal({
           title: "Yeah!",
@@ -730,7 +815,7 @@ function AdminBlueprint() {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -745,7 +830,7 @@ function AdminBlueprint() {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -761,7 +846,7 @@ function AdminBlueprint() {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -774,7 +859,7 @@ function AdminBlueprint() {
     try {
       const config = {
         url: "/admin/registerBLUEPRINT",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "post",
         headers: { "content-type": "application/json" },
         data: {
@@ -846,8 +931,9 @@ function AdminBlueprint() {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
+      console.log("ok", res);
       if (res.status == 200) {
         setsubject(res.data.success);
         setnochangedata(res.data.success);
@@ -861,8 +947,7 @@ function AdminBlueprint() {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" +
-          admin?._id,
+        "http://localhost:8001/api/admin/getquestiontype/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -917,6 +1002,10 @@ function AdminBlueprint() {
       console.log(error);
     }
   };
+  const chapterOptions = chapters.map((chapter) => ({
+    value: chapter.chapterName,
+    label: chapter.chapterName,
+  }));
 
   return (
     <>
@@ -1142,15 +1231,15 @@ function AdminBlueprint() {
                                   <option>Select the Subjects</option>
                                   {subject
                                     ?.filter(
-                                      (ele) => ele?.mediumName === medium
+                                      (ele) =>
+                                        ele?.subClass?.subclassName ===
+                                        SubClassName
                                     )
-                                    ?.map((val, i) => {
-                                      return (
-                                        <option value={val?.subjectName}>
-                                          {val?.subjectName}
-                                        </option>
-                                      );
-                                    })}
+                                    ?.map((val, i) => (
+                                      <option value={val?.subjectName} key={i}>
+                                        {val?.subjectName}
+                                      </option>
+                                    ))}
                                 </Form.Select>
                               </div>
                             </div>
@@ -1219,7 +1308,7 @@ function AdminBlueprint() {
                                       }}
                                     >
                                       <option value="">
-                                        Select the Type of Question
+                                        Selete the Type of Question
                                       </option>
                                       {getobjectives
                                         ?.filter(
@@ -1558,29 +1647,25 @@ function AdminBlueprint() {
                               <div className="row">
                                 <div className="col-md-4">
                                   <div className="do-sear">
-                                    <Form.Select
-                                      aria-label="Default select example"
-                                      onChange={(e) => {
-                                        setlabels(e.target.value);
-                                      }}
-                                    >
-                                      <option value="">
-                                        Select the Type of Question
-                                      </option>
-                                      {weightage
+                                    <Select
+                                      options={weightage
                                         ?.filter(
                                           (ele) =>
                                             subjects === ele?.Subject ||
                                             ele.mediumName === medium
                                         )
-                                        .map((val, i) => {
-                                          return (
-                                            <option value={val?.Content}>
-                                              {val?.Content}
-                                            </option>
-                                          );
-                                        })}
-                                    </Form.Select>
+                                        .map((val) => ({
+                                          value: val?.Content,
+                                          label: val?.Content,
+                                        }))}
+                                      placeholder="Select the Type of Question"
+                                      onChange={(selectedOption) => {
+                                        setlabels(selectedOption.value);
+                                      }}
+                                      isSearchable={true}
+                                      className="basic-single"
+                                      classNamePrefix="select"
+                                    />
                                   </div>
                                 </div>
                                 <div className="col-md-4">
@@ -2340,7 +2425,7 @@ function AdminBlueprint() {
                                               // }}
                                             >
                                               <option value="">
-                                                Select the Objectives
+                                                Selete the Objectives
                                               </option>
                                               {getobjectives.map((val, i) => {
                                                 return (
@@ -2465,33 +2550,27 @@ function AdminBlueprint() {
                                           <label htmlFor="">
                                             Select Chapters
                                           </label>
-                                          <Form.Select
-                                            aria-label="Default select example"
-                                            onChange={(e) => {
-                                              setBlueprintchapter(
-                                                e.target.value
-                                              );
-                                            }}
-                                          >
-                                            <option value="">
-                                              Select the Chapter
-                                            </option>
-                                            {chapters
+                                          <Select
+                                            options={chapters
                                               ?.filter(
                                                 (ele) =>
                                                   ele?.mediumName === medium ||
                                                   ele?.SubjectPart === labels
                                               )
-                                              ?.map((val, i) => {
-                                                return (
-                                                  <option
-                                                    value={val?.chapterName}
-                                                  >
-                                                    {val?.chapterName}
-                                                  </option>
-                                                );
-                                              })}
-                                          </Form.Select>
+                                              ?.map((chapter) => ({
+                                                value: chapter.chapterName,
+                                                label: chapter.chapterName,
+                                              }))}
+                                            placeholder="Select the Chapter"
+                                            onChange={(selectedOption) => {
+                                              setBlueprintchapter(
+                                                selectedOption.value
+                                              );
+                                            }}
+                                            isSearchable={true}
+                                            className="basic-single"
+                                            classNamePrefix="select"
+                                          />
                                         </div>
                                         <div className="col-md-4">
                                           <label htmlFor="">Objectives</label>
@@ -2510,7 +2589,7 @@ function AdminBlueprint() {
                                             }}
                                           >
                                             <option value="">
-                                              Select Objectives
+                                              Selete Objectives
                                             </option>
                                             {Arr3?.map((item, i) => {
                                               return (
@@ -2756,9 +2835,81 @@ function AdminBlueprint() {
                                             </Table>
                                           </div>
                                         </div>
+                                        <div className="row mt-4">
+                                          <div className="col-md-6">
+                                            <Table responsive bordered>
+                                              <thead>
+                                                <tr>
+                                                  <th>Question Type</th>
+                                                  <th>No. of Questions</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {Arr.reduce((acc, curr) => {
+                                                  const existing = acc.find(
+                                                    (item) =>
+                                                      item.type === curr.QAType
+                                                  );
+                                                  if (existing) {
+                                                    existing.count += parseInt(
+                                                      curr.NQA
+                                                    );
+                                                  } else {
+                                                    acc.push({
+                                                      type: curr.QAType,
+                                                      count: parseInt(curr.NQA),
+                                                    });
+                                                  }
+                                                  return acc;
+                                                }, []).map((item, i) => (
+                                                  <tr key={i}>
+                                                    <td>{item.type}</td>
+                                                    <td>{item.count}</td>
+                                                  </tr>
+                                                ))}
+                                              </tbody>
+                                            </Table>
+                                          </div>
+                                          <div className="col-md-6">
+                                            <Table responsive bordered>
+                                              <thead>
+                                                <tr>
+                                                  <th>Objective</th>
+                                                  <th>Required Questions</th>
+                                                  <th>Added Questions</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {Arr3.map((obj, i) => {
+                                                  const addedQuestions =
+                                                    Arr5.reduce(
+                                                      (sum, curr) =>
+                                                        curr.Blueprintobjective ===
+                                                        obj.Objective
+                                                          ? sum +
+                                                            parseInt(
+                                                              curr.Blueprintnoofquestion
+                                                            )
+                                                          : sum,
+                                                      0
+                                                    );
+                                                  return (
+                                                    <tr key={i}>
+                                                      <td>{obj.Objective}</td>
+                                                      <td>
+                                                        {obj.NoofQuestion}
+                                                      </td>
+                                                      <td>{addedQuestions}</td>
+                                                    </tr>
+                                                  );
+                                                })}
+                                              </tbody>
+                                            </Table>
+                                          </div>
+                                        </div>
+
                                         <div className="col-md-4">
                                           <label htmlFor="">Total Price</label>
-
                                           <input
                                             type="number"
                                             className="vi_0"
@@ -2766,14 +2917,6 @@ function AdminBlueprint() {
                                               setprice(e.target.value);
                                             }}
                                             placeholder="total price blue print with quetion paper"
-                                            // onChange={(e) =>
-                                            //   selectedLanguage == "en-t-i0-und"
-                                            //     ?  setBluePrintmarksperquestion(e.target.value)
-                                            //     : onChangeHandler(
-                                            //         e.target.value,
-                                            //         setBluePrintmarksperquestion
-                                            //       )
-                                            // }
                                           />
                                         </div>
                                       </div>
@@ -3132,7 +3275,7 @@ function AdminBlueprint() {
                       setObjective(e.target.value);
                     }}
                   >
-                    <option value="">Select the Type of Question</option>
+                    <option value="">Selete the Type of Question</option>
                     {getobjectives.map((val, i) => {
                       return (
                         <option value={val?.Objectivesname}>
@@ -3258,7 +3401,7 @@ function AdminBlueprint() {
                     setlabels(e.target.value);
                   }}
                 >
-                  <option value="">Select the Type of Question</option>
+                  <option value="">Selete the Type of Question</option>
                   {weightage
                     ?.filter((ele) => subjects == ele?.Subject)
                     .map((val, i) => {
@@ -3331,7 +3474,7 @@ function AdminBlueprint() {
                   setBlueprintchapter(e.target.value);
                 }}
               >
-                <option value="">Select the Chapter</option>
+                <option value="">Selete the Chapter</option>
                 {chapters?.map((val, i) => {
                   return (
                     <option value={val?.chapterName}>{val?.chapterName}</option>
@@ -3352,7 +3495,7 @@ function AdminBlueprint() {
                   }
                 }}
               >
-                <option value="">Select Objectives</option>
+                <option value="">Selete Objectives</option>
                 {Arr3?.map((item, i) => {
                   return (
                     <option value={JSON.stringify(item)} key={i}>

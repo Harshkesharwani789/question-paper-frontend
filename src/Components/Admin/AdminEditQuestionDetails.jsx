@@ -141,7 +141,7 @@ const AdminEditQuestionDetails = () => {
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getQuestionpaperadminbyid/${question_Id}`
+        `http://localhost:8001/api/admin/getQuestionpaperadminbyid/${question_Id}`
       );
       if (res.status === 200) {
         setquestion_details(res.data.success);
@@ -159,7 +159,7 @@ const AdminEditQuestionDetails = () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getobjective`
+        `http://localhost:8001/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -441,7 +441,7 @@ const AdminEditQuestionDetails = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -455,7 +455,7 @@ const AdminEditQuestionDetails = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -467,7 +467,7 @@ const AdminEditQuestionDetails = () => {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -479,7 +479,7 @@ const AdminEditQuestionDetails = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -492,7 +492,7 @@ const AdminEditQuestionDetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -506,7 +506,7 @@ const AdminEditQuestionDetails = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -520,7 +520,7 @@ const AdminEditQuestionDetails = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllTypesofquestion"
+        "http://localhost:8001/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -534,7 +534,7 @@ const AdminEditQuestionDetails = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -548,7 +548,7 @@ const AdminEditQuestionDetails = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -565,7 +565,7 @@ const AdminEditQuestionDetails = () => {
       const config = {
         url: "/admin/UpdateQuestionPaper",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -685,7 +685,7 @@ const AdminEditQuestionDetails = () => {
   const getDifficultyLevel = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllDiffLevel"
+        "http://localhost:8001/api/admin/getAllDiffLevel"
       );
       if (res.status == 200) {
         setDifficultyLevel(res.data.success);
@@ -742,7 +742,7 @@ const AdminEditQuestionDetails = () => {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontype/" + admin?._id,
+        "http://localhost:8001/api/admin/getquestiontype/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1212,7 +1212,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image
                             ? Image && URL.createObjectURL(Image)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image}`
+                            : `http://localhost:8001/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -2208,7 +2208,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -2242,7 +2242,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -2418,7 +2418,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -2452,7 +2452,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -2482,7 +2482,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_3
                             ? Image_3 && URL.createObjectURL(Image_3)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_3}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_3}`
                         }
                         alt="Ans_fig"
                       />
@@ -2516,7 +2516,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_4
                             ? Image_4 && URL.createObjectURL(Image_4)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_4}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_4}`
                         }
                         alt="Ans_fig"
                       />
@@ -2546,7 +2546,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -2585,7 +2585,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image}`
+                            : `http://localhost:8001/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -3327,7 +3327,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image
                             ? Image && URL.createObjectURL(Image)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image}`
+                            : `http://localhost:8001/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -4068,7 +4068,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4102,7 +4102,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4214,7 +4214,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.ImageQ}`
+                            : `http://localhost:8001/Questions/${question_details?.ImageQ}`
                         }
                         alt="Ans_fig"
                       />
@@ -4251,7 +4251,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4285,7 +4285,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4316,7 +4316,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -4496,7 +4496,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.ImageQ}`
+                            : `http://localhost:8001/Questions/${question_details?.ImageQ}`
                         }
                         alt="Ans_fig"
                       />
@@ -4533,7 +4533,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4567,7 +4567,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4597,7 +4597,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_3
                             ? Image_3 && URL.createObjectURL(Image_3)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_3}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_3}`
                         }
                         alt="Ans_fig"
                       />
@@ -4631,7 +4631,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_4
                             ? Image_4 && URL.createObjectURL(Image_4)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_4}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_4}`
                         }
                         alt="Ans_fig"
                       />
@@ -4661,7 +4661,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_5
                             ? Image_5 && URL.createObjectURL(Image_5)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_5}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_5}`
                         }
                         alt="Ans_fig"
                       />
@@ -4695,7 +4695,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_6
                             ? Image_6 && URL.createObjectURL(Image_6)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_6}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_6}`
                         }
                         alt="Ans_fig"
                       />
@@ -4726,7 +4726,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -4868,7 +4868,7 @@ const AdminEditQuestionDetails = () => {
                           <p>{input2}</p>
                         )}
                       </div>
-                      
+
                       <span>___________</span>
                       <div>
                         <input
@@ -4889,7 +4889,6 @@ const AdminEditQuestionDetails = () => {
                           <p>{input3}</p>
                         )}
                       </div>
-                     
                     </div>
                   </>
                 ) : (
@@ -5523,7 +5522,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -5557,7 +5556,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -6513,7 +6512,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -6547,7 +6546,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -6921,7 +6920,7 @@ const AdminEditQuestionDetails = () => {
                       src={
                         ImageAns
                           ? ImageAns && URL.createObjectURL(ImageAns)
-                          : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_Ans}`
+                          : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
                       }
                       alt="Ans_fig"
                     />
@@ -6973,22 +6972,23 @@ const AdminEditQuestionDetails = () => {
                           onChange={(e) => setPoemSat(e.target.value)}
                         /> */}
                         <div>
-                        <input
-                          type="text"
-                          className="vi_0"
-                          placeholder={PoemSat}
-                          // value={PoemSat}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPoemSat(e.target.value);
-                            } else onChangeHandler(e.target.value, setPoemSat);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{PoemSat}</p>
-                        )}
+                          <input
+                            type="text"
+                            className="vi_0"
+                            placeholder={PoemSat}
+                            // value={PoemSat}
+                            onChange={(e) => {
+                              if (selectedLanguage == "en-t-i0-und") {
+                                setPoemSat(e.target.value);
+                              } else
+                                onChangeHandler(e.target.value, setPoemSat);
+                            }}
+                          />
+                          {selectedLanguage == "en-t-i0-und" ? (
+                            <></>
+                          ) : (
+                            <p>{PoemSat}</p>
+                          )}
                         </div>
                         <div className="ans-line mb-3 mt-2"></div>
                       </div>
@@ -7006,22 +7006,23 @@ const AdminEditQuestionDetails = () => {
                           onChange={(e) => setPoemEnd(e.target.value)}
                         /> */}
                         <div>
-                         <input
-                          type="text"
-                          className="vi_0"
-                          placeholder={PoemEnd}
-                          // value={PoemSat}
-                          onChange={(e) => {
-                            if (selectedLanguage == "en-t-i0-und") {
-                              setPoemEnd(e.target.value);
-                            } else onChangeHandler(e.target.value, setPoemEnd);
-                          }}
-                        />
-                        {selectedLanguage == "en-t-i0-und" ? (
-                          <></>
-                        ) : (
-                          <p>{PoemEnd}</p>
-                        )}
+                          <input
+                            type="text"
+                            className="vi_0"
+                            placeholder={PoemEnd}
+                            // value={PoemSat}
+                            onChange={(e) => {
+                              if (selectedLanguage == "en-t-i0-und") {
+                                setPoemEnd(e.target.value);
+                              } else
+                                onChangeHandler(e.target.value, setPoemEnd);
+                            }}
+                          />
+                          {selectedLanguage == "en-t-i0-und" ? (
+                            <></>
+                          ) : (
+                            <p>{PoemEnd}</p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -7833,7 +7834,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_1}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -7867,7 +7868,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `https://guru-resorce-backend.onrender.com/Questions/${question_details?.Image_2}`
+                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />

@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button2 from "../Button2";
 function QuestionHeader() {
-    const [View,setView] = useState({});
+  const [View, setView] = useState({});
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
@@ -118,7 +118,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/addquestionheader",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -185,7 +185,7 @@ function QuestionHeader() {
   const getallQuestionHeader = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getquestiontheader/" + admin?._id,
+        "http://localhost:8001/api/admin/getquestiontheader/" + admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -205,7 +205,7 @@ function QuestionHeader() {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -226,7 +226,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/editquestionheader",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -292,7 +292,7 @@ function QuestionHeader() {
     try {
       const config = {
         url: "/admin/deleteQuestionHeader/" + Headerid?._id + "/" + admin?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "delete",
         headers: {
           "content-type": "application/json",
@@ -348,8 +348,10 @@ function QuestionHeader() {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Question Header List :</h2>
-         
-          <Link onClick={handleShow}><Button2   text={"Add Header"} /></Link>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Header"} />
+          </Link>
         </div>
         <div className="mb-3">
           <Table
@@ -2599,7 +2601,11 @@ function QuestionHeader() {
                           }}
                         />{" "}
                       </b>
-                      {selectedLanguage === "en-t-i0-und" ? <></> : <p>{View?.or}</p>}
+                      {selectedLanguage === "en-t-i0-und" ? (
+                        <></>
+                      ) : (
+                        <p>{View?.or}</p>
+                      )}
                     </div>
                     <div>
                       <b className="d-flex">

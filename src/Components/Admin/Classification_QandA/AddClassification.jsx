@@ -36,7 +36,7 @@ const AddClassification = ({ selectdetails }) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [twoline, setTwoline] = useState(false);
   const [threeline, setThreeline] = useState(false);
@@ -68,7 +68,7 @@ const AddClassification = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -84,11 +84,11 @@ const AddClassification = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -144,7 +144,9 @@ const AddClassification = ({ selectdetails }) => {
   };
 
   const [translatedValue, setTranslatedValue] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState(questiondata?.selectedLanguage);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    questiondata?.selectedLanguage
+  );
   const onChangeHandler = debounce(async (value, setData) => {
     if (!value) {
       setTranslatedValue("");
@@ -215,7 +217,11 @@ const AddClassification = ({ selectdetails }) => {
                   <option value="9 minutes"> 9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
-                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
+                {selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Answer_Time}</p>
+                )}
               </div>
             </div>
             <div className="col-md-6">
@@ -288,7 +294,7 @@ const AddClassification = ({ selectdetails }) => {
                   aria-label="Default select example"
                   onChange={(e) => {
                     const selectedValue = e.target.value;
-                    setNumberOfLine(selectedValue)
+                    setNumberOfLine(selectedValue);
                     setTwoline(selectedValue === "2");
                     setThreeline(selectedValue === "3");
                     setFourline(selectedValue === "4");

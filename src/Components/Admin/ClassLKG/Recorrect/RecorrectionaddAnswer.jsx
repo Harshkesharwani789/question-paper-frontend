@@ -22,7 +22,7 @@ import swal from "sweetalert";
 import parse from "html-react-parser";
 import MathEditor from "../../MyEditor";
 
-const RecorrectionaddAnswer = ({selectdetails}) => {
+const RecorrectionaddAnswer = ({ selectdetails }) => {
   const [show, setShow] = useState();
 
   const navigate = useNavigate();
@@ -34,8 +34,8 @@ const RecorrectionaddAnswer = ({selectdetails}) => {
   // Line
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
-const [orQuestionT, setorQuestionT] = useState("");
-const [orAnswerT, setorAnswerT] = useState("")
+  const [orQuestionT, setorQuestionT] = useState("");
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [twoline, setTwoline] = useState(false);
   const [threeline, setThreeline] = useState(false);
@@ -54,7 +54,7 @@ const [orAnswerT, setorAnswerT] = useState("")
   const [orAnswer, setorAnswer] = useState("");
   const [Marks, setMarks] = useState("");
   const [ImageQ, setImageQ] = useState("");
-  const [orImage_Ans,setorImage_Ans] = useState("");
+  const [orImage_Ans, setorImage_Ans] = useState("");
   const [Image_1, setImage_1] = useState("");
   const [Answer_Time, setAnswer_Time] = useState("");
   const [NumberOfLine, setNumberOfLine] = useState(4);
@@ -65,7 +65,7 @@ const [orAnswerT, setorAnswerT] = useState("")
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -81,18 +81,18 @@ const [orAnswerT, setorAnswerT] = useState("")
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-           Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
           orQuestion: orQuestion,
           orAnswer: orAnswer,
           ImageQ: ImageQ,
-          orImage_Ans:orImage_Ans,
+          orImage_Ans: orImage_Ans,
           Image_1: Image_1,
           NumberOfLine: NumberOfLine,
           Marks: Marks,
@@ -181,15 +181,15 @@ const [orAnswerT, setorAnswerT] = useState("")
                   onChange={handleChange}
                 /> */}
 
-              <MathEditor
-              data = {{
-                A:Question,
-                B:setQuestion,
-                selectedLanguage: selectdetails?.selectedLanguage,
-                trans: QuestionT,
-                settran: setQuestionT,
-              }}             
-              />
+                <MathEditor
+                  data={{
+                    A: Question,
+                    B: setQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: QuestionT,
+                    settran: setQuestionT,
+                  }}
+                />
               </div>
             </div>
 
@@ -826,13 +826,13 @@ const [orAnswerT, setorAnswerT] = useState("")
                   onChange={handleChange1}
                 /> */}
                 <MathEditor
-                 data = {{
-                  A:Answer,
-                  B:setAnswer,
-                  selectedLanguage: selectdetails?.selectedLanguage,
-                  trans: AnswerT,
-                  settran: setAnswerT,
-                }}
+                  data={{
+                    A: Answer,
+                    B: setAnswer,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: AnswerT,
+                    settran: setAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -876,14 +876,14 @@ const [orAnswerT, setorAnswerT] = useState("")
                   data={orQuestion}
                   onChange={handleChange2}
                 /> */}
-                 <MathEditor
-                 data = {{
-                  A:orQuestion,
-                  B:setorQuestion,
-                  selectedLanguage: selectdetails?.selectedLanguage,
-                  trans: orQuestionT,
-                  settran: setorQuestionT,
-                }}
+                <MathEditor
+                  data={{
+                    A: orQuestion,
+                    B: setorQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orQuestionT,
+                    settran: setorQuestionT,
+                  }}
                 />
               </div>
             </div>
@@ -897,14 +897,14 @@ const [orAnswerT, setorAnswerT] = useState("")
                   data={orAnswer}
                   onChange={handleChange3}
                 /> */}
-                 <MathEditor
-                 data = {{
-                  A:orAnswer,
-                  B:setorQuestion,
-                  selectedLanguage: selectdetails?.selectedLanguage,
-                  trans: orAnswerT,
-                  settran: setorAnswerT,
-                }}
+                <MathEditor
+                  data={{
+                    A: orAnswer,
+                    B: setorQuestion,
+                    selectedLanguage: selectdetails?.selectedLanguage,
+                    trans: orAnswerT,
+                    settran: setorAnswerT,
+                  }}
                 />
               </div>
             </div>
@@ -1475,46 +1475,43 @@ const [orAnswerT, setorAnswerT] = useState("")
                         )}
                       </div>
                     </div>
-                   
-                     
                   </div>
                   <div className="col-md-6">
-                  <div className="do-sear mt-2 ">
-                    <label htmlFor="">Image Question</label>
-                    <br />
-                    {ImageQ ? (
-                      <img
-                        className=""
-                        src={ImageQ && URL.createObjectURL(ImageQ)}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                    <div className="do-sear mt-2 ">
+                      <label htmlFor="">Image Question</label>
+                      <br />
+                      {ImageQ ? (
+                        <img
+                          className=""
+                          src={ImageQ && URL.createObjectURL(ImageQ)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </div>
-                   
                   </div>
                   <div className="col-md-6">
-                  <div className="do-sear mt-2 ">
-                    <label htmlFor="">Image Answer</label>
-                    <br />
-                    {orImage_Ans ? (
-                      <img
-                        className=""
-                        src={orImage_Ans  && URL.createObjectURL(orImage_Ans )}
-                        alt="fig."
-                        style={{
-                          width: "30%",
-                          height: "40%",
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                    <div className="do-sear mt-2 ">
+                      <label htmlFor="">Image Answer</label>
+                      <br />
+                      {orImage_Ans ? (
+                        <img
+                          className=""
+                          src={orImage_Ans && URL.createObjectURL(orImage_Ans)}
+                          alt="fig."
+                          style={{
+                            width: "30%",
+                            height: "40%",
+                          }}
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
 
@@ -1574,7 +1571,9 @@ const [orAnswerT, setorAnswerT] = useState("")
                   <div className="col-md-12">
                     <div className="do-sear mt-2">
                       <label htmlFor="">Question Image</label>
-                      <p className="vi_0">{orQuestion ? parse(orQuestion) : ""}</p>
+                      <p className="vi_0">
+                        {orQuestion ? parse(orQuestion) : ""}
+                      </p>
                     </div>
                   </div>
 
@@ -1584,7 +1583,6 @@ const [orAnswerT, setorAnswerT] = useState("")
                       <p className="vi_0">{orAnswer ? parse(orAnswer) : ""}</p>
                     </div>
                   </div>
-                 
                 </div>
               </div>
               {/* </div> */}
@@ -1600,7 +1598,6 @@ const [orAnswerT, setorAnswerT] = useState("")
                   <Button
                     className="mx-2 modal-close-btn"
                     variant=""
-             
                     onClick={handleClose}
                   >
                     Edit

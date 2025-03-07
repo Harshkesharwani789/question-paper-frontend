@@ -22,7 +22,7 @@ const BluePrint = () => {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllBLUEPRINTs/" + user?._id,
+        "http://localhost:8001/api/admin/getAllBLUEPRINTs/" + user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const BluePrint = () => {
   const getallblueprint1 = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getblueprintsbyid"
+        "http://localhost:8001/api/admin/getblueprintsbyid"
       );
 
       if (res.status == 200) {
@@ -63,7 +63,7 @@ const BluePrint = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -233,20 +233,22 @@ const BluePrint = () => {
 
     pdf.save("Blueprint.pdf");
   };
- 
 
-// Function to calculate font size dynamically to fit content within available space
-const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
+  // Function to calculate font size dynamically to fit content within available space
+  const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
     let fontSize = 10; // Initial font size
     const padding = 10; // Padding to avoid content touching the edges
 
     // Loop until content fits within available space
-    while (pdf.getStringUnitWidth(content) * fontSize + padding > maxWidth || fontSize + padding > maxHeight) {
-        fontSize--; // Decrease font size
+    while (
+      pdf.getStringUnitWidth(content) * fontSize + padding > maxWidth ||
+      fontSize + padding > maxHeight
+    ) {
+      fontSize--; // Decrease font size
     }
 
     return fontSize;
-};
+  };
 
   const createPDF1 = async () => {
     // setRotate(360);
@@ -283,7 +285,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
   const GetBluePrintHeaderByMedium = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getblueprintheaderbymedium/" +
+        "http://localhost:8001/api/admin/getblueprintheaderbymedium/" +
           state?.Medium
       );
       if (res.status === 200) {
@@ -299,7 +301,10 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/questiontheadergetbymedium/" + state?.Medium  + "/"+ user?._id,
+        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+          state?.Medium +
+          "/" +
+          user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -319,7 +324,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
     getQuestionHeaderbyMedium();
   }, [state?.Medium]);
 
-  console.log("QuestionHeader",QuestionHeader);
+  console.log("QuestionHeader", QuestionHeader);
   return (
     <div>
       <div className="">
@@ -375,7 +380,7 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     <div className="col-2 col-sm-2 col-md-2 col-lg-2">
                                       {state?.School_Logo ? (
                                         <img
-                                          src={`https://guru-resorce-backend.onrender.com/Teacher/${state?.School_Logo}`}
+                                          src={`http://localhost:8001/Teacher/${state?.School_Logo}`}
                                           alt=""
                                           style={{
                                             width: "80px",
@@ -419,14 +424,23 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                       <b>{state?.Sub_Class}</b>
                                     </div>
                                     <div className="class-data">
-                                      <b>{QuestionHeader?.subject}: {val?.subjects}</b>
+                                      <b>
+                                        {QuestionHeader?.subject}:{" "}
+                                        {val?.subjects}
+                                      </b>
                                     </div>
                                     <div>
                                       <div className="class-data">
-                                        <b>{QuestionHeader?.blueprintBoard}: {val?.board}</b>
+                                        <b>
+                                          {QuestionHeader?.blueprintBoard}:{" "}
+                                          {val?.board}
+                                        </b>
                                       </div>
                                       <div className="class-data">
-                                        <b>{QuestionHeader?.time}: {val?.DurationOfExam}</b>
+                                        <b>
+                                          {QuestionHeader?.time}:{" "}
+                                          {val?.DurationOfExam}
+                                        </b>
                                       </div>
                                     </div>
                                   </div>
@@ -1630,17 +1644,20 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                     }}
                                   >
                                     <thead>
-                                      <tr
-                                      style={{ border: "3px solid #000" }}
-                                      >
-                                        <th style={{ fontSize: "12px" , border: "1px solid #000" }}>
+                                      <tr style={{ border: "3px solid #000" }}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.SNo}</b>
                                         </th>
                                         <th
                                           style={{
                                             fontSize: "12px",
                                             width: "125px",
-                                            border: "1px solid #000" 
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b>{bluePrintHeader?.TargetUnit}</b>
@@ -1650,7 +1667,10 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                             <>
                                               <th
                                                 colSpan={6}
-                                                style={{ fontSize: "12px", border: "1px solid #000"  }}
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
                                               >
                                                 {ele?.Objective}
                                               </th>
@@ -1660,7 +1680,10 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
 
                                         <th
                                           colSpan={6}
-                                          style={{ fontSize: "12px" , border: "1px solid #000" }}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>
                                             {bluePrintHeader?.TotalQuestion}
@@ -1669,37 +1692,48 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
 
                                         <th
                                           colSpan={1}
-                                          style={{ fontSize: "12px",border: "1px solid #000"  }}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.TotalMarks}</b>
                                         </th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr
-                                      style={{ border: "2px solid #000" }}
-                                      >
-                                        <th style={{border: "1px solid #000" }}></th>
-                                        <th style={{border: "1px solid #000" }}></th>
+                                      <tr style={{ border: "2px solid #000" }}>
+                                        <th
+                                          style={{ border: "1px solid #000" }}
+                                        ></th>
+                                        <th
+                                          style={{ border: "1px solid #000" }}
+                                        ></th>
 
                                         <th
                                           style={{
                                             fontSize: "12px",
                                             width: "33px",
-                                            border: "1px solid #000"
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b> {bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px", border: "1px solid #000" }}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b> {bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px", border: "1px solid #000" }}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b> {bluePrintHeader?.D}</b>
                                         </th>
@@ -1707,34 +1741,44 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                           style={{
                                             fontSize: "12px",
                                             width: "33px",
-                                            border: "1px solid #000"
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px", border: "1px solid #000" }}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.D}</b>
                                         </th>
                                         <th
                                           style={{
                                             fontSize: "12px",
-                                            width: "33px", border: "1px solid #000"
+                                            width: "33px",
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
@@ -1747,144 +1791,319 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                         <th
                                           style={{
                                             fontSize: "12px",
-                                            width: "33px", border: "1px solid #000"
+                                            width: "33px",
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b> {bluePrintHeader?.D}</b>
                                         </th>
                                         <th
                                           style={{
                                             fontSize: "12px",
-                                            width: "33px", border: "1px solid #000"
+                                            width: "33px",
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           <b>{bluePrintHeader?.V}</b>
                                         </th>
                                         <th
                                           colSpan={2}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b>{bluePrintHeader?.K}</b>
                                         </th>
                                         <th
                                           colSpan={3}
-                                          style={{ fontSize: "12px", border: "1px solid #000"}}
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
                                         >
                                           <b> {bluePrintHeader?.D}</b>
                                         </th>
                                       </tr>
-                                      <tr  style={{border:'2px solid #000'}}>
+                                      <tr style={{ border: "2px solid #000" }}>
                                         <th></th>
                                         <th
                                           style={{
                                             width: "125px",
-                                            fontSize: "12px", border: "1px solid #000"
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
                                           }}
                                         ></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        ></th>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b> {bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        ></th>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b> {bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        ></th>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        ></th>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b> {bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA3}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}></th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        ></th>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.VSA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.SA}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA1}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA2}</b>
                                         </th>
-                                        <th style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                        <th
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           <b>{bluePrintHeader?.LA3}</b>
                                         </th>
                                       </tr>
                                       {niqueDataName(val?.AllChapter)?.map(
                                         (ele, i) => {
                                           return (
-                                            <tr  style={{border:'2px solid #000'}}>
-                                              <td style={{ fontSize: "12px", border: "1px solid #000"}}>
+                                            <tr
+                                              style={{
+                                                border: "2px solid #000",
+                                              }}
+                                            >
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 <b>{i + 1}</b>
                                               </td>
                                               <td
                                                 style={{
                                                   fontSize: "12px",
-                                                  fontWeight: "bold", border: "1px solid #000"
+                                                  fontWeight: "bold",
+                                                  border: "1px solid #000",
                                                 }}
                                               >
                                                 {ele?.name}
@@ -1894,7 +2113,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   <>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px", border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       <b>
@@ -1938,7 +2159,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       <b>
@@ -1982,7 +2205,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       {
@@ -2021,7 +2246,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       {
@@ -2060,7 +2287,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       {
@@ -2099,7 +2328,9 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                     </td>
                                                     <td
                                                       style={{
-                                                        fontSize: "12px",border: "1px solid #000"
+                                                        fontSize: "12px",
+                                                        border:
+                                                          "1px solid #000",
                                                       }}
                                                     >
                                                       {
@@ -2140,7 +2371,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                 );
                                               })}
 
-                                              <td style={{ fontSize: "12px", border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2149,7 +2385,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2158,7 +2399,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2167,7 +2413,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2176,7 +2427,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px" ,border: "1px solid #000"}}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2185,7 +2441,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   )?.TotalQ
                                                 }
                                               </td>
-                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   bluePrintTotalQues(
                                                     val?.AllChapter,
@@ -2195,7 +2456,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                 }
                                               </td>
 
-                                              <td style={{ fontSize: "12px",border: "1px solid #000" }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {
                                                   QuestionNameWiseMask(
                                                     val?.AllChapter,
@@ -2207,13 +2473,16 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                           );
                                         }
                                       )}
-                                      <tr style={{border:'2px solid #000'}}>
-                                        <td style={{border:'1px solid #000'}}></td>
+                                      <tr style={{ border: "2px solid #000" }}>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
                                         <td
                                           style={{
                                             fontSize: "12px",
                                             width: "46px",
-                                            fontWeight: "bold",border:'1px solid #000'
+                                            fontWeight: "bold",
+                                            border: "1px solid #000",
                                           }}
                                         >
                                           {bluePrintHeader?.Total}
@@ -2221,7 +2490,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                         {val?.objectives?.map((ele) => {
                                           return (
                                             <>
-                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2266,7 +2540,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   ""
                                                 )}
                                               </td>
-                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2311,7 +2590,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   ""
                                                 )}
                                               </td>
-                                              <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2356,7 +2640,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   ""
                                                 )}
                                               </td>
-                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2401,7 +2690,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   ""
                                                 )}
                                               </td>
-                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2446,7 +2740,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                                   ""
                                                 )}
                                               </td>
-                                              <td style={{ fontSize: "12px", border:'1px solid #000' }}>
+                                              <td
+                                                style={{
+                                                  fontSize: "12px",
+                                                  border: "1px solid #000",
+                                                }}
+                                              >
                                                 {val?.AllChapter?.some(
                                                   (item) =>
                                                     item?.Blueprintobjective ==
@@ -2495,12 +2794,27 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                           );
                                         })}
 
-                                        <td style={{border:'1px solid #000'}}></td>
-                                        <td style={{border:'1px solid #000'}}></td>
-                                        <td style={{border:'1px solid #000'}}></td>
-                                        <td style={{border:'1px solid #000'}}></td>
-                                        <td style={{border:'1px solid #000'}}></td>
-                                        <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
+                                        <td
+                                          style={{ border: "1px solid #000" }}
+                                        ></td>
+                                        <td
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           {val?.AllChapter?.reduce(
                                             (a, ele) =>
                                               a +
@@ -2510,7 +2824,12 @@ const calculateFontSizeToFitContent = (pdf, content, maxWidth, maxHeight) => {
                                             0
                                           )}
                                         </td>
-                                        <td style={{ fontSize: "12px" , border:'1px solid #000'}}>
+                                        <td
+                                          style={{
+                                            fontSize: "12px",
+                                            border: "1px solid #000",
+                                          }}
+                                        >
                                           {val?.AllChapter?.reduce(
                                             (a, ele) =>
                                               a +

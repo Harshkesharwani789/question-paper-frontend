@@ -104,7 +104,7 @@ const Mcq_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ const Mcq_add = ({ selectdetails }) => {
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
-          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+          Types_QuestionTranslate: selectdetails?.Types_QuestionTranslate,
 
           Question: Question,
           Option_1: Option_1,

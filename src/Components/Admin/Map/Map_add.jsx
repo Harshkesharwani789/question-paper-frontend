@@ -61,7 +61,7 @@ const Map_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -77,11 +77,11 @@ const Map_add = ({ selectdetails }) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -821,18 +821,18 @@ const Map_add = ({ selectdetails }) => {
                     data={Answer}
                     onChange={handleChange7}
                   /> */}
-                   <MathEditor
-                  data={{
-                    A: Answer,
-                    B: setAnswer,
-                    selectedLanguage: selectdetails?.selectedLanguage,
-                    trans: AnswerT,
-                    settran: setAnswerT,
-                  }}
-                />
+                  <MathEditor
+                    data={{
+                      A: Answer,
+                      B: setAnswer,
+                      selectedLanguage: selectdetails?.selectedLanguage,
+                      trans: AnswerT,
+                      settran: setAnswerT,
+                    }}
+                  />
                 </div>
               </div>
-            </div>            
+            </div>
           </div>
         </div>
 
@@ -908,8 +908,6 @@ const Map_add = ({ selectdetails }) => {
               ) : (
                 <></>
               )}
-
-
 
               <div className="col-12">
                 {twoline ? (
@@ -1401,10 +1399,7 @@ const Map_add = ({ selectdetails }) => {
           >
             Submit
           </Button>
-          <Button
-            variant="danger"
-            onClick={() => navigate("/adminquestions")}
-          >
+          <Button variant="danger" onClick={() => navigate("/adminquestions")}>
             Delete
           </Button>
         </Modal.Footer>

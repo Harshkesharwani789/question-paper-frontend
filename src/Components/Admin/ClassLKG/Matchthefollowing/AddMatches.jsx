@@ -131,7 +131,7 @@ const AddMatches = ({ selectdetails }) => {
     try {
       let config = {
         url: "/admin/AddQuestionPaper",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "post",
         headers: {
           "content-type": "multipart/form-data",
@@ -148,11 +148,11 @@ const AddMatches = ({ selectdetails }) => {
           Section: selectdetails?.Section,
           Sub_Class: selectdetails?.Sub_Class,
           Subject: selectdetails?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
-          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+          Types_QuestionTranslate: selectdetails?.Types_QuestionTranslate,
 
           Part_A1: Part_A1,
           Part_A2: Part_A2,
@@ -288,7 +288,6 @@ const AddMatches = ({ selectdetails }) => {
                         type="text"
                         className="vi_0 mb-2"
                         placeholder="Enter Your Question"
-                     
                         onChange={(e) =>
                           selectdetails?.selectedLanguage == "en-t-i0-und"
                             ? setPart_A3(e.target.value)
@@ -888,7 +887,11 @@ const AddMatches = ({ selectdetails }) => {
                 <label htmlFor=""> Answer Timing</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setAnswer_Time(e.target.value):onChangeHandler(e.target.value,setAnswer_Time)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setAnswer_Time(e.target.value)
+                      : onChangeHandler(e.target.value, setAnswer_Time)
+                  }
                 >
                   <option>Select the Time</option>
                   <option value="1/2 minutes">1/2 minutes</option>
@@ -905,7 +908,11 @@ const AddMatches = ({ selectdetails }) => {
                   <option value="9 minutes">9 minutes</option>
                   <option value="10 minutes">10 minutes</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Answer_Time}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Answer_Time}</p>
+                )}
               </div>
             </div>
             <div className="col-md-6">
@@ -913,7 +920,11 @@ const AddMatches = ({ selectdetails }) => {
                 <label htmlFor=""> Marks</label>
                 <Form.Select
                   aria-label="Default select example"
-                  onChange={(e) =>selectdetails?.selectedLanguage == "en-t-i0-und" ? setMarks(e.target.value):onChangeHandler(e.target.value,setMarks)}
+                  onChange={(e) =>
+                    selectdetails?.selectedLanguage == "en-t-i0-und"
+                      ? setMarks(e.target.value)
+                      : onChangeHandler(e.target.value, setMarks)
+                  }
                 >
                   <option>Select the Marks</option>
                   <option>1/2</option>
@@ -929,7 +940,11 @@ const AddMatches = ({ selectdetails }) => {
                   <option>8</option>
                   <option>10</option>
                 </Form.Select>
-                {selectdetails?.selectedLanguage == "en-t-i0-und" ? <></> : <p>{Marks}</p>}
+                {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                  <></>
+                ) : (
+                  <p>{Marks}</p>
+                )}
               </div>
             </div>
           </div>
@@ -957,24 +972,22 @@ const AddMatches = ({ selectdetails }) => {
               <Modal.Title style={{ color: "white" }}>Preview </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-             
-            
-                    <div className="col-md-6">
-                      <div className="do-sear mt-2">
-                        <label>Image</label>
-                        <br />
-                        <img
-                          className=""
-                          src={ImageQ && URL.createObjectURL(ImageQ)}
-                          alt="fig."
-                          style={{
-                            width: "30%",
-                            height: "40%",
-                          }}
-                        />
-                      </div>
-                    </div>
-              
+              <div className="col-md-6">
+                <div className="do-sear mt-2">
+                  <label>Image</label>
+                  <br />
+                  <img
+                    className=""
+                    src={ImageQ && URL.createObjectURL(ImageQ)}
+                    alt="fig."
+                    style={{
+                      width: "30%",
+                      height: "40%",
+                    }}
+                  />
+                </div>
+              </div>
+
               <div className="col-12">
                 <label htmlFor=""> Questions</label>
                 <Table

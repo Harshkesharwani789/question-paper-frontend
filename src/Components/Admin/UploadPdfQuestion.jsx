@@ -30,7 +30,6 @@ const UploadPdfQuestion = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-
   // Language Translater
   let googleTransliterate = require("google-input-tool");
   const [translatedValue, setTranslatedValue] = useState("");
@@ -83,7 +82,7 @@ const UploadPdfQuestion = () => {
       const config = {
         url: "/admin/",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -98,7 +97,6 @@ const UploadPdfQuestion = () => {
 
           Title: Title,
 
-
           id: updatechapter,
         },
       };
@@ -106,7 +104,7 @@ const UploadPdfQuestion = () => {
       if (res.status === 200)
         if (res.status === 200) {
           handleClose1();
-          getallquestionPdf()
+          getallquestionPdf();
           return swal({
             title: "Yeah!",
             text: res.data.success,
@@ -130,7 +128,7 @@ const UploadPdfQuestion = () => {
   const deletesQuestionAns = async () => {
     try {
       let res = await axios.delete(
-        `https://guru-resorce-backend.onrender.com/api/admin/deleteuploadquestion/${Uploadd?._id}/${admin?._id}`,
+        `http://localhost:8001/api/admin/deleteuploadquestion/${Uploadd?._id}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -138,9 +136,8 @@ const UploadPdfQuestion = () => {
           },
         }
       );
-      if (res.status === 200)
-      getallquestionPdf()
-      handleClose2()
+      if (res.status === 200) getallquestionPdf();
+      handleClose2();
     } catch (error) {
       console.log("Error fetching medium:", error);
     }
@@ -150,7 +147,7 @@ const UploadPdfQuestion = () => {
   const getallquestionPdf = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllpdf/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllpdf/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status === 200) {
@@ -165,7 +162,7 @@ const UploadPdfQuestion = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -179,7 +176,7 @@ const UploadPdfQuestion = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status === 200) {
         setsubject(res.data.success);
@@ -194,7 +191,7 @@ const UploadPdfQuestion = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status === 200) {
         setgetaddsubclass(res.data.success);
@@ -210,14 +207,14 @@ const UploadPdfQuestion = () => {
   const uniqueClassNamesArray = Array.from(uniqueClassNamesSet);
 
   //Post
-  const [Title, setTitle] = useState("")
+  const [Title, setTitle] = useState("");
   const [year, setyear] = useState("");
   const [classs, setclasss] = useState("");
   const [subclass, setsubclass] = useState("");
   const [subjectt, setsubjectt] = useState("");
   const [medium, setmedium] = useState("");
   const [Questionpdf, setQuestionpdf] = useState("");
-  const [Answerpdf, setAnswerpdf] = useState("")
+  const [Answerpdf, setAnswerpdf] = useState("");
   const UploadQuestionAnswer = async () => {
     if (!Title) {
       alert("Please Enter the title");
@@ -241,7 +238,7 @@ const UploadPdfQuestion = () => {
 
       const config = {
         method: "post",
-        url: "https://guru-resorce-backend.onrender.com/api/admin/addUploadQuestions",
+        url: "http://localhost:8001/api/admin/addUploadQuestions",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -272,7 +269,6 @@ const UploadPdfQuestion = () => {
     }
   };
 
-
   console.log("QuestionAnsPdf", QuestionAnsPdf);
 
   useEffect(() => {
@@ -283,27 +279,27 @@ const UploadPdfQuestion = () => {
   }, []);
 
   const handleClick = (pdfFileName) => {
-    window.open(`https://guru-resorce-backend.onrender.com/QuestionPdf/${pdfFileName}`, '_blank');
+    window.open(`http://localhost:8001/QuestionPdf/${pdfFileName}`, "_blank");
   };
   return (
     <div>
       <div className=" d-flex justify-content-between">
         <div>
-        <div className=" d-flex justify-content-center">
-          <div class="input-group ">
-            <span class="input-group-text" id="basic-addon1">
-              <BsSearch />
-            </span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search..."
-              aria-describedby="basic-addon1"
-            />
+          <div className=" d-flex justify-content-center">
+            <div class="input-group ">
+              <span class="input-group-text" id="basic-addon1">
+                <BsSearch />
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                aria-describedby="basic-addon1"
+              />
+            </div>
           </div>
         </div>
-        </div>
-       
+
         <div className="col-md-2">
           <label htmlFor="">Select Langauge</label>
           <select
@@ -328,8 +324,10 @@ const UploadPdfQuestion = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Upload Question Paper</h2>
-         
-          <Link onClick={handleShow}><Button2 text={"Add"}  /></Link>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -339,16 +337,35 @@ const UploadPdfQuestion = () => {
             style={{ width: "-webkit-fill-available" }}
           >
             <thead>
-              <tr style={{textAlign:"center"}}>
+              <tr style={{ textAlign: "center" }}>
                 <th>S.No</th>
-                <th><div>Title</div></th>
-                <th><div>Year</div></th>
-                <th> <div>Class</div></th>
-                <th><div>Sub-Class</div></th>
-                <th><div>Medium</div></th>
-                <th><div>Subject</div></th>
-                <th> <div>Question View</div></th>
-                <th> <div>Answer View</div></th>
+                <th>
+                  <div>Title</div>
+                </th>
+                <th>
+                  <div>Year</div>
+                </th>
+                <th>
+                  {" "}
+                  <div>Class</div>
+                </th>
+                <th>
+                  <div>Sub-Class</div>
+                </th>
+                <th>
+                  <div>Medium</div>
+                </th>
+                <th>
+                  <div>Subject</div>
+                </th>
+                <th>
+                  {" "}
+                  <div>Question View</div>
+                </th>
+                <th>
+                  {" "}
+                  <div>Answer View</div>
+                </th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -356,7 +373,7 @@ const UploadPdfQuestion = () => {
             <tbody>
               {QuestionAnsPdf?.map((item, i) => {
                 return (
-                  <tr key={i} style={{textAlign:"center"}}>
+                  <tr key={i} style={{ textAlign: "center" }}>
                     <td>{i + 1}</td>
                     <td>{item?.Title}</td>
                     <td>{item?.year}</td>
@@ -365,42 +382,48 @@ const UploadPdfQuestion = () => {
                     <td>{item?.medium}</td>
                     <td>{item?.subject}</td>
                     <td>
-
                       <div>
                         <FaEye
                           target="_blank"
                           color="blue"
                           onClick={() => handleClick(item?.questionPdf)}
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: "pointer" }}
                         />
                         <a
-                          href={`https://guru-resorce-backend.onrender.com/QuestionPdf/${item?.questionPdf}`}
+                          href={`http://localhost:8001/QuestionPdf/${item?.questionPdf}`}
                           target="_blank"
-                          style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
+                          style={{
+                            marginLeft: "5px",
+                            textDecoration: "none",
+                            color: "blue",
+                            cursor: "pointer",
+                          }}
                         >
                           View PDF
                         </a>
                       </div>
-
                     </td>
                     <td>
-
                       <div>
                         <FaEye
                           target="_blank"
                           color="blue"
                           onClick={() => handleClick(item?.answerPdf)}
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: "pointer" }}
                         />
                         <a
-                          href={`https://guru-resorce-backend.onrender.com/QuestionPdf/${item?.answerPdf}`}
+                          href={`http://localhost:8001/QuestionPdf/${item?.answerPdf}`}
                           target="_blank"
-                          style={{ marginLeft: '5px', textDecoration: 'none', color: 'blue', cursor: 'pointer' }}
+                          style={{
+                            marginLeft: "5px",
+                            textDecoration: "none",
+                            color: "blue",
+                            cursor: "pointer",
+                          }}
                         >
                           View PDF
                         </a>
                       </div>
-
                     </td>
                     <td>
                       {" "}
@@ -412,7 +435,6 @@ const UploadPdfQuestion = () => {
                             onClick={() => {
                               handleShow1(item);
                               setpdatesetchapter(item?._id);
-
                             }}
                           />{" "}
                         </div>
@@ -435,7 +457,6 @@ const UploadPdfQuestion = () => {
           </Table>
         </div>
 
-
         {/* Add Package modal */}
         <Modal
           show={show}
@@ -444,7 +465,9 @@ const UploadPdfQuestion = () => {
           size="lg"
         >
           <Modal.Header closeButton style={{ backgroundColor: "#26AAE0" }}>
-            <Modal.Title style={{ color: "white" }}>Upload Question Paper and Answer</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Upload Question Paper and Answer
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -468,7 +491,6 @@ const UploadPdfQuestion = () => {
                 <div className="do-sear mt-2">
                   <label>Year</label>
                   <input
-
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- 2023-2024"
@@ -476,7 +498,6 @@ const UploadPdfQuestion = () => {
                       if (selectedLanguage == "en-t-i0-und") {
                         setyear(e.target.value);
                       } else onChangeHandler(e.target.value, setyear);
-
                     }}
                   />
                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
@@ -599,7 +620,6 @@ const UploadPdfQuestion = () => {
                 </div>
               </div>
             </div>
-
           </Modal.Body>
           <Modal.Footer>
             <div className="d-flex">
@@ -621,8 +641,6 @@ const UploadPdfQuestion = () => {
           </Modal.Footer>
         </Modal>
 
-
-
         {/* Edit Package modal */}
         <Modal
           show={show1}
@@ -636,10 +654,12 @@ const UploadPdfQuestion = () => {
             closeButton
             style={{ backgroundColor: "rgb(40 167 223)" }}
           >
-            <Modal.Title style={{ color: "white" }}>Edit Question Upload</Modal.Title>
+            <Modal.Title style={{ color: "white" }}>
+              Edit Question Upload
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <div className="row">
+            <div className="row">
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>Question Title</label>
@@ -660,7 +680,6 @@ const UploadPdfQuestion = () => {
                 <div className="do-sear mt-2">
                   <label>Year</label>
                   <input
-
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- 2023-2024"
@@ -668,7 +687,6 @@ const UploadPdfQuestion = () => {
                       if (selectedLanguage == "en-t-i0-und") {
                         setyear(e.target.value);
                       } else onChangeHandler(e.target.value, setyear);
-
                     }}
                   />
                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{year}</p>}
@@ -791,7 +809,6 @@ const UploadPdfQuestion = () => {
                 </div>
               </div>
             </div>
-
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -840,7 +857,11 @@ const UploadPdfQuestion = () => {
             >
               Close
             </Button>
-            <Button variant="" className="modal-add-btn" onClick={deletesQuestionAns}>
+            <Button
+              variant=""
+              className="modal-add-btn"
+              onClick={deletesQuestionAns}
+            >
               Delete
             </Button>
           </Modal.Footer>

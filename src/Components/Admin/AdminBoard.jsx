@@ -11,7 +11,6 @@ import { debounce } from "lodash";
 import Button2 from "../Button2";
 import { Link } from "react-router-dom";
 const AdminBoard = () => {
-
   const ThemeContext = React.createContext();
   const [show, setShow] = useState();
   const [show1, setShow1] = useState();
@@ -24,7 +23,6 @@ const AdminBoard = () => {
   const handleShow1 = () => setShow1(true);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-
 
   //   DateRange Filter
   const [data, setData] = useState([]);
@@ -50,7 +48,7 @@ const AdminBoard = () => {
   let googleTransliterate = require("google-input-tool");
   const [translatedValue, setTranslatedValue] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
-  
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
@@ -98,12 +96,12 @@ const AdminBoard = () => {
   const AddBoradname = async () => {
     try {
       if (!mediumName)
-      return swal({
-        title: "Opps!",
-        text: "Please Enter boardName ",
-        icon: "error",
-        button: "Try Again!",
-      });
+        return swal({
+          title: "Opps!",
+          text: "Please Enter boardName ",
+          icon: "error",
+          button: "Try Again!",
+        });
       if (!boardName)
         return swal({
           title: "Opps!",
@@ -114,13 +112,13 @@ const AdminBoard = () => {
       const config = {
         url: "/admin/addBoard",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           boardName: boardName,
           authId: admin?._id,
         },
@@ -152,7 +150,7 @@ const AdminBoard = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -165,7 +163,7 @@ const AdminBoard = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllBoard");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -180,13 +178,13 @@ const AdminBoard = () => {
       const config = {
         url: "/admin/updateBoard",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         data: {
-          mediumName:mediumName,
+          mediumName: mediumName,
           boardName: boardName,
           authId: admin?._id,
           id: updateboardname?._id,
@@ -219,7 +217,7 @@ const AdminBoard = () => {
     try {
       const config = {
         url: "/admin/deleteBoard/" + deleteA + "/" + admin?._id,
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         method: "delete",
         headers: {
           "content-type": "application/json",
@@ -237,7 +235,7 @@ const AdminBoard = () => {
           button: "OK!",
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
   useEffect(() => {
     getallboardname();
@@ -288,8 +286,6 @@ const AdminBoard = () => {
 
   return (
     <>
-
-
       {/* <div className="col-lg-4 d-flex justify-content-center">
         <div class="input-group ">
           <span class="input-group-text" id="basic-addon1">
@@ -328,8 +324,10 @@ const AdminBoard = () => {
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Board</h2>
-          
-          <Link onClick={handleShow}><Button2 text={"Add Board"} /></Link>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Board"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -352,7 +350,7 @@ const AdminBoard = () => {
             <tbody>
               {records?.map((val, i) => {
                 return (
-                  <tr key={i} style={{textAlign:"center"}}>
+                  <tr key={i} style={{ textAlign: "center" }}>
                     <td>{i + 1 + firstIndex} </td>
                     <td>{val?.mediumName}</td>
                     <td>
@@ -361,7 +359,13 @@ const AdminBoard = () => {
 
                     <td>
                       {" "}
-                      <div style={{ display: "flex", gap: "20px", justifyContent:"space-around" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "20px",
+                          justifyContent: "space-around",
+                        }}
+                      >
                         <div>
                           <BiSolidEdit
                             className="text-success"
@@ -446,9 +450,14 @@ const AdminBoard = () => {
 
               <li className="not-allow">
                 <span>
-                  <li className="next-prev" onClick={() => {
-                    nextpage();
-                  }}>&gt; </li>
+                  <li
+                    className="next-prev"
+                    onClick={() => {
+                      nextpage();
+                    }}
+                  >
+                    &gt;{" "}
+                  </li>
                 </span>
               </li>
             </ul>
@@ -460,16 +469,21 @@ const AdminBoard = () => {
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>Add Board</Modal.Title>
           </Modal.Header>
-          <Modal.Body>        
+          <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
                 {/* <input
@@ -493,12 +507,12 @@ const AdminBoard = () => {
                   placeholder="Enter Board"
                   className="vi_0"
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
+                    if (selectedLanguage == "en-t-i0-und") {
                       setboardName(e.target.value);
-                    }else onChangeHandler(e.target.value, setboardName);                    
+                    } else onChangeHandler(e.target.value, setboardName);
                   }}
                 />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
               </div>
             </div>
           </Modal.Body>
@@ -537,14 +551,19 @@ const AdminBoard = () => {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-            <div className="do-sear mt-2">
+              <div className="do-sear mt-2">
                 <label>Medium</label>
-                <select className="vi_0" onChange={(e)=>setmediumName(e.target.value)}>
+                <select
+                  className="vi_0"
+                  onChange={(e) => setmediumName(e.target.value)}
+                >
                   <option value="">--Select medium--</option>
-                  {Medium?.map((item)=>{
-                    return(
-                      <option value={item?.mediumName}>{item?.mediumName}</option>
-                    )
+                  {Medium?.map((item) => {
+                    return (
+                      <option value={item?.mediumName}>
+                        {item?.mediumName}
+                      </option>
+                    );
                   })}
                 </select>
                 {/* <input
@@ -567,14 +586,13 @@ const AdminBoard = () => {
                   type="text"
                   placeholder={updateboardname?.boardName}
                   className="vi_0"
-                
                   onChange={(e) => {
-                    if(selectedLanguage == "en-t-i0-und"){
+                    if (selectedLanguage == "en-t-i0-und") {
                       setboardName(e.target.value);
-                    }else onChangeHandler(e.target.value , setboardName)                    
+                    } else onChangeHandler(e.target.value, setboardName);
                   }}
                 />
-                 {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
+                {selectedLanguage == "en-t-i0-und" ? <></> : <p>{boardName}</p>}
               </div>
             </div>
           </Modal.Body>

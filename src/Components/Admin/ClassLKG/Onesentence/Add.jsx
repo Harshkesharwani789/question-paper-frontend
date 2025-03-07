@@ -22,7 +22,7 @@ import "../../../Admin/Admin.css";
 import parse from "html-react-parser";
 import MathEditor from "../../MyEditor";
 
-const Add = ({selectdetails}) => {
+const Add = ({ selectdetails }) => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
   const questiondata = JSON.parse(sessionStorage.getItem("selectdetails"));
@@ -54,7 +54,7 @@ const Add = ({selectdetails}) => {
   const [QuestionT, setQuestionT] = useState("");
   const [AnswerT, setAnswerT] = useState("");
   const [orQuestionT, setorQuestionT] = useState("");
-  const [orAnswerT, setorAnswerT] = useState("")
+  const [orAnswerT, setorAnswerT] = useState("");
 
   const [Question, setQuestion] = useState("");
   const [Answer, setAnswer] = useState("");
@@ -70,7 +70,7 @@ const Add = ({selectdetails}) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -86,11 +86,11 @@ const Add = ({selectdetails}) => {
           Section: questiondata?.Section,
           Sub_Class: questiondata?.Sub_Class,
           Subject: questiondata?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: questiondata?.Types_Question,
           Class: questiondata?.Class,
           Instruction: questiondata?.Instruction,
-          Types_QuestionTranslate:questiondata?.Types_QuestionTranslate,
+          Types_QuestionTranslate: questiondata?.Types_QuestionTranslate,
 
           Question: Question,
           Answer: Answer,
@@ -153,7 +153,7 @@ const Add = ({selectdetails}) => {
                   data={Question}
                   onChange={handleChange}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: Question,
                     B: setQuestion,
@@ -173,7 +173,7 @@ const Add = ({selectdetails}) => {
                   data={Answer}
                   onChange={handleChange1}
                 /> */}
-                   <MathEditor
+                <MathEditor
                   data={{
                     A: Answer,
                     B: setAnswer,
@@ -900,7 +900,7 @@ const Add = ({selectdetails}) => {
                   data={orQuestion}
                   onChange={handleChange2}
                 /> */}
-                 <MathEditor
+                <MathEditor
                   data={{
                     A: orQuestion,
                     B: setorQuestion,
@@ -921,7 +921,7 @@ const Add = ({selectdetails}) => {
                   data={orAnswer}
                   onChange={handleChange3}
                 /> */}
-                  <MathEditor
+                <MathEditor
                   data={{
                     A: orAnswer,
                     B: setorAnswer,
@@ -1034,29 +1034,17 @@ const Add = ({selectdetails}) => {
                 </div>
               </div>
               <div className="col-12">
-                {oneline?(<>
-                  <div className="col-md-12">
-                      <div className="do-sear mt-5">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                </>):(<>
-                  {twoline ? (
+                {oneline ? (
                   <>
                     <div className="col-md-12">
-                      <div className="do-sear mt-4">
-                        <p type="text" className="lined-input"></p>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="do-sear mt-2">
+                      <div className="do-sear mt-5">
                         <p type="text" className="lined-input"></p>
                       </div>
                     </div>
                   </>
                 ) : (
                   <>
-                    {threeline ? (
+                    {twoline ? (
                       <>
                         <div className="col-md-12">
                           <div className="do-sear mt-4">
@@ -1068,15 +1056,10 @@ const Add = ({selectdetails}) => {
                             <p type="text" className="lined-input"></p>
                           </div>
                         </div>
-                        <div className="col-md-12">
-                          <div className="do-sear mt-2">
-                            <p type="text" className="lined-input"></p>
-                          </div>
-                        </div>
                       </>
                     ) : (
                       <>
-                        {fourline ? (
+                        {threeline ? (
                           <>
                             <div className="col-md-12">
                               <div className="do-sear mt-4">
@@ -1093,15 +1076,10 @@ const Add = ({selectdetails}) => {
                                 <p type="text" className="lined-input"></p>
                               </div>
                             </div>
-                            <div className="col-md-12">
-                              <div className="do-sear mt-2">
-                                <p type="text" className="lined-input"></p>
-                              </div>
-                            </div>
                           </>
                         ) : (
                           <>
-                            {fiveline ? (
+                            {fourline ? (
                               <>
                                 <div className="col-md-12">
                                   <div className="do-sear mt-4">
@@ -1123,15 +1101,10 @@ const Add = ({selectdetails}) => {
                                     <p type="text" className="lined-input"></p>
                                   </div>
                                 </div>
-                                <div className="col-md-12">
-                                  <div className="do-sear mt-2">
-                                    <p type="text" className="lined-input"></p>
-                                  </div>
-                                </div>
                               </>
                             ) : (
                               <>
-                                {sixline ? (
+                                {fiveline ? (
                                   <>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-4">
@@ -1140,7 +1113,7 @@ const Add = ({selectdetails}) => {
                                           className="lined-input"
                                         ></p>
                                       </div>
-                                    </div>{" "}
+                                    </div>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-2">
                                         <p
@@ -1148,7 +1121,7 @@ const Add = ({selectdetails}) => {
                                           className="lined-input"
                                         ></p>
                                       </div>
-                                    </div>{" "}
+                                    </div>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-2">
                                         <p
@@ -1156,7 +1129,7 @@ const Add = ({selectdetails}) => {
                                           className="lined-input"
                                         ></p>
                                       </div>
-                                    </div>{" "}
+                                    </div>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-2">
                                         <p
@@ -1164,15 +1137,7 @@ const Add = ({selectdetails}) => {
                                           className="lined-input"
                                         ></p>
                                       </div>
-                                    </div>{" "}
-                                    <div className="col-md-12">
-                                      <div className="do-sear mt-2">
-                                        <p
-                                          type="text"
-                                          className="lined-input"
-                                        ></p>
-                                      </div>
-                                    </div>{" "}
+                                    </div>
                                     <div className="col-md-12">
                                       <div className="do-sear mt-2">
                                         <p
@@ -1184,18 +1149,10 @@ const Add = ({selectdetails}) => {
                                   </>
                                 ) : (
                                   <>
-                                    {sevenline ? (
+                                    {sixline ? (
                                       <>
                                         <div className="col-md-12">
                                           <div className="do-sear mt-4">
-                                            <p
-                                              type="text"
-                                              className="lined-input"
-                                            ></p>
-                                          </div>
-                                        </div>{" "}
-                                        <div className="col-md-12">
-                                          <div className="do-sear mt-2">
                                             <p
                                               type="text"
                                               className="lined-input"
@@ -1245,18 +1202,10 @@ const Add = ({selectdetails}) => {
                                       </>
                                     ) : (
                                       <>
-                                        {eightline ? (
+                                        {sevenline ? (
                                           <>
                                             <div className="col-md-12">
                                               <div className="do-sear mt-4">
-                                                <p
-                                                  type="text"
-                                                  className="lined-input"
-                                                ></p>
-                                              </div>
-                                            </div>{" "}
-                                            <div className="col-md-12">
-                                              <div className="do-sear mt-2">
                                                 <p
                                                   type="text"
                                                   className="lined-input"
@@ -1314,18 +1263,10 @@ const Add = ({selectdetails}) => {
                                           </>
                                         ) : (
                                           <>
-                                            {nineline ? (
+                                            {eightline ? (
                                               <>
                                                 <div className="col-md-12">
                                                   <div className="do-sear mt-4">
-                                                    <p
-                                                      type="text"
-                                                      className="lined-input"
-                                                    ></p>
-                                                  </div>
-                                                </div>{" "}
-                                                <div className="col-md-12">
-                                                  <div className="do-sear mt-2">
                                                     <p
                                                       type="text"
                                                       className="lined-input"
@@ -1391,7 +1332,7 @@ const Add = ({selectdetails}) => {
                                               </>
                                             ) : (
                                               <>
-                                                {tenline ? (
+                                                {nineline ? (
                                                   <>
                                                     <div className="col-md-12">
                                                       <div className="do-sear mt-4">
@@ -1464,18 +1405,97 @@ const Add = ({selectdetails}) => {
                                                           className="lined-input"
                                                         ></p>
                                                       </div>
-                                                    </div>{" "}
-                                                    <div className="col-md-12">
-                                                      <div className="do-sear mt-2">
-                                                        <p
-                                                          type="text"
-                                                          className="lined-input"
-                                                        ></p>
-                                                      </div>
                                                     </div>
                                                   </>
                                                 ) : (
-                                                  <></>
+                                                  <>
+                                                    {tenline ? (
+                                                      <>
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-4">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>{" "}
+                                                        <div className="col-md-12">
+                                                          <div className="do-sear mt-2">
+                                                            <p
+                                                              type="text"
+                                                              className="lined-input"
+                                                            ></p>
+                                                          </div>
+                                                        </div>
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </>
                                                 )}
                                               </>
                                             )}
@@ -1493,15 +1513,13 @@ const Add = ({selectdetails}) => {
                     )}
                   </>
                 )}
-                </>)}
-               
               </div>
               <div>
                 <h6 style={{ padding: "20px 0 0 0", textAlign: "center" }}>
                   <b>(OR)</b>
                 </h6>
               </div>
-             
+
               {Image_1 ? (
                 <div className="col-md-6">
                   <div className="do-sear mt-2">

@@ -84,7 +84,7 @@ const Fillintheblanks_add = ({ selectdetails }) => {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -100,11 +100,11 @@ const Fillintheblanks_add = ({ selectdetails }) => {
           Section: selectdetails?.Section,
           Sub_Class: selectdetails?.Sub_Class,
           Subject: selectdetails?.Subjects,
-          Questiontype:selectdetails?.QuestionTYpe,
+          Questiontype: selectdetails?.QuestionTYpe,
           Types_Question: selectdetails?.Types_Question,
           Class: selectdetails?.Class,
           Instruction: selectdetails?.Instruction,
-          Types_QuestionTranslate:selectdetails?.Types_QuestionTranslate,
+          Types_QuestionTranslate: selectdetails?.Types_QuestionTranslate,
 
           input1: input1,
           input2: input2,
@@ -162,43 +162,41 @@ const Fillintheblanks_add = ({ selectdetails }) => {
               <>
                 <div className="col-md-9 d-flex align-items-end ">
                   <div>
-                  <input
-                    className="vi_0"
-                    type="text"
-                    placeholder="enter text"
-                  
-                    onChange={(e) =>
-                      selectdetails?.selectedLanguage == "en-t-i0-und"
-                        ? setinput1(e.target.value)
-                        : onChangeHandler(e.target.value, setinput1)
-                    }
-                  />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
-                    <></>
-                  ) : (
-                    <p>{input1}</p>
-                  )}
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setinput1(e.target.value)
+                          : onChangeHandler(e.target.value, setinput1)
+                      }
+                    />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{input1}</p>
+                    )}
                   </div>
-                 
+
                   <span>___________</span>
 
                   <div>
-                  <input
-                    className="vi_0"
-                    type="text"
-                    placeholder="enter text"
-                 
-                    onChange={(e) =>
-                      selectdetails?.selectedLanguage == "en-t-i0-und"
-                        ? setinput2(e.target.value)
-                        : onChangeHandler(e.target.value, setinput2)
-                    }
-                  />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
-                    <></>
-                  ) : (
-                    <p>{input2}</p>
-                  )}
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setinput2(e.target.value)
+                          : onChangeHandler(e.target.value, setinput2)
+                      }
+                    />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{input2}</p>
+                    )}
                   </div>
                 </div>
               </>
@@ -208,63 +206,60 @@ const Fillintheblanks_add = ({ selectdetails }) => {
             {Dash === "2" ? (
               <>
                 <div className="col-md-9 d-flex align-items-end ">
-                <div>
-                  <input
-                    className="vi_0"
-                    type="text"
-                    placeholder="enter text"
-                  
-                    onChange={(e) =>
-                      selectdetails?.selectedLanguage == "en-t-i0-und"
-                        ? setinput1(e.target.value)
-                        : onChangeHandler(e.target.value, setinput1)
-                    }
-                  />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
-                    <></>
-                  ) : (
-                    <p>{input1}</p>
-                  )}
+                  <div>
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setinput1(e.target.value)
+                          : onChangeHandler(e.target.value, setinput1)
+                      }
+                    />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{input1}</p>
+                    )}
                   </div>
 
                   <span>___________</span>
 
                   <div>
-                  <input
-                    className="vi_0"
-                    type="text"
-                    placeholder="enter text"
-                 
-                    onChange={(e) =>
-                      selectdetails?.selectedLanguage == "en-t-i0-und"
-                        ? setinput2(e.target.value)
-                        : onChangeHandler(e.target.value, setinput2)
-                    }
-                  />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
-                    <></>
-                  ) : (
-                    <p>{input2}</p>
-                  )}
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setinput2(e.target.value)
+                          : onChangeHandler(e.target.value, setinput2)
+                      }
+                    />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{input2}</p>
+                    )}
                   </div>
                   <span>___________</span>
                   <div>
-                  <input
-                    className="vi_0"
-                    type="text"
-                    placeholder="enter text"
-                 
-                    onChange={(e) =>
-                      selectdetails?.selectedLanguage == "en-t-i0-und"
-                        ? setinput3(e.target.value)
-                        : onChangeHandler(e.target.value, setinput3)
-                    }
-                  />
-                  {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
-                    <></>
-                  ) : (
-                    <p>{input3}</p>
-                  )}
+                    <input
+                      className="vi_0"
+                      type="text"
+                      placeholder="enter text"
+                      onChange={(e) =>
+                        selectdetails?.selectedLanguage == "en-t-i0-und"
+                          ? setinput3(e.target.value)
+                          : onChangeHandler(e.target.value, setinput3)
+                      }
+                    />
+                    {selectdetails?.selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{input3}</p>
+                    )}
                   </div>
                 </div>
               </>

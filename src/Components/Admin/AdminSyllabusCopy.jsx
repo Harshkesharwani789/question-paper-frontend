@@ -94,7 +94,7 @@ const AdminSyllabusCopy = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSujects"
+        "http://localhost:8001/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -109,7 +109,7 @@ const AdminSyllabusCopy = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getallcontent"
+        "http://localhost:8001/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -124,7 +124,7 @@ const AdminSyllabusCopy = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllChapter"
+        "http://localhost:8001/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -139,7 +139,7 @@ const AdminSyllabusCopy = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllNameExamination"
+        "http://localhost:8001/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -190,7 +190,7 @@ const AdminSyllabusCopy = () => {
         Assessment: Assessment,
         from: from,
         to: to,
-        Examinationname:Examinationname
+        Examinationname: Examinationname,
       };
       setArr([...Arr, newObj]);
       swal({
@@ -204,29 +204,26 @@ const AdminSyllabusCopy = () => {
     }
   };
 
-
   // console.log("Arr====data==>",Arr);
-const [period,setperiod]=useState("");
-const [realMonth,setrealMonth]=useState("")
+  const [period, setperiod] = useState("");
+  const [realMonth, setrealMonth] = useState("");
   const [Arr2, setArr2] = useState([]);
   const Addchaptertype = (i) => {
     try {
-   
       const newObj2 = {
         chapterno: chapterNumber,
         Months: Months,
-        realMonth:realMonth,
+        realMonth: realMonth,
         ChapterName: selectsubjectpart,
-        period:period,
+        period: period,
       };
-  setArr2([...Arr2,newObj2])
-    
+      setArr2([...Arr2, newObj2]);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const deleteArrr2=(index)=>{
+  const deleteArrr2 = (index) => {
     try {
       const deletedQuestion = Arr2[index];
 
@@ -234,29 +231,28 @@ const [realMonth,setrealMonth]=useState("")
       const updatedArr = Arr2.filter((_, i) => i !== index);
 
       setArr2(updatedArr);
- 
     } catch (error) {
       console.error(error);
     }
-  }
-const [typ,settype]=useState("")
-  const sumbitToArr=()=>{
- const am=   Arr?.map((ele)=>{
-      if(ele?.Examinationname==selectedassesment&& ele?.Assessment==typ){
-        return {...ele,unitArr:Arr2}
+  };
+  const [typ, settype] = useState("");
+  const sumbitToArr = () => {
+    const am = Arr?.map((ele) => {
+      if (ele?.Examinationname == selectedassesment && ele?.Assessment == typ) {
+        return { ...ele, unitArr: Arr2 };
       }
-      return ele
-    })
-    setArr(am)
-    setArr2([])
-    setShow3(false)
+      return ele;
+    });
+    setArr(am);
+    setArr2([]);
+    setShow3(false);
     return swal({
       title: "Yeah!",
       text: "Added Successfully...",
       icon: "success",
       button: "OK!",
     });
-  }
+  };
   console.log("Arr", Arr);
 
   const deleteQuestionType = (index) => {
@@ -279,7 +275,7 @@ const [typ,settype]=useState("")
       console.error(error);
     }
   };
-const [Title,setTitle]=useState("")
+  const [Title, setTitle] = useState("");
   const addSyllabus = async () => {
     if (!Title) {
       return alert("Please Enter the titele");
@@ -291,7 +287,7 @@ const [Title,setTitle]=useState("")
       const config = {
         url: "/admin/addSyllabus",
         method: "post",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -299,9 +295,9 @@ const [Title,setTitle]=useState("")
         data: {
           head: head,
           head1: head1,
-          head2:head2,
-          head3:head3,
-          head4:head4,
+          head2: head2,
+          head3: head3,
+          head4: head4,
           year: year,
           medium: medium,
           Class: classs,
@@ -309,14 +305,14 @@ const [Title,setTitle]=useState("")
           subject: subjectt,
           authId: admin?._id,
           SyllabusDetails: Arr,
-          Title:Title,
-          Examinationname:Examinationname
+          Title: Title,
+          Examinationname: Examinationname,
         },
       };
       let res = await axios(config);
       if (res.status == 200) {
         handleClose();
-getSyllabus()
+        getSyllabus();
         return swal({
           title: "Yeah!",
           text: res.data.success,
@@ -339,7 +335,7 @@ getSyllabus()
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllClass");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -352,7 +348,7 @@ getSyllabus()
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "https://guru-resorce-backend.onrender.com/api/admin/getAllSubClass"
+        "http://localhost:8001/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -366,7 +362,7 @@ getSyllabus()
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getAllMedium");
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -381,7 +377,7 @@ getSyllabus()
       const config = {
         url: "/admin/updateSyllabus",
         method: "put",
-        baseURL: "https://guru-resorce-backend.onrender.com/api",
+        baseURL: "http://localhost:8001/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -394,8 +390,8 @@ getSyllabus()
           subject: subjectt,
           authId: admin?._id,
           SyllabusDetails: Arr,
-          Title:Title,
-          Examinationname:Examinationname,
+          Title: Title,
+          Examinationname: Examinationname,
           id: updatechapter,
         },
       };
@@ -427,7 +423,7 @@ getSyllabus()
   const deleteslybus = async () => {
     try {
       let res = await axios.delete(
-        `https://guru-resorce-backend.onrender.com/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        `http://localhost:8001/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -458,7 +454,7 @@ getSyllabus()
   const getSyllabus = async () => {
     try {
       let res = await axios.get(
-        `https://guru-resorce-backend.onrender.com/api/admin/getAllSyllabus/${admin?._id}`,
+        `http://localhost:8001/api/admin/getAllSyllabus/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status == 200) {
@@ -468,7 +464,6 @@ getSyllabus()
       console.log(error);
     }
   };
-
 
   // Pagination
   // const [pageNumber, setPageNumber] = useState(0);
@@ -499,8 +494,6 @@ getSyllabus()
       setCurrentpage(currenpage + 1);
     }
   }
-
-
 
   useEffect(() => {
     getSyllabus();
@@ -567,8 +560,10 @@ getSyllabus()
       <div className="customerhead p-2">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="header-c ">Syllabus</h2>
-         
-          <Link onClick={handleShow} ><Button2 text={"Add Syllabus"} /></Link>
+
+          <Link onClick={handleShow}>
+            <Button2 text={"Add Syllabus"} />
+          </Link>
         </div>
 
         <div className="mb-3">
@@ -583,9 +578,9 @@ getSyllabus()
                 <th>
                   <div>Year</div>
                 </th>
-                <th><div>
-                  Exam Name
-                  </div></th>
+                <th>
+                  <div>Exam Name</div>
+                </th>
                 <th>
                   <div>Class</div>
                 </th>
@@ -641,13 +636,13 @@ getSyllabus()
                             onClick={() => {
                               handleShow1(item);
                               setpdatesetchapter(item?._id);
-                            setTitle(item?.Title);
-                            setyear(item?.year);
-                            setclasss(item?.Class);
-                              setsubclass(item?.SubClass)
-                              setsubjectt(item?.subject)
+                              setTitle(item?.Title);
+                              setyear(item?.year);
+                              setclasss(item?.Class);
+                              setsubclass(item?.SubClass);
+                              setsubjectt(item?.subject);
                               setmedium(item?.medium);
-                              setArr(item?.SyllabusDetails)
+                              setArr(item?.SyllabusDetails);
                             }}
                           />{" "}
                         </div>
@@ -726,105 +721,101 @@ getSyllabus()
             <Modal.Title style={{ color: "white" }}>Add Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>Sl.No</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Sl.No Name"
-                      onChange={(e) => {
-                        if (selectedLanguage == "en-t-i0-und") {
-                          sethead(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead);
-                      }}
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
-                  </div>
+            <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+              <div className="col-sm-3">
+                <div className="do-sear mt-2">
+                  <label>Sl.No</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Sl.No Name"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        sethead(e.target.value);
+                      } else onChangeHandler(e.target.value, sethead);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
                 </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>Month</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Month Name"
-                      onChange={(e) => {
-                        if (selectedLanguage == "en-t-i0-und") {
-                          sethead1(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead1);
-                      }}
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
-                  </div>
-                </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>Period</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Month Name"
-                      onChange={(e) => {
-                        if (selectedLanguage == "en-t-i0-und") {
-                          sethead2(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead2);
-                      }}
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
-                  </div>
-                </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>Unit No</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter unit no Name"
-                      onChange={(e) => {
-                        if (selectedLanguage == "en-t-i0-und") {
-                          sethead3(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead3);
-                      }}
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
-                  </div>
-                </div>
-                <div className="col-sm-3">
-                  <div className="do-sear mt-2">
-                    <label>Unit Name</label>
-                    <input
-                      type="text"
-                      className="vi_0"
-                      placeholder="Enter Unit Name"
-                      onChange={(e) => {
-                        if (selectedLanguage == "en-t-i0-und") {
-                          sethead4(e.target.value);
-                        } else onChangeHandler(e.target.value, sethead4);
-                      }}
-                    />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
-                  </div>
-                </div>
-          
-            
-             
               </div>
+              <div className="col-sm-3">
+                <div className="do-sear mt-2">
+                  <label>Month</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Month Name"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        sethead1(e.target.value);
+                      } else onChangeHandler(e.target.value, sethead1);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
+                </div>
+              </div>
+              <div className="col-sm-3">
+                <div className="do-sear mt-2">
+                  <label>Period</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Month Name"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        sethead2(e.target.value);
+                      } else onChangeHandler(e.target.value, sethead2);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
+                </div>
+              </div>
+              <div className="col-sm-3">
+                <div className="do-sear mt-2">
+                  <label>Unit No</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter unit no Name"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        sethead3(e.target.value);
+                      } else onChangeHandler(e.target.value, sethead3);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
+                </div>
+              </div>
+              <div className="col-sm-3">
+                <div className="do-sear mt-2">
+                  <label>Unit Name</label>
+                  <input
+                    type="text"
+                    className="vi_0"
+                    placeholder="Enter Unit Name"
+                    onChange={(e) => {
+                      if (selectedLanguage == "en-t-i0-und") {
+                        sethead4(e.target.value);
+                      } else onChangeHandler(e.target.value, sethead4);
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
+                </div>
+              </div>
+            </div>
             <div className="row">
-            <div className="col-sm-4">
+              <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>Title</label>
                   <input
-                   
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- Annoual Programe of  work for the Year"
                     onChange={(e) => {
                       // setyear(e.target.value);
-                      if(selectedLanguage == "en-t-i0-und"){
-                            setTitle(e.target.value);
-                          }else onChangeHandler(e.target.value, setTitle);
+                      if (selectedLanguage == "en-t-i0-und") {
+                        setTitle(e.target.value);
+                      } else onChangeHandler(e.target.value, setTitle);
                     }}
                   />
                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
@@ -845,7 +836,6 @@ getSyllabus()
                 </div>
               </div>
 
-            
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>
@@ -955,38 +945,38 @@ getSyllabus()
                       className="vi_0"
                       placeholder="Enter Assessment Name"
                       onChange={(e) => {
-                        if(selectedLanguage == "en-t-i0-und"){
+                        if (selectedLanguage == "en-t-i0-und") {
                           setAssessment(e.target.value);
-                        }else onChangeHandler(e.target.value, setAssessment);
-                  
+                        } else onChangeHandler(e.target.value, setAssessment);
                       }}
-
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Assessment}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-sm-2">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Exam Name 
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => setExaminationname(e.target.value)}
-                  >
-                    <option>Select the Exame Name</option>
-                    {NameExam?.map((item, i) => {
-                      return (
-                        <>
-                          <option value={item?.NameExamination}>
-                            {item?.NameExamination}
-                          </option>
-                        </>
-                      );
-                    })}
-                  </Form.Select>
+                  <div className="do-sear mt-2">
+                    <label>Select Exam Name</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => setExaminationname(e.target.value)}
+                    >
+                      <option>Select the Exame Name</option>
+                      {NameExam?.map((item, i) => {
+                        return (
+                          <>
+                            <option value={item?.NameExamination}>
+                              {item?.NameExamination}
+                            </option>
+                          </>
+                        );
+                      })}
+                    </Form.Select>
+                  </div>
                 </div>
-              </div>
                 <div className="col-sm-3">
                   <div className="do-sear mt-2">
                     <label>From:</label>
@@ -1008,8 +998,7 @@ getSyllabus()
                     />
                   </div>
                 </div>
-          
-             
+
                 <div style={{ textAlign: "center" }}>
                   <Button
                     variant=""
@@ -1027,10 +1016,7 @@ getSyllabus()
                     Add
                   </Button>
                 </div>
-            
-             
               </div>
-
 
               <div className="row mt-2">
                 <div className="col-md-12">
@@ -1061,28 +1047,39 @@ getSyllabus()
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{item?.Assessment}({item?.Examinationname})</td>
+                            <td>
+                              {item?.Assessment}({item?.Examinationname})
+                            </td>
                             <td>{item?.from}</td>
                             <td>{item?.to}</td>
 
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.Months}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.period}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.chapterno}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.ChapterName}</p>
-                            })}</td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.Months}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.period}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.chapterno}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.ChapterName}</p>;
+                              })}
+                            </td>
                             <td>
                               <Button
-                                onClick={() =>{ 
-                                  settype(item?.Assessment)
-                                  setArr2(item?.unitArr? item?.unitArr:[])
-                                  handleShow3(item?.Examinationname)}}
+                                onClick={() => {
+                                  settype(item?.Assessment);
+                                  setArr2(item?.unitArr ? item?.unitArr : []);
+                                  handleShow3(item?.Examinationname);
+                                }}
                               >
                                 Add
                               </Button>{" "}
@@ -1134,8 +1131,8 @@ getSyllabus()
             <Modal.Title> Add Units Details</Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ backgroundColor: "#dda559" }}>
-            <div  className="row">
-            <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-6">
                 <div className="do-sear mt-2">
                   <label>Month</label>
                   {/* <input
@@ -1148,14 +1145,22 @@ getSyllabus()
                       }else onChangeHandler(e.target.value, setMonths);
                     }}
                   /> */}
-                  <input type="month"   className="vi_0"  onChange={(e) => {
-                    setrealMonth(e.target.value)
-                    // console.log("months ",moment(e.target.value).format("MMMM"));
-                      if(selectedLanguage == "en-t-i0-und"){
+                  <input
+                    type="month"
+                    className="vi_0"
+                    onChange={(e) => {
+                      setrealMonth(e.target.value);
+                      // console.log("months ",moment(e.target.value).format("MMMM"));
+                      if (selectedLanguage == "en-t-i0-und") {
                         setMonths(moment(e.target.value).format("MMMM  -YYYY"));
-                      }else onChangeHandler(moment(e.target.value).format("MMMM -YYYY"), setMonths);
-                    }}/>
-                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Months}</p>}
+                      } else
+                        onChangeHandler(
+                          moment(e.target.value).format("MMMM -YYYY"),
+                          setMonths
+                        );
+                    }}
+                  />
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Months}</p>}
                 </div>
               </div>
               <div className="col-md-6">
@@ -1166,13 +1171,13 @@ getSyllabus()
                     className="vi_0"
                     placeholder="Enter period Number"
                     onChange={(e) => {
-                      if(selectedLanguage == "en-t-i0-und"){
+                      if (selectedLanguage == "en-t-i0-und") {
                         setperiod(e.target.value);
-                      }else onChangeHandler(e.target.value, setperiod);
+                      } else onChangeHandler(e.target.value, setperiod);
                     }}
                     // onChange={(e) => setperiod(e.target.value)}
                   />
-                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{period}</p>}
+                  {selectedLanguage == "en-t-i0-und" ? <></> : <p>{period}</p>}
                 </div>
               </div>
               <div className="col-md-6">
@@ -1184,16 +1189,20 @@ getSyllabus()
                     placeholder="Enter Unit Number"
                     // onChange={(e) => setChapterNumber(e.target.value)}
                     onChange={(e) => {
-                      if(selectedLanguage == "en-t-i0-und"){
+                      if (selectedLanguage == "en-t-i0-und") {
                         setChapterNumber(e.target.value);
-                      }else onChangeHandler(e.target.value, setChapterNumber);
+                      } else onChangeHandler(e.target.value, setChapterNumber);
                     }}
                     // onChange={(e) => setperiod(e.target.value)}
                   />
-                      {selectedLanguage == "en-t-i0-und" ? <></> : <p>{chapterNumber}</p>}
+                  {selectedLanguage == "en-t-i0-und" ? (
+                    <></>
+                  ) : (
+                    <p>{chapterNumber}</p>
+                  )}
                 </div>
               </div>
-            
+
               <div className="col-md-6">
                 <div className="do-sear mt-2">
                   <label>Unit Name</label>
@@ -1208,7 +1217,10 @@ getSyllabus()
                       ?.filter((ele) => ele.subjectName === subjectt)
                       ?.map((val, i) => {
                         return (
-                          <option value={`${val?.chapterName} (${val?.SubjectPart})`} key={i}>
+                          <option
+                            value={`${val?.chapterName} (${val?.SubjectPart})`}
+                            key={i}
+                          >
                             {val?.chapterName} ({val?.SubjectPart})
                           </option>
                         );
@@ -1216,69 +1228,66 @@ getSyllabus()
                   </Form.Select>
                 </div>
               </div>
-              <div  >
-                 <Button
-              variant=""
-              style={{float:"right",width:"50px",marginTop:"5px"}}
-              className="modal-add-btn"
-              onClick={Addchaptertype}
-            >
-              Add
-            </Button>
+              <div>
+                <Button
+                  variant=""
+                  style={{ float: "right", width: "50px", marginTop: "5px" }}
+                  className="modal-add-btn"
+                  onClick={Addchaptertype}
+                >
+                  Add
+                </Button>
               </div>
-             
             </div>
-      
-          
-            <div className="row mt-2">
-                <div className="col-md-12">
-                  <Table
-                    responsive
-                    bordered
-                    style={{
-                      width: "-webkit-fill-available",
-                      textAlign: "center",
-                    }}
-                  >
-                    <thead>
-                      <tr>
-                        <th>S No.</th>
-                       
-                        <th>Month</th>
-                        <th>Period</th>
-                        <th>Unit No.</th>
-                        <th>Unit Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Arr2?.map((item, i) => {
-                        return (
-                          <tr key={i}>
-                            <td>{i + 1}</td>
-      
-                            <td>{item?.Months}</td>
-                            <td>{item?.period}</td>
-                            <td>{item?.chapterno}</td>
 
-                            <td>{item?.ChapterName}</td>
-                            <td>
-                            
-                              <AiFillDelete
-                                color="red"
-                                cursor="pointer"
-                                onClick={() => deleteArrr2(i)}
-                              />
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </div>
+            <div className="row mt-2">
+              <div className="col-md-12">
+                <Table
+                  responsive
+                  bordered
+                  style={{
+                    width: "-webkit-fill-available",
+                    textAlign: "center",
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th>S No.</th>
+
+                      <th>Month</th>
+                      <th>Period</th>
+                      <th>Unit No.</th>
+                      <th>Unit Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Arr2?.map((item, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{i + 1}</td>
+
+                          <td>{item?.Months}</td>
+                          <td>{item?.period}</td>
+                          <td>{item?.chapterno}</td>
+
+                          <td>{item?.ChapterName}</td>
+                          <td>
+                            <AiFillDelete
+                              color="red"
+                              cursor="pointer"
+                              onClick={() => deleteArrr2(i)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
               </div>
+            </div>
           </Modal.Body>
-          <Modal.Footer  style={{ backgroundColor: "#dda559" }}>
+          <Modal.Footer style={{ backgroundColor: "#dda559" }}>
             <Button
               variant=""
               className="modal-close-btn"
@@ -1286,11 +1295,7 @@ getSyllabus()
             >
               Close
             </Button>
-            <Button
-              variant=""
-              className="modal-add-btn"
-              onClick={sumbitToArr}
-            >
+            <Button variant="" className="modal-add-btn" onClick={sumbitToArr}>
               Sumbit
             </Button>
           </Modal.Footer>
@@ -1312,7 +1317,7 @@ getSyllabus()
             <Modal.Title style={{ color: "white" }}>Edit Syllabus</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <div
+            <div
               style={{
                 border: "2px solid #dee2e6",
                 padding: "10px",
@@ -1320,7 +1325,7 @@ getSyllabus()
                 // backgroundColor: "#e9caa0"
               }}
             >
-             <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
+              <div className="row p-3" style={{ backgroundColor: "#e9caa0" }}>
                 <div className="col-sm-3">
                   <div className="do-sear mt-2">
                     <label>Sl.No</label>
@@ -1335,7 +1340,7 @@ getSyllabus()
                         } else onChangeHandler(e.target.value);
                       }}
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head}</p>}
                   </div>
                 </div>
                 <div className="col-sm-3">
@@ -1351,7 +1356,7 @@ getSyllabus()
                         } else onChangeHandler(e.target.value, sethead1);
                       }}
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head1}</p>}
                   </div>
                 </div>
                 <div className="col-sm-3">
@@ -1367,7 +1372,7 @@ getSyllabus()
                         } else onChangeHandler(e.target.value, sethead2);
                       }}
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head2}</p>}
                   </div>
                 </div>
                 <div className="col-sm-3">
@@ -1383,7 +1388,7 @@ getSyllabus()
                         } else onChangeHandler(e.target.value, sethead3);
                       }}
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head3}</p>}
                   </div>
                 </div>
                 <div className="col-sm-3">
@@ -1399,31 +1404,24 @@ getSyllabus()
                         } else onChangeHandler(e.target.value, sethead4);
                       }}
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? <></> : <p>{head4}</p>}
                   </div>
                 </div>
-          
-            
-             
               </div>
-
-
-              
             </div>
             <div className="row">
-            <div className="col-sm-4">
+              <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>Title</label>
                   <input
-                   
                     type="text"
                     className="vi_0"
                     placeholder="Eg:- Annoual Programe of  work for the Year"
                     onChange={(e) => {
                       // setyear(e.target.value);
-                      if(selectedLanguage == "en-t-i0-und"){
-                            setTitle(e.target.value);
-                          }else onChangeHandler(e.target.value, setTitle);
+                      if (selectedLanguage == "en-t-i0-und") {
+                        setTitle(e.target.value);
+                      } else onChangeHandler(e.target.value, setTitle);
                     }}
                   />
                   {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Title}</p>}
@@ -1444,7 +1442,6 @@ getSyllabus()
                 </div>
               </div>
 
-            
               <div className="col-sm-4">
                 <div className="do-sear mt-2">
                   <label>
@@ -1499,7 +1496,7 @@ getSyllabus()
                     Select Subjects <span style={{ color: "red" }}>*</span>
                   </label>
                   <Form.Select
-                  value={subjectt}
+                    value={subjectt}
                     aria-label="Default select example"
                     onChange={(e) => setsubjectt(e.target.value)}
                   >
@@ -1558,38 +1555,38 @@ getSyllabus()
                       className="vi_0"
                       placeholder="Enter Assessment Name"
                       onChange={(e) => {
-                        if(selectedLanguage == "en-t-i0-und"){
+                        if (selectedLanguage == "en-t-i0-und") {
                           setAssessment(e.target.value);
-                        }else onChangeHandler(e.target.value, setAssessment);
-                  
+                        } else onChangeHandler(e.target.value, setAssessment);
                       }}
-
                     />
-                       {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Assessment}</p>}
+                    {selectedLanguage == "en-t-i0-und" ? (
+                      <></>
+                    ) : (
+                      <p>{Assessment}</p>
+                    )}
                   </div>
                 </div>
                 <div className="col-sm-2">
-                <div className="do-sear mt-2">
-                  <label>
-                    Select Exam Name 
-                  </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => setExaminationname(e.target.value)}
-                  >
-                    <option>Select the Exame Name</option>
-                    {NameExam?.map((item, i) => {
-                      return (
-                        <>
-                          <option value={item?.NameExamination}>
-                            {item?.NameExamination}
-                          </option>
-                        </>
-                      );
-                    })}
-                  </Form.Select>
+                  <div className="do-sear mt-2">
+                    <label>Select Exam Name</label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => setExaminationname(e.target.value)}
+                    >
+                      <option>Select the Exame Name</option>
+                      {NameExam?.map((item, i) => {
+                        return (
+                          <>
+                            <option value={item?.NameExamination}>
+                              {item?.NameExamination}
+                            </option>
+                          </>
+                        );
+                      })}
+                    </Form.Select>
+                  </div>
                 </div>
-              </div>
                 <div className="col-sm-3">
                   <div className="do-sear mt-2">
                     <label>From:</label>
@@ -1611,8 +1608,7 @@ getSyllabus()
                     />
                   </div>
                 </div>
-          
-             
+
                 <div style={{ textAlign: "center" }}>
                   <Button
                     variant=""
@@ -1630,10 +1626,7 @@ getSyllabus()
                     Add
                   </Button>
                 </div>
-            
-             
               </div>
-
 
               <div className="row mt-2">
                 <div className="col-md-12">
@@ -1664,28 +1657,39 @@ getSyllabus()
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{item?.Assessment}({item?.Examinationname})</td>
+                            <td>
+                              {item?.Assessment}({item?.Examinationname})
+                            </td>
                             <td>{item?.from}</td>
                             <td>{item?.to}</td>
 
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.Months}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.period}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.chapterno}</p>
-                            })}</td>
-                            <td>{item?.unitArr?.map((ele)=>{
-                              return <p>{ele?.ChapterName}</p>
-                            })}</td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.Months}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.period}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.chapterno}</p>;
+                              })}
+                            </td>
+                            <td>
+                              {item?.unitArr?.map((ele) => {
+                                return <p>{ele?.ChapterName}</p>;
+                              })}
+                            </td>
                             <td>
                               <Button
-                                onClick={() =>{ 
-                                  settype(item?.Assessment)
-                                  setArr2(item?.unitArr? item?.unitArr:[])
-                                  handleShow3(item?.Examinationname)}}
+                                onClick={() => {
+                                  settype(item?.Assessment);
+                                  setArr2(item?.unitArr ? item?.unitArr : []);
+                                  handleShow3(item?.Examinationname);
+                                }}
                               >
                                 Add
                               </Button>{" "}

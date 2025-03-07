@@ -73,7 +73,7 @@
 //         try {
 //             const config = {
 //                 url: "/admin/addcoverpage",
-//                 baseURL: "https://guru-resorce-backend.onrender.com/api",
+//                 baseURL: "http://localhost:8001/api",
 //                 method: "post",
 //                 headers: { "Content-Type": "application/json" },
 //                 data: {
@@ -102,7 +102,7 @@
 //     const [getcoverpagedetails, setgetcoverpagedetails] = useState([]);
 //     const getCoverPage = async () => {
 //         try {
-//             let res = await axios.get("https://guru-resorce-backend.onrender.com/api/admin/getcoverpagedetails");
+//             let res = await axios.get("http://localhost:8001/api/admin/getcoverpagedetails");
 //             if (res.status === 200) {
 //                 setgetcoverpagedetails(res.data.success);
 //             }
