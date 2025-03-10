@@ -254,11 +254,11 @@ const AdminQuestions = () => {
         </div>
         <div className="col-lg-4 mt-2">
           <div className="text-center">
-            <Link
-              onClick={() => {
+            <Link to="/adminquestiondetails">
+              {/* onClick ={() => {
                 navigate("/adminquestiondetails");
-              }}
-            >
+              }} */}
+
               <Button2 text={"Add Questions"} />
             </Link>
           </div>

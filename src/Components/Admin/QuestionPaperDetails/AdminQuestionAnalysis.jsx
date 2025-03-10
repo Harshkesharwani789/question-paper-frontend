@@ -135,10 +135,11 @@ function AdminQuestionAnalysis() {
       console.log(error);
     }
   };
-  console.log("GetquestAnalysisHeader", GetquestAnalysisHeader);
   useEffect(() => {
     getquestAnalysisHeader();
   }, []);
+  console.log("ok", GetquestAnalysisHeader);
+
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-around">
@@ -218,9 +219,10 @@ function AdminQuestionAnalysis() {
                               <td>{item?.Objectives}</td>
                               <td>{item?.Chapter_Name}</td>
                               <td>{item?.Lesson}</td>
-                              <td>{item?.Types_Question}</td>
+                              <td>{item?.Types_QuestionTranslate}</td>
                               <td>
                                 {check(ele2?.QAType)}
+
                                 {/* {item?.Questiontype} */}
                               </td>
                               <td>{(ele2?.NQA * ele2?.Mask) / ele2?.NQA}</td>

@@ -6,6 +6,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import logo from "./../../assets/logo.png";
+import Select from "react-select";
 
 const LoginPage3 = () => {
   const { state } = useLocation();
@@ -21,6 +22,9 @@ const LoginPage3 = () => {
   const [Test_Date, setTest_Date] = useState("");
   const [Size_ofthe_Question, setSize_ofthe_Question] = useState("A4");
   const [ExamTime, setExamTime] = useState("");
+  const [medium, setMedium] = useState("");
+  const [mediums, setMediums] = useState([]);
+  const [subjectOptions, setSubjectOptions] = useState([]);
   const generate = async () => {
     // alert("Callling")
     try {
@@ -75,9 +79,13 @@ const LoginPage3 = () => {
       let res = await axios.get(
         "http://localhost:8001/api/admin/getAllSujects"
       );
-      console.log("ressss==>", res);
-      if (res.status == 200) {
-        setsubject(res.data.success);
+      if (res.status === 200) {
+        // Convert subjects to an array format required by react-select
+        const options = res.data.success.map((item) => ({
+          value: item.subjectName,
+          label: item.subjectName,
+        }));
+        setSubjectOptions(options);
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +93,21 @@ const LoginPage3 = () => {
   };
   useEffect(() => {
     getSubject();
+  }, []);
+
+  const getMediums = async () => {
+    try {
+      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      if (res.status === 200) {
+        setMediums(res.data.success);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMediums();
   }, []);
 
   if (!user) {
@@ -185,24 +208,19 @@ const LoginPage3 = () => {
                     <Form.Label
                       className="fs-6 fw-bold mt-2 "
                       style={{ letterSpacing: "0.5px" }}
-                    >
-                      Subject
-                    </Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      onChange={(e) => {
-                        setSubject(e.target.value);
-                      }}
-                    >
-                      <option>Select the Subject</option>
-                      {subject?.map((item, i) => {
-                        return (
-                          <option value={item?.subjectName} key={i}>
-                            {item?.subjectName}
-                          </option>
-                        );
-                      })}
-                    </Form.Select>
+                    ></Form.Label>
+                    <Form.Group>
+                      <Form.Label>Subject</Form.Label>
+                      <Select
+                        options={subjectOptions}
+                        onChange={(selectedOption) =>
+                          setSubject(selectedOption.value)
+                        }
+                        placeholder="Select the Subject"
+                        isSearchable
+                      />
+                    </Form.Group>
+
                     <div className="row">
                       <div className="col-md-6">
                         <FormLabel

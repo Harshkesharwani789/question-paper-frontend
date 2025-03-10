@@ -14,6 +14,7 @@ import { FaEye } from "react-icons/fa";
 import { debounce } from "lodash";
 import moment from "moment";
 import Button2 from "../Button2";
+import Select from "react-select";
 const AdminSyllabusCopy = () => {
   const admin = JSON.parse(sessionStorage.getItem("admin"));
   const token = sessionStorage.getItem("token");
@@ -148,6 +149,11 @@ const AdminSyllabusCopy = () => {
       console.log(error);
     }
   };
+
+  const subjectOptions = subject?.map((item) => ({
+    value: item.subjectName,
+    label: item.subjectName,
+  }));
 
   useEffect(() => {
     getallweightagecontent();
@@ -887,21 +893,17 @@ const AdminSyllabusCopy = () => {
                   <label>
                     Select Subjects <span style={{ color: "red" }}>*</span>
                   </label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => setsubjectt(e.target.value)}
-                  >
-                    <option>Select the Subjects</option>
-                    {subject?.map((item, i) => {
-                      return (
-                        <>
-                          <option value={item?.subjectName}>
-                            {item?.subjectName}
-                          </option>
-                        </>
-                      );
-                    })}
-                  </Form.Select>
+                  <Select
+                    options={subjectOptions}
+                    onChange={(selectedOption) =>
+                      setsubjectt(selectedOption.value)
+                    }
+                    placeholder="Select the Subjects"
+                    isClearable
+                    isSearchable
+                    className="basic-single"
+                    classNamePrefix="select"
+                  />
                 </div>
               </div>
               <div className="col-sm-4">

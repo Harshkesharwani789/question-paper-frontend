@@ -462,7 +462,7 @@ const AdminQuestionDetails = () => {
                   {getaddsubclass
                     ?.filter(
                       (ele) =>
-                        ele.className === Class || ele.mediumName === Medium
+                        ele.className === Class && ele.mediumName === Medium
                     )
                     ?.map((val, i) => {
                       return (

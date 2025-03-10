@@ -385,28 +385,30 @@ function AdminBlueprintdetailsview() {
                                       border: "1px solid black",
                                     }}
                                   >
-                                    {(AllChapterData?.filter(
-                                      (ele) =>
-                                        ele?.Blueprintchapter == item?.name
-                                    )?.reduce(
-                                      (a, ele) =>
-                                        a +
-                                        Number(
-                                          ele?.Blueprintnoofquestion *
-                                            ele?.BluePrintmarksperquestion
-                                        ),
-                                      0
-                                    ) /
-                                      blueprint?.AllChapter?.reduce(
+                                    {(
+                                      (AllChapterData?.filter(
+                                        (ele) =>
+                                          ele?.Blueprintchapter == item?.name
+                                      )?.reduce(
                                         (a, ele) =>
                                           a +
                                           Number(
-                                            ele?.BluePrintmarksperquestion *
-                                              ele?.Blueprintnoofquestion
+                                            ele?.Blueprintnoofquestion *
+                                              ele?.BluePrintmarksperquestion
                                           ),
                                         0
-                                      )) *
-                                      100}
+                                      ) /
+                                        blueprint?.AllChapter?.reduce(
+                                          (a, ele) =>
+                                            a +
+                                            Number(
+                                              ele?.BluePrintmarksperquestion *
+                                                ele?.Blueprintnoofquestion
+                                            ),
+                                          0
+                                        )) *
+                                      100
+                                    )?.toFixed(2)}
                                     %
                                   </td>
                                 </tr>
@@ -665,29 +667,31 @@ function AdminBlueprintdetailsview() {
                                       border: "1px solid black",
                                     }}
                                   >
-                                    {(AllChapterData?.filter(
-                                      (ele) =>
-                                        ele?.Blueprintobjective ==
-                                        item?.Objective
-                                    )?.reduce(
-                                      (a, ele) =>
-                                        a +
-                                        Number(
-                                          ele?.Blueprintnoofquestion *
-                                            ele?.BluePrintmarksperquestion
-                                        ),
-                                      0
-                                    ) /
-                                      blueprint?.AllChapter?.reduce(
+                                    {(
+                                      (AllChapterData?.filter(
+                                        (ele) =>
+                                          ele?.Blueprintobjective ==
+                                          item?.Objective
+                                      )?.reduce(
                                         (a, ele) =>
                                           a +
                                           Number(
-                                            ele?.BluePrintmarksperquestion *
-                                              ele?.Blueprintnoofquestion
+                                            ele?.Blueprintnoofquestion *
+                                              ele?.BluePrintmarksperquestion
                                           ),
                                         0
-                                      )) *
-                                      100}
+                                      ) /
+                                        blueprint?.AllChapter?.reduce(
+                                          (a, ele) =>
+                                            a +
+                                            Number(
+                                              ele?.BluePrintmarksperquestion *
+                                                ele?.Blueprintnoofquestion
+                                            ),
+                                          0
+                                        )) *
+                                      100
+                                    )?.toFixed(2)}
                                     %
                                   </td>
                                 </tr>
@@ -926,28 +930,30 @@ function AdminBlueprintdetailsview() {
                                     border: "1px solid black",
                                   }}
                                 >
-                                  {(AllChapterData?.filter(
-                                    (item) =>
-                                      item?.BluePrintQuestiontype == "O T"
-                                  )?.reduce(
-                                    (a, ele) =>
-                                      a +
-                                      Number(
-                                        ele?.Blueprintnoofquestion *
-                                          ele?.BluePrintmarksperquestion
-                                      ),
-                                    0
-                                  ) /
-                                    blueprint?.AllChapter?.reduce(
+                                  {(
+                                    (AllChapterData?.filter(
+                                      (item) =>
+                                        item?.BluePrintQuestiontype == "O T"
+                                    )?.reduce(
                                       (a, ele) =>
                                         a +
                                         Number(
-                                          ele?.BluePrintmarksperquestion *
-                                            ele?.Blueprintnoofquestion
+                                          ele?.Blueprintnoofquestion *
+                                            ele?.BluePrintmarksperquestion
                                         ),
                                       0
-                                    )) *
-                                    100}
+                                    ) /
+                                      blueprint?.AllChapter?.reduce(
+                                        (a, ele) =>
+                                          a +
+                                          Number(
+                                            ele?.BluePrintmarksperquestion *
+                                              ele?.Blueprintnoofquestion
+                                          ),
+                                        0
+                                      )) *
+                                    100
+                                  )?.toFixed(2)}
                                   %
                                 </td>
                               </tr>
@@ -1010,29 +1016,32 @@ function AdminBlueprintdetailsview() {
                                     border: "1px solid black",
                                   }}
                                 >
-                                  {(AllChapterData?.filter(
-                                    (item) =>
-                                      item?.BluePrintQuestiontype == "V.S.A" ||
-                                      item?.BluePrintQuestiontype == "S.A"
-                                  )?.reduce(
-                                    (a, ele) =>
-                                      a +
-                                      Number(
-                                        ele?.Blueprintnoofquestion *
-                                          ele?.BluePrintmarksperquestion
-                                      ),
-                                    0
-                                  ) /
-                                    blueprint?.AllChapter?.reduce(
+                                  {(
+                                    (AllChapterData?.filter(
+                                      (item) =>
+                                        item?.BluePrintQuestiontype ==
+                                          "V.S.A" ||
+                                        item?.BluePrintQuestiontype == "S.A"
+                                    )?.reduce(
                                       (a, ele) =>
                                         a +
                                         Number(
-                                          ele?.BluePrintmarksperquestion *
-                                            ele?.Blueprintnoofquestion
+                                          ele?.Blueprintnoofquestion *
+                                            ele?.BluePrintmarksperquestion
                                         ),
                                       0
-                                    )) *
-                                    100}
+                                    ) /
+                                      blueprint?.AllChapter?.reduce(
+                                        (a, ele) =>
+                                          a +
+                                          Number(
+                                            ele?.BluePrintmarksperquestion *
+                                              ele?.Blueprintnoofquestion
+                                          ),
+                                        0
+                                      )) *
+                                    100
+                                  )?.toFixed(2)}
                                   %
                                 </td>
                               </tr>
@@ -1081,30 +1090,34 @@ function AdminBlueprintdetailsview() {
                                     border: "1px solid black",
                                   }}
                                 >
-                                  {(AllChapterData?.filter(
-                                    (item) =>
-                                      item?.BluePrintQuestiontype == "L.A 1" ||
-                                      item?.BluePrintQuestiontype == "L.A 2" ||
-                                      item?.BluePrintQuestiontype == "L.A 3"
-                                  )?.reduce(
-                                    (a, ele) =>
-                                      a +
-                                      Number(
-                                        ele?.Blueprintnoofquestion *
-                                          ele?.BluePrintmarksperquestion
-                                      ),
-                                    0
-                                  ) /
-                                    blueprint?.AllChapter?.reduce(
+                                  {(
+                                    (AllChapterData?.filter(
+                                      (item) =>
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 1" ||
+                                        item?.BluePrintQuestiontype ==
+                                          "L.A 2" ||
+                                        item?.BluePrintQuestiontype == "L.A 3"
+                                    )?.reduce(
                                       (a, ele) =>
                                         a +
                                         Number(
-                                          ele?.BluePrintmarksperquestion *
-                                            ele?.Blueprintnoofquestion
+                                          ele?.Blueprintnoofquestion *
+                                            ele?.BluePrintmarksperquestion
                                         ),
                                       0
-                                    )) *
-                                    100}
+                                    ) /
+                                      blueprint?.AllChapter?.reduce(
+                                        (a, ele) =>
+                                          a +
+                                          Number(
+                                            ele?.BluePrintmarksperquestion *
+                                              ele?.Blueprintnoofquestion
+                                          ),
+                                        0
+                                      )) *
+                                    100
+                                  )?.toFixed(2)}
                                   %
                                 </td>
                               </tr>

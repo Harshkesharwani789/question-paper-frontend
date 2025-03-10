@@ -471,6 +471,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                         <p>{Note}</p>
                       )}
                     </Form.Group>
+
                     {/* <span>
                                           <input
                                               onChange={(e) => {
@@ -480,6 +481,36 @@ const AdminQuestionAnalysisHeaderEdit = () => {
                                               }}  type="text" placeholder="Note" />:-
                                           {selectedLanguage == "en-t-i0-und" ? <></> : <p>{Note}</p>}
                                       </span> */}
+                  </div>
+                  <div className="weightage-objectives">
+                    <Table
+                      responsive
+                      bordered
+                      hover
+                      size="md"
+                      style={{ border: "1px solid" }}
+                    >
+                      <thead>
+                        <tr>
+                          <th>A</th>
+                          <th>E</th>
+                          <th>M</th>
+                          <th>OT</th>
+                          <th>SA</th>
+                          <th>VSA</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{state?.item?.A}</td>
+                          <td>{state?.item?.E}</td>
+                          <td>{state?.item?.M}</td>
+                          <td>{state?.item?.OT}</td>
+                          <td>{state?.item?.SA}</td>
+                          <td>{state?.item?.VSA}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
                   </div>
 
                   <div className="col-md-12 mb-2">

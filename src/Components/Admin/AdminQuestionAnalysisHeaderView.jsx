@@ -16,6 +16,7 @@ import html2canvas from "html2canvas";
 const AdminQuestionAnalysisHeaderView = () => {
   const location = useLocation();
   const { item } = location.state;
+  console.log("item", item);
 
   return (
     <>
@@ -66,6 +67,40 @@ const AdminQuestionAnalysisHeaderView = () => {
                               <td>40</td>
                               <td>Easy</td>
                               <td>2 minutes</td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+
+                    {/* New Table for A, E, M, OT, SA, VSA */}
+                    <div className="weightage-objectives">
+                      <div className="objectives-table">
+                        <Table
+                          responsive
+                          bordered
+                          hover
+                          size="md"
+                          style={{ border: "1px solid" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>A</th>
+                              <th>E</th>
+                              <th>M</th>
+                              <th>OT</th>
+                              <th>SA</th>
+                              <th>VSA</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{item?.A}</td>
+                              <td>{item?.E}</td>
+                              <td>{item?.M}</td>
+                              <td>{item?.OT}</td>
+                              <td>{item?.SA}</td>
+                              <td>{item?.VSA}</td>
                             </tr>
                           </tbody>
                         </Table>

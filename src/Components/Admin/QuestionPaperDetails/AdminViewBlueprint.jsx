@@ -429,29 +429,31 @@ function AdminViewBlueprint() {
                                                     }}
                                                   >
                                                     <b>
-                                                      {(val?.AllChapter?.filter(
-                                                        (ele) =>
-                                                          ele?.Blueprintchapter ==
-                                                          item?.name
-                                                      )?.reduce(
-                                                        (a, ele) =>
-                                                          a +
-                                                          Number(
-                                                            ele?.Blueprintnoofquestion *
-                                                              ele?.BluePrintmarksperquestion
-                                                          ),
-                                                        0
-                                                      ) /
-                                                        val?.AllChapter?.reduce(
+                                                      {(
+                                                        (val?.AllChapter?.filter(
+                                                          (ele) =>
+                                                            ele?.Blueprintchapter ==
+                                                            item?.name
+                                                        )?.reduce(
                                                           (a, ele) =>
                                                             a +
                                                             Number(
-                                                              ele?.BluePrintmarksperquestion *
-                                                                ele?.Blueprintnoofquestion
+                                                              ele?.Blueprintnoofquestion *
+                                                                ele?.BluePrintmarksperquestion
                                                             ),
                                                           0
-                                                        )) *
-                                                        100}
+                                                        ) /
+                                                          val?.AllChapter?.reduce(
+                                                            (a, ele) =>
+                                                              a +
+                                                              Number(
+                                                                ele?.BluePrintmarksperquestion *
+                                                                  ele?.Blueprintnoofquestion
+                                                              ),
+                                                            0
+                                                          )) *
+                                                        100
+                                                      )?.toFixed(2)}
                                                       %
                                                     </b>
                                                   </td>
@@ -647,29 +649,31 @@ function AdminViewBlueprint() {
                                                   <td>
                                                     <b>
                                                       {" "}
-                                                      {(val?.AllChapter?.filter(
-                                                        (ele) =>
-                                                          ele?.Blueprintobjective ==
-                                                          item?.Objective
-                                                      )?.reduce(
-                                                        (a, ele) =>
-                                                          a +
-                                                          Number(
-                                                            ele?.Blueprintnoofquestion *
-                                                              ele?.BluePrintmarksperquestion
-                                                          ),
-                                                        0
-                                                      ) /
-                                                        val?.AllChapter?.reduce(
+                                                      {(
+                                                        (val?.AllChapter?.filter(
+                                                          (ele) =>
+                                                            ele?.Blueprintobjective ==
+                                                            item?.Objective
+                                                        )?.reduce(
                                                           (a, ele) =>
                                                             a +
                                                             Number(
-                                                              ele?.BluePrintmarksperquestion *
-                                                                ele?.Blueprintnoofquestion
+                                                              ele?.Blueprintnoofquestion *
+                                                                ele?.BluePrintmarksperquestion
                                                             ),
                                                           0
-                                                        )) *
-                                                        100}
+                                                        ) /
+                                                          val?.AllChapter?.reduce(
+                                                            (a, ele) =>
+                                                              a +
+                                                              Number(
+                                                                ele?.BluePrintmarksperquestion *
+                                                                  ele?.Blueprintnoofquestion
+                                                              ),
+                                                            0
+                                                          )) *
+                                                        100
+                                                      )?.toFixed(2)}
                                                       %
                                                     </b>
                                                   </td>
@@ -881,29 +885,31 @@ function AdminViewBlueprint() {
                                               >
                                                 <b>
                                                   {" "}
-                                                  {(val?.AllChapter?.filter(
-                                                    (item) =>
-                                                      item?.BluePrintQuestiontype ==
-                                                      "O T"
-                                                  )?.reduce(
-                                                    (a, ele) =>
-                                                      a +
-                                                      Number(
-                                                        ele?.Blueprintnoofquestion *
-                                                          ele?.BluePrintmarksperquestion
-                                                      ),
-                                                    0
-                                                  ) /
-                                                    val?.AllChapter?.reduce(
+                                                  {(
+                                                    (val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.BluePrintQuestiontype ==
+                                                        "O T"
+                                                    )?.reduce(
                                                       (a, ele) =>
                                                         a +
                                                         Number(
-                                                          ele?.BluePrintmarksperquestion *
-                                                            ele?.Blueprintnoofquestion
+                                                          ele?.Blueprintnoofquestion *
+                                                            ele?.BluePrintmarksperquestion
                                                         ),
                                                       0
-                                                    )) *
-                                                    100}
+                                                    ) /
+                                                      val?.AllChapter?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.BluePrintmarksperquestion *
+                                                              ele?.Blueprintnoofquestion
+                                                          ),
+                                                        0
+                                                      )) *
+                                                    100
+                                                  )?.toFixed(2)}
                                                   %
                                                 </b>
                                               </td>
@@ -983,31 +989,33 @@ function AdminViewBlueprint() {
                                                 }}
                                               >
                                                 <b>
-                                                  {(val?.AllChapter?.filter(
-                                                    (item) =>
-                                                      item?.BluePrintQuestiontype ==
-                                                        "V.S.A" ||
-                                                      item?.BluePrintQuestiontype ==
-                                                        "S.A"
-                                                  )?.reduce(
-                                                    (a, ele) =>
-                                                      a +
-                                                      Number(
-                                                        ele?.Blueprintnoofquestion *
-                                                          ele?.BluePrintmarksperquestion
-                                                      ),
-                                                    0
-                                                  ) /
-                                                    val?.AllChapter?.reduce(
+                                                  {(
+                                                    (val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.BluePrintQuestiontype ==
+                                                          "V.S.A" ||
+                                                        item?.BluePrintQuestiontype ==
+                                                          "S.A"
+                                                    )?.reduce(
                                                       (a, ele) =>
                                                         a +
                                                         Number(
-                                                          ele?.BluePrintmarksperquestion *
-                                                            ele?.Blueprintnoofquestion
+                                                          ele?.Blueprintnoofquestion *
+                                                            ele?.BluePrintmarksperquestion
                                                         ),
                                                       0
-                                                    )) *
-                                                    100}
+                                                    ) /
+                                                      val?.AllChapter?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.BluePrintmarksperquestion *
+                                                              ele?.Blueprintnoofquestion
+                                                          ),
+                                                        0
+                                                      )) *
+                                                    100
+                                                  )?.toFixed(2)}
                                                   %
                                                 </b>
                                               </td>
@@ -1090,33 +1098,35 @@ function AdminViewBlueprint() {
                                                 }}
                                               >
                                                 <b>
-                                                  {(val?.AllChapter?.filter(
-                                                    (item) =>
-                                                      item?.BluePrintQuestiontype ==
-                                                        "L.A 1" ||
-                                                      item?.BluePrintQuestiontype ==
-                                                        "L.A 2" ||
-                                                      item?.BluePrintQuestiontype ==
-                                                        "L.A 3"
-                                                  )?.reduce(
-                                                    (a, ele) =>
-                                                      a +
-                                                      Number(
-                                                        ele?.Blueprintnoofquestion *
-                                                          ele?.BluePrintmarksperquestion
-                                                      ),
-                                                    0
-                                                  ) /
-                                                    val?.AllChapter?.reduce(
+                                                  {(
+                                                    (val?.AllChapter?.filter(
+                                                      (item) =>
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 1" ||
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 2" ||
+                                                        item?.BluePrintQuestiontype ==
+                                                          "L.A 3"
+                                                    )?.reduce(
                                                       (a, ele) =>
                                                         a +
                                                         Number(
-                                                          ele?.BluePrintmarksperquestion *
-                                                            ele?.Blueprintnoofquestion
+                                                          ele?.Blueprintnoofquestion *
+                                                            ele?.BluePrintmarksperquestion
                                                         ),
                                                       0
-                                                    )) *
-                                                    100}
+                                                    ) /
+                                                      val?.AllChapter?.reduce(
+                                                        (a, ele) =>
+                                                          a +
+                                                          Number(
+                                                            ele?.BluePrintmarksperquestion *
+                                                              ele?.Blueprintnoofquestion
+                                                          ),
+                                                        0
+                                                      )) *
+                                                    100
+                                                  )?.toFixed(2)}
                                                   %
                                                 </b>
                                               </td>

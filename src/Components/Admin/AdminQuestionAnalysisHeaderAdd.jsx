@@ -24,8 +24,68 @@ const AdminQuestionAnalysisHeaderAdd = () => {
   let googleTransliterate = require("google-input-tool");
   const [translatedValue, setTranslatedValue] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("en-t-i0-und");
+  const [analysisValues, setAnalysisValues] = useState({
+    OT: "",
+    VSA: "",
+    SA: "",
+    A: "",
+    E: "",
+    M: "",
+  });
+  const [translatedAnalysisValues, setTranslatedAnalysisValues] = useState({
+    OT: "",
+    VSA: "",
+    SA: "",
+    A: "",
+    E: "",
+    M: "",
+  });
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
+  };
+  const translateText = async (text, key = null) => {
+    if (!text || selectedLanguage === "en-t-i0-und") return text;
+
+    const words = text.split(/\s+/);
+    const translations = await Promise.all(
+      words.map(async (word) => {
+        try {
+          const response = await googleTransliterate(
+            new XMLHttpRequest(),
+            word,
+            selectedLanguage
+          );
+          return response[0][0];
+        } catch (error) {
+          console.error("Translation error:", error);
+          return word;
+        }
+      })
+    );
+
+    const translatedText = translations.join(" ");
+
+    if (key) {
+      setTranslatedAnalysisValues((prev) => ({
+        ...prev,
+        [key]: translatedText,
+      }));
+    }
+
+    return translatedText;
+  };
+
+  const handleAnalysisChange = async (key, value) => {
+    setAnalysisValues((prev) => ({ ...prev, [key]: value }));
+
+    if (selectedLanguage !== "en-t-i0-und") {
+      const translatedText = await translateText(value, key);
+      setTranslatedAnalysisValues((prev) => ({
+        ...prev,
+        [key]: translatedText,
+      }));
+    }
   };
 
   const onChangeHandler = debounce(async (value, setData) => {
@@ -103,11 +163,11 @@ const AdminQuestionAnalysisHeaderAdd = () => {
           Time: Time,
           Note: Note,
           selectedMedium: selectedMedium,
+          analysisValues: analysisValues, // Include analysisValues in the data
         },
       };
       const res = await axios(config);
       if (res.status === 200) {
-        // alert(res.data.success);
         return swal({
           title: "Yeahh!",
           text: res.data.success,
@@ -117,7 +177,6 @@ const AdminQuestionAnalysisHeaderAdd = () => {
       }
       window.location.assign("/adminquestionsanalysisheadertype");
     } catch (error) {
-      // alert(error.response.data.error);
       return swal({
         title: "Error!",
         text: error.response.data.error,
@@ -715,6 +774,55 @@ const AdminQuestionAnalysisHeaderAdd = () => {
                             ) : (
                               <p>{Note}</p>
                             )}
+                            <div
+                              className="analysis-grid"
+                              style={{
+                                display: "grid",
+                                gridTemplateColumns:
+                                  "repeat(auto-fit, minmax(200px, 1fr))",
+                                gap: "1rem",
+                                margin: "2rem 0",
+                              }}
+                            >
+                              {Object.entries({
+                                "O.T": "OT",
+                                "V.S.A": "VSA",
+                                "S.A": "SA",
+                                A: "A",
+                                E: "E",
+                                M: "M",
+                              }).map(([label, key]) => (
+                                <div
+                                  key={key}
+                                  className="analysis-item"
+                                  style={{
+                                    backgroundColor: "white",
+                                    padding: "1rem",
+                                    borderRadius: "8px",
+                                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                                  }}
+                                >
+                                  <label className="block mb-2 font-medium">
+                                    {label}
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="w-full p-2 border rounded"
+                                    value={analysisValues[key]}
+                                    onChange={(e) =>
+                                      handleAnalysisChange(key, e.target.value)
+                                    }
+                                    placeholder={label}
+                                  />
+                                  {selectedLanguage !== "en-t-i0-und" &&
+                                    translatedAnalysisValues[key] && (
+                                      <p className="mt-2 text-sm text-gray-600">
+                                        {translatedAnalysisValues[key]}
+                                      </p>
+                                    )}
+                                </div>
+                              ))}
+                            </div>
 
                             <div className="col-md-12 mb-2">
                               <div className="d-flex justify-content-center">

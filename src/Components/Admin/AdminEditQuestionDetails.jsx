@@ -920,7 +920,7 @@ const AdminEditQuestionDetails = () => {
                   {getaddsubclass
                     ?.filter(
                       (ele) =>
-                        Class === ele.className || ele.mediumName === Medium
+                        Class === ele.className && ele.mediumName === Medium
                     )
                     ?.map((val, i) => {
                       return (

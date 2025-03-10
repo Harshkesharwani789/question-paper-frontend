@@ -308,6 +308,51 @@ function QuestionHeader() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (View) {
+      setClass(View.classs || "");
+      setSubject(View.subject || "");
+      setMarks(View.marks || "");
+      setTime(View.time || "");
+      setStudentInfo(View.studentinfo || "");
+      setExamDate(View.examdate || "");
+      setTotalQuestion(View.totalquestion || "");
+      setNameofStudent(View.nameofstudent || "");
+      setSatsNo(View.satsno || "");
+      setSignature(View.signature || "");
+      setroomInvigilator(View.roominvigilator || "");
+      setIdsccode(View.idsccode || "");
+      setSchoolName(View.schoolname || "");
+      setCluster(View.cluster || "");
+      setBlock(View.block || "");
+      setDistric(View.distric || "");
+      setGovt(View.govt || "");
+      setAided(View.aided || "");
+      setUnaided(View.unaided || "");
+      setmarkinfo(View.markinfo || "");
+      setSignatuteInvigilator(View.signatureinvigilator || "");
+      setEvaluator(View.evaluator || "");
+      setQuestionNo1(View.questionno1 || "");
+      setObtainedNo1(View.obtainedno1 || "");
+      setQuestionNo2(View.questionno2 || "");
+      setObtainedNo2(View.obtainedno2 || "");
+      setQuestionNo3(View.questionno3 || "");
+      setObtainedNo3(View.obtainedno3 || "");
+      setTotalMarks1(View.totalmarks1 || "");
+      setTotalMarks2(View.totalmarks2 || "");
+      setTotalMarks3(View.totalmarks3 || "");
+      setGrandTotal(View.grandtotal || "");
+      setTotalObtainMarks(View.totalobtainedmarks || "");
+      setEvaluatorSign(View.evaluatorsign || "");
+      setQFormatMedium(View.medium || "");
+      setAns(View.ans || "");
+      setOr(View.or || "");
+      setAnswerHeader(View.answerheader || "");
+      setblueprintBoard(View.blueprintBoard || "");
+      setmediumHeead(View.mediumHead || "");
+      setlastSign(View.lastSign || "");
+    }
+  }, [View]);
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
@@ -1601,7 +1646,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.classs}</p>
+                        <p>{Class || View?.classs}</p>
                       )}
                     </div>
                     <div className="class-data">
@@ -1620,7 +1665,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.subject}</p>
+                        <p>{Subject || View?.subject}</p>
                       )}
                       <br />
                       <b className="d-flex">
@@ -1639,7 +1684,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.medium}</p>
+                        <p>{mediumHead || View?.medium}</p>
                       )}
                     </div>
                     <div className="mb-2">
@@ -1659,7 +1704,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.Marks}</p>
+                          <p>{Marks || View?.Marks}</p>
                         )}
                       </div>
                       <br />
@@ -1679,7 +1724,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.time}</p>
+                          <p>{Time || View?.time}</p>
                         )}
                       </div>
                     </div>
@@ -1703,7 +1748,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.studentinfo}</p>
+                          <p>{StudentInfo || View?.studentinfo}</p>
                         )}
                       </div>
                       <div>
@@ -1724,7 +1769,7 @@ function QuestionHeader() {
                           {selectedLanguage === "en-t-i0-und" ? (
                             <></>
                           ) : (
-                            <p>{View?.examdate}</p>
+                            <p>{ExamDate || View?.examdate}</p>
                           )}
                         </span>{" "}
                         <br />
@@ -1748,7 +1793,7 @@ function QuestionHeader() {
                           {selectedLanguage === "en-t-i0-und" ? (
                             <></>
                           ) : (
-                            <p>{View?.totalquestion}</p>
+                            <p>{TotalQuestion || View?.totalquestion}</p>
                           )}
                         </span>
                       </div>
@@ -1774,7 +1819,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.nameofstudent}</p>
+                          <p>{NameofStudent || View?.nameofstudent}</p>
                         )}
                       </p>
                       <div className="line"></div>
@@ -1800,7 +1845,7 @@ function QuestionHeader() {
                           {selectedLanguage === "en-t-i0-und" ? (
                             <></>
                           ) : (
-                            <p>{View?.satsno}</p>
+                            <p>{SatsNo || View?.satsno}</p>
                           )}
                         </p>
                       </div>
@@ -1833,7 +1878,7 @@ function QuestionHeader() {
                           {selectedLanguage === "en-t-i0-und" ? (
                             <></>
                           ) : (
-                            <p>{View?.signature}</p>
+                            <p>{Signature || View?.signature}</p>
                           )}
                         </p>
 
@@ -1863,7 +1908,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.signatureinvigilator}</p>
+                        <p>{roomInvigilator || View?.signatureinvigilator}</p>
                       )}
                     </h5>
 
@@ -1886,7 +1931,7 @@ function QuestionHeader() {
                           {selectedLanguage === "en-t-i0-und" ? (
                             <></>
                           ) : (
-                            <p>{View?.idsccode}</p>
+                            <p>{Idsccode || View?.idsccode}</p>
                           )}
                         </p>
                       </div>
@@ -1922,7 +1967,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.schoolname}</p>
+                          <p>{SchoolName || View?.schoolname}</p>
                         )}
                       </p>
                       <div className="line-2"></div>
@@ -1948,7 +1993,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.cluster}</p>
+                          <p>{Cluster || View?.cluster}</p>
                         )}
                       </p>
 
@@ -1971,7 +2016,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.block}</p>
+                          <p>{Block || View?.block}</p>
                         )}
                       </p>
                       <div className="line-3"></div>
@@ -1994,7 +2039,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.distric}</p>
+                          <p>{Distric || View?.distric}</p>
                         )}
                       </p>
 
@@ -2036,7 +2081,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.govt}</p>
+                          <p>{Govt || View?.govt}</p>
                         )}
                       </p>
 
@@ -2059,7 +2104,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.aided}</p>
+                          <p>{Aided || View?.aided}</p>
                         )}
                       </p>
                       <div className="number-box-1"></div>
@@ -2082,7 +2127,7 @@ function QuestionHeader() {
                         {selectedLanguage === "en-t-i0-und" ? (
                           <></>
                         ) : (
-                          <p>{View?.unaided}</p>
+                          <p>{Unaided || View?.unaided}</p>
                         )}
                       </p>
 
@@ -2107,7 +2152,7 @@ function QuestionHeader() {
                     {selectedLanguage === "en-t-i0-und" ? (
                       <></>
                     ) : (
-                      <p>{View?.markinfo}</p>
+                      <p>{markinfo || View?.markinfo}</p>
                     )}
                   </div>
                   <div
@@ -2134,7 +2179,9 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.signatureinvigilator}</p>
+                        <p>
+                          {SignatuteInvigilator || View?.signatureinvigilator}
+                        </p>
                       )}
                     </p>
                     <div className="line-4"></div>
@@ -2155,7 +2202,7 @@ function QuestionHeader() {
                     {selectedLanguage === "en-t-i0-und" ? (
                       <></>
                     ) : (
-                      <p>{View?.evaluator}</p>
+                      <p>{Evaluator || View?.evaluator}</p>
                     )}
 
                     <br />
@@ -2187,7 +2234,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.questionno1}</p>
+                              <p>{QuestionNo1 || View?.questionno1}</p>
                             )}
                           </th>
 
@@ -2210,7 +2257,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.obtainedno1}</p>
+                              <p>{ObtainedNo1 || View?.obtainedno1}</p>
                             )}
                           </th>
 
@@ -2233,7 +2280,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.questionno2}</p>
+                              <p>{QuestionNo2 || View?.questionno2}</p>
                             )}
                           </th>
                           <th>
@@ -2256,7 +2303,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.obtainedno2}</p>
+                              <p>{ObtainedNo2 || View?.obtainedno2}</p>
                             )}
                           </th>
                           <th>
@@ -2278,7 +2325,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.questionno3}</p>
+                              <p>{QuestionNo3 || View?.questionno3}</p>
                             )}
                           </th>
                           <th>
@@ -2301,7 +2348,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.obtainedno3}</p>
+                              <p>{ObtainedNo3 || View?.obtainedno3}</p>
                             )}
                           </th>
                         </tr>
@@ -2407,7 +2454,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.totalmarks1}</p>
+                              <p>{TotalMarks1 || View?.totalmarks1}</p>
                             )}
                           </td>
                           <td></td>
@@ -2430,7 +2477,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.totalmarks2}</p>
+                              <p>{TotalMarks2 || View?.totalmarks2}</p>
                             )}
                           </td>
                           <td></td>
@@ -2453,7 +2500,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.totalmarks3}</p>
+                              <p>{TotalMarks3 || View?.totalmarks3}</p>
                             )}
                           </td>
                           <td></td>
@@ -2482,7 +2529,7 @@ function QuestionHeader() {
                             {selectedLanguage === "en-t-i0-und" ? (
                               <></>
                             ) : (
-                              <p>{View?.grandtotal}</p>
+                              <p>{GrandTotal || View?.grandtotal}</p>
                             )}
                           </td>
                           <td></td>
@@ -2511,7 +2558,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.totalobtainedmarks}</p>
+                        <p>{TotalObtainMarks || View?.totalobtainedmarks}</p>
                       )}
                     </p>
 
@@ -2536,7 +2583,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.evaluatorsign}</p>
+                        <p>{EvaluatorSign || View?.evaluatorsign}</p>
                       )}
                     </p>
 
@@ -2560,7 +2607,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.lastSign}</p>
+                        <p>{lastSign || View?.lastSign}</p>
                       )}
                     </p>
 
@@ -2586,7 +2633,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.ans}</p>
+                        <p>{Ans || View?.ans}</p>
                       )}
                     </div>
                     <div>
@@ -2623,7 +2670,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.answerheader}</p>
+                        <p>{AnswerHeader || View?.answerheader}</p>
                       )}
                     </div>
                     <div>
@@ -2645,7 +2692,7 @@ function QuestionHeader() {
                       {selectedLanguage === "en-t-i0-und" ? (
                         <></>
                       ) : (
-                        <p>{View?.blueprintBoard}</p>
+                        <p>{blueprintBoard || View?.blueprintBoard}</p>
                       )}
                     </div>
                   </div>
