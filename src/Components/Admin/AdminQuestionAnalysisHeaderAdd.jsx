@@ -163,7 +163,7 @@ const AdminQuestionAnalysisHeaderAdd = () => {
           Time: Time,
           Note: Note,
           selectedMedium: selectedMedium,
-          analysisValues: analysisValues, // Include analysisValues in the data
+          translatedAnalysisValues: translatedAnalysisValues,
         },
       };
       const res = await axios(config);
@@ -814,12 +814,15 @@ const AdminQuestionAnalysisHeaderAdd = () => {
                                     }
                                     placeholder={label}
                                   />
-                                  {selectedLanguage !== "en-t-i0-und" &&
+                                  {selectedLanguage === "en-t-i0-und" ? (
+                                    <></>
+                                  ) : (
                                     translatedAnalysisValues[key] && (
                                       <p className="mt-2 text-sm text-gray-600">
                                         {translatedAnalysisValues[key]}
                                       </p>
-                                    )}
+                                    )
+                                  )}
                                 </div>
                               ))}
                             </div>

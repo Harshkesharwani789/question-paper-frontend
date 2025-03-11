@@ -91,7 +91,7 @@ function QuestionAnalysis() {
       am == "Grammer Questions" ||
       am == "One Sentence Answer Question"
     ) {
-      return "O.T";
+      return GetquestAnalysisHeader?.OT;
     }
     if (
       am == "Two  Sentence Answer Questions" ||
@@ -100,7 +100,7 @@ function QuestionAnalysis() {
       am == "Poet,Time, Place, Writer answer questions" ||
       am == "Two and three Sentence Answer Questions"
     ) {
-      return "S.A";
+      return GetquestAnalysisHeader?.SA;
     }
     if (
       am == "Three and Four Sentence Answer Questions" ||
@@ -115,7 +115,7 @@ function QuestionAnalysis() {
       am == "Letter Writting" ||
       am == "Map Reading"
     ) {
-      return "L.A";
+      return GetquestAnalysisHeader?.VSA;
     }
   }
 
@@ -139,6 +139,7 @@ function QuestionAnalysis() {
     }
   };
   console.log("GetquestAnalysisHeader", GetquestAnalysisHeader);
+
   useEffect(() => {
     getquestAnalysisHeader();
   }, []);
@@ -216,7 +217,7 @@ function QuestionAnalysis() {
                         );
                         const requiredQuestions = Number(ele2?.NQA);
                         const addedQuestions = filteredQuestions?.length || 0;
-                        
+
                         return filteredQuestions?.map((item, i) => {
                           if (i < requiredQuestions) {
                             return (
@@ -226,12 +227,12 @@ function QuestionAnalysis() {
                                 <td>{item?.Chapter_Name}</td>
                                 <td>{item?.Lesson}</td>
                                 <td>
-                                  {item?.Types_Question}
-                                  <div>
+                                  {item?.Types_QuestionTranslate}
+                                  {/* <div>
                                     <small>Required: {requiredQuestions}</small>
                                     <br />
-                                    <small>Added: {addedQuestions}</small>
-                                  </div>
+                            <small>Added: {addedQuestions}</small>
+                            </div>*/}
                                 </td>
                                 <td>{check(ele2?.QAType)}</td>
                                 <td>{(ele2?.NQA * ele2?.Mask) / ele2?.NQA}</td>

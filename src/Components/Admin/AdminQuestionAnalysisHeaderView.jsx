@@ -16,6 +16,7 @@ import html2canvas from "html2canvas";
 const AdminQuestionAnalysisHeaderView = () => {
   const location = useLocation();
   const { item } = location.state;
+  console.log("location", location);
   console.log("item", item);
 
   return (

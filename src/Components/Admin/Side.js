@@ -45,15 +45,13 @@ import { PiNumberSquareFiveFill } from "react-icons/pi";
 import { TiTick } from "react-icons/ti";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { FaPersonCircleQuestion } from "react-icons/fa6";
-import logo from "./../../assets/logo.png"
-
-
+import logo from "./../../assets/logo.png";
 
 const Side = () => {
   const [question, setquestion] = useState(false);
 
   const [Board, setBoard] = useState(false);
-  const [DiffLevel,setDiffLevel] = useState(false);
+  const [DiffLevel, setDiffLevel] = useState(false);
   const [Class, setClass] = useState(false);
   const [Medium, setMedium] = useState(false);
   const [Examination, setExamination] = useState(false);
@@ -90,7 +88,7 @@ const Side = () => {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return (
     <div>
-      <Navbar expand="lg" className=" p-0" style={{background:"#E17D1F"}}>
+      <Navbar expand="lg" className=" p-0" style={{ background: "#E17D1F" }}>
         <button
           class="custom-toggler navbar-toggler"
           type="button"
@@ -113,11 +111,7 @@ const Side = () => {
           <div className="si09">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="lo-ad">
-                <img
-                  src={logo}
-                  alt="adminlogo"
-                  className="admin-logo-img"
-                />
+                <img src={logo} alt="adminlogo" className="admin-logo-img" />
               </div>
               <div className="sidebar-close-icon" onClick={handleNavCollapse}>
                 <AiOutlineClose />
@@ -132,57 +126,14 @@ const Side = () => {
                   <span className="ms-2">Dashboard</span>
                 </li>
               </Link>
-
-              <Link to="/adminboard" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(true);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(false);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Board Add </span>
-                </li>
-              </Link>
-              <Link to="/admindifficultylevel" onClick={handleNavCollapse}>
+              <Link to="/adminmedium" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {
                     setBoard(false);
-                    setDiffLevel(true);
+                    setDiffLevel(false);
                     setClass(false);
-                    setMedium(false);
+                    setMedium(true);
                     setExamination(false);
                     setSubject(false);
                     setWeightage(false);
@@ -212,9 +163,9 @@ const Side = () => {
                   }}
                 >
                   <span>
-                    <LuAlignHorizontalJustifyStart style={{ fontSize: "20px" }} />
+                    <LuFileQuestion style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Difficulty Level </span>
+                  <span className="ms-2">Medium Add</span>
                 </li>
               </Link>
               <Link to="/adminclass" onClick={handleNavCollapse}>
@@ -260,14 +211,14 @@ const Side = () => {
                 </li>
               </Link>
 
-              <Link to="/adminmedium" onClick={handleNavCollapse}>
+              <Link to="/adminboard" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {
-                    setBoard(false);
+                    setBoard(true);
                     setDiffLevel(false);
                     setClass(false);
-                    setMedium(true);
+                    setMedium(false);
                     setExamination(false);
                     setSubject(false);
                     setWeightage(false);
@@ -297,9 +248,11 @@ const Side = () => {
                   }}
                 >
                   <span>
-                    <LuFileQuestion style={{ fontSize: "20px" }} />
+                    <LuAlignHorizontalJustifyStart
+                      style={{ fontSize: "20px" }}
+                    />
                   </span>
-                  <span className="ms-2">Medium Add</span>
+                  <span className="ms-2">Board Add </span>
                 </li>
               </Link>
               <Link to="/adminexam" onClick={handleNavCollapse}>
@@ -335,6 +288,7 @@ const Side = () => {
                   <span className="ms-2">Name Of Examination Add</span>
                 </li>
               </Link>
+
               <Link to="/adminsubject" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
@@ -401,6 +355,51 @@ const Side = () => {
                   <span className="ms-2">Subject Part Add</span>
                 </li>
               </Link>
+              <Link to="/admindifficultylevel" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(true);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <LuAlignHorizontalJustifyStart
+                      style={{ fontSize: "20px" }}
+                    />
+                  </span>
+                  <span className="ms-2">Difficulty Level </span>
+                </li>
+              </Link>
+
               <Link to="/adminchapter" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
@@ -434,170 +433,7 @@ const Side = () => {
                   <span className="ms-2">Chapters Add</span>
                 </li>
               </Link>
-              <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele"
-                  onClick={() => {
-                    setBoard(false);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(true);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Syllabus Add</span>
-                </li>
-              </Link>
-              <Link to="/adminobjectives" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele"
-                  onClick={() => {
-                    setBoard(false);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(true);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Objectives Add</span>
-                </li>
-              </Link>
-              <Link to="/questionheader" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele"
-                  onClick={() => {
-                    setBoard(false);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(true);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Question Header Add</span>
-                </li>
-              </Link>
-              <Link to="/adminblueprintheadertype" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(true);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(false);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Blue Print Header</span>
-                </li>
-              </Link>
-              <Link to="/adminquestionsanalysisheadertype" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(false);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setAccountHistory(false);
-                    setsyllabusCopy(false);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setquestAnalysis(true);
-                  }}
-                >
-                  <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Questions Analysis Header</span>
-                </li>
-              </Link>
-              <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
+              <Link to="/adminquestions" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
                   onClick={() => {
@@ -607,13 +443,13 @@ const Side = () => {
                     setMedium(false);
                     setExamination(false);
                     setSubject(false);
-                    setWeightage(true);
-                    setQuestions(false);
+                    setWeightage(false);
+                    setQuestions(true);
                     setQuestionLevel(false);
                     setExamLevel(false);
                     setUserList(false);
-                    setAccountHistory(false);
                     setsyllabusCopy(false);
+                    setAccountHistory(false);
                     setOnesentence(false);
                     setTwosentence(false);
                     setThreesentence(false);
@@ -621,13 +457,23 @@ const Side = () => {
                     setFivesentence(false);
                     setRecorrect(false);
                     setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
                     setquestAnalysis(false);
                   }}
                 >
                   <span>
-                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                    <FaShop style={{ fontSize: "20px" }} />
                   </span>
-                  <span className="ms-2">Blue Print Add</span>
+                  <span className="ms-2">Questions Add</span>
                 </li>
               </Link>
               <Link to="/questiontype" onClick={handleNavCollapse}>
@@ -663,6 +509,251 @@ const Side = () => {
                   <span className="ms-2">QuestionType Add</span>
                 </li>
               </Link>
+              <Link to="/questionheader" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(true);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Question Header Add</span>
+                </li>
+              </Link>
+              <Link
+                to="/adminquestionsanalysisheadertype"
+                onClick={handleNavCollapse}
+              >
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(true);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Questions Analysis Header</span>
+                </li>
+              </Link>
+              <Link to="/admin_upload_pdf" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(true);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setsyllabusCopy(false);
+                    setAccountHistory(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setRelationship(false);
+                    setfiveandsix(false);
+                    setsix(false);
+                    setseven(false);
+                    seteight(false);
+                    setten(false);
+                    setexpandexplain(false);
+                    setoddandout(false);
+                    setmcq(false);
+                    setpassage(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaUpload style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Upload Questions</span>
+                </li>
+              </Link>
+              <Link to="/adminblueprintdetails" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Blue Print Add</span>
+                </li>
+              </Link>
+              <Link to="/adminblueprintheadertype" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele "
+                  onClick={() => {
+                    setBoard(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(true);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(false);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Blue Print Header</span>
+                </li>
+              </Link>
+
+              <Link to="/adminobjectives" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(true);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Objectives Add</span>
+                </li>
+              </Link>
+
+              <Link to="/adminsyllabuscopy" onClick={handleNavCollapse}>
+                <li
+                  className="a-ele"
+                  onClick={() => {
+                    setBoard(false);
+                    setDiffLevel(false);
+                    setClass(false);
+                    setMedium(false);
+                    setExamination(false);
+                    setSubject(false);
+                    setWeightage(false);
+                    setQuestions(false);
+                    setQuestionLevel(false);
+                    setExamLevel(false);
+                    setUserList(false);
+                    setAccountHistory(false);
+                    setsyllabusCopy(true);
+                    setOnesentence(false);
+                    setTwosentence(false);
+                    setThreesentence(false);
+                    setFoursentence(false);
+                    setFivesentence(false);
+                    setRecorrect(false);
+                    setMatch(false);
+                    setquestAnalysis(false);
+                  }}
+                >
+                  <span>
+                    <FaWeightHanging style={{ fontSize: "20px" }} />
+                  </span>
+                  <span className="ms-2">Syllabus Add</span>
+                </li>
+              </Link>
+
               {/* <Link to="#">
                 <li
                   className="a-ele"
@@ -845,92 +936,6 @@ const Side = () => {
                 )}
               </Link> */}
 
-              <Link to="/adminquestions" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(false);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(true);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setsyllabusCopy(false);
-                    setAccountHistory(false);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaShop style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Questions Add</span>
-                </li>
-              </Link>
-              <Link to="/admin_upload_pdf" onClick={handleNavCollapse}>
-                <li
-                  className="a-ele "
-                  onClick={() => {
-                    setBoard(false);
-                    setDiffLevel(false);
-                    setClass(false);
-                    setMedium(false);
-                    setExamination(false);
-                    setSubject(false);
-                    setWeightage(false);
-                    setQuestions(true);
-                    setQuestionLevel(false);
-                    setExamLevel(false);
-                    setUserList(false);
-                    setsyllabusCopy(false);
-                    setAccountHistory(false);
-                    setOnesentence(false);
-                    setTwosentence(false);
-                    setThreesentence(false);
-                    setFoursentence(false);
-                    setFivesentence(false);
-                    setRecorrect(false);
-                    setMatch(false);
-                    setRelationship(false);
-                    setfiveandsix(false);
-                    setsix(false);
-                    setseven(false);
-                    seteight(false);
-                    setten(false);
-                    setexpandexplain(false);
-                    setoddandout(false);
-                    setmcq(false);
-                    setpassage(false);
-                    setquestAnalysis(false);
-                  }}
-                >
-                  <span>
-                    <FaUpload  style={{ fontSize: "20px" }} />
-                  </span>
-                  <span className="ms-2">Upload Questions</span>
-                </li>
-              </Link>
               <Link to="/adminuserlist" onClick={handleNavCollapse}>
                 <li
                   className="a-ele "
@@ -1010,7 +1015,7 @@ const Side = () => {
                   }}
                 >
                   <span>
-                    <GiNewspaper  style={{ fontSize: "20px" }} />
+                    <GiNewspaper style={{ fontSize: "20px" }} />
                   </span>
                   <span className="ms-2">Genrated Question </span>
                 </li>
@@ -1098,7 +1103,6 @@ const Side = () => {
                   <span className="ms-2">Cover Page</span>
                 </li>
               </Link>
-           
             </ul>
           </div>
         </div>

@@ -88,7 +88,7 @@ function AdminQuestionAnalysis() {
       am == "Grammer Questions" ||
       am == "One Sentence Answer Question"
     ) {
-      return "O.T";
+      return GetquestAnalysisHeader.OT;
     }
     if (
       am == "Two  Sentence Answer Questions" ||
@@ -97,7 +97,7 @@ function AdminQuestionAnalysis() {
       am == "Poet,Time, Place, Writer answer questions" ||
       am == "Two and three Sentence Answer Questions"
     ) {
-      return "S.A";
+      return GetquestAnalysisHeader.SA;
     }
     if (
       am == "Three and Four Sentence Answer Questions" ||
@@ -112,7 +112,7 @@ function AdminQuestionAnalysis() {
       am == "Letter Writting" ||
       am == "Map Reading"
     ) {
-      return "L.A";
+      return GetquestAnalysisHeader.A;
     }
   }
 
