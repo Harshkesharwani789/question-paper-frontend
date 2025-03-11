@@ -37,7 +37,6 @@
   }
 } */
 
-
 .swal-footer {
   text-align: center !important;
 }
@@ -174,7 +173,7 @@ button {
 }
 
 .beautiful-text::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -196,11 +195,10 @@ button {
   }
 }
 
-.questionpdfview a{
+.questionpdfview a {
   font-size: 25px;
   text-decoration: none;
   word-spacing: 3px;
-
 }
 .vertical-line {
   border-left: 4px solid white;
@@ -210,39 +208,42 @@ button {
   /* margin-bottom: -12px; */
   margin-top: 16px;
 }
-.table_data td{
+.table_data td {
   border: 1px solid #dddddd;
   font-size: 20px;
 }
-.offerbox{
+.offerbox {
   background-color: aliceblue;
- 
- border-radius: 10px;
+
+  border-radius: 10px;
 }
-.uiline ul{
+.uiline ul {
   gap: 22px;
   display: flex;
   align-items: center;
 }
 
-.uiline span{
+.uiline span {
   font-size: 18px;
   font-family: math;
 }
-.buybtn{
+.buybtn {
   padding: 12px;
   border-radius: 10px !important;
   width: 69px;
 }
-.spantg{
+.spantg {
   background-color: #9ae5cc;
   padding: 8px;
   border-radius: 23px;
   height: 35px;
-
 }
-@media screen  and (max-width:799px){
-  .vertical-line{
+@media screen and (max-width: 799px) {
+  .vertical-line {
     display: none !important;
   }
 }
+
+/* * {
+  outline: 2px solid red !important;
+} */

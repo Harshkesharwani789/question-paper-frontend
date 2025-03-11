@@ -12,7 +12,6 @@ import Button1 from "../Button1";
 import { MdEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 // import Button from "../Button";
-
 const Login = () => {
   const navigate = useNavigate("");
   const [show, setShow] = useState(false);
@@ -212,9 +211,12 @@ const Login = () => {
           <div className="box">
             <div className="row">
               <div className="col-md-6">
-                <div className="bg-img">
+                <div
+                  className="bg-img "
+                  // style={{ alignItems: "center", justifyContent: "center" }}
+                >
                   <div className="line-1">
-                    <h2 className="alfa-slab mt-2" style={{ color: "#5140EB" }}>
+                    <h2 className="alfa-slab " style={{ color: "#5140EB" }}>
                       Welcome To,
                     </h2>
                     <img src={logo} alt=" " className="w-50" />
@@ -298,8 +300,14 @@ const Login = () => {
                     </div> */}
 
                     <div
-                      className="border border-white mt-5 contact-width p-3"
-                      style={{ backdropFilter: "blur(10px)", maxWidth: "100%" }}
+                      className="border border-white mt-5 contact-width p-3 login-contact"
+                      style={{
+                        backdropFilter: "blur(10px)",
+                        maxWidth: "100%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // marginLeft: "35px",
+                      }}
                     >
                       <h2 style={{ fontSize: "20px" }} className="text-light">
                         Contact Information

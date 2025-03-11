@@ -13,20 +13,25 @@
 }
 .line-1 {
   position: absolute;
-  top: 69%;
+  top: 49%;
   /* width: 100%; */
   font-size: 30px;
   white-space: nowrap;
   overflow: hidden;
   transform: translateY(-50%);
   text-align: center;
-  left: 11%;
-  right: 3%;
+  /* left: 11%; */
+  /* right: 3%; */
 }
 
 .line-1 h3 {
   font-size: 30px;
 }
+
+.login-contact {
+  margin-left: 35px;
+}
+
 /* Animation */
 .anim-typewriter {
   animation: typewriter 4s steps(44) 1s 1 normal both;
@@ -88,5 +93,30 @@
   }
   .loginpage5 {
     padding: 0px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .loginpage5 {
+    width: 100%;
+    border-radius: 0px;
+    box-shadow: none;
+  }
+  .line-1 {
+    position: absolute;
+    top: 52%;
+    left: 0%;
+  }
+  .line-1 h3 {
+    font-size: 25px;
+  }
+  .signup-bg-img {
+    height: 280px;
+  }
+  .loginpage5 {
+    padding: 0px !important;
+  }
+  .login-contact {
+    margin-left: 13px;
   }
 }
