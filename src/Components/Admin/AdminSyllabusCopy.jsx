@@ -95,7 +95,7 @@ const AdminSyllabusCopy = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSujects"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -110,7 +110,7 @@ const AdminSyllabusCopy = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getallcontent"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -125,7 +125,7 @@ const AdminSyllabusCopy = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllChapter"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -140,7 +140,7 @@ const AdminSyllabusCopy = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllNameExamination"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -293,7 +293,7 @@ const AdminSyllabusCopy = () => {
       const config = {
         url: "/admin/addSyllabus",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -341,7 +341,9 @@ const AdminSyllabusCopy = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllClass"
+      );
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -354,7 +356,7 @@ const AdminSyllabusCopy = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -368,7 +370,9 @@ const AdminSyllabusCopy = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -383,7 +387,7 @@ const AdminSyllabusCopy = () => {
       const config = {
         url: "/admin/updateSyllabus",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -429,7 +433,7 @@ const AdminSyllabusCopy = () => {
   const deleteslybus = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8001/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/deletedSyllaus/${Syllabus}/${admin?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -460,7 +464,7 @@ const AdminSyllabusCopy = () => {
   const getSyllabus = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllSyllabus/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSyllabus/${admin?._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.status == 200) {

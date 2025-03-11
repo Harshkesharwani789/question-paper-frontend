@@ -81,7 +81,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/addcoverpage",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -114,7 +114,7 @@ export const AddCover = () => {
   const getCoverPage = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getcoverpagedetails"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getcoverpagedetails"
       );
       if (res.status === 200) {
         setgetcoverpagedetails(res.data.success);
@@ -130,7 +130,9 @@ export const AddCover = () => {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
       }
@@ -149,7 +151,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/EditCoverPageHeader/" + EditData?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: { "Content-Type": "application/json" },
         data: {
@@ -188,7 +190,7 @@ export const AddCover = () => {
     try {
       const config = {
         url: "/admin/DeleteCoverPageHeader/" + deleteData?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "delete",
         headers: { "Content-Type": "application/json" },
       };

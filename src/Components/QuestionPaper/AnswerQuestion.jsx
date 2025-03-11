@@ -49,7 +49,7 @@ function AnswerQuestion() {
     try {
       const config = {
         url: "/teacher/getGenQuestionById/" + state?._id + "/" + user?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "get",
         headers: {
           "content-type": "application/json",
@@ -81,7 +81,7 @@ function AnswerQuestion() {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/questiontheadergetbymedium/" +
           state?.Medium +
           "/" +
           user?._id,
@@ -215,7 +215,7 @@ function AnswerQuestion() {
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
+                                                    src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -267,7 +267,7 @@ function AnswerQuestion() {
                                               <b>Answer Image:</b>
                                               <div>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_Ans}`}
                                                   style={{
                                                     width: "174px",
                                                     height: "98px",
@@ -775,7 +775,7 @@ function AnswerQuestion() {
                                                 <b>Answer Image:</b>
                                                 <div>
                                                   <img
-                                                    src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
+                                                    src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_Ans}`}
                                                     style={{
                                                       width: "174px",
                                                       height: "98px",
@@ -906,7 +906,7 @@ function AnswerQuestion() {
                                           <>
                                             <div>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_Ans}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_Ans}`}
                                                 style={{
                                                   width: "174px",
                                                   height: "98px",

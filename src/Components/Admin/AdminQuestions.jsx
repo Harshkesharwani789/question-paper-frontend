@@ -58,7 +58,7 @@ const AdminQuestions = () => {
   const getAllQuestions = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllQuestionAdmin/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllQuestionAdmin/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ const AdminQuestions = () => {
       const config = {
         url: "/admin/deleteQuestionPaper/" + deleteA + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

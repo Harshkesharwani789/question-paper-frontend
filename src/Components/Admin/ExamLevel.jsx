@@ -36,7 +36,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/addExamLevel",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -72,7 +72,9 @@ const ExamLevel = () => {
   const [nochangedata, setnochangedata] = useState([]);
   const getExamLevel = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getExamLevel");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getExamLevel"
+      );
       if (res.status == 200) {
         setExamlevell(res.data.success);
         setnochangedata(res.data.success);
@@ -89,7 +91,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/updateExamLevel",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -129,7 +131,7 @@ const ExamLevel = () => {
       const config = {
         url: "/admin/deleteExamLevel/" + exam + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

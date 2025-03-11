@@ -75,7 +75,7 @@ function AdminBlueprintdetailsview() {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getblueprintsbyid/${blueprint_ID}`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getblueprintsbyid/${blueprint_ID}`
       );
 
       if (res.status == 200) {
@@ -91,7 +91,7 @@ function AdminBlueprintdetailsview() {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getallcontent"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -222,7 +222,7 @@ function AdminBlueprintdetailsview() {
   const GetBluePrintHeaderByMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getblueprintheaderbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getblueprintheaderbymedium/" +
           blueprint?.medium
       );
       if (res.status === 200) {

@@ -51,7 +51,7 @@ const Login = () => {
       const config = {
         url: "/admin/loginTeacher",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           // Authorization:`Bearer ${token}`,
@@ -108,7 +108,7 @@ const Login = () => {
       const config = {
         url: "/otp/sendOtpRegisterEmail",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -144,7 +144,7 @@ const Login = () => {
       const config = {
         url: "/otp/verifyEmail",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: { "content-type": "application/json" },
         data: {
           email: Optmail,
@@ -182,7 +182,7 @@ const Login = () => {
       const config = {
         url: "/admin/updatepassword",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: { "content-type": "application/json" },
         data: {
           Email: Optmail,

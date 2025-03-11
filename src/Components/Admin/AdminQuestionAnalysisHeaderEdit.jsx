@@ -165,7 +165,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
   const getAddMedium = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllMedium"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
       );
       if (res.status == 200) {
         setMedium(res.data.success);
@@ -193,7 +193,7 @@ const AdminQuestionAnalysisHeaderEdit = () => {
       const config = {
         url: "/admin/updateQuestionAnalysisHeader/" + state?.item?._id,
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
         },

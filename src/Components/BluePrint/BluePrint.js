@@ -22,7 +22,8 @@ const BluePrint = () => {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllBLUEPRINTs/" + user?._id,
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllBLUEPRINTs/" +
+          user?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +44,7 @@ const BluePrint = () => {
   const getallblueprint1 = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getblueprintsbyid"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getblueprintsbyid"
       );
 
       if (res.status == 200) {
@@ -63,7 +64,7 @@ const BluePrint = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -285,7 +286,7 @@ const BluePrint = () => {
   const GetBluePrintHeaderByMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getblueprintheaderbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getblueprintheaderbymedium/" +
           state?.Medium
       );
       if (res.status === 200) {
@@ -301,7 +302,7 @@ const BluePrint = () => {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/questiontheadergetbymedium/" +
           state?.Medium +
           "/" +
           user?._id,
@@ -380,7 +381,7 @@ const BluePrint = () => {
                                     <div className="col-2 col-sm-2 col-md-2 col-lg-2">
                                       {state?.School_Logo ? (
                                         <img
-                                          src={`http://localhost:8001/Teacher/${state?.School_Logo}`}
+                                          src={`https://question-paper-backend-pariksha.onrender.com/Teacher/${state?.School_Logo}`}
                                           alt=""
                                           style={{
                                             width: "80px",

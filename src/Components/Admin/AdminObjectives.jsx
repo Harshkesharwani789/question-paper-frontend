@@ -100,7 +100,7 @@ const AdminObjectives = () => {
     try {
       const config = {
         url: "/admin/addobjectives",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -134,7 +134,9 @@ const AdminObjectives = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -148,7 +150,7 @@ const AdminObjectives = () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8001/api/admin/getobjective`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -176,7 +178,7 @@ const AdminObjectives = () => {
 
       const config = {
         url: "/admin/updateObjectives",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "Content-type": "application/json",
@@ -229,7 +231,7 @@ const AdminObjectives = () => {
 
       const config = {
         url: `/admin/deleteobjectives/${deleteA}/${admin?._id}`,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

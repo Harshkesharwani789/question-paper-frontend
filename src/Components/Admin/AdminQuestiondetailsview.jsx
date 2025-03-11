@@ -22,7 +22,7 @@ const AdminQuestionDetailsview = () => {
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getQuestionpaperadminbyid/${question_Id}`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getQuestionpaperadminbyid/${question_Id}`
       );
       if (res.status == 200) {
         setquestion_details(res.data.success);
@@ -570,7 +570,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Question Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -586,7 +586,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Answer Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                           alt=""
                         />
                       </div>
@@ -640,7 +640,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image}`}
                               alt=""
                             />
                           </div>
@@ -988,7 +988,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -1027,7 +1027,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -1412,7 +1412,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -1451,7 +1451,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -1522,7 +1522,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image}`}
                               alt=""
                             />
                           </div>
@@ -1950,7 +1950,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -1989,7 +1989,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2054,7 +2054,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2093,7 +2093,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.orImage_Ans}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.orImage_Ans}`}
                               alt=""
                             />
                           </div>
@@ -2435,7 +2435,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -2475,7 +2475,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image Answer</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2602,7 +2602,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2620,7 +2620,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option1 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -2636,7 +2636,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option2 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                           alt=""
                         />
                       </div>
@@ -2652,7 +2652,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option3 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_3}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_3}`}
                           alt=""
                         />
                       </div>
@@ -2668,7 +2668,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option4 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_4}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_4}`}
                           alt=""
                         />
                       </div>
@@ -2684,7 +2684,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option5 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_5}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_5}`}
                           alt=""
                         />
                       </div>
@@ -2700,7 +2700,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Option6 Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_6}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_6}`}
                           alt=""
                         />
                       </div>
@@ -2741,7 +2741,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Image question</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -2911,7 +2911,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.ImageQ}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.ImageQ}`}
                               alt=""
                             />
                           </div>
@@ -2927,7 +2927,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Option 1 Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -2943,7 +2943,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Option 2 Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -2959,7 +2959,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Answer Image</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -3040,7 +3040,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 1</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                               alt=""
                             />
                           </div>
@@ -3072,7 +3072,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 2</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                               alt=""
                             />
                           </div>
@@ -3094,7 +3094,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 3</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_3}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_3}`}
                               alt=""
                             />
                           </div>
@@ -3116,7 +3116,7 @@ const AdminQuestionDetailsview = () => {
                             <label htmlFor="">Question Image 4</label> <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_4}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_4}`}
                               alt=""
                             />
                           </div>
@@ -3158,7 +3158,7 @@ const AdminQuestionDetailsview = () => {
                             <br />
                             <img
                               className="img-fluid h-50"
-                              src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
+                              src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`}
                               alt=""
                             />
                           </div>
@@ -3775,7 +3775,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Question Image 1</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_1}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`}
                           alt=""
                         />
                       </div>
@@ -3791,7 +3791,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Question Image 2</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_2}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`}
                           alt=""
                         />
                       </div>
@@ -3939,7 +3939,7 @@ const AdminQuestionDetailsview = () => {
                         <label htmlFor="">Answer Image</label> <br />
                         <img
                           className="img-fluid h-50"
-                          src={`http://localhost:8001/Questions/${question_details?.Image_Ans}`}
+                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`}
                           alt=""
                         />
                       </div>

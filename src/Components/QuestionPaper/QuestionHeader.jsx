@@ -118,7 +118,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/addquestionheader",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -185,7 +185,8 @@ function QuestionHeader() {
   const getallQuestionHeader = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getquestiontheader/" + admin?._id,
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getquestiontheader/" +
+          admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -205,7 +206,9 @@ function QuestionHeader() {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -226,7 +229,7 @@ function QuestionHeader() {
       const config = {
         url: "/admin/editquestionheader",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -292,7 +295,7 @@ function QuestionHeader() {
     try {
       const config = {
         url: "/admin/deleteQuestionHeader/" + Headerid?._id + "/" + admin?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

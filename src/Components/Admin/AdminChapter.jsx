@@ -76,7 +76,9 @@ const AdminChapter = () => {
   //  const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         //  setnochangedata(res.data.success);
@@ -90,7 +92,7 @@ const AdminChapter = () => {
   const getaddsubclas = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubcla(res.data.success);
@@ -104,7 +106,7 @@ const AdminChapter = () => {
   //  const getaddsubclasss = async () => {
   //    try {
   //      const res = await axios.get(
-  //        "http://localhost:8001/api/admin/getAllSubClass"
+  //        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
   //      );
   //      if (res.status == 200) {
   //        setgetaddsubclass(res.data.success);
@@ -154,7 +156,7 @@ const AdminChapter = () => {
       const config = {
         url: "/admin/addChapter",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -194,7 +196,7 @@ const AdminChapter = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getallcontent"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -209,7 +211,7 @@ const AdminChapter = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllChapter"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -227,7 +229,7 @@ const AdminChapter = () => {
       const config = {
         url: "/admin/updateChapter",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -270,7 +272,7 @@ const AdminChapter = () => {
       const config = {
         url: "/admin/deleteChapter/" + chapter + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -304,7 +306,7 @@ const AdminChapter = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSujects"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -338,7 +340,7 @@ const AdminChapter = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);

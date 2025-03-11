@@ -96,7 +96,7 @@ const Adminslybuscopyview = () => {
   const Adminslybusbyid = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getslybusbyid/${Slybus_id}`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getslybusbyid/${Slybus_id}`
       );
       if (res.status == 200) setaddslybus(res.data.succes);
     } catch (error) {

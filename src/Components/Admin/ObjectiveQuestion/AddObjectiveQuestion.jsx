@@ -82,7 +82,7 @@ function AddObjectiveQuestion() {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ function AddObjectiveQuestion() {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getallcontent"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -153,7 +153,9 @@ function AddObjectiveQuestion() {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllBoard"
+      );
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -165,7 +167,9 @@ function AddObjectiveQuestion() {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -177,7 +181,9 @@ function AddObjectiveQuestion() {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllClass"
+      );
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -190,7 +196,7 @@ function AddObjectiveQuestion() {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -204,7 +210,7 @@ function AddObjectiveQuestion() {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSujects"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -218,7 +224,7 @@ function AddObjectiveQuestion() {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllTypesofquestion"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -232,7 +238,7 @@ function AddObjectiveQuestion() {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllChapter"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -246,7 +252,7 @@ function AddObjectiveQuestion() {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllNameExamination"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);

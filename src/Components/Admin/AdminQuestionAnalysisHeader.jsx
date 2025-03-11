@@ -32,7 +32,7 @@ const AdminQuestionAnalysisHeader = () => {
   const getquestAnalysisHeader = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getQuestAnalysisheader"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getQuestAnalysisheader"
       );
       if (res.status == 200) {
         setGetquestAnalysisHeader(res.data.success);
@@ -46,7 +46,7 @@ const AdminQuestionAnalysisHeader = () => {
     try {
       const config = {
         url: "/admin/deleteQuestionAnalysisHeader/" + deleteA,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

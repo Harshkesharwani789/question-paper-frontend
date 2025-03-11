@@ -131,7 +131,7 @@ const AddMatches = ({ selectdetails }) => {
     try {
       let config = {
         url: "/admin/AddQuestionPaper",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "post",
         headers: {
           "content-type": "multipart/form-data",

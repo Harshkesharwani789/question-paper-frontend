@@ -33,7 +33,7 @@ const QuestionPaper = ({ text }) => {
     try {
       const config = {
         url: "/admin/getQuestionByClasswise/" + user?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -127,7 +127,7 @@ const QuestionPaper = ({ text }) => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -205,7 +205,7 @@ const QuestionPaper = ({ text }) => {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/questiontheadergetbymedium/" +
           state?.Medium +
           "/" +
           user?._id,
@@ -356,7 +356,7 @@ const QuestionPaper = ({ text }) => {
                                     {item?.Image ? (
                                       <div>
                                         <img
-                                          src={`http://localhost:8001/Questions/${item?.Image}`}
+                                          src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image}`}
                                           className="mcq-img"
                                           alt=""
                                         />
@@ -698,7 +698,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -710,7 +710,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -780,7 +780,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -792,7 +792,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -862,7 +862,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -874,7 +874,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -942,7 +942,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -954,7 +954,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1022,7 +1022,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1034,7 +1034,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1102,7 +1102,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1114,7 +1114,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1182,7 +1182,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1194,7 +1194,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1297,7 +1297,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1309,7 +1309,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1344,7 +1344,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>a)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1356,7 +1356,7 @@ const QuestionPaper = ({ text }) => {
                                             <>
                                               <span>b)</span>
                                               <img
-                                                src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                 className="mcq-img"
                                                 alt=""
                                               />
@@ -1447,7 +1447,7 @@ const QuestionPaper = ({ text }) => {
                                               <b>Question Image:</b>
                                               <div>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.ImageQ}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.ImageQ}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1463,7 +1463,7 @@ const QuestionPaper = ({ text }) => {
                                               <>
                                                 <span>a)</span>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1475,7 +1475,7 @@ const QuestionPaper = ({ text }) => {
                                               <>
                                                 <span>b)</span>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -1997,7 +1997,7 @@ const QuestionPaper = ({ text }) => {
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                            src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -2009,7 +2009,7 @@ const QuestionPaper = ({ text }) => {
                                         <>
                                           <span>b)</span>
                                           <img
-                                            src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                            src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                             className="mcq-img"
                                             alt=""
                                           />
@@ -2236,7 +2236,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2247,7 +2247,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2300,7 +2300,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_1 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2311,7 +2311,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_2 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_2}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_2}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2324,7 +2324,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_3 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_3}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_3}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2335,7 +2335,7 @@ const QuestionPaper = ({ text }) => {
                                             {item?.Image_4 ? (
                                               <>
                                                 <img
-                                                  src={`http://localhost:8001/Questions/${item?.Image_4}`}
+                                                  src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_4}`}
                                                   className="mcq-img"
                                                   alt=""
                                                 />
@@ -2423,7 +2423,7 @@ const QuestionPaper = ({ text }) => {
                                         <>
                                           <span>a)</span>
                                           <img
-                                            src={`http://localhost:8001/Questions/${item?.Image_1}`}
+                                            src={`https://question-paper-backend-pariksha.onrender.com/Questions/${item?.Image_1}`}
                                             className="mcq-img"
                                             alt=""
                                           />

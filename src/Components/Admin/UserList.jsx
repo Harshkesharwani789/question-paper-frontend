@@ -29,7 +29,7 @@ const UserList = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ const UserList = () => {
   const DeleteTeacher = async () => {
     try {
       let res = await axios.delete(
-        `http://localhost:8001/api/admin/deleteTeacher/${delteacher}/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/deleteTeacher/${delteacher}/${admin?._id}`,
         {
           headers: {
             "content-type": "application/json",
@@ -59,7 +59,7 @@ const UserList = () => {
       );
       // const config = {
       //   url: "/teacher/deleteTeacher/" + delteacher + "/" + admin?._id,
-      //   baseURL: "http://localhost:8001/api",
+      //   baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
       //   method: "delete",
       //   headers: {
       //     "content-type": "application/json",

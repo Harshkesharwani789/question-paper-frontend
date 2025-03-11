@@ -63,7 +63,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/AddAccount",
-        baseURL: "http://localhost:8001/api/",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api/",
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/EditAccount/" + EditData?._id,
-        baseURL: "http://localhost:8001/api/",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api/",
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const AccountHistory = () => {
     try {
       const config = {
         url: "admin/DeleteAccount/" + deleteData?._id,
-        baseURL: "http://localhost:8001/api/",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api/",
         method: "delete",
         headers: {
           "Content-Type": "application/json",
@@ -166,7 +166,7 @@ const AccountHistory = () => {
   const getaccounthistory = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllAcountHistory/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllAcountHistory/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -186,7 +186,7 @@ const AccountHistory = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

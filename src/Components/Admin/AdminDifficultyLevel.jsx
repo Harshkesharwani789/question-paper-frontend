@@ -113,7 +113,7 @@ const AdminDifficultyLevel = () => {
       const config = {
         url: "/admin/addDiffLevel",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -151,7 +151,9 @@ const AdminDifficultyLevel = () => {
   // const [nochangedata, setnochangedata] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMedium(res.data.success);
         // setnochangedata(res.data.success);
@@ -165,7 +167,7 @@ const AdminDifficultyLevel = () => {
   const getallDiffLevel = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllDiffLevel"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllDiffLevel"
       );
       if (res.status == 200) {
         setDiffiLevel(res.data.success);
@@ -181,7 +183,7 @@ const AdminDifficultyLevel = () => {
       const config = {
         url: "/admin/updateDiffLevel",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -220,7 +222,7 @@ const AdminDifficultyLevel = () => {
     try {
       const config = {
         url: "/admin/deleteDiffLevel/" + deleteA + "/" + admin?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "delete",
         headers: {
           "content-type": "application/json",

@@ -81,7 +81,8 @@ const AdminBlueprintdetails = () => {
   const getallblueprint = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllBLUEPRINTs/" + admin?._id,
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllBLUEPRINTs/" +
+          admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -112,7 +113,7 @@ const AdminBlueprintdetails = () => {
   const makedeleteblueprint = async () => {
     try {
       let data = await axios.delete(
-        "http://localhost:8001/api/admin/deleteBLUEPRINT/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/deleteBLUEPRINT/" +
           deleteId +
           "/" +
           admin?._id,
@@ -183,7 +184,7 @@ const AdminBlueprintdetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -205,7 +206,7 @@ const AdminBlueprintdetails = () => {
     try {
       const config = {
         url: "/admin/makeBlockAndUnblockBLUEPRINTs",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "application/json",

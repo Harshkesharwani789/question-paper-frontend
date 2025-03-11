@@ -30,7 +30,7 @@ const LoginPage3 = () => {
     try {
       const config = {
         url: "/teacher/upadeteQuestionPaper",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "put",
         headers: {
           "content-type": "multipart/form-data",
@@ -77,7 +77,7 @@ const LoginPage3 = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSujects"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSujects"
       );
       if (res.status === 200) {
         // Convert subjects to an array format required by react-select
@@ -97,7 +97,9 @@ const LoginPage3 = () => {
 
   const getMediums = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status === 200) {
         setMediums(res.data.success);
       }

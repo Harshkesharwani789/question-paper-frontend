@@ -44,7 +44,7 @@ function AddGraphQuestion({ selectdetails }) {
       const config = {
         url: "/admin/AddQuestionPaper",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

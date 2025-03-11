@@ -47,7 +47,7 @@ function QuestionAnalysis() {
     try {
       const config = {
         url: "/teacher/getGenQuestionById/" + state?._id + "/" + user?._id,
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         method: "get",
         headers: {
           "content-type": "application/json",
@@ -128,7 +128,7 @@ function QuestionAnalysis() {
   const getquestAnalysisHeader = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getQuestAnalysisheaderbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getQuestAnalysisheaderbymedium/" +
           state?.Medium
       );
       if (res.status == 200) {

@@ -22,7 +22,7 @@ const Dashboard = () => {
   const getAllTeacher = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getAllTeachers/${admin?._id}`,
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getAllTeachers/${admin?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

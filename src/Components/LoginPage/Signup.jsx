@@ -34,7 +34,7 @@ const SignUp = () => {
       const config = {
         url: "/admin/registerTeacher",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

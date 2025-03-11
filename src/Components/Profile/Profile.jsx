@@ -22,7 +22,7 @@ const Profile = () => {
 
   const getAllQuestion = async () => {
     const res = await axios.get(
-      `http://localhost:8001/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
+      `https://question-paper-backend-pariksha.onrender.com/api/teacher/getAllGenQuestionByUserId/${user?._id}/${user?._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

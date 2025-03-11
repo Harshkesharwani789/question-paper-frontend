@@ -76,7 +76,9 @@ function QuestionType() {
   const [Medium, setMedium] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status === 200) {
         setMedium(res.data.success);
       }
@@ -98,7 +100,7 @@ function QuestionType() {
       const config = {
         url: "/admin/addquestiontype",
         method: "post",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -140,7 +142,8 @@ function QuestionType() {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getquestiontype/" + admin?._id,
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getquestiontype/" +
+          admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -162,7 +165,7 @@ function QuestionType() {
       const config = {
         url: "/admin/updateQuestionType",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -203,7 +206,7 @@ function QuestionType() {
       const config = {
         url: "/admin/deleteQtype/" + QuestionTypeId?._id + "/" + admin?._id,
         method: "delete",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

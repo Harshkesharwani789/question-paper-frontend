@@ -22,7 +22,7 @@ const Frontpage = ({ data }) => {
   const getQuestionHeaderbyMedium = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/questiontheadergetbymedium/" +
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/questiontheadergetbymedium/" +
           data?.Medium +
           "/" +
           user?._id,
@@ -53,7 +53,7 @@ const Frontpage = ({ data }) => {
               <div className="col-sm-2">
                 {data?.School_Logo ? (
                   <img
-                    src={`http://localhost:8001/Teacher/${data?.School_Logo}`}
+                    src={`https://question-paper-backend-pariksha.onrender.com/Teacher/${data?.School_Logo}`}
                     alt=""
                     style={{ width: "80px", marginTop: "24px" }}
                   />

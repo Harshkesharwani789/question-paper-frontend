@@ -141,7 +141,7 @@ const AdminEditQuestionDetails = () => {
   const getquestionbyid = async () => {
     try {
       let res = await axios.get(
-        `http://localhost:8001/api/admin/getQuestionpaperadminbyid/${question_Id}`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getQuestionpaperadminbyid/${question_Id}`
       );
       if (res.status === 200) {
         setquestion_details(res.data.success);
@@ -159,7 +159,7 @@ const AdminEditQuestionDetails = () => {
   const getObjectives = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8001/api/admin/getobjective`
+        `https://question-paper-backend-pariksha.onrender.com/api/admin/getobjective`
       );
 
       if (res.status === 200) {
@@ -441,7 +441,7 @@ const AdminEditQuestionDetails = () => {
   const getallweightagecontent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getallcontent"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getallcontent"
       );
       if (res.status === 200) {
         setweightage(res.data.success);
@@ -455,7 +455,9 @@ const AdminEditQuestionDetails = () => {
   const [getboardname, setboardname] = useState([]);
   const getallboardname = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllBoard");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllBoard"
+      );
       if (res.status == 200) {
         setboardname(res.data.success);
       }
@@ -467,7 +469,9 @@ const AdminEditQuestionDetails = () => {
   const [Mediumm, setMediumm] = useState([]);
   const getAddMedium = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllMedium");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllMedium"
+      );
       if (res.status == 200) {
         setMediumm(res.data.success);
       }
@@ -479,7 +483,9 @@ const AdminEditQuestionDetails = () => {
   const [getclassname, setgetclassName] = useState([]);
   const getallclassname = async () => {
     try {
-      let res = await axios.get("http://localhost:8001/api/admin/getAllClass");
+      let res = await axios.get(
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllClass"
+      );
       if (res.status == 200) {
         setgetclassName(res.data.success);
       }
@@ -492,7 +498,7 @@ const AdminEditQuestionDetails = () => {
   const getaddsubclasss = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSubClass"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSubClass"
       );
       if (res.status == 200) {
         setgetaddsubclass(res.data.success);
@@ -506,7 +512,7 @@ const AdminEditQuestionDetails = () => {
   const getSubject = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllSujects"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllSujects"
       );
       if (res.status == 200) {
         setsubject(res.data.success);
@@ -520,7 +526,7 @@ const AdminEditQuestionDetails = () => {
   const getalltypesofquess = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllTypesofquestion"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllTypesofquestion"
       );
       if (res.status == 200) {
         setgetalltypesofques(res.data.success);
@@ -534,7 +540,7 @@ const AdminEditQuestionDetails = () => {
   const getChapter = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllChapter"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllChapter"
       );
       if (res.status == 200) {
         setchapters(res.data.success);
@@ -548,7 +554,7 @@ const AdminEditQuestionDetails = () => {
   const getNameExamination = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllNameExamination"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllNameExamination"
       );
       if (res.status == 200) {
         setNameExam(res.data.success);
@@ -565,7 +571,7 @@ const AdminEditQuestionDetails = () => {
       const config = {
         url: "/admin/UpdateQuestionPaper",
         method: "put",
-        baseURL: "http://localhost:8001/api",
+        baseURL: "https://question-paper-backend-pariksha.onrender.com/api",
         headers: {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -685,7 +691,7 @@ const AdminEditQuestionDetails = () => {
   const getDifficultyLevel = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getAllDiffLevel"
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getAllDiffLevel"
       );
       if (res.status == 200) {
         setDifficultyLevel(res.data.success);
@@ -742,7 +748,8 @@ const AdminEditQuestionDetails = () => {
   const getallQuestiontype = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getquestiontype/" + admin?._id,
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getquestiontype/" +
+          admin?._id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1212,7 +1219,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image
                             ? Image && URL.createObjectURL(Image)
-                            : `http://localhost:8001/Questions/${question_details?.Image}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -2208,7 +2215,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -2242,7 +2249,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -2418,7 +2425,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -2452,7 +2459,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -2482,7 +2489,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_3
                             ? Image_3 && URL.createObjectURL(Image_3)
-                            : `http://localhost:8001/Questions/${question_details?.Image_3}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_3}`
                         }
                         alt="Ans_fig"
                       />
@@ -2516,7 +2523,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_4
                             ? Image_4 && URL.createObjectURL(Image_4)
-                            : `http://localhost:8001/Questions/${question_details?.Image_4}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_4}`
                         }
                         alt="Ans_fig"
                       />
@@ -2546,7 +2553,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -2585,7 +2592,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `http://localhost:8001/Questions/${question_details?.Image}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -3327,7 +3334,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image
                             ? Image && URL.createObjectURL(Image)
-                            : `http://localhost:8001/Questions/${question_details?.Image}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image}`
                         }
                         alt="Ans_fig"
                       />
@@ -4068,7 +4075,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4102,7 +4109,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4214,7 +4221,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `http://localhost:8001/Questions/${question_details?.ImageQ}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.ImageQ}`
                         }
                         alt="Ans_fig"
                       />
@@ -4251,7 +4258,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4285,7 +4292,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4316,7 +4323,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -4496,7 +4503,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageQues
                             ? ImageQues && URL.createObjectURL(ImageQues)
-                            : `http://localhost:8001/Questions/${question_details?.ImageQ}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.ImageQ}`
                         }
                         alt="Ans_fig"
                       />
@@ -4533,7 +4540,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -4567,7 +4574,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -4597,7 +4604,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_3
                             ? Image_3 && URL.createObjectURL(Image_3)
-                            : `http://localhost:8001/Questions/${question_details?.Image_3}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_3}`
                         }
                         alt="Ans_fig"
                       />
@@ -4631,7 +4638,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_4
                             ? Image_4 && URL.createObjectURL(Image_4)
-                            : `http://localhost:8001/Questions/${question_details?.Image_4}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_4}`
                         }
                         alt="Ans_fig"
                       />
@@ -4661,7 +4668,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_5
                             ? Image_5 && URL.createObjectURL(Image_5)
-                            : `http://localhost:8001/Questions/${question_details?.Image_5}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_5}`
                         }
                         alt="Ans_fig"
                       />
@@ -4695,7 +4702,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image_6
                             ? Image_6 && URL.createObjectURL(Image_6)
-                            : `http://localhost:8001/Questions/${question_details?.Image_6}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_6}`
                         }
                         alt="Ans_fig"
                       />
@@ -4726,7 +4733,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           ImageAns
                             ? ImageAns && URL.createObjectURL(ImageAns)
-                            : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`
                         }
                         alt="Ans_fig"
                       />
@@ -5522,7 +5529,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -5556,7 +5563,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -6512,7 +6519,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -6546,7 +6553,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />
@@ -6920,7 +6927,7 @@ const AdminEditQuestionDetails = () => {
                       src={
                         ImageAns
                           ? ImageAns && URL.createObjectURL(ImageAns)
-                          : `http://localhost:8001/Questions/${question_details?.Image_Ans}`
+                          : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_Ans}`
                       }
                       alt="Ans_fig"
                     />
@@ -7834,7 +7841,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image1
                             ? Image1 && URL.createObjectURL(Image1)
-                            : `http://localhost:8001/Questions/${question_details?.Image_1}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_1}`
                         }
                         alt="Ans_fig"
                       />
@@ -7868,7 +7875,7 @@ const AdminEditQuestionDetails = () => {
                         src={
                           Image2
                             ? Image2 && URL.createObjectURL(Image2)
-                            : `http://localhost:8001/Questions/${question_details?.Image_2}`
+                            : `https://question-paper-backend-pariksha.onrender.com/Questions/${question_details?.Image_2}`
                         }
                         alt="Ans_fig"
                       />

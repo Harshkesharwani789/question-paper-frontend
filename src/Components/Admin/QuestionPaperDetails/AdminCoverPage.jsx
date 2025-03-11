@@ -16,7 +16,8 @@ function AdminCoverPage() {
   const getCoverPage = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8001/api/admin/getCoverPageBYMedium/" + item?.Medium
+        "https://question-paper-backend-pariksha.onrender.com/api/admin/getCoverPageBYMedium/" +
+          item?.Medium
       );
       if (res.status === 200) {
         setData1(res.data.success);
@@ -82,7 +83,7 @@ function AdminCoverPage() {
               <div>
                 {item?.School_Logo ? (
                   <img
-                    src={`http://localhost:8001/Teacher/${item?.School_Logo}`}
+                    src={`https://question-paper-backend-pariksha.onrender.com/Teacher/${item?.School_Logo}`}
                     alt=""
                     style={{ width: "80px", marginTop: "24px" }}
                   />
